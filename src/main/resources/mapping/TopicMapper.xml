@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.scdx.dao.mapper.TopicMapper">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<resultMap id="BaseResultMap" type="com.hust.scdx.model.Topic">
+		<id column="topic_id" jdbcType="VARCHAR" property="topicId" />
+		<result column="topic_name" jdbcType="VARCHAR" property="topicName" />
+		<result column="topic_type" jdbcType="VARCHAR" property="topicType" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="creator" jdbcType="VARCHAR" property="creator" />
+		<result column="last_operator" jdbcType="VARCHAR" property="lastOperator" />
+		<result column="last_update_time" jdbcType="TIMESTAMP"
+			property="lastUpdateTime" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		topic_id, topic_name, topic_type, create_time, creator, last_operator,
+		last_update_time
+	</sql>
+	<select id="selectByExample" parameterType="com.hust.scdx.model.TopicExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from topic
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select 'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from topic
+		where topic_id = #{topicId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from topic
+		where topic_id = #{topicId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.hust.scdx.model.TopicExample">
+		delete from topic
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.hust.scdx.model.Topic">
+		insert into topic (topic_id, topic_name, topic_type,
+		create_time, creator, last_operator,
+		last_update_time)
+		values (#{topicId,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR},
+		#{topicType,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{lastOperator,jdbcType=VARCHAR},
+		#{lastUpdateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hust.scdx.model.Topic">
+		insert into topic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="topicId != null">
+				topic_id,
+			</if>
+			<if test="topicName != null">
+				topic_name,
+			</if>
+			<if test="topicType != null">
+				topic_type,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="lastOperator != null">
+				last_operator,
+			</if>
+			<if test="lastUpdateTime != null">
+				last_update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="topicId != null">
+				#{topicId,jdbcType=VARCHAR},
+			</if>
+			<if test="topicName != null">
+				#{topicName,jdbcType=VARCHAR},
+			</if>
+			<if test="topicType != null">
+				#{topicType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="lastOperator != null">
+				#{lastOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateTime != null">
+				#{lastUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.hust.scdx.model.TopicExample"
+		resultType="java.lang.Long">
+		select count(*) from topic
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update topic
+		<set>
+			<if test="record.topicId != null">
+				topic_id = #{record.topicId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.topicName != null">
+				topic_name = #{record.topicName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.topicType != null">
+				topic_type = #{record.topicType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.creator != null">
+				creator = #{record.creator,jdbcType=VARCHAR},
+			</if>
+			<if test="record.lastOperator != null">
+				last_operator = #{record.lastOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="record.lastUpdateTime != null">
+				last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update topic
+		set topic_id = #{record.topicId,jdbcType=VARCHAR},
+		topic_name = #{record.topicName,jdbcType=VARCHAR},
+		topic_type = #{record.topicType,jdbcType=VARCHAR},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP},
+		creator = #{record.creator,jdbcType=VARCHAR},
+		last_operator = #{record.lastOperator,jdbcType=VARCHAR},
+		last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hust.scdx.model.Topic">
+		update topic
+		<set>
+			<if test="topicName != null">
+				topic_name = #{topicName,jdbcType=VARCHAR},
+			</if>
+			<if test="topicType != null">
+				topic_type = #{topicType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=VARCHAR},
+			</if>
+			<if test="lastOperator != null">
+				last_operator = #{lastOperator,jdbcType=VARCHAR},
+			</if>
+			<if test="lastUpdateTime != null">
+				last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where topic_id = #{topicId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.Topic">
+		update topic
+		set topic_name = #{topicName,jdbcType=VARCHAR},
+		topic_type = #{topicType,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=VARCHAR},
+		last_operator = #{lastOperator,jdbcType=VARCHAR},
+		last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+		where topic_id = #{topicId,jdbcType=VARCHAR}
+	</update>
+</mapper>

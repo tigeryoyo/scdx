@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hust.scdx.dao.mapper.ExtfileMapper">
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<resultMap id="BaseResultMap" type="com.hust.scdx.model.Extfile">
+		<id column="extfile_id" jdbcType="VARCHAR" property="extfileId" />
+		<result column="extfile_name" jdbcType="VARCHAR" property="extfileName" />
+		<result column="topic_id" jdbcType="VARCHAR" property="topicId" />
+		<result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+		<result column="size" jdbcType="INTEGER" property="size" />
+		<result column="line_number" jdbcType="INTEGER" property="lineNumber" />
+		<result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+		<result column="creator" jdbcType="VARCHAR" property="creator" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		extfile_id, extfile_name, topic_id, source_type, size, line_number, upload_time,
+		creator
+	</sql>
+	<select id="selectByExample" parameterType="com.hust.scdx.model.ExtfileExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from extfile
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select 'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from extfile
+		where extfile_id = #{extfileId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from extfile
+		where extfile_id = #{extfileId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.hust.scdx.model.ExtfileExample">
+		delete from extfile
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.hust.scdx.model.Extfile">
+		insert into extfile (extfile_id, extfile_name, topic_id,
+		source_type, size, line_number,
+		upload_time, creator)
+		values (#{extfileId,jdbcType=VARCHAR}, #{extfileName,jdbcType=VARCHAR},
+		#{topicId,jdbcType=VARCHAR},
+		#{sourceType,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER},
+		#{uploadTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hust.scdx.model.Extfile">
+		insert into extfile
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="extfileId != null">
+				extfile_id,
+			</if>
+			<if test="extfileName != null">
+				extfile_name,
+			</if>
+			<if test="topicId != null">
+				topic_id,
+			</if>
+			<if test="sourceType != null">
+				source_type,
+			</if>
+			<if test="size != null">
+				size,
+			</if>
+			<if test="lineNumber != null">
+				line_number,
+			</if>
+			<if test="uploadTime != null">
+				upload_time,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="extfileId != null">
+				#{extfileId,jdbcType=VARCHAR},
+			</if>
+			<if test="extfileName != null">
+				#{extfileName,jdbcType=VARCHAR},
+			</if>
+			<if test="topicId != null">
+				#{topicId,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceType != null">
+				#{sourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				#{size,jdbcType=INTEGER},
+			</if>
+			<if test="lineNumber != null">
+				#{lineNumber,jdbcType=INTEGER},
+			</if>
+			<if test="uploadTime != null">
+				#{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.hust.scdx.model.ExtfileExample"
+		resultType="java.lang.Long">
+		select count(*) from extfile
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update extfile
+		<set>
+			<if test="record.extfileId != null">
+				extfile_id = #{record.extfileId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.extfileName != null">
+				extfile_name = #{record.extfileName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.topicId != null">
+				topic_id = #{record.topicId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sourceType != null">
+				source_type = #{record.sourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.size != null">
+				size = #{record.size,jdbcType=INTEGER},
+			</if>
+			<if test="record.lineNumber != null">
+				line_number = #{record.lineNumber,jdbcType=INTEGER},
+			</if>
+			<if test="record.uploadTime != null">
+				upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.creator != null">
+				creator = #{record.creator,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update extfile
+		set extfile_id = #{record.extfileId,jdbcType=VARCHAR},
+		extfile_name = #{record.extfileName,jdbcType=VARCHAR},
+		topic_id = #{record.topicId,jdbcType=VARCHAR},
+		source_type = #{record.sourceType,jdbcType=VARCHAR},
+		size = #{record.size,jdbcType=INTEGER},
+		line_number = #{record.lineNumber,jdbcType=INTEGER},
+		upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+		creator = #{record.creator,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hust.scdx.model.Extfile">
+		update extfile
+		<set>
+			<if test="extfileName != null">
+				extfile_name = #{extfileName,jdbcType=VARCHAR},
+			</if>
+			<if test="topicId != null">
+				topic_id = #{topicId,jdbcType=VARCHAR},
+			</if>
+			<if test="sourceType != null">
+				source_type = #{sourceType,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				size = #{size,jdbcType=INTEGER},
+			</if>
+			<if test="lineNumber != null">
+				line_number = #{lineNumber,jdbcType=INTEGER},
+			</if>
+			<if test="uploadTime != null">
+				upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where extfile_id = #{extfileId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.Extfile">
+		update extfile
+		set extfile_name = #{extfileName,jdbcType=VARCHAR},
+		topic_id = #{topicId,jdbcType=VARCHAR},
+		source_type = #{sourceType,jdbcType=VARCHAR},
+		size = #{size,jdbcType=INTEGER},
+		line_number = #{lineNumber,jdbcType=INTEGER},
+		upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+		creator = #{creator,jdbcType=VARCHAR}
+		where extfile_id = #{extfileId,jdbcType=VARCHAR}
+	</update>
+</mapper>

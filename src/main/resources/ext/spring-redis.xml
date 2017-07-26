@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	                                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+      
+   	<bean  id="jedisPoolConfig"   class="redis.clients.jedis.JedisPoolConfig" depends-on="redisPoolLocator">
+    	<property  name="maxTotal"  value="${redis.pool.maxActive}" />
+    	<property  name="maxIdle"  value="${redis.pool.maxIdle}" />
+    	<property  name="maxWaitMillis"  value="${redis.pool.maxWait}" />
+    	<property  name="testOnBorrow"  value="${redis.pool.testOnBorrow}" />
+    	<property  name="testOnReturn"  value="${redis.pool.testOnReturn}" />
+    	<property  name="testWhileIdle"  value="${redis.pool.testWhileIdle}" />
+	</bean>  
+	<bean  id="master1Instance"  class="redis.clients.jedis.JedisPool" >  
+    	<constructor-arg   index="0"  ref="jedisPoolConfig" />  
+    	<constructor-arg   index="1"  value="${redis1.ip}" />
+        <constructor-arg   index="2"  value="${redis.port}"  type="int" />
+        <constructor-arg   index="3"  value="${redis.timeout}"  type="int" />
+         <constructor-arg   index="4"  value="${redis.password}" />
+	</bean>  
+	<bean  id="master2Instance"  class="redis.clients.jedis.JedisPool" >  
+    	<constructor-arg   index="0"  ref="jedisPoolConfig" />  
+    	<constructor-arg   index="1"  value="${redis2.ip}" />
+        <constructor-arg   index="2"  value="${redis.port}"  type="int" />
+        <constructor-arg   index="3"  value="${redis.timeout}"  type="int" />
+         <constructor-arg   index="4"  value="${redis.password}" />
+	</bean>  
+	<bean  id="master3Instance"  class="redis.clients.jedis.JedisPool" >  
+    	<constructor-arg   index="0"  ref="jedisPoolConfig" />  
+    	<constructor-arg   index="1"  value="${redis3.ip}" />
+        <constructor-arg   index="2"  value="${redis.port}"  type="int" />
+        <constructor-arg   index="3"  value="${redis.timeout}"  type="int" />
+         <constructor-arg   index="4"  value="${redis.password}" />
+	</bean>  
+	<bean  id="master4Instance"  class="redis.clients.jedis.JedisPool" >  
+    	<constructor-arg   index="0"  ref="jedisPoolConfig" />  
+    	<constructor-arg   index="1"  value="${redis4.ip}" />
+        <constructor-arg   index="2"  value="${redis.port}"  type="int" />
+        <constructor-arg   index="3"  value="${redis.timeout}"  type="int" />
+        <constructor-arg   index="4"  value="${redis.password}" />
+	</bean>  
+	<bean  id="master5Instance"  class="redis.clients.jedis.JedisPool" >  
+    	<constructor-arg   index="0"  ref="jedisPoolConfig" />  
+    	<constructor-arg   index="1"  value="${redis5.ip}" />
+        <constructor-arg   index="2"  value="${redis.port}"  type="int" />
+        <constructor-arg   index="3"  value="${redis.timeout}"  type="int" />
+        <constructor-arg   index="4"  value="${redis.password}" />
+	</bean>  
+	
+</beans>
