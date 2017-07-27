@@ -27,4 +27,6 @@ public interface StopwordMapper {
     int updateByPrimaryKeySelective(Stopword record);
 
     int updateByPrimaryKey(Stopword record);
+
+	int insertBatch(List<Stopword> list);
 }

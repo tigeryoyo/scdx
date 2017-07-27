@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hust.scdx.model.params.ExtfileCondition;
+import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.util.ResultUtil;
 import com.hust.scdx.service.ExtfileService;
 
@@ -48,7 +48,7 @@ public class ExtfileController {
 			logger.info(file.getName() + "为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
 		}
-		ExtfileCondition con = new ExtfileCondition();
+		ExtfileQueryCondition con = new ExtfileQueryCondition();
 		con.setFile(file);
 		con.setSourceType(sourceType);
 		con.setTopicId(topicId);

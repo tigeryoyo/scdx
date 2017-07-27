@@ -22,7 +22,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -54,7 +55,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -97,7 +99,8 @@
 		where stopword_id = #{stopwordId,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from stopword
+		delete from
+		stopword
 		where stopword_id = #{stopwordId,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample" parameterType="com.hust.scdx.model.StopwordExample">
@@ -107,12 +110,26 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.hust.scdx.model.Stopword">
-		insert into stopword (stopword_id, word, creator,
+		insert into stopword
+		(stopword_id, word, creator,
 		create_time)
-		values (#{stopwordId,jdbcType=INTEGER}, #{word,jdbcType=VARCHAR},
+		values
+		(#{stopwordId,jdbcType=INTEGER}, #{word,jdbcType=VARCHAR},
 		#{creator,jdbcType=VARCHAR},
 		#{createTime,jdbcType=TIMESTAMP})
 	</insert>
+
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert ignore into stopword (word, creator,
+		create_time)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.word,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+			#{item.createTime,jdbcType=TIMESTAMP})
+		</foreach>
+	</insert>
+
 	<insert id="insertSelective" parameterType="com.hust.scdx.model.Stopword">
 		insert into stopword
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -173,10 +190,14 @@
 	</update>
 	<update id="updateByExample" parameterType="map">
 		update stopword
-		set stopword_id = #{record.stopwordId,jdbcType=INTEGER},
-		word = #{record.word,jdbcType=VARCHAR},
-		creator = #{record.creator,jdbcType=VARCHAR},
-		create_time = #{record.createTime,jdbcType=TIMESTAMP}
+		set stopword_id =
+		#{record.stopwordId,jdbcType=INTEGER},
+		word =
+		#{record.word,jdbcType=VARCHAR},
+		creator =
+		#{record.creator,jdbcType=VARCHAR},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -199,8 +220,11 @@
 	<update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.Stopword">
 		update stopword
 		set word = #{word,jdbcType=VARCHAR},
-		creator = #{creator,jdbcType=VARCHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP}
-		where stopword_id = #{stopwordId,jdbcType=INTEGER}
+		creator =
+		#{creator,jdbcType=VARCHAR},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP}
+		where stopword_id =
+		#{stopwordId,jdbcType=INTEGER}
 	</update>
 </mapper>

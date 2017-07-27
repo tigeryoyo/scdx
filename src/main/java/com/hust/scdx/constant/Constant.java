@@ -7,6 +7,28 @@ public class Constant {
 	
 	public final static String UNKNOWN = "未知";
 	
+	
+	/**
+	 * 0-1模型
+	 */
+    public static final int DIGITAL = 1;
+    /**
+     * TF-IDF模型
+     */
+    public static final int TFIDF = 2;
+   
+    public static final String CONTENT = "content";
+    public static final String CLUSTERRESULT = "clusterResult";
+    public static final String COUNTRESULT = "countResult";
+    
+    
+    public static final String REDIS_CONTENT = "redis_content";
+    public static final String REDIS_CLUSTER_RESULT = "redis_cluster_result";
+    public static final String REDIS_COUNT_RESULT = "redis_count_result";
+	
+    
+    
+    
 	public final static String INVALID_TIME = "1970-01-01";
     public final static String EMOTION_EN = "emotion";
     public final static String EMOTION_CH = "情感";

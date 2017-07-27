@@ -1,5 +1,8 @@
 package com.hust.scdx.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -77,7 +83,7 @@ public class TopicController {
 		result.put("list", list);
 		return ResultUtil.success(result);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/queryOwnTopicCount")
 	public Object queryOwnTopicCount(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
@@ -86,5 +92,36 @@ public class TopicController {
 			return ResultUtil.errorWithMsg("没有专题被创建。");
 		}
 		return ResultUtil.success(count);
+	}
+
+	/**
+	 * 根据时间范围聚类。
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/miningByTimeRange")
+	public Object miningByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "startTime", required = true) Date startTime,
+			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+		List<String[]> list = topicService.miningByTimeRange(topicId, startTime, endTime, request);
+		if (list == null) {
+			return ResultUtil.unknowError();
+		}
+		return ResultUtil.success(list);
+	}
+
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		CustomDateEditor editor = new CustomDateEditor(df, false);
+		binder.registerCustomEditor(Date.class, editor);
 	}
 }

@@ -24,13 +24,8 @@ public class ExcelUtils {
 	public static void main(String[] args) {
 		try {
 			Date uploadTime = new Date();
-			String dir = "C:/Users/Chan/Desktop/" + DateConverter.parseYear(uploadTime) + "/"
-					+ DateConverter.parseMonth(uploadTime) + "/";
-			if (!new File(dir).exists()) {
-				new File(dir).mkdirs();
-			} else {
-				System.out.println("true");
-			}
+
+			System.out.println(DateConverter.parseMdH(uploadTime));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

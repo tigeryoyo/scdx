@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hust.scdx.dao.ExtfileDao;
 import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.User;
-import com.hust.scdx.model.params.ExtfileCondition;
+import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ExcelUtils;
@@ -34,7 +34,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 	private UserService userService;
 	
 	@Override
-	public int insert(ExtfileCondition con, HttpServletRequest request) {
+	public int insert(ExtfileQueryCondition con, HttpServletRequest request) {
 		User user = userService.selectCurrentUser(request);
 		MultipartFile file = con.getFile();
 		List<String[]> list = null;

@@ -18,7 +18,6 @@ public class DateConverter implements Converter<String, Date> {
 
     @Override
     public Date convert(String source) {
-        // TODO Auto-generated method stub
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return simpleDateFormat.parse(source);
@@ -29,23 +28,31 @@ public class DateConverter implements Converter<String, Date> {
     }
 
     public static String parseYear(Date date) {
-        // TODO Auto-generated method stub
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         try {
             return simpleDateFormat.format(date);
         } catch (Exception e) {
-            logger.error("convert str to date error");
+            logger.error("转换日期错误。");
         }
         return Constant.UNKNOWN;
     }
     
     public static String parseMonth(Date date) {
-    	// TODO Auto-generated method stub
-    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM月");
+    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
     	try {
     		return simpleDateFormat.format(date);
     	} catch (Exception e) {
-    		logger.error("convert str to date error");
+    		logger.error("转换日期错误。");
+    	}
+    	return Constant.UNKNOWN;
+    }
+    
+    public static String parseMdH(Date date){
+    	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMddHH");
+    	try {
+    		return simpleDateFormat.format(date);
+    	} catch (Exception e) {
+    		logger.error("转换日期错误。");
     	}
     	return Constant.UNKNOWN;
     }

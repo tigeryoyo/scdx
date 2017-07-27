@@ -45,6 +45,16 @@ public class TopicDao {
 	}
 
 	/**
+	 * 根据专题id查询专题
+	 * 
+	 * @param topicId
+	 * @return
+	 */
+	public Topic queryTopicById(String topicId) {
+		return topicMapper.selectByPrimaryKey(topicId);
+	}
+
+	/**
 	 * 根据其他条件查找所有符合条件专题
 	 * 
 	 * @param con
@@ -113,4 +123,11 @@ public class TopicDao {
 		}
 		return topicMapper.countByExample(example);
 	}
+
+	public int updateTopicInfo(Topic topic) {
+		TopicExample example = new TopicExample();
+		example.createCriteria().andTopicIdEqualTo(topic.getTopicId());
+		return topicMapper.updateByExampleSelective(topic, example);
+	}
+
 }

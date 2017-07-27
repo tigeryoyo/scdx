@@ -1,12 +1,22 @@
 package com.hust.scdx.model.params;
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
-public class ExtfileCondition {
+public class ExtfileQueryCondition {
 	/**
 	 * 专题id
 	 */
 	private String topicId;
+	/**
+	 * 开始时间
+	 */
+	private Date startTime;
+	/**
+	 * 截止时间
+	 */
+	private Date endTime;
 	/**
 	 * 文件内容
 	 */
@@ -20,8 +30,24 @@ public class ExtfileCondition {
 		return topicId;
 	}
 
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
 	public void setTopicId(String topicId) {
 		this.topicId = topicId;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public MultipartFile getFile() {
