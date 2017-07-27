@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.model.params.ExtfileQueryCondition;
+import com.hust.scdx.util.AttrUtil;
+import com.hust.scdx.util.ExcelUtils;
 import com.hust.scdx.util.ResultUtil;
 import com.hust.scdx.service.ExtfileService;
 
@@ -30,7 +32,7 @@ public class ExtfileController {
 	/**
 	 * 上传原始文件，经过去重成为泛数据文件存储在文件系统中。
 	 * 
-	 * @param file
+	 * @param origfile
 	 *            原始文件
 	 * @param topicId
 	 *            话题id
@@ -41,15 +43,15 @@ public class ExtfileController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public Object upload(@RequestParam(value = "file", required = true) MultipartFile file,
+	public Object upload(@RequestParam(value = "origfile", required = true) MultipartFile origfile,
 			@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "sourceType", required = false) String sourceType, HttpServletRequest request) {
-		if (file.isEmpty()) {
-			logger.info(file.getName() + "为空。");
+		if (origfile.isEmpty()) {
+			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
 		}
 		ExtfileQueryCondition con = new ExtfileQueryCondition();
-		con.setFile(file);
+		con.setFile(origfile);
 		con.setSourceType(sourceType);
 		con.setTopicId(topicId);
 		if (extfileService.insert(con, request) == 0) {
@@ -57,5 +59,30 @@ public class ExtfileController {
 			return ResultUtil.errorWithMsg("上传失败。");
 		}
 		return ResultUtil.success("上传成功");
+	}
+
+	/**
+	 * 读取上传文件的第一行（属性行），检查是否满足存在 时间、标题、链接
+	 * 
+	 * @param origfile
+	 *            上传的原始文件
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getAttrs")
+	public Object getAttrs(@RequestParam(value = "origfile", required = true) MultipartFile origfile) {
+		if (origfile.isEmpty()) {
+			return ResultUtil.errorWithMsg("文件是空的");
+		}
+		try {
+			String[] attrs = ExcelUtils.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
+			if (AttrUtil.findIndexOfTime(attrs) != -1 && AttrUtil.findIndexOfTitle(attrs) != -1
+					&& AttrUtil.findIndexOfUrl(attrs) != -1) {
+				return ResultUtil.successWithoutMsg();
+			}
+		} catch (Exception e) {
+			logger.warn("读取属性行失败。" + e.toString());
+		}
+		return ResultUtil.errorWithMsg("获取文件属性失败");
 	}
 }

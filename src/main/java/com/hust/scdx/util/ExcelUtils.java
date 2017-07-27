@@ -90,6 +90,24 @@ public class ExcelUtils {
 		return resList;
 	}
 
+	public static String[] readOrigfileAttrs(String filename, InputStream inputStream) throws IOException {
+		if (inputStream == null) {
+			throw new IllegalArgumentException("inputStream is null.");
+		}
+		List<String[]> resList = new ArrayList<String[]>();
+		Workbook workbook = null;
+		if (filename.endsWith("xls")) {
+			workbook = new HSSFWorkbook(inputStream);
+		} else {
+			workbook = new XSSFWorkbook(inputStream);
+		}
+		Sheet sheet = workbook.getSheetAt(0);
+		// 列数
+		int colNum = sheet.getRow(0).getLastCellNum();
+		// excel首行为属性行
+		return convert(sheet.getRow(0), colNum);
+	}
+
 	/**
 	 * 转换Row为String数组。
 	 * 
