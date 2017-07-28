@@ -99,6 +99,7 @@ public class TopicServiceImpl implements TopicService {
 	/**
 	 * 根据时间范围聚类。
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<String[]> miningByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
 		// 根据条件查找extfile对象list
@@ -112,8 +113,7 @@ public class TopicServiceImpl implements TopicService {
 		int size = extfiles.size();
 		for (int i = 0; i < size; i++) {
 			Date uploadTime = extfiles.get(i).getUploadTime();
-			extfilePaths[i] = DIRECTORY.EXTFILE + DateConverter.parseYear(uploadTime) + "/"
-					+ DateConverter.parseMonth(uploadTime) + "/" + extfiles.get(i).getExtfileId();
+			extfilePaths[i] = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime) + extfiles.get(i).getExtfileId();
 		}
 
 		// 读取泛数据文件集合,去重排序并取并集。
@@ -131,14 +131,14 @@ public class TopicServiceImpl implements TopicService {
 			return null;
 		}
 
-		// 将此次记录插入数据库
+		// 将此次记录插入数据库、将content、clusterResult、countResult存入文件系统
 		Result result = new Result();
 		result.setCreator(user.getUserName());
 		result.setCreateTime(new Date());
 		result.setTopicId(topicId);
 		result.setResId(UUID.randomUUID().toString());
 		result.setResName(setResName(topicId, startTime, endTime));
-		if (resultDao.insert(result) <= 0) {
+		if (resultDao.insert(result, content, map) <= 0) {
 			logger.error("插入result记录失败。");
 			return null;
 		}
@@ -154,13 +154,12 @@ public class TopicServiceImpl implements TopicService {
 
 		// 将content、orig_cluster、orig_count存入redis
 		redisService.setObject(Constant.REDIS_CONTENT, content, request);
-		redisService.setObject(Constant.REDIS_CLUSTER_RESULT, map.get(Constant.REDIS_CLUSTER_RESULT), request);
-		redisService.setObject(Constant.REDIS_COUNT_RESULT, map.get(Constant.REDIS_COUNT_RESULT), request);
+		redisService.setObject(Constant.REDIS_CLUSTER_RESULT, map.get(Constant.CLUSTERRESULT), request);
+		redisService.setObject(Constant.REDIS_COUNT_RESULT, map.get(Constant.COUNTRESULT), request);
 
-		return null;
+		return (List<String[]>) map.get(Constant.DISPLAYRESULT);
 	}
 
-	// 标明 向量的装换方式，和算法。
 	/**
 	 * 选择算法和向量模型，对给定集合按标题排序后进行聚类
 	 * 
@@ -176,14 +175,25 @@ public class TopicServiceImpl implements TopicService {
 	 *         排序后的集合，聚类的结果（List<String[]>所有类（类内记录下标，用空格隔开）），类的信息（List<int[]>类内最早的一条记录index，类记录个数）
 	 */
 	private Map<String, Object> mining(List<String[]> content, int converterType, int algorithmType, int granularity) {
-		List<String[]> tmp = new ArrayList<String[]>(content);
-		// 聚类
-		List<List<Integer>> clusterResult = miningService.cluster(tmp, converterType, algorithmType, granularity);
-		// 每个String[]都是某个类簇的数据ID的集合。
-		List<String[]> cluster = ConvertUtil.toStringListB(clusterResult);
-		List<String[]> countResult = ConvertUtil.toStringList(miningService.count(tmp, cluster));
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put(Constant.CLUSTERRESULT, ConvertUtil.toStringListB(clusterResult));
+		List<String[]> tmp = new ArrayList<String[]>(content);
+		// 聚类,每个String[]都是某个类簇的数据ID的集合。
+		List<String[]> clusterResult = ConvertUtil.toStringListB(miningService.cluster(tmp, converterType, algorithmType, granularity));
+		result.put(Constant.CLUSTERRESULT, clusterResult);
+
+		List<int[]> count = miningService.count(tmp, clusterResult);
+		// 返回给前端的结果list：title、url、time、amount
+		List<String[]> displayResult = new ArrayList<String[]>();
+		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
+		for (int[] row : count) {
+			String[] old = content.get(row[0]);
+			String[] sub = new String[] { old[indexOfEss[Constant.INDEXOFTITLE]], old[indexOfEss[Constant.INDEXOFURL]],
+					old[indexOfEss[Constant.INDEXOFTIME]], String.valueOf(row[1]) };
+			displayResult.add(sub);
+		}
+		result.put(Constant.DISPLAYRESULT, displayResult);
+
+		List<String[]> countResult = ConvertUtil.toStringList(count);
 		result.put(Constant.COUNTRESULT, countResult);
 		return result;
 	}
@@ -200,30 +210,6 @@ public class TopicServiceImpl implements TopicService {
 	 * @return
 	 */
 	private String setResName(String topicId, Date startTime, Date endTime) {
-		return queryTopicById(topicId).getTopicName() + DateConverter.parseMdH(startTime) + "-"
-				+ DateConverter.parseMdH(endTime);
-	}
-
-	/**
-	 * 对以去重好的待聚类集合按照标题进行重排序
-	 * 
-	 * @param filteredContent
-	 *            去重后的待聚类集合(不带标题)
-	 * @param titleIndex
-	 *            去重后的待聚类集合中的标题下标
-	 * @return
-	 */
-	private List<String[]> resortContent(List<String[]> filteredContent, int titleIndex) {
-		List<String[]> newContent = new ArrayList<String[]>();
-		newContent.addAll(filteredContent);
-		newContent.remove(0);
-		// 排序
-		Collections.sort(newContent, new Comparator<String[]>() {
-			public int compare(String[] o1, String[] o2) {
-				return (o1[titleIndex]).compareTo(o2[titleIndex]);
-			}
-		});
-		newContent.add(0, filteredContent.get(0));
-		return newContent;
+		return queryTopicById(topicId).getTopicName() + DateConverter.convert(startTime) + "-" + DateConverter.convert(endTime);
 	}
 }

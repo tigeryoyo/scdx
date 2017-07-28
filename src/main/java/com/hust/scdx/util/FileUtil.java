@@ -7,19 +7,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -45,162 +44,122 @@ public class FileUtil {
 			try {
 				content.addAll(f.get());
 			} catch (InterruptedException | ExecutionException e) {
-				logger.error("read from {} failed", filenames[i]);
+				logger.error("读取{}失败。", filenames[i]);
 			}
 		}
 		pool.shutdown();
 		return content;
 	}
-	//读取带空行的数据，被空行隔开的数据分别存到list里
-	public static List<List<String[]>> readwithNullRow(String filename) throws Exception {
-		List<List<String[]>> docs = new ArrayList<>();
-		List<String[]> doc = new ArrayList<>();
-		BufferedReader br = new BufferedReader(new FileReader(filename));
-		synchronized (br) {
-			String line;
-			while (true) {
-				line = br.readLine();
-				if (StringUtils.isEmpty(line) || CommonUtil.isEmptyArray(line.split("\t"))) {
-					String nextline = br.readLine();
-					//判断是否为空行
-					if(StringUtils.isEmpty(nextline) || CommonUtil.isEmptyArray(nextline.split("\t"))){
-//						doc.add(line.split("\t"));
-						if(!doc.isEmpty()){
-							docs.add(doc);
-						}
-						break;
-					}else{
-						docs.add(doc);	
-						doc = new ArrayList<>();
-						doc.add(nextline.split("\t"));
-						//docs.add(doc);						
-					}
-					
-				}else{
-					String[] row = line.split("\t");
-					doc.add(row);
-				}
-			}
-		}
-		br.close();
-		return docs;
-	}
 
-	// 不同文件第一行属性不同，作并集处理
-	@SuppressWarnings("unchecked")
-	public static List<String[]> readForUnificating(String... filenames) {
+	/**
+	 * 根据基础数据文件名集合获取泛数据文件内容，整合、去重。
+	 * 
+	 * @param filenames
+	 * @return
+	 */
+	@SuppressWarnings("null")
+	public static List<String[]> readExtfiles(String... filenames) {
+		List<String[]> content = null;
 		if (CommonUtil.hasEmptyArray(filenames)) {
 			return null;
 		}
-		List<String[]> content = new ArrayList<String[]>();
-		try {
-			Map<String, Object> map = readAttr(filenames);
-			List<String> allAttrs = (List<String>) map.get("allAttrs");
-			Map<String, List<Integer>> allAttrPos = (Map<String, List<Integer>>) map.get("allAttrPos");
-			int taskSize = filenames.length;
-			ExecutorService pool = Executors.newFixedThreadPool(taskSize);
-			FileUtil util = new FileUtil();
-			for (int i = 0; i < taskSize; i++) {
-				Callable<List<String[]>> thread = util.new UnionReadThread(filenames[i], allAttrPos.get(filenames[i]),
-						allAttrs);
-				Future<List<String[]>> f = pool.submit(thread);
-				try {
-					content.addAll(f.get());
-				} catch (InterruptedException | ExecutionException e) {
-					logger.error("read from {} failed", filenames[i]);
+		// 属性list
+		List<String> globalAttrs = new ArrayList<String>();
+		for (int i = 0; i < filenames.length; i++) {
+			try (BufferedReader br = new BufferedReader(new FileReader(filenames[i]))) {
+				String line = br.readLine();
+				// 当前文件url、time所在列
+				int indexOfUrl = AttrUtil.findIndexOfUrl(line.split("\t"));
+				int indexOfTime = AttrUtil.findIndexOfTime(line.split("t"));
+				// 当前文件的所有属性在全局文件的索引位置
+				int[] indexs = getIndexOfExtfile(line, globalAttrs);
+				// 全局文件url、time所在列
+				int globalIndexOfUrl = AttrUtil.findIndexOfUrl(globalAttrs);
+				int globalIndexOfTime = AttrUtil.findIndexOfTime(globalAttrs);
+				// 全局文件中已存在的url,key未url、Integer为当前url所在行的行数（从0开始）
+				HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
+				while (true) {
+					line = br.readLine();
+					if (!StringUtils.isBlank(line)) {
+						String[] row = line.split("\t");
+						String[] imp = new String[globalAttrs.size()];
+						for (int j = 0; j < row.length; j++) {
+							imp[indexs[j]] = row[j];
+						}
+						// 如果检测到url重复
+						if (urlMap.containsKey(row[indexOfUrl])) {
+							// 比较两条url所属新闻数据的时间先后s
+							int col = urlMap.get(row[indexOfUrl]);
+							String[] oldNews = content.get(col);
+							// 若全局新闻的时间大于当前新闻的时间那么替换该新闻
+							if (oldNews[globalIndexOfTime].compareTo(row[indexOfTime]) > 0) {
+								content.set(col, imp);
+							}
+						} else { // 否则将未重复的url加入到map当中
+							urlMap.put(row[indexOfUrl], content.size());
+							content.add(imp);
+						}
+					}
 				}
+			} catch (Exception e) {
+				logger.error("读取基础数据文件集合失败。");
+				return null;
 			}
-			String[] allAttrs_str = new String[allAttrs.size()];
-			for (int i = 0; i < allAttrs_str.length; i++) {
-				allAttrs_str[i] = allAttrs.get(i);
-			}
-			content.add(0, allAttrs_str);
-			pool.shutdown();
-		} catch (Exception e) {
-			logger.error("read attrs faild:{}", e.toString());
 		}
+		// 对content进行排序
+		int indexOfTite = AttrUtil.findIndexOfTitle(globalAttrs);
+		Collections.sort(content, new Comparator<String[]>() {
+			public int compare(String[] o1, String[] o2) {
+				return (o1[indexOfTite]).compareTo(o2[indexOfTite]);
+			}
+		});
+
+		String[] tmp = new String[globalAttrs.size()];
+		globalAttrs.toArray(tmp);
+		content.add(0, tmp);
 		return content;
 	}
 
-	// 读取属性行，即第一行
-	private static Map<String, Object> readAttr(String... filenames) {
-		List<String> allAttrs = new ArrayList<String>();
-		Map<String, List<Integer>> allAttrPos = new HashMap<String, List<Integer>>();
-
-		try {
-
-			// 偏好词位置设置。例如 摘要、内容属性放在最后面、序号、属性放在第一二列。
-			Map<String, Map<String, Integer>> preference = new HashMap<String, Map<String, Integer>>();
-			// TODO
-			List<Integer> pos_i = new ArrayList<Integer>();
-			BufferedReader br = new BufferedReader(new FileReader(filenames[0]));
-			String line = br.readLine();
-
-			String[] subAttrs = line.split("\t");
-			for (int i = 0; i < subAttrs.length; i++) {
-				if (subAttrs[i].equals("微博链接")) {
-					allAttrs.add("链接");
-					pos_i.add(i);
-					continue;
-				} else if (subAttrs[i].equals("内容")) {
-					allAttrs.add("标题");
-					pos_i.add(i);
-					continue;
+	/**
+	 * 获取基础数据首行各个属性在公共属性集合中的索引位置,获取url所在列
+	 * 
+	 * @param rowOne
+	 *            基础数据属性行
+	 * @param gloableAttrs
+	 *            所有属性集合
+	 * @return
+	 */
+	private static int[] getIndexOfExtfile(String rowOne, List<String> globalAttrs) {
+		int[] indexs = null;
+		String[] attrs = rowOne.split("\t");
+		indexs = new int[attrs.length];
+		for (int i = 0; i < attrs.length; i++) {
+			int index = globalAttrs.indexOf(attrs[i]);
+			if (index != -1) { // 防止相似属性
+				indexs[i] = index;
+			} else {
+				if (AttrUtil.isTitle(attrs[i])) {
+					indexs[i] = AttrUtil.findIndexOfTitle(attrs);
+				} else if (AttrUtil.isUrl(attrs[i])) {
+					indexs[i] = AttrUtil.findIndexOfUrl(attrs);
+				} else if (AttrUtil.isTime(attrs[i])) {
+					indexs[i] = AttrUtil.findIndexOfTime(attrs);
+				} else {
+					globalAttrs.add(attrs[i]);
+					indexs[i] = globalAttrs.size() - 1;
 				}
-				allAttrs.add(subAttrs[i]);
-				pos_i.add(i);
 			}
-			if (AttrUtil.findIndexOfUrl(allAttrs) == -1 || -1 == AttrUtil.findIndexOfTime(allAttrs)) {
-				logger.error("excel文件格式不正确：含有不包含url或time的文件。");
-				return null;
-			}
-			allAttrPos.put(filenames[0], pos_i);
-			br.close();
-
-			for (int i = 1; i < filenames.length; i++) {
-				pos_i = new ArrayList<Integer>();
-				br = new BufferedReader(new FileReader(filenames[i]));
-				line = br.readLine();
-				String[] subAttrs_i = line.split("\t");
-				for (int j = 0; j < subAttrs_i.length; j++) {
-					int index = allAttrs.indexOf(subAttrs_i[j]);
-					if (index == -1) {
-						if (Pattern.matches("链接|网址|微博链接|[Uu][Rr][Ll]", subAttrs_i[j])) {
-							pos_i.add(AttrUtil.findIndexOfUrl(allAttrs));
-							continue;
-						}
-						if (Pattern.matches("发布时间|发贴时间|时间", subAttrs_i[j])) {
-							pos_i.add(AttrUtil.findIndexOfTime(allAttrs));
-							continue;
-						}
-						if (Pattern.matches("标题|内容", subAttrs_i[j])) {
-							pos_i.add(AttrUtil.findIndexOfTitle(allAttrs));
-							continue;
-						}
-						pos_i.add(allAttrs.size());
-						allAttrs.add(subAttrs_i[j]);
-					} else {
-						pos_i.add(index);
-						continue;
-					}
-				}
-				allAttrPos.put(filenames[i], pos_i);
-				br.close();
-			}
-		} catch (Exception e) {
-			logger.error("read attrs faild:{}", e.toString());
 		}
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("allAttrs", allAttrs);
-		map.put("allAttrPos", allAttrPos);
-		return map;
+		return indexs;
 	}
 
 	/**
 	 * 写入文件
-	 * @param filename  文件名
-	 * @param content 文件内容   包含标题
+	 * 
+	 * @param filename
+	 *            文件名
+	 * @param content
+	 *            文件内容 包含标题
 	 * @return
 	 */
 	public static boolean write(String filename, List<String[]> content) {
@@ -221,21 +180,6 @@ public class FileUtil {
 		return false;
 	}
 
-	public static boolean writeSBList(String filename, List<StringBuilder> sbList) {
-		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
-			for (StringBuilder sb : sbList) {
-				bw.write(sb.toString());
-			}
-			bw.close();
-		} catch (Exception e) {
-			logger.error("write {} failed, because:{}", filename, e.toString());
-			return false;
-		}
-
-		return true;
-	}
-
 	public static boolean write(String filename, OutputStream outputStream) {
 		try {
 			InputStream is = new BufferedInputStream(new FileInputStream(filename));
@@ -246,7 +190,7 @@ public class FileUtil {
 			}
 			is.close();
 		} catch (Exception e) {
-			logger.error("export {} failed, because:{}", filename, e.toString());
+			logger.error("导出{}失败,因为{}", filename, e.toString());
 			return false;
 		}
 		return true;
@@ -259,31 +203,6 @@ public class FileUtil {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * 计算数量
-	 */
-	public static List<String[]> calcPOfCount(List<String[]> list) {
-		List<String[]> res = new ArrayList<String[]>();
-		res.add(new String[] { list.get(0)[0], list.get(0)[1], "占比" });
-		int total = 0;
-		for (int i = 1; i < list.size(); i++) {
-			total += Integer.parseInt(list.get(i)[1].trim());
-		}
-
-		for (int i = 1; i < list.size(); i++) {
-			String[] row = list.get(i);
-			String[] insert = new String[3];
-			insert[0] = row[0].trim();
-			insert[1] = row[1].trim();
-			int count = Integer.parseInt(insert[1]);
-			insert[2] = String.valueOf(Math.round((float)count/total*100))+"%";
-			res.add(insert);
-		}
-		res.add(new String[1]);
-		res.add(new String[]{"总共",String.valueOf(total)});
-		return res;
 	}
 
 	class ReadThread implements Callable<List<String[]>> {
@@ -314,37 +233,6 @@ public class FileUtil {
 			return content;
 		}
 	}
-//	class ReadwithNullRowThread implements Callable<List<String[]>> {
-//
-//		private String filename;
-//
-//		protected ReadwithNullRowThread(String filename) {
-//			super();
-//			this.filename = filename;
-//		}
-//
-//		@Override
-//		public List<String[]> call() throws Exception {
-//			BufferedReader br = new BufferedReader(new FileReader(filename));
-//			List<String[]> content = new ArrayList<String[]>();
-//			synchronized (br) {
-//				String line;
-//				while (true) {
-//					line = br.readLine();
-//					if (StringUtils.isEmpty(line)) {
-//						if(StringUtils.isEmpty(br.readLine())){
-//							break;
-//						}
-//						
-//					}
-//					String[] row = line.split("\t");
-//					content.add(row);
-//				}
-//			}
-//			br.close();
-//			return content;
-//		}
-//	}
 
 	class WriteThread implements Callable<Boolean> {
 		private String filename;
@@ -358,7 +246,6 @@ public class FileUtil {
 
 		@Override
 		public Boolean call() throws Exception {
-			// TODO Auto-generated method stub
 			try {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
 				for (String[] row : content) {
@@ -367,58 +254,11 @@ public class FileUtil {
 				}
 				bw.close();
 			} catch (Exception e) {
-				logger.error("write {} failed, because:{}", filename, e.toString());
+				logger.error("写文件{}失败,因为{}", filename, e.toString());
 				return false;
 			}
 			return true;
 		}
 
-	}
-
-	class UnionReadThread implements Callable<List<String[]>> {
-
-		private String filename;
-		private List<Integer> attrPos;
-		private List<String> allAttrs;
-
-		protected UnionReadThread(String filename, List<Integer> attrPos, List<String> allAttrs) {
-			super();
-			this.filename = filename;
-			this.attrPos = attrPos;
-			this.allAttrs = allAttrs;
-		}
-
-		@Override
-		public List<String[]> call() throws IOException {
-			List<String[]> content = new ArrayList<String[]>();
-
-			BufferedReader br = new BufferedReader(new FileReader(filename));
-			synchronized (br) {
-				// 第一行属性读丢
-				br.readLine();
-				String line;
-				while (true) {
-					line = br.readLine();
-					if (StringUtils.isEmpty(line)) {
-						break;
-					}
-					String[] row = line.split("\t");
-					content.add(takeRightSeat(row));
-				}
-			}
-			br.close();
-			return content;
-		}
-
-		private String[] takeRightSeat(String[] row) {
-			String[] res = new String[allAttrs.size()];
-			for (int i = 0; i < res.length; i++) {
-				res[i] = "";
-			}
-			for (int i = 0; i < row.length; i++) {
-				res[attrPos.get(i)] = row[i];
-			}
-			return res;
-		}
 	}
 }

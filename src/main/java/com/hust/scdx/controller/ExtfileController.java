@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.util.AttrUtil;
-import com.hust.scdx.util.ExcelUtils;
+import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
 import com.hust.scdx.service.ExtfileService;
 
@@ -75,7 +75,7 @@ public class ExtfileController {
 			return ResultUtil.errorWithMsg("文件是空的");
 		}
 		try {
-			String[] attrs = ExcelUtils.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
+			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
 			if (AttrUtil.findIndexOfTime(attrs) != -1 && AttrUtil.findIndexOfTitle(attrs) != -1
 					&& AttrUtil.findIndexOfUrl(attrs) != -1) {
 				return ResultUtil.successWithoutMsg();

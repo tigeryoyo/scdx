@@ -50,8 +50,7 @@ public class TopicController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public Object createTopic(@RequestParam(value = "topicName", required = true) String topicName,
-			HttpServletRequest request) {
+	public Object createTopic(@RequestParam(value = "topicName", required = true) String topicName, HttpServletRequest request) {
 		if (topicService.createTopic(topicName, request) <= 0) {
 			logger.info("创建 [" + topicName + "] 专题失败。");
 			return ResultUtil.errorWithMsg("创建 [" + topicName + "] 专题失败。");
@@ -109,8 +108,9 @@ public class TopicController {
 	@ResponseBody
 	@RequestMapping("/miningByTimeRange")
 	public Object miningByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "startTime", required = true) Date startTime,
-			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
+			HttpServletRequest request) {
+		// title、url、time、amount
 		List<String[]> list = topicService.miningByTimeRange(topicId, startTime, endTime, request);
 		if (list == null) {
 			return ResultUtil.unknowError();

@@ -41,8 +41,7 @@ public class ExtfileDao {
 	public int insert(Extfile extfile, List<String[]> list) {
 		// 存储规则 DIRECTORY.EXTFILE/xxxx年/xx月/extfileId
 		Date uploadTime = extfile.getUploadTime();
-		String dir = DIRECTORY.EXTFILE + DateConverter.parseYear(uploadTime) + "/"
-				+ DateConverter.parseMonth(uploadTime) + "/";
+		String dir = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime);
 		if (!new File(dir).exists()) {
 			new File(dir).mkdirs();
 		}
@@ -82,13 +81,13 @@ public class ExtfileDao {
 	}
 
 	/**
-	 * 根据泛数据文件名集合获取泛数据文件内容，整合、去重。
+	 * 根据基础数据文件名集合获取泛数据文件内容，整合、去重。
 	 * 
 	 * @param extfilePaths
 	 * @return
 	 */
 	public List<String[]> getExtfilesContent(String[] extfilePaths) {
-		return null;
+		return FileUtil.readExtfiles(extfilePaths);
 	}
 
 }

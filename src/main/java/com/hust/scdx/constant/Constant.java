@@ -20,13 +20,15 @@ public class Constant {
     public static final String CONTENT = "content";
     public static final String CLUSTERRESULT = "clusterResult";
     public static final String COUNTRESULT = "countResult";
-    
+    public static final String DISPLAYRESULT = "displayResult";
     
     public static final String REDIS_CONTENT = "redis_content";
     public static final String REDIS_CLUSTER_RESULT = "redis_cluster_result";
     public static final String REDIS_COUNT_RESULT = "redis_count_result";
 	
-    
+    public static final int INDEXOFTITLE = 0;
+    public static final int INDEXOFURL = 1;
+    public static final int INDEXOFTIME = 2;
     
     
 	public final static String INVALID_TIME = "1970-01-01";

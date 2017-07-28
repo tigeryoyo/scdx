@@ -1,9 +1,11 @@
 package com.hust.scdx.constant;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- *	系统文件配置路径-->config.properties 
+ * 系统文件配置路径-->config.properties
  */
 public class Config {
 	// 把config.properties中的变量值，赋给当前的变量
@@ -23,8 +25,7 @@ public class Config {
 	private String dirStdfile;
 
 	void init() {
-		DIRECTORY.init(dirExtfile, dirContent, dirOrigCluster, dirOrigCount, dirModifyCluster, dirModifyCount,
-				dirStdfile);
+		DIRECTORY.init(dirExtfile, dirContent, dirOrigCluster, dirOrigCount, dirModifyCluster, dirModifyCount, dirStdfile);
 	}
 
 	public static class DIRECTORY {
@@ -58,8 +59,8 @@ public class Config {
 		 */
 		public static String STDFILE;
 
-		public static void init(String dirExtfile, String dirContent, String dirOrigCluster, String dirOrigCount,
-				String dirModifyCluster, String dirModifyCount, String dirStdfile) {
+		public static void init(String dirExtfile, String dirContent, String dirOrigCluster, String dirOrigCount, String dirModifyCluster,
+				String dirModifyCount, String dirStdfile) {
 			EXTFILE = dirExtfile;
 			CONTENT = dirContent;
 			ORIG_CLUSTER = dirOrigCluster;
@@ -67,6 +68,27 @@ public class Config {
 			MODIFY_CLUSTER = dirModifyCluster;
 			MODIFY_COUNT = dirModifyCount;
 			STDFILE = dirStdfile;
+			if (!new File(dirExtfile).exists()) {
+				new File(dirExtfile).mkdirs();
+			}
+			if (!new File(dirContent).exists()) {
+				new File(dirContent).mkdirs();
+			}
+			if (!new File(dirOrigCluster).exists()) {
+				new File(dirOrigCluster).mkdirs();
+			}
+			if (!new File(dirOrigCount).exists()) {
+				new File(dirOrigCount).mkdirs();
+			}
+			if (!new File(dirModifyCluster).exists()) {
+				new File(dirModifyCluster).mkdirs();
+			}
+			if (!new File(dirModifyCount).exists()) {
+				new File(dirModifyCount).mkdirs();
+			}
+			if (!new File(dirStdfile).exists()) {
+				new File(dirStdfile).mkdirs();
+			}
 		}
 	}
 }

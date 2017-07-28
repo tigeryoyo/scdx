@@ -1,3 +1,6 @@
+/**
+ * 拖拽
+ */
 var fileArray = new Array();
 $(function() {
 	// 阻止浏览器默认行。
@@ -41,11 +44,10 @@ $(function() {
 					contentType : false,
 					mimeType : "multipart/form-data",
 					data : fd,
-					success : function(response) {
-						reSetView(response, filename, fileArray.length);
+					success : function(msg) {
+						console.log(msg);
 					},
 					error : function() {
-						alert("预览失败");
 						stop();
 					}
 				});
@@ -56,3 +58,17 @@ $(function() {
 		}
 	}, false);
 });
+
+/**
+ * 上传所有文件
+ */
+function uploadAll() {
+
+}
+
+/**
+ * 删除所有文件
+ */
+function deleteAll() {
+
+}

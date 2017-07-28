@@ -5,12 +5,18 @@ import java.util.regex.Pattern;
 
 public class AttrUtil {
 
-	public static String[] findEssentialIndex(String[] attrs) {
-		String indexOfTitle = String.valueOf(findIndexOfTitle(attrs));
-		String indexOfUrl = String.valueOf(findIndexOfUrl(attrs));
-		String indexOfTime = String.valueOf(findIndexOfTime(attrs));
+	/**
+	 * title、url、time
+	 * 
+	 * @param attrs
+	 * @return
+	 */
+	public static int[] findEssentialIndex(String[] attrs) {
+		int indexOfTitle = findIndexOfTitle(attrs);
+		int indexOfUrl = findIndexOfUrl(attrs);
+		int indexOfTime = findIndexOfTime(attrs);
 
-		return new String[] { indexOfTitle, indexOfUrl, indexOfTime };
+		return new int[] { indexOfTitle, indexOfUrl, indexOfTime };
 	}
 
 	public static int findIndexOfSth(String[] attrs, String sth) {
@@ -93,4 +99,27 @@ public class AttrUtil {
 		return -1;
 	}
 
+	public static boolean isTitle(String attr) {
+		if (Pattern.matches("标题|内容", attr)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isUrl(String attr) {
+		if (Pattern.matches("链接|网址|微博链接|[Uu][Rr][Ll]", attr)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isTime(String attr) {
+		if (Pattern.matches("发布时间|发贴时间|时间", attr)) {
+			return true;
+		}
+
+		return false;
+	}
 }

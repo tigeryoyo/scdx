@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>泛数据汇总</title>
+<title>基础数据聚类</title>
 <link rel="stylesheet" href="css/history_clusterdetails.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/page.css">
@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="s_nav">
-		当前位置： <a href="javascript:;" onclick="jumpto('topic-list')">专题管理</a> <span>>>专题详情
+		当前位置： <a href="javascript:;" onclick="jumpto('topic-list')">专题管理</a> <span>>>基础数据聚类
 		</span>
 	</div>
 	<div class="ckht">
@@ -19,7 +19,7 @@
 			<button type="button" class="btn btn-default"
 				onclick="jumpto('orig-upload')">上传</button>
 			<button type="button" class="btn btn-default active"
-				style="color: red" onclick="jumpto('ext-summary')">汇总</button>
+				style="color: red" onclick="jumpto('ext-cluster')">聚类</button>
 			<button type="button" class="btn btn-default"
 				onclick="jumpto('std-analysis')">分析</button>
 		</div>
@@ -62,8 +62,6 @@
 					<button type="button" class="btn btn-danger"
 						style="float: left; margin-top: 16px; margin-left: 20px;"
 						onclick="deleteLayData()">删除</button>
-
-
 					<button type="button" class="btn btn-info"
 						style="float: right; margin-top: 16px; margin-right: 0px;"
 						onclick="download()">下载泛数据</button>

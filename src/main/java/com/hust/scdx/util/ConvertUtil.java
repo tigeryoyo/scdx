@@ -31,10 +31,8 @@ public class ConvertUtil {
 		return listStr;
 	}
 
-	public static List<List<String[]>> convertToStringSet(List<String[]> list, List<List<Integer>> resultIndexSet,
-			final int targetIndex) {
-		if (null == resultIndexSet || resultIndexSet.size() == 0 || list.size() == 0 || null == list
-				|| targetIndex < 0) {
+	public static List<List<String[]>> convertToStringSet(List<String[]> list, List<List<Integer>> resultIndexSet, final int targetIndex) {
+		if (null == resultIndexSet || resultIndexSet.size() == 0 || list.size() == 0 || null == list || targetIndex < 0) {
 			return null;
 		}
 		Collections.sort(resultIndexSet, new Comparator<List<Integer>>() {
@@ -46,12 +44,7 @@ public class ConvertUtil {
 			}
 		});
 		List<List<String[]>> listStrSet = new ArrayList<List<String[]>>();
-		// List<String[]> singleDataList = new ArrayList<String[]>();
 		for (List<Integer> set : resultIndexSet) {
-			// if (set.size() == 1) {
-			// singleDataList.add(list.get(set.get(0) + 1));
-			// continue;
-			// }
 			List<String[]> setDataList = new ArrayList<String[]>();
 			for (int i : set) {
 				setDataList.add(list.get(i + 1));
@@ -63,12 +56,6 @@ public class ConvertUtil {
 			});
 			listStrSet.add(setDataList);
 		}
-		// Collections.sort(singleDataList, new Comparator<String[]>() {
-		// public int compare(String[] o1, String[] o2) {
-		// return o1[targetIndex].compareTo(o2[targetIndex]);
-		// }
-		// });
-		// listStrSet.add(singleDataList);
 		return listStrSet;
 	}
 
@@ -137,7 +124,9 @@ public class ConvertUtil {
 
 	/**
 	 * 将(所有类（单个类（类内元素的index））)变为（所有类（单个类））
-	 * @param list 聚类结果集（index）
+	 * 
+	 * @param list
+	 *            聚类结果集（index）
 	 * @return
 	 */
 	public static List<String[]> toStringListB(List<List<Integer>> list) {

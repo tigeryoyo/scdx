@@ -19,7 +19,7 @@ import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.service.UserService;
-import com.hust.scdx.util.ExcelUtils;
+import com.hust.scdx.util.ExcelUtil;
 
 @Service
 public class ExtfileServiceImpl implements ExtfileService {
@@ -39,7 +39,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		MultipartFile file = con.getFile();
 		List<String[]> list = null;
 		try {
-			list = ExcelUtils.readOrigfile(file.getOriginalFilename(), file.getInputStream());
+			list = ExcelUtil.readOrigfile(file.getOriginalFilename(), file.getInputStream());
 		} catch (IOException e) {
 			logger.error("读取原始文件出现异常\t" + e.toString());
 			return 0;
