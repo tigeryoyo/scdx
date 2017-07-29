@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -29,6 +30,21 @@ public class FileUtil {
 	 * Logger for this class
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+
+	public static void main(String[] args) {
+		try {
+			List<String[]> list = readExtfiles("C:/Users/tigerto/Desktop/1", "C:/Users/tigerto/Desktop/2");
+			for (String[] strs : list) {
+				for (String str : strs) {
+					System.out.print(str + "\t");
+				}
+				System.out.println();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static List<String[]> read(String... filenames) {
 		if (CommonUtil.hasEmptyArray(filenames)) {
@@ -57,38 +73,38 @@ public class FileUtil {
 	 * @param filenames
 	 * @return
 	 */
-	@SuppressWarnings("null")
 	public static List<String[]> readExtfiles(String... filenames) {
-		List<String[]> content = null;
+		List<String[]> content = new ArrayList<String[]>();
 		if (CommonUtil.hasEmptyArray(filenames)) {
 			return null;
 		}
 		// 属性list
 		List<String> globalAttrs = new ArrayList<String>();
+		// 全局文件中已存在的url,key未url、Integer为当前url所在行的行数（从0开始）
+		HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
 		for (int i = 0; i < filenames.length; i++) {
 			try (BufferedReader br = new BufferedReader(new FileReader(filenames[i]))) {
 				String line = br.readLine();
+				String[] attrs = line.split("\t");
 				// 当前文件url、time所在列
-				int indexOfUrl = AttrUtil.findIndexOfUrl(line.split("\t"));
-				int indexOfTime = AttrUtil.findIndexOfTime(line.split("t"));
+				int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
+				int indexOfTime = AttrUtil.findIndexOfTime(attrs);
 				// 当前文件的所有属性在全局文件的索引位置
-				int[] indexs = getIndexOfExtfile(line, globalAttrs);
-				// 全局文件url、time所在列
-				int globalIndexOfUrl = AttrUtil.findIndexOfUrl(globalAttrs);
+				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs) : getIndexOfExtfile(attrs, globalAttrs);
+				// 全局文件time所在列
 				int globalIndexOfTime = AttrUtil.findIndexOfTime(globalAttrs);
-				// 全局文件中已存在的url,key未url、Integer为当前url所在行的行数（从0开始）
-				HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
 				while (true) {
 					line = br.readLine();
 					if (!StringUtils.isBlank(line)) {
 						String[] row = line.split("\t");
 						String[] imp = new String[globalAttrs.size()];
+						Arrays.fill(imp, "");
 						for (int j = 0; j < row.length; j++) {
 							imp[indexs[j]] = row[j];
 						}
 						// 如果检测到url重复
 						if (urlMap.containsKey(row[indexOfUrl])) {
-							// 比较两条url所属新闻数据的时间先后s
+							// 比较两条url所属新闻数据的时间先后
 							int col = urlMap.get(row[indexOfUrl]);
 							String[] oldNews = content.get(col);
 							// 若全局新闻的时间大于当前新闻的时间那么替换该新闻
@@ -99,9 +115,12 @@ public class FileUtil {
 							urlMap.put(row[indexOfUrl], content.size());
 							content.add(imp);
 						}
+					} else {
+						break;
 					}
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				logger.error("读取基础数据文件集合失败。");
 				return null;
 			}
@@ -121,6 +140,23 @@ public class FileUtil {
 	}
 
 	/**
+	 * 对第一个读入的基础文件进行初始化全局属性list操作
+	 * 
+	 * @param attrs
+	 * @param globalAttrs
+	 * @return
+	 */
+	private static int[] initGlobalAttrs(String[] attrs, List<String> globalAttrs) {
+		int[] indexs = null;
+		indexs = new int[attrs.length];
+		for (int i = 0; i < attrs.length; i++) {
+			indexs[i] = i;
+			globalAttrs.add(attrs[i]);
+		}
+		return indexs;
+	}
+
+	/**
 	 * 获取基础数据首行各个属性在公共属性集合中的索引位置,获取url所在列
 	 * 
 	 * @param rowOne
@@ -129,9 +165,8 @@ public class FileUtil {
 	 *            所有属性集合
 	 * @return
 	 */
-	private static int[] getIndexOfExtfile(String rowOne, List<String> globalAttrs) {
+	private static int[] getIndexOfExtfile(String[] attrs, List<String> globalAttrs) {
 		int[] indexs = null;
-		String[] attrs = rowOne.split("\t");
 		indexs = new int[attrs.length];
 		for (int i = 0; i < attrs.length; i++) {
 			int index = globalAttrs.indexOf(attrs[i]);

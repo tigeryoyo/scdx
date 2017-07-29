@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.constant.Config.DIRECTORY;
-import com.hust.scdx.constant.Constant;
+import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.dao.mapper.ResultMapper;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.util.DateConverter;
@@ -30,10 +30,11 @@ public class ResultDao {
 	 *            存储clusterResult、countResult的map
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public int insert(Result result, List<String[]> content, Map<String, Object> map) {
 		String dirPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
-		List<String[]> clusterResult = (List<String[]>) map.get(Constant.CLUSTERRESULT);
-		List<String[]> countResult = (List<String[]>) map.get(Constant.COUNTRESULT);
+		List<String[]> clusterResult = (List<String[]>) map.get(Cluster.ORIGCLUSTERS);
+		List<String[]> countResult = (List<String[]>) map.get(Cluster.ORIGCOUNTS);
 		if (FileUtil.write(DIRECTORY.CONTENT + dirPath, content) && FileUtil.write(DIRECTORY.ORIG_CLUSTER + dirPath, clusterResult)
 				&& FileUtil.write(DIRECTORY.ORIG_COUNT + dirPath, countResult) && FileUtil.write(DIRECTORY.MODIFY_CLUSTER + dirPath, clusterResult)
 				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + dirPath, countResult)) {

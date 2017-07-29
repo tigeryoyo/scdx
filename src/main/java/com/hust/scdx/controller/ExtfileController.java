@@ -58,7 +58,7 @@ public class ExtfileController {
 			logger.info("文件上传失败。");
 			return ResultUtil.errorWithMsg("上传失败。");
 		}
-		return ResultUtil.success("上传成功");
+		return ResultUtil.success("上传成功。");
 	}
 
 	/**
@@ -69,8 +69,8 @@ public class ExtfileController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/getAttrs")
-	public Object getAttrs(@RequestParam(value = "origfile", required = true) MultipartFile origfile) {
+	@RequestMapping("/checkExtfile")
+	public Object checkExtfile(@RequestParam(value = "origfile", required = true) MultipartFile origfile) {
 		if (origfile.isEmpty()) {
 			return ResultUtil.errorWithMsg("文件是空的");
 		}

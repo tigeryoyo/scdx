@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.ExtfileDao;
 import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.User;
@@ -52,7 +53,8 @@ public class ExtfileServiceImpl implements ExtfileService {
 		extfile.setSize((int) (file.getSize() / 1024));
 		extfile.setTopicId(con.getTopicId());
 		extfile.setExtfileId(UUID.randomUUID().toString());
-		extfile.setSourceType(con.getSourceType());
+		//extfile.setSourceType(con.getSourceType());
+		extfile.setSourceType(Constant.UNKNOWN);
 		return extfileDao.insert(extfile, list);
 	}
 

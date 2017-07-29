@@ -1,7 +1,7 @@
 /**
  * 拖拽
  */
-var fileArray = new Array();
+var fileBuf = new Array();
 $(function() {
 	// 阻止浏览器默认行。
 	$(document).on({
@@ -31,27 +31,30 @@ $(function() {
 		// 检测文件是不是excel文件
 		for (var index = 0; index < fileList.length; index++) {
 			var filename = fileList[index].name;
-			if (filename.lastIndexOf("xls") !== -1 || filename.lastIndexOf("xlsx") !== -1) {
-				var file = fileList[index];
+			if (filename.lastIndexOf("xls") !== -1
+					|| filename.lastIndexOf("xlsx") !== -1) {
+				var origfile = fileList[index];
 				var fd = new FormData();
-				fd.append("file", file);
+				fd.append("origfile", origfile);
 				$.ajax({
 					async : false,
 					crossDomain : true,
-					url : "/file/getColumnTitle",
+					url : "/extfile/checkExtfile",
 					method : "POST",
 					processData : false,
 					contentType : false,
 					mimeType : "multipart/form-data",
 					data : fd,
 					success : function(msg) {
-						console.log(msg);
+						addOrigfile(filename);
+						$(".btn_del_all").removeAttr("disabled");
+						$(".btn_upl_all").removeAttr("disabled");
 					},
 					error : function() {
 						stop();
 					}
 				});
-				fileArray.push(file);
+				fileBuf.push(origfile);
 			} else {
 				alert(filename + " 不是Excel文件");
 			}
@@ -60,15 +63,55 @@ $(function() {
 });
 
 /**
+ * 将原始文件名显示在界面
+ */
+function addOrigfile(filename) {
+	var btn_content = '<a href="#" class="btn btn-info disabled" role="button">'
+			+ filename + '</a>';
+	$("#filelist").append(btn_content);
+}
+
+/**
  * 上传所有文件
  */
 function uploadAll() {
+	var flag = true;
+	for (var i = 0; i < fileBuf.length; i++) {
+		var form = new FormData();
+		form.append("origfile", fileBuf[i]);
+		form.append("topicId", getCookie("topicId"));
+		$.ajax({
+			async : false,
+			crossDomain : true,
+			url : "/extfile/upload",
+			method : "POST",
+			processData : false,
+			contentType : false,
+			mimeType : "multipart/form-data",
+			data : form,
+			error : function() {
+				alert("上传失败");
+				flag = false;
+				stop();
+			}
+		});
+	}
 
+	if (flag) {
+		$("#drop_area").text("上传成功。");
+		setTimeout(function() {
+			jumpto("ext-cluster");
+		}, 250);
+
+	}
 }
 
 /**
  * 删除所有文件
  */
 function deleteAll() {
-
+	fileBuf = new Array();
+	$("#filelist").text("");
+	$(".btn_del_all").attr("disabled", true);
+	$(".btn_upl_all").attr("disabled", true);
 }

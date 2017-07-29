@@ -13,11 +13,11 @@ public interface TopicService {
 
 	int deleteTopicById(String topicId);
 
-	int updateIssueInfo(Topic topic);
+	int updateTopicInfo(Topic topic);
 
 	Topic queryTopicById(String topicId);
 	
-	List<Topic> queryTopic(TopicQueryCondition con);
+	List<Topic> queryTopicByName(TopicQueryCondition con);
 
 	long queryTopicCount(TopicQueryCondition con);
 

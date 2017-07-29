@@ -3,10 +3,7 @@ package com.hust.scdx.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -24,11 +21,8 @@ import com.hust.datamining.convertor.DigitalConvertor;
 import com.hust.datamining.convertor.TFIDFConvertor;
 import com.hust.datamining.simcal.AcrossSimilarity;
 import com.hust.datamining.simcal.CosSimilarity;
-import com.hust.scdx.constant.Constant;
-import com.hust.scdx.constant.Constant.ALGORIRHMTYPE;
-import com.hust.scdx.constant.Constant.GRANULARITY;
+import com.hust.scdx.constant.Constant.Algorithm;
 import com.hust.scdx.constant.Constant.Index;
-import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.SegmentService;
 import com.hust.scdx.util.AttrUtil;
@@ -46,19 +40,21 @@ public class MiningServiceImpl implements MiningService {
 
 	// 目的是聚类。第一个参数是原始文本，第二个为向量模型的选择，第三个为算法的选择（已经写死了，为canopy）。
 	@Override
-	public List<List<Integer>> cluster(List<String[]> list, int converterType, int algorithmType, int granularity) {
+	public List<List<Integer>> getOrigClusters(List<String[]> content, int converterType, int algorithmType,
+			int granularity) {
 		// 用于存放结果
 		List<List<Integer>> resultIndexSetList = new ArrayList<List<Integer>>();
+		List<String[]> tmp = new ArrayList<String[]>(content);
 		// 移除属性行
-		String[] attrs = list.remove(0);
+		String[] attrs = tmp.remove(0);
 		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-		List<String[]> segmentList = segmentService.getSegresult(list, indexOfTitle, 0);
+		List<String[]> segmentList = segmentService.getSegresult(tmp, indexOfTitle, 0);
 		Convertor convertor = null;
 		// 判断选择的向量模型的类型
-		if (converterType == Constant.DIGITAL) {
+		if (converterType == Algorithm.DIGITAL) {
 			convertor = new DigitalConvertor();
-		} else if (converterType == Constant.TFIDF) {
+		} else if (converterType == Algorithm.TFIDF) {
 			convertor = new TFIDFConvertor();
 		}
 		convertor.setList(segmentList);
@@ -66,21 +62,21 @@ public class MiningServiceImpl implements MiningService {
 		// 向量转换完成
 
 		// 如果选择的是canopy算法
-		if (algorithmType == ALGORIRHMTYPE.CANOPY) {
+		if (algorithmType == Algorithm.CANOPY) {
 			// System.out.println("使用的是CANOPY");
 			Canopy canopy = new Canopy();
 			canopy.setVectors(vectors);
 			// 相似度方式的选择
-			if (granularity == GRANULARITY.AcrossSimilarity) {
+			if (granularity == Algorithm.AcrossSimilarity) {
 				canopy.setSimi(new AcrossSimilarity(vectors));
 				// System.out.println("选择的是粗粒度AcrossSimilarity");
 
-			} else if (granularity == GRANULARITY.CosSimilarity) {
+			} else if (granularity == Algorithm.CosSimilarity) {
 				canopy.setSimi(new CosSimilarity(vectors));
 				// System.out.println("选择的是细粒度CosSimilarity");
 			}
 			// 设置阀值
-			canopy.setThreshold(Constant.SIMILARITYTHRESHOLD);
+			canopy.setThreshold(Algorithm.SIMILARITYTHRESHOLD);
 			// 开启线程池
 			ExecutorService exec = Executors.newSingleThreadExecutor();
 			Future<List<List<Integer>>> future = exec.submit(canopy);
@@ -91,14 +87,14 @@ public class MiningServiceImpl implements MiningService {
 				logger.error("error occur during clustering by canopy" + e.toString());
 				return null;
 			}
-		} else if (algorithmType == ALGORIRHMTYPE.KMEANS) {
+		} else if (algorithmType == Algorithm.KMEANS) {
 			// System.out.println("使用的是KMEANS");
 			Canopy canopy = new Canopy();
 			canopy.setVectors(vectors);
 			// 相似度方式的选择
 			canopy.setSimi(new AcrossSimilarity(vectors));
 			// 设置阀值
-			canopy.setThreshold(Constant.SIMILARITYTHRESHOLD);
+			canopy.setThreshold(Algorithm.SIMILARITYTHRESHOLD);
 			// 开启线程池
 			ExecutorService exec = Executors.newSingleThreadExecutor();
 			Future<List<List<Integer>>> future = exec.submit(canopy);
@@ -110,11 +106,11 @@ public class MiningServiceImpl implements MiningService {
 				kmeans.setVectors(vectors);
 				kmeans.setIterationTimes(20);
 				// 相似度方式的选择
-				if (granularity == GRANULARITY.AcrossSimilarity) {
+				if (granularity == Algorithm.AcrossSimilarity) {
 					kmeans.setSimi(new AcrossSimilarity(vectors));
 					// System.out.println("选择的是粗粒度AcrossSimilarity");
 
-				} else if (granularity == GRANULARITY.CosSimilarity) {
+				} else if (granularity == Algorithm.CosSimilarity) {
 					kmeans.setSimi(new CosSimilarity(vectors));
 					// System.out.println("选择的是细粒度CosSimilarity");
 				}
@@ -133,21 +129,21 @@ public class MiningServiceImpl implements MiningService {
 				logger.error("error occur during clustering by canopy" + e.toString());
 				return null;
 			}
-		} else if (algorithmType == ALGORIRHMTYPE.DBSCAN) {
+		} else if (algorithmType == Algorithm.DBSCAN) {
 			// System.out.println("使用的是DBSCAN");
 			DBScan dbscan = new DBScan();
 			dbscan.setVectors(vectors);
-			if (granularity == GRANULARITY.AcrossSimilarity) {
+			if (granularity == Algorithm.AcrossSimilarity) {
 				dbscan.setSimi(new AcrossSimilarity(vectors));
 				// System.out.println("选择的是粗粒度AcrossSimilarity");
 
-			} else if (granularity == GRANULARITY.CosSimilarity) {
+			} else if (granularity == Algorithm.CosSimilarity) {
 				dbscan.setSimi(new CosSimilarity(vectors));
 				// System.out.println("选择的是细粒度CosSimilarity");
 			}
 			// 设置阀值
-			dbscan.setMinPts(Constant.MinPts);
-			dbscan.setEps(Constant.Eps);
+			dbscan.setMinPts(Algorithm.MINPTS);
+			dbscan.setEps(Algorithm.EPS);
 			// 开启线程池
 			ExecutorService exec = Executors.newSingleThreadExecutor();
 			Future<List<List<Integer>>> future = exec.submit(dbscan);
@@ -165,7 +161,6 @@ public class MiningServiceImpl implements MiningService {
 
 		// 重载排序的方法，按照降序。类中数量多的排在前面。
 		Collections.sort(resultIndexSetList, new Comparator<List<Integer>>() {
-
 			@Override
 			public int compare(List<Integer> o1, List<Integer> o2) {
 				// TODO Auto-generated method stub
@@ -178,10 +173,10 @@ public class MiningServiceImpl implements MiningService {
 				public int compare(Integer o1, Integer o2) {
 					// TODO Auto-generated method stub
 					// 判断他们的标题是否相同
-					int compare = list.get(o1)[indexOfTitle].compareTo(list.get(o2)[indexOfTitle]);
+					int compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
 					// 若不相同，使用时间进行排序。
 					if (compare == 0) {
-						compare = list.get(o1)[indexOfTime].compareTo(list.get(o2)[indexOfTime]);
+						compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
 					}
 					return compare;
 				}
@@ -190,70 +185,39 @@ public class MiningServiceImpl implements MiningService {
 		return resultIndexSetList;
 	}
 
-	// 用于得出orig_count的数据
+	// 用于得出origCounts的数据
 	@Override
-	public List<int[]> count(List<String[]> content, List<String[]> cluster) {
-		// TODO Auto-generated method stub
-		List<int[]> clusterInt = ConvertUtil.toIntList(cluster); // 变成
-		List<int[]> reList = new ArrayList<int[]>();
-		for (int i = 0; i < clusterInt.size(); i++) {
-			int[] tmpList = clusterInt.get(i); // 取第i条数组
+	public List<int[]> getOrigCounts(List<String[]> content, List<String[]> origClusters) {
+		List<int[]> origCounts = new ArrayList<int[]>();
+		List<String[]> tmp = new ArrayList<String[]>(content);
+		// 移除属性行
+		String[] attrs = tmp.remove(0);
+		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		List<int[]> clusters = ConvertUtil.toIntList(origClusters); // 变成
+		for (int i = 0; i < clusters.size(); i++) {
+			int[] cluster = clusters.get(i); // 取第i条数组
 			int origIndex = -1;
 			String origTime = "9999-12-12 23:59:59";
-			for (int j = 0; j < tmpList.length; j++) {
-				String[] row = content.get(tmpList[j]); // 取它的真实内容
+			for (int j = 0; j < cluster.length; j++) {
+				String[] row = tmp.get(cluster[j]); // 取它的真实内容
 				try {
-					if (origTime.compareTo(row[Index.TIME_INDEX]) > 0) {
-						origTime = row[Index.TIME_INDEX];
-						origIndex = tmpList[j];
+					if (origTime.compareTo(row[indexOfTime]) > 0) {
+						origTime = row[indexOfTime];
+						origIndex = cluster[j];
 					}
 				} catch (Exception e) {
-					logger.error("sth error when count:{}", tmpList[j]);
+					logger.error("计算origCount错误{}", cluster[j]);
 				}
 			}
 			if (origIndex == -1) {
-				origIndex = tmpList[0];
+				origIndex = cluster[0];
 			}
 			int[] item = new int[2];
 			item[Index.COUNT_ITEM_INDEX] = origIndex;
-			item[Index.COUNT_ITEM_AMOUNT] = tmpList.length;
-			reList.add(item);
+			item[Index.COUNT_ITEM_AMOUNT] = cluster.length;
+			origCounts.add(item);
 		}
-		return reList;
-	}
-
-	@Override
-	public Map<String, Object> getAmount(Map<String, Map<String, Map<String, Integer>>> map) {
-		// TODO Auto-generated method stub
-		if (map == null) {
-			return null;
-		}
-		Map<String, Integer> typeAmountMap = new HashMap<String, Integer>();
-		for (Map<String, Map<String, Integer>> values : map.values()) {
-			Map<String, Integer> typeMap = values.get(Constant.INFOTYPE_EN);
-			for (Entry<String, Integer> entry : typeMap.entrySet()) {
-				Integer oldValue = typeAmountMap.get(entry.getKey());
-				if (null == oldValue) {
-					oldValue = 0;
-				}
-				typeAmountMap.put(entry.getKey(), entry.getValue() + oldValue);
-			}
-		}
-		Map<String, Integer> mediaAmountMap = new HashMap<String, Integer>();
-		for (Map<String, Map<String, Integer>> values : map.values()) {
-			Map<String, Integer> mediaMap = values.get(Constant.MEDIA_EN);
-			for (Entry<String, Integer> entry : mediaMap.entrySet()) {
-				Integer oldValue = mediaAmountMap.get(entry.getKey());
-				if (null == oldValue) {
-					oldValue = 0;
-				}
-				mediaAmountMap.put(entry.getKey(), entry.getValue() + oldValue);
-			}
-		}
-		Map<String, Object> reMap = new HashMap<>();
-		reMap.put(KEY.MINING_AMOUNT_MEDIA, mediaAmountMap);
-		reMap.put(KEY.MINING_AMOUNT_TYPE, typeAmountMap);
-		return reMap;
+		return origCounts;
 	}
 
 }

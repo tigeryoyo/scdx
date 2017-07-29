@@ -1,8 +1,6 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +16,9 @@ import org.springframework.stereotype.Service;
 
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant;
+import com.hust.scdx.constant.Constant.Algorithm;
+import com.hust.scdx.constant.Constant.Cluster;
+import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.dao.ExtfileDao;
 import com.hust.scdx.dao.ResultDao;
 import com.hust.scdx.dao.TopicDao;
@@ -77,7 +78,7 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public int updateIssueInfo(Topic topic) {
+	public int updateTopicInfo(Topic topic) {
 		return 0;
 	}
 
@@ -87,8 +88,8 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public List<Topic> queryTopic(TopicQueryCondition con) {
-		return topicDao.queryTopicByTopicName(con);
+	public List<Topic> queryTopicByName(TopicQueryCondition con) {
+		return topicDao.queryTopicByName(con);
 	}
 
 	@Override
@@ -113,7 +114,8 @@ public class TopicServiceImpl implements TopicService {
 		int size = extfiles.size();
 		for (int i = 0; i < size; i++) {
 			Date uploadTime = extfiles.get(i).getUploadTime();
-			extfilePaths[i] = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime) + extfiles.get(i).getExtfileId();
+			extfilePaths[i] = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime)
+					+ extfiles.get(i).getExtfileId();
 		}
 
 		// 读取泛数据文件集合,去重排序并取并集。
@@ -125,8 +127,8 @@ public class TopicServiceImpl implements TopicService {
 
 		// 开始对content聚类
 		User user = userService.selectCurrentUser(request);
-		Map<String, Object> map = mining(content, Constant.DIGITAL, user.getAlgorithm(), user.getGranularity());
-		if (map == null) {
+		Map<String, Object> map = mining(content, Algorithm.DIGITAL, user.getAlgorithm(), user.getGranularity());
+		if (map.isEmpty()) {
 			logger.error("聚类失败。");
 			return null;
 		}
@@ -153,11 +155,11 @@ public class TopicServiceImpl implements TopicService {
 		}
 
 		// 将content、orig_cluster、orig_count存入redis
-		redisService.setObject(Constant.REDIS_CONTENT, content, request);
-		redisService.setObject(Constant.REDIS_CLUSTER_RESULT, map.get(Constant.CLUSTERRESULT), request);
-		redisService.setObject(Constant.REDIS_COUNT_RESULT, map.get(Constant.COUNTRESULT), request);
+		redisService.setObject(Cluster.REDIS_CONTENT, content, request);
+		redisService.setObject(Cluster.REDIS_ORIGCLUSTER, map.get(Cluster.ORIGCLUSTERS), request);
+		redisService.setObject(Cluster.REDIS_ORIGCOUNT, map.get(Cluster.ORIGCOUNTS), request);
 
-		return (List<String[]>) map.get(Constant.DISPLAYRESULT);
+		return (List<String[]>) map.get(Cluster.DISPLAYRESULT);
 	}
 
 	/**
@@ -176,25 +178,25 @@ public class TopicServiceImpl implements TopicService {
 	 */
 	private Map<String, Object> mining(List<String[]> content, int converterType, int algorithmType, int granularity) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		List<String[]> tmp = new ArrayList<String[]>(content);
 		// 聚类,每个String[]都是某个类簇的数据ID的集合。
-		List<String[]> clusterResult = ConvertUtil.toStringListB(miningService.cluster(tmp, converterType, algorithmType, granularity));
-		result.put(Constant.CLUSTERRESULT, clusterResult);
+		List<String[]> origClusters = ConvertUtil
+				.toStringListB(miningService.getOrigClusters(content, converterType, algorithmType, granularity));
+		result.put(Cluster.ORIGCLUSTERS, origClusters);
 
-		List<int[]> count = miningService.count(tmp, clusterResult);
+		List<int[]> origCounts = miningService.getOrigCounts(content, origClusters);
 		// 返回给前端的结果list：title、url、time、amount
 		List<String[]> displayResult = new ArrayList<String[]>();
 		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
-		for (int[] row : count) {
+		for (int[] row : origCounts) {
 			String[] old = content.get(row[0]);
-			String[] sub = new String[] { old[indexOfEss[Constant.INDEXOFTITLE]], old[indexOfEss[Constant.INDEXOFURL]],
-					old[indexOfEss[Constant.INDEXOFTIME]], String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
+					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
-		result.put(Constant.DISPLAYRESULT, displayResult);
+		result.put(Cluster.DISPLAYRESULT, displayResult);
 
-		List<String[]> countResult = ConvertUtil.toStringList(count);
-		result.put(Constant.COUNTRESULT, countResult);
+		List<String[]> tmp = ConvertUtil.toStringList(origCounts);
+		result.put(Cluster.ORIGCOUNTS, tmp);
 		return result;
 	}
 
@@ -210,6 +212,7 @@ public class TopicServiceImpl implements TopicService {
 	 * @return
 	 */
 	private String setResName(String topicId, Date startTime, Date endTime) {
-		return queryTopicById(topicId).getTopicName() + DateConverter.convert(startTime) + "-" + DateConverter.convert(endTime);
+		return queryTopicById(topicId).getTopicName() + DateConverter.convert(startTime) + "-"
+				+ DateConverter.convert(endTime);
 	}
 }

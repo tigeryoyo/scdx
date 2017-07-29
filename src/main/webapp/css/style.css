@@ -67,7 +67,7 @@ a:hover { color:#000000; text-decoration:none; }
 .btn_sc{ display:inline-block;margin-right:10px;}
 .btn_jl{ display:inline-block;}
 .files_add{ width:770px; height:250px; background:#f8f8f8; margin:0px auto; line-height:225px; font-size:40px; text-align:center;}
-.files_put{ width:770px; height:30px; background:#f8f8f8; font-size:16px; text-align:center;}
+.files_put{ width:770px; height:35px; background:#f8f8f8; font-size:16px; text-align:center;}
 
 .up_del{ width:770px;}
 @keyframes twinkling{	/*透明度由0到1*/
@@ -86,8 +86,10 @@ a:hover { color:#000000; text-decoration:none; }
 .up_del li select option{ width:75px; height:26px; line-height:26px; font-size:12px;}
 .btn_up_del01{float:right; margin-top:10px; margin-right:10px;}
 .btn_up_del02{float:right; margin-top:10px;}
-.btn_up_del03{float:right; margin-right:10px;}
 .btn_up_del04{float:right; margin-top:10px;}
+
+.btn_upl_all{float:right; margin-right:10px;}
+.btn_del_all{float:right;}
 
 /*查看任务*/
 .cjht{ width:770px; height:185px;}

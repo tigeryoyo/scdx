@@ -11,7 +11,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFonts;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRPr;
 
-import com.hust.scdx.constant.Constant.FONT;
+import com.hust.scdx.constant.Constant.WordFont;
 
 /**
  * 写word文档
@@ -115,7 +115,7 @@ public class WordUtil {
 		public Env() {
 			// 默认14号华文仿宋灰色未加粗字体
 			fontSize = 14;
-			fontType = FONT.FANGSONG;
+			fontType = WordFont.FANGSONG;
 			alignment = ParagraphAlignment.LEFT;
 		}
 

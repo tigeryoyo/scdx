@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>基础数据聚类</title>
-<link rel="stylesheet" href="css/history_clusterdetails.css">
+<link rel="stylesheet" href="css/clusterdetails.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/loading.css">
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 	<div class="s_nav">
@@ -28,16 +29,22 @@
 		</ul>
 	</div>
 
+	<div>
+		<input size="16" type="text" id="datetimeStart" readonly
+			class="form_datetime"> -- <input size="16" type="text"
+			id="datetimeEnd" readonly class="form_datetime">
+	</div>
+
 	<div class="data_summary">
 		<div class="summary_wrap ">
 			<div class="summary_cont">
 				<div class="summary_tab">
-					<table width="730" border="0">
+					<table width="751" border="0">
 						<tr>
-							<td width="60" height="36" align="center" bgcolor="#86c6ea">选择</td>
-							<td width="320" height="36" align="center" bgcolor="#86c6ea">标题</td>
-							<td width="150" height="36" align="center" bgcolor="#86c6ea">时间</td>
-							<td width="60" height="36" align="center" bgcolor="#86c6ea">数量</td>
+							<td width="36" height="36" align="center" bgcolor="#86c6ea">选择</td>
+							<td width="525" height="36" align="center" bgcolor="#86c6ea">标题</td>
+							<td width="145" height="36" align="center" bgcolor="#86c6ea">时间</td>
+							<td width="45" height="36" align="center" bgcolor="#86c6ea">数量</td>
 						</tr>
 					</table>
 				</div>
@@ -70,17 +77,6 @@
 				</div>
 			</div>
 		</div>
-
-		<li>
-			<div class="files_add" id="drop_area">将准数据文件拖拽到此处</div>
-		</li>
-		</ul>
-		<div class="up_del">
-			<ul id="file_ul">
-			</ul>
-			<button type="button" class="btn btn-info" style="float: right;"
-				id="create_std_result">生成准数据</button>
-		</div>
 	</div>
 
 	<!-- 遮罩div -->
@@ -110,14 +106,39 @@
 						<th width="200" height="36" align="center" bgcolor="#86c6ea">时间</th>
 						<th width="70" height="36" align="center" bgcolor="#86c6ea">操作</th>
 					</tr>
-
 				</table>
-
 			</div>
-
 		</div>
-
 	</div>
 </body>
-
+<script type="text/javascript"
+	src="js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+	src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+	$("#datetimeStart").datetimepicker({
+		format : 'yyyy-mm-dd HH:mm',
+		minView : 'hour',
+		language : 'zh-CN',
+		autoclose : true,
+		startDate : new Date()
+	}).on(
+			"click",
+			function() {
+				$("#datetimeStart").datetimepicker("setEndDate",
+						$("#datetimeEnd").val())
+			});
+	$("#datetimeEnd").datetimepicker({
+		format : 'yyyy-mm-dd',
+		minView : 'month',
+		language : 'zh-CN',
+		autoclose : true,
+		startDate : new Date()
+	}).on(
+			"click",
+			function() {
+				$("#datetimeEnd").datetimepicker("setStartDate",
+						$("#datetimeStart".val()))
+			});
+</script>
 </html>

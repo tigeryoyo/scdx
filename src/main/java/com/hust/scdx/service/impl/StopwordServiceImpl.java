@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.dao.StopwordDao;
 import com.hust.scdx.model.Stopword;
 import com.hust.scdx.model.params.StopwordQueryCondition;
-import com.hust.scdx.service.RedisService;
 import com.hust.scdx.service.StopwordService;
+import com.hust.scdx.service.UserService;
 
 @Service
 @Transactional
@@ -28,7 +26,7 @@ public class StopwordServiceImpl implements StopwordService {
 	@Autowired
 	private StopwordDao stopwordDao;
 	@Autowired
-	private RedisService redisService;
+	private UserService userService;
 
 	@Override
 	public List<Stopword> selectStopwordInforByWord(String word, int start, int limit) {
@@ -61,7 +59,6 @@ public class StopwordServiceImpl implements StopwordService {
 
 	@Override
 	public boolean insertStopword(Stopword stopword) {
-		// TODO Auto-generated method stub
 		int num = stopwordDao.insert(stopword);
 		if (0 == num) {
 			logger.info("this word is existed");
@@ -72,7 +69,6 @@ public class StopwordServiceImpl implements StopwordService {
 
 	@Override
 	public boolean insertStopwords(List<Stopword> list) {
-		// TODO Auto-generated method stub
 		if (null == list || 0 == list.size()) {
 			return false;
 		}
@@ -91,7 +87,6 @@ public class StopwordServiceImpl implements StopwordService {
 
 	@Override
 	public boolean delStopwordById(Integer id) {
-		// TODO Auto-generated method stub
 		int num = stopwordDao.deleteById(id);
 		if (0 == num) {
 			logger.info("delete stopword by id error");
@@ -102,17 +97,11 @@ public class StopwordServiceImpl implements StopwordService {
 
 	@Override
 	public String getCurrentUser(HttpServletRequest request) {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		if (null == session) {
-			return null;
-		}
-		return redisService.getString(KEY.USER_NAME, request);
+		return userService.selectCurrentUser(request).getUserName();
 	}
 
 	@Override
 	public long selectCountWord(String word) {
-		// TODO Auto-generated method stub
 		StopwordQueryCondition condition = new StopwordQueryCondition();
 		condition.setWord(word);
 		condition.setLimit(0);

@@ -30,7 +30,7 @@ public class TopicDao {
 	 * @param con
 	 * @return
 	 */
-	public List<Topic> queryTopicByTopicName(TopicQueryCondition con) {
+	public List<Topic> queryTopicByName(TopicQueryCondition con) {
 		TopicExample example = new TopicExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andCreatorEqualTo(con.getCreater());

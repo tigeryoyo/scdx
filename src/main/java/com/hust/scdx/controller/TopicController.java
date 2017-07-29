@@ -71,7 +71,7 @@ public class TopicController {
 	public Object queryOwnTopic(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
 		User user = userService.selectCurrentUser(request);
 		con.setCreater(user.getUserName());
-		List<Topic> list = topicService.queryTopic(con);
+		List<Topic> list = topicService.queryTopicByName(con);
 		if (null == list || 0 == list.size()) {
 			return ResultUtil.errorWithMsg("没有专题被创建！");
 		}

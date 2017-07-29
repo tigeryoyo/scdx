@@ -3,9 +3,6 @@ package com.hust.scdx.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hust.scdx.constant.Constant;
-import com.hust.scdx.constant.Constant.Interval;
-
 import org.apache.commons.lang.StringUtils;
 
 public class CommonUtil {
@@ -43,7 +40,6 @@ public class CommonUtil {
 			return StringUtils.EMPTY;
 		}
 		try {
-
 			int pure = url.indexOf("/", url.indexOf("://") + 3);
 			if (pure == -1) {
 				return url;
@@ -54,26 +50,6 @@ public class CommonUtil {
 		} catch (Exception e) {
 			logger.error("get prefix of url failed, url :{}, exception:{}", url, e.toString());
 			return StringUtils.EMPTY;
-		}
-	}
-	
-	public static String getTimeKey(String time, int interval) {
-		if (StringUtils.isBlank(time) || !TimeUtil.isvalidate(time)) {
-			return Constant.INVALID_TIME;
-		}
-		switch (interval) {
-		case Interval.HOUR: {
-			return time.substring(0, 13);
-		}
-		case Interval.DAY: {
-			return time.substring(0, 10);
-		}
-		case Interval.MONTH: {
-			return time.substring(0, 7);
-		}
-		default: {
-			return Constant.INVALID_TIME;
-		}
 		}
 	}
 }

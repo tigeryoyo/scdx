@@ -19,12 +19,14 @@ public class ExcelUtil {
 
 	public static void main(String[] args) {
 		try {
-			List<String[]> list = readOrigfile("C:/Users/Chan/Desktop/1.xls");
-			for (String[] strs : list) {
-				for (String str : strs) {
-					System.out.print(str + "\t");
-				}
-				System.out.println();
+			List<String> list = new ArrayList<String>();
+			list.add("1");
+			list.add("2");
+			list.add("3");
+			List<String> tmp = new ArrayList<String>(list);
+			tmp.remove(0);
+			for (String str : tmp) {
+				System.out.print(str + "\t");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -93,7 +95,7 @@ public class ExcelUtil {
 			}
 		}
 		inputStream.close();
-		content.add(0,attrRow);
+		content.add(0, attrRow);
 		return content;
 	}
 
