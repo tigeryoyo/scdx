@@ -2,6 +2,8 @@ package com.hust.scdx.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hust.scdx.model.User;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ResultUtil;
 
 @Controller
 @RequestMapping("/")
 public class AuthController {
-	
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 	@Autowired
 	private UserService userService;
 
@@ -48,7 +54,16 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserTrueName", method = RequestMethod.POST)
 	public Object getCurrentUserTrueName(HttpServletRequest request) {
-		return ResultUtil.success(userService.selectCurrentUser(request).getTrueName());
+		try{
+			User user = userService.selectCurrentUser(request);
+			if(user == null){
+				return ResultUtil.errorWithMsg("登陆失效,请重新登陆。");
+			}
+			return ResultUtil.success(user.getTrueName());
+		}catch(Exception e){
+			logger.info("查找用户名失败,用户session失效。");
+		}
+		return ResultUtil.errorWithMsg("登陆失败,请重新登陆。");
 	}
 
 	/**
@@ -57,6 +72,15 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserId", method = RequestMethod.POST)
 	public Object getCurrentUserId(HttpServletRequest request) {
-		return ResultUtil.success(userService.selectCurrentUser(request).getUserId());
+		try{
+			User user = userService.selectCurrentUser(request);
+			if(user == null){
+				return ResultUtil.errorWithMsg("登陆失效,请重新登陆。");
+			}
+			return ResultUtil.success(user.getUserId());
+		}catch(Exception e){
+			logger.info("查找用户名失败,用户session失效。");
+		}
+		return ResultUtil.errorWithMsg("登陆失败,请重新登陆。");
 	}
 }
