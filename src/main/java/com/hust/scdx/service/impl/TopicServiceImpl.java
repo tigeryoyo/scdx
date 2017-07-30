@@ -154,12 +154,12 @@ public class TopicServiceImpl implements TopicService {
 			logger.error("更新topic记录失败。");
 		}
 
-		try{
+		try {
 			// 将content、orig_cluster、orig_count存入redis
 			redisService.setObject(Cluster.REDIS_CONTENT, content, request);
 			redisService.setObject(Cluster.REDIS_ORIGCLUSTER, map.get(Cluster.ORIGCLUSTERS), request);
 			redisService.setObject(Cluster.REDIS_ORIGCOUNT, map.get(Cluster.ORIGCOUNTS), request);
-		} catch(Exception e){
+		} catch (Exception e) {
 			logger.error("存储数据至redis数据库失败,请检查redis数据库是否开启。");
 		}
 
@@ -192,7 +192,7 @@ public class TopicServiceImpl implements TopicService {
 		List<String[]> displayResult = new ArrayList<String[]>();
 		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
 		for (int[] row : origCounts) {
-			String[] old = content.get(row[0]);
+			String[] old = content.get(row[0] + 1);
 			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
 					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
 			displayResult.add(sub);

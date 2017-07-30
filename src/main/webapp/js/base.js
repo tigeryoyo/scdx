@@ -116,7 +116,6 @@ var pageTrigger = function(target) {
 			}
 
 		} else {
-			console.log(eleTarget);
 			$(eleTarget).trigger("click");
 		}
 	}

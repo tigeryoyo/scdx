@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/loading.css">
-<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 	<div class="s_nav">
@@ -29,10 +28,15 @@
 		</ul>
 	</div>
 
-	<div>
-		<input size="16" type="text" id="datetimeStart" readonly
-			class="form_datetime"> -- <input size="16" type="text"
-			id="datetimeEnd" readonly class="form_datetime">
+	<div style="padding: 10px 100px 10px;">
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">起止时间</span>
+			<input type="text" class="form-control" id="startTime" placeholder="2017/07/30 12:00:00">
+			<input type="text" class="form-control" id="endTime" placeholder="2018/07/30 12:00:00">
+			<span class="input-group-addon" onclick="miningByTimeRange()">聚类</span>
+			</div>
+		</form>
 	</div>
 
 	<div class="data_summary">
@@ -111,34 +115,5 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript"
-	src="js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript"
-	src="js/bootstrap-datetimepicker.zh-CN.js"></script>
-<script>
-	$("#datetimeStart").datetimepicker({
-		format : 'yyyy-mm-dd HH:mm',
-		minView : 'hour',
-		language : 'zh-CN',
-		autoclose : true,
-		startDate : new Date()
-	}).on(
-			"click",
-			function() {
-				$("#datetimeStart").datetimepicker("setEndDate",
-						$("#datetimeEnd").val())
-			});
-	$("#datetimeEnd").datetimepicker({
-		format : 'yyyy-mm-dd',
-		minView : 'month',
-		language : 'zh-CN',
-		autoclose : true,
-		startDate : new Date()
-	}).on(
-			"click",
-			function() {
-				$("#datetimeEnd").datetimepicker("setStartDate",
-						$("#datetimeStart".val()))
-			});
-</script>
+<script type="text/javascript" src="js/ext-cluster.js"></script>
 </html>

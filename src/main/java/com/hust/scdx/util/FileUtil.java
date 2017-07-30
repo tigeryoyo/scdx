@@ -198,6 +198,10 @@ public class FileUtil {
 	 * @return
 	 */
 	public static boolean write(String filename, List<String[]> content) {
+		String parentDir = new File(filename).getParent();
+		if(!new File(parentDir).exists()){
+			new File(parentDir).mkdirs();
+		}
 		if (StringUtils.isEmpty(filename)) {
 			return false;
 		}

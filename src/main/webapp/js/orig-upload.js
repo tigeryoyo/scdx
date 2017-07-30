@@ -43,20 +43,25 @@ $(function() {
 					method : "POST",
 					processData : false,
 					contentType : false,
+					dataType : "json",
 					mimeType : "multipart/form-data",
 					data : fd,
 					success : function(msg) {
-						addOrigfile(filename);
-						$(".btn_del_all").removeAttr("disabled");
-						$(".btn_upl_all").removeAttr("disabled");
+						if (msg.status == "OK") {
+							addOrigfile(filename);
+							$(".btn_del_all").removeAttr("disabled");
+							$(".btn_upl_all").removeAttr("disabled");
+							fileBuf.push(origfile);
+						} else {
+							alert("文件[ " + filename+" ]属行行不符合规定。");
+						}
 					},
 					error : function() {
 						stop();
 					}
 				});
-				fileBuf.push(origfile);
 			} else {
-				alert(filename + " 不是Excel文件");
+				alert("文件[ " + filename + " ]不是excel文件。");
 			}
 		}
 	}, false);
@@ -76,6 +81,7 @@ function addOrigfile(filename) {
  */
 function uploadAll() {
 	var flag = true;
+	alert("fileBufLength = " + fileBuf.length);
 	for (var i = 0; i < fileBuf.length; i++) {
 		var form = new FormData();
 		form.append("origfile", fileBuf[i]);

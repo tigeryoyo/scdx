@@ -76,8 +76,8 @@ public class ExtfileController {
 		}
 		try {
 			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
-			if (AttrUtil.findIndexOfTime(attrs) != -1 && AttrUtil.findIndexOfTitle(attrs) != -1
-					&& AttrUtil.findIndexOfUrl(attrs) != -1) {
+			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1
+					&& AttrUtil.findIndexOfTime(attrs) != -1) {
 				return ResultUtil.successWithoutMsg();
 			}
 		} catch (Exception e) {
