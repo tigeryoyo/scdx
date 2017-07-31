@@ -100,6 +100,38 @@ public class ConvertUtil {
 		return newList;
 	}
 
+	public static List<List<Integer>> toListList(List<String[]> list) {
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<List<Integer>> newList = new ArrayList<List<Integer>>();
+		for (String[] strs : list) {
+			List<Integer> sub = new ArrayList<Integer>();
+			for (String str : strs) {
+				sub.add(Integer.valueOf(str));
+			}
+			newList.add(sub);
+		}
+
+		return newList;
+	}
+	
+	public static List<Integer[]> toIntegerList(List<String[]> list) {
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<Integer[]> newList = new ArrayList<Integer[]>();
+		for (String[] strs : list) {
+			Integer[] sub = new Integer[strs.length];
+			for(int i=0; i<strs.length; i++){
+				sub[i] = Integer.valueOf(strs[i]);
+			}
+			newList.add(sub);
+		}
+		
+		return newList;
+	}
+
 	public static String[] toStringArray(int[] array) {
 		if (array == null) {
 			return null;

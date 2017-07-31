@@ -18,9 +18,11 @@ import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.dao.ResultDao;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.params.ResultQueryCondition;
+import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.RedisService;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.util.AttrUtil;
+import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.FileUtil;
@@ -36,6 +38,8 @@ public class ResultServiceImpl implements ResultService {
 	private ResultDao resultDao;
 	@Autowired
 	private RedisService redisService;
+	@Autowired
+	private MiningService miningService;
 
 	@Override
 	public int insert(Result result, List<String[]> content, Map<String, Object> map) {
@@ -135,6 +139,9 @@ public class ResultServiceImpl implements ResultService {
 		return displayResult;
 	}
 
+	/**
+	 * 重置聚类结果
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String[]> resetResultById(String resultId, HttpServletRequest request) {
@@ -170,6 +177,41 @@ public class ResultServiceImpl implements ResultService {
 		FileUtil.copy(DIRECTORY.ORIG_CLUSTER + subPath, DIRECTORY.MODIFY_CLUSTER + subPath);
 		FileUtil.copy(DIRECTORY.ORIG_COUNT + subPath, DIRECTORY.MODIFY_COUNT + subPath);
 		return displayResult;
+	}
+
+	/**
+	 * 根据索引删除聚类结果中的某些类
+	 */
+	@Override
+	public int deleteResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request) {
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return -1;
+		}
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+		} catch (Exception e) {
+			logger.error("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		if (content == null || content.size() == 0) {
+			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+		}
+		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
+		if (modifyClusters == null || modifyClusters.size() == 0) {
+			return -1;
+		}
+		List<List<Integer>> resultIndexSetList = ConvertUtil.toListList(modifyClusters);
+		for (int i : indices) {
+			resultIndexSetList.remove(i);
+		}
+		CommonUtil.sort(content, resultIndexSetList);
+		modifyClusters = ConvertUtil.toStringListB(resultIndexSetList);
+		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
+		FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters);
+		FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts);
+		return 1;
 	}
 
 }

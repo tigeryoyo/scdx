@@ -1,8 +1,6 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +24,7 @@ import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.SegmentService;
 import com.hust.scdx.util.AttrUtil;
+import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
 
 @Service
@@ -38,17 +37,17 @@ public class MiningServiceImpl implements MiningService {
 	@Autowired
 	private SegmentService segmentService;
 
-	// 目的是聚类。第一个参数是原始文本，第二个为向量模型的选择，第三个为算法的选择（已经写死了，为canopy）。
+	/**
+	 * 目的是聚类。第一个参数是原始文本，第二个为向量模型的选择，第三个为算法的选择（已经写死了，为canopy）。
+	 */
 	@Override
-	public List<List<Integer>> getOrigClusters(List<String[]> content, int converterType, int algorithmType,
-			int granularity) {
+	public List<List<Integer>> getOrigClusters(List<String[]> content, int converterType, int algorithmType, int granularity) {
 		// 用于存放结果
 		List<List<Integer>> resultIndexSetList = new ArrayList<List<Integer>>();
 		List<String[]> tmp = new ArrayList<String[]>(content);
 		// 移除属性行
 		String[] attrs = tmp.remove(0);
 		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
 		List<String[]> segmentList = segmentService.getSegresult(tmp, indexOfTitle, 0);
 		Convertor convertor = null;
 		// 判断选择的向量模型的类型
@@ -158,34 +157,13 @@ public class MiningServiceImpl implements MiningService {
 			logger.error("没有选择任何算法");
 			return null;
 		}
-
-		// 重载排序的方法，按照降序。类中数量多的排在前面。
-		Collections.sort(resultIndexSetList, new Comparator<List<Integer>>() {
-			@Override
-			public int compare(List<Integer> o1, List<Integer> o2) {
-				// TODO Auto-generated method stub
-				return o2.size() - o1.size();
-			}
-		});
-		for (List<Integer> set : resultIndexSetList) {
-			Collections.sort(set, new Comparator<Integer>() {
-				@Override
-				public int compare(Integer o1, Integer o2) {
-					// TODO Auto-generated method stub
-					// 判断他们的标题是否相同
-					int compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
-					// 若不相同，使用时间进行排序。
-					if (compare == 0) {
-						compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
-					}
-					return compare;
-				}
-			});
-		}
+		CommonUtil.sort(content, resultIndexSetList);
 		return resultIndexSetList;
 	}
 
-	// 用于得出origCounts的数据
+	/**
+	 * 用于得出origCounts的数据
+	 */
 	@Override
 	public List<int[]> getOrigCounts(List<String[]> content, List<String[]> origClusters) {
 		List<int[]> origCounts = new ArrayList<int[]>();

@@ -77,6 +77,27 @@ public class ResultController {
 	}
 
 	/**
+	 * 根据索引删除聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            索引集合
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteResultItemsByIndices")
+	public Object deleteResultItemsByIndices(@RequestParam(value = "resultId", required = true) String resultId,
+			@RequestParam(value = "indices", required = true) int[] indices, HttpServletRequest request) {
+		if (indices.length == 0) {
+			return ResultUtil.errorWithMsg("未选中任何index。");
+		}
+		resultService.deleteResultItemsByIndices(resultId, indices,request);
+
+		return ResultUtil.success("");
+	}
+
+	/**
 	 * 重置结果，撤销对结果的二次操作。
 	 * 
 	 * @param resultId

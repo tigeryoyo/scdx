@@ -1,6 +1,5 @@
 package com.hust.scdx.interceptor;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

@@ -23,4 +23,5 @@ public interface ResultService {
 
 	List<String[]> resetResultById(String resultId, HttpServletRequest request);
 
+	int deleteResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request);
 }
