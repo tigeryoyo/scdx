@@ -12,12 +12,9 @@ import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.dao.mapper.StdfileMapper;
-import com.hust.scdx.model.Extfile;
-import com.hust.scdx.model.ExtfileExample;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.StdfileExample;
 import com.hust.scdx.model.StdfileExample.Criteria;
-import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.FileUtil;
