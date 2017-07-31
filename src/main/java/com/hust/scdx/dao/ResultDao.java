@@ -67,11 +67,10 @@ public class ResultDao {
 	 */
 	public int deleteByResultId(String resultId) {
 		Result result = queryResultById(resultId);
-		if (FileUtil.delete(DIRECTORY.CONTENT + DateConverter.convertToPath(result.getCreateTime()))
-				&& FileUtil.delete(DIRECTORY.ORIG_CLUSTER + DateConverter.convertToPath(result.getCreateTime()))
-				&& FileUtil.delete(DIRECTORY.ORIG_COUNT + DateConverter.convertToPath(result.getCreateTime()))
-				&& FileUtil.delete(DIRECTORY.MODIFY_CLUSTER + DateConverter.convertToPath(result.getCreateTime()))
-				&& FileUtil.delete(DIRECTORY.MODIFY_COUNT + DateConverter.convertToPath(result.getCreateTime()))) {
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + resultId;
+		if (FileUtil.delete(DIRECTORY.CONTENT + subPath) && FileUtil.delete(DIRECTORY.ORIG_CLUSTER + subPath)
+				&& FileUtil.delete(DIRECTORY.ORIG_COUNT + subPath) && FileUtil.delete(DIRECTORY.MODIFY_CLUSTER + subPath)
+				&& FileUtil.delete(DIRECTORY.MODIFY_COUNT + subPath)) {
 			return resultMapper.deleteByPrimaryKey(resultId);
 		}
 
@@ -94,6 +93,9 @@ public class ResultDao {
 			return del;
 		}
 		List<Result> list = resultMapper.selectByExample(example);
+		if (list == null || list.size() == 0) {
+			del = 0;
+		}
 		for (Result result : list) {
 			del = deleteByResultId(result.getResId());
 		}

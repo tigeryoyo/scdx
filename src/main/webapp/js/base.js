@@ -150,6 +150,19 @@ function getCookie(key) {
 }
 
 /**
+ * 删除cookies
+ */
+function delCookie(key)  
+{
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getCookie(name);
+	if(cval!=null){
+		document.cookie= key + "="+cval+";expires="+exp.toGMTString();  
+	}
+}  
+
+/**
  * 获取用户真实姓名
  */
 function getUserName() {

@@ -43,7 +43,7 @@ public class ResultController {
 	@ResponseBody
 	@RequestMapping("/getDisplayResultById")
 	public Object getDisplayResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request) {
-		List<String[]> list = resultService.getDisplayResultById(resultId,request);
+		List<String[]> list = resultService.getDisplayResultById(resultId, request);
 		if (list == null) {
 			logger.error("查找操作结果失败。");
 			return ResultUtil.errorWithMsg("查找操作结果失败。");
@@ -72,6 +72,24 @@ public class ResultController {
 		if (list == null) {
 			logger.error("查找历史操作结果失败。");
 			return ResultUtil.errorWithMsg("查找历史操作结果失败。");
+		}
+		return ResultUtil.success(list);
+	}
+
+	/**
+	 * 重置结果，撤销对结果的二次操作。
+	 * 
+	 * @param resultId
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/resetResultById")
+	public Object resetResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request) {
+		List<String[]> list = resultService.resetResultById(resultId, request);
+		if (list == null) {
+			logger.error("查找操作结果失败。");
+			return ResultUtil.errorWithMsg("查找操作结果失败。");
 		}
 		return ResultUtil.success(list);
 	}

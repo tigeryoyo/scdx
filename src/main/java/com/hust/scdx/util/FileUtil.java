@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ import java.util.concurrent.Future;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.Files;
 
 public class FileUtil {
 	/**
@@ -189,6 +192,22 @@ public class FileUtil {
 	}
 
 	/**
+	 * 从文件from拷贝至to,如果存在则覆盖。
+	 * 
+	 * @param from
+	 * @param to
+	 */
+	public static void copy(String from, String to) {
+		try {
+			File fromf = new File(from);
+			File tof = new File(to);
+			Files.copy(fromf, tof);
+		} catch (Exception e) {
+			logger.error("拷贝文件出错。");
+		}
+	}
+
+	/**
 	 * 写入文件
 	 * 
 	 * @param filename
@@ -199,7 +218,7 @@ public class FileUtil {
 	 */
 	public static boolean write(String filename, List<String[]> content) {
 		String parentDir = new File(filename).getParent();
-		if(!new File(parentDir).exists()){
+		if (!new File(parentDir).exists()) {
 			new File(parentDir).mkdirs();
 		}
 		if (StringUtils.isEmpty(filename)) {

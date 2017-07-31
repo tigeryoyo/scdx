@@ -2,6 +2,37 @@ $("#startTime").attr("placeholder", "2017-07-01 12:00:00");
 $("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
 
 /**
+ * 此次聚类结果id
+ */
+var resultId = "";
+
+/**
+ * 根据时间范围查找基础文件。
+ */
+function queryExtfilesByTimeRange() {
+	$.ajax({
+		type : "post",
+		url : "/extfile/queryExtfilesByTimeRange",
+		data : {
+			topicId : getCookie("topicId"),
+			startTime : "2017-07-01 12:00:00",
+			endTime : "2018-07-01 12:00:00"
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				console.log(msg.result);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
  * 根据时间范围查找结果记录。
  */
 function queryResultByTimeRange() {
@@ -31,11 +62,12 @@ function queryResultByTimeRange() {
  * 根据id得到显示该次结果。（title、url、time、amount）
  */
 function getDisplayResultById() {
+	alert(resultId);
 	$.ajax({
 		type : "post",
 		url : "/result/getDisplayResultById",
 		data : {
-			resultId : "036e71a8-8c5c-445a-bfdf-aa3bff767219"
+			resultId : resultId
 		},
 		dataType : "json",
 		success : function(msg) {
@@ -71,7 +103,59 @@ function miningByTimeRange() {
 		dataType : "json",
 		success : function(msg) {
 			if (msg.status == "OK") {
+				resultId = msg.result.resultId;
 				console.log(msg.result);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
+ * 重置结果，如果resultId为空则不能重置
+ */
+function resetResultById() {
+	$.ajax({
+		type : "post",
+		url : "/result/resetResultById",
+		data : {
+			resultId : resultId
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				console.log(msg.result);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
+ * 重置结果，如果resultId为空则不能重置
+ */
+function deleteTopic() {
+	$.ajax({
+		type : "post",
+		url : "/topic/delete",
+		data : {
+			topicId : getCookie("topicId")
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				resultId = "";
+				delCookie("topicId");
+				alert(msg.result);
+				jumpto("topic-list");
 			} else {
 				alert(msg.result);
 			}

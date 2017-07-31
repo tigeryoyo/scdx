@@ -107,12 +107,8 @@ public class ExtfileServiceImpl implements ExtfileService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<String[]> miningByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
-		// 根据条件查找extfile对象list
-		ExtfileQueryCondition con = new ExtfileQueryCondition();
-		con.setTopicId(topicId);
-		con.setStartTime(startTime);
-		con.setEndTime(endTime);
-		List<Extfile> extfiles = queryExtfilesByCondtion(con);
+		// 根据时间范围查找extfile对象list
+		List<Extfile> extfiles = queryExtfilesByTimeRange(topicId, startTime, endTime);
 
 		String[] extfilePaths = new String[extfiles.size()];
 		int size = extfiles.size();
@@ -147,6 +143,9 @@ public class ExtfileServiceImpl implements ExtfileService {
 			logger.error("插入result记录失败。");
 			return null;
 		}
+
+		// 此次聚类的resultId存进session里。
+		request.getSession().setAttribute(Cluster.RESULTID, result.getResId());
 
 		// 更新该条topic属性值
 		Topic topic = new Topic();
@@ -219,6 +218,26 @@ public class ExtfileServiceImpl implements ExtfileService {
 	 */
 	private String setResName(String topicId, Date startTime, Date endTime) {
 		return topicService.queryTopicById(topicId).getTopicName() + DateConverter.convert(startTime) + "-" + DateConverter.convert(endTime);
+	}
+
+	/**
+	 * 根据时间范围查找基础文件。
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @return
+	 */
+	@Override
+	public List<Extfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime) {
+		ExtfileQueryCondition con = new ExtfileQueryCondition();
+		con.setTopicId(topicId);
+		con.setStartTime(startTime);
+		con.setEndTime(endTime);
+		return queryExtfilesByCondtion(con);
 	}
 
 	/**

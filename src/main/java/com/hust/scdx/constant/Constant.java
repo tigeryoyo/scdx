@@ -23,6 +23,8 @@ public class Constant {
 		public static final String ORIGCOUNTS = "origCounts";
 		public static final String DISPLAYRESULT = "displayResult";
 
+		public static final String RESULTID = "resultId";
+		
 		public static final String REDIS_CONTENT = "redis_content";
 		public static final String REDIS_ORIGCLUSTER = "redis_OrigClusters";
 		public static final String REDIS_ORIGCOUNT = "redis_OrigCounts";

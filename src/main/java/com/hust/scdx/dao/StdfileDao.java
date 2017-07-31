@@ -58,7 +58,7 @@ public class StdfileDao {
 	public Stdfile queryStdfileById(String stdfileId) {
 		return stdfileMapper.selectByPrimaryKey(stdfileId);
 	}
-	
+
 	/**
 	 * 根据条件（时间范围、专题id）查找符合范围的标准数据对象
 	 * 
@@ -113,6 +113,9 @@ public class StdfileDao {
 		StdfileQueryCondition con = new StdfileQueryCondition();
 		con.setTopicId(topicId);
 		List<Stdfile> list = queryStdfilesByCondtion(con);
+		if (list == null || list.size() == 0) {
+			del = 0;
+		}
 		for (Stdfile stdfile : list) {
 			del = deleteStdfileById(stdfile.getStdfileId());
 		}

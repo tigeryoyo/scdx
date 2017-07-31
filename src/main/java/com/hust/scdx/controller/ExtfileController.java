@@ -2,6 +2,7 @@ package com.hust.scdx.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.constant.Constant.Cluster;
+import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
+import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
-import com.hust.scdx.service.ExtfileService;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/extfile")
@@ -52,8 +57,8 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public Object upload(@RequestParam(value = "origfile", required = true) MultipartFile origfile,
-			@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "sourceType", required = false) String sourceType, HttpServletRequest request) {
+			@RequestParam(value = "topicId", required = true) String topicId, @RequestParam(value = "sourceType", required = false) String sourceType,
+			HttpServletRequest request) {
 		if (origfile.isEmpty()) {
 			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
@@ -84,8 +89,7 @@ public class ExtfileController {
 		}
 		try {
 			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
-			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1
-					&& AttrUtil.findIndexOfTime(attrs) != -1) {
+			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1 && AttrUtil.findIndexOfTime(attrs) != -1) {
 				return ResultUtil.successWithoutMsg();
 			}
 		} catch (Exception e) {
@@ -93,7 +97,31 @@ public class ExtfileController {
 		}
 		return ResultUtil.errorWithMsg("获取文件属性失败");
 	}
-	
+
+	/**
+	 * 根据时间范围查找基础文件。
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/queryExtfilesByTimeRange")
+	public Object queryExtfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
+			HttpServletRequest request) {
+		List<Extfile> list = extfileService.queryExtfilesByTimeRange(topicId, startTime, endTime);
+		if (list == null) {
+			return ResultUtil.unknowError();
+		}
+		return ResultUtil.success(list);
+	}
+
 	/**
 	 * 根据时间范围聚类。
 	 * 
@@ -113,10 +141,13 @@ public class ExtfileController {
 			HttpServletRequest request) {
 		// title、url、time、amount
 		List<String[]> list = extfileService.miningByTimeRange(topicId, startTime, endTime, request);
+		JSONObject json = new JSONObject();
+		json.put(Cluster.DISPLAYRESULT, list);
+		json.put(Cluster.RESULTID, request.getSession().getAttribute(Cluster.RESULTID));
 		if (list == null) {
 			return ResultUtil.unknowError();
 		}
-		return ResultUtil.success(list);
+		return ResultUtil.success(json);
 	}
 
 	@InitBinder

@@ -18,5 +18,8 @@ public interface ExtfileService {
 
 	int deleteExtfileByTopicId(String topicId);
 
+	List<Extfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime);
+
 	List<String[]> miningByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request);
+
 }

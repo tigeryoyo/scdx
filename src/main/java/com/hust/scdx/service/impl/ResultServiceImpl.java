@@ -100,6 +100,9 @@ public class ResultServiceImpl implements ResultService {
 	@Override
 	public List<String[]> getDisplayResultById(String resultId, HttpServletRequest request) {
 		Result result = queryResultById(resultId);
+		if (result == null) {
+			return null;
+		}
 		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		List<int[]> origCounts = ConvertUtil.toIntList(FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath));
@@ -129,6 +132,43 @@ public class ResultServiceImpl implements ResultService {
 		} catch (Exception e) {
 			logger.error("存储数据至redis数据库失败,请检查redis数据库是否开启。");
 		}
+		return displayResult;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String[]> resetResultById(String resultId, HttpServletRequest request) {
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return null;
+		}
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		List<String[]> origCounts = null;
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+			origCounts = (List<String[]>) redisService.getObject(Cluster.REDIS_ORIGCOUNT, request);
+		} catch (Exception e) {
+			logger.error("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		if (content == null || content.size() == 0) {
+			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+		}
+		if (origCounts == null || origCounts.size() == 0) {
+			origCounts = FileUtil.read(DIRECTORY.ORIG_COUNT + subPath);
+		}
+		// 返回给前端的结果list：title、url、time、amount
+		List<String[]> displayResult = new ArrayList<String[]>();
+		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
+		List<int[]> tmp = ConvertUtil.toIntList(origCounts);
+		for (int[] row : tmp) {
+			String[] old = content.get(row[0] + 1);
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
+					String.valueOf(row[1]) };
+			displayResult.add(sub);
+		}
+		FileUtil.copy(DIRECTORY.ORIG_CLUSTER + subPath, DIRECTORY.MODIFY_CLUSTER + subPath);
+		FileUtil.copy(DIRECTORY.ORIG_COUNT + subPath, DIRECTORY.MODIFY_COUNT + subPath);
 		return displayResult;
 	}
 

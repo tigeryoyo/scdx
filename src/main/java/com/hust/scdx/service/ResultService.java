@@ -21,4 +21,6 @@ public interface ResultService {
 
 	List<String[]> getDisplayResultById(String resultId, HttpServletRequest request);
 
+	List<String[]> resetResultById(String resultId, HttpServletRequest request);
+
 }

@@ -98,7 +98,7 @@ public class ExtfileDao {
 	 */
 	public int deleteExtfileById(String extfileId) {
 		Extfile extfile = queryExtfileById(extfileId);
-		if (FileUtil.delete(DIRECTORY.EXTFILE + DateConverter.convertToPath(extfile.getUploadTime()))) {
+		if (FileUtil.delete(DIRECTORY.EXTFILE + DateConverter.convertToPath(extfile.getUploadTime()) + extfileId)) {
 			return extfileMapper.deleteByPrimaryKey(extfileId);
 		}
 		return -1;
@@ -122,6 +122,9 @@ public class ExtfileDao {
 		ExtfileQueryCondition con = new ExtfileQueryCondition();
 		con.setTopicId(topicId);
 		List<Extfile> list = queryExtfilesByCondtion(con);
+		if (list == null || list.size() == 0) {
+			del = 0;
+		}
 		for (Extfile extfile : list) {
 			del = deleteExtfileById(extfile.getExtfileId());
 		}

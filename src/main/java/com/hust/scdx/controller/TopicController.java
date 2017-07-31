@@ -46,10 +46,10 @@ public class TopicController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public Object createTopic(@RequestParam(value = "topicName", required = true) String topicName, HttpServletRequest request) {
 		if (topicService.createTopic(topicName, request) <= 0) {
-			logger.info("创建 [" + topicName + "] 专题失败。");
-			return ResultUtil.errorWithMsg("创建 [" + topicName + "] 专题失败。");
+			logger.info("创建「" + topicName + "」专题失败。");
+			return ResultUtil.errorWithMsg("创建「" + topicName + "」专题失败。");
 		}
-		return ResultUtil.success("创建 [" + topicName + "] 专题成功。");
+		return ResultUtil.success("创建「" + topicName + "」专题成功。");
 	}
 
 	@ResponseBody
@@ -57,15 +57,15 @@ public class TopicController {
 	public Object deleteTopic(@RequestParam(value = "topicId", required = true) String topicId, HttpServletRequest request) {
 		Topic topic = topicService.queryTopicById(topicId);
 		if (topic == null) {
-			logger.info("[" + topicId + "] 专题不存在。");
+			logger.info("「" + topicId + "」专题不存在。");
 			return ResultUtil.errorWithMsg("该专题已被删除。");
 		}
 		String topicName = topic.getTopicName();
-		if (topicService.deleteTopicById(topicId) <= 0) {
-			logger.info("删除[" + topicName + "] 专题失败。");
-			return ResultUtil.errorWithMsg("删除 [" + topicName + "] 专题失败。");
+		if (topicService.deleteTopicById(topicId) < 0) {
+			logger.info("删除「" + topicName + "」专题失败。");
+			return ResultUtil.errorWithMsg("删除「" + topicName + "」专题失败。");
 		}
-		return ResultUtil.success("删除[" + topicName + "] 专题成功。");
+		return ResultUtil.success("删除「" + topicName + "」专题成功。");
 	}
 
 	/**
