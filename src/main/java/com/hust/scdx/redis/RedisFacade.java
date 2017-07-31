@@ -293,7 +293,7 @@ public class RedisFacade {
             result = jedis.expire(key, seconds);
 
         } catch (Exception e) {
-            LOGGER.error("Redis 设值失败key=" + key + " seconds=" + seconds + e.getMessage(), e);
+            LOGGER.error("Redis 设值失败key=" + key + " seconds=" + seconds);
             flag = true;
         } finally {
             this.returnResource(masterJedisPool, jedis, flag);

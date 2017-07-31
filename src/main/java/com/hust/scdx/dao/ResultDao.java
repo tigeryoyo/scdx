@@ -3,6 +3,7 @@ package com.hust.scdx.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,9 @@ import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.dao.mapper.ResultMapper;
 import com.hust.scdx.model.Result;
+import com.hust.scdx.model.ResultExample;
+import com.hust.scdx.model.ResultExample.Criteria;
+import com.hust.scdx.model.params.ResultQueryCondition;
 import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.FileUtil;
 
@@ -45,4 +49,71 @@ public class ResultDao {
 		return 0;
 	}
 
+	/**
+	 * 根据resultId查找result记录
+	 * 
+	 * @param resultId
+	 * @return
+	 */
+	public Result queryResultById(String resultId) {
+		return resultMapper.selectByPrimaryKey(resultId);
+	}
+
+	/**
+	 * 根据resultId删除Result记录以及删除相关文件。
+	 * 
+	 * @param resultId
+	 * @return
+	 */
+	public int deleteByResultId(String resultId) {
+		Result result = queryResultById(resultId);
+		if (FileUtil.delete(DIRECTORY.CONTENT + DateConverter.convertToPath(result.getCreateTime()))
+				&& FileUtil.delete(DIRECTORY.ORIG_CLUSTER + DateConverter.convertToPath(result.getCreateTime()))
+				&& FileUtil.delete(DIRECTORY.ORIG_COUNT + DateConverter.convertToPath(result.getCreateTime()))
+				&& FileUtil.delete(DIRECTORY.MODIFY_CLUSTER + DateConverter.convertToPath(result.getCreateTime()))
+				&& FileUtil.delete(DIRECTORY.MODIFY_COUNT + DateConverter.convertToPath(result.getCreateTime()))) {
+			return resultMapper.deleteByPrimaryKey(resultId);
+		}
+
+		return -1;
+	}
+
+	/**
+	 * 根据专题id删除Result，删除专题内所有的Result记录以及文件。
+	 * 
+	 * @param topicId
+	 * @return
+	 */
+	public int deleteResultByTopicId(String topicId) {
+		int del = -1;
+		ResultExample example = new ResultExample();
+		Criteria criteria = example.createCriteria();
+		if (!StringUtils.isEmpty(topicId)) {
+			criteria.andTopicIdEqualTo(topicId);
+		} else {
+			return del;
+		}
+		List<Result> list = resultMapper.selectByExample(example);
+		for (Result result : list) {
+			del = deleteByResultId(result.getResId());
+		}
+
+		return del;
+	}
+
+	public List<Result> queryResultsByCondtion(ResultQueryCondition con) {
+		ResultExample example = new ResultExample();
+		Criteria criteria = example.createCriteria();
+		if (!StringUtils.isEmpty(con.getTopicId())) {
+			criteria.andTopicIdEqualTo(con.getTopicId());
+		}
+		if (null != con.getStartTime()) {
+			criteria.andCreateTimeGreaterThanOrEqualTo(con.getStartTime());
+		}
+		if (null != con.getEndTime()) {
+			criteria.andCreateTimeLessThanOrEqualTo(con.getEndTime());
+		}
+		example.setOrderByClause("create_time desc");
+		return resultMapper.selectByExample(example);
+	}
 }

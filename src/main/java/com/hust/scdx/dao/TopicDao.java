@@ -55,6 +55,16 @@ public class TopicDao {
 	}
 
 	/**
+	 * 根据专题id删除专题.
+	 * 
+	 * @param topicId
+	 * @return
+	 */
+	public int deleteTopicById(String topicId) {
+		return topicMapper.deleteByPrimaryKey(topicId);
+	}
+
+	/**
 	 * 根据其他条件查找所有符合条件专题
 	 * 
 	 * @param con
