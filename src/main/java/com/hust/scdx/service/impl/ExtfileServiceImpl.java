@@ -162,7 +162,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 			redisService.setObject(Cluster.REDIS_ORIGCLUSTER, map.get(Cluster.ORIGCLUSTERS), request);
 			redisService.setObject(Cluster.REDIS_ORIGCOUNT, map.get(Cluster.ORIGCOUNTS), request);
 		} catch (Exception e) {
-			logger.error("存储数据至redis数据库失败,请检查redis数据库是否开启。");
+			logger.warn("存储数据至redis数据库失败,请检查redis数据库是否开启。");
 		}
 
 		return (List<String[]>) map.get(Cluster.DISPLAYRESULT);

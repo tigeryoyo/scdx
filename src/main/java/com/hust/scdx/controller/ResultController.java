@@ -77,11 +77,33 @@ public class ResultController {
 	}
 
 	/**
+	 * 根据索引合并聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            顺序的索引集合
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/combineResultItemsByIndices")
+	public Object combineResultItemsByIndices(@RequestParam(value = "resultId", required = true) String resultId,
+			@RequestParam(value = "indices", required = true) int[] indices, HttpServletRequest request) {
+		if (indices.length == 0) {
+			return ResultUtil.errorWithMsg("未选中任何index。");
+		}
+		if (resultService.combineResultItemsByIndices(resultId, indices, request) < 0) {
+			return ResultUtil.errorWithMsg("合并失败。");
+		}
+		return ResultUtil.success("合并成功。");
+	}
+
+	/**
 	 * 根据索引删除聚类结果中的某些类
 	 * 
 	 * @param resultId
 	 * @param indices
-	 *            索引集合
+	 *            顺序的索引集合
 	 * @param request
 	 * @return
 	 */
@@ -92,9 +114,10 @@ public class ResultController {
 		if (indices.length == 0) {
 			return ResultUtil.errorWithMsg("未选中任何index。");
 		}
-		resultService.deleteResultItemsByIndices(resultId, indices,request);
-
-		return ResultUtil.success("");
+		if (resultService.deleteResultItemsByIndices(resultId, indices, request) < 0) {
+			return ResultUtil.errorWithMsg("删除失败。");
+		}
+		return ResultUtil.success("删除成功。");
 	}
 
 	/**

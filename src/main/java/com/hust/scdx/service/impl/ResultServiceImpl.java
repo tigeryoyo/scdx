@@ -1,6 +1,8 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +24,10 @@ import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.RedisService;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.util.AttrUtil;
-import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.FileUtil;
+import com.hust.scdx.util.StringUtil;
 
 @Service
 public class ResultServiceImpl implements ResultService {
@@ -40,7 +42,7 @@ public class ResultServiceImpl implements ResultService {
 	private RedisService redisService;
 	@Autowired
 	private MiningService miningService;
-
+	
 	@Override
 	public int insert(Result result, List<String[]> content, Map<String, Object> map) {
 		return resultDao.insert(result, content, map);
@@ -113,7 +115,7 @@ public class ResultServiceImpl implements ResultService {
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
 		} catch (Exception e) {
-			logger.error("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
 		}
 		if (content == null || content.size() == 0) {
 			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
@@ -134,7 +136,7 @@ public class ResultServiceImpl implements ResultService {
 			redisService.setObject(Cluster.REDIS_ORIGCLUSTER, FileUtil.read(DIRECTORY.ORIG_CLUSTER + subPath), request);
 			redisService.setObject(Cluster.REDIS_ORIGCOUNT, FileUtil.read(DIRECTORY.ORIG_COUNT + subPath), request);
 		} catch (Exception e) {
-			logger.error("存储数据至redis数据库失败,请检查redis数据库是否开启。");
+			logger.warn("存储数据至redis数据库失败,请检查redis数据库是否开启。");
 		}
 		return displayResult;
 	}
@@ -156,7 +158,7 @@ public class ResultServiceImpl implements ResultService {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
 			origCounts = (List<String[]>) redisService.getObject(Cluster.REDIS_ORIGCOUNT, request);
 		} catch (Exception e) {
-			logger.error("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
 		}
 		if (content == null || content.size() == 0) {
 			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
@@ -180,8 +182,69 @@ public class ResultServiceImpl implements ResultService {
 	}
 
 	/**
-	 * 根据索引删除聚类结果中的某些类
+	 * 根据索引合并聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            顺序的索引集合
+	 * @param request
+	 * @return
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public int combineResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request) {
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return -1;
+		}
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+		} catch (Exception e) {
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		if (content == null || content.size() == 0) {
+			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+		}
+		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
+		if (modifyClusters.size() == 0) {
+			return -1;
+		}
+
+		// 由于remove后list的长度会变，故从大往小合并，删除已合并的类。
+		String[] combine = new String[0];
+		for (int i = indices.length - 1; i >= 0; i--) {
+			String[] cluster = modifyClusters.remove(indices[i]);
+			combine = StringUtil.concat(combine, cluster);
+		}
+		modifyClusters.add(combine);
+		// 重载排序的方法，按照降序。类中数量多的排在前面。
+		Collections.sort(modifyClusters, new Comparator<String[]>() {
+			@Override
+			public int compare(String[] o1, String[] o2) {
+				// TODO Auto-generated method stub
+				return o2.length - o1.length;
+			}
+		});
+		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
+
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+			return 0;
+		}
+		return -1;
+	}
+
+	/**
+	 * 根据索引删除聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            顺序的索引集合
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public int deleteResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request) {
 		Result result = queryResultById(resultId);
@@ -193,25 +256,27 @@ public class ResultServiceImpl implements ResultService {
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
 		} catch (Exception e) {
-			logger.error("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
 		}
 		if (content == null || content.size() == 0) {
 			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
 		}
 		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
-		if (modifyClusters == null || modifyClusters.size() == 0) {
+		List<String[]> modifyCounts = FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath);
+		if (modifyClusters.size() == 0 || modifyCounts.size() == 0) {
 			return -1;
 		}
-		List<List<Integer>> resultIndexSetList = ConvertUtil.toListList(modifyClusters);
-		for (int i : indices) {
-			resultIndexSetList.remove(i);
+		// 由于remove后list的长度会变，故从大往小删除。
+		for (int i = indices.length - 1; i >= 0; i--) {
+			modifyClusters.remove(indices[i]);
+			modifyCounts.remove(indices[i]);
 		}
-		CommonUtil.sort(content, resultIndexSetList);
-		modifyClusters = ConvertUtil.toStringListB(resultIndexSetList);
-		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
-		FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters);
-		FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts);
-		return 1;
+
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+			return 0;
+		}
+
+		return -1;
 	}
 
 }

@@ -54,12 +54,41 @@ function allData(page) {
 							+ '</td><td height="40" align="center">' + new Date(item.createTime.time).format('yyyy-MM-dd hh:mm:ss')
 							+ '</td><td height="40" align="center">' + item.lastOperator + '</td><td height="40" align="center">'
 							+ new Date(item.lastUpdateTime.time).format('yyyy-MM-dd hh:mm:ss')
-							+ '</td><td height="40" align="center"><button type="button" class="btn btn-danger" onclick="deleteData(' + "'"
+							+ '</td><td height="40" align="center"><button type="button" class="btn btn-danger" onclick="deleteTopic(' + "'"
 							+ item.topicId + "'" + ')">删除</button></td></tr>'
 					$('.ht_cont').append(row);
 				});
 			} else {
 				alert("查找专题出错。");
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
+ * 重置结果，如果resultId为空则不能重置
+ * 
+ * @param topicId
+ *            专题id
+ */
+function deleteTopic() {
+	$.ajax({
+		type : "post",
+		url : "/topic/delete",
+		data : {
+			topicId : getCookie("topicId")
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				delCookie("topicId");
+				alert(msg.result);
+				jumpto("topic-list");
+			} else {
+				alert(msg.result);
 			}
 		},
 		error : function(msg) {

@@ -22,6 +22,26 @@ public interface ResultService {
 	List<String[]> getDisplayResultById(String resultId, HttpServletRequest request);
 
 	List<String[]> resetResultById(String resultId, HttpServletRequest request);
-
+	
+	/**
+	 * 根据索引删除聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            顺序的索引集合
+	 * @param request
+	 * @return
+	 */
 	int deleteResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request);
+	
+	/**
+	 * 根据索引合并聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param indices
+	 *            顺序的索引集合
+	 * @param request
+	 * @return
+	 */
+	int combineResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request);
 }

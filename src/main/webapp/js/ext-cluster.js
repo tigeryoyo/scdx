@@ -7,7 +7,14 @@ $("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
 var resultId = "";
 
 /**
- * 根据时间范围查找基础文件。
+ * 根据时间范围查找基础文件。 *
+ * 
+ * @param topicId
+ *            专题id
+ * @param startTime
+ *            开始时间
+ * @param endTime
+ *            结束时间
  */
 function queryExtfilesByTimeRange() {
 	$.ajax({
@@ -34,6 +41,13 @@ function queryExtfilesByTimeRange() {
 
 /**
  * 根据时间范围查找结果记录。
+ * 
+ * @param topicId
+ *            专题id
+ * @param startTime
+ *            开始时间
+ * @param endTime
+ *            结束时间
  */
 function queryResultByTimeRange() {
 	$.ajax({
@@ -60,6 +74,9 @@ function queryResultByTimeRange() {
 
 /**
  * 根据id得到显示该次结果。（title、url、time、amount）
+ * 
+ * @param resultId
+ *            结果id
  */
 function getDisplayResultById() {
 	alert(resultId);
@@ -85,6 +102,13 @@ function getDisplayResultById() {
 
 /**
  * 根据时间范围聚类。
+ * 
+ * @param topicId
+ *            专题id
+ * @param startTime
+ *            开始时间
+ * @param endTime
+ *            结束时间
  */
 function miningByTimeRange() {
 	var ds = $("#startTime");
@@ -117,6 +141,9 @@ function miningByTimeRange() {
 
 /**
  * 重置结果，如果resultId为空则不能重置
+ * 
+ * @param resultId
+ *            专题id
  */
 function resetResultById() {
 	$.ajax({
@@ -140,22 +167,63 @@ function resetResultById() {
 }
 
 /**
- * 重置结果，如果resultId为空则不能重置
+ * 根据索引合并聚类结果中的某些类,索引indices为顺序。
+ * 
+ * @param resultId
+ *            结果id
+ * @param indices
+ *            顺序索引
  */
-function deleteTopic() {
+function combineResultItemsByIndices() {
+	var indices = new Array();
+	indices.push(0);
+	indices.push(1);
 	$.ajax({
 		type : "post",
-		url : "/topic/delete",
+		url : "/result/combineResultItemsByIndices",
 		data : {
-			topicId : getCookie("topicId")
+			resultId : resultId,
+			indices : indices
 		},
 		dataType : "json",
+		traditional: true,
 		success : function(msg) {
 			if (msg.status == "OK") {
-				resultId = "";
-				delCookie("topicId");
 				alert(msg.result);
-				jumpto("topic-list");
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
+ * 根据索引删除聚类结果中的某些类,索引indices为顺序。 *
+ * 
+ * @param resultId
+ *            结果id
+ * @param indices
+ *            顺序索引
+ */
+function deleteResultItemsByIndices() {
+	var indices = new Array();
+	indices.push(0);
+	indices.push(1);
+	$.ajax({
+		type : "post",
+		url : "/result/deleteResultItemsByIndices",
+		data : {
+			resultId : resultId,
+			indices : indices
+		},
+		dataType : "json",
+		traditional: true,
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert(msg.result);
 			} else {
 				alert(msg.result);
 			}

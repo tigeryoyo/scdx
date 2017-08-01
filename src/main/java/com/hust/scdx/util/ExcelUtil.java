@@ -19,14 +19,19 @@ public class ExcelUtil {
 
 	public static void main(String[] args) {
 		try {
-			List<String> list = new ArrayList<String>();
-			list.add("1");
-			list.add("2");
-			list.add("3");
-			List<String> tmp = new ArrayList<String>(list);
-			tmp.remove(0);
-			for (String str : tmp) {
-				System.out.print(str + "\t");
+			String[] a = new String[0];
+			String[] b = new String[] { "1", "2" };
+			String[] c = new String[] { "3", "4", "5" };
+			a = StringUtil.concat(a, b);
+			System.out.println(a.length);
+			for (String i : a) {
+				System.out.print(i);
+			}
+			System.out.println();
+			a = StringUtil.concat(a, c);
+			System.out.println(a.length);
+			for (String i : a) {
+				System.out.print(i);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -31,15 +31,28 @@
 	<div style="padding: 10px;">
 		<form class="bs-example bs-example-form" role="form">
 			<div class="input-group">
-				<span class="input-group-addon">起止时间</span>
-			<input type="text" class="form-control" id="startTime" placeholder="2017/07/30 12:00:00">
-			<input type="text" class="form-control" id="endTime" placeholder="2018/07/30 12:00:00">
-			<span class="input-group-addon" onclick="miningByTimeRange()">聚类</span>
-			<span class="input-group-addon" onclick="queryResultByTimeRange()">历史结果集</span>
-			<span class="input-group-addon" onclick="getDisplayResultById()">根据id查看结果</span>
-			<span class="input-group-addon" onclick="resetResultById()">重置</span>
-			<span class="input-group-addon" onclick="queryExtfilesByTimeRange()">查看基础文件集</span>
-			<span class="input-group-addon" onclick="deleteTopic()">删除专题</span>
+				<span class="input-group-addon">起止时间</span> <input type="text"
+					class="form-control" id="startTime"
+					placeholder="2017/07/30 12:00:00"> <input type="text"
+					class="form-control" id="endTime" placeholder="2018/07/30 12:00:00">
+				<span class="input-group-addon" onclick="miningByTimeRange()">聚类</span>
+				<span class="input-group-addon" onclick="queryResultByTimeRange()">历史结果集</span>
+				<span class="input-group-addon" onclick="getDisplayResultById()">根据id查看结果</span>
+				<span class="input-group-addon" onclick="resetResultById()">重置</span>
+				<span class="input-group-addon" onclick="queryExtfilesByTimeRange()">查看基础文件集</span>
+			</div>
+		</form>
+	</div>
+
+	<div style="padding: 10px;">
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">测试</span> <input type="text"
+					class="form-control" placeholder="测试"> <input type="text"
+					class="form-control" placeholder="测试"> <span
+					class="input-group-addon" onclick="combineResultItemsByIndices()">二次操作合并</span>
+				<span class="input-group-addon"
+					onclick="deleteResultItemsByIndices()">二次操作删除</span>
 			</div>
 		</form>
 	</div>

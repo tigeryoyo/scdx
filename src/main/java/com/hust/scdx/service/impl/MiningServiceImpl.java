@@ -1,6 +1,8 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,7 +26,6 @@ import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.SegmentService;
 import com.hust.scdx.util.AttrUtil;
-import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
 
 @Service
@@ -48,6 +49,7 @@ public class MiningServiceImpl implements MiningService {
 		// 移除属性行
 		String[] attrs = tmp.remove(0);
 		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
+		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
 		List<String[]> segmentList = segmentService.getSegresult(tmp, indexOfTitle, 0);
 		Convertor convertor = null;
 		// 判断选择的向量模型的类型
@@ -157,7 +159,31 @@ public class MiningServiceImpl implements MiningService {
 			logger.error("没有选择任何算法");
 			return null;
 		}
-		CommonUtil.sort(content, resultIndexSetList);
+
+		// 重载排序的方法，按照降序。类中数量多的排在前面。
+		Collections.sort(resultIndexSetList, new Comparator<List<Integer>>() {
+			@Override
+			public int compare(List<Integer> o1, List<Integer> o2) {
+				// TODO Auto-generated method stub
+				return o2.size() - o1.size();
+			}
+		});
+		// 对于类内的排序，则先按照时间先后，再按照标题排序。
+		for (List<Integer> set : resultIndexSetList) {
+			Collections.sort(set, new Comparator<Integer>() {
+				@Override
+				public int compare(Integer o1, Integer o2) {
+					// 先按照时间顺序
+					int compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
+					// 若时间相同，使用标题进行排序。
+					if (compare == 0) {
+						compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
+					}
+					return compare;
+				}
+			});
+		}
+
 		return resultIndexSetList;
 	}
 
