@@ -181,11 +181,6 @@ CREATE TABLE `topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
--- Records of topic
--- ----------------------------
-INSERT INTO `topic` VALUES ('0cd97adf-35a0-418c-a1eb-bcd5ae038556', '四川戒毒管理局特供', '未知', '2017-07-27 12:36:47', 'admin', 'admin', '2017-07-27 12:36:47');
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
