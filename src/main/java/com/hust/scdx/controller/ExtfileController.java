@@ -144,7 +144,7 @@ public class ExtfileController {
 		json.put(Cluster.DISPLAYRESULT, list);
 		json.put(Cluster.RESULTID, request.getSession().getAttribute(Cluster.RESULTID));
 		if (list == null) {
-			return ResultUtil.unknowError();
+			return ResultUtil.errorWithMsg("基础文件集为空。");
 		}
 		return ResultUtil.success(json);
 	}
