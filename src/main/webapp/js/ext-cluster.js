@@ -176,8 +176,9 @@ function resetResultById() {
  */
 function combineResultItemsByIndices() {
 	var indices = new Array();
-	indices.push(0);
 	indices.push(1);
+	indices.push(3);
+	indices.push(5);
 	$.ajax({
 		type : "post",
 		url : "/result/combineResultItemsByIndices",
@@ -210,8 +211,9 @@ function combineResultItemsByIndices() {
  */
 function deleteResultItemsByIndices() {
 	var indices = new Array();
-	indices.push(0);
 	indices.push(1);
+	indices.push(3);
+	indices.push(5);
 	$.ajax({
 		type : "post",
 		url : "/result/deleteResultItemsByIndices",

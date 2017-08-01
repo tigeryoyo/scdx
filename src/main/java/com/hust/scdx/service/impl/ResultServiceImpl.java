@@ -42,7 +42,7 @@ public class ResultServiceImpl implements ResultService {
 	private RedisService redisService;
 	@Autowired
 	private MiningService miningService;
-	
+
 	@Override
 	public int insert(Result result, List<String[]> content, Map<String, Object> map) {
 		return resultDao.insert(result, content, map);
@@ -223,7 +223,6 @@ public class ResultServiceImpl implements ResultService {
 		Collections.sort(modifyClusters, new Comparator<String[]>() {
 			@Override
 			public int compare(String[] o1, String[] o2) {
-				// TODO Auto-generated method stub
 				return o2.length - o1.length;
 			}
 		});
@@ -276,6 +275,62 @@ public class ResultServiceImpl implements ResultService {
 			return 0;
 		}
 
+		return -1;
+	}
+
+	/**
+	 * 删除索引为index的类簇内的数据集。
+	 * 
+	 * @param resultId
+	 *            结果id
+	 * @param index
+	 *            类簇索引
+	 * @param indices
+	 *            类簇内要删除的索引集合
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public int deleteClusterItemsByIndices(String resultId, int index, int[] indices, HttpServletRequest request) {
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return -1;
+		}
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+		} catch (Exception e) {
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		if (content == null || content.size() == 0) {
+			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+		}
+		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
+
+		String[] cluster = modifyClusters.get(index);
+		String[] newCluster = new String[cluster.length - indices.length];
+		for (int i : indices) {
+			cluster[i] = null;
+		}
+		for (int i = 0, j = 0; i < cluster.length; i++) {
+			if (cluster[i] != null) {
+				newCluster[j++] = cluster[i];
+			}
+		}
+		modifyClusters.set(index, newCluster);
+		Collections.sort(modifyClusters, new Comparator<String[]>() {
+			@Override
+			public int compare(String[] o1, String[] o2) {
+				return o2.length - o1.length;
+			}
+		});
+		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
+
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+			return 0;
+		}
 		return -1;
 	}
 

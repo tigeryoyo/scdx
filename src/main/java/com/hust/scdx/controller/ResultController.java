@@ -121,7 +121,7 @@ public class ResultController {
 	}
 
 	/**
-	 * 重置结果，撤销对结果的二次操作。
+	 * 重置结果，撤销对聚类结果的二次操作。
 	 * 
 	 * @param resultId
 	 * @param request
@@ -136,6 +136,32 @@ public class ResultController {
 			return ResultUtil.errorWithMsg("查找操作结果失败。");
 		}
 		return ResultUtil.success(list);
+	}
+
+	/**
+	 * 删除索引为index的类簇内的数据集。
+	 * 
+	 * @param resultId
+	 *            结果id
+	 * @param index
+	 *            类簇索引
+	 * @param indices
+	 *            类簇内要删除的索引集合
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteClusterItemsByIndices")
+	public Object deleteClusterItemsByIndices(@RequestParam(value = "resultId", required = true) String resultId,
+			@RequestParam(value = "index", required = true) int index, @RequestParam(value = "indices", required = true) int[] indices,
+			HttpServletRequest request) {
+		if (indices.length == 0) {
+			return ResultUtil.errorWithMsg("未选中任何index。");
+		}
+		if (resultService.deleteClusterItemsByIndices(resultId, index, indices, request) < 0) {
+			return ResultUtil.errorWithMsg("删除失败。");
+		}
+		return ResultUtil.success("删除成功。");
 	}
 
 	@InitBinder
