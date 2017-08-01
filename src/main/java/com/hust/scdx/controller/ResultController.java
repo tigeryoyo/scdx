@@ -139,7 +139,7 @@ public class ResultController {
 	}
 
 	/**
-	 * 删除索引为index的类簇内的数据集。
+	 * 删除索引为index的类簇内的指定数据集。
 	 * 
 	 * @param resultId
 	 *            结果id
