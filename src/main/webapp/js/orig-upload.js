@@ -53,7 +53,7 @@ $(function() {
 							$(".btn_upl_all").removeAttr("disabled");
 							fileBuf.push(origfile);
 						} else {
-							alert("文件[ " + filename+" ]属行行不符合规定。");
+							alert("文件「 " + filename+" 」属行行不符合规定。");
 						}
 					},
 					error : function() {
@@ -61,7 +61,7 @@ $(function() {
 					}
 				});
 			} else {
-				alert("文件[ " + filename + " ]不是excel文件。");
+				alert("文件「 " + filename + " 」不是excel文件。");
 			}
 		}
 	}, false);
@@ -99,6 +99,7 @@ function uploadAll() {
 				alert("上传失败");
 				flag = false;
 				stop();
+				return false;
 			}
 		});
 	}

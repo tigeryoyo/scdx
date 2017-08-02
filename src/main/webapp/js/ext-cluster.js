@@ -187,7 +187,7 @@ function combineResultItemsByIndices() {
 			indices : indices
 		},
 		dataType : "json",
-		traditional: true,
+		traditional : true,
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -222,7 +222,46 @@ function deleteResultItemsByIndices() {
 			indices : indices
 		},
 		dataType : "json",
-		traditional: true,
+		traditional : true,
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert(msg.result);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+/**
+ * 删除索引为index的类簇内的指定数据集。
+ * 
+ * @param resultId
+ *            结果id
+ * @param index
+ *            类簇索引
+ * @param indices
+ *            类簇内要删除的索引集合
+ */
+function deleteClusterItemsByIndices() {
+	var index = 0;
+	var indices = new Array();
+	indices.push(1);
+	indices.push(3);
+	indices.push(5);
+	$.ajax({
+		type : "post",
+		url : "/result/deleteClusterItemsByIndices",
+		data : {
+			resultId : resultId,
+			index : index,
+			indices : indices
+		},
+		dataType : "json",
+		traditional : true,
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);

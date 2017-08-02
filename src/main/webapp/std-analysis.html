@@ -23,32 +23,33 @@
 				<button type="button" class="btn btn-default active"
 					style="color: red" onclick="jumpto('std-analysis')">分析</button>
 			</div>
-			<li class="issueName">专题名称：</li>
+			<li class="topicName">专题名称：</li>
+			<li>新增文件：
+				<div class="files_add" id="drop_area">将文件拖拽到此处</div>
+				<div class="files_put" id="filelist"></div>
+			</li>
 		</ul>
-	</div>
-
-	<div class="data_summary">
-		<div class="summary_wrap ">
-			<div class="summary_cont">
-				<div class="summary_tab" style="height: 500px;">
-					<table width="730" border="0" style="margin-bottom: -1px;">
-						<tr>
-							<td width="60" height="36" align="center" bgcolor="#86c6ea">序号</td>
-							<td width="320" height="36" align="center" bgcolor="#86c6ea">标题</td>
-							<td width="150" height="36" align="center" bgcolor="#86c6ea">时间</td>
-							<td width="60" height="36" align="center" bgcolor="#86c6ea">数量</td>
-						</tr>
-					</table>
-				</div>
-				<div class="table_clear">
-
-					<button type="button" class="btn btn-info"
-						style="float: right; margin-top: 16px; margin-right: 0px;"
-						id="create_core_result">下载结果数据</button>
-					<div class="clear"></div>
-				</div>
-			</div>
+		<div class="up_del">
+			<button type="button" class="btn btn-danger btn_del_all"
+				style="float: right;" onclick="deleteStd()" disabled>删除</button>
+			<button type="button" class="btn btn-primary btn_upl_all"
+				onclick="uploadStd()" disabled>上传</button>
 		</div>
 	</div>
+
+	<div style="padding: 10px;">
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">测试</span> <input type="text"
+					class="form-control" placeholder="测试"> <input type="text"
+					class="form-control" placeholder="测试"> <span
+					class="input-group-addon" onclick="combineResultItemsByIndices()">二次操作合并</span>
+				<span class="input-group-addon"
+					onclick="deleteResultItemsByIndices()">二次操作删除</span> <span
+					class="input-group-addon" onclick="deleteClusterItemsByIndices()">删除类内元素</span>
+			</div>
+		</form>
+	</div>
 </body>
+<script type="text/javascript" src="js/std-analysis.js"></script>
 </html>

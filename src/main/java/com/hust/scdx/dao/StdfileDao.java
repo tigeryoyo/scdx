@@ -29,6 +29,15 @@ public class StdfileDao {
 	@Autowired
 	private StdfileMapper stdfileMapper;
 
+	/**
+	 * 插入标准数据文件至文件系统、插入记录至mysql数据库。
+	 * 
+	 * @param stdfile
+	 *            标准数据文件对象
+	 * @param list
+	 *            文件内容每一个String[]数组为一行
+	 * @return
+	 */
 	public int insert(Stdfile stdfile, List<String[]> list) {
 		// 存储规则 DIRECTORY.stdfile/xxxx年/xx月/stdfileId
 		Date uploadTime = stdfile.getUploadTime();
@@ -46,7 +55,7 @@ public class StdfileDao {
 		} catch (Exception e) {
 			logger.error("写标准数据文件失败:{}", e.toString());
 		}
-		return 0;
+		return -1;
 	}
 
 	/**
@@ -89,7 +98,7 @@ public class StdfileDao {
 	 */
 	public int deleteStdfileById(String stdfileId) {
 		Stdfile stdfile = queryStdfileById(stdfileId);
-		if (FileUtil.delete(DIRECTORY.STDFILE + DateConverter.convertToPath(stdfile.getUploadTime()))) {
+		if (FileUtil.delete(DIRECTORY.STDFILE + DateConverter.convertToPath(stdfile.getUploadTime()) + stdfileId)) {
 			return stdfileMapper.deleteByPrimaryKey(stdfileId);
 		}
 		return -1;

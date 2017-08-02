@@ -173,11 +173,11 @@ public class MiningServiceImpl implements MiningService {
 			Collections.sort(set, new Comparator<Integer>() {
 				@Override
 				public int compare(Integer o1, Integer o2) {
-					// 先按照时间顺序
-					int compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
-					// 若时间相同，使用标题进行排序。
+					// 先按照标题顺序
+					int compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
+					// 若标题相同，使用时间进行排序。
 					if (compare == 0) {
-						compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
+						compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
 					}
 					return compare;
 				}

@@ -21,10 +21,6 @@ public class StdfileQueryCondition {
 	 * 文件内容
 	 */
 	private MultipartFile file;
-	/**
-	 * 数据类型：新闻or微博
-	 */
-	private String sourceType;
 
 	public String getTopicId() {
 		return topicId;
@@ -56,14 +52,6 @@ public class StdfileQueryCondition {
 
 	public void setFile(MultipartFile file) {
 		this.file = file;
-	}
-
-	public String getSourceType() {
-		return sourceType;
-	}
-
-	public void setSourceType(String sourceType) {
-		this.sourceType = sourceType;
 	}
 
 }
