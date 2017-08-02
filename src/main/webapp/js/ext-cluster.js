@@ -274,3 +274,17 @@ function deleteClusterItemsByIndices() {
 		}
 	});
 }
+
+/**
+ * 根据resultId下载结果数据
+ * 
+ */
+
+function downloadResultById() {
+	$(function() {
+		var form = $('<form method="POST" action="/result/downloadResultById">');
+		form.append($('<input type="hidden" name="resultId" value="' + resultId + '"/>'));
+		$('body').append(form);
+		form.submit(); // 自动提交
+	});
+}

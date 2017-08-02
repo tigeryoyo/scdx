@@ -1,12 +1,16 @@
 package com.hust.scdx.controller;
 
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hust.scdx.constant.Constant.Resutt;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.service.ResultService;
+import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
 
 @Controller
@@ -161,6 +168,39 @@ public class ResultController {
 		if (resultService.deleteClusterItemsByIndices(resultId, index, indices, request) < 0) {
 			return ResultUtil.errorWithMsg("删除失败。");
 		}
+		return ResultUtil.success("删除成功。");
+	}
+
+	/**
+	 * 根据resultId下载结果
+	 * 
+	 * @param resultId
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@ResponseBody
+	@RequestMapping(value = "/downloadResultById", method = RequestMethod.POST)
+	public Object downloadResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request,
+			HttpServletResponse response) {
+		Map<String, Object> map = resultService.getResultContentById(resultId, request);
+		if (map == null || map.size() == 0) {
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
+		try (OutputStream outputStream = response.getOutputStream();) {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("multipart/form-data");
+
+			String resultName = new String(((String) map.get(Resutt.RESULTNAME)).getBytes(), "ISO8859-1");
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
+			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT), (List<Integer>) map.get(Resutt.MARKED));
+			workbook.write(outputStream);
+		} catch (Exception e) {
+			logger.error("下载结果失败。");
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
 		return ResultUtil.success("删除成功。");
 	}
 

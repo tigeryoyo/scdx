@@ -103,6 +103,12 @@ public class ResultDao {
 		return del;
 	}
 
+	/**
+	 * 查找符合条件的结果集
+	 * 
+	 * @param con
+	 * @return
+	 */
 	public List<Result> queryResultsByCondtion(ResultQueryCondition con) {
 		ResultExample example = new ResultExample();
 		Criteria criteria = example.createCriteria();

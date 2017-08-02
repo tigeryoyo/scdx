@@ -7,12 +7,18 @@ public class Constant {
 
 	public final static String UNKNOWN = "未知";
 	public final static String INVALID_TIME = "1970-01-01";
-	
+
 	// 错误码
-    public static final int ERROR_CODE = -1;
-    // 错误返回内容
-    public static final String UNKNOW_ERROR = "未知错误。";
-    
+	public static final int ERROR_CODE = -1;
+	// 错误返回内容
+	public static final String UNKNOW_ERROR = "未知错误。";
+
+	public static class Resutt {
+		public final static String RESULT = "result";
+		public final static String RESULTNAME = "resultName";
+		public final static String MARKED = "marked";
+	}
+
 	public static class Index {
 		public static final int TITLE = 0;
 		public static final int URL = 1;
@@ -26,10 +32,12 @@ public class Constant {
 		public static final String CONTENT = "content";
 		public static final String ORIGCLUSTERS = "origClusters";
 		public static final String ORIGCOUNTS = "origCounts";
+		public static final String MODIFYCLUSTERS = "modifyClusters";
+		public static final String MODIFYCOUNTS = "modifyCounts";
 		public static final String DISPLAYRESULT = "displayResult";
 
 		public static final String RESULTID = "resultId";
-		
+
 		public static final String REDIS_CONTENT = "redis_content";
 		public static final String REDIS_ORIGCLUSTER = "redis_OrigClusters";
 		public static final String REDIS_ORIGCOUNT = "redis_OrigCounts";

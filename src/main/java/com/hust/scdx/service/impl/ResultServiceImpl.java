@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.constant.Constant.Index;
+import com.hust.scdx.constant.Constant.Resutt;
 import com.hust.scdx.dao.ResultDao;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.params.ResultQueryCondition;
@@ -332,6 +334,61 @@ public class ResultServiceImpl implements ResultService {
 			return 0;
 		}
 		return -1;
+	}
+
+	/**
+	 * 根据resultId得到文件内容
+	 * 
+	 * @param resultId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String,Object> getResultContentById(String resultId, HttpServletRequest request) {
+		Map<String,Object> res = new HashMap<String,Object>();
+		List<String[]> resultContent = new ArrayList<String[]>();
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return null;
+		}
+		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+		} catch (Exception e) {
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		try {
+			if (content == null || content.size() == 0) {
+				content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+			}
+			List<int[]> modifyClusters = ConvertUtil.toIntList(FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath));
+			List<String[]> modifyCounts = FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath);
+			if (modifyClusters == null || modifyCounts == null) {
+				return null;
+			}
+			
+			List<Integer> marked = new ArrayList<Integer>();
+			for(String[] cluster : modifyCounts){
+				marked.add(Integer.valueOf(cluster[Index.COUNT_ITEM_INDEX]));
+			}
+			
+			resultContent.add(content.remove(0));
+			for (int[] cluster : modifyClusters) {
+				for (int index : cluster) {
+					resultContent.add(content.get(index));
+				}
+				resultContent.add(new String[0]);
+			}
+			res.put(Resutt.RESULT, resultContent);
+			res.put(Resutt.RESULTNAME, result.getResName());
+			res.put(Resutt.MARKED, marked);
+		} catch (Exception e) {
+			logger.error("获取内容失败。");
+			return null;
+		}
+
+		return res;
 	}
 
 }

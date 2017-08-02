@@ -46,4 +46,6 @@ public interface ResultService {
 	int combineResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request);
 
 	int deleteClusterItemsByIndices(String resultId, int index, int[] indices, HttpServletRequest request);
+
+	Map<String, Object> getResultContentById(String resultId, HttpServletRequest request);
 }
