@@ -27,7 +27,6 @@ import com.hust.scdx.service.RedisService;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
-import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.FileUtil;
 import com.hust.scdx.util.StringUtil;
 
@@ -111,9 +110,9 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return null;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
-		List<int[]> origCounts = ConvertUtil.toIntList(FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath));
+		List<int[]> origCounts = ConvertUtil.toIntArrayList(FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath));
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
 		} catch (Exception e) {
@@ -153,7 +152,7 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return null;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		List<String[]> origCounts = null;
 		try {
@@ -171,7 +170,7 @@ public class ResultServiceImpl implements ResultService {
 		// 返回给前端的结果list：title、url、time、amount
 		List<String[]> displayResult = new ArrayList<String[]>();
 		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
-		List<int[]> tmp = ConvertUtil.toIntList(origCounts);
+		List<int[]> tmp = ConvertUtil.toIntArrayList(origCounts);
 		for (int[] row : tmp) {
 			String[] old = content.get(row[0] + 1);
 			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
@@ -199,7 +198,7 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return -1;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
@@ -228,7 +227,7 @@ public class ResultServiceImpl implements ResultService {
 				return o2.length - o1.length;
 			}
 		});
-		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
+		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(content, modifyClusters));
 
 		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
@@ -252,7 +251,7 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return -1;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
@@ -299,7 +298,7 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return -1;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
@@ -328,7 +327,7 @@ public class ResultServiceImpl implements ResultService {
 				return o2.length - o1.length;
 			}
 		});
-		List<String[]> modifyCounts = ConvertUtil.toStringList(miningService.getOrigCounts(content, modifyClusters));
+		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(content, modifyClusters));
 
 		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
@@ -351,7 +350,7 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return null;
 		}
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> content = null;
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
@@ -362,7 +361,7 @@ public class ResultServiceImpl implements ResultService {
 			if (content == null || content.size() == 0) {
 				content = FileUtil.read(DIRECTORY.CONTENT + subPath);
 			}
-			List<int[]> modifyClusters = ConvertUtil.toIntList(FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath));
+			List<int[]> modifyClusters = ConvertUtil.toIntArrayList(FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath));
 			List<String[]> modifyCounts = FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath);
 			if (modifyClusters == null || modifyCounts == null) {
 				return null;

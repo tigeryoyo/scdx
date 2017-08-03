@@ -197,7 +197,7 @@ public class MiningServiceImpl implements MiningService {
 		// 移除属性行
 		String[] attrs = tmp.remove(0);
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-		List<int[]> clusters = ConvertUtil.toIntList(origClusters); // 变成
+		List<int[]> clusters = ConvertUtil.toIntArrayList(origClusters); // 变成
 		for (int i = 0; i < clusters.size(); i++) {
 			int[] cluster = clusters.get(i); // 取第i条数组
 			int origIndex = -1;

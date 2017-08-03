@@ -14,7 +14,7 @@ import com.hust.scdx.model.Result;
 import com.hust.scdx.model.ResultExample;
 import com.hust.scdx.model.ResultExample.Criteria;
 import com.hust.scdx.model.params.ResultQueryCondition;
-import com.hust.scdx.util.DateConverter;
+import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.FileUtil;
 
 @Repository
@@ -36,7 +36,7 @@ public class ResultDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public int insert(Result result, List<String[]> content, Map<String, Object> map) {
-		String dirPath = DateConverter.convertToPath(result.getCreateTime()) + result.getResId();
+		String dirPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
 		List<String[]> clusterResult = (List<String[]>) map.get(Cluster.ORIGCLUSTERS);
 		List<String[]> countResult = (List<String[]>) map.get(Cluster.ORIGCOUNTS);
 		if (FileUtil.write(DIRECTORY.CONTENT + dirPath, content) && FileUtil.write(DIRECTORY.ORIG_CLUSTER + dirPath, clusterResult)
@@ -67,7 +67,7 @@ public class ResultDao {
 	 */
 	public int deleteByResultId(String resultId) {
 		Result result = queryResultById(resultId);
-		String subPath = DateConverter.convertToPath(result.getCreateTime()) + resultId;
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + resultId;
 		if (FileUtil.delete(DIRECTORY.CONTENT + subPath) && FileUtil.delete(DIRECTORY.ORIG_CLUSTER + subPath)
 				&& FileUtil.delete(DIRECTORY.ORIG_COUNT + subPath) && FileUtil.delete(DIRECTORY.MODIFY_CLUSTER + subPath)
 				&& FileUtil.delete(DIRECTORY.MODIFY_COUNT + subPath)) {

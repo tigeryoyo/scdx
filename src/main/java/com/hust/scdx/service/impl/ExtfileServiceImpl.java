@@ -35,7 +35,6 @@ import com.hust.scdx.service.TopicService;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
-import com.hust.scdx.util.DateConverter;
 import com.hust.scdx.util.ExcelUtil;
 
 @Service
@@ -114,7 +113,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		int size = extfiles.size();
 		for (int i = 0; i < size; i++) {
 			Date uploadTime = extfiles.get(i).getUploadTime();
-			extfilePaths[i] = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime) + extfiles.get(i).getExtfileId();
+			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime) + extfiles.get(i).getExtfileId();
 		}
 
 		// 读取基础数据文件集合,去重排序并取并集。
@@ -185,7 +184,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 	private Map<String, Object> mining(List<String[]> content, int converterType, int algorithmType, int granularity) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		// 聚类,每个String[]都是某个类簇的数据ID的集合。
-		List<String[]> origClusters = ConvertUtil.toStringListB(miningService.getOrigClusters(content, converterType, algorithmType, granularity));
+		List<String[]> origClusters = ConvertUtil.toStringArrayListB(miningService.getOrigClusters(content, converterType, algorithmType, granularity));
 		result.put(Cluster.ORIGCLUSTERS, origClusters);
 
 		List<int[]> origCounts = miningService.getOrigCounts(content, origClusters);
@@ -200,7 +199,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		}
 		result.put(Cluster.DISPLAYRESULT, displayResult);
 
-		List<String[]> tmp = ConvertUtil.toStringList(origCounts);
+		List<String[]> tmp = ConvertUtil.toStringArrayList(origCounts);
 		result.put(Cluster.ORIGCOUNTS, tmp);
 		return result;
 	}
@@ -217,7 +216,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 	 * @return
 	 */
 	private String setResName(String topicId, Date startTime, Date endTime) {
-		return topicService.queryTopicById(topicId).getTopicName() + DateConverter.convert(startTime) + "-" + DateConverter.convert(endTime);
+		return topicService.queryTopicById(topicId).getTopicName() + ConvertUtil.convertDateToName(startTime) + "-" + ConvertUtil.convertDateToName(endTime);
 	}
 
 	/**

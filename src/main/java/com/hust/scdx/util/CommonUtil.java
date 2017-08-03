@@ -34,22 +34,4 @@ public class CommonUtil {
 		return true;
 	}
 
-	public static String getPrefixUrl(String url) {
-		if (StringUtils.isEmpty(url)) {
-			return StringUtils.EMPTY;
-		}
-		try {
-			int pure = url.indexOf("/", url.indexOf("://") + 3);
-			if (pure == -1) {
-				return url;
-			} else {
-				String prefix = url.substring(0, pure);
-				return prefix;
-			}
-		} catch (Exception e) {
-			logger.error("get prefix of url failed, url :{}, exception:{}", url, e.toString());
-			return StringUtils.EMPTY;
-		}
-	}
-
 }

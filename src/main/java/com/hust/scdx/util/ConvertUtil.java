@@ -1,83 +1,72 @@
 package com.hust.scdx.util;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
-public class ConvertUtil {
-	public static List<String[]> convertoStrList(List<List<String[]>> setList, String[] title) {
-		if (null == setList)
-			return null;
-		List<String[]> listStr = new ArrayList<String[]>();
-		listStr.add(title);
-		for (List<String[]> set : setList) {
-			if (null != set && set.size() != 0) {
-				for (String[] row : set) {
-					listStr.add(row);
-				}
-				/**
-				 * 新加一行空行，以区分类间的区别
-				 */
-				listStr.add(new String[set.get(0).length]);
-			}
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.convert.converter.Converter;
+
+import com.hust.scdx.constant.Constant;
+
+public class ConvertUtil implements Converter<String, Date> {
+	/**
+	 * Logger for this class
+	 */
+	private static final Logger logger = LoggerFactory.getLogger(ConvertUtil.class);
+
+	@Override
+	public Date convert(String source) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			return simpleDateFormat.parse(source);
+		} catch (Exception e) {
+			logger.error("convert str to date error");
 		}
-		return listStr;
+		return null;
 	}
 
-	public static List<List<String[]>> convertToStringSet(List<String[]> list, List<List<Integer>> resultIndexSet, final int targetIndex) {
-		if (null == resultIndexSet || resultIndexSet.size() == 0 || list.size() == 0 || null == list || targetIndex < 0) {
-			return null;
+	/**
+	 * 存储路径 例如 2017/07/
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String convertDateToPath(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMM");
+		try {
+			String res = simpleDateFormat.format(date);
+			return res.substring(0, 4) + "/" + res.substring(4, 6) + "/";
+		} catch (Exception e) {
+			logger.error("转换日期错误。");
 		}
-		Collections.sort(resultIndexSet, new Comparator<List<Integer>>() {
-
-			@Override
-			public int compare(List<Integer> o1, List<Integer> o2) {
-				// TODO Auto-generated method stub
-				return o2.size() - o1.size();
-			}
-		});
-		List<List<String[]>> listStrSet = new ArrayList<List<String[]>>();
-		for (List<Integer> set : resultIndexSet) {
-			List<String[]> setDataList = new ArrayList<String[]>();
-			for (int i : set) {
-				setDataList.add(list.get(i + 1));
-			}
-			Collections.sort(setDataList, new Comparator<String[]>() {
-				public int compare(String[] o1, String[] o2) {
-					return o1[targetIndex].compareTo(o2[targetIndex]);
-				}
-			});
-			listStrSet.add(setDataList);
-		}
-		return listStrSet;
+		return Constant.UNKNOWN;
 	}
 
-	public static byte[] convertToBytes(Object obj) throws Exception {
-		if (null == obj) {
-			return null;
+	/**
+	 * 用于生成聚类后结果文件名
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String convertDateToName(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHH");
+		try {
+			return simpleDateFormat.format(date);
+		} catch (Exception e) {
+			logger.error("转换日期错误。");
 		}
-		ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-		ObjectOutput output = new ObjectOutputStream(byteStream);
-		output.writeObject(obj);
-		return byteStream.toByteArray();
+		return Constant.UNKNOWN;
 	}
 
-	public static Object convertBytesToObject(byte[] bytes) throws Exception {
-		if (null == bytes || bytes.length == 0) {
-			return null;
-		}
-		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-		ObjectInput input = new ObjectInputStream(byteArrayInputStream);
-		return input.readObject();
-	}
-
+	/**
+	 * 将字符串数组转换为整型数组
+	 * 
+	 * @param array
+	 * @return
+	 */
 	public static int[] toIntArray(String[] array) {
 		if (array == null || array.length == 0) {
 			return null;
@@ -89,7 +78,30 @@ public class ConvertUtil {
 		return newArray;
 	}
 
-	public static List<int[]> toIntList(List<String[]> list) {
+	/**
+	 * 将整型数组转换为字符串数组
+	 * 
+	 * @param array
+	 * @return
+	 */
+	public static String[] toStringArray(int[] array) {
+		if (array == null) {
+			return null;
+		}
+		String[] newArray = new String[array.length];
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = String.valueOf(array[i]);
+		}
+		return newArray;
+	}
+
+	/**
+	 * 将字符串数组list转换为整型数组list
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<int[]> toIntArrayList(List<String[]> list) {
 		if (list == null || list.size() == 0) {
 			return null;
 		}
@@ -100,7 +112,30 @@ public class ConvertUtil {
 		return newList;
 	}
 
-	public static List<List<Integer>> toListList(List<String[]> list) {
+	/**
+	 * 将整型数组list转换为字符串数组list
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<String[]> toStringArrayList(List<int[]> list) {
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		List<String[]> newList = new ArrayList<String[]>();
+		for (int[] array : list) {
+			newList.add(toStringArray(array));
+		}
+		return newList;
+	}
+
+	/**
+	 * 将字符串数组list转换为...
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static List<List<Integer>> toIntListList(List<String[]> list) {
 		if (list == null || list.size() == 0) {
 			return null;
 		}
@@ -115,44 +150,6 @@ public class ConvertUtil {
 
 		return newList;
 	}
-	
-	public static List<Integer[]> toIntegerList(List<String[]> list) {
-		if (list == null || list.size() == 0) {
-			return null;
-		}
-		List<Integer[]> newList = new ArrayList<Integer[]>();
-		for (String[] strs : list) {
-			Integer[] sub = new Integer[strs.length];
-			for(int i=0; i<strs.length; i++){
-				sub[i] = Integer.valueOf(strs[i]);
-			}
-			newList.add(sub);
-		}
-		
-		return newList;
-	}
-
-	public static String[] toStringArray(int[] array) {
-		if (array == null) {
-			return null;
-		}
-		String[] newArray = new String[array.length];
-		for (int i = 0; i < array.length; i++) {
-			newArray[i] = String.valueOf(array[i]);
-		}
-		return newArray;
-	}
-
-	public static List<String[]> toStringList(List<int[]> list) {
-		if (list == null || list.size() == 0) {
-			return null;
-		}
-		List<String[]> newList = new ArrayList<String[]>();
-		for (int[] array : list) {
-			newList.add(toStringArray(array));
-		}
-		return newList;
-	}
 
 	/**
 	 * 将(所有类（单个类（类内元素的index））)变为（所有类（单个类））
@@ -161,7 +158,7 @@ public class ConvertUtil {
 	 *            聚类结果集（index）
 	 * @return
 	 */
-	public static List<String[]> toStringListB(List<List<Integer>> list) {
+	public static List<String[]> toStringArrayListB(List<List<Integer>> list) {
 		if (list == null || list.size() == 0) {
 			return null;
 		}
@@ -174,15 +171,5 @@ public class ConvertUtil {
 			newList.add(array);
 		}
 		return newList;
-	}
-
-	public static List<String[]> strConvertToList(String count, String tag) {
-		List<String[]> list = new ArrayList<String[]>();
-		String[] kvs = count.split(",");
-		for (String kv : kvs) {
-			list.add(kv.split("="));
-		}
-		list.add(0, new String[] { tag, "数量" });
-		return list;
 	}
 }

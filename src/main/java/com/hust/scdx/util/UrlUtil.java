@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +17,8 @@ import org.slf4j.LoggerFactory;
  * @author Jack
  *
  */
-public class UrlUtils {
-	private static final Logger logger = LoggerFactory.getLogger(UrlUtils.class);
+public class UrlUtil {
+	private static final Logger logger = LoggerFactory.getLogger(UrlUtil.class);
 
 	private static final String RE_IP = "((?:(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(?:25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d))))(:[0-9]{1,})?$";
 	private static final String RE = "(com\\.cn|cn\\.com|com\\.hk|net\\.cn|gov\\.cn|org\\.nz|org\\.cn|com\\.tw|"
@@ -30,7 +31,7 @@ public class UrlUtils {
 	private static final String RE_SEC = "([\\w-]*\\.){2,}";
 
 	// 三级域名提取
-//	private static final String RE_THI = "(\\w*\\.){3,}";
+	// private static final String RE_THI = "(\\w*\\.){3,}";
 
 	/**
 	 * 给定网址提取出完整域名（包含非80端口的端口）,同时清洗掉www.
@@ -57,10 +58,10 @@ public class UrlUtils {
 			if (url.startsWith("www.")) {
 				url = url.substring(4);
 			}
-			if(isDomain(url)||isIp(url)){
+			if (isDomain(url) || isIp(url)) {
 				logger.info("不符合格式无法直接提取域名的url：" + url);
 				return url;
-			}else{
+			} else {
 				return null;
 			}
 		}
@@ -89,7 +90,7 @@ public class UrlUtils {
 	 * @return
 	 */
 	public static String getDomainOne(String url) {
-		if(url == null){
+		if (url == null) {
 			return null;
 		}
 		Pattern pattern = Pattern.compile(RE_TOP);
@@ -123,16 +124,13 @@ public class UrlUtils {
 	 * @return
 	 */
 	public static String getDomainTwo(String url) {
-		/*String result = "";
-		Pattern pattern = Pattern.compile(RE_SEC);
-		Matcher matcher = pattern.matcher(url);
-		if (matcher.find()) {
-			if (!matcher.group().equals(getDomainOne(url))) {
-				return matcher.group();
-			}
-		}
-		return null;*/
-		if(url == null){
+		/*
+		 * String result = ""; Pattern pattern = Pattern.compile(RE_SEC);
+		 * Matcher matcher = pattern.matcher(url); if (matcher.find()) { if
+		 * (!matcher.group().equals(getDomainOne(url))) { return
+		 * matcher.group(); } } return null;
+		 */
+		if (url == null) {
 			return null;
 		}
 		String head = "";
@@ -181,25 +179,15 @@ public class UrlUtils {
 	 * Pattern.compile(RE_THI); Matcher matcher = pattern.matcher(url);
 	 * if(matcher.find()){ return matcher.group(); } return null; }
 	 */
-/*	public static String getDomainThr(String url) {
-		String head = "";
-		String end = "";
-		Pattern pattern1 = Pattern.compile(RE);
-		Matcher matcher1 = pattern1.matcher(url);
-		if (matcher1.find()) {
-			end = matcher1.group();
-			url = matcher1.replaceFirst("");
-		} else {
-			return null;
-		}
-		Pattern pattern2 = Pattern.compile(RE_THI);
-		Matcher matcher2 = pattern2.matcher(url);
-		if (matcher2.find()) {
-			head = matcher2.group();
-		} else
-			return null;
-		return head + end;
-	}*/
+	/*
+	 * public static String getDomainThr(String url) { String head = ""; String
+	 * end = ""; Pattern pattern1 = Pattern.compile(RE); Matcher matcher1 =
+	 * pattern1.matcher(url); if (matcher1.find()) { end = matcher1.group(); url
+	 * = matcher1.replaceFirst(""); } else { return null; } Pattern pattern2 =
+	 * Pattern.compile(RE_THI); Matcher matcher2 = pattern2.matcher(url); if
+	 * (matcher2.find()) { head = matcher2.group(); } else return null; return
+	 * head + end; }
+	 */
 
 	/**
 	 * 批量获取清洗过后的完整域名中的三级及以上域名
@@ -208,13 +196,11 @@ public class UrlUtils {
 	 *            清洗过后的完整域名 形如（baidu.com）,没有三级及以上域名的其对应String为null
 	 * @return
 	 */
-/*	public static List<String> getDomainThr(List<String> list) {
-		List<String> thrList = new ArrayList<>();
-		for (String string : list) {
-			thrList.add(getDomainThr(string));
-		}
-		return thrList;
-	}*/
+	/*
+	 * public static List<String> getDomainThr(List<String> list) { List<String>
+	 * thrList = new ArrayList<>(); for (String string : list) {
+	 * thrList.add(getDomainThr(string)); } return thrList; }
+	 */
 
 	private static boolean isIp(String url) {
 		Pattern pattern = Pattern.compile(RE_IP);
@@ -224,13 +210,37 @@ public class UrlUtils {
 		} else
 			return false;
 	}
-	
-	private static boolean isDomain(String url){
+
+	private static boolean isDomain(String url) {
 		Pattern pattern = Pattern.compile("(\\w*\\.){1,}" + RE);
 		Matcher matcher = pattern.matcher(url);
 		if (matcher.find()) {
 			return true;
 		} else
 			return false;
+	}
+
+	/**
+	 * 获取url前缀
+	 * 
+	 * @param url
+	 * @return
+	 */
+	public static String getPrefixUrl(String url) {
+		if (StringUtils.isEmpty(url)) {
+			return StringUtils.EMPTY;
+		}
+		try {
+			int pure = url.indexOf("/", url.indexOf("://") + 3);
+			if (pure == -1) {
+				return url;
+			} else {
+				String prefix = url.substring(0, pure);
+				return prefix;
+			}
+		} catch (Exception e) {
+			logger.error("get prefix of url failed, url :{}, exception:{}", url, e.toString());
+			return StringUtils.EMPTY;
+		}
 	}
 }

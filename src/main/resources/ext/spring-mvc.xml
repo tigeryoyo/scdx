@@ -111,7 +111,7 @@
 		</property>
 	</bean>
 	<!-- 第一步: 创建自定义日期转换规则 -->
-	<bean id="dateConvert" class="com.hust.scdx.util.DateConverter" />
+	<bean id="dateConvert" class="com.hust.scdx.util.ConvertUtil" />
 
 </beans>
     

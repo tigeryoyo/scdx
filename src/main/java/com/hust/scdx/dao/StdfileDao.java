@@ -16,7 +16,7 @@ import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.StdfileExample;
 import com.hust.scdx.model.StdfileExample.Criteria;
 import com.hust.scdx.model.params.StdfileQueryCondition;
-import com.hust.scdx.util.DateConverter;
+import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.FileUtil;
 
 @Repository
@@ -41,7 +41,7 @@ public class StdfileDao {
 	public int insert(Stdfile stdfile, List<String[]> list) {
 		// 存储规则 DIRECTORY.stdfile/xxxx年/xx月/stdfileId
 		Date uploadTime = stdfile.getUploadTime();
-		String dir = DIRECTORY.STDFILE + DateConverter.convertToPath(uploadTime);
+		String dir = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(uploadTime);
 		if (!new File(dir).exists()) {
 			new File(dir).mkdirs();
 		}
@@ -98,7 +98,7 @@ public class StdfileDao {
 	 */
 	public int deleteStdfileById(String stdfileId) {
 		Stdfile stdfile = queryStdfileById(stdfileId);
-		if (FileUtil.delete(DIRECTORY.STDFILE + DateConverter.convertToPath(stdfile.getUploadTime()) + stdfileId)) {
+		if (FileUtil.delete(DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId)) {
 			return stdfileMapper.deleteByPrimaryKey(stdfileId);
 		}
 		return -1;

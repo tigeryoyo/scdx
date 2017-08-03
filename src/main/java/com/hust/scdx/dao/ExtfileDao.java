@@ -16,7 +16,7 @@ import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.ExtfileExample;
 import com.hust.scdx.model.ExtfileExample.Criteria;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
-import com.hust.scdx.util.DateConverter;
+import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.FileUtil;
 
 @Repository
@@ -41,7 +41,7 @@ public class ExtfileDao {
 	public int insert(Extfile extfile, List<String[]> list) {
 		// 存储规则 DIRECTORY.EXTFILE/xxxx年/xx月/extfileId
 		Date uploadTime = extfile.getUploadTime();
-		String dir = DIRECTORY.EXTFILE + DateConverter.convertToPath(uploadTime);
+		String dir = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime);
 		if (!new File(dir).exists()) {
 			new File(dir).mkdirs();
 		}
@@ -98,7 +98,7 @@ public class ExtfileDao {
 	 */
 	public int deleteExtfileById(String extfileId) {
 		Extfile extfile = queryExtfileById(extfileId);
-		if (FileUtil.delete(DIRECTORY.EXTFILE + DateConverter.convertToPath(extfile.getUploadTime()) + extfileId)) {
+		if (FileUtil.delete(DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(extfile.getUploadTime()) + extfileId)) {
 			return extfileMapper.deleteByPrimaryKey(extfileId);
 		}
 		return -1;
