@@ -31,11 +31,11 @@ public class Config {
 	public static class DIRECTORY {
 
 		/**
-		 * 泛数据
+		 * 基础数据
 		 */
 		public static String EXTFILE;
 		/**
-		 * 泛数据集合去重形成的数据
+		 * 基础数据集合去重形成的数据
 		 */
 		public static String CONTENT;
 		/**
@@ -55,7 +55,7 @@ public class Config {
 		 */
 		public static String MODIFY_COUNT;
 		/**
-		 * 准数据
+		 * 标准数据
 		 */
 		public static String STDFILE;
 

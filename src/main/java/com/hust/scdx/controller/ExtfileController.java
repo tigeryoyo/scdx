@@ -42,7 +42,7 @@ public class ExtfileController {
 	private ExtfileService extfileService;
 
 	/**
-	 * 上传原始文件，经过去重成为泛数据文件存储在文件系统中。
+	 * 上传原始文件，经过去重成为基础数据文件存储在文件系统中。
 	 * 
 	 * @param origfile
 	 *            原始文件
