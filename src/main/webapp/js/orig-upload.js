@@ -1,6 +1,9 @@
 /**
  * 拖拽
  */
+
+$('.topicName').text("专题名称：" + getCookie("topicName"));
+
 var fileBuf = new Array();
 $(function() {
 	// 阻止浏览器默认行。

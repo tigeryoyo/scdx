@@ -1,3 +1,4 @@
+$('.topicName').text("专题名称：" + getCookie("topicName"));
 $("#startTime").attr("placeholder", "2017-07-01 12:00:00");
 $("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
 
