@@ -101,7 +101,7 @@ public class ResultServiceImpl implements ResultService {
 	 * 根据resultId查找结果，返回前台显示的list。
 	 * 
 	 * @param resultId
-	 * @return displayResult（title、time、url、amount）
+	 * @return displayResult（title、url、time、amount）
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

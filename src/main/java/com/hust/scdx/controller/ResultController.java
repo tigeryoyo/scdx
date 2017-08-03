@@ -45,7 +45,7 @@ public class ResultController {
 	 * 
 	 * @param resultId
 	 * @param request
-	 * @return displayResult（title、time、url、amount）
+	 * @return displayResult（title、url、time、amount）
 	 */
 	@ResponseBody
 	@RequestMapping("/getDisplayResultById")
