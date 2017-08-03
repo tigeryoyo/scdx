@@ -47,7 +47,6 @@ function allData(page) {
 				var count = 0;
 				$.each(items, function(idx, item) {
 					count++;
-					var item_topicId = "'" + item.topicId + "'";
 					row = '<tr><td height="40" align="center">' + ((page - 1) * 10 + count)
 							+ '</td><td height="40" align="center"><a href="javascript:;" onclick="openTopic(' + "'" + item.topicId + "'"
 							+ "," + "'" + item.topicName + "'" + ')">' + item.topicName + '</a></td><td height="40" align="center">'
