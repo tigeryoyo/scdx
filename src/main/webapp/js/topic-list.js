@@ -49,13 +49,14 @@ function allData(page) {
 					count++;
 					var item_topicId = "'" + item.topicId + "'";
 					row = '<tr><td height="40" align="center">' + ((page - 1) * 10 + count)
-							+ '</td><td height="40" align="center"><a href="javascript:;" onclick="openTopic(' + item_topicId + ')">'
-							+ item.topicName + '</a></td><td height="40" align="center">' + item.creator
-							+ '</td><td height="40" align="center">' + new Date(item.createTime.time).format('yyyy-MM-dd hh:mm:ss')
-							+ '</td><td height="40" align="center">' + item.lastOperator + '</td><td height="40" align="center">'
+							+ '</td><td height="40" align="center"><a href="javascript:;" onclick="openTopic(' + "'" + item.topicId + "'"
+							+ "," + "'" + item.topicName + "'" + ')">' + item.topicName + '</a></td><td height="40" align="center">'
+							+ item.creator + '</td><td height="40" align="center">'
+							+ new Date(item.createTime.time).format('yyyy-MM-dd hh:mm:ss') + '</td><td height="40" align="center">'
+							+ item.lastOperator + '</td><td height="40" align="center">'
 							+ new Date(item.lastUpdateTime.time).format('yyyy-MM-dd hh:mm:ss')
-							+ '</td><td height="40" align="center"><button type="button" class="btn btn-danger" onclick="deleteTopic(' + "'"
-							+ item.topicId + "'" + ')">删除</button></td></tr>'
+							+ '</td><td height="40" align="center"><button type="button" class="btn btn-danger" onclick="deleteTopic('
+							+ "'" + item.topicId + "'" + ')">删除</button></td></tr>'
 					$('.ht_cont').append(row);
 				});
 			} else {
@@ -85,6 +86,7 @@ function deleteTopic() {
 		success : function(msg) {
 			if (msg.status == "OK") {
 				delCookie("topicId");
+				delCookie("topicName");
 				alert(msg.result);
 				jumpto("topic-list");
 			} else {
@@ -100,9 +102,10 @@ function deleteTopic() {
 /**
  * 进入该专题
  */
-function openTopic(topicId) {
-	// 将topicId存入cookie
+function openTopic(topicId, topicName) {
+	// 将topicId、topicName存入cookie
 	setCookie("topicId", topicId);
+	setCookie("topicName", topicName);
 	jumpto("orig-upload");
 }
 
