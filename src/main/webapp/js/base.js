@@ -22,7 +22,7 @@ function jumpto(item) {
 				}
 			},
 			error : function() {
-				alert("ajax加载失败！");
+				alert("jumpto出现错误。");
 			}
 		});
 		title = document.title;
@@ -54,7 +54,7 @@ var eleMenus = $(".left a").click(function(e) {
 				}
 			},
 			error : function() {
-				alert("ajax加载失败！");
+				alert("jumpto出现错误。");
 			}
 		});
 		var title = $(this).text();
@@ -105,7 +105,7 @@ var pageTrigger = function(target) {
 					}
 				},
 				error : function() {
-					alert("ajax加载失败！");
+					alert("jumpto出现错误。");
 				}
 			});
 
@@ -177,11 +177,11 @@ function getUserName() {
 					$('.s_tit i').append(user);
 				});
 			} else {
-				alert("getUserName fail");
+				alert("获取用户信息失败。");
 			}
 		},
 		error : function() {
-			alert("getUserName fail.");
+			alert("获取用户信息失败。");
 		}
 	});
 };
@@ -198,7 +198,7 @@ function exit() {
 			window.parent.location.href = "/index.html";
 		},
 		error : function() {
-			alert("请求失败");
+			alert("退出请求失败。");
 			window.parent.location.href = "/index.html";
 		}
 	});
