@@ -344,8 +344,8 @@ public class ResultServiceImpl implements ResultService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String,Object> getResultContentById(String resultId, HttpServletRequest request) {
-		Map<String,Object> res = new HashMap<String,Object>();
+	public Map<String, Object> getResultContentById(String resultId, HttpServletRequest request) {
+		Map<String, Object> res = new HashMap<String, Object>();
 		List<String[]> resultContent = new ArrayList<String[]>();
 		Result result = queryResultById(resultId);
 		if (result == null) {
@@ -367,19 +367,19 @@ public class ResultServiceImpl implements ResultService {
 			if (modifyClusters == null || modifyCounts == null) {
 				return null;
 			}
-			
-			List<Integer> marked = new ArrayList<Integer>();
-			for(String[] cluster : modifyCounts){
-				marked.add(Integer.valueOf(cluster[Index.COUNT_ITEM_INDEX]));
-			}
-			
+
 			resultContent.add(content.remove(0));
 			for (int[] cluster : modifyClusters) {
 				for (int index : cluster) {
 					resultContent.add(content.get(index));
 				}
-				resultContent.add(new String[0]);
+				// 将类结果数量为1的聚集在结尾不以空格分开
+				if (cluster.length != 1) {
+					resultContent.add(new String[0]);
+				}
 			}
+			List<Integer> marked = getMarked(modifyClusters, modifyCounts);
+
 			res.put(Resutt.RESULT, resultContent);
 			res.put(Resutt.RESULTNAME, result.getResName());
 			res.put(Resutt.MARKED, marked);
@@ -389,6 +389,29 @@ public class ResultServiceImpl implements ResultService {
 		}
 
 		return res;
+	}
+
+	/**
+	 * 获取时间最早的标记下标
+	 * 
+	 * @param content
+	 * @param modifyClusters
+	 * @param modifyCounts
+	 * @return
+	 */
+	private List<Integer> getMarked(List<int[]> modifyClusters, List<String[]> modifyCounts) {
+		List<Integer> marked = new ArrayList<Integer>();
+		for (int i = 0; i < modifyClusters.size() - 1; i++) {
+			int[] cluster = modifyClusters.get(i);
+			int index = Integer.valueOf(modifyCounts.get(i)[Index.COUNT_ITEM_INDEX]);
+			int amount = Integer.valueOf(modifyCounts.get(i)[Index.COUNT_ITEM_AMOUNT]);
+			for (int j = 0; j < cluster.length; j++) {
+				if (index == cluster[j] && amount != 1) {
+					marked.add(j);
+				}
+			}
+		}
+		return marked;
 	}
 
 }

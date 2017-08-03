@@ -140,12 +140,12 @@ public class ExtfileController {
 			HttpServletRequest request) {
 		// title、url、time、amount
 		List<String[]> list = extfileService.miningByTimeRange(topicId, startTime, endTime, request);
-		JSONObject json = new JSONObject();
-		json.put(Cluster.DISPLAYRESULT, list);
-		json.put(Cluster.RESULTID, request.getSession().getAttribute(Cluster.RESULTID));
 		if (list == null) {
 			return ResultUtil.errorWithMsg("基础文件集为空。");
 		}
+		JSONObject json = new JSONObject();
+		json.put(Cluster.DISPLAYRESULT, list);
+		json.put(Cluster.RESULTID, request.getSession().getAttribute(Cluster.RESULTID));
 		return ResultUtil.success(json);
 	}
 

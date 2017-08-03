@@ -197,13 +197,13 @@ public class ExcelUtil {
 	/**
 	 * 将带标记的信息导出到Excel文件中 带标记的行字体样式为红色
 	 * 
-	 * @param cluster
+	 * @param content
 	 *            要导出的内容
 	 * @param marked
 	 *            待标记的id集合（每个类中的下标）
 	 * @return
 	 */
-	public static HSSFWorkbook exportToExcelMarked(List<String[]> cluster, List<Integer> marked) {
+	public static HSSFWorkbook exportToExcelMarked(List<String[]> content, List<Integer> marked) {
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 生成单元格样式
 		HSSFCellStyle markedrowStyle = workbook.createCellStyle();
@@ -213,36 +213,27 @@ public class ExcelUtil {
 		hssfFont.setColor(HSSFColor.RED.index);
 		markedrowStyle.setFont(hssfFont);
 
-		Sheet sheet = workbook.createSheet("泛数据");
-		String[] rowList = cluster.get(0);
+		Sheet sheet = workbook.createSheet();
+		String[] rowList = content.get(0);
 		Row row = sheet.createRow(0);
 		for (int j = 0; j < rowList.length; j++) {
 			Cell cell = row.createCell(j);
 			cell.setCellValue(rowList[j]);
 		}
 
-		// cluster.remove(0);
 		int index = 0;
 		int count = 0;
-		for (int i = 0; i < cluster.size(); i++) {
-
-			rowList = cluster.get(i);
-			if (i == 0) {
-				row = sheet.createRow(i);
-				for (int j = 0; j < rowList.length; j++) {
-					Cell cell = row.createCell(j);
-					cell.setCellValue(rowList[j]);
-				}
-				continue;
-			}
+		int maxCount = marked.size();
+		for (int i = 1; i < content.size(); i++) {
+			rowList = content.get(i);
 			if (CommonUtil.isEmptyArray(rowList)) {
 				index = 0;
 				count++;
 				continue;
 			}
-			// 从2开始，否则第一行表头会被覆盖
+			// 从下标1开始，否则第一行会被覆盖
 			row = sheet.createRow(i);
-			if (index == marked.get(count)) {
+			if (maxCount > count && index == marked.get(count)) {
 				for (int j = 0; j < rowList.length; j++) {
 					Cell cell = row.createCell(j);
 					cell.setCellValue(rowList[j]);
@@ -254,10 +245,8 @@ public class ExcelUtil {
 					cell.setCellValue(rowList[j]);
 				}
 			}
-
 			++index;
 		}
-
 		return workbook;
 	}
 
