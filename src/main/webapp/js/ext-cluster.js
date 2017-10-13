@@ -1,6 +1,6 @@
-$("#startTime").attr("placeholder", "2017-07-01 12:00:00");
+$("#startTime").attr("placeholder", "2016-01-01 00:00:00");
 $("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
-
+searchTimeChange();
 /**
  * 此次聚类结果id
  */
@@ -16,19 +16,36 @@ var resultId = "";
  * @param endTime
  *            结束时间
  */
-function queryExtfilesByTimeRange() {
+function queryExtfilesByTimeRange(startTime,endTime) {
+	if(startTime == "" || startTime=="undefined" || endTime=="" || endTime=="undefined"){
+		alert("时间选择有误");
+		return ;
+	}
 	$.ajax({
 		type : "post",
 		url : "/extfile/queryExtfilesByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
-			startTime : "2017-07-01 12:00:00",
-			endTime : "2018-07-01 12:00:00"
+			startTime : startTime,
+			endTime : endTime
 		},
 		dataType : "json",
 		success : function(msg) {
 			if (msg.status == "OK") {
-				console.log(msg.result);
+				$("#extList").html("");
+				var items = msg.result;
+				$.each(items,function(idx,item){
+					row = '<tr>'
+                        +'<td width="15px;">'
+                        +'<input type="checkbox" name="orig_check" checked="checked">'
+                        +'</td>'
+                        +'<td width="177px;" title="'+item.extfileName+'">'
+                        +item.extfileName
+                        +'</td>'
+                        +'<td width="169px;">'+new Date(item.uploadTime.time).format('yyyy-MM-dd hh:mm:ss')
+                        +'</tr>';
+					$("#extList").append(row);                        
+				})
 			} else {
 				alert(msg.result);
 			}
@@ -49,19 +66,28 @@ function queryExtfilesByTimeRange() {
  * @param endTime
  *            结束时间
  */
-function queryResultByTimeRange() {
+function queryResultByTimeRange(startTime,endTime) {
 	$.ajax({
 		type : "post",
 		url : "/result/queryResultByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
-			startTime : "2017-07-01 12:00:00",
-			endTime : "2018-07-01 12:00:00"
+			startTime : startTime,
+			endTime : endTime
 		},
 		dataType : "json",
 		success : function(msg) {
 			if (msg.status == "OK") {
 				console.log(msg.result);
+				/*$("#resultList").html("");
+				var items = msg.result;
+				$.each(items,function(idx,tiem){
+					row = '<tr>'                     
+                        +'<td class="hand" title="'+item.extfileName+'">'
+                        +item.extfileName
+                        +'</td>';
+					$("#resultList").append(row);                        
+				})*/
 			} else {
 				alert(msg.result);
 			}
@@ -287,4 +313,61 @@ function downloadResultById() {
 		$('body').append(form);
 		form.submit(); // 自动提交
 	});
+}
+
+function searchTimeChange(){
+	var index = $("input[name='searchTime']:checked").val();
+    var startTime,endTime,start,end;
+    var currentTime = new Date();
+    endTime = currentTime.getTime();
+    switch (index){
+        case '1':
+                startTime = endTime - 1*60*1000;
+            var tempS  = new Date(startTime);
+            var tempE = new Date(endTime);
+             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+            break;
+        case '2':
+                var temp = new Date();
+                temp.setTime(currentTime.getTime());
+                temp.setHours(0);
+                temp.setMinutes(0);
+                temp.setSeconds(0);
+                temp.setMilliseconds(0);
+                startTime = temp.getTime() - 24*60*60*1000;
+            var tempS  = new Date(startTime);
+            var tempE = new Date(endTime);
+             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+            break;
+        case '3':
+            var temp = new Date();
+            temp.setTime(currentTime.getTime());
+            temp.setHours(0);
+            temp.setMinutes(0);
+            temp.setSeconds(0);
+            temp.setMilliseconds(0);
+            startTime = temp.getTime() - 7*24*60*60*1000;
+            var tempS  = new Date(startTime);
+            var tempE = new Date(endTime);
+             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+            break;
+        default :
+            start = $("#startTime").val();
+            end = $("#endTime").val();
+            if(start=="" || start=="undefined"){
+                start = "2016-01-01 00:00:00";
+            }
+            if(end == "" || end == "undefined"){
+            	var date = new Date();
+            	end = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+            }
+            break;
+    }
+    queryExtfilesByTimeRange(start,end);
 }

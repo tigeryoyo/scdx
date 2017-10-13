@@ -55,7 +55,7 @@ public class DomainController {
 		condition.setLimit(limit);
 		List<DomainOne> one = domainService.getDomainOneByCondition(condition);
 		if (one == null) {
-			return ResultUtil.errorWithMsg("没有域名被找到！");
+			return ResultUtil.errorWithMsg("无域名信息！");
 		}
 		List<List<DomainTwo>> two = domainService.getDomainTwoByOne(one);
 

@@ -276,4 +276,49 @@ public class ExcelUtil {
 		}
 		return res;
 	}
+	
+	/**
+	 * 读取excel文件第一个sheet，并会过滤到url为空的数据，同时具有url去重功能
+	 * @param filename 文件名
+	 * @param inputStream 输入流，不能为null
+	 * @return 返回excel文件内容 一行为一个String[]
+	 * @throws IOException
+	 */
+	public static List<String[]> readExcel(String filename, InputStream inputStream) throws IOException {
+		if (inputStream == null) {
+			throw new IllegalArgumentException("inputStream is null.");
+		}
+		List<String[]> content = new ArrayList<String[]>();
+		Workbook workbook = null;
+		if (filename.endsWith("xls")) {
+			workbook = new HSSFWorkbook(inputStream);
+		} else {
+			workbook = new XSSFWorkbook(inputStream);
+		}
+		Sheet sheet = workbook.getSheetAt(0);
+		// 行数
+		int rowNum = sheet.getLastRowNum();
+		// 列数
+		int colNum = sheet.getRow(0).getLastCellNum();
+		// excel首行为属性行
+		String[] attrRow = convert(sheet.getRow(0), colNum);
+		// url所在列位置
+		int indexOfUrl = AttrUtil.findIndexOfUrl(attrRow);
+		List<String> exitUrls = new ArrayList<String>();
+		for (int i = 1; i <= rowNum; i++) {
+			String[] row = convert(sheet.getRow(i), colNum);
+			//如果url为空则过滤该行数据
+			if(StringUtils.isBlank(row[indexOfUrl])){
+				continue;
+			}
+			//url去重
+			if (!exitUrls.contains(row[indexOfUrl])) {
+				exitUrls.add(row[indexOfUrl]);
+				content.add(row);
+			}
+		}
+		inputStream.close();
+		content.add(0, attrRow);
+		return content;
+	}
 }

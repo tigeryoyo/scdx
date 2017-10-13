@@ -1,0 +1,191 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>自有专题</title>
+    <link  rel="stylesheet" type="text/css" href="css/topic-list.css">
+</head>
+<body>
+<div class="s_nav">
+    当前位置： <a href="javascript:;">专题管理</a> >>自有专题
+</div>
+<div class="ckht">
+    <ul class="ckht_list">
+        <div class="btn-group" role="group" aria-label="..."
+             style="float: right;">
+            <button type="button" class="btn btn-default"
+                    onclick="jumpto('orig-upload')">上传</button>
+            <button type="button" class="btn btn-default active"
+                    style="color: red" onclick="jumpto('ext-cluster')">聚类</button>
+            <button type="button" class="btn btn-default"
+                    onclick="jumpto('std-analysis')">分析</button>
+        </div>
+        <li class="topicName">专题名称：</li>
+    </ul>
+</div>
+    <div style="width: 770px; border: 1px solid;margin-top:10px;">
+            <div width="657px" style="height:45px;line-height:45px;border-right: 1px solid;padding: 2px 3px 2px 0;display: inline-block;">
+                <div style="display: inline-block;margin: auto 0">
+                最近
+                <input style="display: inline-block" name="searchTime" type="radio" checked="checked" value="1">1分钟
+                <input style="display: inline-block" name="searchTime" type="radio" value="2" >一天
+                <input style="display: inline-block" name="searchTime" type="radio" value="3">一周
+                </div>
+                <div style="display: inline-block;">
+                    <input style="display: inline-block" name="searchTime" type="radio" value="4" >
+                起始时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="lb_time" onclick="showTime(this)"/>
+                截至时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="lo_time" onclick="showTime(this)"/>
+                </div>
+            </div>
+            <div width="112px" style="line-height:45px;display: inline-block">
+                <button class="btn btn-primary" style="width:55px;margin-left:23px;">聚类</button>
+            </div>
+        <div style="border-top:1px solid;">
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid;">基础数据</span>
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;float:right">历史聚类结果</span>
+                <div class="fileList" style="width: 384px; border-right:1px solid">
+                    <table>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="orig_check" checked="checked">
+                            </td>
+                            <td width="177px;" title="这是一个很长的测试用的文件名">
+                                这是一个很长的测试用的文件名
+                            </td>                    
+                            
+                            
+                            <td width="169px;">2017-1-1 00：00：00</td>
+                        </tr>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="orig_check" checked="checked">
+                            </td>
+                            <td width="177px;">
+                                这是一个很长的测试用的文件名
+                            </td>
+                            <td width="169px;">2017-1-1 00：00：00</td>
+                        </tr>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="orig_check" checked="checked">
+                            </td>
+                            <td width="177px;">
+                                这是一个很长的测试用的文件名
+                            </td>
+                            <td width="169px;">2017-1-1 00：00：00</td>
+                        </tr>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="orig_check" checked="checked">
+                            </td>
+                            <td width="177px;">
+                                这是一个很长的测试用的文件名
+                            </td>
+                            <td width="169px;">2017-1-1 00：00：00</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="fileList" style="float: right;">
+                    <table>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="result_check" checked="checked">
+                            </td>
+                            <td width="346px;"></td>
+                        </tr>
+                        <tr>
+                            <td width="15px;">
+                                <input type="checkbox" name="orig_check" checked="checked">
+                            </td>
+                            <td width="346px;">
+                                这是一个很长的测试用的文件名
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/topic-list.js"></script>
+<script type="text/javascript" src="js/jedate.js"></script>
+<script type="text/javascript">
+    $("input[name=searchTime]").click(function(){
+        var index = $("input[name='searchTime']:checked").val();
+        var startTime,endTime,start,end;
+        var currentTime = new Date();
+        endTime = currentTime.getTime();
+        switch (index){
+            case '1':
+                    startTime = endTime - 1*60*1000;
+                var tempS  = new Date(startTime);
+                var tempE = new Date(endTime);
+                 start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+                 end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+                break;
+            case '2':
+                    var temp = new Date();
+                    temp.setTime(currentTime.getTime());
+                    temp.setHours(0);
+                    temp.setMinutes(0);
+                    temp.setSeconds(0);
+                    temp.setMilliseconds(0);
+                    startTime = temp.getTime() - 24*60*60*1000;
+                var tempS  = new Date(startTime);
+                var tempE = new Date(endTime);
+                 start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+                 end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+                break;
+            case '3':
+                var temp = new Date();
+                temp.setTime(currentTime.getTime());
+                temp.setHours(0);
+                temp.setMinutes(0);
+                temp.setSeconds(0);
+                temp.setMilliseconds(0);
+                startTime = temp.getTime() - 7*24*60*60*1000;
+                var tempS  = new Date(startTime);
+                var tempE = new Date(endTime);
+                 start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+                 end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+                break;
+            default :
+                start = $("#lb_time").val();
+                end = $("#lo_time").val();
+                if(start=="" || start=="undefined"){
+                	var temp = new Date(0);
+                    start = temp.getFullYear()+"-"+(temp.getMonth()+1)+"-"+temp.getDate()+" "+temp.getHours()+":"+temp.getMinutes()+":"+temp.getSeconds();
+                }
+                if(end == "" || end == "undefined"){
+                	var date = new Date();
+                	end = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+                }
+                break;
+        }
+        alert(start+"\n"+end);
+    })
+/*     $("#lo_time").change(function(){
+        var startTime = $("#lb_time").val();
+        var endTime = $("#lo_time").val();
+        if(startTime==""){
+            var temp = new Date(0);
+            startTime = temp.getFullYear()+"-"+(temp.getMonth()+1)+"-"+temp.getDate();
+        }
+        alert(startTime+"\n"+endTime);
+    }) */
+    function showTime(e){
+    	jeDate({
+    		dateCell:"#"+$(e).attr("id"),
+                format:"YYYY-MM-DD hh:mm:ss",
+                isTime:true,
+                minDate:"2016-01-01 00:00:00",
+                trigger: "click"
+            })       
+    }
+    
+
+</script>
+</html>

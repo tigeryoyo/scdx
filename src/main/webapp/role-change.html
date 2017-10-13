@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>角色管理——编辑角色</title>
+<script type="text/javascript" src="js/role.js"></script>
+<script type="text/javascript" src="js/role-power.js"></script>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置：<a href="javascript:;" onclick="jumpto('role-infor')">角色管理</a>>>编辑角色
+	</div>
+	<div class="user_infor">
+		<form>
+			<table width="880" border="0" class="change_tab">
+				<tr>
+					<td align="right" colspan="2" width="81" height="50">角色名称：</td>
+					<td width="680" height="50"><input type="text" style="width: 190px;"
+						class="roleChange form-control" id="new_name_role" disabled="disabled"/></td>
+				</tr>
+				<tr>
+					<td align="right" colspan="2" width="81" valign="top"><br />
+						<br />配置权限：</td>
+					<td width="680">
+						<div class="ckht">
+							<div class="up_list_wrap" style="height: 400px">
+								<table width="374" border="0" class="infor_tab02"
+									id="role_power_tab">
+									<tr class="infor_tab02_tit">
+										<td colspan="1" height="40" align="center" valign="middle"
+											bgcolor="#86c6ea" class="d_blue"><input
+											style="width: 19px; height: 25px; padding: 0 0 5px 0;"
+											type="checkbox" class="checkAll" id="check_all_power">&nbsp;&nbsp;序号</td>
+										<td colspan="3" height="40" align="center" valign="middle"
+											bgcolor="#86c6ea" class="d_blue">权限名称</td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td align="right" colspan="2" width="81" height="80">
+						<button type="button"  class="btn btn-primary" onclick="changeRole()">提交</button>
+					</td>
+					<td align="center" width="600" height="80">
+						<button type="button"  class="btn btn-primary" onclick="clearNewrole()">重置</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<script>
+	var newName = getCookie("role_name");
+	console.log(newName);
+	var b_cookie = document.getElementById("new_name_role");
+	b_cookie.value = newName;
+//	b_cookie.style.color = "#999999";
+</script>
+</html>
