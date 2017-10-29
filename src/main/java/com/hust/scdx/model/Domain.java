@@ -5,7 +5,7 @@ package com.hust.scdx.model;
  * @author Jack
  *
  */
-public class Domain {
+public class Domain implements Comparable<Domain>{
     private String url;
 
     private String name;
@@ -132,5 +132,12 @@ public class Domain {
 		two.setWeight(weight);
 		two.setIncidence(incidence);
 		return two;
+	}
+
+	@Override
+	//按权重大小排序
+	public int compareTo(Domain o) {
+		// TODO Auto-generated method stub
+		return (this.weight-o.weight);
 	}
 }

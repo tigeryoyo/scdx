@@ -70,7 +70,21 @@ public class DomainServiceImpl implements DomainService {
 				return false;
 			}
 			String[] attr = content.remove(0);
+			boolean nameFlag=true,columnFlag=true,typeFlag = true;
 			int urlIndex = AttrUtil.findIndexOfUrl(attr);
+			int nameIndex = AttrUtil.findIndexOfSth(attr, "网站");//网站名
+			if(nameIndex == -1){
+				nameFlag = false;
+			}
+			int columnIndex = AttrUtil.findIndexOfSth(attr, "板块|频道");//栏目
+			if(columnIndex == -1){
+				columnFlag = false;
+			}
+			int typeIndex = AttrUtil.findIndexOfSth(attr, "来源|类型");//类型
+			if(typeIndex == -1){
+				typeFlag = false;
+			}
+			
 			/**
 			 * 获取其他属性列的下标
 			 */
@@ -81,6 +95,12 @@ public class DomainServiceImpl implements DomainService {
 				}
 				Domain d = new Domain();
 				d.setUrl(string[urlIndex]);
+				if(nameFlag)
+					d.setName(string[nameIndex]);
+				if(columnFlag)
+					d.setColumn(string[columnIndex]);
+				if(typeFlag)
+					d.setType(string[typeIndex]);
 				/**
 				 * 添加其他属性 注意判null
 				 */

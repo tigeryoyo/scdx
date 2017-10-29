@@ -1,5 +1,8 @@
 package com.hust.scdx.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.model.params.StdfileQueryCondition;
+import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
+import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
 
 @Controller
@@ -26,6 +31,9 @@ public class StdfileController {
 
 	@Autowired
 	private StdfileService stdfileService;
+	@Autowired
+	private DomainService domainService;
+
 
 	/**
 	 * 上传准数据文件
@@ -52,6 +60,10 @@ public class StdfileController {
 			logger.info("文件上传失败。");
 			return ResultUtil.errorWithMsg("上传失败。");
 		}
-		return ResultUtil.success("上传成功。");
+		//添加标准文件中未知的url基本属性
+		if(domainService.addUnknowUrlFromFile(stdfile))
+			return ResultUtil.success("准数据文件上传成功，并且未知url已添加到数据仓库中！");
+		else
+			return ResultUtil.success("准数据文件上传成功，但未知url添加失败！");
 	}
 }
