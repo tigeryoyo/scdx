@@ -1,7 +1,11 @@
 package com.hust.scdx.interceptor;
 
+import java.util.HashSet;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,13 +17,15 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hust.scdx.constant.Constant;
+import com.hust.scdx.model.User;
 import com.hust.scdx.util.ResultUtil;
 
 public class PermissionInterceptor implements HandlerInterceptor {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOG = LoggerFactory.getLogger(PermissionInterceptor.class);
+	private static final Logger logger = LoggerFactory.getLogger(PermissionInterceptor.class);
 
 	@Autowired
 	private MappingJackson2HttpMessageConverter converter;
@@ -27,46 +33,33 @@ public class PermissionInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		return true;
-		/*try {
-			String url = request.getRequestURI();
-			System.out.println("------------------------------------"+url);
+		try {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(Constant.UESR);
-			System.out.println("------------------------------------user下");
-			if ("/".equals(url) || "/index.html".equals(url)) {
-				if (null != user) {
-					//response.sendRedirect("/topic-list.html");
-				} else {
-					System.out.println("------------------------------------user=null");
-				}
+			if (user == null) {
+				logger.warn("用户未登陆，请重新登陆。");
+				response.sendRedirect("/");
+				return false;
+			}
+			String url = request.getRequestURI();
+			if (url.endsWith(".html")) {
 				return true;
-			} else {
-				System.out.println("------------------------------------else内");
-				if (user == null) {
-					System.out.println("------------------------------------else if内");
-					LOG.warn("session失效，请重新登陆。");
-				} else {// 如果session没有失效，判断当前用户是否有访问该资源的权限。
-					System.out.println("------------------------------------else else内");
-					List<String> powers = (List<String>) session.getAttribute(Constant.USERPOWER);
-					String requestPath = request.getServletPath();
-					if (powers != null && powers.contains(requestPath)) {
-						return true;
-					}
-					//暂时开放权限
-					//fail(response);
-					return true;
-				}
+			}
+			HashSet<String> powers = (HashSet<String>) session.getAttribute(Constant.USERPOWER);
+			
+			if(powers==null){
+//				return false;
+				return true;
+			}
+			
+			if (powers.contains(url)) {
+				return true;
 			}
 		} catch (Exception e) {
-			LOG.error("permissionInterceptor 错误。 \t" + e.toString());
-			try {
-				response.sendRedirect("/error.html");
-			} catch (Exception e1) {
-				LOG.error("跳转发生异常" + e1.toString());
-			}
+			response.sendRedirect("/error.html");
+			logger.error("permissionInterceptor 错误。 \t" + e.toString());
 		}
-		return false;*/
+		return false;
 	}
 
 	@Override
@@ -82,16 +75,4 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 
 	}
-
-	private void fail(HttpServletResponse response) {
-		try {
-			response.setCharacterEncoding("UTF-8");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			converter.write(ResultUtil.errorWithMsg("非常抱歉，您没有权限访问该资源，请联系管理员"), MediaType.APPLICATION_JSON,
-					new ServletServerHttpResponse(response));
-		} catch (Throwable e) {
-			LOG.error("ajax error \t" + e);
-		}
-	}
-
 }

@@ -127,8 +127,8 @@ public class ResultServiceImpl implements ResultService {
 		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
 		for (int[] row : origCounts) {
 			String[] old = content.get(row[0] + 1);
-			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
-					String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
+					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
 		try {
@@ -173,8 +173,8 @@ public class ResultServiceImpl implements ResultService {
 		List<int[]> tmp = ConvertUtil.toIntArrayList(origCounts);
 		for (int[] row : tmp) {
 			String[] old = content.get(row[0] + 1);
-			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
-					String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
+					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
 		FileUtil.copy(DIRECTORY.ORIG_CLUSTER + subPath, DIRECTORY.MODIFY_CLUSTER + subPath);
@@ -227,9 +227,12 @@ public class ResultServiceImpl implements ResultService {
 				return o2.length - o1.length;
 			}
 		});
-		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(content, modifyClusters));
+		String[] attrs = content.get(0);
+		List<String[]> modifyCounts = ConvertUtil
+				.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
+				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 		return -1;
@@ -272,7 +275,8 @@ public class ResultServiceImpl implements ResultService {
 			modifyCounts.remove(indices[i]);
 		}
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
+				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 
@@ -327,9 +331,12 @@ public class ResultServiceImpl implements ResultService {
 				return o2.length - o1.length;
 			}
 		});
-		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(content, modifyClusters));
+		String[] attrs = content.get(0);
+		List<String[]> modifyCounts = ConvertUtil
+				.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
+				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 		return -1;

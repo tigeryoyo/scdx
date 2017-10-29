@@ -24,7 +24,7 @@ function initShowPage(currentPage) {
 			}
 		},
 		error : function() {
-			alert("数据请求失败");
+			alert("数据请求失败...");
 		}
 	})
 }

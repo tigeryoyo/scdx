@@ -32,6 +32,12 @@ import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/extfile")
+/**
+ * 基础数据Controller
+ * 
+ * @author tigerto
+ *
+ */
 public class ExtfileController {
 	/**
 	 * Logger for this class
@@ -56,8 +62,8 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public Object upload(@RequestParam(value = "origfile", required = true) MultipartFile origfile,
-			@RequestParam(value = "topicId", required = true) String topicId, @RequestParam(value = "sourceType", required = false) String sourceType,
-			HttpServletRequest request) {
+			@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "sourceType", required = false) String sourceType, HttpServletRequest request) {
 		if (origfile.isEmpty()) {
 			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
@@ -88,7 +94,8 @@ public class ExtfileController {
 		}
 		try {
 			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
-			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1 && AttrUtil.findIndexOfTime(attrs) != -1) {
+			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1
+					&& AttrUtil.findIndexOfTime(attrs) != -1) {
 				return ResultUtil.successWithoutMsg();
 			}
 		} catch (Exception e) {
@@ -112,8 +119,8 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping("/queryExtfilesByTimeRange")
 	public Object queryExtfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
-			HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime,
+			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
 		List<Extfile> list = extfileService.queryExtfilesByTimeRange(topicId, startTime, endTime);
 		if (list == null) {
 			return ResultUtil.unknowError();
@@ -136,12 +143,12 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping("/miningByTimeRange")
 	public Object miningByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
-			HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime,
+			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
 		// title、url、time、amount
 		List<String[]> list = extfileService.miningByTimeRange(topicId, startTime, endTime, request);
 		if (list == null) {
-			return ResultUtil.errorWithMsg("基础文件集为空。");
+			return ResultUtil.errorWithMsg("聚类出现bug。");
 		}
 		JSONObject json = new JSONObject();
 		json.put(Cluster.DISPLAYRESULT, list);

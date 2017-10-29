@@ -8,6 +8,10 @@ public class Constant {
 	public final static String UNKNOWN = "未知";
 	public final static String INVALID_TIME = "1970-01-01";
 
+	// 切片
+	public final static int slices = 1250;
+	// 线程数
+	public final static int threads = 10;
 	// 错误码
 	public static final int ERROR_CODE = -1;
 	// 错误返回内容

@@ -18,6 +18,12 @@ import com.hust.scdx.util.ResultUtil;
 
 @Controller
 @RequestMapping("/stdfile")
+/**
+ * 标准数据Controller
+ * 
+ * @author tigerto
+ *
+ */
 public class StdfileController {
 	/**
 	 * Logger for this class
@@ -28,10 +34,10 @@ public class StdfileController {
 	private StdfileService stdfileService;
 
 	/**
-	 * 上传准数据文件
+	 * 上传标准数据文件
 	 * 
 	 * @param stdfile
-	 *            准数据文件句柄
+	 *            标准数据文件句柄
 	 * @param topicId
 	 *            专题id
 	 * @param request

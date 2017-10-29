@@ -1,6 +1,7 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 获取当前用户的所有权限
 	 */
-	List<String> selectUserPowerUrl(int userId) {
+	HashSet<String> selectUserPowerUrl(int userId) {
 		UserRole userRole = userRoleDao.selectUserRoleByUserId(userId);
 		if(userRole == null){
 			logger.info("当前用户不存在角色。");
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
 		if(rolePowers == null || rolePowers.isEmpty()){
 			return null;
 		}
-		List<String> powers = new ArrayList<String>();
+		HashSet<String> powers = new HashSet<String>();
 		for(RolePower rolePower : rolePowers){
 			powers.add(powerDao.selectPowerById(rolePower.getPowerId()).getPowerUrl());
 		}
