@@ -19,11 +19,11 @@ function login() {
 			if (msg.status === 'OK') {
 				window.location.href = "/base.html?href=topic-list";
 			} else {
-				alert('用户名和密码错误');
+				alert('用户名或密码错误。');
 			}
 		},
 		error : function() {
-			alert('数据请求失败');
+			alert('登陆出现错误。');
 		}
 	});
 }

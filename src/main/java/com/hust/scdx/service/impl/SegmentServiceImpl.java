@@ -109,6 +109,8 @@ public class SegmentServiceImpl implements SegmentService {
 			throw new NullPointerException();
 		}
 		if (index < 0 || start + 1 > list.size()) {
+			System.out.println("index:"+index);
+			System.out.println("start:"+start);
 			throw new IllegalArgumentException();
 		}
 		List<String[]> relist = new ArrayList<String[]>();

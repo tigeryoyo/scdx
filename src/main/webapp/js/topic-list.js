@@ -24,7 +24,7 @@ function initShowPage(currentPage) {
 			}
 		},
 		error : function() {
-			alert("数据请求失败");
+			alert("数据请求失败...");
 		}
 	})
 }
@@ -69,17 +69,17 @@ function allData(page) {
 }
 
 /**
- * 重置结果，如果resultId为空则不能重置
+ * 删除专题
  * 
  * @param topicId
  *            专题id
  */
-function deleteTopic() {
+function deleteTopic(topicId) {
 	$.ajax({
 		type : "post",
 		url : "/topic/delete",
 		data : {
-			topicId : getCookie("topicId")
+			topicId : topicId
 		},
 		dataType : "json",
 		success : function(msg) {

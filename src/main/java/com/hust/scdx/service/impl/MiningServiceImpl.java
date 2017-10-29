@@ -42,15 +42,13 @@ public class MiningServiceImpl implements MiningService {
 	 * 目的是聚类。第一个参数是原始文本，第二个为向量模型的选择，第三个为算法的选择（已经写死了，为canopy）。
 	 */
 	@Override
-	public List<List<Integer>> getOrigClusters(List<String[]> content, int converterType, int algorithmType, int granularity) {
+	public List<List<Integer>> getOrigClusters(String[] attrs, List<String[]> content, int converterType,
+			int algorithmType, int granularity) {
 		// 用于存放结果
 		List<List<Integer>> resultIndexSetList = new ArrayList<List<Integer>>();
-		List<String[]> tmp = new ArrayList<String[]>(content);
-		// 移除属性行
-		String[] attrs = tmp.remove(0);
 		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-		List<String[]> segmentList = segmentService.getSegresult(tmp, indexOfTitle, 0);
+		List<String[]> segmentList = segmentService.getSegresult(content, indexOfTitle, 0);
 		Convertor convertor = null;
 		// 判断选择的向量模型的类型
 		if (converterType == Algorithm.DIGITAL) {
@@ -160,30 +158,6 @@ public class MiningServiceImpl implements MiningService {
 			return null;
 		}
 
-		// 重载排序的方法，按照降序。类中数量多的排在前面。
-		Collections.sort(resultIndexSetList, new Comparator<List<Integer>>() {
-			@Override
-			public int compare(List<Integer> o1, List<Integer> o2) {
-				// TODO Auto-generated method stub
-				return o2.size() - o1.size();
-			}
-		});
-		// 对于类内的排序，则先按照时间先后，再按照标题排序。
-		for (List<Integer> set : resultIndexSetList) {
-			Collections.sort(set, new Comparator<Integer>() {
-				@Override
-				public int compare(Integer o1, Integer o2) {
-					// 先按照标题顺序
-					int compare = tmp.get(o1)[indexOfTitle].compareTo(tmp.get(o2)[indexOfTitle]);
-					// 若标题相同，使用时间进行排序。
-					if (compare == 0) {
-						compare = tmp.get(o1)[indexOfTime].compareTo(tmp.get(o2)[indexOfTime]);
-					}
-					return compare;
-				}
-			});
-		}
-
 		return resultIndexSetList;
 	}
 
@@ -191,11 +165,8 @@ public class MiningServiceImpl implements MiningService {
 	 * 用于得出origCounts的数据
 	 */
 	@Override
-	public List<int[]> getOrigCounts(List<String[]> content, List<String[]> origClusters) {
+	public List<int[]> getOrigCounts(String[] attrs, List<String[]> content, List<String[]> origClusters) {
 		List<int[]> origCounts = new ArrayList<int[]>();
-		List<String[]> tmp = new ArrayList<String[]>(content);
-		// 移除属性行
-		String[] attrs = tmp.remove(0);
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
 		List<int[]> clusters = ConvertUtil.toIntArrayList(origClusters); // 变成
 		for (int i = 0; i < clusters.size(); i++) {
@@ -203,7 +174,7 @@ public class MiningServiceImpl implements MiningService {
 			int origIndex = -1;
 			String origTime = "9999-12-12 23:59:59";
 			for (int j = 0; j < cluster.length; j++) {
-				String[] row = tmp.get(cluster[j]); // 取它的真实内容
+				String[] row = content.get(cluster[j]); // 取它的真实内容
 				try {
 					if (origTime.compareTo(row[indexOfTime]) > 0) {
 						origTime = row[indexOfTime];

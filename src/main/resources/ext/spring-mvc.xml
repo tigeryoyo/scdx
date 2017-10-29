@@ -20,10 +20,18 @@
 			<mvc:exclude-mapping path="/images/**" />
 			<mvc:exclude-mapping path="/js/**" />
 			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/fonts/**" />
 			<mvc:exclude-mapping path="/libs/**" />
 			<mvc:exclude-mapping path="/login" />
-			<mvc:exclude-mapping path="/error.html" />
-			<mvc:exclude-mapping path="/favicon.ico" />
+			<mvc:exclude-mapping path="/logout" />
+			<mvc:exclude-mapping path="/index.html" />
+			<mvc:exclude-mapping path="//" />
+			<mvc:exclude-mapping path="/*.ico" />
+			<mvc:exclude-mapping path="/**/*.ico" />
+			<mvc:exclude-mapping path="/*.png" />
+			<mvc:exclude-mapping path="/**/*.png" />
+			<mvc:exclude-mapping path="/*.jpg" />
+			<mvc:exclude-mapping path="/**/*.jpg" />
 			<bean class="com.hust.scdx.interceptor.PermissionInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

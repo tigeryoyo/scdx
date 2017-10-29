@@ -31,6 +31,12 @@ import com.hust.scdx.util.ResultUtil;
 
 @Controller
 @RequestMapping("/result")
+/**
+ * 聚类数据Controller
+ * 
+ * @author tigerto
+ *
+ */
 public class ResultController {
 	/**
 	 * Logger for this class
@@ -49,7 +55,8 @@ public class ResultController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getDisplayResultById")
-	public Object getDisplayResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request) {
+	public Object getDisplayResultById(@RequestParam(value = "resultId", required = true) String resultId,
+			HttpServletRequest request) {
 		List<String[]> list = resultService.getDisplayResultById(resultId, request);
 		if (list == null) {
 			logger.error("查找操作结果失败。");
@@ -73,8 +80,8 @@ public class ResultController {
 	@ResponseBody
 	@RequestMapping("/queryResultByTimeRange")
 	public Object queryResultByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
-			HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime,
+			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
 		List<Result> list = resultService.queryResultByTimeRange(topicId, startTime, endTime);
 		if (list == null) {
 			logger.error("查找历史操作结果失败。");
@@ -136,7 +143,8 @@ public class ResultController {
 	 */
 	@ResponseBody
 	@RequestMapping("/resetResultById")
-	public Object resetResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request) {
+	public Object resetResultById(@RequestParam(value = "resultId", required = true) String resultId,
+			HttpServletRequest request) {
 		List<String[]> list = resultService.resetResultById(resultId, request);
 		if (list == null) {
 			logger.error("查找操作结果失败。");
@@ -160,8 +168,8 @@ public class ResultController {
 	@ResponseBody
 	@RequestMapping("/deleteClusterItemsByIndices")
 	public Object deleteClusterItemsByIndices(@RequestParam(value = "resultId", required = true) String resultId,
-			@RequestParam(value = "index", required = true) int index, @RequestParam(value = "indices", required = true) int[] indices,
-			HttpServletRequest request) {
+			@RequestParam(value = "index", required = true) int index,
+			@RequestParam(value = "indices", required = true) int[] indices, HttpServletRequest request) {
 		if (indices.length == 0) {
 			return ResultUtil.errorWithMsg("未选中任何index。");
 		}
@@ -181,8 +189,8 @@ public class ResultController {
 	@SuppressWarnings("unchecked")
 	@ResponseBody
 	@RequestMapping(value = "/downloadResultById", method = RequestMethod.POST)
-	public Object downloadResultById(@RequestParam(value = "resultId", required = true) String resultId, HttpServletRequest request,
-			HttpServletResponse response) {
+	public Object downloadResultById(@RequestParam(value = "resultId", required = true) String resultId,
+			HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = resultService.getResultContentById(resultId, request);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
@@ -194,7 +202,8 @@ public class ResultController {
 
 			String resultName = new String(((String) map.get(Resutt.RESULTNAME)).getBytes(), "ISO8859-1");
 			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
-			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT), (List<Integer>) map.get(Resutt.MARKED));
+			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT),
+					(List<Integer>) map.get(Resutt.MARKED));
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
