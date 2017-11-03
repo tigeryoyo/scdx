@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>用户管理——编辑用户</title>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置： <a href="javascript:;" onclick="jumpto('auth-acc')">用户管理</a>
+		>>编辑用户
+	</div>
+	<div class="user_infor">
+		<form>
+			<table border="0" class="change_tab">
+				<tr>
+					<td width="75" height="60" align="right">用户名：</td>
+					<td width="200" height="60"><input type="text"
+						class="form-control" id="chg_userName" disabled="disabled" /></td>
+					<td width="140" height="60">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="75" height="60" align="right">姓名：</td>
+					<td width="200" height="60"><input type="text"
+						class="form-control" id="chg_trueName" /></td>
+					<td width="140" height="60">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="75" height="60" align="right">电话：</td>
+					<td width="200" height="60"><input type="text"
+						class="form-control" id="chg_tel" /></td>
+					<td width="140" height="60" class="user_warn" id="tel_warn"></td>
+				</tr>
+				<tr>
+					<td width="75" height="60" align="right">邮箱：</td>
+					<td width="200" height="60"><input type="email"
+						class="form-control" id="chg_email" /></td>
+					<td width="140" height="60" class="user_warn" id="email_warn"></td>
+				</tr>
+				<tr>
+					<td width="75" height="60" align="right">角色：</td>
+					<td width="200" height="60"><select id="chg_userRoleName"
+						class="form-control">
+					</select></td>
+					<td width="140" height="60">&nbsp;</td>
+				</tr>
+				<tr>
+					<td width="75" height="80">&nbsp;</td>
+					<td width="200" height="80">
+						<button type="button" class="btn btn-primary"
+							onClick="submitAccChg()">提交</button>
+						<button type="button" class="btn btn-primary"
+							onClick="resetAccChg()">重置</button>
+					</td>
+					<td width="75" height="80">&nbsp;</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="js/auth.js"></script>
+<script>
+	var acc_selectedUser = JSON.parse(getCookie("acc_selectedUser"));
+	$("#chg_userName").val(acc_selectedUser.userName);
+	$("#chg_trueName").val(acc_selectedUser.trueName);
+	$("#chg_tel").val(acc_selectedUser.tel);
+	$("#chg_email").val(acc_selectedUser.email);
+	var roles = selectRole();
+	var currentUserId = getCookie("currentUserId");
+	//若编辑的是当前用户那么不能修改角色
+	if (acc_selectedUser.userId == currentUserId) {
+		$('#chg_userRoleName').append('<option selected="true">' + roles[0].roleName + '</option>');
+	} else if (acc_selectedUser.userId > currentUserId) {
+		//若编辑的用户级别比当前用户低（不需要考虑编辑级别高的用户，在编辑按钮直接拒绝）
+		$.each(roles, function(index, role) {
+			if (role.roleId > currentUserId) {
+				$('#chg_userRoleName').append('<option selected="true">' + role.roleName + '</option>');
+			}
+		});
+	}
+</script>
+</html>

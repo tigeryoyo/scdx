@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>资源管理——添加权限</title>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置：<a href="javascript:;" onclick="jumpto('auth-power')">资源管理</a>>>添加权限
+	</div>
+	<div class="user_infor">
+		<form>
+			<table width="470" border="0" class="change_tab">
+				<tr>
+					<td width="100" height="50" align="right">权限名称：</td>
+					<td width="250" height="50"><input type="text"
+						class="form-control" style="width: 190px;" id="power_addPowerName"
+						placeholder="请输入权限名称" /></td>
+				</tr>
+				<tr>
+					<td width="100" height="50" align="right">资源路径：</td>
+					<td width="250" height="50"><input type="text"
+						class="form-control" style="width: 190px;" id="power_addPowerUrl"
+						placeholder="请输入资源路径" /></td>
+				</tr>
+				<tr>
+					<td width="100" height="80"></td>
+					<td width="250" height="80">
+						<button type="button" class="btn btn-primary"
+							onClick="submitPowerAdd()">提交</button>
+						<button type="button" class="btn btn-primary"
+							onClick="resetPowerAdd()">重置</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="js/auth.js"></script>
+</html>

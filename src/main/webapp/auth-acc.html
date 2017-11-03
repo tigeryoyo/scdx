@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>用户管理——信息显示</title>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置： <a href="javascript:;">用户管理</a> >>信息显示
+	</div>
+	<div class="user_infor">
+		<div class="role_search">
+			<div class="role_search_input">
+				<input type="search" placeholder="请输入姓名" class="form-control"
+					id="power_Search" /> <img src="images/icon_search.png"
+					class="icon_search" />
+				<button type="button" class="btn btn-primary" onClick=""
+					style="margin-left: 10px">搜 索</button>
+				<button type="button" class="btn btn-primary" onClick="accAdd()">添加用户</button>
+			</div>
+		</div>
+		<div class="infor_tablist">
+			<table width="715" border="0" class="infor_tab02">
+				<tr class="infor_tab02_tit">
+					<td width="66" height="45" align="center" bgcolor="#86c6ea">编号</td>
+					<td width="64" height="45" align="center" bgcolor="#86c6ea">用户名</td>
+					<td width="66" height="45" align="center" bgcolor="#86c6ea">姓名</td>
+					<td width="67" height="45" align="center" bgcolor="#86c6ea">角色</td>
+					<td width="104" height="45" align="center" bgcolor="#86c6ea">电话</td>
+					<td width="157" height="45" align="center" bgcolor="#86c6ea">邮箱</td>
+					<td width="130" height="45" align="center" bgcolor="#86c6ea">操作</td>
+				</tr>
+			</table>
+		</div>
+		<div class="user_num">
+			<ul class="page" maxshowpageitem="5" pagelistcount="10" id="page"></ul>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" src="js/auth.js"></script>
+<script>
+	/**
+	 * 用户信息展示
+	 */
+	$(function() {
+		$.ajax({
+				type : "post",
+				url : "/user/selectAllUser",
+				dataType : "json",
+				success : function(msg) {
+					$('.infor_tab02 tr:not(:first)').html("");
+					if (msg.status == "OK") {
+						var items = msg.result;
+						// userId,userName,trueName,tel,email,userRoleName
+						$
+							.each(
+								items,
+								function(idx, item) {
+									row = '<tr><td width="66" height="40" align="center" bgcolor="#ffffff">'
+										+ (idx + 1)
+										+ '</td><td width="64" height="40" align="center" bgcolor="#ffffff">'
+										+ item[1]
+										+ '</td><td width="66" height="40" align="center" bgcolor="#ffffff">'
+										+ item[2]
+										+ '</td><td width="67" height="40" align="center" bgcolor="#ffffff">'
+										+ item[5]
+										+ '</td><td width="104" height="40" align="center" bgcolor="#ffffff">'
+										+ item[3]
+										+ '</td><td width="157" height="40" align="center" bgcolor="#ffffff">'
+										+ item[4]
+										+ '</td><td width="130" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick='
+										+ 'accChg("'
+										+ item[0]
+										+ '","'
+										+ item[1]
+										+ '","'
+										+ item[2]
+										+ '","'
+										+ item[3]
+										+ '","'
+										+ item[4]
+										+ '","'
+										+ item[5]
+										+ '"'
+										+ ')'
+										+ '>编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger" onClick="accDel('
+										+ item[0] + ')" >删除</button></td></tr>'
+									$('.infor_tab02').append(row);
+								});
+					} else {
+						alert(msg.result);
+					}
+				},
+				error : function(msg) {
+				},
+			})
+	});
+</script>
+</html>

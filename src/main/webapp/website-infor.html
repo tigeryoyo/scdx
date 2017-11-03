@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>映射表管理——信息显示</title>
+    <script type="text/javascript" src="js/website.js"></script>
+</head>
+<body>
+
+<div class="s_nav">
+    当前位置： <a href="javascript:;">映射表管理</a> >>信息显示 <b style="color: red;"></b>
+</div>
+<div class="user_infor">
+    <table width="750" border="0" class="infor_tab01">
+        <tr>
+            <td width="85" height="50">网站URL：</td>
+            <td height="50"><input type="text" class="form-control"
+                                   id="web_url"></td>
+            <td width="85" height="50">网站级别：</td>
+            <td height="50"><input type="text" class="form-control"
+                                   id="web_level"></td>
+            <td height="50" colspan="2"/>
+            <td height="50" colspan="2">
+                <form action="/file/exportDomain?flag=0" method="POST">
+                    <button type="button" class="btn btn-success" onclick="chooseExport()">导出映射表</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td width="85" height="50">网站名称：</td>
+            <td height="50"><input type="text" class="form-control"
+                                   id="web_name"></td>
+            <td width="85" height="50">网站权重：</td>
+            <td height="50"><input type="text" class="form-control"
+                                   id="web_weight"></td>
+            <td height="50" colspan="2">
+                <button type="button" class="btn btn-primary"
+                        onclick="initSearchPage(1)">搜 索
+                </button>
+            </td>
+            <td height="50" colspan="2">
+                <button type="button" class="btn btn-primary"
+                        onClick="websiteInforAdd()">添加映射表
+                </button>
+            </td>
+        </tr>
+    </table>
+    <div style="display: block; font-size: 18px;">
+        <span style="width: 220px; display: inline; float: left">域名</span> <span
+            style="width: 170px; display: inline; float: left">名称</span> <span
+            style="width: 110px; display: inline; float: left">级别</span> <span
+            style="width: 100px; display: inline; float: left">权重</span> <span
+            style="width: 120px;">操作</span>
+    </div>
+    <div id="domain_content" style="width: 720px; min-height: 280px">
+        <!--<details style="font-size: 16px">
+            <summary style="margin-bottom:10px;">
+                <p data-id="">
+					<span style="width: 220px; min-height: 10px; display: inline; float: left;">
+                        <span class="glyphicon glyphicon-chevron-right" aria-label="true"
+                              style="float: left; padding: 1px 3px;"></span>
+                        <a href="http://baidu.com" target="_blank">baidu.com</a>
+                    </span>
+                    <span style="width: 170px;min-height: 10px; display: inline; float: left;">百度</span>
+                    <span style="width: 110px;min-height: 10px; display: inline; float: left">其他</span>
+                    <span style="width: 100px;min-height: 10px; display: inline; float: left">100</span>
+                    <span><a href="#" style="margin: 2px 0px;">详情</a> <a href="#" style="margin: 2px 0px;">删除</a></span>
+                </p>
+            </summary>
+            <p data-id="">
+                <span style="width: 220px; display: inline; float: left">&#45;&#45;&#45;&#45;map.baidu.com</span>
+                <span style="width: 170px; display: inline; float: left">百度地图</span>
+                <span style="width: 110px; display: inline; float: left">其他</span>
+                <span style="width: 100px; display: inline; float: left">0</span>
+                <span><a href="#" style="margin: 2px 0px;">详情</a> <a href="#" style="margin: 2px 0px;">删除</a></span>
+
+            </p>
+            <p data-id="">
+                <span style="width: 220px; display: inline; float: left">&#45;&#45;&#45;&#45;map.baidu.com</span>
+                <span style="width: 170px; display: inline; float: left">百度地图</span>
+                <span
+                        style="width: 110px; min-height: 10px; display: inline; float: left"></span>
+                <span style="width: 100px; display: inline; float: left">0</span>
+                <span><a href="#" style="margin: 2px 0px;">详情</a> <a href="#" style="margin: 2px 0px;">删除</a></span>
+            </p>
+        </details>-->
+    </div>
+    <div class="user_num" style="margin-right: 0px;">
+        <ul class="page" maxshowpageitem="5" pagelistcount="10" id="page"></ul>
+    </div>
+</div>
+<div id="goodcover"></div>
+<div id="chooseWindow" style="border-radius: 5px;width: 336px;height: 200px;position: fixed;background-color: #fff;z-index: 1002;top:50%;left:50%;margin-left:-168px;margin-top:-100px;display: none">
+    <table style="width: 80%; height: 100%; margin:0 10%">
+        <tr style="height: 20%">
+            <th colspan="2" style="text-align: center; font-size: 18px;font-weight: 600;">域名导出选择</th>
+        </tr>
+        <tr style="height: 50%">
+            <td style="text-align: center; font-size: 16px;">
+                <input name="choice" type="radio" value="0" checked>全部域名
+            </td>
+            <td style="text-align: center; font-size: 16px;">
+                <input name="choice" type="radio" value="2">未知域名
+            </td>
+        </tr>
+        <tr style="height: 30%">
+            <td style="text-align: center;">
+                <button type="button" class="btn btn-primary" style="margin-left:30px;" onclick="submitChoice()">确定</button>
+            </td>
+            <td style="text-align: center;">
+                <button type="button" class="btn btn-primary" style="margin-right:30px;" onclick="cancel()">取消</button>
+            </td>
+        </tr>
+    </table>
+
+
+
+</div>
+</body>
+<script type="text/javascript">
+    $("#web_weight").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    function chooseExport() {
+        $("#goodcover").show();
+        $("#chooseWindow").show();
+    }
+    function submitChoice() {
+        $("#goodcover").hide();
+        $("#chooseWindow").hide();
+        var flag = $("#chooseWindow").find("input[name='choice']:checked").val();
+        $("form").attr("action","/domain/exportDomain?flag="+flag);
+        $("form").submit();
+    }
+    function cancel(){
+        $("#goodcover").hide();
+        $("#chooseWindow").hide();
+    }
+</script>
+</html>

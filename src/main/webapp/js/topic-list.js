@@ -59,7 +59,7 @@ function allData(page) {
 					$('.ht_cont').append(row);
 				});
 			} else {
-				alert("查找专题出错。");
+				alert(msg.result);
 			}
 		},
 		error : function(msg) {

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>映射表管理——添加映射表</title>
+</head>
+<body>
+
+	<div class="s_nav">
+		当前位置： <a href="javascript:;" onclick="jumpto('website-infor')">映射表管理</a>
+		>>添加映射表
+	</div>
+	<div class="user_infor">
+		<form>
+			<table width="450" border="0" class="change_tab">
+				<tr>
+					<td width="117" height="50">域名：</td>
+					<td width="323" height="50"><input type="text" class="form-control" id="url" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">名称：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+						id="name" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">栏目：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+													   id="column" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">类型：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+						id="type" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">级别：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+						id="rank" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">影响范围：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+													   id="incidence" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="50">权重：</td>
+					<td width="323" height="50"><input type="text" class="form-control"
+													   id="weight" /></td>
+				</tr>
+				<tr>
+					<td width="117" height="70">
+						<button type="button"  class="btn btn-primary" onClick="addWebsite()">提交</button>
+					</td>
+					<td width="323" height="70">
+						<button type="button"  class="btn btn-primary" onClick="clearWebsite()">重置</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<b>添加映射文件：</b>
+	<div class="files_add" id="drop_area">
+		<p id="filename">将文件拖拽到此处
+		<p>
+	</div>
+	<div class="up_">
+		<button type="button"  class="btn btn-primary btn_up_del03" id="submitUpload">上传</button>
+	</div>
+
+</body>
+<script type="text/javascript" src="js/loading.js"></script>
+<script type="text/javascript" src="js/waiting.js"></script>
+<script type="text/javascript" src="js/website-add.js"></script>
+<script type="text/javascript">
+	$("#weight").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $(document).on({
+		dragleave : function(e) { // 拖离
+			e.preventDefault();
+		},
+		drop : function(e) { // 拖后放
+			e.preventDefault();
+		},
+		dragenter : function(e) { // 拖进
+			e.preventDefault();
+		},
+		dragover : function(e) { // 拖来拖去
+			e.preventDefault();
+		}
+	});
+	box = document.getElementById('drop_area'); // 拖拽区域
+	box.addEventListener("drop", function(e) {
+		e.preventDefault(); // 取消默认浏览器拖拽效果
+//		console.log("before");
+//		console.log(e.dataTransfer.files);
+		var file = e.dataTransfer.files[0]; // 获取文件对象
+		if (file.name.lastIndexOf("xls") !== -1
+				|| file.name.lastIndexOf("xlsx") !== -1) {
+			box.innerHTML=file.name;
+			var fd = new FormData();
+			fd.append("file", file);
+			$("#submitUpload").one("click",function() {
+				submit(fd);
+			});
+		} else {
+			alert(file.name + " 不是Excel文件");
+		}
+	}, false);
+</script>
+</html>

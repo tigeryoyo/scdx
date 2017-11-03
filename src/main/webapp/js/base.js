@@ -181,7 +181,7 @@ function getUserName() {
 			}
 		},
 		error : function() {
-			alert("获取用户信息失败。");
+			alert("获取用户信息失败...");
 		}
 	});
 };

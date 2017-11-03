@@ -1,20 +1,31 @@
 package com.hust.scdx.service;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.hust.scdx.model.User;
 
 public interface UserService {
 
-	boolean insertUserInfo(User user, String roleName);
+	int login(String userName, String password, HttpServletRequest request);
 
-	boolean deleteUserInfoById(int userId);
+	void logout(HttpServletRequest request);
 
-	boolean updateUserInfo(User user, String roleName);
+	boolean insertUser(User user, int roleId);
+
+	boolean insertUser(User user, String userRoleName);
+	
+	boolean deleteUserById(int userId);
+
+	boolean updateUser(User user, String userRoleName);
+
+	User selectUserByUserName(String userName);
 
 	User selectCurrentUser(HttpServletRequest request);
 
-	boolean login(String userName, String password, HttpServletRequest request);
+	List<String[]> selectAllUser();
 
-	void logout(HttpServletRequest request);
+
 }

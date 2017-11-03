@@ -59,7 +59,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			response.sendRedirect("/error.html");
 			logger.error("permissionInterceptor 错误。 \t" + e.toString());
 		}
-		return false;
+		return true;
 	}
 
 	@Override

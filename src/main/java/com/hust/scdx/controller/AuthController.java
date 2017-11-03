@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.model.User;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ResultUtil;
@@ -32,10 +33,11 @@ public class AuthController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public Object login(@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password, HttpServletRequest request) {
-		if (userService.login(username, password, request)) {
-			return ResultUtil.successWithoutMsg();
+		int roleId = userService.login(username, password, request);
+		if (Constant.ERROR_CODE == roleId) {
+			return ResultUtil.errorWithMsg("用户名或密码错误");
 		}
-		return ResultUtil.errorWithMsg("用户名或密码错误");
+		return ResultUtil.success(roleId);
 	}
 
 	/**
@@ -54,13 +56,13 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserTrueName", method = RequestMethod.POST)
 	public Object getCurrentUserTrueName(HttpServletRequest request) {
-		try{
+		try {
 			User user = userService.selectCurrentUser(request);
-			if(user == null){
+			if (user == null) {
 				return ResultUtil.errorWithMsg("登陆失效,请重新登陆。");
 			}
 			return ResultUtil.success(user.getTrueName());
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.info("查找用户名失败,用户session失效。");
 		}
 		return ResultUtil.errorWithMsg("登陆失败,请重新登陆。");
@@ -72,13 +74,13 @@ public class AuthController {
 	@ResponseBody
 	@RequestMapping(value = "/getCurrentUserId", method = RequestMethod.POST)
 	public Object getCurrentUserId(HttpServletRequest request) {
-		try{
+		try {
 			User user = userService.selectCurrentUser(request);
-			if(user == null){
+			if (user == null) {
 				return ResultUtil.errorWithMsg("登陆失效,请重新登陆。");
 			}
 			return ResultUtil.success(user.getUserId());
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.info("查找用户名失败,用户session失效。");
 		}
 		return ResultUtil.errorWithMsg("登陆失败,请重新登陆。");

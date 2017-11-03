@@ -28,12 +28,46 @@ public class UserDao {
 		return userMapper.deleteByPrimaryKey(userId);
 	}
 
+	public int deleteByUserName(String userName) {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserNameEqualTo(userName);
+		return userMapper.deleteByExample(example);
+	}
+
 	public int updateByPrimaryKey(User record) {
 		return userMapper.updateByPrimaryKey(record);
 	}
 
 	public User selectByPrimaryKey(Integer userId) {
 		return userMapper.selectByPrimaryKey(userId);
+	}
+
+	/**
+	 * 通过用户名查找用户
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public User selectUserByUserName(String userName) {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserNameEqualTo(userName);
+		List<User> users = userMapper.selectByExample(example);
+		if (null == users || users.size() == 0) {
+			return null;
+		}
+		return users.get(0);
+	}
+
+	/**
+	 * 查询所有用户
+	 */
+	public List<User> selectAllUser() {
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserIdIsNotNull();
+		return userMapper.selectByExample(example);
 	}
 
 	public User login(String username, String password) {
@@ -48,4 +82,5 @@ public class UserDao {
 		}
 		return users.get(0);
 	}
+
 }
