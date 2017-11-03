@@ -51,7 +51,7 @@ public class AttrUtil {
 
 	public static int findIndexOfUrl(String[] attrs) {
 		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches("链接|网址|微博链接|[Uu][Rr][Ll]", attrs[i])) {
+			if (Pattern.matches("链接|网址|域名|微博链接|[Uu][Rr][Ll]", attrs[i])) {
 				return i;
 			}
 		}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>资源管理——编辑权限</title>
+<script type="text/javascript" src="js/auth.js"></script>
+</head>
+<div class="s_nav">
+	当前位置：<a href="javascript:;" onclick="jumpto('auth-power')">资源管理</a>>>编辑权限
+</div>
+<div class="user_infor">
+	<form>
+		<table border="0" class="change_tab">
+			<tr>
+				<td width="100" height="50" align="right">权限名称：</td>
+				<td width="250" height="50"><input type="text"
+					class="form-control" style="width: 222px;" id="new_name_power" /></td>
+			</tr>
+			<tr>
+				<td width="100" height="50" align="right">资源路径：</td>
+				<td width="250" height="50"><input type="text"
+					class="form-control" style="width: 222px;" id="new_url_power" /></td>
+			</tr>
+			<tr>
+				<td width="100" height="80"></td>
+				<td width="250" height="80">
+					<button type="button" class="btn btn-primary"
+						onclick="powerInforChange()">提交</button>
+					<button type="button" class="btn btn-primary"
+						onclick="clearNewPower()">重置</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+<script>
+	var power_selectedPower = JSON.parse(getCookie("power_selectedPower"));
+	$("#new_name_power").val(power_selectedPower.powerName);
+	$("#new_url_power").val(power_selectedPower.powerUrl);
+</script>
+</html>

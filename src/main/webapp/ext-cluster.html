@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/loading.css">
+<link  rel="stylesheet" type="text/css" href="css/topic-list.css">
 </head>
 <body>
 	<div class="s_nav">
@@ -14,50 +15,54 @@
 		</span>
 	</div>
 	<div class="ckht">
+		<div class="btn-group" role="group" aria-label="..."
+			style="float: right;">
+			<button type="button" class="btn btn-default"
+				onclick="jumpto('orig-upload')">上传</button>
+			<button type="button" class="btn btn-default active"
+				style="color: red" onclick="jumpto('ext-cluster')">聚类</button>
+			<button type="button" class="btn btn-default"
+				onclick="jumpto('std-analysis')">分析</button>
+		</div>
 		<ul class="ckht_list">
-			<div class="btn-group" role="group" aria-label="..."
-				style="float: right;">
-				<button type="button" class="btn btn-default"
-					onclick="jumpto('orig-upload')">上传</button>
-				<button type="button" class="btn btn-default active"
-					style="color: red" onclick="jumpto('ext-cluster')">聚类</button>
-				<button type="button" class="btn btn-default"
-					onclick="jumpto('std-analysis')">分析</button>
-			</div>
 			<li class="topicName">专题名称：</li>
 		</ul>
 	</div>
 
-	<div style="padding: 10px;">
-		<form class="bs-example bs-example-form" role="form">
-			<div class="input-group">
-				<span class="input-group-addon">起止时间</span> <input type="text"
-					class="form-control" id="startTime"
-					placeholder="2017/07/30 12:00:00"> <input type="text"
-					class="form-control" id="endTime" placeholder="2018/07/30 12:00:00">
-				<span class="input-group-addon" onclick="miningByTimeRange()">聚类</span>
-				<span class="input-group-addon" onclick="queryResultByTimeRange()">历史结果集</span>
-				<span class="input-group-addon" onclick="getDisplayResultById()">根据id查看结果</span>
-				<span class="input-group-addon" onclick="resetResultById()">重置</span>
-				<span class="input-group-addon" onclick="queryExtfilesByTimeRange()">查看基础文件集</span>
-			</div>
-		</form>
-	</div>
-
-	<div style="padding: 10px;">
-		<form class="bs-example bs-example-form" role="form">
-			<div class="input-group">
-				<span class="input-group-addon">测试</span> <input type="text"
-					class="form-control" placeholder="测试"> <input type="text"
-					class="form-control" placeholder="测试"> <span
-					class="input-group-addon" onclick="combineResultItemsByIndices()">二次操作合并</span>
-				<span class="input-group-addon" onclick="downloadResultById()">下载结果</span>
-				<span class="input-group-addon"
-					onclick="deleteResultItemsByIndices()">二次操作删除</span> <span
-					class="input-group-addon" onclick="deleteClusterItemsByIndices()">删除类内元素</span>
-			</div>
-		</form>
-	</div>
+	<div style="width: 770px; border: 1px solid;margin-top:10px;">
+            <div width="657px" style="height:45px;line-height:45px;border-right: 1px solid;padding: 2px 3px 2px 0;display: inline-block;">
+                <div style="display: inline-block;margin: auto 0">
+                最近
+                <input style="display: inline-block" name="searchTime" type="radio" checked="checked" value="1">1分钟
+                <input style="display: inline-block" name="searchTime" type="radio" value="2" >一天
+                <input style="display: inline-block" name="searchTime" type="radio" value="3">一周
+                </div>
+                <div style="display: inline-block;">
+                    <input style="display: inline-block" name="searchTime" type="radio" value="4" >
+                起始时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="startTime" onclick="showTime(this)"/>
+                截至时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="endTime" onclick="showTime(this)"/>
+                </div>
+            </div>
+            <div width="112px" style="line-height:45px;display: inline-block">
+                <button class="btn btn-primary" style="width:55px;margin-left:23px;">聚类</button>
+            </div>
+        <div style="border-top:1px solid;">
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid;">基础数据</span>
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;float:right">历史聚类结果</span>
+                <div class="fileList" style="width: 384px;min-height:100px; max-height:150px;border-right:1px solid">
+                    <table id="extList">
+                       
+                    </table>
+                </div>
+                <div class="fileList" style="float: right;">
+                    <table id="resultList">
+                        
+                    </table>
+                </div>
+        </div>
+    </div>
 
 	<div class="data_summary">
 		<div class="summary_wrap ">
@@ -95,9 +100,8 @@
 						onclick="deleteLayData()">删除</button>
 					<button type="button" class="btn btn-info"
 						style="float: right; margin-top: 16px; margin-right: 0px;"
-						onclick="download()">下载泛数据</button>
+						onclick="download()">下载聚类数据</button>
 					<div class="clear"></div>
-
 				</div>
 			</div>
 		</div>
@@ -136,4 +140,28 @@
 	</div>
 </body>
 <script type="text/javascript" src="js/ext-cluster.js"></script>
+<script type="text/javascript" src="js/jedate.js"></script>
+<script type="text/javascript">
+    $("input[name=searchTime]").click(searchTimeChange);
+/*     $("#lo_time").change(function(){
+        var startTime = $("#lb_time").val();
+        var endTime = $("#lo_time").val();
+        if(startTime==""){
+            var temp = new Date(0);
+            startTime = temp.getFullYear()+"-"+(temp.getMonth()+1)+"-"+temp.getDate();
+        }
+        alert(startTime+"\n"+endTime);
+    }) */
+    function showTime(e){
+    	jeDate({
+    		dateCell:"#"+$(e).attr("id"),
+                format:"YYYY-MM-DD hh:mm:ss",
+                isTime:true,
+                minDate:"2016-01-01 00:00:00",
+                trigger: "click"
+            })       
+    }
+    
+
+</script>
 </html>

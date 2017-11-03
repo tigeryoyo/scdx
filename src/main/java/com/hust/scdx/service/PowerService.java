@@ -1,9 +1,17 @@
 package com.hust.scdx.service;
 
+import java.util.List;
+
 import com.hust.scdx.model.Power;
 
 public interface PowerService {
+	
+	boolean insertPower(int roleId, String powerName, String powerUrl);
 
-	Power selectPowerById(int powerId);
+	boolean deletePower(int powerId);
+
+	List<Power> selectAllPower();
+
+	List<Power> selectPowerByRoleId(int roleId);
 
 }

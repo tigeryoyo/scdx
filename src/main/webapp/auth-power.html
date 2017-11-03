@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>资源管理——信息显示</title>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置： <a href="javascript:;">资源管理</a> >>信息显示
+	</div>
+	<div class="user_infor">
+		<div class="role_search">
+			<div class="role_search_input">
+				<input type="search" placeholder="请输入权限名称" class="form-control"
+					id="power_Search" /> <img src="images/icon_search.png"
+					class="icon_search" />
+				<button type="button" class="btn btn-primary" onClick=""
+					style="margin-left: 10px">搜 索</button>
+				<button type="button" class="btn btn-primary" onClick="powerAdd()">添加权限</button>
+			</div>
+		</div>
+		<div class="infor_tablist">
+			<table width="715" border="0" class="infor_tab02">
+				<tr class="infor_tab02_tit">
+					<td width="169" height="45" align="center" bgcolor="#86c6ea">权限编号</td>
+					<td width="231" height="45" align="center" bgcolor="#86c6ea">权限名称</td>
+					<td colspan="2" height="45" align="center" bgcolor="#86c6ea">操作</td>
+				</tr>
+			</table>
+		</div>
+		<div class="user_num">
+			<ul class="page" maxshowpageitem="5" pagelistcount="10" id="page"></ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/auth.js"></script>
+<script type="text/javascript">
+	var powers = selectAllPower();
+	$
+		.each(
+			powers,
+			function(index, power) {
+				powerId = power.powerId;
+				powerName = "'" + power.powerName + "'";
+				powerUrl = "'" + power.powerUrl + "'";
+				row = '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'
+					+ (index + 1)
+					+ '</td><td width="231" height="40" align="center" bgcolor="#ffffff">'
+					+ power.powerName
+					+ '</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="powerChg('
+					+ powerId
+					+ ','
+					+ powerName
+					+ ','
+					+ powerUrl
+					+ ')">编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger delPower" onClick="powerDel('
+					+ powerId + ')" >删除</button></td></tr>'
+				$('.infor_tab02').append(row);
+
+			});
+</script>
+</html>

@@ -10,6 +10,30 @@ public class RoleExample {
 
 	protected List<Criteria> oredCriteria;
 
+	protected int start;
+
+	protected int limit;
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public void setOredCriteria(List<Criteria> oredCriteria) {
+		this.oredCriteria = oredCriteria;
+	}
+
 	public RoleExample() {
 		oredCriteria = new ArrayList<Criteria>();
 	}
@@ -259,6 +283,10 @@ public class RoleExample {
 
 		private String typeHandler;
 
+		public Criterion() {
+			super();
+		}
+
 		public String getCondition() {
 			return condition;
 		}
@@ -289,10 +317,6 @@ public class RoleExample {
 
 		public String getTypeHandler() {
 			return typeHandler;
-		}
-
-		protected Criterion() {
-			super();
 		}
 
 		protected Criterion(String condition) {

@@ -16,6 +16,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Autowired
 	private UserRoleDao userRoleDao;
 
+	/**
+	 * 根据用户id查找用户角色
+	 */
 	@Override
 	public UserRole selectUserRole(int userId) {
 		UserRole userRole = userRoleDao.selectUserRoleByUserId(userId);
@@ -25,4 +28,5 @@ public class UserRoleServiceImpl implements UserRoleService {
 		}
 		return userRole;
 	}
+
 }

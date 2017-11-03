@@ -60,7 +60,7 @@ a:hover { color:#000000; text-decoration:none; }
 .his_result{position: absolute; right:125px; top:10px;}
 .ckht_list{ width:770px; margin-left:0px;  margin-top:0px;}
 .ckht_list li{ line-height: 30px; font-size: 16px; }
-.up_list_wrap{width:770px; max-height:350px; min-height:150px;overflow-y:scroll;border:1px solid #0e63ab;}
+.up_list_wrap{width:770px; max-height:350px; min-height:150px;overflow-y:scroll;overflow-x:hidden;border:1px solid #0e63ab;}
 .files_list table{ margin:0px auto;}
 .files_list table td{ border-right:1px solid #999999; border-bottom:1px solid #999999; font-size:14px; background:#ffffff;}
 .files_list table .d_blue{ background:#86c6ea;}  
