@@ -1,4 +1,4 @@
-var load;
+var load = null;
 function begin() {
     load = new Loading()
     load.init();
@@ -6,5 +6,7 @@ function begin() {
 }
 
 function stop() {
-    load.stop();
+	if(load!=null){
+	    load.stop();
+	}
 }

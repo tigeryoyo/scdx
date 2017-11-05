@@ -13,5 +13,7 @@ public interface PowerService {
 	List<Power> selectAllPower();
 
 	List<Power> selectPowerByRoleId(int roleId);
+	
+	boolean resetRolePower(int roleId,List<Integer> powerIds);
 
 }

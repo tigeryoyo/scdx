@@ -3,6 +3,7 @@
  */
 $('.topicName').text("专题名称：" + getCookie("topicName"));
 var fileBuf = null;
+var stdfileId = null;
 $(function() {
 	// 阻止浏览器默认行。
 	$(document).on({
@@ -67,12 +68,93 @@ $(function() {
 });
 
 /**
+ * 根据时间范围查找标准文件。 *
+ * 
+ * @param startTime
+ *            开始时间
+ * @param endTime
+ *            结束时间
+ */
+function queryStdfilesByTimeRange(startTime,endTime) {
+	if(startTime == "" || startTime=="undefined" || endTime=="" || endTime=="undefined"){
+		alert("时间选择有误");
+		return ;
+	}
+	$.ajax({
+		type : "POST",
+		url : "/stdfile/queryStdfilesByTimeRange",
+		data : {
+			topicId : getCookie("topicId"),
+			startTime : startTime,
+			endTime : endTime
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				$("#extList").html("");
+				var items = msg.result;
+				$.each(items,function(idx,item){
+					row = '<tr>'
+                        +'<td width="182px;" data-id="'+item.stdfileId+'" style="cursor: pointer;" title="'+item.stdfileName+'" onclick="showDetail(this)">'
+                        +item.stdfileName
+                        +'</td>'
+                        +'<td width="179px;">'+new Date(item.uploadTime.time).format('yyyy-MM-dd hh:mm:ss')
+                        +'</tr>';
+					$("#extList").append(row);                        
+				})
+				$("#extList tr:first").click();
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function() {
+			alert("查询历史上传记录失败！");
+		}
+	});
+}
+
+//显示标准文件的分类详情
+function showDetail(e){
+	stdfileId = $(e).attr("data-id");
+	$.ajax({
+		type : "post",
+		url : "/stdfile/analyzeByStdfileId",
+		data : {
+			stdfileId : stdfileId
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				$('.summary_tab table tr:not(:first)').html('');
+				var items = msg.result;
+				for (var i = 0; i < items.length; i++) {
+					// items第一行存储index，故从i+1读起
+					var item = items[i];
+					var rows = '<tr><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
+						//添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'
+						+  item[3]  + '</td></tr>';
+					console.log(rows);
+					$('.summary_tab table').append(rows);
+				}		
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert(msg.result);
+		}
+	});
+}
+
+
+/**
  * 上传标准数据文件
  */
 function uploadStd() {
 	var form = new FormData();
 	form.append("stdfile", fileBuf);
 	form.append("topicId", getCookie("topicId"));
+	console.log(form);
 	$.ajax({
 		async : false,
 		crossDomain : true,
@@ -88,23 +170,83 @@ function uploadStd() {
 				$("#drop_area").text("文件「 " + fileBuf.name + " 」上传成功。");
 				$(".btn_del_all").attr("disabled", true);
 				$(".btn_upl_all").attr("disabled", true);
+				searchTimeChange();
 			} else {
 				alert("aa"+msg.result);
 			}
 		},
 		error : function() {
-			alert("上传失败。");
+			alert("上传失败!");
 			stop();
 		}
 	});
 }
 
+function showTime(e){
+	jeDate({
+		dateCell:"#"+$(e).attr("id"),
+            format:"YYYY-MM-DD hh:mm:ss",
+            isTime:true,
+            minDate:"2016-01-01 00:00:00",
+            trigger: "click"
+        })       
+}
+
 /**
- * 删除标准数据文件
+ * 删除待上传的标准数据文件
  */
 function deleteStd() {
 	fileBuf = null;
 	$("#drop_area").text("将文件拖拽到此处");
 	$(".btn_del_all").attr("disabled", true);
 	$(".btn_upl_all").attr("disabled", true);
+}
+
+function searchTimeChange(){
+	var index = $("input[name='searchTime']:checked").val();
+    var startTime,endTime,start,end;
+    var currentTime = new Date();
+    endTime = currentTime.getTime();
+    switch (index){
+        case '1':
+                var temp = new Date();
+                temp.setTime(currentTime.getTime());
+                temp.setHours(0);
+                temp.setMinutes(0);
+                temp.setSeconds(0);
+                temp.setMilliseconds(0);
+                startTime = temp.getTime() - 7*24*60*60*1000;
+            var tempS  = new Date(startTime);
+            var tempE = new Date(endTime);
+             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+            break;
+        case '2':
+            var temp = new Date();
+            temp.setTime(currentTime.getTime());
+            temp.setHours(0);
+            temp.setMinutes(0);
+            temp.setSeconds(0);
+            temp.setMilliseconds(0);
+            startTime = temp.getTime() - 30*24*60*60*1000;
+            var tempS  = new Date(startTime);
+            var tempE = new Date(endTime);
+             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
+
+            break;
+        default :
+            start = $("#startTime").val();
+            end = $("#endTime").val();
+            if(start=="" || start=="undefined"){
+                start = "2016-01-01 00:00:00";
+            }
+            if(end == "" || end == "undefined"){
+            	var date = new Date();
+            	end = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+            }
+            break;
+    }
+    queryStdfilesByTimeRange(start,end);
 }

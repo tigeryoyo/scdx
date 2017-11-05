@@ -1,7 +1,7 @@
 .fileList{
-    width:384px;
-    max-height: 300px;
-    border-top:1px solid;
+    width:384px;   
+    height: 125px;
+    border-top:1px solid #999999;
     overflow-y: scroll;
     overflow-x: hidden;
     display: inline-block;
@@ -28,8 +28,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    border-right:1px solid;
-    border-bottom:1px solid;
+    border-right:1px solid #999999;
+    border-bottom:1px solid #999999;
     padding: 0;
 }
 

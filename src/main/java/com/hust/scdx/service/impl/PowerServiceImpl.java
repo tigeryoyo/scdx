@@ -77,4 +77,33 @@ public class PowerServiceImpl implements PowerService {
 		return powers;
 	}
 
+	/**
+	 * 根据给定权限id集合，重新设置指定角色id的的权限
+	 */
+	@Override
+	public boolean resetRolePower(int roleId, List<Integer> powerIds) {
+		// TODO Auto-generated method stub
+		//判断指定id是否拥有权限，有则全部删除
+		if(null!=rolePowerDao.selectRolePowerByRoleId(roleId)){
+			//删除指定角色id的权限
+			if(!rolePowerDao.deleteRolePowerByRoleId(roleId)){
+				return false;
+			}
+		}
+		if(null == powerIds || powerIds.size() == 0){
+			return true;
+		}
+		try{
+			for (Integer powerId : powerIds) {
+				rolePowerDao.insertRolePower(roleId, powerId);
+			}
+		}catch(Exception e){
+			logger.info("重置权重过程中，添加权限失败！");
+			return false;
+		}
+		return true;
+	}
+	
+	
+
 }

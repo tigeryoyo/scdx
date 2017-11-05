@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <title>角色管理——编辑角色</title>
+<style>
+	#role_power_tab tr{
+	display:block;
+	}
+	#role_power_tab td,#role_power_tab th{
+		width:189px;	
+		height: 40px;	
+		text-align:center;
+	}
+</style>
 </head>
 <body>
 	<div class="s_nav">
@@ -10,43 +20,46 @@
 	</div>
 	<div class="user_infor">
 		<form>
-			<table width="880" border="0" class="change_tab">
+			<table width="490px" border="0" class="change_tab">
 				<tr>
-					<td align="right" colspan="2" width="81" height="50">角色名称：</td>
-					<td width="680" height="50"><input type="text"
+					<td align="right" width="110px" height="50">角色名称：</td>
+					<td width="380px" height="50"><input type="text"
 						style="width: 190px;" class="roleChange form-control"
 						id="new_name_role" disabled="disabled" /></td>
 				</tr>
 				<tr>
-					<td align="right" colspan="2" width="81" valign="top"><br />
-						<br />配置权限：</td>
-					<td width="680">
-						<div class="ckht">
-							<div class="up_list_wrap" style="height: 400px">
-								<table width="374" border="0" class="infor_tab02"
+					<td align="right" width="110px" style="position:relative;">
+						<span style="position:absolute;top:0;right:0; height:40px;line-height: 40px;display:block">配置权限：</span>
+					</td>
+					<td width="380px">	
+								<table border="1" class="infor_tab02" style="width:380px;max-height: 420px"
 									id="role_power_tab">
-									<tr class="infor_tab02_tit">
-										<td colspan="1" height="40" align="center" valign="middle"
+									<thead>
+									<tr class="infor_tab02_tit" align="center" valign="middle">
+										<th height="40" align="center" valign="middle" style="width:180px;text-align:left"
 											bgcolor="#86c6ea" class="d_blue"><input
 											style="width: 19px; height: 25px; padding: 0 0 5px 0;"
 											type="checkbox" class="checkAll" id="check_all_power">&nbsp;&nbsp;序号</td>
-										<td colspan="3" height="40" align="center" valign="middle"
+										<th height="40" align="center" valign="middle" style="width: 199px;"
 											bgcolor="#86c6ea" class="d_blue">权限名称</td>
 									</tr>
-
+									</thead>
+									<tbody align="center" valign="middle" style="overflow-y:scroll; max-height:380px;display:block">
+									<tr >
+										<td style="text-align:left">
+											<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power">&nbsp;&nbsp;1
+										</td>
+										<td>1</td>
+									</tr>									
+									</tbody>
 								</table>
-
-							</div>
-						</div>
 					</td>
 				</tr>
 
-				<tr>
-					<td align="right" colspan="2" width="81" height="80">
-						<button type="button" class="btn btn-primary"
+				<tr>					
+					<td align="center" colspan="2" height="80">
+					<button type="button" class="btn btn-primary"
 							onclick="submitRoleChg()">提交</button>
-					</td>
-					<td align="center" width="600" height="80">
 						<button type="button" class="btn btn-primary"
 							onclick="resetRoleChg()">重置</button>
 					</td>
@@ -57,16 +70,6 @@
 </body>
 <script type="text/javascript" src="js/auth.js"></script>
 <script>
-	var powers =  selectPowerByRoleId(getCookie("role_selectedRoleId"));
-	$
-		.each(
-			powers,
-			function(index, power) {
-				var row = ' <tr id="power_tr" class="infor_tab02_tit"><td colspan="1" height="40" align="center" valign="middle" bgcolor="#ffffff"><input style=" width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" checked="checked" class="check_power" id="check_power">&nbsp;&nbsp;'
-					+ (index + 1)
-					+ '</td><td class="td_powerName" colspan="3" height="40" align="center" valign="middle" bgcolor="#ffffff" >'
-					+ power.powerName + '</td></tr>';
-				$('#role_power_tab').append(row);
-			});
+	showRolePower();
 </script>
 </html>

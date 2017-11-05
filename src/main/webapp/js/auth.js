@@ -227,8 +227,12 @@ function resetRoleAdd() {
 /**
  * 角色管理-编辑角色
  */
-function roleChg(roleId) {
-	setCookie("role_selectedRoleId", roleId);
+function roleChg(roleId,roleName) {
+	var role_selectedRole = {
+			"roleId":roleId,
+			"roleName":roleName
+	}
+	setCookie("role_selectedRole", JSON.stringify(role_selectedRole));
 	jumpto('auth-role_chg');
 }
 
@@ -250,6 +254,7 @@ function selectPowerByRoleId(roleId) {
 		success : function(msg) {
 			if (msg.status == "OK") {
 				res = msg.result;
+				
 			} else {
 				alert(msg.result);
 			}
@@ -330,6 +335,37 @@ function powerChg(powerId, powerName, powerUrl) {
 }
 
 /**
+ * 显示指定角色所拥有的权限
+ */
+function showRolePower(){
+	var powers =  selectPowerByRoleId(JSON.parse(getCookie("role_selectedRole")).roleId);
+	$("#new_name_role").val(JSON.parse(getCookie("role_selectedRole")).roleName);
+	$("#check_all_power").prop("checked",false);
+	$('#role_power_tab').find("tbody").empty();
+		$.each(
+			powers,
+			function(index, power) {
+				var row='';
+				if(power.owned){
+					row='<tr >'+
+						'<td style="text-align:left">'+
+						'<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'+power.powerId+'" checked="checked">&nbsp;&nbsp;'+(index+1)+
+						'</td>'+
+						'<td>'+ power.powerName +'</td>'+
+						'</tr>'				
+				}else{
+					row='<tr >'+
+					'<td style="text-align:left">'+
+					'<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'+power.powerId+'">&nbsp;&nbsp;'+(index+1)+
+					'</td>'+
+					'<td>'+ power.powerName +'</td>'+
+					'</tr>'
+				}
+				$('#role_power_tab').append(row);
+			});
+}
+
+/**
  * 资源管理-添加权限-提交 只有开发者（roleId=1）有权使用添加权限，故添加权限的时候自动将该权限添加至开发者权限表中
  */
 function submitPowerAdd() {
@@ -353,9 +389,52 @@ function submitPowerAdd() {
 }
 
 /**
- * 资源管理-添加权限-重置
+ *角色管理-编辑角色-重置
  */
-function resetPowerAdd() {
-	$("#power_addPowerName").val('');
-	$("#power_addPowerUrl").val('');
+function resetRoleChg() {	
+	showRolePower();
 }
+
+/**
+ * 角色管理-编辑角色-提交
+ */
+function submitRoleChg(){
+	var array = new Array();
+	var roleId = JSON.parse(getCookie("role_selectedRole")).roleId;
+	$.each($("input[name='power']:checked"),function(index,power){
+		var id = parseInt($(power).attr("data-id"));
+		array.push(id);
+	});
+	if(0 == array.length){
+		if(!confirm("您是否要删除该角色的全部权限？"))
+			return false;
+	}
+	$.ajax({
+		type : "post",
+		url : "/power/changeRolePower",
+		traditional:true,
+		data : {
+			powerIds:array,
+			roleId:roleId
+		},
+		dataType : "json",
+		async : false,
+		success : function(msg) {
+			alert(msg.result);
+		},
+		error : function(msg) {
+			alert("您没有权限添加权限。");
+		},
+	})
+	showRolePower();
+}
+
+//角色权限编辑页面的全选
+$("#check_all_power").click(function(){
+	
+	if($("#check_all_power").prop("checked")){
+		$("input[name='power']").prop("checked",true);
+	}else{
+		$("input[name='power']").prop("checked",false);
+	}
+})
