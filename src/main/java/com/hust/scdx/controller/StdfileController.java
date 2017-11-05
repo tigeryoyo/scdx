@@ -1,5 +1,7 @@
 package com.hust.scdx.controller;
 
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
@@ -37,10 +40,9 @@ public class StdfileController {
 	@Autowired
 	private DomainService domainService;
 
-
 	/**
 	 * 上传标准数据文件
-	 * 
+	 *
 	 * @param stdfile
 	 *            标准数据文件句柄
 	 * @param topicId
@@ -63,10 +65,55 @@ public class StdfileController {
 			logger.info("文件上传失败。");
 			return ResultUtil.errorWithMsg("上传失败。");
 		}
-		//添加标准文件中未知的url基本属性
-		if(domainService.addUnknowUrlFromFile(stdfile))
+		// 添加标准文件中未知的url基本属性
+		if (domainService.addUnknowUrlFromFile(stdfile))
 			return ResultUtil.success("准数据文件上传成功，并且未知url已添加到数据仓库中！");
 		else
 			return ResultUtil.success("准数据文件上传成功，但未知url添加失败！");
 	}
+
+	/**
+	 * 根据时间范围查找标准数据文件。
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/queryStdfilesByTimeRange")
+	public Object queryStdfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "startTime", required = true) Date startTime,
+			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+		List<Stdfile> list = stdfileService.queryExtfilesByTimeRange(topicId, startTime, endTime);
+		if (list == null) {
+			return ResultUtil.unknowError();
+		}
+		return ResultUtil.success(list);
+	}
+	
+	/**
+	 * 分析标准数据文件
+	 * 
+	 * @param stdfileId
+	 *            标准数据id
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/analyzeByStdfileId", method = RequestMethod.POST)
+	public Object analyzeByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
+			HttpServletRequest request) {
+		// title、url、time、amount
+		List<String[]> list = stdfileService.analyzeByStdfileId(stdfileId);
+		if (list == null || list.isEmpty()) {
+			return ResultUtil.errorWithMsg("分析标准数据出错。");
+		}
+		return ResultUtil.success(list);
+	}
+
 }
