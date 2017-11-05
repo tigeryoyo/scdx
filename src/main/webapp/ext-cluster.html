@@ -155,25 +155,6 @@
 <script type="text/javascript" src="js/jedate.js"></script>
 <script type="text/javascript">
     $("input[name=searchTime]").click(searchTimeChange);
-/*     $("#lo_time").change(function(){
-        var startTime = $("#lb_time").val();
-        var endTime = $("#lo_time").val();
-        if(startTime==""){
-            var temp = new Date(0);
-            startTime = temp.getFullYear()+"-"+(temp.getMonth()+1)+"-"+temp.getDate();
-        }
-        alert(startTime+"\n"+endTime);
-    }) */
-    function showTime(e){
-    	jeDate({
-    		dateCell:"#"+$(e).attr("id"),
-                format:"YYYY-MM-DD hh:mm:ss",
-                isTime:true,
-                minDate:"2016-01-01 00:00:00",
-                trigger: "click"
-            })       
-    }
-    
-
+    searchTimeChange();  
 </script>
 </html>
