@@ -1,6 +1,8 @@
 /**
  * 拖拽
  */
+$("#startTime").attr("placeholder", "2016-01-01 00:00:00");
+$("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
 $('.topicName').text("专题名称：" + getCookie("topicName"));
 var fileBuf = null;
 var stdfileId = null;
@@ -102,7 +104,7 @@ function queryStdfilesByTimeRange(startTime,endTime) {
                         +'</tr>';
 					$("#extList").append(row);                        
 				})
-				$("#extList tr:first").click();
+				$("#extList tr:first td:first").click();
 			} else {
 				alert(msg.result);
 			}
@@ -130,7 +132,7 @@ function showDetail(e){
 				for (var i = 0; i < items.length; i++) {
 					// items第一行存储index，故从i+1读起
 					var item = items[i];
-					var rows = '<tr><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
+					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
 						//添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'
 						+  item[3]  + '</td></tr>';
 					console.log(rows);

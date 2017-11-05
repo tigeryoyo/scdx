@@ -367,6 +367,16 @@ function downloadResultById() {
 	});
 }
 
+function showTime(e){
+	jeDate({
+		dateCell:"#"+$(e).attr("id"),
+            format:"YYYY-MM-DD hh:mm:ss",
+            isTime:true,
+            minDate:"2016-01-01 00:00:00",
+            trigger: "click"
+        })       
+}
+
 function searchTimeChange(){
 	var index = $("input[name='searchTime']:checked").val();
     var startTime,endTime,start,end;
