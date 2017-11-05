@@ -42,12 +42,13 @@
 			roles,
 			function(index, role) {
 				if (index != 0) {
+					var roleName="'"+role.roleName+"'";
 					row = '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'
 						+ index
 						+ '</td><td width="231" height="40" align="center" bgcolor="#ffffff">'
 						+ role.roleName
 						+ '</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="roleChg('
-						+ role.roleId + ')"'
+						+ role.roleId + ','+roleName+')"'
 					if (role.roleId > 3 || role.roleId <= currentRoleId) {
 						row += 'disabled';
 					}

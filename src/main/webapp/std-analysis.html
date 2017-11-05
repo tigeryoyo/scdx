@@ -6,6 +6,20 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/page.css">
 <link rel="stylesheet" href="css/loading.css">
+<link rel="stylesheet" href="css/topic-list.css">
+<style>
+.fileList {
+    width: 384px;
+    min-height: 125px;
+    max-height: 150px;
+    border-top: 1px solid #999999;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline-block;
+    margin-bottom: -1px;
+    font-size: 15px;
+}
+</style>
 </head>
 <body>
 	<div class="s_nav">
@@ -24,18 +38,74 @@
 					style="color: red" onclick="jumpto('std-analysis')">分析</button>
 			</div>
 			<li class="topicName">专题名称：</li>
-			<li>新增文件：
-				<div class="files_add" id="drop_area">将文件拖拽到此处</div>
-				<div class="files_put" id="filelist"></div>
-			</li>
-		</ul>
-		<div class="up_del">
+		</ul>		
+	</div>
+	<div style="width: 770px; border: 1px solid #0e63ab;margin-top:10px;">
+            <div width="770px" style="height:45px;line-height:45px;padding: 2px 3px 2px 0;display: inline-block;">
+                <div style="display: inline-block;margin: auto 0">
+                最近:
+                <input style="display: inline-block;margin-left:5px;" name="searchTime" type="radio" checked="checked" value="1">一周
+                <input style="display: inline-block;margin-left:15px;" name="searchTime" type="radio" value="2" >一月
+                </div>
+                <div style="display: inline-block;margin-left:15px;">
+                    <input style="display: inline-block" name="searchTime" type="radio" value="4" >
+                起始时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="startTime" onclick="showTime(this)"/>
+                截至时间：
+                <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="endTime" onclick="showTime(this)"/>
+                </div>
+            </div>
+        <div style="border-top:1px solid #999999;">
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid #999999;">标准数据</span>
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: left;line-height: 30px;float:right">新增文件：</span>
+                <div class="fileList" style="width: 384px;border-right:1px solid #999999">
+                    <table id="extList">
+                       <tr>          
+                            <td width="182px;" title="这是一个很长的测试用的文件名">
+                                这是一个很长的测试用的文件名
+                            </td>
+                            <td width="179px;">2017-1-1 00：00：00</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="fileList" style="float: right;position:relative;overflow:hidden;">
+                    <div class="files_add" style="width:375px;height:100%;line-height:100px;font-size:16px;" id="drop_area">将文件拖拽到此处</div>
+					<div class="files_put" style="width:375px;" id="filelist"></div>
+					<div class="up_del" style="width:375px;position:absolute;bottom:0;">
 			<button type="button" class="btn btn-danger btn_del_all"
 				style="float: right;" onclick="deleteStd()" disabled>删除</button>
 			<button type="button" class="btn btn-primary btn_upl_all"
 				onclick="uploadStd()" disabled>上传</button>
 		</div>
+                </div>
+        </div>
+    </div>
+	<div class="data_summary">
+		<div class="summary_wrap ">
+			<div class="summary_cont">
+				<div class="summary_tab">
+					<table width="751" border="0">
+						<tr>
+							<td width="60" height="36" align="center" bgcolor="#86c6ea">选择</td>
+							<td width="500" height="36" align="center" bgcolor="#86c6ea">标题</td>
+							<td width="145" height="36" align="center" bgcolor="#86c6ea">时间</td>
+							<td width="45" height="36" align="center" bgcolor="#86c6ea">数量</td>
+						</tr>
+					</table>
+				</div>
+				<div class="table_clear">	
+					<button type="button" class="btn btn-info"
+						style="float: right; margin-top: 16px; margin-right: 0px;"
+						onclick="downloadResultById()">下载聚类数据</button>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
+<script type="text/javascript" src="js/jedate.js"></script>
 <script type="text/javascript" src="js/std-analysis.js"></script>
+<script type="text/javascript">
+	$("input[name=searchTime]").click(searchTimeChange);
+</script>
 </html>

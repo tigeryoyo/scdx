@@ -48,4 +48,19 @@ public class RolePowerDao {
 		}
 		return true;
 	}
+	
+	/**
+	 * 根据角色id删除制定角色的所有权限
+	 * @param roleId 角色id
+	 * @return 删除记录失败返回false
+	 */
+	public boolean deleteRolePowerByRoleId(int roleId){
+		RolePowerExample example = new RolePowerExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+		if(0 == rolePowerMapper.deleteByExample(example)){
+			return false;
+		}
+		return true;
+	}
 }
