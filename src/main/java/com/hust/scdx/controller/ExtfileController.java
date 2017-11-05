@@ -121,7 +121,11 @@ public class ExtfileController {
 	public Object queryExtfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "startTime", required = true) Date startTime,
 			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
-		List<Extfile> list = extfileService.queryExtfilesByTimeRange(topicId, startTime, endTime);
+		ExtfileQueryCondition con = new ExtfileQueryCondition();
+		con.setTopicId(topicId);
+		con.setStartTime(startTime);
+		con.setEndTime(endTime);
+		List<Extfile> list = extfileService.queryExtfilesByTimeRange(con);
 		if (list == null) {
 			return ResultUtil.unknowError();
 		}
@@ -145,8 +149,34 @@ public class ExtfileController {
 	public Object miningByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "startTime", required = true) Date startTime,
 			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+		ExtfileQueryCondition con = new ExtfileQueryCondition();
+		con.setTopicId(topicId);
+		con.setStartTime(startTime);
+		con.setEndTime(endTime);
 		// title、url、time、amount
-		List<String[]> list = extfileService.miningByTimeRange(topicId, startTime, endTime, request);
+		List<String[]> list = extfileService.miningByTimeRange(con, request);
+		if (list == null) {
+			return ResultUtil.errorWithMsg("聚类出现bug。");
+		}
+		JSONObject json = new JSONObject();
+		json.put(Cluster.DISPLAYRESULT, list);
+		json.put(Cluster.RESULTID, request.getSession().getAttribute(Cluster.RESULTID));
+		return ResultUtil.success(json);
+	}
+
+	/**
+	 * 根据时间范围聚类。
+	 * 
+	 * @param stdfileIds
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/miningByExtfileIds")
+	public Object miningByExtfileIds(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "extfileIds", required = true) List<String> extfileIds, HttpServletRequest request) {
+		// title、url、time、amount
+		List<String[]> list = extfileService.miningByExtfileIds(topicId, extfileIds, request);
 		if (list == null) {
 			return ResultUtil.errorWithMsg("聚类出现bug。");
 		}

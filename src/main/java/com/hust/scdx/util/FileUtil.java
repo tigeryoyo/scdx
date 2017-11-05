@@ -35,13 +35,14 @@ public class FileUtil {
 
 	public static void main(String[] args) {
 		try {
-			List<String[]> list = readExtfiles("C:/Users/tigerto/Desktop/1", "C:/Users/tigerto/Desktop/2");
-			for (String[] strs : list) {
-				for (String str : strs) {
-					System.out.print(str + "\t");
-				}
-				System.out.println();
-			}
+			// List<String[]> list = readExtfiles("C:/Users/tigerto/Desktop/1",
+			// "C:/Users/tigerto/Desktop/2");
+			// for (String[] strs : list) {
+			// for (String str : strs) {
+			// System.out.print(str + "\t");
+			// }
+			// System.out.println();
+			// }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -317,5 +318,45 @@ public class FileUtil {
 			return true;
 		}
 
+	}
+
+	/**
+	 * title、url、time、amount
+	 * 
+	 * @param stdfilePath
+	 *            标准数据路径
+	 * @return
+	 */
+	public static List<String[]> readStdfile(String stdfilePath) {
+		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
+			ArrayList<String[]> list = new ArrayList<String[]>();
+			String line = br.readLine();
+			String[] row = line.split("\t");
+			int indexOfTitle = AttrUtil.findIndexOfTitle(row);
+			int indexOfUrl = AttrUtil.findIndexOfUrl(row);
+			int indexOfTime = AttrUtil.findIndexOfTime(row);
+			do {
+				String title = "", url = "";
+				int amount = 0;
+				String latestTime = "9999-12-12 23:59:59";
+				while (!StringUtils.isBlank((line = br.readLine()))) {
+					amount++;
+					row = line.split("\t");
+					if (latestTime.compareTo(row[indexOfTime]) > 0) {
+						latestTime = row[indexOfTime];
+						title = row[indexOfTitle];
+						url = row[indexOfUrl];
+					}
+				}
+				if (amount != 0) {
+					list.add(new String[] { title, url, latestTime, String.valueOf(amount) });
+				}
+			} while (line != null);
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("读取标准数据文件出错。");
+			return null;
+		}
 	}
 }

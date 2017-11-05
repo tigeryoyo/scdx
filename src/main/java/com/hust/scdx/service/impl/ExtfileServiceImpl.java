@@ -87,14 +87,6 @@ public class ExtfileServiceImpl implements ExtfileService {
 	}
 
 	/**
-	 * 查找符合条件的基础数据对象集合
-	 */
-	@Override
-	public List<Extfile> queryExtfilesByCondtion(ExtfileQueryCondition con) {
-		return extfileDao.queryExtfilesByCondtion(con);
-	}
-
-	/**
 	 * 根据专题id删除该专题下的所有基础数据:数据库与文件系统内的数据。
 	 * 
 	 * @param topicId
@@ -106,35 +98,80 @@ public class ExtfileServiceImpl implements ExtfileService {
 	}
 
 	/**
+	 * 根据时间范围查找基础文件。
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @return
+	 */
+	@Override
+	public List<Extfile> queryExtfilesByTimeRange(ExtfileQueryCondition con) {
+		return extfileDao.queryExtfilesByCondtion(con);
+	}
+
+	/**
 	 * 根据时间范围聚类。
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<String[]> miningByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
+	public List<String[]> miningByTimeRange(ExtfileQueryCondition con, HttpServletRequest request) {
 		// 根据时间范围查找extfile对象list
-		List<Extfile> extfiles = queryExtfilesByTimeRange(topicId, startTime, endTime);
-
+		List<Extfile> extfiles = queryExtfilesByTimeRange(con);
 		String[] extfilePaths = new String[extfiles.size()];
 		int size = extfiles.size();
-		System.out.println("TopicId:" + topicId);
-		System.out.println("file size:" + size);
 		for (int i = 0; i < size; i++) {
 			Date uploadTime = extfiles.get(i).getUploadTime();
 			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime)
 					+ extfiles.get(i).getExtfileId();
 		}
 
-		// 读取基础数据文件集合,去重排序并取并集。
-		List<String[]> content = getExtfilesContent(extfilePaths);
+		return mining(con, getExtfilesContent(extfilePaths), request);
+	}
+
+	/**
+	 * 根据extfileIds聚类
+	 */
+	@Override
+	public List<String[]> miningByExtfileIds(String topicId, List<String> extfileIds, HttpServletRequest request) {
+		ExtfileQueryCondition con = new ExtfileQueryCondition();
+		con.setTopicId(topicId);
+		int size = extfileIds.size();
+		String[] extfilePaths = new String[size];
+		for (int i = 0; i < size; i++) {
+			Extfile extfile = extfileDao.queryExtfileById(extfileIds.get(i));
+			Date uploadTime = extfile.getUploadTime();
+			if (i == 0) {
+				con.setEndTime(uploadTime);
+			}
+			if (i == size - 1) {
+				con.setStartTime(uploadTime);
+			}
+			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime) + extfile.getExtfileId();
+		}
+
+		return mining(con, getExtfilesContent(extfilePaths), request);
+	}
+
+	/**
+	 * 对content进行聚类
+	 * 
+	 * @param content
+	 *            去重排序并取并集后基础文件的内容。
+	 * @param user
+	 * @return
+	 */
+	private List<String[]> mining(ExtfileQueryCondition con, List<String[]> content, HttpServletRequest request) {
 		if (content == null) {
 			logger.info("content内容为空。");
 			return null;
 		}
 		// 属性行提取出来
 		String[] attrs = content.remove(0);
-
-		// 开始聚类
 		User user = userService.selectCurrentUser(request);
+		// 开始聚类
 		List<List<Integer>> origRess = multipleMining(user, attrs, content);
 		if (origRess == null) {
 			logger.error("聚类失败。");
@@ -156,7 +193,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 				logger.error("聚类失败。");
 				return null;
 			}
-			
+
 			List<List<Integer>> tmp = new ArrayList<List<Integer>>(origRess);
 			origRess.clear();
 			csize = newOrigRess.size();
@@ -179,9 +216,9 @@ public class ExtfileServiceImpl implements ExtfileService {
 		Result result = new Result();
 		result.setCreator(user.getUserName());
 		result.setCreateTime(new Date());
-		result.setTopicId(topicId);
+		result.setTopicId(con.getTopicId());
 		result.setResId(UUID.randomUUID().toString());
-		result.setResName(setResName(topicId, startTime, endTime));
+		result.setResName(setResName(con.getTopicId(), con.getStartTime(), con.getEndTime()));
 		content.add(0, attrs);
 		if (resultService.insert(result, content, map) <= 0) {
 			logger.error("插入result记录失败。");
@@ -193,7 +230,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 
 		// 更新该条topic属性值
 		Topic topic = new Topic();
-		topic.setTopicId(topicId);
+		topic.setTopicId(con.getTopicId());
 		topic.setLastOperator(user.getUserName());
 		topic.setLastUpdateTime(new Date());
 		if (topicService.updateTopicInfo(topic) <= 0) {
@@ -329,33 +366,12 @@ public class ExtfileServiceImpl implements ExtfileService {
 	}
 
 	/**
-	 * 根据时间范围查找基础文件。
-	 * 
-	 * @param topicId
-	 *            专题id
-	 * @param startTime
-	 *            开始时间
-	 * @param endTime
-	 *            结束时间
-	 * @return
-	 */
-	@Override
-	public List<Extfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime) {
-		ExtfileQueryCondition con = new ExtfileQueryCondition();
-		con.setTopicId(topicId);
-		con.setStartTime(startTime);
-		con.setEndTime(endTime);
-		return queryExtfilesByCondtion(con);
-	}
-
-	/**
 	 * 根据基础数据文件名集合获取基础数据文件内容，整合、去重。
 	 * 
 	 * @param extfilePaths
 	 * @return
 	 */
-	@Override
-	public List<String[]> getExtfilesContent(String[] extfilePaths) {
+	private List<String[]> getExtfilesContent(String[] extfilePaths) {
 		return extfileDao.getExtfilesContent(extfilePaths);
 	}
 
@@ -404,4 +420,5 @@ public class ExtfileServiceImpl implements ExtfileService {
 			return result;
 		}
 	}
+
 }

@@ -1,6 +1,5 @@
 package com.hust.scdx.service;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,14 +11,12 @@ public interface ExtfileService {
 
 	int insert(ExtfileQueryCondition con, HttpServletRequest request);
 
-	List<Extfile> queryExtfilesByCondtion(ExtfileQueryCondition con);
-
-	List<String[]> getExtfilesContent(String[] extfilePaths);
-
 	int deleteExtfileByTopicId(String topicId);
 
-	List<Extfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime);
+	List<Extfile> queryExtfilesByTimeRange(ExtfileQueryCondition con);
 
-	List<String[]> miningByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request);
+	List<String[]> miningByTimeRange(ExtfileQueryCondition con, HttpServletRequest request);
+
+	List<String[]> miningByExtfileIds(String topicId, List<String> extfileIds, HttpServletRequest request);
 
 }
