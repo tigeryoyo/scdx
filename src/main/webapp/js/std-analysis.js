@@ -135,7 +135,6 @@ function showDetail(e){
 					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
 						//添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'
 						+  item[3]  + '</td></tr>';
-					console.log(rows);
 					$('.summary_tab table').append(rows);
 				}		
 			} else {
@@ -156,7 +155,6 @@ function uploadStd() {
 	var form = new FormData();
 	form.append("stdfile", fileBuf);
 	form.append("topicId", getCookie("topicId"));
-	console.log(form);
 	$.ajax({
 		async : false,
 		crossDomain : true,
@@ -181,6 +179,19 @@ function uploadStd() {
 			alert("上传失败!");
 			stop();
 		}
+	});
+}
+
+/**
+ * 根据resultId下载结果数据
+ * 
+ */
+function downloadResultById() {
+	$(function() {
+		var form = $('<form method="POST" action="/stdfile/downloadStdfileByStdfileId">');
+		form.append($('<input type="hidden" name="stdfileId" value="' + stdfileId + '"/>'));
+		$('body').append(form);
+		form.submit(); // 自动提交
 	});
 }
 

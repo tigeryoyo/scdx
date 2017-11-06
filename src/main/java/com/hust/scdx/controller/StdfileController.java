@@ -1,24 +1,36 @@
 package com.hust.scdx.controller;
 
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.constant.Constant.Resutt;
+import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
+import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
 
 @Controller
@@ -73,6 +85,40 @@ public class StdfileController {
 	}
 
 	/**
+	 * 根据标准数据id下载标准数据
+	 * 
+	 * @param StdfileId
+	 *            标准数据id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/downloadStdfileByStdfileId", method = RequestMethod.POST)
+	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
+			HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> map = stdfileService.getStdfileAndAbstractById(stdfileId);
+		if (map == null || map.size() == 0) {
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
+		try (OutputStream outputStream = response.getOutputStream();) {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("multipart/form-data");
+
+			String resultName = new String(((String) map.get(StdfileMap.NAME)).getBytes(), "ISO8859-1");
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
+			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
+					(List<Integer>) map.get(StdfileMap.MARKED));
+			workbook.write(outputStream);
+		} catch (Exception e) {
+			logger.error("下载结果失败。");
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
+		return ResultUtil.success("删除成功。");
+	}
+
+	/**
 	 * 根据时间范围查找标准数据文件。
 	 * 
 	 * @param topicId
@@ -95,7 +141,7 @@ public class StdfileController {
 		}
 		return ResultUtil.success(list);
 	}
-	
+
 	/**
 	 * 分析标准数据文件
 	 * 
@@ -116,4 +162,10 @@ public class StdfileController {
 		return ResultUtil.success(list);
 	}
 
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		CustomDateEditor editor = new CustomDateEditor(df, false);
+		binder.registerCustomEditor(Date.class, editor);
+	}
 }

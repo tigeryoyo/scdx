@@ -78,7 +78,6 @@ function queryResultByTimeRange(startTime,endTime) {
 		dataType : "json",
 		success : function(msg) {
 			if (msg.status == "OK") {
-			//	console.log(msg.result);
 				$("#resultList").html("");
 				var items = msg.result;
 				if(null == items || 0 == items.length)
@@ -118,7 +117,6 @@ function showResultByContent(items){
 			+ resultId + '\',' + item[3] + ')">' + item[0] + '</a></td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
 			//添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'
 			+  item[3]  + '</td></tr>';
-		console.log(rows);
 		$('.summary_tab table').append(rows);
 	}
 }
@@ -357,7 +355,6 @@ function deleteClusterItemsByIndices() {
  * 根据resultId下载结果数据
  * 
  */
-
 function downloadResultById() {
 	$(function() {
 		var form = $('<form method="POST" action="/result/downloadResultById">');
