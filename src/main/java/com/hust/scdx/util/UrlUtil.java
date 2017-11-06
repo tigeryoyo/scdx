@@ -147,10 +147,9 @@ public class UrlUtil {
 		Matcher matcher2 = pattern2.matcher(url+".");
 		if (matcher2.find()) {
 			head = matcher2.group();
-			head = head.substring(0, head.length()-1);
 		} else
 			return null;
-		return head + end;
+		return (head + end).replace("..", ".");
 	}
 
 	/**
