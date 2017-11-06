@@ -16,7 +16,7 @@ function paint() {
     title = getCookie('title');
     $.ajax({
         type : "post",
-        url : "/standardResult/statisticSingleSet",
+        url : "/stdfile/statisticSingleSet",
         data : {
         	stdfileId:stdfileId,
         	interval : 2,
@@ -42,6 +42,7 @@ function mouseover(th){
             .siblings().removeClass('stop_zs');
 }
 function parseTime(json) {
+	console.log(json)
     var netAttenHtml = '';
     var typeHtml = '';
     var mediaAttenHtml = '';

@@ -265,9 +265,9 @@ function searchTimeChange(){
 }
 
 //画图页面跳转
-function toPaint(currentSet, title) {
+function toPaint(targetIndex, title) {
 	setCookie('targetIndex', targetIndex);
 	setCookie('title', title);
 	setCookie('stdfileId',stdfileId);
-	baseAjax("data_results");
+	jumpto("data_results");
 }
