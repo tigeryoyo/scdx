@@ -19,12 +19,15 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.common.collect.Maps;
 import com.hust.scdx.constant.Config.DIRECTORY;
+import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.dao.StdfileDao;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.StdfileQueryCondition;
+import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.StdfileService;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ConvertUtil;
@@ -42,6 +45,8 @@ public class StdfileServiceImpl implements StdfileService {
 	StdfileDao stdfileDao;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private MiningService miningService;
 
 	/**
 	 * 根据专题id删除该专题下的所有标准数据:数据库与文件系统内的数据。
@@ -123,6 +128,49 @@ public class StdfileServiceImpl implements StdfileService {
 		Map<String,Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
 		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
 		return stdfileMap;
+	}
+	
+	
+	/**
+	 * 出图----统计准数据
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		try {
+			// 标准数据
+			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
+			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;			
+			List<String[]> clusters = FileUtil.readStdfile(stdfilePath);			
+			if (clusters == null || clusters.isEmpty()) {
+				return null;
+			}
+			// 属性行
+			String[] attrs = clusters.get(0);
+			for (String s : attrs) {
+				System.out.print(s + "\t");
+			}
+			List<String[]> cluster = clusters.get(targetIndex);
+			cluster.add(0, attrs);
+			//
+			Map<String, Map<String, Map<String, Integer>>> timeMap = miningService.statisticStdfile(cluster,
+					interval);
+			Map<String, Object> reMap = miningService.getAmount(timeMap);
+			Map<String, Integer> levelMap = (Map<String, Integer>) reMap.get(KEY.MINING_AMOUNT_MEDIA);
+			Map<String, Integer> typeMap = (Map<String, Integer>) reMap.get(KEY.MINING_AMOUNT_TYPE);
+			Map<String, Object> map = Maps.newHashMap();
+			map.put("time", timeMap);
+			Map<String, Object> countMap = Maps.newHashMap();
+			countMap.put("type", typeMap);
+			countMap.put("level", levelMap);
+			map.put("count", countMap);
+			return map;
+		} catch (Exception e) {
+			logger.error("exception occur when statistic:{}", e.toString());
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@InitBinder

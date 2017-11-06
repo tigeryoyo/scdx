@@ -120,4 +120,11 @@ public interface DomainService {
 	 * @return 更新成功返回true，失败返回false
 	 */
 	boolean updateDomainTwo(DomainTwo two);
+	
+	/**
+	 * 根据给定的url获取到域名信息
+	 * @param url 完整的url
+	 * @return 清洗过后的域名对象
+	 */
+	Domain getDomainByUrl(String url);
 }

@@ -403,4 +403,18 @@ public class DomainServiceImpl implements DomainService {
 		// TODO Auto-generated method stub
 		return domainTwoDao.updateDomainTwo(two);
 	}
+	
+	public Domain getDomainByUrl(String url){
+		String tmp = UrlUtil.getUrl(url);
+		Domain domain = null;
+		DomainOne domainOne = domainOneDao.getDomainOneByUrl(tmp);
+		if(domainOne!= null){
+			domain = new Domain();
+			domain.setDomainFormOne(domainOne);
+		}else{
+			DomainTwo domainTwo = domainTwoDao.getDomainTwoByUrl(tmp);
+			domain.setDomainFormTwo(domainTwo);
+		}		
+		return domain;
+	}
 }

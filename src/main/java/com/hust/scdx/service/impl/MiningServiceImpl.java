@@ -3,7 +3,11 @@ package com.hust.scdx.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -21,12 +25,19 @@ import com.hust.datamining.convertor.DigitalConvertor;
 import com.hust.datamining.convertor.TFIDFConvertor;
 import com.hust.datamining.simcal.AcrossSimilarity;
 import com.hust.datamining.simcal.CosSimilarity;
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.Algorithm;
 import com.hust.scdx.constant.Constant.Index;
+import com.hust.scdx.constant.Constant.KEY;
+import com.hust.scdx.dao.WeightDao;
+import com.hust.scdx.model.Domain;
+import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.SegmentService;
 import com.hust.scdx.util.AttrUtil;
+import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
+import com.hust.scdx.util.UrlUtil;
 
 @Service
 public class MiningServiceImpl implements MiningService {
@@ -37,6 +48,10 @@ public class MiningServiceImpl implements MiningService {
 
 	@Autowired
 	private SegmentService segmentService;
+	@Autowired
+	private DomainService domainService;
+	@Autowired
+	private WeightDao weightDao;
 
 	/**
 	 * 目的是聚类。第一个参数是原始文本，第二个为向量模型的选择，第三个为算法的选择（已经写死了，为canopy）。
@@ -194,5 +209,137 @@ public class MiningServiceImpl implements MiningService {
 		}
 		return origCounts;
 	}
+	
+	
+	
+	/**
+	 * 获取出图需要的统计数据信息
+	 * @param map
+	 * @return
+	 */
+	@Override
+    public Map<String, Object> getAmount(Map<String, Map<String, Map<String, Integer>>> map) {
+        // TODO Auto-generated method stub
+        if (map == null) {
+            return null;
+        }
+        Map<String, Integer> typeAmountMap = new HashMap<String, Integer>();
+        for (Map<String, Map<String, Integer>> values : map.values()) {
+            Map<String, Integer> typeMap = values.get(KEY.INFOTYPE_EN);
+            for (Entry<String, Integer> entry : typeMap.entrySet()) {
+                Integer oldValue = typeAmountMap.get(entry.getKey());
+                if (null == oldValue) {
+                    oldValue = 0;
+                }
+                typeAmountMap.put(entry.getKey(), entry.getValue() + oldValue);
+            }
+        }
+        Map<String, Integer> mediaAmountMap = new HashMap<String, Integer>();
+        for (Map<String, Map<String, Integer>> values : map.values()) {
+            Map<String, Integer> mediaMap = values.get(KEY.MEDIA_EN);
+            for (Entry<String, Integer> entry : mediaMap.entrySet()) {
+                Integer oldValue = mediaAmountMap.get(entry.getKey());
+                if (null == oldValue) {
+                    oldValue = 0;
+                }
+                mediaAmountMap.put(entry.getKey(), entry.getValue() + oldValue);
+            }
+        }
+        Map<String, Object> reMap = new HashMap<>();
+        reMap.put(KEY.MINING_AMOUNT_MEDIA, mediaAmountMap);
+        reMap.put(KEY.MINING_AMOUNT_TYPE, typeAmountMap);
+        return reMap;
+    }
+
+    /**
+     * 统计准数据某个类各个维度信息
+     * content 类的所有记录
+     */
+    @Override
+	public Map<String, Map<String, Map<String, Integer>>> statisticStdfile(List<String[]> content, int interval) {
+		Map<String, Map<String, Map<String, Integer>>> map =
+                new TreeMap<String, Map<String, Map<String, Integer>>>(new Comparator<String>() {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return o1.compareTo(o2);
+                    }
+                });
+        //属性行
+        String[] attrs = content.remove(0);
+        int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
+        int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+        
+        for (String[] row : content) {
+           
+            if (CommonUtil.isEmptyArray(row)) {
+                continue;
+            }
+           
+            Domain domain = domainService.getDomainByUrl(row[indexOfUrl]);
+            String level = domain.getRank();
+            String type = domain.getType();
+            String timeKey = CommonUtil.getTimeKey(row[indexOfTime], interval);
+            Map<String, Map<String, Integer>> timeMap = map.get(timeKey);
+            if (timeMap == null) {
+                timeMap = new HashMap<String, Map<String, Integer>>();
+                Map<String, Integer> typeMap = new HashMap<String, Integer>();
+                Map<String, Integer> levelMap = new HashMap<String, Integer>();
+                typeMap.put(type, 1);
+                levelMap.put(level, 1);
+                timeMap.put(KEY.MEDIA_EN, levelMap);
+                timeMap.put(KEY.INFOTYPE_EN, typeMap);
+                map.put(timeKey, timeMap);
+            } else {
+                Map<String, Integer> typeMap = timeMap.get(KEY.INFOTYPE_EN);
+                if (null == typeMap) {
+                    typeMap = new HashMap<String, Integer>();
+                    typeMap.put(type, 1);
+                } else {
+                    if (typeMap.get(type) == null) {
+                        typeMap.put(type, 1);
+                    } else {
+                        typeMap.put(type, typeMap.get(type) + 1);
+                    }
+                }
+
+                Map<String, Integer> levelMap = timeMap.get(KEY.MEDIA_EN);
+                if (null == levelMap) {
+                    levelMap = new HashMap<String, Integer>();
+                    levelMap.put(level, 1);
+                } else {
+                    if (levelMap.get(level) == null) {
+                        levelMap.put(level, 1);
+                    } else {
+                        levelMap.put(level, levelMap.get(level) + 1);
+                    }
+                }
+                timeMap.put(KEY.MEDIA_EN, levelMap);
+                timeMap.put(KEY.INFOTYPE_EN, typeMap);
+                map.put(timeKey, timeMap);
+            }
+        }
+        for (String time : map.keySet()) {
+            Map<String, Map<String, Integer>> timeMap = map.get(time);
+            Map<String, Integer> mediaAttention = calAttention(timeMap.get(KEY.MEDIA_EN));
+            Map<String, Integer> netizenAttention = calAttention(timeMap.get(KEY.INFOTYPE_EN));
+            timeMap.put(KEY.NETIZENATTENTION_EN, netizenAttention);
+            timeMap.put(KEY.MEDIAATTENTION_EN, mediaAttention);
+        }
+        return map;
+	}
+    
+    private Map<String, Integer> calAttention(Map<String, Integer> map) {
+        // TODO Auto-generated method stub
+        Map<String, Integer> attention = new HashMap<String, Integer>();
+        if (null == map) {
+            return attention;
+        }
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            int weight = weightDao.queryWeightByName(entry.getKey().toString());
+            int atten = weight * entry.getValue();
+            attention.put(entry.getKey(), atten);
+        }
+        return attention;
+    }
 
 }
