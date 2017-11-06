@@ -125,37 +125,27 @@ public class StdfileServiceImpl implements StdfileService {
 	public Map<String, Object> getStdfileAndAbstractById(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-		Map<String,Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
+		Map<String, Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
 		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
 		return stdfileMap;
 	}
-	
-	
+
 	/**
 	 * 出图----统计准数据
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request) {
-		// TODO Auto-generated method stub
+	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex,
+			HttpServletRequest request) {
 		try {
 			// 标准数据
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
-			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;			
-			List<String[]> clusters = FileUtil.readStdfile(stdfilePath);			
-			if (clusters == null || clusters.isEmpty()) {
+			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+			List<String[]> cluster = FileUtil.getTargetSet(stdfilePath, targetIndex);
+			if (cluster == null || cluster.isEmpty()) {
 				return null;
 			}
-			// 属性行
-			String[] attrs = clusters.get(0);
-			for (String s : attrs) {
-				System.out.print(s + "\t");
-			}
-			List<String[]> cluster = clusters.get(targetIndex);
-			cluster.add(0, attrs);
-			//
-			Map<String, Map<String, Map<String, Integer>>> timeMap = miningService.statisticStdfile(cluster,
-					interval);
+			Map<String, Map<String, Map<String, Integer>>> timeMap = miningService.statisticStdfile(cluster, interval);
 			Map<String, Object> reMap = miningService.getAmount(timeMap);
 			Map<String, Integer> levelMap = (Map<String, Integer>) reMap.get(KEY.MINING_AMOUNT_MEDIA);
 			Map<String, Integer> typeMap = (Map<String, Integer>) reMap.get(KEY.MINING_AMOUNT_TYPE);
