@@ -11,13 +11,9 @@
 });*/
 var title = "";
 function paint() {
-    var currentSet = getCookie('currentSet');
-    var stdfileId = stdfileId;
+    var currentSet = getCookie('targetIndex');
+    var stdfileId = getCookie('stdfileId');
     title = getCookie('title');
-    var json = {
-        interval : 2,
-        currentSet : currentSet
-    };
     $.ajax({
         type : "post",
         url : "/standardResult/statisticSingleSet",

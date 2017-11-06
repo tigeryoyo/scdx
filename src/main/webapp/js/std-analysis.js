@@ -133,7 +133,7 @@ function showDetail(e){
 					// items第一行存储index，故从i+1读起
 					var item = items[i];
 					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'+
-						'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[3].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'+
+						'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[0].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'+
 						'</td></tr>';
 					$('.summary_tab table').append(rows);
 				}		
@@ -266,7 +266,8 @@ function searchTimeChange(){
 
 //画图页面跳转
 function toPaint(currentSet, title) {
-	setCookie('currentSet', currentSet);
+	setCookie('targetIndex', targetIndex);
 	setCookie('title', title);
+	setCookie('stdfileId',stdfileId);
 	baseAjax("data_results");
 }
