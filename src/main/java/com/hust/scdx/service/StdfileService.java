@@ -2,6 +2,7 @@ package com.hust.scdx.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,5 +18,7 @@ public interface StdfileService {
 	List<Stdfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime);
 
 	List<String[]> analyzeByStdfileId(String stdfileId);
+
+	Map<String, Object> getStdfileAndAbstractById(String stdfileId);
 
 }

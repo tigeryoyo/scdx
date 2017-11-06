@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -26,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
+import com.hust.scdx.constant.Constant.StdfileMap;
 
 public class FileUtil {
 	/**
@@ -359,4 +361,53 @@ public class FileUtil {
 			return null;
 		}
 	}
+
+	/**
+	 * <content,List<String[]>>， <marked,List<Integer>>
+	 * 获取stdfile内容与待标记的id集合（每个类中的下标）
+	 * 
+	 * @param stdfilePath
+	 * @return
+	 */
+	public static Map<String, Object> getStdfileMap(String stdfilePath) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
+			List<String[]> content = new ArrayList<String[]>();
+			List<Integer> marked = new ArrayList<Integer>();
+			String line = br.readLine();
+			String[] row = line.split("\t");
+			content.add(row);
+			int indexOfTime = AttrUtil.findIndexOfTime(row);
+			do {
+				String latestTime = "9999-12-12 23:59:59";
+				List<String[]> cluster = new ArrayList<String[]>();
+				int markedIndex = 0;
+				int i = 0;
+				while (!StringUtils.isBlank((line = br.readLine()))) {
+					row = line.split("\t");
+					cluster.add(row);
+					if (latestTime.compareTo(row[indexOfTime]) > 0) {
+						latestTime = row[indexOfTime];
+						markedIndex = i;
+					}
+					i++;
+				}
+				if (i != 0) {
+					marked.add(markedIndex);
+					content.addAll(cluster);
+				}
+				if (StringUtils.isEmpty(line)) {
+					content.add(new String[0]);
+				}
+			} while (line != null);
+			map.put(StdfileMap.CONTENT, content);
+			map.put(StdfileMap.MARKED, marked);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("获取标准数据map出错。");
+			return null;
+		}
+		return map;
+	}
+
 }

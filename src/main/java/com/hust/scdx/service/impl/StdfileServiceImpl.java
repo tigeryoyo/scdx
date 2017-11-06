@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.constant.Config.DIRECTORY;
+import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.dao.StdfileDao;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.User;
@@ -109,6 +111,18 @@ public class StdfileServiceImpl implements StdfileService {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		return FileUtil.readStdfile(stdfilePath);
+	}
+
+	/**
+	 * 根据stdfileId得到标准文件与摘要
+	 */
+	@Override
+	public Map<String, Object> getStdfileAndAbstractById(String stdfileId) {
+		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
+		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+		Map<String,Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
+		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
+		return stdfileMap;
 	}
 
 	@InitBinder

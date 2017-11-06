@@ -22,6 +22,12 @@ public class Constant {
 		public final static String RESULTNAME = "resultName";
 		public final static String MARKED = "marked";
 	}
+	
+	public static class StdfileMap {
+		public final static String NAME = "name";
+		public final static String CONTENT = "content";
+		public final static String MARKED = "marked";
+	}
 
 	public static class Index {
 		public static final int TITLE = 0;
