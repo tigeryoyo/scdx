@@ -135,7 +135,7 @@ public class UrlUtil {
 		}
 		String head = "";
 		String end = "";
-		Pattern pattern1 = Pattern.compile(RE);
+		Pattern pattern1 = Pattern.compile("\\."+RE);
 		Matcher matcher1 = pattern1.matcher(url);
 		if (matcher1.find()) {
 			end = matcher1.group();
@@ -144,9 +144,10 @@ public class UrlUtil {
 			return null;
 		}
 		Pattern pattern2 = Pattern.compile(RE_SEC);
-		Matcher matcher2 = pattern2.matcher(url);
+		Matcher matcher2 = pattern2.matcher(url+".");
 		if (matcher2.find()) {
 			head = matcher2.group();
+			head = head.substring(0, head.length()-1);
 		} else
 			return null;
 		return head + end;

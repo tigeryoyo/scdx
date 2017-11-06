@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.dao.mapper.DomainTwoMapper;
 import com.hust.scdx.model.DomainTwo;
@@ -14,7 +15,7 @@ import com.hust.scdx.model.DomainTwoExample;
 import com.hust.scdx.model.DomainTwoExample.Criteria;
 import com.hust.scdx.model.params.DomainTwoQueryCondition;
 
-
+@Repository
 public class DomainTwoDao {
 	private static final Logger logger = LoggerFactory.getLogger(DomainTwoDao.class);
 

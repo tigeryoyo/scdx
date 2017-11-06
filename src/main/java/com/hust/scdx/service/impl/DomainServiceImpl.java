@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.constant.Constant.DomainExcelAttr;
@@ -26,8 +27,9 @@ import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.UrlUtil;
 
+@Service
 public class DomainServiceImpl implements DomainService {
-	private static final Logger logger = LoggerFactory.getLogger(DomainService.class);
+	private static final Logger logger = LoggerFactory.getLogger(DomainServiceImpl.class);
 
 	@Autowired
 	private DomainOneDao domainOneDao;
@@ -413,7 +415,13 @@ public class DomainServiceImpl implements DomainService {
 			domain.setDomainFormOne(domainOne);
 		}else{
 			DomainTwo domainTwo = domainTwoDao.getDomainTwoByUrl(tmp);
-			domain.setDomainFormTwo(domainTwo);
+			if(domainTwo!=null){
+				domain = new Domain();
+				domain.setDomainFormTwo(domainTwo);
+			}else{
+				domain = new Domain();
+				logger.debug("-----------------------------"+url+"不存在"+tmp);
+			}
 		}		
 		return domain;
 	}

@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.dao.mapper.DomainOneMapper;
 import com.hust.scdx.model.DomainOne;
@@ -13,6 +14,7 @@ import com.hust.scdx.model.DomainOneExample;
 import com.hust.scdx.model.DomainOneExample.Criteria;
 import com.hust.scdx.model.params.DomainOneQueryCondition;
 
+@Repository
 public class DomainOneDao {
 	private static final Logger logger = LoggerFactory.getLogger(DomainOneDao.class);
 

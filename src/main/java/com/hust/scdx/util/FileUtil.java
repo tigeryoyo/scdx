@@ -378,13 +378,13 @@ public class FileUtil {
 			int i = 0;
 			do {
 				if (i == targetIndex) {
-					while (StringUtils.isBlank((line = br.readLine()))) {
+					while (!StringUtils.isBlank((line = br.readLine()))) {
 						row = line.split("\t");
 						list.add(row);
 					}
 					break;
 				}
-				while (StringUtils.isBlank((line = br.readLine())))
+				while (!StringUtils.isBlank((line = br.readLine())))
 					;
 				i++;
 			} while (line != null);
