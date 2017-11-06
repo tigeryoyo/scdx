@@ -1,6 +1,7 @@
 package com.hust.scdx.service;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MiningService {
 
@@ -21,4 +22,8 @@ public interface MiningService {
 	 */
 	public List<int[]> getOrigCounts(String[] attrs, List<String[]> content, List<String[]> origClusters);
 
+	
+	Map<String, Map<String, Map<String, Integer>>> statisticStdfile(List<String[]> content, int interval);
+	
+	Map<String, Object> getAmount(Map<String, Map<String, Map<String, Integer>>> map);
 }

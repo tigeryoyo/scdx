@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -161,6 +162,25 @@ public class StdfileController {
 		}
 		return ResultUtil.success(list);
 	}
+
+    /**
+     * 对准数据一个类统计出图
+     * @param params
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/statisticSingleSet")
+    public Object statistic(@RequestParam(value = "stdfileId", required = true) String stdfileId,@RequestParam(value = "interval", required = true) Integer interval,@RequestParam(value = "targetIndex", required = true) String targetIndex, HttpServletRequest request) {
+        if (StringUtils.isBlank(stdfileId)) {
+            return ResultUtil.errorWithMsg("请重新选择准数据任务");
+        }
+        Map<String, Object> map = stdfileService.statistic(stdfileId,interval,Integer.parseInt(targetIndex), request);
+        if (null == map || map.isEmpty()) {
+            return ResultUtil.errorWithMsg("统计失败");
+        }
+        return ResultUtil.success(map);
+    }
 
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

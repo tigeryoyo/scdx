@@ -95,4 +95,22 @@ public class Constant {
 		public static final String RED = "FF0000";
 		public static final String GREEN = "008B00";
 	}
+	
+	//出图用到的参数
+	public static class KEY{
+        public static final String MINING_AMOUNT_TYPE = "typeAmount";
+        public static final String MINING_AMOUNT_MEDIA = "mediaAmount";
+        public final static String NETIZENATTENTION_EN = "netizenAttention";
+        public final static String MEDIAATTENTION_EN = "mediaAttention";
+        public final static String MEDIA_EN = "media";
+        public final static String INFOTYPE_EN = "infoType";
+        public final static String INVALID_TIME = "1970-01-01";
+	}
+	
+	// 出图用到的 统计时间间隔
+    public static class Interval {
+        public static final int HOUR = 1;
+        public static final int DAY = 2;
+        public static final int MONTH = 3;
+    }
 }

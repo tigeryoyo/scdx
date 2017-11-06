@@ -20,5 +20,7 @@ public interface StdfileService {
 	List<String[]> analyzeByStdfileId(String stdfileId);
 
 	Map<String, Object> getStdfileAndAbstractById(String stdfileId);
+	
+	Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request);
 
 }
