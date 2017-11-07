@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.DomainExcelAttr;
 import com.hust.scdx.dao.DomainOneDao;
 import com.hust.scdx.dao.DomainTwoDao;
@@ -87,27 +88,45 @@ public class DomainServiceImpl implements DomainService {
 				typeFlag = false;
 			}
 			
-			/**
-			 * 获取其他属性列的下标
-			 */
+			// 获取其他属性列的下标
 			List<Domain> list = new ArrayList<>();
 			for (String[] string : content) {
-				if(string.length<=0 || null == string){
+				if(string.length<=0 || null == string || Constant.existDomain.contains(UrlUtil.getUrl(string[urlIndex]))){
 					continue;
 				}
 				Domain d = new Domain();
 				d.setUrl(string[urlIndex]);
-				if(nameFlag)
-					d.setName(string[nameIndex]);
-				if(columnFlag)
-					d.setColumn(string[columnIndex]);
-				if(typeFlag)
-					d.setType(string[typeIndex]);
+				if(nameFlag){
+					if(StringUtils.isBlank(string[nameIndex])){
+						d.setName("其他");
+					}else{
+						d.setName(string[nameIndex]);
+					}					
+				}
+				if(columnFlag){
+					if(StringUtils.isBlank(string[columnIndex])){
+						d.setColumn("其他");
+					}else{
+						if(string[columnIndex].length()>32){
+							d.setColumn(string[columnIndex].substring(0, 31));
+						}else{
+							d.setColumn(string[columnIndex]);
+						}
+					}
+				}
+				if(typeFlag){
+					if(StringUtils.isBlank(string[typeIndex])){
+						d.setType("其他");
+					}else{
+						d.setType(string[typeIndex]);
+					}
+				}
 				/**
 				 * 添加其他属性 注意判null
 				 */
 				list.add(d);
 			}
+			System.out.println("---------这是一个测试---------需要添加的未知url有----"+list.size());
 			return addUnknowDomain(list);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -180,6 +199,9 @@ public class DomainServiceImpl implements DomainService {
 					father.setIsFather(true);
 					if (!domainOneDao.insertDomain(father)){						
 						return false;
+					}else{
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(father.getUrl());
 					}
 				} else {
 					fatherUuid = domainOne.getUuid();
@@ -193,6 +215,8 @@ public class DomainServiceImpl implements DomainService {
 					dt.setUrl(two);
 					dt.setUpdateTime(new Date());
 					if (domainTwoDao.insertDomainTwo(dt)) {
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(dt.getUrl());
 						//插入成功则判断其父的isFather是否为真，诺为否则更新
 						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
 						if (null != dm && !dm.getIsFather()) {
@@ -217,6 +241,10 @@ public class DomainServiceImpl implements DomainService {
 					domainOne.setUpdateTime(new Date());
 					if (!domainOneDao.insertDomain(domainOne))
 						return false;
+					else{
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(domainOne.getUrl());
+					}
 				}
 			}
 		}else{
@@ -261,8 +289,12 @@ public class DomainServiceImpl implements DomainService {
 					domainOne.setUrl(one);
 					domainOne.setIsFather(true);
 					domainOne.setUpdateTime(new Date());
-					if (!domainOneDao.insertDomain(domainOne))
+					if (!domainOneDao.insertDomain(domainOne)){
 						return false;
+					}else{
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(domainOne.getUrl());
+					}
 				} else {
 					fatherUuid = domainOne.getUuid();
 				}
@@ -276,6 +308,8 @@ public class DomainServiceImpl implements DomainService {
 					domainTwo.setFatherUuid(fatherUuid);
 					domainTwo.setUpdateTime(new Date());
 					if (domainTwoDao.insertDomainTwo(domainTwo)) {
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(domainTwo.getUrl());
 						//插入二级域名成功后，更新对应一级域名的isFather属性
 						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
 						if (null != dm && !dm.getIsFather()) {
@@ -312,6 +346,10 @@ public class DomainServiceImpl implements DomainService {
 					domainOne.setUpdateTime(new Date());
 					if (!domainOneDao.insertDomain(domainOne))
 						return false;
+					else{
+						//添加成功，写入全局域名存放在数据库中
+						Constant.existDomain.add(domainOne.getUrl());
+					}
 				} else {
 					//更新一级域名信息
 					DomainOne dm = domain.getDomainOneBaseProperty();

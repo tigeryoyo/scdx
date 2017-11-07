@@ -3,6 +3,7 @@ package com.hust.scdx.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +11,17 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.hust.scdx.constant.Config;
+import com.hust.scdx.constant.Constant;
+import com.hust.scdx.dao.DomainOneDao;
+import com.hust.scdx.dao.DomainTwoDao;
+import com.hust.scdx.model.DomainOne;
+import com.hust.scdx.model.DomainTwo;
+import com.hust.scdx.model.params.DomainOneQueryCondition;
+import com.hust.scdx.model.params.DomainTwoQueryCondition;
 
 /**
  * 域名分级清洗相关操作
@@ -32,6 +44,28 @@ public class UrlUtil {
 
 	// 三级域名提取
 	// private static final String RE_THI = "(\\w*\\.){3,}";
+	
+	/**
+	 * 初始化全局域名对象，添加未知URL时减少数据库查询操作
+	 */
+	static{		
+		//初始化域名对象
+		Constant.existDomain = new HashSet<String>();
+		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
+		DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
+		DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
+		oneCondition.setLimit(0);
+		oneCondition.setStart(0);
+		for (DomainOne domainOne : domainOneDao.getDomainOneOrderByTime(oneCondition)) {
+			Constant.existDomain.add(domainOne.getUrl());
+		}
+		DomainTwoDao domaintwoDao = applicationContext.getBean(DomainTwoDao.class);
+		DomainTwoQueryCondition twoCondition = new DomainTwoQueryCondition();
+		for (DomainTwo domainTwo : domaintwoDao.getDomainTwoByCondition(twoCondition)) {
+			Constant.existDomain.add(domainTwo.getUrl());			
+		}
+		System.out.println("---------------existDomain------"+Constant.existDomain.size());
+	}
 
 	/**
 	 * 给定网址提取出完整域名（包含非80端口的端口）,同时清洗掉www.

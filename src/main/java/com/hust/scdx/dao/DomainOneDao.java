@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.mapper.DomainOneMapper;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainOneExample;
@@ -258,8 +259,9 @@ public class DomainOneDao {
 	 * @return 插入失败则返回0
 	 */
 	public boolean insertDomain(DomainOne domainOne) {
-		if (0 < domainOneMapper.insertSelective(domainOne))
+		if (0 < domainOneMapper.insertSelective(domainOne)){
 			return true;
+		}
 		else
 			return false;
 	}

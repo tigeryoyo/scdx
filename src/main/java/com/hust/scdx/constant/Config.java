@@ -1,8 +1,18 @@
 package com.hust.scdx.constant;
 
 import java.io.File;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.hust.scdx.dao.DomainOneDao;
+import com.hust.scdx.dao.DomainTwoDao;
+import com.hust.scdx.model.DomainOne;
+import com.hust.scdx.model.DomainTwo;
+import com.hust.scdx.model.params.DomainOneQueryCondition;
+import com.hust.scdx.model.params.DomainTwoQueryCondition;
 
 /**
  * 系统文件配置路径-->config.properties
@@ -23,7 +33,7 @@ public class Config {
 	private String dirModifyCount;
 	@Value("${stdfile}")
 	private String dirStdfile;
-
+	
 	void init() {
 		DIRECTORY.init(dirExtfile, dirContent, dirOrigCluster, dirOrigCount, dirModifyCluster, dirModifyCount, dirStdfile);
 	}
@@ -89,6 +99,7 @@ public class Config {
 			if (!new File(dirStdfile).exists()) {
 				new File(dirStdfile).mkdirs();
 			}
+	
 		}
 	}
 }

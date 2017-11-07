@@ -276,6 +276,9 @@ public class MiningServiceImpl implements MiningService {
             }
            
             Domain domain = domainService.getDomainByUrl(row[indexOfUrl]);
+            if(domain == null){
+            	continue;
+            }
             String level = domain.getRank();
             String type = domain.getType();
             String timeKey = CommonUtil.getTimeKey(row[indexOfTime], interval);
