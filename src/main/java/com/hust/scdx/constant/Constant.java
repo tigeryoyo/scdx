@@ -1,5 +1,7 @@
 package com.hust.scdx.constant;
 
+import java.util.HashSet;
+
 public class Constant {
 
 	public final static String UESR = "user";
@@ -7,6 +9,11 @@ public class Constant {
 
 	public final static String UNKNOWN = "未知";
 	public final static String INVALID_TIME = "1970-01-01";
+
+	/**
+	 * 已经存在的域名，用于检测新来的域名是否存在数据库中
+	 */
+	public static HashSet<String> existDomain;
 
 	// 切片
 	public final static int slices = 1250;

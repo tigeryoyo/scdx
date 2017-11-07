@@ -1,6 +1,15 @@
-$("#startTime").attr("placeholder", "2016-01-01 00:00:00");
-$("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
-searchTimeChange();
+{
+	var t_temp = new Date();
+	t_temp.setHours(0);
+	t_temp.setMinutes(0);
+	t_temp.setSeconds(0);
+	t_temp.setMilliseconds(0);
+	var t_startTime = t_temp.getTime() - 30*24*60*60*1000;
+	var tempS  = new Date(t_startTime);
+	start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();            
+	$("#startTime").attr("placeholder", start);
+	$("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
+}
 /**
  * 此次聚类结果id
  */
@@ -412,17 +421,24 @@ function searchTimeChange(){
             startTime = temp.getTime() - 7*24*60*60*1000;
             var tempS  = new Date(startTime);
             var tempE = new Date(endTime);
-             start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
-             end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
-
+            start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
+            end = tempE.getFullYear()+"-"+(tempE.getMonth()+1)+"-"+tempE.getDate()+" "+tempE.getHours()+":"+tempE.getMinutes()+":"+tempE.getSeconds();
             break;
         default :
             start = $("#startTime").val();
             end = $("#endTime").val();
-            if(start=="" || start=="undefined"){
-                start = "2016-01-01 00:00:00";
+            if(start=="" || start=="undefined"  || null == start){
+            	var temp = new Date();
+                temp.setTime(currentTime.getTime());
+                temp.setHours(0);
+                temp.setMinutes(0);
+                temp.setSeconds(0);
+                temp.setMilliseconds(0);
+                startTime = temp.getTime() - 30*24*60*60*1000;
+                var tempS  = new Date(startTime);
+                start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();
             }
-            if(end == "" || end == "undefined"){
+            if(end == "" || end == "undefined" || null == end){
             	var date = new Date();
             	end = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
             }
@@ -432,6 +448,15 @@ function searchTimeChange(){
     queryResultByTimeRange(start,end);
 }
 
+$("#startTime").change(function(){
+	if(index = $("input[name='searchTime']:checked").val() == '4')
+		searchTimeChange();
+})
+
+$("#endTime").change(function(){
+	if(index = $("input[name='searchTime']:checked").val() == '4')
+		searchTimeChange();
+})
 
 //聚类的各个类详细信息显示操作js
 function showClusterDetails(index,resultId,count){
