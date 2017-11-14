@@ -149,7 +149,7 @@ public class AttrUtil {
 
 		int len = content.size();
 		for (int i = 1; i < len; i++) {
-			String[] row = content.get(0);
+			String[] row = content.get(i);
 			// 如果不为空行
 			if (row.length != 0) {
 				String time = TimeUtil.getTimeKey(row[indexOfTime], Interval.DAY);
