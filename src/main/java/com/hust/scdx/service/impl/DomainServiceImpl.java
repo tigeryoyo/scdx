@@ -91,7 +91,7 @@ public class DomainServiceImpl implements DomainService {
 			// 获取其他属性列的下标
 			List<Domain> list = new ArrayList<>();
 			for (String[] string : content) {
-				if(string.length<=0 || null == string || Constant.existDomain.contains(UrlUtil.getUrl(string[urlIndex]))){
+				if(string.length<=0 || null == string || Constant.existDomain.containsKey(UrlUtil.getUrl(string[urlIndex]))){
 					continue;
 				}
 				Domain d = new Domain();
@@ -201,7 +201,7 @@ public class DomainServiceImpl implements DomainService {
 						return false;
 					}else{
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(father.getUrl());
+						updateExistDomain(father);
 					}
 				} else {
 					fatherUuid = domainOne.getUuid();
@@ -216,14 +216,16 @@ public class DomainServiceImpl implements DomainService {
 					dt.setUpdateTime(new Date());
 					if (domainTwoDao.insertDomainTwo(dt)) {
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(dt.getUrl());
+						updateExistDomain(dt);
 						//插入成功则判断其父的isFather是否为真，诺为否则更新
 						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
 						if (null != dm && !dm.getIsFather()) {
 							dm.setIsFather(true);
 							dm.setUuid(fatherUuid);
 							dm.setUpdateTime(new Date());
-							domainOneDao.updateDomainOneInfo(dm);
+							if(domainOneDao.updateDomainOneInfo(dm)){
+								updateExistDomain(dm);
+							}
 						}
 					} else {
 						return false;
@@ -243,7 +245,7 @@ public class DomainServiceImpl implements DomainService {
 						return false;
 					else{
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(domainOne.getUrl());
+						updateExistDomain(domainOne);
 					}
 				}
 			}
@@ -293,7 +295,7 @@ public class DomainServiceImpl implements DomainService {
 						return false;
 					}else{
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(domainOne.getUrl());
+						updateExistDomain(domainOne);
 					}
 				} else {
 					fatherUuid = domainOne.getUuid();
@@ -309,14 +311,16 @@ public class DomainServiceImpl implements DomainService {
 					domainTwo.setUpdateTime(new Date());
 					if (domainTwoDao.insertDomainTwo(domainTwo)) {
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(domainTwo.getUrl());
+						updateExistDomain(domainTwo);
 						//插入二级域名成功后，更新对应一级域名的isFather属性
 						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
 						if (null != dm && !dm.getIsFather()) {
 							dm.setIsFather(true);
 							dm.setUuid(fatherUuid);
 							dm.setUpdateTime(new Date());
-							domainOneDao.updateDomainOneInfo(dm);
+							if(domainOneDao.updateDomainOneInfo(dm)){
+								updateExistDomain(dm);
+							}
 						}
 					} else {
 						//插入二级域名失败
@@ -332,6 +336,9 @@ public class DomainServiceImpl implements DomainService {
 					System.out.println("---------------------------测试fatherUUid是否一样-------"+fatherUuid== domainTwo.getFatherUuid());
 					if (!domainTwoDao.updateDomainTwo(dt))
 						return false;
+					else{
+						updateExistDomain(dt);
+					}
 				}
 			} else {
 				// 不是二级域名，就一定是一级域名
@@ -348,7 +355,7 @@ public class DomainServiceImpl implements DomainService {
 						return false;
 					else{
 						//添加成功，写入全局域名存放在数据库中
-						Constant.existDomain.add(domainOne.getUrl());
+						updateExistDomain(domainOne);
 					}
 				} else {
 					//更新一级域名信息
@@ -359,6 +366,9 @@ public class DomainServiceImpl implements DomainService {
 					dm.setUpdateTime(new Date());
 					if (!domainOneDao.updateDomainOneInfo(dm))
 						return false;
+					else{
+						updateExistDomain(dm);
+					}
 				}
 			}
 		}else{
@@ -435,13 +445,22 @@ public class DomainServiceImpl implements DomainService {
 	@Override
 	public boolean updateDomainOne(DomainOne one) {
 		// TODO Auto-generated method stub
-		return domainOneDao.updateDomainOneInfo(one);
+		if(domainOneDao.updateDomainOneInfo(one)){
+			updateExistDomain(one);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean updateDomainTwo(DomainTwo two) {
 		// TODO Auto-generated method stub
-		return domainTwoDao.updateDomainTwo(two);
+		if(domainTwoDao.updateDomainTwo(two)){
+			updateExistDomain(two);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public Domain getDomainByUrl(String url){
@@ -462,5 +481,16 @@ public class DomainServiceImpl implements DomainService {
 			}
 		}		
 		return domain;
+	}
+	
+	private void updateExistDomain(DomainTwo two){
+		Domain domain = new Domain();
+		domain.setDomainFormTwo(two);
+		Constant.existDomain.put(two.getUrl(), domain);
+	}
+	private void updateExistDomain(DomainOne one){
+		Domain domain = new Domain();
+		domain.setDomainFormOne(one);
+		Constant.existDomain.put(one.getUrl(), domain);
 	}
 }

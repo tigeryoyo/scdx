@@ -3,6 +3,7 @@ package com.hust.scdx.util;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,6 +19,7 @@ import com.hust.scdx.constant.Config;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.DomainOneDao;
 import com.hust.scdx.dao.DomainTwoDao;
+import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainTwo;
 import com.hust.scdx.model.params.DomainOneQueryCondition;
@@ -50,19 +52,22 @@ public class UrlUtil {
 	 */
 	static{		
 		//初始化域名对象
-		Constant.existDomain = new HashSet<String>();
 		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
 		DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
 		DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
 		oneCondition.setLimit(0);
 		oneCondition.setStart(0);
 		for (DomainOne domainOne : domainOneDao.getDomainOneOrderByTime(oneCondition)) {
-			Constant.existDomain.add(domainOne.getUrl());
+			Domain domain = new Domain();
+			domain.setDomainFormOne(domainOne);
+			Constant.existDomain.put(domainOne.getUrl(),domain);
 		}
 		DomainTwoDao domaintwoDao = applicationContext.getBean(DomainTwoDao.class);
 		DomainTwoQueryCondition twoCondition = new DomainTwoQueryCondition();
 		for (DomainTwo domainTwo : domaintwoDao.getDomainTwoByCondition(twoCondition)) {
-			Constant.existDomain.add(domainTwo.getUrl());			
+			Domain domain = new Domain();
+			domain.setDomainFormTwo(domainTwo);
+			Constant.existDomain.put(domainTwo.getUrl(),domain);			
 		}
 		System.out.println("---------------existDomain------"+Constant.existDomain.size());
 	}
