@@ -11,6 +11,9 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 
+import com.hust.scdx.constant.Constant.Interval;
+import com.hust.scdx.constant.Constant.KEY;
+
 public class TimeUtil {
 
 	public static String convert(Cell cell) {
@@ -66,4 +69,30 @@ public class TimeUtil {
         }
         return 0;
     }
+
+	/**
+	 * 获取出图需要的时间维度
+	 * @param time 时间 yyyy-mm-dd hh:MM:ss
+	 * @param interval
+	 * @return
+	 */
+	public static String getTimeKey(String time, int interval) {
+		if (StringUtils.isBlank(time) || !isvalidate(time)) {
+			return KEY.INVALID_TIME;
+		}
+		switch (interval) {
+		case Interval.HOUR: {
+			return time.substring(0, 13);
+		}
+		case Interval.DAY: {
+			return time.substring(0, 10);
+		}
+		case Interval.MONTH: {
+			return time.substring(0, 7);
+		}
+		default: {
+			return KEY.INVALID_TIME;
+		}
+		}
+	}
 }

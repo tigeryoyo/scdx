@@ -329,7 +329,7 @@ public class FileUtil {
 	 *            标准数据路径
 	 * @return
 	 */
-	public static List<String[]> readStdfile(String stdfilePath) {
+	public static List<String[]> getStdfileDisplaylist(String stdfilePath) {
 		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			String line = br.readLine();
@@ -363,48 +363,13 @@ public class FileUtil {
 	}
 
 	/**
-	 * 获取目标cluster
-	 * 
-	 * @param stdfilePath
-	 * @param targetIndex
-	 * @return
-	 */
-	public static List<String[]> getTargetSet(String stdfilePath, int targetIndex) {
-		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
-			ArrayList<String[]> list = new ArrayList<String[]>();
-			String line = br.readLine();
-			String[] row = line.split("\t");
-			list.add(row);
-			int i = 0;
-			do {
-				if (i == targetIndex) {
-					while (!StringUtils.isBlank((line = br.readLine()))) {
-						row = line.split("\t");
-						list.add(row);
-					}
-					break;
-				}
-				while (!StringUtils.isBlank((line = br.readLine())))
-					;
-				i++;
-			} while (line != null);
-
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("读取标准数据文件出错。");
-			return null;
-		}
-	}
-
-	/**
 	 * <content,List<String[]>>， <marked,List<Integer>>
 	 * 获取stdfile内容与待标记的id集合（每个类中的下标）
 	 * 
 	 * @param stdfilePath
 	 * @return
 	 */
-	public static Map<String, Object> getStdfileMap(String stdfilePath) {
+	public static Map<String, Object> getStdfileExcelcontent(String stdfilePath) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
 			List<String[]> content = new ArrayList<String[]>();
@@ -443,6 +408,41 @@ public class FileUtil {
 			return null;
 		}
 		return map;
+	}
+
+	/**
+	 * 获取目标cluster
+	 * 
+	 * @param stdfilePath
+	 * @param targetIndex
+	 * @return
+	 */
+	public static List<String[]> getStdfileTargetCluster(String stdfilePath, int targetIndex) {
+		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
+			ArrayList<String[]> list = new ArrayList<String[]>();
+			String line = br.readLine();
+			String[] row = line.split("\t");
+			list.add(row);
+			int i = 0;
+			do {
+				if (i == targetIndex) {
+					while (!StringUtils.isBlank((line = br.readLine()))) {
+						row = line.split("\t");
+						list.add(row);
+					}
+					break;
+				}
+				while (!StringUtils.isBlank((line = br.readLine())))
+					;
+				i++;
+			} while (line != null);
+
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("读取标准数据文件出错。");
+			return null;
+		}
 	}
 
 }

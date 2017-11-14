@@ -97,7 +97,42 @@ public class StdfileController {
 	@RequestMapping(value = "/downloadStdfileByStdfileId", method = RequestMethod.POST)
 	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
 			HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> map = stdfileService.getStdfileAndAbstractById(stdfileId);
+		Map<String, Object> map = stdfileService.getStdfileById(stdfileId);
+		if (map == null || map.size() == 0) {
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
+		try (OutputStream outputStream = response.getOutputStream();) {
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("multipart/form-data");
+
+			String resultName = new String(((String) map.get(StdfileMap.NAME)).getBytes(), "ISO8859-1");
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
+			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
+					(List<Integer>) map.get(StdfileMap.MARKED));
+			workbook.write(outputStream);
+		} catch (Exception e) {
+			logger.error("下载结果失败。");
+			return ResultUtil.errorWithMsg("下载结果失败。");
+		}
+
+		return ResultUtil.success("删除成功。");
+	}
+
+	/**
+	 * 根据标准数据id下载标准数据
+	 * 
+	 * @param StdfileId
+	 *            标准数据id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/downloadAbstractByStdfileId", method = RequestMethod.POST)
+	public Object downloadAbstractByStdfileId(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request,
+			HttpServletResponse response) {
+		Map<String, Object> map = stdfileService.getStdfileById(stdfileId);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
@@ -163,24 +198,27 @@ public class StdfileController {
 		return ResultUtil.success(list);
 	}
 
-    /**
-     * 对准数据一个类统计出图
-     * @param params
-     * @param request
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/statisticSingleSet")
-    public Object statistic(@RequestParam(value = "stdfileId", required = true) String stdfileId,@RequestParam(value = "interval", required = true) Integer interval,@RequestParam(value = "targetIndex", required = true) String targetIndex, HttpServletRequest request) {
-        if (StringUtils.isBlank(stdfileId)) {
-            return ResultUtil.errorWithMsg("请重新选择准数据任务");
-        }
-        Map<String, Object> map = stdfileService.statistic(stdfileId,interval,Integer.parseInt(targetIndex), request);
-        if (null == map || map.isEmpty()) {
-            return ResultUtil.errorWithMsg("统计失败");
-        }
-        return ResultUtil.success(map);
-    }
+	/**
+	 * 对准数据一个类统计出图
+	 * 
+	 * @param params
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/statisticSingleSet")
+	public Object statistic(@RequestParam(value = "stdfileId", required = true) String stdfileId,
+			@RequestParam(value = "interval", required = true) Integer interval,
+			@RequestParam(value = "targetIndex", required = true) String targetIndex, HttpServletRequest request) {
+		if (StringUtils.isBlank(stdfileId)) {
+			return ResultUtil.errorWithMsg("请重新选择准数据任务");
+		}
+		Map<String, Object> map = stdfileService.statistic(stdfileId, interval, Integer.parseInt(targetIndex), request);
+		if (null == map || map.isEmpty()) {
+			return ResultUtil.errorWithMsg("统计失败");
+		}
+		return ResultUtil.success(map);
+	}
 
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

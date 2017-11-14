@@ -37,6 +37,13 @@ public class Constant {
 		public final static String CONTENT = "content";
 		public final static String MARKED = "marked";
 	}
+	
+	public static class AttrID{
+		public final static String TITLE = "TITLE";
+		public final static String URL = "URL";
+		public final static String TIME = "TIME";
+		public final static String TYPE = "TYPE";
+	}
 
 	public static class Index {
 		public static final int TITLE = 0;

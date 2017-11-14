@@ -115,17 +115,17 @@ public class StdfileServiceImpl implements StdfileService {
 	public List<String[]> analyzeByStdfileId(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-		return FileUtil.readStdfile(stdfilePath);
+		return FileUtil.getStdfileDisplaylist(stdfilePath);
 	}
 
 	/**
 	 * 根据stdfileId得到标准文件与摘要
 	 */
 	@Override
-	public Map<String, Object> getStdfileAndAbstractById(String stdfileId) {
+	public Map<String, Object> getStdfileById(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-		Map<String, Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
+		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
 		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
 		return stdfileMap;
 	}
@@ -141,7 +141,7 @@ public class StdfileServiceImpl implements StdfileService {
 			// 标准数据
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-			List<String[]> cluster = FileUtil.getTargetSet(stdfilePath, targetIndex);
+			List<String[]> cluster = FileUtil.getStdfileTargetCluster(stdfilePath, targetIndex);
 			if (cluster == null || cluster.isEmpty()) {
 				return null;
 			}
