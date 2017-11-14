@@ -71,7 +71,7 @@ public class AlgorithmContainerServiceImpl implements AlgorithmContainerService 
         for (String[] strings : clusterResult) {
         	for (String string : strings) {
 				int i = Integer.parseInt(string);
-				String[] s = content.get(i+1);
+				String[] s = content.get(i);
 				list.add(s);
 			}
 			list.add(new String[0]);

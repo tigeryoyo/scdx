@@ -87,7 +87,7 @@ public class AlgorithmContainerController {
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("multipart/form-data");
 			response.setHeader("Content-Disposition", "attachment;fileName=ClusterResult.xls");
-			HSSFWorkbook workbook = ExcelUtil.exportToExcel(list);
+			HSSFWorkbook workbook = ExcelUtil.exportToExcel1(list);
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.info("excel 下载失败\t" + e.toString());

@@ -34,6 +34,15 @@ function algorithmChange(){
 
 }
 
+//
+function downloadResult(){
+	$(function() {
+		var form = $('<form method="POST" action="/AlgorithmContainer/downloadResult">');
+		$('body').append(form);
+		form.submit(); // 自动提交
+	});
+}
+
 
 //保存按钮点击事件
 function conservationClick() {
