@@ -1,0 +1,10 @@
+input[type='text'] {
+    width:45px;
+    height:25px;
+    margin: 5px 2px;
+    border-radius:5px;
+}
+
+.choosebox td{
+	width:215px;
+}

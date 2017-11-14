@@ -130,7 +130,9 @@ public class StdfileServiceImpl implements StdfileService {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
-		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
+		String stdfileName = stdfile.getStdfileName();
+		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
+		stdfileMap.put(StdfileMap.NAME, stdfileName);
 		Map<String, TreeMap<String, Integer>> statMap = AttrUtil
 				.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), Constant.existDomain);
 		stdfileMap.put("stat", statMap);
