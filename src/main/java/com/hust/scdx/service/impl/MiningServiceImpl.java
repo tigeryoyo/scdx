@@ -37,6 +37,7 @@ import com.hust.scdx.service.SegmentService;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
+import com.hust.scdx.util.TimeUtil;
 import com.hust.scdx.util.UrlUtil;
 
 @Service
@@ -281,7 +282,7 @@ public class MiningServiceImpl implements MiningService {
             }
             String level = domain.getRank();
             String type = domain.getType();
-            String timeKey = CommonUtil.getTimeKey(row[indexOfTime], interval);
+            String timeKey = TimeUtil.getTimeKey(row[indexOfTime], interval);
             Map<String, Map<String, Integer>> timeMap = map.get(timeKey);
             if (timeMap == null) {
                 timeMap = new HashMap<String, Map<String, Integer>>();
