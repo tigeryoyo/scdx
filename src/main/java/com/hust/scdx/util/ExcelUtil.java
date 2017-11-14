@@ -93,15 +93,17 @@ public class ExcelUtil {
 		HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
 		for (int i = 1; i <= rowNum; i++) {
 			String[] row = convert(sheet.getRow(i), colNum);
-			if (urlMap.containsKey(row[indexOfUrl])) {
-				int col = urlMap.get(row[indexOfUrl]);
-				String[] oldNews = content.get(col);
-				if (oldNews[indexOfTime].compareTo(row[indexOfTime]) > 0) {
-					content.set(col, row);
+			if(!CommonUtil.isEmptyArray(row)){
+				if (urlMap.containsKey(row[indexOfUrl])) {
+					int col = urlMap.get(row[indexOfUrl]);
+					String[] oldNews = content.get(col);
+					if (oldNews[indexOfTime].compareTo(row[indexOfTime]) > 0) {
+						content.set(col, row);
+					}
+				} else {
+					urlMap.put(row[indexOfUrl], content.size());
+					content.add(row);
 				}
-			} else {
-				urlMap.put(row[indexOfUrl], content.size());
-				content.add(row);
 			}
 		}
 		inputStream.close();
