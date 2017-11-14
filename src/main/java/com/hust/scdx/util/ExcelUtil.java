@@ -197,6 +197,31 @@ public class ExcelUtil {
 		}
 		return workbook;
 	}
+	/**
+	 * 将list导出为excel
+	 * String[]长度为0为空行
+	 * @param lists
+	 * @return
+	 */
+	public static HSSFWorkbook exportToExcel1(@SuppressWarnings("unchecked") List<String[]>... lists) {
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		for (int k = 0; k < lists.length; k++) {
+			List<String[]> list = lists[k];
+			Sheet sheet = workbook.createSheet("sheet" + (k + 1));
+			for (int i = 0; i < list.size(); i++) {
+				String[] rowList = list.get(i);
+				if(CommonUtil.isEmptyArray(rowList)){
+					continue;
+				}
+				Row row = sheet.createRow(i);
+				for (int j = 0; j < rowList.length; j++) {
+					Cell cell = row.createCell(j);
+					cell.setCellValue(rowList[j]);
+				}
+			}
+		}
+		return workbook;
+	}
 
 	/**
 	 * 将属性统计导出
