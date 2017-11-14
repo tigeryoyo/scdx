@@ -11,6 +11,12 @@ public class AttrUtil {
 	 * @param attrs
 	 * @return
 	 */
+	
+	private static final String TITLE_PATTERN = "标题|内容";
+	private static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
+	private static final String TIME_PATTERN = "发布时间|发贴时间|时间";
+	private static final String WEBNAME_PATTERN = "网站|媒体名称";
+	
 	public static int[] findEssentialIndex(String[] attrs) {
 		int indexOfTitle = findIndexOfTitle(attrs);
 		int indexOfUrl = findIndexOfUrl(attrs);
