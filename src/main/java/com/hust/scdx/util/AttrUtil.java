@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-
-import org.apache.poi.ss.formula.eval.IntersectionEval;
-
 import com.hust.scdx.constant.Constant.AttrID;
 import com.hust.scdx.constant.Constant.Interval;
 import com.hust.scdx.model.Domain;
@@ -20,12 +17,19 @@ public class AttrUtil {
 	 * @param attrs
 	 * @return
 	 */
-	
-	private static final String TITLE_PATTERN = "标题|内容";
-	private static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
-	private static final String TIME_PATTERN = "发布时间|发贴时间|时间";
-	private static final String WEBNAME_PATTERN = "网站|媒体名称";
-	
+	// 标题
+	public static final String TITLE_PATTERN = "标题|内容";
+	// url
+	public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
+	// 时间
+	public static final String TIME_PATTERN = "发布时间|发贴时间|时间";
+	// 网站名称
+	public static final String WEBNAME_PATTERN = "网站|媒体名称";
+	// 网站类型
+	public static final String TYPE_PATTERN = "来源|类型|资源类型";
+	// 网站所属模块
+	public static final String COLUMN_PATTERN = "板块|频道";
+
 	public static int[] findEssentialIndex(String[] attrs) {
 		int indexOfTitle = findIndexOfTitle(attrs);
 		int indexOfUrl = findIndexOfUrl(attrs);
@@ -46,7 +50,7 @@ public class AttrUtil {
 
 	public static int findIndexOfTitle(String[] attrs) {
 		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches("标题|内容", attrs[i])) {
+			if (Pattern.matches(TITLE_PATTERN, attrs[i])) {
 				return i;
 			}
 		}
@@ -56,7 +60,7 @@ public class AttrUtil {
 
 	public static int findIndexOfTitle(List<String> attrs) {
 		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches("标题|内容", attrs.get(i))) {
+			if (Pattern.matches(TITLE_PATTERN, attrs.get(i))) {
 				return i;
 			}
 		}
@@ -66,17 +70,7 @@ public class AttrUtil {
 
 	public static int findIndexOfUrl(String[] attrs) {
 		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches("链接|网址|域名|微博链接|[Uu][Rr][Ll]", attrs[i])) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfWebName(String[] attrs) {
-		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches("媒体名称|网站|来源", attrs[i])) {
+			if (Pattern.matches(URL_PATTERN, attrs[i])) {
 				return i;
 			}
 		}
@@ -86,7 +80,7 @@ public class AttrUtil {
 
 	public static int findIndexOfUrl(List<String> attrs) {
 		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches("链接|网址|微博链接|[Uu][Rr][Ll]", attrs.get(i))) {
+			if (Pattern.matches(URL_PATTERN, attrs.get(i))) {
 				return i;
 			}
 		}
@@ -96,7 +90,7 @@ public class AttrUtil {
 
 	public static int findIndexOfTime(String[] attrs) {
 		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches("发布时间|发贴时间|时间", attrs[i])) {
+			if (Pattern.matches(TIME_PATTERN, attrs[i])) {
 				return i;
 			}
 		}
@@ -106,7 +100,27 @@ public class AttrUtil {
 
 	public static int findIndexOfTime(List<String> attrs) {
 		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches("发布时间|发贴时间|时间", attrs.get(i))) {
+			if (Pattern.matches(TIME_PATTERN, attrs.get(i))) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	public static int findIndexOfWebName(String[] attrs) {
+		for (int i = 0; i < attrs.length; i++) {
+			if (Pattern.matches(WEBNAME_PATTERN, attrs[i])) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	public static int findIndexOfWebName(List<String> attrs) {
+		for (int i = 0; i < attrs.size(); i++) {
+			if (Pattern.matches(WEBNAME_PATTERN, attrs.get(i))) {
 				return i;
 			}
 		}
@@ -115,7 +129,7 @@ public class AttrUtil {
 	}
 
 	public static boolean isTitle(String attr) {
-		if (Pattern.matches("标题|内容", attr)) {
+		if (Pattern.matches(TITLE_PATTERN, attr)) {
 			return true;
 		}
 
@@ -123,7 +137,7 @@ public class AttrUtil {
 	}
 
 	public static boolean isUrl(String attr) {
-		if (Pattern.matches("链接|网址|微博链接|[Uu][Rr][Ll]", attr)) {
+		if (Pattern.matches(URL_PATTERN, attr)) {
 			return true;
 		}
 
@@ -131,7 +145,7 @@ public class AttrUtil {
 	}
 
 	public static boolean isTime(String attr) {
-		if (Pattern.matches("发布时间|发贴时间|时间", attr)) {
+		if (Pattern.matches(TIME_PATTERN, attr)) {
 			return true;
 		}
 

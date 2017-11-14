@@ -118,7 +118,7 @@ public class StdfileController {
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
 
-		return ResultUtil.success("删除成功。");
+		return ResultUtil.success("下载成功。");
 	}
 
 	/**

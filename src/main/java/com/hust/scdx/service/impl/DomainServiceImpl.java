@@ -75,15 +75,15 @@ public class DomainServiceImpl implements DomainService {
 			String[] attr = content.remove(0);
 			boolean nameFlag=true,columnFlag=true,typeFlag = true;
 			int urlIndex = AttrUtil.findIndexOfUrl(attr);
-			int nameIndex = AttrUtil.findIndexOfSth(attr, "网站");//网站名
+			int nameIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEBNAME_PATTERN);//网站名
 			if(nameIndex == -1){
 				nameFlag = false;
 			}
-			int columnIndex = AttrUtil.findIndexOfSth(attr, "板块|频道");//栏目
+			int columnIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.COLUMN_PATTERN);//栏目
 			if(columnIndex == -1){
 				columnFlag = false;
 			}
-			int typeIndex = AttrUtil.findIndexOfSth(attr, "来源|类型");//类型
+			int typeIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.COLUMN_PATTERN);//类型
 			if(typeIndex == -1){
 				typeFlag = false;
 			}

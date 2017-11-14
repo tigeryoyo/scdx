@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>算法容器——体验算法</title>
+
+<link rel="stylesheet" href="css/algorithm-test.css">
+<script type="text/javascript" src="js/algorithm-test.js"></script>
+</head>
+<body>
+	<div class="s_nav">
+		当前位置： <a href="javascript:;">算法容器</a> <span>>>算法容器 </span><span
+			style="color: red; font-weight: bold;" id="algorithm"></span>
+	</div>
+	<div class="ckht">
+		<table class="choosebox" style="width: 100%;">
+			<tr style="height: 40px;">
+				<td><input type="radio" name="algorithm" value="1"
+					checked="checked" onclick="algorithmChange()"> kmeans</td>
+				<td><input type="radio" name="algorithm" value="2"
+					onclick="algorithmChange()"> canopy</td>
+				<td><input type="radio" name="algorithm" value="3"
+					onclick="algorithmChange()"> DBScan</td>
+			</tr>
+			<tr>
+				<td id="algorithm_detail" colspan="2" style="height: 70px">k值：<input type='text' class="form-control" id='k_value' name='k_value'><br>粒度选择：<input type='radio' id='kmeans_granularity' name='kmeans_granularity' value='1' checked='checked'> 粗粒度 <input type='radio' name='kmeans_granularity' id='kmeans_granularity' value='2'> 细粒度</td>
+				<td colspan="1"><button type="button"  type="button" class="btn btn-primary cluster" onclick="clusterClick()" disabled>聚类</button> <button type="button"  type="button" class="btn btn-primary" onclick="conservationClick()">设为默认</button> <form action="/AlgorithmContainer/downloadResult" method="POST"><button type="button"  class="btn btn-success" type="submit">下载结果</button></form></td>
+			</tr>
+		</table>
+		<ul class="ckht_list">
+			<li>聚类结果：
+				<div class="summary_tab">
+					<table border="0" width="751px" style="font-size:14px;">
+						<tr class="d_blue">
+							<td style="width:45px; height:36px;" align="center" bgcolor="#86c6ea">序号</td>
+							<td style="width:500px; height:36px;" align="center" bgcolor="#86c6ea">标题</td>
+							<td style="width:155px; height:36px;" align="center" bgcolor="#86c6ea">时间</td>
+							<td style="width:50px; height:36px;" align="center" bgcolor="#86c6ea">数量</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li>新增文件：
+				<div class="files_add" id="drop_area">将文件拖拽到此处</div>				
+				<div class="files_put" id="filelist"></div>
+			</li>
+		</ul>
+		<div class="up_del">
+			<button type="button" class="btn btn-danger btn_del_all" style="float: right;"
+				onclick="deleteAll()" disabled>删除</button>
+			<button type="button" class="btn btn-primary btn_upl_all"
+				onclick="uploadAll()" disabled>上传</button>
+		</div>
+	</div>
+</body>
+</html>

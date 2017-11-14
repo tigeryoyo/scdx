@@ -66,7 +66,7 @@ a:hover { color:#000000; text-decoration:none; }
 .files_list table .d_blue{ background:#86c6ea;}  
 .btn_sc{ display:inline-block;margin-right:10px;}
 .btn_jl{ display:inline-block;}
-.files_add{ width:770px; height:250px; background:#f8f8f8; margin:0px auto; line-height:225px; font-size:40px; text-align:center;}
+.files_add{ width:770px; height:250px; background:#f8f8f8; margin:0px auto; line-height:40px; font-size:40px; text-align:center;vertical-align: middle;display: table-cell;}
 .files_put{ width:770px; height:35px; background:#f8f8f8; font-size:16px; text-align:center;}
 
 .up_del{ width:770px;}
