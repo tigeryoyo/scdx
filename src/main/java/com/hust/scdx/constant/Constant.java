@@ -1,6 +1,8 @@
 package com.hust.scdx.constant;
 
-import java.util.HashSet;
+import java.util.HashMap;
+
+import com.hust.scdx.model.Domain;
 
 public class Constant {
 
@@ -13,7 +15,7 @@ public class Constant {
 	/**
 	 * 已经存在的域名，用于检测新来的域名是否存在数据库中
 	 */
-	public static HashSet<String> existDomain;
+	public static HashMap<String,Domain> existDomain=new HashMap<String,Domain>();
 
 	// 切片
 	public final static int slices = 1250;
