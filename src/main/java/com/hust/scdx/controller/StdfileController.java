@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -110,6 +111,7 @@ public class StdfileController {
 			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
 			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
 					(List<Integer>) map.get(StdfileMap.MARKED));
+			workbook = ExcelUtil.exportStatToExcel(workbook, (Map<String, TreeMap<String, Integer>>) map.get("stat"));
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
