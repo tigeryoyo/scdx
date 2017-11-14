@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -18,6 +20,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.hust.scdx.constant.Constant.AttrID;
 
 public class ExcelUtil {
 
@@ -195,6 +199,48 @@ public class ExcelUtil {
 	}
 
 	/**
+	 * 将属性统计导出
+	 * 
+	 * @param lists
+	 * @return
+	 */
+	public static HSSFWorkbook exportStatToExcel(HSSFWorkbook workbook, Map<String, TreeMap<String, Integer>> map) {
+		Sheet sheet = workbook.createSheet("日期统计");
+		TreeMap<String, Integer> timeMap = map.get(AttrID.TIME);
+		int i = 0;
+		Row row = sheet.createRow(i++);
+		Cell cell = row.createCell(0);
+		cell.setCellValue("日期");
+		cell = row.createCell(1);
+		cell.setCellValue("数量");
+		for (Map.Entry<String, Integer> entry : timeMap.entrySet()) {
+			row = sheet.createRow(i++);
+			cell = row.createCell(0);
+			cell.setCellValue(entry.getKey());
+			cell = row.createCell(1);
+			cell.setCellValue(entry.getValue());
+		}
+
+		sheet = workbook.createSheet("类型统计");
+		TreeMap<String, Integer> typeMap = map.get(AttrID.TYPE);
+		i = 0;
+		row = sheet.createRow(i++);
+		cell = row.createCell(0);
+		cell.setCellValue("类型");
+		cell = row.createCell(1);
+		cell.setCellValue("数量");
+		for (Map.Entry<String, Integer> entry : typeMap.entrySet()) {
+			row = sheet.createRow(i++);
+			cell = row.createCell(0);
+			cell.setCellValue(entry.getKey());
+			cell = row.createCell(1);
+			cell.setCellValue(entry.getValue());
+		}
+
+		return workbook;
+	}
+
+	/**
 	 * 将带标记的信息导出到Excel文件中 带标记的行字体样式为红色
 	 * 
 	 * @param content
@@ -276,11 +322,14 @@ public class ExcelUtil {
 		}
 		return res;
 	}
-	
+
 	/**
 	 * 读取excel文件第一个sheet，并会过滤到url为空的数据，同时具有url去重功能
-	 * @param filename 文件名
-	 * @param inputStream 输入流，不能为null
+	 * 
+	 * @param filename
+	 *            文件名
+	 * @param inputStream
+	 *            输入流，不能为null
 	 * @return 返回excel文件内容 一行为一个String[]
 	 * @throws IOException
 	 */
@@ -307,11 +356,11 @@ public class ExcelUtil {
 		List<String> exitUrls = new ArrayList<String>();
 		for (int i = 1; i <= rowNum; i++) {
 			String[] row = convert(sheet.getRow(i), colNum);
-			//如果url为空则过滤该行数据
-			if(StringUtils.isBlank(row[indexOfUrl])){
+			// 如果url为空则过滤该行数据
+			if (StringUtils.isBlank(row[indexOfUrl])) {
 				continue;
 			}
-			//url去重
+			// url去重
 			if (!exitUrls.contains(row[indexOfUrl])) {
 				exitUrls.add(row[indexOfUrl]);
 				content.add(row);

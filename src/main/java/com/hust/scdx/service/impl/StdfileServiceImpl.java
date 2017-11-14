@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Maps;
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.constant.Constant.StdfileMap;
@@ -30,6 +33,7 @@ import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.StdfileService;
 import com.hust.scdx.service.UserService;
+import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.FileUtil;
@@ -115,18 +119,21 @@ public class StdfileServiceImpl implements StdfileService {
 	public List<String[]> analyzeByStdfileId(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-		return FileUtil.readStdfile(stdfilePath);
+		return FileUtil.getStdfileDisplaylist(stdfilePath);
 	}
 
 	/**
 	 * 根据stdfileId得到标准文件与摘要
 	 */
 	@Override
-	public Map<String, Object> getStdfileAndAbstractById(String stdfileId) {
+	public Map<String, Object> getStdfileById(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-		Map<String, Object> stdfileMap = FileUtil.getStdfileMap(stdfilePath);
+		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
 		stdfileMap.put(StdfileMap.NAME, stdfile.getStdfileName());
+		Map<String, TreeMap<String, Integer>> statMap = AttrUtil
+				.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), Constant.existDomain);
+		stdfileMap.put("stat", statMap);
 		return stdfileMap;
 	}
 
@@ -141,7 +148,7 @@ public class StdfileServiceImpl implements StdfileService {
 			// 标准数据
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
-			List<String[]> cluster = FileUtil.getTargetSet(stdfilePath, targetIndex);
+			List<String[]> cluster = FileUtil.getStdfileTargetCluster(stdfilePath, targetIndex);
 			if (cluster == null || cluster.isEmpty()) {
 				return null;
 			}
