@@ -163,7 +163,7 @@ public class AttrUtil {
 		HashMap<String, TreeMap<String, Integer>> map = new HashMap<String, TreeMap<String, Integer>>();
 		int indexOfUrl = findIndexOfUrl(content.get(0));
 		int indexOfTime = findIndexOfTime(content.get(0));
-		int indexOfWebName = findIndexOfWebName(content.get(0));
+		int indexOfType = findIndexOfSth(content.get(0), TYPE_PATTERN);
 		TreeMap<String, Integer> timeMap = new TreeMap<String, Integer>();
 		TreeMap<String, Integer> webMap = new TreeMap<String, Integer>();
 
@@ -184,19 +184,19 @@ public class AttrUtil {
 				// 统计类型-数量
 				// 先根据url查询域名表是否包含此条url
 				Domain domain = domains.get(row[indexOfUrl]);
-				String webName = row[indexOfWebName].trim();
+				String type = row[indexOfType].trim();
 				if (domain != null) {
-					String type = domain.getType();
-					if (!type.equals("其他") && !type.equals("")) {
-						webName = type;
+					String tmp = domain.getType();
+					if (!tmp.equals("其他") && !tmp.equals("")) {
+						type = tmp;
 					}
 				}
 
-				Integer webCount = webMap.get(webName);
+				Integer webCount = webMap.get(type);
 				if (webCount != null) {
-					webMap.put(webName, webCount + 1);
+					webMap.put(type, webCount + 1);
 				} else {
-					webMap.put(webName, 1);
+					webMap.put(type, 1);
 				}
 			}
 		}

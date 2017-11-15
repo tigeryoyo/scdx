@@ -15,7 +15,7 @@ public class Constant {
 	/**
 	 * 已经存在的域名，用于检测新来的域名是否存在数据库中
 	 */
-	public static HashMap<String,Domain> existDomain=new HashMap<String,Domain>();
+	public static HashMap<String, Domain> existDomain = new HashMap<String, Domain>();
 
 	// 切片
 	public final static int slices = 1250;
@@ -31,14 +31,16 @@ public class Constant {
 		public final static String RESULTNAME = "resultName";
 		public final static String MARKED = "marked";
 	}
-	
+
 	public static class StdfileMap {
 		public final static String NAME = "name";
 		public final static String CONTENT = "content";
 		public final static String MARKED = "marked";
+		public final static String STAT = "stat";
+		public final static String REPORT = "report";
 	}
-	
-	public static class AttrID{
+
+	public static class AttrID {
 		public final static String TITLE = "TITLE";
 		public final static String URL = "URL";
 		public final static String TIME = "TIME";
@@ -111,22 +113,22 @@ public class Constant {
 		public static final String RED = "FF0000";
 		public static final String GREEN = "008B00";
 	}
-	
-	//出图用到的参数
-	public static class KEY{
-        public static final String MINING_AMOUNT_TYPE = "typeAmount";
-        public static final String MINING_AMOUNT_MEDIA = "mediaAmount";
-        public final static String NETIZENATTENTION_EN = "netizenAttention";
-        public final static String MEDIAATTENTION_EN = "mediaAttention";
-        public final static String MEDIA_EN = "media";
-        public final static String INFOTYPE_EN = "infoType";
-        public final static String INVALID_TIME = "1970-01-01";
+
+	// 出图用到的参数
+	public static class KEY {
+		public static final String MINING_AMOUNT_TYPE = "typeAmount";
+		public static final String MINING_AMOUNT_MEDIA = "mediaAmount";
+		public final static String NETIZENATTENTION_EN = "netizenAttention";
+		public final static String MEDIAATTENTION_EN = "mediaAttention";
+		public final static String MEDIA_EN = "media";
+		public final static String INFOTYPE_EN = "infoType";
+		public final static String INVALID_TIME = "1970-01-01";
 	}
-	
+
 	// 出图用到的 统计时间间隔
-    public static class Interval {
-        public static final int HOUR = 1;
-        public static final int DAY = 2;
-        public static final int MONTH = 3;
-    }
+	public static class Interval {
+		public static final int HOUR = 1;
+		public static final int DAY = 2;
+		public static final int MONTH = 3;
+	}
 }

@@ -39,6 +39,10 @@ public class WordUtil {
 		doc.write(fos);
 	}
 
+	public XWPFDocument getDoc() {
+		return this.doc;
+	}
+
 	/**
 	 * 设置font类型、插入一段文本
 	 * 
@@ -97,7 +101,7 @@ public class WordUtil {
 		para = doc.createParagraph();
 		para.setPageBreak(true);
 	}
-	
+
 	/**
 	 * 设置文本参数：字体大小、字体、字体颜色、加粗与否、标题目录、左对齐居中右对齐
 	 * 

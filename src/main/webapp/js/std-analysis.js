@@ -205,6 +205,20 @@ function downloadResultById() {
 	});
 }
 
+/**
+ * 根据topicId与resultId下载报告
+ * 
+ */
+function downloadReportById() {
+	$(function() {
+		var form = $('<form method="POST" action="/stdfile/downloadAbstractByStdfileId">');
+		form.append($('<input type="hidden" name="topicId" value="' + getCookie("topicId") + '"/>'));
+		form.append($('<input type="hidden" name="stdfileId" value="' + stdfileId + '"/>'));
+		$('body').append(form);
+		form.submit(); // 自动提交
+	});
+}
+
 function showTime(e){
 	jeDate({
 		dateCell:"#"+$(e).attr("id"),
