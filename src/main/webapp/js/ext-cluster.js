@@ -194,7 +194,9 @@ function miningByTimeRange() {
 			extfileIds : extfileIds
 		},
 		dataType : "json",
-		beforeSend:begin(),
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
@@ -207,8 +209,11 @@ function miningByTimeRange() {
 		},
 		error : function(msg) {
 			alert(msg.result);
+			stop();
 		},
-		complete: stop(),
+		complete: function(){
+			stop();
+		},
 	});
 }
 

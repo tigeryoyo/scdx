@@ -204,11 +204,11 @@ function kmeans_cluster(){
             }
         },
         complete : function(){
-      //      console.log("all")
             stop();
         },
         error: function(){
             alert("请求失败!请检测k值是否为整数！");
+            stop();
         }
     })
 }
@@ -243,6 +243,7 @@ function canopy_cluster(){
         },
         error: function(){
             alert("请求失败！请确认阈值是否为纯小数！");
+            stop();
         }
     })
 }
@@ -251,9 +252,6 @@ function dbscan_cluster(){
     var radius = $("#radius").val();
     var minNum = $("#minNum").val();
     var granularity = $("input[name='dbscan_size']:checked").val();
- //   console.log("radius:"+radius);
- //   console.log("minNum:"+minNum);
- //   console.log("granularity:"+granularity);
     //ajax 发送请求
     $.ajax({
         type:"post",
@@ -275,11 +273,11 @@ function dbscan_cluster(){
             }
         },
         complete : function(){
-    //        console.log("all")
             stop();
         },
         error: function(){
             alert("请求失败！请确认半径是否为纯小数，最小数量是否为整数！");
+            stop();
         }
     })
 }
@@ -380,6 +378,9 @@ function uploadAll() {
 			mimeType : "multipart/form-data",
 			dataType : "json",
 			data : form,
+			beforeSend : function(){
+		          begin();
+		    },
 			success:function(msg) {
 				if (msg.status == "OK") {
 					$("#drop_area").text("文件「 " + fileBuf[0].name + " 」上传成功。");
@@ -394,7 +395,10 @@ function uploadAll() {
 			error : function() {
 				alert("上传失败");
 				stop();
-			}
+			},
+			complete : function(){
+	            stop();
+	        },
 		});
 }
 

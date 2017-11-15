@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 
@@ -30,6 +32,7 @@ import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.constant.Constant.WordFont;
 import com.hust.scdx.dao.StdfileDao;
 import com.hust.scdx.dao.TopicDao;
+import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.StdfileQueryCondition;
@@ -41,8 +44,11 @@ import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.FileUtil;
 import com.hust.scdx.util.TimeUtil;
+import com.hust.scdx.util.UrlUtil;
 import com.hust.scdx.util.WordUtil;
 import com.hust.scdx.util.WordUtil.Env;
+import com.hust.scdx.util.crawler;
+import com.hust.summary.Summary;
 
 @Service
 public class StdfileServiceImpl implements StdfileService {
@@ -294,6 +300,13 @@ public class StdfileServiceImpl implements StdfileService {
 			//
 			//
 			//
+			List<String[]> summary = new ArrayList<>();
+			summary = generateSummary(attrs, content,topicName);
+			int num = 1;
+			for (String[] strings : summary) {
+				wu.addParaText((num++) + ". " + strings[0], mainBEnv);
+				wu.addParaText("        " + strings[1] + strings[2], mainEnv);
+			}
 
 			wu.setPageBreak();
 
@@ -367,5 +380,68 @@ public class StdfileServiceImpl implements StdfileService {
 			}
 		});
 		return res;
+	}
+	
+	
+	/**
+	 * 爬取数据生成摘要
+	 * @param attrs 属性列
+	 * @param allContent 文本内容  String[]为一条新闻记录 List<String[]>为一个类簇
+	 * @return
+	 */
+	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent,String topicName) {
+		List<String[]> summary = new ArrayList<>();
+		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
+		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
+		for (List<String[]> content : allContent) {
+			String title = null;
+			List<String> sentence = null;
+			List<Domain> organization = new ArrayList<Domain>();
+			Set<String> urlSet =new HashSet<String>();
+			// 是否找到了要摘要的文章
+			boolean flag = false;
+			// 找到可以爬的sentence
+			for (String[] str : content) {
+				String url = UrlUtil.getUrl(str[urlIndex]);
+				if(url==null)
+					continue;
+				if (!flag) {
+					sentence = crawler.getSummary(url);
+					if (null != sentence) {
+						flag = true;
+						title = str[titleIndex];
+						sentence.add(0, title);
+						Summary s = new Summary(sentence);
+						s.summary();
+						sentence = s.getSummary(null);
+					}
+				}
+				if(!urlSet.contains(url)){
+					urlSet.add(url);
+					organization.add(Constant.existDomain.get(url));
+				}
+			}
+			organization.sort(null);
+			String str_organization = "（";
+			if (organization.size() == 0) {
+				str_organization = topicName;
+			} else {
+				for (Domain domain : organization) {
+					str_organization += domain.getName()+domain.getWeight() + "、";
+				}
+				str_organization = str_organization.substring(0, str_organization.length() - 1) + "）";
+			}
+			String str_sentence = "";
+			if (flag) {
+				for (String string : sentence) {
+					str_sentence += string + "。";
+				}
+			} else {
+				title = content.get(0)[titleIndex];
+				str_sentence = "由于该类新闻没有合适的网站来获取新闻内容，故无法获得摘要。该类新闻的第一条新闻来源于：" + content.get(0)[urlIndex];
+			}
+			summary.add(new String[] { title, str_sentence, str_organization });
+		}
+		return summary;
 	}
 }

@@ -83,7 +83,7 @@ public class DomainServiceImpl implements DomainService {
 			if(columnIndex == -1){
 				columnFlag = false;
 			}
-			int typeIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.COLUMN_PATTERN);//类型
+			int typeIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.TYPE_PATTERN);//类型
 			if(typeIndex == -1){
 				typeFlag = false;
 			}
