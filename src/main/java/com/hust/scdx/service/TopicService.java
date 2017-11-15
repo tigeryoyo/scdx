@@ -19,5 +19,7 @@ public interface TopicService {
 	List<Topic> queryTopicByName(TopicQueryCondition con);
 
 	long queryTopicCount(TopicQueryCondition con);
+	
+	List<Topic> queryTopic(TopicQueryCondition con);
 
 }

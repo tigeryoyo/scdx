@@ -82,4 +82,8 @@ public class TopicServiceImpl implements TopicService {
 		return topicDao.queryTopicCount(con);
 	}
 
+	@Override
+	public List<Topic> queryTopic(TopicQueryCondition con) {
+		return topicDao.queryTopic(con);
+	}
 }

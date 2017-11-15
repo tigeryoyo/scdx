@@ -1,7 +1,9 @@
 package com.hust.scdx.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.model.UserExample;
 import com.hust.scdx.model.UserExample.Criteria;
+import com.hust.scdx.model.params.UserQueryCondition;
 import com.hust.scdx.service.impl.UserServiceImpl;
 import com.hust.scdx.dao.mapper.UserMapper;
 import com.hust.scdx.model.User;
@@ -69,6 +72,25 @@ public class UserDao {
 		criteria.andUserIdIsNotNull();
 		return userMapper.selectByExample(example);
 	}
+	/**
+	 * 查询所有用户的总个数
+	 * @return
+	 */
+	public long selectAllUsetCount(UserQueryCondition uc){
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserIdIsNotNull();
+		if (!StringUtils.isBlank(uc.getUserName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andUserNameLike("%" + uc.getUserName() + "%");
+		}
+		if (!StringUtils.isBlank(uc.getTrueName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andTrueNameLike("%" + uc.getTrueName() + "%");
+		}
+		example.setOrderByClause("create_date desc");
+		return userMapper.countByExample(example);
+	}
 
 	public User login(String username, String password) {
 		UserExample example = new UserExample();
@@ -81,6 +103,28 @@ public class UserDao {
 			return null;
 		}
 		return users.get(0);
+	}
+	
+	/**
+	 * 根据条件查询用户
+	 * @param uc
+	 * @return
+	 */
+	public List<User> selectUserByCondition(UserQueryCondition uc){
+		UserExample example = new UserExample();
+		Criteria criteria = example.createCriteria();
+		if (!StringUtils.isBlank(uc.getUserName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andUserNameLike("%" + uc.getUserName() + "%");
+		}
+		if (!StringUtils.isBlank(uc.getTrueName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andTrueNameLike("%" + uc.getTrueName() + "%");
+		}
+		example.setOrderByClause("create_date desc");
+		example.setStart(uc.getStart());
+		example.setLimit(uc.getLimit());
+		return userMapper.selectByExample(example);
 	}
 
 }

@@ -21,6 +21,7 @@ import com.hust.scdx.dao.UserRoleDao;
 import com.hust.scdx.model.RolePower;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.UserRole;
+import com.hust.scdx.model.params.UserQueryCondition;
 import com.hust.scdx.service.UserService;
 
 @Service
@@ -147,6 +148,37 @@ public class UserServiceImpl implements UserService {
 			}
 		} catch (Exception e) {
 			logger.error("查找所有用户失败。");
+			return null;
+		}
+		return list;
+	}
+	@Override	
+	/**
+	 * 查询所有用户个数
+	 */
+	public long selectCountOfUser(UserQueryCondition uc){
+		return userDao.selectAllUsetCount(uc);
+	}
+	@Override
+	/**
+	 * 根据条件查询用户
+	 */
+	public List<String[]> selectUserByCondition(UserQueryCondition uc){
+		List<User> users = userDao.selectUserByCondition(uc);
+		List<String[]> list = new ArrayList<String[]>();
+		try {
+			for (User user : users) {
+				String[] strs = new String[6];
+				strs[0] = String.valueOf(user.getUserId());
+				strs[1] = user.getUserName();
+				strs[2] = user.getTrueName();
+				strs[3] = user.getTelphone();
+				strs[4] = user.getEmail();
+				strs[5] = selectUserRoleNameByUserId(user.getUserId());
+				list.add(strs);
+			}
+		} catch (Exception e) {
+			logger.error("查找用户失败。");
 			return null;
 		}
 		return list;

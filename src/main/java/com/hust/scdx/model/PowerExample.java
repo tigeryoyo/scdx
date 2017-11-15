@@ -9,6 +9,10 @@ public class PowerExample {
 	protected boolean distinct;
 
 	protected List<Criteria> oredCriteria;
+	
+	private int limit;
+    
+    private int start;
 
 	public PowerExample() {
 		oredCriteria = new ArrayList<Criteria>();
@@ -28,6 +32,22 @@ public class PowerExample {
 
 	public boolean isDistinct() {
 		return distinct;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 	public List<Criteria> getOredCriteria() {

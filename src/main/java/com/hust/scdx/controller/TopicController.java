@@ -81,7 +81,7 @@ public class TopicController {
 	public Object queryOwnTopic(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
 		User user = userService.selectCurrentUser(request);
 		con.setCreater(user.getUserName());
-		List<Topic> list = topicService.queryTopicByName(con);
+		List<Topic> list = topicService.queryTopic(con);
 		if (null == list || 0 == list.size()) {
 			return ResultUtil.errorWithMsg("没有专题被创建！");
 		}
@@ -96,6 +96,41 @@ public class TopicController {
 	@ResponseBody
 	@RequestMapping("/queryOwnTopicCount")
 	public Object queryOwnTopicCount(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
+		User user = userService.selectCurrentUser(request);
+		con.setCreater(user.getUserName());
+		long count = topicService.queryTopicCount(con);
+		if (count <= 0) {
+			return ResultUtil.errorWithMsg("没有专题被创建。");
+		}
+		return ResultUtil.success(count);
+	}
+	
+	/**
+	 * 查询所有专题
+	 * 
+	 * @param con
+	 *            查询条件
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/queryAllTopic")
+	public Object queryAllTopic(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
+		List<Topic> list = topicService.queryTopic(con);
+		if (null == list || 0 == list.size()) {
+			return ResultUtil.errorWithMsg("没有专题被创建！");
+		}
+		long count = list.size();
+		JSONObject result = new JSONObject();
+		long pageTotal = count % 10 == 0 ? (count / 10) : (count / 10 + 1);
+		result.put("pageTotal", pageTotal);
+		result.put("list", list);
+		return ResultUtil.success(result);
+	}
+
+	@ResponseBody
+	@RequestMapping("/queryAllTopicCount")
+	public Object queryAllTopicCount(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
 		long count = topicService.queryTopicCount(con);
 		if (count <= 0) {
 			return ResultUtil.errorWithMsg("没有专题被创建。");

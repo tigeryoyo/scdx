@@ -2,12 +2,14 @@ package com.hust.scdx.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hust.scdx.model.Power;
 import com.hust.scdx.model.PowerExample;
 import com.hust.scdx.model.PowerExample.Criteria;
+import com.hust.scdx.model.params.PowerQueryCondition;
 import com.hust.scdx.dao.mapper.PowerMapper;
 
 @Repository
@@ -55,6 +57,40 @@ public class PowerDao {
 		Criteria criteria = example.createCriteria();
 		criteria.andPowerIdIsNotNull();
 		return powerMapper.selectByExample(example);
+	}
+	
+	/**
+	 * 分页查询所有权限
+	 * 
+	 * @return
+	 */
+	public List<Power> selectPower(PowerQueryCondition qc) {
+		PowerExample example = new PowerExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andPowerIdIsNotNull();
+		if (!StringUtils.isBlank(qc.getName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andPowerNameLike("%" + qc.getName() + "%");
+		}
+		example.setStart(qc.getStart());
+		example.setLimit(qc.getLimit());
+		return powerMapper.selectByExample(example);
+	}
+	
+	/**
+	 * 查询所有权限个数
+	 * 
+	 * @return
+	 */
+	public long selectCountOfPower(PowerQueryCondition qc) {
+		PowerExample example = new PowerExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andPowerIdIsNotNull();
+		if (!StringUtils.isBlank(qc.getName())) {
+			// criteria.andTopicNameEqualTo(con.getTopicName());
+			criteria.andPowerNameLike("%" + qc.getName() + "%");
+		}
+		return powerMapper.countByExample(example);
 	}
 
 	/**
