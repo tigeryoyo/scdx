@@ -170,8 +170,8 @@ public class UserController {
 		uc.setStart(start);
 		uc.setLimit(limit);
 		if(userName != null){
-			uc.setUserName(userName);
-		//	uc.setTrueName(userName);
+		//	uc.setUserName(userName);
+			uc.setTrueName(userName);
 		}
 		List<String[]> list = userService.selectUserByCondition(uc);
 		if (list == null || list.isEmpty()) {
@@ -191,8 +191,8 @@ public class UserController {
 		// userId,userName,trueName,tel,email,userRoleName
 		UserQueryCondition uc = new UserQueryCondition();
 		if(userName != null){
-			uc.setUserName(userName);
-		//	uc.setTrueName(userName);
+		//	uc.setUserName(userName);
+			uc.setTrueName(userName);
 		}
 		long count = userService.selectCountOfUser(uc);
 		if (count==0) {
