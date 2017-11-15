@@ -175,6 +175,9 @@ function uploadStd() {
 		mimeType : "multipart/form-data",
 		dataType : "json",
 		data : form,
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$("#drop_area").text("文件「 " + fileBuf.name + " 」上传成功。");
@@ -188,7 +191,10 @@ function uploadStd() {
 		error : function() {
 			alert("上传失败!");
 			stop();
-		}
+		},
+		complete: function(){
+			stop();
+		},
 	});
 }
 

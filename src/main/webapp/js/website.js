@@ -76,7 +76,6 @@ function initShowPage(currenPage) {
         }
     })
 }
-initShowPage(1)
 
 function initSearchPage(currenPage) {
     var listCount = 0;

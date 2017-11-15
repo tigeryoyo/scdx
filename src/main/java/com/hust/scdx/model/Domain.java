@@ -138,6 +138,6 @@ public class Domain implements Comparable<Domain>{
 	//按权重大小排序
 	public int compareTo(Domain o) {
 		// TODO Auto-generated method stub
-		return (this.weight-o.weight);
+		return (o.weight-this.weight);
 	}
 }

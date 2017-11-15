@@ -98,12 +98,18 @@ function uploadAll() {
 			contentType : false,
 			mimeType : "multipart/form-data",
 			data : form,
+			beforeSend : function() {
+				begin();
+				},
 			error : function() {
 				alert("上传失败");
 				flag = false;
 				stop();
 				return false;
-			}
+			},
+			complete: function(){
+				stop();
+			},
 		});
 	}
 
