@@ -1,8 +1,9 @@
 package com.hust.scdx.service.impl;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,21 +13,23 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Maps;
-import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Config.DIRECTORY;
+import com.hust.scdx.constant.Constant;
+import com.hust.scdx.constant.Constant.AttrID;
+import com.hust.scdx.constant.Constant.Interval;
 import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.constant.Constant.StdfileMap;
+import com.hust.scdx.constant.Constant.WordFont;
 import com.hust.scdx.dao.StdfileDao;
+import com.hust.scdx.dao.TopicDao;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.StdfileQueryCondition;
@@ -37,6 +40,9 @@ import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.FileUtil;
+import com.hust.scdx.util.TimeUtil;
+import com.hust.scdx.util.WordUtil;
+import com.hust.scdx.util.WordUtil.Env;
 
 @Service
 public class StdfileServiceImpl implements StdfileService {
@@ -45,6 +51,8 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	private static final Logger logger = LoggerFactory.getLogger(StdfileServiceImpl.class);
 
+	@Autowired
+	TopicDao topicDao;
 	@Autowired
 	StdfileDao stdfileDao;
 	@Autowired
@@ -123,7 +131,7 @@ public class StdfileServiceImpl implements StdfileService {
 	}
 
 	/**
-	 * 根据stdfileId得到标准文件与摘要
+	 * 根据stdfileId得到标准文件
 	 */
 	@Override
 	public Map<String, Object> getStdfileById(String stdfileId) {
@@ -133,9 +141,20 @@ public class StdfileServiceImpl implements StdfileService {
 		String stdfileName = stdfile.getStdfileName();
 		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
+		@SuppressWarnings("unchecked")
 		Map<String, TreeMap<String, Integer>> statMap = AttrUtil
 				.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), Constant.existDomain);
-		stdfileMap.put("stat", statMap);
+		stdfileMap.put(StdfileMap.STAT, statMap);
+		return stdfileMap;
+	}
+
+	/**
+	 * 根据topicId和stdfileId获取摘要
+	 */
+	@Override
+	public Map<String, Object> getAbstractById(String topicId, String stdfileId) {
+		Map<String, Object> stdfileMap = getStdfileById(stdfileId);
+		stdfileMap.put(StdfileMap.REPORT, generateReport(topicId, stdfileMap));
 		return stdfileMap;
 	}
 
@@ -172,11 +191,181 @@ public class StdfileServiceImpl implements StdfileService {
 		return null;
 	}
 
-	@InitBinder
-	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		CustomDateEditor editor = new CustomDateEditor(df, false);
-		binder.registerCustomEditor(Date.class, editor);
+	/**
+	 * 产生核心报告
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private XWPFDocument generateReport(String topicId, Map<String, Object> stdfileMap) {
+		try {
+			String topicName = topicDao.queryTopicById(topicId).getTopicName();
+
+			WordUtil wu = new WordUtil();
+			wu.addParaText("(" + topicName + ")专供", new Env().bold(true).fontType(WordFont.KAITI));
+			wu.addParaText("舆情参阅", new Env().fontSize(52).bold(true).fontType(WordFont.XINSONGTI)
+					.fontColor(WordFont.GREEN).alignment("center"));
+			Env titleEnv = new Env().fontSize(22).bold(true).fontType(WordFont.SONGTI);
+			Env mainEnv = new Env().fontType(WordFont.FANGSONG);
+			Env mainBEnv = new Env(mainEnv).bold(true).fontType(WordFont.SONGTI);
+			Env mainRBEnv = new Env(mainBEnv).fontColor(WordFont.RED);
+			Env mainSEnv = new Env(mainEnv).fontSize(10);
+
+			// 类簇内容，类簇与类簇之间以new String[0]区分
+			List<String[]> tmp = (List<String[]>) stdfileMap.get(StdfileMap.CONTENT);
+			// 属性行
+			String[] attrs = tmp.remove(0);
+			int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
+			int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+			// 将类簇内容转换每一个类簇为一个list
+			List<List<String[]>> content = convert(tmp);
+			// 标记，每一个类簇的最早出现的新闻index
+			List<Integer> marked = (List<Integer>) stdfileMap.get(StdfileMap.MARKED);
+			HashMap<String, TreeMap<String, Integer>> statMap = (HashMap<String, TreeMap<String, Integer>>) stdfileMap
+					.get(StdfileMap.STAT);
+			TreeMap<String, Integer> timeMap = statMap.get(AttrID.TIME);
+			TreeMap<String, Integer> typeMap = statMap.get(AttrID.TYPE);
+			// 信息总数
+			int total = 0;
+			// 信息平均数
+			int avg = 0;
+			// 信息峰值日期
+			String peakD = "";
+			// 信息峰值数量
+			int peakC = 0;
+			// 信息峰值占比
+			float peak = 0.0f;
+			// 信息起止时间
+			String first = timeMap.pollFirstEntry().getKey();
+			String last = timeMap.pollLastEntry().getKey();
+			for (Map.Entry<String, Integer> entry : timeMap.entrySet()) {
+				int count = entry.getValue();
+				if (count > peakC) {
+					peakC = count;
+					peakD = entry.getKey();
+				}
+				total += count;
+			}
+			avg = total / timeMap.size();
+			peak = Math.round((float) peakC / total * 100);
+
+			// 一周概况
+			wu.addParaText("一周概况", titleEnv);
+			wu.addParaText("本周互联网相关舆情信息更新量" + total + " 条（日均 ）" + avg + " 条）与上周相比，信息量上升/下降", mainEnv);
+			wu.appendParaText("未发现“正/负”面舆情", mainBEnv);
+
+			wu.setBreak();
+
+			// 舆情聚焦
+			wu.addParaText("舆情聚焦", titleEnv);
+			int len = content.size();
+			for (int i = 0; i < len; i++) {
+				String[] row = content.get(i).get(marked.get(i));
+				wu.addParaText((i + 1) + ". " + row[indexOfTitle], mainBEnv);
+				wu.addParaText("（相关新闻" + content.get(i).size() + "条。）", mainSEnv);
+			}
+			wu.addParaText("行业舆情", titleEnv);
+
+			wu.setBreak();
+
+			// 监测信息量日分布情况
+			wu.addParaText("监测信息量日分布情况", titleEnv);
+			wu.addParaText(
+					first + " 至" + last + "，通过四川电信互联网舆情信息服务平台监测数据显示，本时间段内与“" + topicName + "”相关互联网信息" + total + " ，条，",
+					mainEnv);
+			wu.appendParaText("未发现“正/负”面舆情。", mainBEnv);
+			wu.addParaText("信息具体情况如下：", mainEnv);
+			wu.addParaText("监测数据显示，" + topicName + first + " 至 " + last + "相关信息总量 " + total + " 条，平均每日信息量为 " + avg
+					+ " 条。其中，" + peakD + "当天的相关信息量是本周最大峰值，相关信息共有 " + peakC + " 条，占一周信息量的 ", mainEnv);
+			wu.appendParaText(peak + "%", mainRBEnv);
+			wu.appendParaText("，主要为", mainEnv);
+			List<String[]> theDayInfo = statTheDay(content, marked, peakD, indexOfTitle, indexOfTime);
+			for (int i = 0; i < 3 && i < theDayInfo.size(); i++) {
+				String[] theday = theDayInfo.get(i);
+				wu.appendParaText("《" + theday[0] + "》", mainBEnv);
+				wu.addParaText("（" + theday[1] + "条）", mainSEnv);
+			}
+			wu.addParaText("，相关转载转播。", mainEnv);
+
+			wu.setBreak();
+			// 舆情聚焦（摘要）
+			wu.addParaText("舆情聚焦", titleEnv);
+
+			//
+			//
+			//
+
+			wu.setPageBreak();
+
+			Env env1 = new Env().fontType(WordFont.KAITI);
+			Env env2 = new Env(env1).alignment("right");
+			Env env3 = new Env(env1).fontSize(16).bold(true);
+			wu.addParaText("（责任编辑：汪静远）", env2);
+			wu.addParaText("四川电信互联网舆情信息服务中心 ", env3);
+			wu.addParaText("声明：", env3);
+			wu.appendParaText(
+					"以上舆情信息仅供参考，用户对于舆情信息所反映出的问题或状况的处理，应综合其他信息加以判断和利用，仅凭以上舆情信息做出判断、进行决策等处理措施造成不利后果及损失的，我单位不承担任何责任。",
+					env1);
+			return wu.getDoc();
+		} catch (Exception e) {
+			logger.error("产生报告出错!{}", e.toString());
+		}
+		return null;
 	}
 
+	/**
+	 * 将以new String[0]区分类簇的content转换为以list区分
+	 * 
+	 * @return
+	 */
+	private List<List<String[]>> convert(List<String[]> content) {
+		List<List<String[]>> list = new ArrayList<List<String[]>>();
+		int len = content.size();
+		List<String[]> tmp = new ArrayList<String[]>();
+		for (int i = 0; i < len; i++) {
+			String[] row = content.get(i);
+			if (row.length != 0) {
+				tmp.add(row);
+			} else {
+				list.add(tmp);
+				tmp = new ArrayList<String[]>();
+			}
+		}
+		if (!tmp.isEmpty()) {
+			list.add(tmp);
+		}
+		return list;
+	}
+
+	/**
+	 * 统计指定某天新闻的数量排名 ...title、count
+	 * 
+	 * @return
+	 */
+	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay,
+			int indexOfTitle, int indexOfTime) {
+		List<String[]> res = new ArrayList<String[]>();
+		int size = content.size();
+		for (int i = 0; i < size; i++) {
+			List<String[]> cluster = content.get(i);
+			int count = 0;
+			int csize = cluster.size();
+			for (int j = 0; j < csize; j++) {
+				String[] row = cluster.get(j);
+				if (TimeUtil.getTimeKey(row[indexOfTime], Interval.DAY).equals(theDay)) {
+					count++;
+				}
+			}
+			if (count != 0) {
+				res.add(new String[] { cluster.get(marked.get(i))[indexOfTitle], String.valueOf(count) });
+			}
+		}
+		Collections.sort(res, new Comparator<String[]>() {
+			@Override
+			public int compare(String[] o1, String[] o2) {
+				return Integer.valueOf(o2[1]) - Integer.valueOf(o1[1]);
+			}
+		});
+		return res;
+	}
 }

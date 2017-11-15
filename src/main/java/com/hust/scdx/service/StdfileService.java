@@ -21,6 +21,8 @@ public interface StdfileService {
 
 	Map<String, Object> getStdfileById(String stdfileId);
 	
+	Map<String, Object> getAbstractById(String topicId, String stdfileId);
+
 	Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request);
 
 }

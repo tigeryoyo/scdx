@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hust.scdx.constant.Constant.Resutt;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
@@ -95,6 +95,7 @@ public class StdfileController {
 	 * @param response
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/downloadStdfileByStdfileId", method = RequestMethod.POST)
 	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -111,7 +112,8 @@ public class StdfileController {
 			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
 			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
 					(List<Integer>) map.get(StdfileMap.MARKED));
-			workbook = ExcelUtil.exportStatToExcel(workbook, (Map<String, TreeMap<String, Integer>>) map.get("stat"));
+			workbook = ExcelUtil.exportStatToExcel(workbook,
+					(Map<String, TreeMap<String, Integer>>) map.get(StdfileMap.STAT));
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
@@ -134,7 +136,7 @@ public class StdfileController {
 	public Object downloadAbstractByStdfileId(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request,
 			HttpServletResponse response) {
-		Map<String, Object> map = stdfileService.getStdfileById(stdfileId);
+		Map<String, Object> map = stdfileService.getAbstractById(topicId, stdfileId);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
@@ -142,18 +144,15 @@ public class StdfileController {
 		try (OutputStream outputStream = response.getOutputStream();) {
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("multipart/form-data");
-
 			String resultName = new String(((String) map.get(StdfileMap.NAME)).getBytes(), "ISO8859-1");
-			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
-			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
-					(List<Integer>) map.get(StdfileMap.MARKED));
-			workbook.write(outputStream);
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".doc");
+			((XWPFDocument) map.get(StdfileMap.REPORT)).write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
 
-		return ResultUtil.success("删除成功。");
+		return ResultUtil.success("下载成功。");
 	}
 
 	/**
