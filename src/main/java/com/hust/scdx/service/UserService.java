@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.hust.scdx.model.User;
+import com.hust.scdx.model.params.UserQueryCondition;
 
 public interface UserService {
 
@@ -26,6 +27,10 @@ public interface UserService {
 	User selectCurrentUser(HttpServletRequest request);
 
 	List<String[]> selectAllUser();
+	
+	long selectCountOfUser(UserQueryCondition uc);
+	
+	List<String[]> selectUserByCondition(UserQueryCondition uc);
 
 
 }

@@ -2,6 +2,112 @@
  * 权限管理
  */
 
+function selectUserInfor(page){
+	$.ajax({
+		type : "post",
+		url : "/user/selectUserInfor",
+		dataType : "json",
+		data:{
+			userName:$("#user_search").val(),
+            start:(parseInt(10*page-10)),
+            limit:10
+        },
+		success : function(msg) {
+			$('.infor_tab02 tr:not(:first)').html("");
+			if (msg.status == "OK") {
+				var items = msg.result;
+				// userId,userName,trueName,tel,email,userRoleName
+				$
+					.each(
+						items,
+						function(idx, item) {
+							row = '<tr><td width="66" height="40" align="center" bgcolor="#ffffff">'
+								+ (idx + 1)
+								+ '</td><td width="64" height="40" align="center" bgcolor="#ffffff">'
+								+ item[1]
+								+ '</td><td width="66" height="40" align="center" bgcolor="#ffffff">'
+								+ item[2]
+								+ '</td><td width="67" height="40" align="center" bgcolor="#ffffff">'
+								+ item[5]
+								+ '</td><td width="104" height="40" align="center" bgcolor="#ffffff">'
+								+ item[3]
+								+ '</td><td width="157" height="40" align="center" bgcolor="#ffffff">'
+								+ item[4]
+								+ '</td><td width="130" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick='
+								+ 'accChg("'
+								+ item[0]
+								+ '","'
+								+ item[1]
+								+ '","'
+								+ item[2]
+								+ '","'
+								+ item[3]
+								+ '","'
+								+ item[4]
+								+ '","'
+								+ item[5]
+								+ '"'
+								+ ')'
+								+ '>编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger" onClick="accDel('
+								+ item[0] + ')" >删除</button></td></tr>'
+							$('.infor_tab02').append(row);
+						});
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+		},
+	})
+}
+
+function initUserShow(currenPage){
+	var listCount = 0;
+    if("undefined" == typeof(currenPage) || null == currenPage){
+        currenPage = 1;
+    }
+    $.ajax({
+        type: "post",
+        url: "/user/selectUserCount",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.status == "OK") {
+                // alert("success");
+                listCount = msg.result;
+                $("#page").initPage(listCount,currenPage,selectUserInfor);
+            } else {
+                alert(msg.result);
+            }
+        },
+        error: function () {
+            alert("数据请求失败");
+        }});
+}
+
+function initUserSearch(currenPage){
+	var listCount = 0;
+    if("undefined" == typeof(currenPage) || null == currenPage){
+        currenPage = 1;
+    }
+    $.ajax({
+        type: "post",
+        url: "/user/selectUserCount",
+        dataType: "json",
+        data:{userName:$("#user_search").val()},
+        success: function (msg) {
+            if (msg.status == "OK") {
+                // alert("success");
+                listCount = msg.result;
+                $("#page").initPage(listCount,currenPage,selectUserInfor);
+            } else {
+                alert(msg.result);
+            }
+        },
+        error: function () {
+            alert("数据请求失败");
+        }});
+}
+
 /**
  * 用户管理-添加用户
  */
@@ -266,21 +372,95 @@ function selectPowerByRoleId(roleId) {
 	return res;
 }
 
+function initPowerShow(currenPage){
+	var listCount = 0;
+    if("undefined" == typeof(currenPage) || null == currenPage){
+        currenPage = 1;
+    }
+    $.ajax({
+        type: "post",
+        url: "/power/selectPowerCount",
+        dataType: "json",
+        success: function (msg) {
+            if (msg.status == "OK") {
+                // alert("success");
+                listCount = msg.result;
+                $("#page").initPage(listCount,currenPage,selectPowerInfor);
+            } else {
+                alert(msg.result);
+            }
+        },
+        error: function () {
+            alert("数据请求失败");
+        }});
+}
+
+function initPowerSearch(currenPage){
+	var listCount = 0;
+    if("undefined" == typeof(currenPage) || null == currenPage){
+        currenPage = 1;
+    }
+    $.ajax({
+        type: "post",
+        url: "/power/selectPowerCount",
+        dataType: "json",
+        date:{powerName:$("#power_search").val()},
+        success: function (msg) {
+            if (msg.status == "OK") {
+                // alert("success");
+                listCount = msg.result;
+                $("#page").initPage(listCount,currenPage,selectPowerInfor);
+            } else {
+                alert(msg.result);
+            }
+        },
+        error: function () {
+            alert("数据请求失败");
+        }});
+}
+
 /**
  * 查询所有角色权限
  * 
  * @returns
  */
-function selectAllPower() {
-	var res;
+function selectPowerInfor(page) {
 	$.ajax({
 		type : "post",
-		url : "/power/selectAllPower",
+		url : "/power/selectPowerInfor",
 		dataType : "json",
 		async : false,
+		data:{
+			powerName:$("#power_search").val(),
+            start:(parseInt(10*page-10)),
+            limit:10
+        },
 		success : function(msg) {
 			if (msg.status == "OK") {
-				res = msg.result;
+				var powers = msg.result;
+				$('.infor_tab02 tr:not(:first)').html("");
+				$
+				.each(
+					powers,
+					function(index, power) {
+						powerId = power.powerId;
+						powerName = "'" + power.powerName + "'";
+						powerUrl = "'" + power.powerUrl + "'";
+						row = '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'
+							+ (index + 1)
+							+ '</td><td width="231" height="40" align="center" bgcolor="#ffffff">'
+							+ power.powerName
+							+ '</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="powerChg('
+							+ powerId
+							+ ','
+							+ powerName
+							+ ','
+							+ powerUrl
+							+ ')">编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger delPower" onClick="powerDel('
+							+ powerId + ')" >删除</button></td></tr>'
+						$('.infor_tab02').append(row);
+
+					});
 			} else {
 				alert(msg.result);
 			}
@@ -289,7 +469,6 @@ function selectAllPower() {
 			alert("您没有权限使用此资源。");
 		},
 	});
-	return res;
 }
 
 /**

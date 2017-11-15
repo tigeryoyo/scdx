@@ -12,9 +12,9 @@ public class UserQueryCondition {
 
 	private String roleName;
 
-	private int page;
+	private int start;
 
-	private int row;
+	private int limit;
 
 	public String getRoleName() {
 		return roleName;
@@ -56,26 +56,26 @@ public class UserQueryCondition {
 		this.trueName = trueName;
 	}
 
-	public int getPage() {
-		return page;
+	public int getStart() {
+		return start;
 	}
 
-	public void setPage(int page) {
-		this.page = page;
+	public void setStart(int start) {
+		this.start = start;
 	}
 
-	public int getRow() {
-		return row;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setRow(int row) {
-		this.row = row;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	@Override
 	public String toString() {
 		return "UserQueryCondition [userName=" + userName + ", email=" + email + ", telphone=" + telphone
-				+ ", trueName=" + trueName + ", roleName=" + roleName + ", page=" + page + ", row=" + row + "]";
+				+ ", trueName=" + trueName + ", roleName=" + roleName + ", start=" + start + ", limit=" + limit + "]";
 	}
 
 }

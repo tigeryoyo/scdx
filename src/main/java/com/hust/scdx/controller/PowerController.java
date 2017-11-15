@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hust.scdx.model.Power;
 import com.hust.scdx.model.Power4Set;
+import com.hust.scdx.model.params.PowerQueryCondition;
 import com.hust.scdx.service.PowerService;
 import com.hust.scdx.util.ResultUtil;
 
@@ -61,10 +62,7 @@ public class PowerController {
 	}
 
 	/**
-	 * 根据角色id查询角色所有权限
-	 * 
-	 * @param roleId
-	 * @param request
+	 * 查询所有权限
 	 * @return
 	 */
 	@ResponseBody
@@ -75,6 +73,48 @@ public class PowerController {
 			return ResultUtil.errorWithMsg("查询所有权限出现错误。");
 		}
 		return ResultUtil.success(powers);
+	}
+	
+	/**
+	 * 分页，查询权限
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/selectPowerInfor")
+	public Object selectPowerInfor(@RequestParam(value = "powerName", required = false) String powerName,@RequestParam(value = "start", required = true) int start,
+			@RequestParam(value = "limit", required = true) int limit,HttpServletRequest request) {
+		PowerQueryCondition qc = new PowerQueryCondition();
+		qc.setStart(start);
+		qc.setLimit(limit);
+		if(powerName!=null){
+			qc.setName(powerName);
+		}
+		List<Power> powers = powerService.selectPowerByCondition(qc);
+		if (null == powers || powers.size() == 0) {
+			return ResultUtil.errorWithMsg("查询所有权限出现错误。");
+		}
+		return ResultUtil.success(powers);
+	}
+	
+	/**
+	 * 根据角色id查询角色所有权限个数
+	 * 
+	 * @param roleId
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/selectPowerCount")
+	public Object selectPowerCount(@RequestParam(value = "powerName", required = false) String powerName,HttpServletRequest request) {
+		PowerQueryCondition qc = new PowerQueryCondition();
+		if(powerName!=null){
+			qc.setName(powerName);
+		}
+		long count = powerService.selectCountOfPower(qc);
+		if (count == 0) {
+			return ResultUtil.errorWithMsg("查询所有权限出现错误。");
+		}
+		return ResultUtil.success(count);
 	}
 
 	/**

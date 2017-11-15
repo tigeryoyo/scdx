@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hust.scdx.model.User;
+import com.hust.scdx.model.params.UserQueryCondition;
 import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ResultUtil;
 
@@ -155,20 +156,49 @@ public class UserController {
 	}
 
 	/**
-	 * 查询用户信息
+	 * 分页查询用户信息
 	 * 
 	 * @param request
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/selectAllUser")
-	public Object selectAllUser(HttpServletRequest request) {
+	@RequestMapping("/selectUserInfor")
+	public Object selectAllUser(@RequestParam(value = "userName", required = false) String userName,@RequestParam(value = "start", required = true) int start,
+			@RequestParam(value = "limit", required = true) int limit,HttpServletRequest request) {
 		// userId,userName,trueName,tel,email,userRoleName
-		List<String[]> list = userService.selectAllUser();
+		UserQueryCondition uc = new UserQueryCondition();
+		uc.setStart(start);
+		uc.setLimit(limit);
+		if(userName != null){
+			uc.setUserName(userName);
+		//	uc.setTrueName(userName);
+		}
+		List<String[]> list = userService.selectUserByCondition(uc);
 		if (list == null || list.isEmpty()) {
-			return ResultUtil.errorWithMsg("查询所有用户出现错误。");
+			return ResultUtil.errorWithMsg("未找到相关用户。");
 		}
 		return ResultUtil.success(list);
+	}
+	/**
+	 * 查询用户个数
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/selectUserCount")
+	public Object selectUserCount(@RequestParam(value = "userName", required = false) String userName,HttpServletRequest request) {
+		// userId,userName,trueName,tel,email,userRoleName
+		UserQueryCondition uc = new UserQueryCondition();
+		if(userName != null){
+			uc.setUserName(userName);
+		//	uc.setTrueName(userName);
+		}
+		long count = userService.selectCountOfUser(uc);
+		if (count==0) {
+			return ResultUtil.errorWithMsg("未找到相关用户。");
+		}
+		return ResultUtil.success(count);
 	}
 
 	/**

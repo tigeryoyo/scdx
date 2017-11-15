@@ -12,9 +12,9 @@
 		<div class="role_search">
 			<div class="role_search_input">
 				<input type="search" placeholder="请输入姓名" class="form-control"
-					id="power_Search" /> <img src="images/icon_search.png"
+					id="user_search" /> <img src="images/icon_search.png"
 					class="icon_search" />
-				<button type="button" class="btn btn-primary" onClick=""
+				<button type="button" class="btn btn-primary" onClick="selectUserInfor(1)"
 					style="margin-left: 10px">搜 索</button>
 				<button type="button" class="btn btn-primary" onClick="accAdd()">添加用户</button>
 			</div>
@@ -43,58 +43,6 @@
 	/**
 	 * 用户信息展示
 	 */
-	$(function() {
-		$.ajax({
-				type : "post",
-				url : "/user/selectAllUser",
-				dataType : "json",
-				success : function(msg) {
-					$('.infor_tab02 tr:not(:first)').html("");
-					if (msg.status == "OK") {
-						var items = msg.result;
-						// userId,userName,trueName,tel,email,userRoleName
-						$
-							.each(
-								items,
-								function(idx, item) {
-									row = '<tr><td width="66" height="40" align="center" bgcolor="#ffffff">'
-										+ (idx + 1)
-										+ '</td><td width="64" height="40" align="center" bgcolor="#ffffff">'
-										+ item[1]
-										+ '</td><td width="66" height="40" align="center" bgcolor="#ffffff">'
-										+ item[2]
-										+ '</td><td width="67" height="40" align="center" bgcolor="#ffffff">'
-										+ item[5]
-										+ '</td><td width="104" height="40" align="center" bgcolor="#ffffff">'
-										+ item[3]
-										+ '</td><td width="157" height="40" align="center" bgcolor="#ffffff">'
-										+ item[4]
-										+ '</td><td width="130" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick='
-										+ 'accChg("'
-										+ item[0]
-										+ '","'
-										+ item[1]
-										+ '","'
-										+ item[2]
-										+ '","'
-										+ item[3]
-										+ '","'
-										+ item[4]
-										+ '","'
-										+ item[5]
-										+ '"'
-										+ ')'
-										+ '>编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger" onClick="accDel('
-										+ item[0] + ')" >删除</button></td></tr>'
-									$('.infor_tab02').append(row);
-								});
-					} else {
-						alert(msg.result);
-					}
-				},
-				error : function(msg) {
-				},
-			})
-	});
+	 initUserShow(1);
 </script>
 </html>

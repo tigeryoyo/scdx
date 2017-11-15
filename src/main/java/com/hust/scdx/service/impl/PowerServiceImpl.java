@@ -12,6 +12,7 @@ import com.hust.scdx.dao.PowerDao;
 import com.hust.scdx.dao.RolePowerDao;
 import com.hust.scdx.model.Power;
 import com.hust.scdx.model.RolePower;
+import com.hust.scdx.model.params.PowerQueryCondition;
 import com.hust.scdx.service.PowerService;
 
 @Service
@@ -103,7 +104,17 @@ public class PowerServiceImpl implements PowerService {
 		}
 		return true;
 	}
-	
-	
+
+	@Override
+	public List<Power> selectPowerByCondition(PowerQueryCondition qc) {
+		// TODO Auto-generated method stub
+		return powerDao.selectPower(qc);
+	}
+
+	@Override
+	public long selectCountOfPower(PowerQueryCondition qc) {
+		// TODO Auto-generated method stub
+		return powerDao.selectCountOfPower(qc);
+	}
 
 }
