@@ -80,17 +80,9 @@ function initSearchPage(currenPage){
             alert("数据请求失败");
         }})
 }
-function setCookie(value1,value2,value3){
-	// alert(name+value);
-	var cookie_name1="id";
-	var cookie_name2="weightName";
-	var cookie_name3="weight";
-	var Days = 1; // 此 cookie 将被保存 1 天
-	var exp　= new Date();
-	exp.setTime(exp.getTime() +Days*24*60*60*1000);
-	document.cookie = cookie_name1 +"="+ escape (value1) + ";expires=" + exp.toGMTString();
-	document.cookie = cookie_name2 +"="+ escape (value2) + ";expires=" + exp.toGMTString();
-	document.cookie = cookie_name3 +"="+ escape (value3) + ";expires=" + exp.toGMTString();
+function weightChange(value1,value2,value3){
+	var json = {"weightId":value1,"weightName":value2,"weight":value3};
+	setCookie("weightInfor",JSON.stringify(json));
 	jumpto("weight-change");
 }
 
@@ -118,7 +110,7 @@ function weightInforSearch(page){
 					cookie_value1="'"+item.id+"'";
 					cookie_value2="'"+item.name+"'";
 					cookie_value3="'"+item.weight+"'";
-					row= '<tr><td width="88" height="40" align="center" bgcolor="#ffffff">'+((page-1)*10+idx+1)+'</td><td width="162" height="40" align="center" bgcolor="#ffffff">'+item.name+'</td><td width="181" height="40" align="center" bgcolor="#ffffff">'+item.weight+'</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="setCookie('+cookie_value1+','+cookie_value2+','+cookie_value3+')">编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger delWeight" id="'+item.id+'" >删除</button></td></tr>'
+					row= '<tr><td width="88" height="40" align="center" bgcolor="#ffffff">'+((page-1)*10+idx+1)+'</td><td width="162" height="40" align="center" bgcolor="#ffffff">'+item.name+'</td><td width="181" height="40" align="center" bgcolor="#ffffff">'+item.weight+'</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="weightChange('+cookie_value1+','+cookie_value2+','+cookie_value3+')">编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger delWeight" id="'+item.id+'" >删除</button></td></tr>'
 					$('.infor_tab02').append(row);
 				});
 			}else{
@@ -164,12 +156,12 @@ function clearWeight(){
 }
 
 function weightInforChange(){
-	var newId=getCookie("id");
+	var weight=getCookie("weightInfor");
 	$.ajax({
 		type:"post",
 		url:"/weight/updateWeight",
 		data:{
-			id:newId,
+			id:weight.weightId,
 			name:$("#new_name_weight").val(),
 			weight:$("#new_weight_weight").val()
 		},
