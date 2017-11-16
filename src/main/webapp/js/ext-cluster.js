@@ -1,4 +1,5 @@
 {
+	$('.topicName').text("专题名称：" + getCookie("topicName"));
 	var t_temp = new Date();
 	t_temp.setHours(0);
 	t_temp.setMinutes(0);
@@ -14,7 +15,6 @@
  * 此次聚类结果id
  */
 var resultId = "";
-
 /**
  * 根据时间范围查找基础文件。 *
  * 
