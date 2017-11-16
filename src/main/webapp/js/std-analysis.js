@@ -231,7 +231,13 @@ function showTime(e){
             format:"YYYY-MM-DD hh:mm:ss",
             isTime:true,
             minDate:"2016-01-01 00:00:00",
-            trigger: "click"
+            trigger: "click",
+            choosefun:function(datas){
+            	timeChange();
+            },
+            okfun:function(datas){
+            	timeChange();
+            }
         })       
 }
 
@@ -301,15 +307,10 @@ function searchTimeChange(){
     queryStdfilesByTimeRange(start,end);
 }
 
-$("#startTime").change(function(){
-	if(index = $("input[name='searchTime']:checked").val() == '3')
+function timeChange(){
+	if(index = $("input[name='searchTime']:checked").val() == '4')
 		searchTimeChange();
-})
-
-$("#endTime").change(function(){
-	if(index = $("input[name='searchTime']:checked").val() == '3')
-		searchTimeChange();
-})
+}
 
 //画图页面跳转
 function toPaint(targetIndex, title) {
