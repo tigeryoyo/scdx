@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50637
 File Encoding         : 65001
 
-Date: 2017-11-21 17:09:47
+Date: 2017-11-21 21:25:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3526,8 +3526,8 @@ CREATE TABLE `extfile` (
 -- ----------------------------
 -- Records of extfile
 -- ----------------------------
+INSERT INTO `extfile` VALUES ('7499a84d-a108-40ec-b5be-07bed57174b3', '测试1048-1000.xls', '205f276b-6378-4403-873c-819b8594f243', '未知', '1344', '1048', '2017-11-21 21:23:39', '开发者');
 INSERT INTO `extfile` VALUES ('c2e33271-c538-47ea-bd37-4a7a06138748', '测试587-581.xls', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', '未知', '681', '568', '2017-10-30 13:33:29', '管理员admin');
-INSERT INTO `extfile` VALUES ('cb79e843-54b7-4cb6-b5fd-6a972f3bbb57', '测试1048-1000.xls', 'fe741b00-2b21-45d0-b851-f1324bbb81f8', '未知', '1344', '1048', '2017-11-21 11:28:59', '开发者huster');
 
 -- ----------------------------
 -- Table structure for power
@@ -3540,7 +3540,7 @@ CREATE TABLE `power` (
   PRIMARY KEY (`power_id`),
   UNIQUE KEY `unique_name` (`power_name`),
   KEY `unique_url` (`power_url`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of power
@@ -3550,9 +3550,9 @@ INSERT INTO `power` VALUES ('2', '获取用户id', '/getCurrentUserId');
 INSERT INTO `power` VALUES ('3', '创建专题', '/topic/create');
 INSERT INTO `power` VALUES ('4', '删除专题', '/topic/delete');
 INSERT INTO `power` VALUES ('5', '查询自有的所有专题', '/topic/queryOwnTopic');
-INSERT INTO `power` VALUES ('6', '查询自由的所有专题分页', '/topic/queryOwnTopicCount');
+INSERT INTO `power` VALUES ('6', '查询自有的所有专题分页', '/topic/queryOwnTopicCount');
 INSERT INTO `power` VALUES ('7', '查询所有专题', '/topic/queryAllTopic');
-INSERT INTO `power` VALUES ('8', '查询所有专题分页', '/topic/queryOwnTopicCount');
+INSERT INTO `power` VALUES ('8', '查询所有专题分页', '/topic/queryAllTopicCount');
 INSERT INTO `power` VALUES ('9', '上传原始文件', '/extfile/upload');
 INSERT INTO `power` VALUES ('10', '读取上传文件属性行', '/extfile/checkExtfile');
 INSERT INTO `power` VALUES ('11', '根据时间范围查找基础文件', '/extfile/queryExtfilesByTimeRange');
@@ -3623,6 +3623,7 @@ INSERT INTO `power` VALUES ('75', '分页，查询权限', '/power/selectPowerIn
 INSERT INTO `power` VALUES ('76', '根据角色id查询角色所有权限', '/power/selectPowerByRoleId');
 INSERT INTO `power` VALUES ('77', '改变角色权限', '/power/changeRolePower');
 INSERT INTO `power` VALUES ('78', '查找所有角色', '/role/selectAllRole');
+INSERT INTO `power` VALUES ('79', '修改权限信息', '/power/changePowerInfor');
 
 -- ----------------------------
 -- Table structure for result
@@ -3642,8 +3643,8 @@ CREATE TABLE `result` (
 -- ----------------------------
 -- Records of result
 -- ----------------------------
+INSERT INTO `result` VALUES ('1dfe345b-0ec9-4647-a261-60c1011f2fb0', 'ddd2017112121-2017112121', '205f276b-6378-4403-873c-819b8594f243', 'huster', '2017-11-21 21:23:49');
 INSERT INTO `result` VALUES ('34982e17-fbc2-4b65-b6fd-cd0511a6293e', '测试专题2017103013-2017103013', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', 'huster', '2017-11-16 09:37:34');
-INSERT INTO `result` VALUES ('4fd5b8df-c799-4537-8312-c25123801291', '四川戒毒管理局专题2017112111-2017112111', 'fe741b00-2b21-45d0-b851-f1324bbb81f8', 'huster', '2017-11-21 11:29:25');
 INSERT INTO `result` VALUES ('e5efb523-98b6-4627-b4a7-e91f5ba5ce7e', '测试专题2017103013-2017103013', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', 'huster', '2017-11-16 09:37:56');
 
 -- ----------------------------
@@ -3677,7 +3678,7 @@ CREATE TABLE `role_power` (
   KEY `index_power_id` (`power_id`),
   CONSTRAINT `rp_fk_power_id` FOREIGN KEY (`power_id`) REFERENCES `power` (`power_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `rp_fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=392 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=393 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_power
@@ -3894,6 +3895,7 @@ INSERT INTO `role_power` VALUES ('388', '3', '67');
 INSERT INTO `role_power` VALUES ('389', '3', '68');
 INSERT INTO `role_power` VALUES ('390', '3', '69');
 INSERT INTO `role_power` VALUES ('391', '3', '70');
+INSERT INTO `role_power` VALUES ('392', '1', '79');
 
 -- ----------------------------
 -- Table structure for source_type
@@ -3932,7 +3934,7 @@ CREATE TABLE `stdfile` (
 -- ----------------------------
 -- Records of stdfile
 -- ----------------------------
-INSERT INTO `stdfile` VALUES ('6a75408d-43ba-4f84-937f-c625f43f574f', '四川戒毒管理局专题2017112111-2017112111.xls', 'fe741b00-2b21-45d0-b851-f1324bbb81f8', '697', '1169', '2017-11-21 11:32:45', '开发者huster');
+INSERT INTO `stdfile` VALUES ('54a932e5-7984-4509-969e-2f7ead2b3159', 'ddd2017112121-2017112121.xls', '205f276b-6378-4403-873c-819b8594f243', '697', '1169', '2017-11-21 21:24:09', '开发者');
 
 -- ----------------------------
 -- Table structure for stopword
@@ -3973,7 +3975,7 @@ CREATE TABLE `topic` (
 -- Records of topic
 -- ----------------------------
 INSERT INTO `topic` VALUES ('0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', '测试专题', '未知', '2017-10-30 13:24:52', 'admin', 'huster', '2017-11-16 09:37:56');
-INSERT INTO `topic` VALUES ('fe741b00-2b21-45d0-b851-f1324bbb81f8', '四川戒毒管理局专题', '未知', '2017-11-21 11:26:06', 'huster', 'huster', '2017-11-21 11:29:25');
+INSERT INTO `topic` VALUES ('205f276b-6378-4403-873c-819b8594f243', 'ddd', '未知', '2017-11-21 21:23:21', 'huster', 'huster', '2017-11-21 21:23:50');
 
 -- ----------------------------
 -- Table structure for user
