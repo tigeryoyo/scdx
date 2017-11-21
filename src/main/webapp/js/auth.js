@@ -629,3 +629,38 @@ $("#check_all_power").click(function() {
 		$("input[name='power']").prop("checked", false);
 	}
 })
+
+/**
+ * 提交权限信息修改请求
+ */
+function submitPowerChg(){
+	powerInfor = JSON.parse(getCookie("power_selectedPower"));
+	$.ajax({
+		type : "post",
+		url : "/power/changePowerInfor",
+		data : {
+			powerId : powerInfor.powerId,
+			powerName : $("#new_name_power").val(),
+			powerUrl : $("#new_url_power").val()
+		},
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert("权限信息更新成功。");
+				jumpto("auth-power");
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function(msg) {
+			alert("您没有权限修改权限信息。");
+		},
+	})
+}
+/**
+ * 重置权限信息
+ */
+function resetPowerChg(){
+	$("#new_name_power").val('')
+	$("#new_url_power").val('')
+}

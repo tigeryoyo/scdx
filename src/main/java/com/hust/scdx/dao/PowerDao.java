@@ -58,7 +58,7 @@ public class PowerDao {
 		criteria.andPowerIdIsNotNull();
 		return powerMapper.selectByExample(example);
 	}
-	
+
 	/**
 	 * 分页查询所有权限
 	 * 
@@ -76,7 +76,7 @@ public class PowerDao {
 		example.setLimit(qc.getLimit());
 		return powerMapper.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询所有权限个数
 	 * 
@@ -122,4 +122,11 @@ public class PowerDao {
 		return powers.get(0);
 	}
 
+	public boolean updatePower(Power power) {
+		int count = powerMapper.updateByPrimaryKey(power);
+		if (count > 0)
+			return true;
+		else
+			return false;
+	}
 }

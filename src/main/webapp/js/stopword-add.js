@@ -98,6 +98,9 @@ $(function() {
 					contentType : false,
 					mimeType : "multipart/form-data",
 					data : fd,
+					beforeSend : function() {
+						begin();
+						},
 					success : function(msg) {
 						if (msg.status == "OK") {
 							//判断上一个停用词表格是否为空若为空则删除
@@ -119,6 +122,9 @@ $(function() {
 					},
 					error : function() {
 						alert("预览失败");
+						stop();
+					},
+					complete: function(){
 						stop();
 					}
 				});
