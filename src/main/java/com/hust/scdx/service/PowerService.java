@@ -20,5 +20,7 @@ public interface PowerService {
 	boolean resetRolePower(int roleId,List<Integer> powerIds);
 	
 	long selectCountOfPower(PowerQueryCondition qc);
+	
+	boolean updatePower(Power power);
 
 }

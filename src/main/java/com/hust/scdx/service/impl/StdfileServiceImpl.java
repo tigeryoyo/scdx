@@ -296,10 +296,6 @@ public class StdfileServiceImpl implements StdfileService {
 			wu.setBreak();
 			// 舆情聚焦（摘要）
 			wu.addParaText("舆情聚焦", titleEnv);
-
-			//
-			//
-			//
 			List<String[]> summary = new ArrayList<>();
 			summary = generateSummary(attrs, content,topicName);
 			int num = 1;
@@ -394,6 +390,9 @@ public class StdfileServiceImpl implements StdfileService {
 		List<String[]> summary = new ArrayList<>();
 		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
 		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
+		if(allContent== null || allContent.size() == 0){
+			return summary;
+		}
 		for (List<String[]> content : allContent) {
 			String title = null;
 			List<String> sentence = null;
@@ -403,23 +402,27 @@ public class StdfileServiceImpl implements StdfileService {
 			boolean flag = false;
 			// 找到可以爬的sentence
 			for (String[] str : content) {
-				String url = UrlUtil.getUrl(str[urlIndex]);
-				if(url==null)
-					continue;
-				if (!flag) {
-					sentence = crawler.getSummary(url);
-					if (null != sentence) {
-						flag = true;
-						title = str[titleIndex];
-						sentence.add(0, title);
-						Summary s = new Summary(sentence);
-						s.summary();
-						sentence = s.getSummary(null);
+				try{
+					String url = UrlUtil.getUrl(str[urlIndex]);
+					if(url==null)
+						continue;
+					if (!flag) {
+						sentence = crawler.getSummary(url);
+						if (null != sentence) {
+							flag = true;
+							title = str[titleIndex];
+							sentence.add(0, title);
+							Summary s = new Summary(sentence);
+							s.summary();
+							sentence = s.getSummary(null);
+						}
 					}
-				}
-				if(!urlSet.contains(url)){
-					urlSet.add(url);
-					organization.add(Constant.existDomain.get(url));
+					if(!urlSet.contains(url)){
+						urlSet.add(url);
+						organization.add(Constant.existDomain.get(url));
+					}
+				}catch(Exception e){
+					logger.error("提取摘要信息出错！");
 				}
 			}
 			organization.sort(null);
@@ -428,7 +431,11 @@ public class StdfileServiceImpl implements StdfileService {
 				str_organization = topicName;
 			} else {
 				for (Domain domain : organization) {
-					str_organization += domain.getName()+domain.getWeight() + "、";
+					if(domain == null){
+						logger.error("域名为空，摘要信息提取出错！");
+						continue;
+					}
+					str_organization += domain.getName()+ "、";
 				}
 				str_organization = str_organization.substring(0, str_organization.length() - 1) + "）";
 			}

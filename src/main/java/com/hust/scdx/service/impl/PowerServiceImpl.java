@@ -116,5 +116,11 @@ public class PowerServiceImpl implements PowerService {
 		// TODO Auto-generated method stub
 		return powerDao.selectCountOfPower(qc);
 	}
+	@Override
+	public boolean updatePower(Power power) {
+		// TODO Auto-generated method stub		
+		return powerDao.updatePower(power);
+	}
 
+	
 }

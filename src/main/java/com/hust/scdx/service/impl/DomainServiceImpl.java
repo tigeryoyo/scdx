@@ -126,7 +126,7 @@ public class DomainServiceImpl implements DomainService {
 				 */
 				list.add(d);
 			}
-			System.out.println("---------这是一个测试---------需要添加的未知url有----"+list.size());
+//			System.out.println("---------这是一个测试---------需要添加的未知url有----"+list.size());
 			return addUnknowDomain(list);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

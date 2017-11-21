@@ -69,7 +69,7 @@ public class UrlUtil {
 			domain.setDomainFormTwo(domainTwo);
 			Constant.existDomain.put(domainTwo.getUrl(),domain);			
 		}
-		System.out.println("---------------existDomain------"+Constant.existDomain.size());
+//		System.out.println("---------------existDomain------"+Constant.existDomain.size());
 	}
 
 	/**

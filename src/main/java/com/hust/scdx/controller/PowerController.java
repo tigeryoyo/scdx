@@ -159,8 +159,23 @@ public class PowerController {
 			HttpServletRequest request) {
 		System.out.println(powerIds);
 		if(powerService.resetRolePower(roleId, powerIds))
-			return ResultUtil.errorWithMsg("修改角色权限成功！");
+			return ResultUtil.success("修改角色权限成功！");
 		return ResultUtil.errorWithMsg("修改角色权限出现错误。");
+	}
+	
+	@ResponseBody
+	@RequestMapping("/changePowerInfor")
+	public Object changePower(@RequestParam(value = "powerId", required = true) int powerId,
+			@RequestParam(value = "powerName", required = false) String powerName,
+			@RequestParam(value = "powerUrl", required = false) String powerUrl,
+			HttpServletRequest request){
+		Power power = new Power();
+		power.setPowerId(powerId);
+		power.setPowerName(powerName);
+		power.setPowerUrl(powerUrl);
+		if(powerService.updatePower(power))
+			return ResultUtil.success("修改权限信息成功！");
+		return ResultUtil.errorWithMsg("修改权限信息失败！");
 	}
 
 }
