@@ -60,7 +60,7 @@ function queryExtfilesByTimeRange(startTime,endTime) {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -103,14 +103,16 @@ function queryResultByTimeRange(startTime,endTime) {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
 
 /**
  * 根据ajax查询到的内容显示聚类结果
- * @param items ajxa返回的内容string[][]
+ * 
+ * @param items
+ *            ajxa返回的内容string[][]
  */
 function showResultByContent(items){
 	for (var i = 0; i < items.length; i++) {
@@ -124,14 +126,16 @@ function showResultByContent(items){
 			+ (i+1) + ',\''
 			// + item[indexOfUrl]
 			+ resultId + '\',' + item[3] + ')">' + item[0] + '</a></td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
-			//添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'
+			// 添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' +
+			// item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") +
+			// '\')">' + item[3] + '</a>'
 			+  item[3]  + '</td></tr>';
 		$('.summary_tab table').append(rows);
 	}
 }
 
 
-//显示历史聚类结果
+// 显示历史聚类结果
 function showHistoryResult(e){
 	resultId = $(e).attr("data-id");
 	getDisplayResultById();
@@ -161,7 +165,7 @@ function getDisplayResultById() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -203,7 +207,7 @@ function miningByTimeRange() {
 				var items = msg.result.displayResult;
 				resultId = msg.result.resultId;
 				showResultByContent(items);
-				//更新历史聚类结果
+				// 更新历史聚类结果
 				var index = $("input[name='searchTime']:checked").val();
 			    var startTime,endTime,start,end;
 			    var currentTime = new Date();
@@ -270,7 +274,7 @@ function miningByTimeRange() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			alert("您没有权限使用该资源...");
 			stop();
 		},
 		complete: function(){
@@ -303,7 +307,7 @@ function resetResultById() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -343,7 +347,7 @@ function combineResultItemsByIndices() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -383,7 +387,7 @@ function deleteResultItemsByIndices() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -422,7 +426,7 @@ function deleteClusterItemsByIndices() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -526,7 +530,7 @@ function timeChange(){
 		searchTimeChange();
 }
 
-//聚类的各个类详细信息显示操作js
+// 聚类的各个类详细信息显示操作js
 function showClusterDetails(index,resultId,count){
 	var url = '';
 	$("#clusterItemAll").prop("checked",false);
@@ -538,7 +542,7 @@ function showClusterDetails(index,resultId,count){
 			resultId : resultId
 		},
 		dataType : "json",
-		async: false,//同步
+		async: false,// 同步
 		success : function(msg) {
 			if (msg.status == "OK") {
 				var items = msg.result;
@@ -550,8 +554,8 @@ function showClusterDetails(index,resultId,count){
 					url = items[i + 1][indexOfUrl];
 					return;
 				}
-				var indexOfTitle = parseInt(items[0][0]) ;//+ 1				
-				var indexOfTime = parseInt(items[0][2]) ;//+ 1
+				var indexOfTitle = parseInt(items[0][0]) ;// + 1
+				var indexOfTime = parseInt(items[0][2]) ;// + 1
 				
 				$('.details_tab table tr:not(:first)').remove();
 				for (var i = 0; i < items.length - 1; i++) {
@@ -571,7 +575,7 @@ function showClusterDetails(index,resultId,count){
 						+ i
 						+'" >删除</button></td></tr>';
 				$('.details_tab table').append(rows);
-				//将类的id作为table的id
+				// 将类的id作为table的id
 				$('.details_tab table').attr('id',index);
 				}
 			}else{
@@ -582,10 +586,10 @@ function showClusterDetails(index,resultId,count){
 			 $('#code').hide();
 		     $('#goodcover').hide();
 		     freshData();
-//			alert(msg.result);
+// alert(msg.result);
 		}
 	});
-	//类中只有一个元素直接打开url
+	// 类中只有一个元素直接打开url
 	if(url != '' && count == 1){
 		window.open(url);
 	}else if(url == ''){
@@ -598,7 +602,7 @@ function showClusterDetails(index,resultId,count){
 	     $('#code').fadeIn();
 	}
 }
-//全选类中所有元素
+// 全选类中所有元素
 $("#historyAll").click(function() {
 	if (this.checked) {
 		$("input[name='result_check']").prop("checked", true);
@@ -607,13 +611,13 @@ $("#historyAll").click(function() {
 	}
 });
 
-//快速选中
+// 快速选中
 function selectClusters(){
 	var count = $("#clusternum_input").val();
 	$("input[name='result_check'][data-count='"+count+"']").prop("checked", true);
 }
 
-//弹出框的样式
+// 弹出框的样式
 $(function() {
     // alert($(window).height());
     $('#closebt').click(function() {

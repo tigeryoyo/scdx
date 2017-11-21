@@ -27,7 +27,7 @@ function typeInforShow(page){
 			}
 		},
 		error: function(){
-			alert("数据请求失败");
+			 alert("您没有权限使用该资源...");
 		}
 	})	
 }
@@ -50,7 +50,7 @@ function initShowPage(currenPage){
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	alert("您没有权限使用该资源...");
         }})
 }
 
@@ -75,7 +75,7 @@ function initSearchPage(currenPage){
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	alert("您没有权限使用该资源...");
         }})
 }
 
@@ -114,7 +114,7 @@ function typeInforSearch(page){
 			}
 		},
 		error: function(){
-            alert("数据请求失败");
+			 alert("您没有权限使用该资源...");
         },
 	})	
 }
@@ -146,7 +146,7 @@ function AddtypeInfor(){
 			}
 		},
 		error: function(){
-            alert("数据请求失败");
+			 alert("您没有权限添加类型。");
         }
 	})	
 }
@@ -181,7 +181,7 @@ function ChangetypeInfor(){
 			}
 		},
 		error: function(){
-            alert("数据请求失败");
+			 alert("您没有权限编辑类型。");
         }
 	})	
 }
@@ -211,7 +211,7 @@ $(function(){
 					}
 				} ,
 				error: function(){
-		            alert("数据请求失败");
+					 alert("您没有权限删除类型。");
 		        },
 			});
 		}

@@ -40,7 +40,7 @@ function addStopword() {
 			stop();
 		},
 		error : function() {
-			alert("数据请求失败");
+			 alert("您没有权限添加停用词。");
 		}
 	})
 }

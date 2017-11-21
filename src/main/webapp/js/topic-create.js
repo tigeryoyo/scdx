@@ -24,7 +24,7 @@ function createTopic() {
 			}
 		},
 		error : function() {
-			alert("数据请求失败。");
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
