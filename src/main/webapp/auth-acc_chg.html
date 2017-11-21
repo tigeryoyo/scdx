@@ -65,14 +65,14 @@
 	$("#chg_tel").val(acc_selectedUser.tel);
 	$("#chg_email").val(acc_selectedUser.email);
 	var roles = selectRole();
-	var currentUserId = getCookie("currentUserId");
+	var currentRoleId = getCookie("currentRoleId");
 	//若编辑的是当前用户那么不能修改角色
-	if (acc_selectedUser.userId == currentUserId) {
+	if (acc_selectedUser.roleId == currentRoleId) {
 		$('#chg_userRoleName').append('<option selected="true">' + roles[0].roleName + '</option>');
-	} else if (acc_selectedUser.userId > currentUserId) {
+	} else if (acc_selectedUser.roleId > currentRoleId) {
 		//若编辑的用户级别比当前用户低（不需要考虑编辑级别高的用户，在编辑按钮直接拒绝）
 		$.each(roles, function(index, role) {
-			if (role.roleId > currentUserId) {
+			if (role.roleId > currentRoleId) {
 				$('#chg_userRoleName').append('<option selected="true">' + role.roleName + '</option>');
 			}
 		});

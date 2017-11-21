@@ -18,7 +18,7 @@ public interface UserService {
 
 	boolean insertUser(User user, String userRoleName);
 	
-	boolean deleteUserById(int userId);
+	boolean deleteUserById(int currentUserId, int userId);
 
 	boolean updateUser(User user, String userRoleName);
 

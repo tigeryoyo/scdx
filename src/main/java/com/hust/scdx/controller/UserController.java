@@ -85,9 +85,9 @@ public class UserController {
 		if (user.getUserId().equals(userId)) {
 			return ResultUtil.successWithoutStatus("不能删除自己。");
 		}
-		if (!userService.deleteUserById(userId)) {
+		if (!userService.deleteUserById(user.getUserId(), userId)) {
 			logger.error("删除用户（用户id:" + userId + "）失败。");
-			return ResultUtil.errorWithMsg("删除用户失败。");
+			return ResultUtil.errorWithMsg("您没有权限删除该用户。");
 		}
 		return ResultUtil.success("删除用户成功。");
 	}
@@ -165,7 +165,7 @@ public class UserController {
 	@RequestMapping("/selectUserInfor")
 	public Object selectAllUser(@RequestParam(value = "userName", required = false) String userName,@RequestParam(value = "start", required = true) int start,
 			@RequestParam(value = "limit", required = true) int limit,HttpServletRequest request) {
-		// userId,userName,trueName,tel,email,userRoleName
+		// userId,userName,trueName,tel,email,userRoleName,roleId
 		UserQueryCondition uc = new UserQueryCondition();
 		uc.setStart(start);
 		uc.setLimit(limit);

@@ -24,7 +24,7 @@ function initShowPage(currentPage) {
 			}
 		},
 		error : function() {
-			alert("数据请求失败...");
+			alert("您没有权限访问该资源...");
 		}
 	})
 }
