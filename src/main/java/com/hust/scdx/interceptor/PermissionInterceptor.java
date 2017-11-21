@@ -1,7 +1,6 @@
 package com.hust.scdx.interceptor;
 
 import java.util.HashSet;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,16 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.model.User;
-import com.hust.scdx.util.ResultUtil;
 
 public class PermissionInterceptor implements HandlerInterceptor {
 	/**
@@ -48,8 +43,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			HashSet<String> powers = (HashSet<String>) session.getAttribute(Constant.USERPOWER);
 			
 			if(powers==null){
-//				return false;
-				return true;
+				return false;
 			}
 			
 			if (powers.contains(url)) {
@@ -59,7 +53,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			response.sendRedirect("/error.html");
 			logger.error("permissionInterceptor 错误。 \t" + e.toString());
 		}
-		return true;
+		return false;
 	}
 
 	@Override
