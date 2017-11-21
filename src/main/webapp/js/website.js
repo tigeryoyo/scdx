@@ -49,7 +49,7 @@ function websiteInforShow(page) {
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         },
     })
 }
@@ -72,7 +72,7 @@ function initShowPage(currenPage) {
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }
     })
 }
@@ -105,7 +105,7 @@ function initSearchPage(currenPage) {
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }
     })
 }
@@ -170,7 +170,7 @@ function websiteInforSearch(page) {
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }
     })
 }
@@ -224,7 +224,7 @@ function delDomainOne(e) {
                 alert(msg.result);
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限删除一级域名。");
         }
 
     })
@@ -248,7 +248,7 @@ function delDomainTwo(e) {
                 alert(msg.result);
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限删除二级域名。");
         }
 
     })

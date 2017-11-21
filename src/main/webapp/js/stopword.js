@@ -34,7 +34,7 @@ function stopwordInforShow(page){
             }
         },
         error: function(){
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }
     })
 }
@@ -58,7 +58,7 @@ function initShowPage(currenPage){
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }})
     }
 initShowPage(1)
@@ -99,7 +99,7 @@ function stopwordInforSearch(page){
             }
         },
         error: function(){
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }
     })
 }
@@ -124,7 +124,7 @@ function initSearchPage(currenPage){
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }})
     }
 
@@ -153,7 +153,7 @@ $(function(){
                     }
                 } ,
                 error: function(){
-                    alert("数据请求失败");
+                	 alert("您没有权限删除停用词。");
                 }
             });
     })

@@ -56,7 +56,7 @@ function initSearchPage(currenPage){
             }
         },
         error: function () {
-            alert("数据请求失败");
+        	 alert("您没有权限使用该资源...");
         }})
 }
 
@@ -94,7 +94,7 @@ function allData(page) {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限使用该资源...");
 		}
 	});
 }
@@ -124,7 +124,7 @@ function deleteTopic(topicId) {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			 alert("您没有权限删除专题。");
 		}
 	});
 }
@@ -199,7 +199,7 @@ function searchData(page){
 
         } ,
         error:function(){
-            
+        	 alert("您没有权限使用该资源...");
         }
     });
 }

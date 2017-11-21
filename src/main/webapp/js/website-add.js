@@ -24,7 +24,7 @@ function addWebsite() {
 			jumpto("website-infor");
 		},
 		error : function() {
-			alert("数据请求失败");
+			 alert("您没有权限添加域名。");
 		}
 	})
 }
@@ -61,7 +61,7 @@ function submit(fd) {
 			box.innerHTML="将文件拖拽到此处";
 		},
 		error : function() {
-			alert("数据请求失败");
+			 alert("您没有权限添加域名。");
 		}
 	});
 }
