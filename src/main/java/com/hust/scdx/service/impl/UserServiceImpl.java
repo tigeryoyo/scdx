@@ -79,7 +79,13 @@ public class UserServiceImpl implements UserService {
 	 * 删除指定用户，由于数据库的外键关联相对应的user_role表中的数据也会删除。
 	 */
 	@Override
-	public boolean deleteUserById(int userId) {
+	public boolean deleteUserById(int currentUserId, int userId) {
+		int currentRoleId = selectUserRoleIdByUserId(currentUserId);
+		int userRoleId = selectUserRoleIdByUserId(userId);
+		if (currentRoleId >= userRoleId) {
+			return false;
+		}
+
 		if (0 == userDao.deleteByPrimaryKey(userId)) {
 			logger.info("删除用户(userId:" + userId + ")失败。");
 			return false;
@@ -121,6 +127,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	/**
+	 * 根据用户id查找用户角色id
+	 */
+	private int selectUserRoleIdByUserId(int userId) {
+		return userRoleDao.selectUserRoleByUserId(userId).getRoleId();
+	}
+
+	/**
 	 * 根据用户名查找用户
 	 */
 	@Override
@@ -137,13 +150,14 @@ public class UserServiceImpl implements UserService {
 		List<String[]> list = new ArrayList<String[]>();
 		try {
 			for (User user : users) {
-				String[] strs = new String[6];
+				String[] strs = new String[7];
 				strs[0] = String.valueOf(user.getUserId());
 				strs[1] = user.getUserName();
 				strs[2] = user.getTrueName();
 				strs[3] = user.getTelphone();
 				strs[4] = user.getEmail();
 				strs[5] = selectUserRoleNameByUserId(user.getUserId());
+				strs[6] = String.valueOf(selectUserRoleIdByUserId(user.getUserId()));
 				list.add(strs);
 			}
 		} catch (Exception e) {
@@ -152,29 +166,32 @@ public class UserServiceImpl implements UserService {
 		}
 		return list;
 	}
-	@Override	
+
+	@Override
 	/**
 	 * 查询所有用户个数
 	 */
-	public long selectCountOfUser(UserQueryCondition uc){
+	public long selectCountOfUser(UserQueryCondition uc) {
 		return userDao.selectAllUsetCount(uc);
 	}
+
 	@Override
 	/**
 	 * 根据条件查询用户
 	 */
-	public List<String[]> selectUserByCondition(UserQueryCondition uc){
+	public List<String[]> selectUserByCondition(UserQueryCondition uc) {
 		List<User> users = userDao.selectUserByCondition(uc);
 		List<String[]> list = new ArrayList<String[]>();
 		try {
 			for (User user : users) {
-				String[] strs = new String[6];
+				String[] strs = new String[7];
 				strs[0] = String.valueOf(user.getUserId());
 				strs[1] = user.getUserName();
 				strs[2] = user.getTrueName();
 				strs[3] = user.getTelphone();
 				strs[4] = user.getEmail();
 				strs[5] = selectUserRoleNameByUserId(user.getUserId());
+				strs[6] = String.valueOf(selectUserRoleIdByUserId(user.getUserId()));
 				list.add(strs);
 			}
 		} catch (Exception e) {

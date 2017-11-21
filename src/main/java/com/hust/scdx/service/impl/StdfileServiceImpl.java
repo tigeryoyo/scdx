@@ -321,6 +321,7 @@ public class StdfileServiceImpl implements StdfileService {
 					env1);
 			return wu.getDoc();
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error("产生报告出错!{}", e.toString());
 		}
 		return null;

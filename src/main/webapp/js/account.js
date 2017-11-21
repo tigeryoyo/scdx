@@ -71,7 +71,7 @@ function submitAccount() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			alert("您没有权限修改个人信息...");
 		},
 	})
 }
@@ -108,7 +108,7 @@ function pwdChange() {
 			}
 		},
 		error : function(msg) {
-			alert(msg.result);
+			alert("您没有权限修改密码...");
 		},
 	})
 }

@@ -2,110 +2,117 @@
  * 权限管理
  */
 
-function selectUserInfor(page){
+function selectUserInfor(page) {
+	$
+		.ajax({
+			type : "post",
+			url : "/user/selectUserInfor",
+			dataType : "json",
+			data : {
+				userName : $("#user_search").val(),
+				start : (parseInt(10 * page - 10)),
+				limit : 10
+			},
+			success : function(msg) {
+				$('.infor_tab02 tr:not(:first)').html("");
+				if (msg.status == "OK") {
+					var items = msg.result;
+					// userId,userName,trueName,tel,email,userRoleName,roleId
+					$
+						.each(
+							items,
+							function(idx, item) {
+								row = '<tr><td width="66" height="40" align="center" bgcolor="#ffffff">'
+									+ (idx + 1)
+									+ '</td><td width="64" height="40" align="center" bgcolor="#ffffff">'
+									+ item[1]
+									+ '</td><td width="66" height="40" align="center" bgcolor="#ffffff">'
+									+ item[2]
+									+ '</td><td width="67" height="40" align="center" bgcolor="#ffffff">'
+									+ item[5]
+									+ '</td><td width="104" height="40" align="center" bgcolor="#ffffff">'
+									+ item[3]
+									+ '</td><td width="157" height="40" align="center" bgcolor="#ffffff">'
+									+ item[4]
+									+ '</td><td width="130" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick='
+									+ 'accChg("'
+									+ item[0]
+									+ '","'
+									+ item[1]
+									+ '","'
+									+ item[2]
+									+ '","'
+									+ item[3]
+									+ '","'
+									+ item[4]
+									+ '","'
+									+ item[5]
+									+ '","'
+									+ item[6]
+									+ '")'
+									+ '>编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger" onClick="accDel('
+									+ item[0] + ')" >删除</button></td></tr>'
+								$('.infor_tab02').append(row);
+							});
+				} else {
+					alert(msg.result);
+				}
+			},
+			error : function(msg) {
+				alert("您没有权限访问该资源...");
+			},
+		})
+}
+
+function initUserShow(currenPage) {
+	var listCount = 0;
+	if ("undefined" == typeof (currenPage) || null == currenPage) {
+		currenPage = 1;
+	}
 	$.ajax({
 		type : "post",
-		url : "/user/selectUserInfor",
+		url : "/user/selectUserCount",
 		dataType : "json",
-		data:{
-			userName:$("#user_search").val(),
-            start:(parseInt(10*page-10)),
-            limit:10
-        },
 		success : function(msg) {
-			$('.infor_tab02 tr:not(:first)').html("");
 			if (msg.status == "OK") {
-				var items = msg.result;
-				// userId,userName,trueName,tel,email,userRoleName
-				$
-					.each(
-						items,
-						function(idx, item) {
-							row = '<tr><td width="66" height="40" align="center" bgcolor="#ffffff">'
-								+ (idx + 1)
-								+ '</td><td width="64" height="40" align="center" bgcolor="#ffffff">'
-								+ item[1]
-								+ '</td><td width="66" height="40" align="center" bgcolor="#ffffff">'
-								+ item[2]
-								+ '</td><td width="67" height="40" align="center" bgcolor="#ffffff">'
-								+ item[5]
-								+ '</td><td width="104" height="40" align="center" bgcolor="#ffffff">'
-								+ item[3]
-								+ '</td><td width="157" height="40" align="center" bgcolor="#ffffff">'
-								+ item[4]
-								+ '</td><td width="130" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick='
-								+ 'accChg("'
-								+ item[0]
-								+ '","'
-								+ item[1]
-								+ '","'
-								+ item[2]
-								+ '","'
-								+ item[3]
-								+ '","'
-								+ item[4]
-								+ '","'
-								+ item[5]
-								+ '"'
-								+ ')'
-								+ '>编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger" onClick="accDel('
-								+ item[0] + ')" >删除</button></td></tr>'
-							$('.infor_tab02').append(row);
-						});
+				// alert("success");
+				listCount = msg.result;
+				$("#page").initPage(listCount, currenPage, selectUserInfor);
 			} else {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
+		error : function() {
+			alert("您没有权限访问该资源...");
+		}
+	});
+}
+
+function initUserSearch(currenPage) {
+	var listCount = 0;
+	if ("undefined" == typeof (currenPage) || null == currenPage) {
+		currenPage = 1;
+	}
+	$.ajax({
+		type : "post",
+		url : "/user/selectUserCount",
+		dataType : "json",
+		data : {
+			userName : $("#user_search").val()
 		},
-	})
-}
-
-function initUserShow(currenPage){
-	var listCount = 0;
-    if("undefined" == typeof(currenPage) || null == currenPage){
-        currenPage = 1;
-    }
-    $.ajax({
-        type: "post",
-        url: "/user/selectUserCount",
-        dataType: "json",
-        success: function (msg) {
-            if (msg.status == "OK") {
-                // alert("success");
-                listCount = msg.result;
-                $("#page").initPage(listCount,currenPage,selectUserInfor);
-            } else {
-                alert(msg.result);
-            }
-        },
-        error: function () {
-            alert("数据请求失败");
-        }});
-}
-
-function initUserSearch(currenPage){
-	var listCount = 0;
-    if("undefined" == typeof(currenPage) || null == currenPage){
-        currenPage = 1;
-    }
-    $.ajax({
-        type: "post",
-        url: "/user/selectUserCount",
-        dataType: "json",
-        data:{userName:$("#user_search").val()},
-        success: function (msg) {
-            if (msg.status == "OK") {
-                // alert("success");
-                listCount = msg.result;
-                $("#page").initPage(listCount,currenPage,selectUserInfor);
-            } else {
-                alert(msg.result);
-            }
-        },
-        error: function () {
-            alert("数据请求失败");
-        }});
+		success : function(msg) {
+			if (msg.status == "OK") {
+				// alert("success");
+				listCount = msg.result;
+				$("#page").initPage(listCount, currenPage, selectUserInfor);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function() {
+			alert("您没有权限访问该资源...");
+		}
+	});
 }
 
 /**
@@ -143,14 +150,15 @@ function accDel(userId) {
 /**
  * 用户管理-编辑用户
  */
-function accChg(userId, userName, trueName, tel, email, userRoleName) {
+function accChg(userId, userName, trueName, tel, email, userRoleName, roleId) {
 	var acc_selectedUser = {
 		"userId" : userId,
 		"userName" : userName,
 		"trueName" : trueName,
 		"tel" : tel,
 		"email" : email,
-		"userRoleName" : userRoleName
+		"userRoleName" : userRoleName,
+		"roleId" : roleId
 	};
 	setCookie("acc_selectedUser", JSON.stringify(acc_selectedUser));
 	jumpto('auth-acc_chg');
@@ -174,7 +182,7 @@ function selectRole() {
 			}
 		},
 		error : function(msg) {
-			alert("您没有权限删除该用户。");
+			alert("您没有权限访问该资源...");
 		},
 	});
 	// 下标0存的是当前用户的角色信息
@@ -292,7 +300,7 @@ function submitAccChg() {
 			}
 		},
 		error : function(msg) {
-			alert("修改用户信息失败。");
+			alert("您没有权限修改用户信息。");
 		},
 	})
 }
@@ -333,10 +341,10 @@ function resetRoleAdd() {
 /**
  * 角色管理-编辑角色
  */
-function roleChg(roleId,roleName) {
+function roleChg(roleId, roleName) {
 	var role_selectedRole = {
-			"roleId":roleId,
-			"roleName":roleName
+		"roleId" : roleId,
+		"roleName" : roleName
 	}
 	setCookie("role_selectedRole", JSON.stringify(role_selectedRole));
 	jumpto('auth-role_chg');
@@ -360,7 +368,7 @@ function selectPowerByRoleId(roleId) {
 		success : function(msg) {
 			if (msg.status == "OK") {
 				res = msg.result;
-				
+
 			} else {
 				alert(msg.result);
 			}
@@ -372,51 +380,55 @@ function selectPowerByRoleId(roleId) {
 	return res;
 }
 
-function initPowerShow(currenPage){
+function initPowerShow(currenPage) {
 	var listCount = 0;
-    if("undefined" == typeof(currenPage) || null == currenPage){
-        currenPage = 1;
-    }
-    $.ajax({
-        type: "post",
-        url: "/power/selectPowerCount",
-        dataType: "json",
-        success: function (msg) {
-            if (msg.status == "OK") {
-                // alert("success");
-                listCount = msg.result;
-                $("#page").initPage(listCount,currenPage,selectPowerInfor);
-            } else {
-                alert(msg.result);
-            }
-        },
-        error: function () {
-            alert("数据请求失败");
-        }});
+	if ("undefined" == typeof (currenPage) || null == currenPage) {
+		currenPage = 1;
+	}
+	$.ajax({
+		type : "post",
+		url : "/power/selectPowerCount",
+		dataType : "json",
+		success : function(msg) {
+			if (msg.status == "OK") {
+				// alert("success");
+				listCount = msg.result;
+				$("#page").initPage(listCount, currenPage, selectPowerInfor);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function() {
+			alert("您没有权限访问该资源...");
+		}
+	});
 }
 
-function initPowerSearch(currenPage){
+function initPowerSearch(currenPage) {
 	var listCount = 0;
-    if("undefined" == typeof(currenPage) || null == currenPage){
-        currenPage = 1;
-    }
-    $.ajax({
-        type: "post",
-        url: "/power/selectPowerCount",
-        dataType: "json",
-        date:{powerName:$("#power_search").val()},
-        success: function (msg) {
-            if (msg.status == "OK") {
-                // alert("success");
-                listCount = msg.result;
-                $("#page").initPage(listCount,currenPage,selectPowerInfor);
-            } else {
-                alert(msg.result);
-            }
-        },
-        error: function () {
-            alert("数据请求失败");
-        }});
+	if ("undefined" == typeof (currenPage) || null == currenPage) {
+		currenPage = 1;
+	}
+	$.ajax({
+		type : "post",
+		url : "/power/selectPowerCount",
+		dataType : "json",
+		date : {
+			powerName : $("#power_search").val()
+		},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				// alert("success");
+				listCount = msg.result;
+				$("#page").initPage(listCount, currenPage, selectPowerInfor);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function() {
+			alert("您没有权限访问该资源...");
+		}
+	});
 }
 
 /**
@@ -425,50 +437,51 @@ function initPowerSearch(currenPage){
  * @returns
  */
 function selectPowerInfor(page) {
-	$.ajax({
-		type : "post",
-		url : "/power/selectPowerInfor",
-		dataType : "json",
-		async : false,
-		data:{
-			powerName:$("#power_search").val(),
-            start:(parseInt(10*page-10)),
-            limit:10
-        },
-		success : function(msg) {
-			if (msg.status == "OK") {
-				var powers = msg.result;
-				$('.infor_tab02 tr:not(:first)').html("");
-				$
-				.each(
-					powers,
-					function(index, power) {
-						powerId = power.powerId;
-						powerName = "'" + power.powerName + "'";
-						powerUrl = "'" + power.powerUrl + "'";
-						row = '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'
-							+ (index + 1)
-							+ '</td><td width="231" height="40" align="center" bgcolor="#ffffff">'
-							+ power.powerName
-							+ '</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="powerChg('
-							+ powerId
-							+ ','
-							+ powerName
-							+ ','
-							+ powerUrl
-							+ ')">编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger delPower" onClick="powerDel('
-							+ powerId + ')" >删除</button></td></tr>'
-						$('.infor_tab02').append(row);
+	$
+		.ajax({
+			type : "post",
+			url : "/power/selectPowerInfor",
+			dataType : "json",
+			async : false,
+			data : {
+				powerName : $("#power_search").val(),
+				start : (parseInt(10 * page - 10)),
+				limit : 10
+			},
+			success : function(msg) {
+				if (msg.status == "OK") {
+					var powers = msg.result;
+					$('.infor_tab02 tr:not(:first)').html("");
+					$
+						.each(
+							powers,
+							function(index, power) {
+								powerId = power.powerId;
+								powerName = "'" + power.powerName + "'";
+								powerUrl = "'" + power.powerUrl + "'";
+								row = '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'
+									+ (index + 1)
+									+ '</td><td width="231" height="40" align="center" bgcolor="#ffffff">'
+									+ power.powerName
+									+ '</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="powerChg('
+									+ powerId
+									+ ','
+									+ powerName
+									+ ','
+									+ powerUrl
+									+ ')">编辑</button>&nbsp;&nbsp;<button type="button" class="btn btn-danger delPower" onClick="powerDel('
+									+ powerId + ')" >删除</button></td></tr>'
+								$('.infor_tab02').append(row);
 
-					});
-			} else {
-				alert(msg.result);
-			}
-		},
-		error : function(msg) {
-			alert("您没有权限使用此资源。");
-		},
-	});
+							});
+				} else {
+					alert(msg.result);
+				}
+			},
+			error : function(msg) {
+				alert("您没有权限访问该资源...");
+			},
+		});
 }
 
 /**
@@ -516,29 +529,28 @@ function powerChg(powerId, powerName, powerUrl) {
 /**
  * 显示指定角色所拥有的权限
  */
-function showRolePower(){
-	var powers =  selectPowerByRoleId(JSON.parse(getCookie("role_selectedRole")).roleId);
+function showRolePower() {
+	var powers = selectPowerByRoleId(JSON.parse(getCookie("role_selectedRole")).roleId);
 	$("#new_name_role").val(JSON.parse(getCookie("role_selectedRole")).roleName);
-	$("#check_all_power").prop("checked",false);
+	$("#check_all_power").prop("checked", false);
 	$('#role_power_tab').find("tbody").empty();
-		$.each(
+	$
+		.each(
 			powers,
 			function(index, power) {
-				var row='';
-				if(power.owned){
-					row='<tr >'+
-						'<td style="text-align:left">'+
-						'<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'+power.powerId+'" checked="checked">&nbsp;&nbsp;'+(index+1)+
-						'</td>'+
-						'<td>'+ power.powerName +'</td>'+
-						'</tr>'				
-				}else{
-					row='<tr >'+
-					'<td style="text-align:left">'+
-					'<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'+power.powerId+'">&nbsp;&nbsp;'+(index+1)+
-					'</td>'+
-					'<td>'+ power.powerName +'</td>'+
-					'</tr>'
+				var row = '';
+				if (power.owned) {
+					row = '<tr >'
+						+ '<td style="text-align:left">'
+						+ '<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'
+						+ power.powerId + '" checked="checked">&nbsp;&nbsp;' + (index + 1) + '</td>' + '<td>'
+						+ power.powerName + '</td>' + '</tr>'
+				} else {
+					row = '<tr >'
+						+ '<td style="text-align:left">'
+						+ '<input style="width: 19px; height: 25px; padding: 0 0 5px 0;" type="checkbox" name="power" data-id="'
+						+ power.powerId + '">&nbsp;&nbsp;' + (index + 1) + '</td>' + '<td>' + power.powerName + '</td>'
+						+ '</tr>'
 				}
 				$('#role_power_tab').append(row);
 			});
@@ -568,33 +580,33 @@ function submitPowerAdd() {
 }
 
 /**
- *角色管理-编辑角色-重置
+ * 角色管理-编辑角色-重置
  */
-function resetRoleChg() {	
+function resetRoleChg() {
 	showRolePower();
 }
 
 /**
  * 角色管理-编辑角色-提交
  */
-function submitRoleChg(){
+function submitRoleChg() {
 	var array = new Array();
 	var roleId = JSON.parse(getCookie("role_selectedRole")).roleId;
-	$.each($("input[name='power']:checked"),function(index,power){
+	$.each($("input[name='power']:checked"), function(index, power) {
 		var id = parseInt($(power).attr("data-id"));
 		array.push(id);
 	});
-	if(0 == array.length){
-		if(!confirm("您是否要删除该角色的全部权限？"))
+	if (0 == array.length) {
+		if (!confirm("您是否要删除该角色的全部权限？"))
 			return false;
 	}
 	$.ajax({
 		type : "post",
 		url : "/power/changeRolePower",
-		traditional:true,
+		traditional : true,
 		data : {
-			powerIds:array,
-			roleId:roleId
+			powerIds : array,
+			roleId : roleId
 		},
 		dataType : "json",
 		async : false,
@@ -608,12 +620,12 @@ function submitRoleChg(){
 	showRolePower();
 }
 
-//角色权限编辑页面的全选
-$("#check_all_power").click(function(){
-	
-	if($("#check_all_power").prop("checked")){
-		$("input[name='power']").prop("checked",true);
-	}else{
-		$("input[name='power']").prop("checked",false);
+// 角色权限编辑页面的全选
+$("#check_all_power").click(function() {
+
+	if ($("#check_all_power").prop("checked")) {
+		$("input[name='power']").prop("checked", true);
+	} else {
+		$("input[name='power']").prop("checked", false);
 	}
 })
