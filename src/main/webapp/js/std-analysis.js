@@ -50,7 +50,7 @@ $(function() {
 			var fd = new FormData();
 			fd.append("origfile", origfile);
 			$.ajax({
-				async : false,
+	//			async : false,
 				crossDomain : true,
 				url : "/extfile/checkExtfile",
 				method : "POST",
@@ -185,7 +185,7 @@ function uploadStd() {
 	form.append("stdfile", fileBuf);
 	form.append("topicId", getCookie("topicId"));
 	$.ajax({
-		async : false,
+//		async : false,
 		crossDomain : true,
 		url : "/stdfile/upload",
 		method : "POST",
