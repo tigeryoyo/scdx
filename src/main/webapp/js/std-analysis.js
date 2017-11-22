@@ -155,7 +155,7 @@ function showDetail(e){
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
 				var items = msg.result;
-				for (var i = 0; i < items.length; i++) {
+				for (var i = 0; i < (items.length>50?50:items.length); i++) {
 					// items第一行存储index，故从i+1读起
 					var item = items[i];
 					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'+

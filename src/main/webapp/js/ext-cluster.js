@@ -130,7 +130,7 @@ function queryResultByTimeRange(startTime,endTime) {
  *            ajxa返回的内容string[][]
  */
 function showResultByContent(items){
-	for (var i = 0; i < items.length; i++) {
+	for (var i = 0; i < (items.length>50?50:items.length); i++) {
 		// items第一行存储index，故从i+1读起
 		var item = items[i];
 		var rows = '<tr><td height="32" align="left"><input type="checkbox" name="result_check" style="width:20px;height:20px" data-id="'+i+'" data-count="'+item[3]+'" class="' + i
