@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hust.scdx.constant.Constant.Resutt;
+import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.util.ExcelUtil;
@@ -204,13 +206,15 @@ public class ResultController {
 			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
 			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT),
 					(List<Integer>) map.get(Resutt.MARKED));
+			workbook = ExcelUtil.exportStatToExcel(workbook,
+					(Map<String, TreeMap<String, Integer>>) map.get(Resutt.STAT));
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
 
-		return ResultUtil.success("删除成功。");
+		return ResultUtil.success("下载成功。");
 	}
 
 	@InitBinder
