@@ -64,7 +64,7 @@ function queryExtfilesByTimeRange(startTime,endTime) {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
-			 stop();
+		//	 stop();
 		},
 		complete:function(){
 			stop();
@@ -92,6 +92,9 @@ function queryResultByTimeRange(startTime,endTime) {
 			endTime : endTime
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$("#resultList").html("");
@@ -113,6 +116,9 @@ function queryResultByTimeRange(startTime,endTime) {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -164,6 +170,9 @@ function getDisplayResultById() {
 			resultId : resultId
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
@@ -175,6 +184,9 @@ function getDisplayResultById() {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -306,6 +318,9 @@ function resetResultById() {
 			resultId : resultId
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
@@ -317,6 +332,9 @@ function resetResultById() {
 		},
 		error : function(msg) {
 			alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -347,6 +365,9 @@ function combineResultItemsByIndices() {
 		},
 		dataType : "json",
 		traditional : true,
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -357,6 +378,9 @@ function combineResultItemsByIndices() {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }

@@ -59,6 +59,9 @@ $(function() {
 				dataType : "json",
 				mimeType : "multipart/form-data",
 				data : fd,
+				beforeSend : function() {
+					begin();
+					},
 				success : function(msg) {
 					if (msg.status == "OK") {
 						$("#drop_area").text(filename);
@@ -70,6 +73,10 @@ $(function() {
 					}
 				},
 				error : function() {
+					//stop();
+					alert("文件预览失败！");
+				},
+				complete:function(){
 					stop();
 				}
 			});
@@ -101,6 +108,9 @@ function queryStdfilesByTimeRange(startTime,endTime) {
 			endTime : endTime
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$("#extList").html("");
@@ -121,6 +131,9 @@ function queryStdfilesByTimeRange(startTime,endTime) {
 		},
 		error : function() {
 			alert("查询历史上传记录失败！");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -135,6 +148,9 @@ function showDetail(e){
 			stdfileId : stdfileId
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
@@ -153,6 +169,9 @@ function showDetail(e){
 		},
 		error : function(msg) {
 			alert(msg.result);
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -190,7 +209,6 @@ function uploadStd() {
 		},
 		error : function() {
 			alert("上传失败!");
-			stop();
 		},
 		complete: function(){
 			stop();

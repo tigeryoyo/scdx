@@ -37,7 +37,7 @@ function addStopword() {
 			} else {
 				alert(msg.result);
 			}
-			stop();
+		//	stop();
 		},
 		error : function() {
 			 alert("您没有权限添加停用词。");
@@ -122,7 +122,7 @@ $(function() {
 					},
 					error : function() {
 						alert("预览失败");
-						stop();
+						//stop();
 					},
 					complete: function(){
 						stop();
