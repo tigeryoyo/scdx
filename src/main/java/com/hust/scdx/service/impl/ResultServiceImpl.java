@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,10 +16,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.constant.Constant.Resutt;
+import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.dao.ResultDao;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.params.ResultQueryCondition;
@@ -385,7 +388,8 @@ public class ResultServiceImpl implements ResultService {
 				}
 			}
 			List<Integer> marked = getMarked(modifyClusters, modifyCounts);
-
+			Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics(resultContent, Constant.existDomain);
+			res.put(Resutt.STAT, statMap);
 			res.put(Resutt.RESULT, resultContent);
 			res.put(Resutt.RESULTNAME, result.getResName());
 			res.put(Resutt.MARKED, marked);

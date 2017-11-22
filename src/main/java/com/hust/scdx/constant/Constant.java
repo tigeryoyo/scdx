@@ -30,6 +30,7 @@ public class Constant {
 		public final static String RESULT = "result";
 		public final static String RESULTNAME = "resultName";
 		public final static String MARKED = "marked";
+		public final static String STAT = "stat";
 	}
 
 	public static class StdfileMap {
