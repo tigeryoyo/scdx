@@ -39,6 +39,9 @@ function queryExtfilesByTimeRange(startTime,endTime) {
 			endTime : endTime
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$("#extList").html("");
@@ -61,6 +64,10 @@ function queryExtfilesByTimeRange(startTime,endTime) {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+			 stop();
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -92,10 +99,12 @@ function queryResultByTimeRange(startTime,endTime) {
 				if(null == items || 0 == items.length)
 					return ;
 				$.each(items,function(idx,item){
-					row = '<tr>'                     
-                        +'<td class="hand" title="'+item.resName+'" data-id="'+item.resId+'" onclick="showHistoryResult(this)">'
+					row = '<tr>'
+                        +'<td class="hand" width="192px;" title="'+item.resName+'" data-id="'+item.resId+'" onclick="showHistoryResult(this)">'
                         +item.resName
-                        +'</td>';
+                        +'</td>'
+                        +'<td width="169px;">'+new Date(item.createTime.time).format('yyyy-MM-dd hh:mm:ss')
+                        +'</tr>';
 					$("#resultList").append(row);                        
 				})
 			} else {

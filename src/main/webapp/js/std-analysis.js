@@ -308,7 +308,7 @@ function searchTimeChange(){
 }
 
 function timeChange(){
-	if(index = $("input[name='searchTime']:checked").val() == '4')
+	if(index = $("input[name='searchTime']:checked").val() == '3')
 		searchTimeChange();
 }
 
