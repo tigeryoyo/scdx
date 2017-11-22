@@ -24,7 +24,8 @@
 				$('body').append(loading);
 			}
 			this.loading = loading;
-			// console.log(cw,ch)
+			//
+			console.log("11111")
 			this.setPosition();
 		},
 		setPosition : function() {
@@ -63,6 +64,8 @@
 				top : top,
 				left : left
 			})
+			console.log(cw,ch)
+			console.log(top,left)
 		},
 		init : function(settings) {
 			settings = settings || {};

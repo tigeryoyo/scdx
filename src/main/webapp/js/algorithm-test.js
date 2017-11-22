@@ -208,7 +208,7 @@ function kmeans_cluster(){
         },
         error: function(){
             alert("请求失败!请检测k值是否为整数！");
-            stop();
+          //  stop();
         }
     })
 }
@@ -243,7 +243,7 @@ function canopy_cluster(){
         },
         error: function(){
             alert("请求失败！请确认阈值是否为纯小数！");
-            stop();
+        //    stop();
         }
     })
 }
@@ -277,7 +277,7 @@ function dbscan_cluster(){
         },
         error: function(){
             alert("请求失败！请确认半径是否为纯小数，最小数量是否为整数！");
-            stop();
+         //   stop();
         }
     })
 }
@@ -343,7 +343,8 @@ $(function() {
 						}
 					},
 					error : function() {
-						stop();
+					//	stop();
+						alert("文件预览失败！");
 					}
 				});
 			} else {
@@ -394,7 +395,7 @@ function uploadAll() {
 			},
 			error : function() {
 				alert("上传失败");
-				stop();
+			//	stop();
 			},
 			complete : function(){
 	            stop();

@@ -49,6 +49,9 @@ $(function() {
 					dataType : "json",
 					mimeType : "multipart/form-data",
 					data : fd,
+					beforeSend : function() {
+						begin();
+						},
 					success : function(msg) {
 						if (msg.status == "OK") {
 							addOrigfile(filename);
@@ -60,6 +63,9 @@ $(function() {
 						}
 					},
 					error : function() {
+						alert("文件预览失败！");
+					},
+					complete:function(){
 						stop();
 					}
 				});
@@ -104,7 +110,6 @@ function uploadAll() {
 			error : function() {
 				alert("上传失败");
 				flag = false;
-				stop();
 				return false;
 			},
 			complete: function(){

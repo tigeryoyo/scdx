@@ -419,7 +419,11 @@ public class StdfileServiceImpl implements StdfileService {
 					}
 					if(!urlSet.contains(url)){
 						urlSet.add(url);
-						organization.add(Constant.existDomain.get(url));
+						if(Constant.existDomain.get(url) == null){
+							logger.error(url+"暂未录入existDomain中！");
+						}else{
+							organization.add(Constant.existDomain.get(url));
+						}
 					}
 				}catch(Exception e){
 					logger.error("提取摘要信息出错！");
@@ -428,7 +432,7 @@ public class StdfileServiceImpl implements StdfileService {
 			organization.sort(null);
 			String str_organization = "（";
 			if (organization.size() == 0) {
-				str_organization = topicName;
+				str_organization = "（"+topicName+"）";
 			} else {
 				for (Domain domain : organization) {
 					if(domain == null){
