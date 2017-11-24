@@ -170,8 +170,21 @@ public class StdfileController {
 	@ResponseBody
 	@RequestMapping("/queryStdfilesByTimeRange")
 	public Object queryStdfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
 			@RequestParam(value = "startTime", required = true) Date startTime,
 			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+		switch (timeRangeType) {
+		case "1":
+			endTime = new Date();
+			startTime = new Date(endTime.getTime()-1*24*60*60*1000);
+			break;
+		case "2":
+			endTime = new Date();
+			startTime = new Date(endTime.getTime()-7*24*60*60*1000);
+			break;
+		default:
+			break;
+		}
 		List<Stdfile> list = stdfileService.queryExtfilesByTimeRange(topicId, startTime, endTime);
 		if (list == null) {
 			return ResultUtil.unknowError();

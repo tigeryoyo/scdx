@@ -95,4 +95,15 @@ public class TimeUtil {
 		}
 		}
 	}
+	
+	/**
+	 * 根据给定时间往前推指定时间  如 2017-11-24 11：11：0 前一分钟 2017-11-24 11：10：0
+	 * @param time 微秒
+	 * @param curDate 给定时间
+	 * @return
+	 */
+	public static Date getPreTime(long time,Date curDate){
+		Date result = new Date(curDate.getTime()- time);
+		return result;
+	}
 }
