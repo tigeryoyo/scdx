@@ -25,7 +25,7 @@ var resultId = "";
  * @param endTime
  *            结束时间
  */
-function queryExtfilesByTimeRange(startTime,endTime) {
+function queryExtfilesByTimeRange(timeRangeType,startTime,endTime) {
 	if(startTime == "" || startTime=="undefined" || endTime=="" || endTime=="undefined"){
 		alert("时间选择有误");
 		return ;
@@ -35,6 +35,7 @@ function queryExtfilesByTimeRange(startTime,endTime) {
 		url : "/extfile/queryExtfilesByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
+			timeRangeType:timeRangeType,
 			startTime : startTime,
 			endTime : endTime
 		},
@@ -82,12 +83,13 @@ function queryExtfilesByTimeRange(startTime,endTime) {
  * @param endTime
  *            结束时间
  */
-function queryResultByTimeRange(startTime,endTime) {
+function queryResultByTimeRange(timeRangeType,startTime,endTime) {
 	$.ajax({
 		type : "post",
 		url : "/result/queryResultByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
+			timeRangeType:timeRangeType,
 			startTime : startTime,
 			endTime : endTime
 		},
@@ -289,7 +291,7 @@ function miningByTimeRange() {
 			            }
 			            break;
 			    }
-			    queryResultByTimeRange(start,end);				
+			    queryResultByTimeRange(index,start,end);				
 			} else {
 				alert(msg.result);
 			}
@@ -554,8 +556,8 @@ function searchTimeChange(){
             }
             break;
     }
-    queryExtfilesByTimeRange(start,end);
-    queryResultByTimeRange(start,end);
+    queryExtfilesByTimeRange(index,start,end);
+    queryResultByTimeRange(index,start,end);
 }
 
 function timeChange(){

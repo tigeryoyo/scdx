@@ -94,7 +94,7 @@ $(function() {
  * @param endTime
  *            结束时间
  */
-function queryStdfilesByTimeRange(startTime,endTime) {
+function queryStdfilesByTimeRange(timeRangeType,startTime,endTime) {
 	if(startTime == "" || startTime=="undefined" || endTime=="" || endTime=="undefined"){
 		alert("时间选择有误");
 		return ;
@@ -104,6 +104,7 @@ function queryStdfilesByTimeRange(startTime,endTime) {
 		url : "/stdfile/queryStdfilesByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
+			timeRangeType:timeRangeType,
 			startTime : startTime,
 			endTime : endTime
 		},
@@ -322,7 +323,7 @@ function searchTimeChange(){
             }
             break;
     }
-    queryStdfilesByTimeRange(start,end);
+    queryStdfilesByTimeRange(index,start,end);
 }
 
 function timeChange(){
