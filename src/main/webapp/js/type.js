@@ -10,6 +10,9 @@ function typeInforShow(page){
 			limit:10
 		},
 		dataType:"json",
+		beforeSend : function() {
+			begin();
+			},
 		success: function(msg){
 		    $('.infor_tab02 tr:not(:first)').html("");
 			if( msg.status == "OK"){
@@ -28,6 +31,9 @@ function typeInforShow(page){
 		},
 		error: function(){
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	})	
 }
@@ -40,6 +46,9 @@ function initShowPage(currenPage){
         type: "post",
         url: "/sourceType/selectSourceTypeCount",
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -51,7 +60,11 @@ function initShowPage(currenPage){
         },
         error: function () {
         	alert("您没有权限使用该资源...");
-        }})
+        },
+        complete:function(){
+			stop();
+		}        
+    })
 }
 
 function initSearchPage(currenPage){
@@ -65,6 +78,9 @@ function initSearchPage(currenPage){
         data:{
         	name:$("#type_search").val()},
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -76,7 +92,11 @@ function initSearchPage(currenPage){
         },
         error: function () {
         	alert("您没有权限使用该资源...");
-        }})
+        },
+        complete:function(){
+			stop();
+		}
+    })
 }
 
 function typeChange(value1,value2){
@@ -96,6 +116,9 @@ function typeInforSearch(page){
 			limit:10
 		},
 		dataType:"json",
+		beforeSend : function() {
+			begin();
+			},
 		success: function(msg){
 		    $('.infor_tab02 tr:not(:first)').html("");
 			if( msg.status == "OK"){
@@ -116,6 +139,9 @@ function typeInforSearch(page){
 		error: function(){
 			 alert("您没有权限使用该资源...");
         },
+        complete:function(){
+			stop();
+		}
 	})	
 }
 
@@ -137,6 +163,9 @@ function AddtypeInfor(){
 			name:submit
 		},
 		dataType:"json",
+		beforeSend : function() {
+			begin();
+			},
 		success: function(msg){
 //			console.log(msg);
 			if( msg.status == "OK"){
@@ -147,7 +176,10 @@ function AddtypeInfor(){
 		},
 		error: function(){
 			 alert("您没有权限添加类型。");
-        }
+        },
+        complete:function(){
+			stop();
+		}
 	})	
 }
 
@@ -172,6 +204,9 @@ function ChangetypeInfor(){
 			id:type.typeId
 		},
 		dataType:"json",
+		beforeSend : function() {
+			begin();
+			},
 		success: function(msg){
 			if( msg.status == "OK"){
 				alert("修改成功");	
@@ -182,7 +217,10 @@ function ChangetypeInfor(){
 		},
 		error: function(){
 			 alert("您没有权限编辑类型。");
-        }
+        },
+        complete:function(){
+			stop();
+		}
 	})	
 }
 function clearNewtype(){
@@ -203,6 +241,9 @@ $(function(){
 					id:typeId,
 				} ,
 				dataType:"json",
+				beforeSend : function() {
+					begin();
+					},
 				success:function(msg){
 					if(msg.status=="OK"){
 						jumpto("type-infor");
@@ -213,6 +254,9 @@ $(function(){
 				error: function(){
 					 alert("您没有权限删除类型。");
 		        },
+		        complete:function(){
+					stop();
+				}
 			});
 		}
 	})

@@ -413,6 +413,9 @@ function deleteResultItemsByIndices() {
 		},
 		dataType : "json",
 		traditional : true,
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -423,6 +426,9 @@ function deleteResultItemsByIndices() {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -453,6 +459,9 @@ function deleteClusterItemsByIndices() {
 		},
 		dataType : "json",
 		traditional : true,
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -462,6 +471,9 @@ function deleteClusterItemsByIndices() {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -565,7 +577,7 @@ function timeChange(){
 		searchTimeChange();
 }
 
-// 聚类的各个类详细信息显示操作js
+// 聚类的各个类详细信息显示操作js(暂未使用)
 function showClusterDetails(index,resultId,count){
 	var url = '';
 	$("#clusterItemAll").prop("checked",false);

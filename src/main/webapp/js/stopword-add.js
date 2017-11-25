@@ -29,6 +29,9 @@ function addStopword() {
 		data : {
 			words : getWords()
 		},
+		beforeSend : function() {
+			begin();
+			},
 		dataType : "json",
         traditional:true,
 		success : function(msg) {
@@ -41,6 +44,9 @@ function addStopword() {
 		},
 		error : function() {
 			 alert("您没有权限添加停用词。");
+		},
+		complete:function(){
+			stop();
 		}
 	})
 }
@@ -89,7 +95,7 @@ $(function() {
 				var fd = new FormData();
 				fd.append("file", file);
 				$.ajax({
-					async : false,
+				//	async : false,
 					crossDomain : true,
 					url : "/file/getStopword",
 					method : "POST",

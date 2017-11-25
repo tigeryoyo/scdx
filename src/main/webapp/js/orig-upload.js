@@ -40,7 +40,7 @@ $(function() {
 				var fd = new FormData();
 				fd.append("origfile", origfile);
 				$.ajax({
-					async : false,
+//					async : false,
 					crossDomain : true,
 					url : "/extfile/checkExtfile",
 					method : "POST",

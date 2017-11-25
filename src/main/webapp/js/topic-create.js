@@ -15,6 +15,9 @@ function createTopic() {
 			topicName : $("#chuangjian").val(),
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				jumpto("topic-list");
@@ -25,6 +28,9 @@ function createTopic() {
 		},
 		error : function() {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }

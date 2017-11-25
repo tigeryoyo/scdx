@@ -29,6 +29,9 @@ function domainOneInfoChange() {
             weight:$("#new_weight").val()
         },
         datatype:"json",
+        beforeSend : function() {
+			begin();
+			},
         success:function (msg) {
             if(msg.status == "OK"){
                 alert(msg.result);
@@ -39,7 +42,10 @@ function domainOneInfoChange() {
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -59,6 +65,9 @@ function domainTwoInfoChange() {
             weight:$("#new_weight").val()
         },
         datatype:"json",
+        beforeSend : function() {
+			begin();
+			},
         success:function (msg) {
             if(msg.status == "OK"){
                 alert(msg.result);
@@ -69,7 +78,10 @@ function domainTwoInfoChange() {
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 

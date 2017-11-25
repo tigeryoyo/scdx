@@ -16,6 +16,9 @@ function initShowPage(currentPage) {
 		data : JSON.stringify(GetJsonData(currentPage)),
 		dataType : "json",
 		contentType : "application/json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				$("#page").initPage(msg.result, currentPage, allData);
@@ -25,7 +28,11 @@ function initShowPage(currentPage) {
 		},
 		error : function() {
 			 alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
+		
 	})
 }
 
@@ -45,6 +52,9 @@ function initSearchPage(currenPage){
         data:JSON.stringify(SearchJsonData(currenPage)),
         dataType: "json",
 		contentType:"application/json",
+		beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -57,7 +67,12 @@ function initSearchPage(currenPage){
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }})
+        },
+        complete:function(){
+			stop();
+        }
+		
+    })
 }
 
 /**
@@ -71,6 +86,9 @@ function allData(page) {
 		data : JSON.stringify(GetJsonData(page)),
 		dataType : "json",
 		contentType : "application/json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				var items = msg.result.list;
@@ -95,7 +113,10 @@ function allData(page) {
 		},
 		error : function(msg) {
 			 alert("您没有权限使用该资源...");
-		}
+		},
+		complete:function(){
+							stop();
+						}
 	});
 }
 
@@ -113,6 +134,9 @@ function deleteTopic(topicId) {
 			topicId : topicId
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				delCookie("topicId");
@@ -125,7 +149,10 @@ function deleteTopic(topicId) {
 		},
 		error : function(msg) {
 			 alert("您没有权限删除专题。");
-		}
+		},
+		complete:function(){
+							stop();
+						}
 	});
 }
 
@@ -174,6 +201,9 @@ function searchData(page){
         data:JSON.stringify(SearchJsonData(page)),
         dataType:"json",
         contentType:"application/json",
+        beforeSend : function() {
+			begin();
+			},
         success:function(msg){
             if(msg.status=="OK"){
             	var items = msg.result.list;
@@ -200,7 +230,10 @@ function searchData(page){
         } ,
         error:function(){
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     });
 }
 

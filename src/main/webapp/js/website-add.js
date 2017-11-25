@@ -15,6 +15,9 @@ function addWebsite() {
             weight : parseInt(weight)
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				jumpto("website-infor");
@@ -25,6 +28,9 @@ function addWebsite() {
 		},
 		error : function() {
 			 alert("您没有权限添加域名。");
+		},
+		complete:function(){
+			stop();
 		}
 	})
 }
@@ -62,6 +68,6 @@ function submit(fd) {
 		},
 		error : function() {
 			 alert("您没有权限添加域名。");
-		}
+		}		
 	});
 }

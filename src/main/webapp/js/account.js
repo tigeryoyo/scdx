@@ -10,6 +10,9 @@ $(function() {
 		type : "GET",
 		url : "/user/selectCurrentUser",
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				var user = msg.result;
@@ -25,6 +28,9 @@ $(function() {
 		error : function(msg) {
 			alert(msg.result);
 		},
+		complete:function(){
+			stop();
+		}
 	})
 
 });
@@ -62,6 +68,9 @@ function submitAccount() {
 			email : $("#user_email").val(),
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -73,6 +82,9 @@ function submitAccount() {
 		error : function(msg) {
 			alert("您没有权限修改个人信息...");
 		},
+		complete:function(){
+			stop();
+		}
 	})
 }
 
@@ -99,6 +111,9 @@ function pwdChange() {
 			oldPassword : $("#oldPwd").val(),
 			newPassword : newPwd
 		},
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert("密码更改成功！");
@@ -110,6 +125,9 @@ function pwdChange() {
 		error : function(msg) {
 			alert("您没有权限修改密码...");
 		},
+		complete:function(){
+			stop();
+		}
 	})
 }
 
