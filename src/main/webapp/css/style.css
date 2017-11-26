@@ -27,8 +27,8 @@ a:hover { color:#000000; text-decoration:none; }
 .main{ width:1000px; margin:0 auto; overflow: hidden; }
 
 /* 头部*/
-.top{ width:1000px; height:177px; background: url(../images/banner.jpg) no-repeat center center; color:#fff; overflow: hidden;} 
-.b_tit{ display: block; height:117px; line-height:117px; font-size: 48px; margin-top: 20px; text-align: center; }
+.top{ width:1000px; height:147px; background: url(../images/banner.jpg) no-repeat center center; color:#fff; overflow: hidden;} 
+.b_tit{ display: block; height:87px; line-height:87px; font-size: 48px; margin-top: 20px; text-align: center; }
 .s_tit{ display: block; line-height:40px; font-size: 16px; text-align: right; padding-right:20px;}
 .s_tit a{ color:#fff;}
 .s_tit i{ font-style: normal;}

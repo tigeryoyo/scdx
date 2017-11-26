@@ -30,7 +30,7 @@
 	</div>
 </body>
 <script>
-	var type =getCookie("typeInfor");
+	var type =JSON.parse(getCookie("typeInfor"));
 	var b_cookie = document.getElementById("new_name_type");
 	b_cookie.value = type.typeName;
 //	b_cookie.style.color = "#999999";

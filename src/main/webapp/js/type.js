@@ -22,7 +22,7 @@ function typeInforShow(page){
 				$.each(items,function(idx,item) {
 					cookie_value1="'"+item.id+"'";
 					cookie_value2="'"+item.name+"'";
-					row= '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'+((page-1)*10+idx+1)+'</td><td width="231" height="40" align="center" bgcolor="#ffffff">'+item.name+'</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="changeToCookie('+cookie_value1+','+cookie_value2+')" >编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger delType" id="'+item.id+'">删除</button></td></tr>'
+					row= '<tr><td width="169" height="40" align="center" bgcolor="#ffffff">'+((page-1)*10+idx+1)+'</td><td width="231" height="40" align="center" bgcolor="#ffffff">'+item.name+'</td><td colspan="2" width="140" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn btn-primary" onClick="typeChange('+cookie_value1+','+cookie_value2+')" >编辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-danger delType" id="'+item.id+'">删除</button></td></tr>'
 					$('.infor_tab02').append(row);
 				});
 			}else{
@@ -100,7 +100,7 @@ function initSearchPage(currenPage){
 }
 
 function typeChange(value1,value2){
-	var json = {"typeId":value1,"typeName":value2};
+	var json = {typeId:value1,typeName:value2};
 	setCookie("typeInfor",JSON.stringify(json));
 	jumpto("type-change");
 }

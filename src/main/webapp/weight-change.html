@@ -36,7 +36,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-	var weight = getCookie("weightInfor");
+	var weight = JSON.parse(getCookie("weightInfor"));
 	var b_cookie = document.getElementById("new_name_weight");
 	var c_cookie = document.getElementById("new_weight_weight");
 	b_cookie.value = weight.weightName;

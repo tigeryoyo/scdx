@@ -34,7 +34,7 @@ function weightInforShow(page) {
 									+ item.name
 									+ '</td><td width="181" height="40" align="center" bgcolor="#ffffff">'
 									+ item.weight
-									+ '</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn b btn-primary" onClick="setCookie('
+									+ '</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn b btn-primary" onClick="weightChange('
 									+ cookie_value1
 									+ ','
 									+ cookie_value2
@@ -120,9 +120,9 @@ function initSearchPage(currenPage) {
 }
 function weightChange(value1, value2, value3) {
 	var json = {
-		"weightId" : value1,
-		"weightName" : value2,
-		"weight" : value3
+		weightId : value1,
+		weightName : value2,
+		weight : value3
 	};
 	setCookie("weightInfor", JSON.stringify(json));
 	jumpto("weight-change");

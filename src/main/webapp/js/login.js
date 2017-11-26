@@ -15,9 +15,6 @@ function login() {
 			username : username,
 			password : password
 		},
-		  beforeSend : function() {
-				begin();
-			},
 		success : function(msg) {
 			if (msg.status === 'OK') {
 				var Days = 1; // 此 cookie 将被保存 1 天
@@ -32,9 +29,6 @@ function login() {
 		error : function() {
 			alert('登陆出现错误。');
 		},
-		complete:function(){
-			stop();
-		}
 	});
 }
 
