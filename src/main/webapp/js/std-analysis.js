@@ -156,14 +156,24 @@ function showDetail(e){
 			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
 				var items = msg.result;
-				for (var i = 0; i < (items.length>50?50:items.length); i++) {
+				for (var i = 0; i < (items.length>300?300:items.length); i++) {
 					// items第一行存储index，故从i+1读起
 					var item = items[i];
 					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'+
 						'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[0].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'+
 						'</td></tr>';
 					$('.summary_tab table').append(rows);
-				}		
+				}
+				var pieTitle = "'"+getCookie("topicName")+"'";
+				var count = 0;
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					count += parseInt(item[3]);
+				}
+				var rows = '<tr><td height="32" align="center">共:'+(items.length)+'类</td><td height="32" align="center"></td><td height="32" align="center"></td><td height="32" align="center">'+
+				'<a href="javascript:;" onclick="toPaint(0,'+pieTitle+')">'+count+'</a>'+
+				'</td></tr>';
+				$('.summary_tab table').append(rows);
 			} else {
 				alert(msg.result);
 			}

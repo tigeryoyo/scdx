@@ -9,11 +9,11 @@
                         .siblings().removeClass('stop_zs');
             });
 });*/
-var title = "";
+var pieTitle = "四川电信舆情信息挖掘系统";
 function paint() {
     var currentSet = getCookie('targetIndex');
     var stdfileId = getCookie('stdfileId');
-    title = getCookie('title');
+    pieTitle = getCookie('title');
     $.ajax({
         type : "post",
         url : "/stdfile/statisticSingleSet",
@@ -23,14 +23,19 @@ function paint() {
             targetIndex : currentSet
         },
         dataType : "json",
+        beforeSend : function() {
+			begin();
+		},
         success : function(msg) {
             parseTime(msg.result.time);
             parseAmount(msg.result.count);
-        },
+        },      
         error : function() {
             alert("请求失败");
         },
-
+        complete:function(){
+			stop();
+		}
     });
 }
 paint();
@@ -244,7 +249,7 @@ function paintbt(id, legend, series) {
     var myChart = echarts.init(document.getElementById(id));
     var option = {
         title : {
-            text : title,
+            text : pieTitle,
             x : 'center'
         },
         tooltip : {

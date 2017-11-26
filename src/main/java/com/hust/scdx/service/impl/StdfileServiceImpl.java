@@ -297,7 +297,7 @@ public class StdfileServiceImpl implements StdfileService {
 			// 舆情聚焦（摘要）
 			wu.addParaText("舆情聚焦", titleEnv);
 			List<String[]> summary = new ArrayList<>();
-			summary = generateSummary(attrs, content,topicName);
+			summary = generateSummary(attrs, content,marked,topicName);
 			int num = 1;
 			for (String[] strings : summary) {
 				wu.addParaText((num++) + ". " + strings[0], mainBEnv);
@@ -386,14 +386,15 @@ public class StdfileServiceImpl implements StdfileService {
 	 * @param allContent 文本内容  String[]为一条新闻记录 List<String[]>为一个类簇
 	 * @return
 	 */
-	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent,String topicName) {
+	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent,List<Integer> marked,String topicName) {
 		List<String[]> summary = new ArrayList<>();
 		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
 		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
 		if(allContent== null || allContent.size() == 0){
 			return summary;
 		}
-		for (List<String[]> content : allContent) {
+		for (int i = 0; i < allContent.size(); i ++){
+			List<String[]> content = allContent.get(i);
 			String title = null;
 			List<String> sentence = null;
 			List<Domain> organization = new ArrayList<Domain>();
@@ -407,7 +408,7 @@ public class StdfileServiceImpl implements StdfileService {
 					if(url==null)
 						continue;
 					if (!flag) {
-						sentence = crawler.getSummary(url);
+						sentence = crawler.getSummary(str[urlIndex]);
 						if (null != sentence) {
 							flag = true;
 							title = str[titleIndex];
@@ -426,6 +427,7 @@ public class StdfileServiceImpl implements StdfileService {
 						}
 					}
 				}catch(Exception e){
+					e.printStackTrace();
 					logger.error("提取摘要信息出错！");
 				}
 			}
@@ -449,8 +451,8 @@ public class StdfileServiceImpl implements StdfileService {
 					str_sentence += string + "。";
 				}
 			} else {
-				title = content.get(0)[titleIndex];
-				str_sentence = "由于该类新闻没有合适的网站来获取新闻内容，故无法获得摘要。该类新闻的第一条新闻来源于：" + content.get(0)[urlIndex];
+				title = content.get(marked.get(i))[titleIndex];
+				str_sentence = "由于该类新闻没有权威性较高的网站来获取新闻内容，故无法获得摘要。该类新闻的最早报道来源于：" + content.get(marked.get(i))[urlIndex];
 			}
 			summary.add(new String[] { title, str_sentence, str_organization });
 		}

@@ -28,7 +28,7 @@ function login() {
 		},
 		error : function() {
 			alert('登陆出现错误。');
-		}
+		},
 	});
 }
 

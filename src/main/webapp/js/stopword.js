@@ -12,6 +12,9 @@ function stopwordInforShow(page){
             limit:10
         },
         dataType:"json",
+        beforeSend : function() {
+			begin();
+			},
         success: function(msg){
             $('.infor_tab02 tr:not(:first)').html("");
             if( msg.status == "OK"){
@@ -35,7 +38,10 @@ function stopwordInforShow(page){
         },
         error: function(){
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -48,6 +54,9 @@ function initShowPage(currenPage){
         type: "post",
         url: "/stopword/selectStopwordCount",
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -59,7 +68,11 @@ function initShowPage(currenPage){
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }})
+        },
+        complete:function(){
+			stop();
+		}
+    })
     }
 initShowPage(1)
 
@@ -77,6 +90,9 @@ function stopwordInforSearch(page){
             limit:10
         },
         dataType:"json",
+        beforeSend : function() {
+			begin();
+			},
         success: function(msg){
             if( msg.status == "OK"){
                 $('.infor_tab02 tr:not(:first)').html("");
@@ -100,7 +116,10 @@ function stopwordInforSearch(page){
         },
         error: function(){
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -115,6 +134,9 @@ function initSearchPage(currenPage){
         url: "/stopword/selectStopwordCount",
         data:{word:obj1},
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 listCount = msg.result;
@@ -125,7 +147,11 @@ function initSearchPage(currenPage){
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }})
+        },
+        complete:function(){
+			stop();
+		}
+        })
     }
 
 // 添加停用词页面跳转
@@ -144,6 +170,9 @@ $(function(){
                     stopwordId:stopword_id
                 } ,
                 dataType:"json",
+                beforeSend : function() {
+					begin();
+					},
                 success:function(msg){
                     if(msg.status=="OK"){
                     	alert(msg.result);
@@ -154,7 +183,10 @@ $(function(){
                 } ,
                 error: function(){
                 	 alert("您没有权限删除停用词。");
-                }
+                },
+                complete:function(){
+					stop();
+				}
             });
     })
 })

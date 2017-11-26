@@ -13,6 +13,9 @@ function selectUserInfor(page) {
 				start : (parseInt(10 * page - 10)),
 				limit : 10
 			},
+			beforeSend : function() {
+				begin();
+				},
 			success : function(msg) {
 				$('.infor_tab02 tr:not(:first)').html("");
 				if (msg.status == "OK") {
@@ -61,6 +64,9 @@ function selectUserInfor(page) {
 			error : function(msg) {
 				alert("您没有权限访问该资源...");
 			},
+			complete:function(){
+				stop();
+			}
 		})
 }
 
@@ -73,6 +79,9 @@ function initUserShow(currenPage) {
 		type : "post",
 		url : "/user/selectUserCount",
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				// alert("success");
@@ -84,6 +93,9 @@ function initUserShow(currenPage) {
 		},
 		error : function() {
 			alert("您没有权限访问该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -100,6 +112,9 @@ function initUserSearch(currenPage) {
 		data : {
 			userName : $("#user_search").val()
 		},
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				// alert("success");
@@ -111,6 +126,9 @@ function initUserSearch(currenPage) {
 		},
 		error : function() {
 			alert("您没有权限访问该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -133,6 +151,9 @@ function accDel(userId) {
 			userId : userId,
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
@@ -144,6 +165,10 @@ function accDel(userId) {
 		error : function(msg) {
 			alert("您没有权限删除该用户。");
 		},
+		complete:function(){
+			stop();
+		}
+		
 	});
 }
 
@@ -236,6 +261,9 @@ function submitAccAdd() {
 			userRoleName : $("#add_userRoleName option:selected").val()
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				jumpto("auth-acc");
@@ -246,6 +274,9 @@ function submitAccAdd() {
 		error : function(msg) {
 			alert("您没有权限添加用户。");
 		},
+		complete:function(){
+							stop();
+						}
 	})
 }
 
@@ -291,6 +322,9 @@ function submitAccChg() {
 			userRoleName : $("#chg_userRoleName option:selected").val(),
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert("用户信息更新成功。");
@@ -302,6 +336,10 @@ function submitAccChg() {
 		error : function(msg) {
 			alert("您没有权限修改用户信息。");
 		},
+		complete:function(){
+			stop();
+		}
+		
 	})
 }
 
@@ -389,6 +427,9 @@ function initPowerShow(currenPage) {
 		type : "post",
 		url : "/power/selectPowerCount",
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				// alert("success");
@@ -400,6 +441,9 @@ function initPowerShow(currenPage) {
 		},
 		error : function() {
 			alert("您没有权限访问该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -416,6 +460,9 @@ function initPowerSearch(currenPage) {
 		date : {
 			powerName : $("#power_search").val()
 		},
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				// alert("success");
@@ -427,6 +474,9 @@ function initPowerSearch(currenPage) {
 		},
 		error : function() {
 			alert("您没有权限访问该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	});
 }
@@ -442,12 +492,15 @@ function selectPowerInfor(page) {
 			type : "post",
 			url : "/power/selectPowerInfor",
 			dataType : "json",
-			async : false,
+//			async : false,
 			data : {
 				powerName : $("#power_search").val(),
 				start : (parseInt(10 * page - 10)),
 				limit : 10
 			},
+			beforeSend : function() {
+				begin();
+				},
 			success : function(msg) {
 				if (msg.status == "OK") {
 					var powers = msg.result;
@@ -481,6 +534,9 @@ function selectPowerInfor(page) {
 			error : function(msg) {
 				alert("您没有权限访问该资源...");
 			},
+			complete:function(){
+				stop();
+			}
 		});
 }
 
@@ -501,6 +557,9 @@ function powerDel(powerId) {
 		data : {
 			powerId : powerId
 		},
+		beforeSend : function() {
+			begin();
+			},
 		dataType : "json",
 		async : false,
 		success : function(msg) {
@@ -509,6 +568,7 @@ function powerDel(powerId) {
 		error : function(msg) {
 			alert("您没有权限删除该权限。");
 		},
+		
 	});
 	jumpto('auth-power');
 }
@@ -644,6 +704,9 @@ function submitPowerChg(){
 			powerUrl : $("#new_url_power").val()
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert("权限信息更新成功。");
@@ -655,6 +718,9 @@ function submitPowerChg(){
 		error : function(msg) {
 			alert("您没有权限修改权限信息。");
 		},
+		complete:function(){
+			stop();
+		}
 	})
 }
 /**

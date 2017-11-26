@@ -9,6 +9,9 @@ function websiteInforShow(page) {
             limit: 10
         },
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
         	$('#domain_content').html("");
             if (msg.status == "OK") {                
@@ -51,6 +54,9 @@ function websiteInforShow(page) {
         error: function () {
         	 alert("您没有权限使用该资源...");
         },
+        complete:function(){
+			stop();
+		}
     })
 }
 function initShowPage(currenPage) {
@@ -62,6 +68,9 @@ function initShowPage(currenPage) {
         type: "post",
         url: "/domain/selectDomainCount",
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -73,7 +82,10 @@ function initShowPage(currenPage) {
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -95,6 +107,9 @@ function initSearchPage(currenPage) {
             weight: obj4
         },
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 // alert("success");
@@ -106,7 +121,10 @@ function initSearchPage(currenPage) {
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -130,6 +148,9 @@ function websiteInforSearch(page) {
             limit: 10
         },
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
         	$('#domain_content').html("");
             if (msg.status == "OK") {                
@@ -171,7 +192,10 @@ function websiteInforSearch(page) {
         },
         error: function () {
         	 alert("您没有权限使用该资源...");
-        }
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -216,6 +240,9 @@ function delDomainOne(e) {
             uuid:uuid
         },
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 alert(msg.result);
@@ -225,8 +252,10 @@ function delDomainOne(e) {
         },
         error: function () {
         	 alert("您没有权限删除一级域名。");
-        }
-
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 
@@ -240,6 +269,9 @@ function delDomainTwo(e) {
             uuid:uuid
         },
         dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
         success: function (msg) {
             if (msg.status == "OK") {
                 alert(msg.result);
@@ -249,8 +281,10 @@ function delDomainTwo(e) {
         },
         error: function () {
         	 alert("您没有权限删除二级域名。");
-        }
-
+        },
+        complete:function(){
+			stop();
+		}
     })
 }
 

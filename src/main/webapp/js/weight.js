@@ -11,6 +11,9 @@ function weightInforShow(page) {
 				limit : 10
 			},
 			dataType : "json",
+			beforeSend : function() {
+				begin();
+				},
 			success : function(msg) {
 				$('.infor_tab02 tr:not(:first)').html("");
 				if (msg.status == "OK") {
@@ -31,7 +34,7 @@ function weightInforShow(page) {
 									+ item.name
 									+ '</td><td width="181" height="40" align="center" bgcolor="#ffffff">'
 									+ item.weight
-									+ '</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn b btn-primary" onClick="setCookie('
+									+ '</td><td colspan="2" width="243" height="40" align="center" bgcolor="#ffffff"><button type="button" class="btn b btn-primary" onClick="weightChange('
 									+ cookie_value1
 									+ ','
 									+ cookie_value2
@@ -48,6 +51,9 @@ function weightInforShow(page) {
 			error : function() {
 				alert("您没有权限使用该资源...");
 			},
+			complete:function(){
+				stop();
+			}
 		})
 }
 function initShowPage(currenPage) {
@@ -59,6 +65,9 @@ function initShowPage(currenPage) {
 		type : "post",
 		url : "/weight/selectWeightCount",
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				listCount = msg.result;
@@ -69,6 +78,9 @@ function initShowPage(currenPage) {
 		},
 		error : function() {
 			alert("您没有权限使用该资源...");
+		},
+		complete:function(){
+			stop();
 		}
 	})
 }
@@ -86,6 +98,9 @@ function initSearchPage(currenPage) {
 			weight : $("#weight").val()
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				// alert("success");
@@ -97,14 +112,17 @@ function initSearchPage(currenPage) {
 		},
 		error : function() {
 			 alert("您没有权限使用该资源...");
-		}
+		},
+		complete:function(){
+							stop();
+						}
 	})
 }
 function weightChange(value1, value2, value3) {
 	var json = {
-		"weightId" : value1,
-		"weightName" : value2,
-		"weight" : value3
+		weightId : value1,
+		weightName : value2,
+		weight : value3
 	};
 	setCookie("weightInfor", JSON.stringify(json));
 	jumpto("weight-change");
@@ -124,6 +142,9 @@ function weightInforSearch(page) {
 				limit : 10
 			},
 			dataType : "json",
+			beforeSend : function() {
+				begin();
+				},
 			success : function(msg) {
 				$('.infor_tab02 tr:not(:first)').html("");
 				if (msg.status == "OK") {
@@ -160,7 +181,10 @@ function weightInforSearch(page) {
 			},
 			error : function() {
 				 alert("您没有权限使用该资源...");
-			}
+			},
+			complete:function(){
+								stop();
+							}
 		})
 }
 
@@ -177,6 +201,9 @@ function addWeight() {
 			weight : $("#add_weight").val()
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			if (msg.status == "OK") {
 				jumpto("weight-infor");
@@ -187,6 +214,9 @@ function addWeight() {
 		error : function() {
 			 alert("您没有权限添加权重。");
 		},
+		complete:function(){
+			stop();
+		}
 	})
 }
 
@@ -206,6 +236,9 @@ function weightInforChange() {
 			weight : $("#new_weight_weight").val()
 		},
 		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
 		success : function(msg) {
 			console.log(msg);
 			if (msg.status == "OK") {
@@ -217,6 +250,9 @@ function weightInforChange() {
 		error : function() {
 			 alert("您没有权限编辑权重。");
 		},
+		complete:function(){
+			stop();
+		}
 	})
 }
 function clearNewWeight() {
@@ -240,6 +276,9 @@ $(function() {
 					weightId : weight_id,
 				},
 				dataType : "json",
+				beforeSend : function() {
+					begin();
+					},
 				success : function(msg) {
 					console.log(msg);
 					if (msg.status == "OK") {

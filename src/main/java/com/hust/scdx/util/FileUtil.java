@@ -423,20 +423,29 @@ public class FileUtil {
 			String line = br.readLine();
 			String[] row = line.split("\t");
 			list.add(row);
-			int i = 0;
-			do {
-				if (i == targetIndex) {
+			//targetIndex为0时，统计所有类信息
+			if(targetIndex == 0){
+				while(line!= null){
 					while (!StringUtils.isBlank((line = br.readLine()))) {
 						row = line.split("\t");
 						list.add(row);
 					}
-					break;
 				}
-				while (!StringUtils.isBlank((line = br.readLine())))
-					;
-				i++;
-			} while (line != null);
-
+			}else{
+				int i = 0;
+				do {
+					if (i == targetIndex) {
+						while (!StringUtils.isBlank((line = br.readLine()))) {
+							row = line.split("\t");
+							list.add(row);
+						}
+						break;
+					}
+					while (!StringUtils.isBlank((line = br.readLine())))
+						;
+					i++;
+				} while (line != null);
+			}
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();

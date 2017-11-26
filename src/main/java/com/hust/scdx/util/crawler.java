@@ -133,20 +133,20 @@ public class crawler {
 
     public static List<String> getSummary(String url){
     	List<String> list = new ArrayList<>();
-    	switch (url) {
-		case "http://legaldaily.com.cn":		
+    	switch (UrlUtil.getUrl(url)) {
+		case "legaldaily.com.cn":		
 				list = getContent(url);
 			break;
-		case "http://dzb.scfzbs.com":
+		case "dzb.scfzbs.com":
 			list = getContent1(url);
 			break;
-		case "http://scfz.org":
+		case "scfz.org":
 			list = getContent1(url);
 			break;
-		case "http://politics.people.com.cn":
+		case "politics.people.com.cn":
 			list = getContent2(url);
 			break;
-		case "http://sichuanpeace.gov.cn":
+		case "sichuanpeace.gov.cn":
 			list = getContent3(url);
 			break;
 
