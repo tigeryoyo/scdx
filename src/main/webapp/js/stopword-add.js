@@ -95,7 +95,7 @@ $(function() {
 				var fd = new FormData();
 				fd.append("file", file);
 				$.ajax({
-				//	async : false,
+					async : false,
 					crossDomain : true,
 					url : "/file/getStopword",
 					method : "POST",
