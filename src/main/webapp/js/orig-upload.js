@@ -40,7 +40,7 @@ $(function() {
 				var fd = new FormData();
 				fd.append("origfile", origfile);
 				$.ajax({
-//					async : false,
+					async : false,
 					crossDomain : true,
 					url : "/extfile/checkExtfile",
 					method : "POST",
@@ -90,7 +90,7 @@ function addOrigfile(filename) {
  */
 function uploadAll() {
 	var flag = true;
-	alert("fileBufLength = " + fileBuf.length);
+//	alert("fileBufLength = " + fileBuf.length);
 	for (var i = 0; i < fileBuf.length; i++) {
 		var form = new FormData();
 		form.append("origfile", fileBuf[i]);
