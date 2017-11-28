@@ -65,9 +65,9 @@ public interface DomainService {
 	boolean addUnknowDomain(List<Domain> domainList);
 
 	/**
-	 * 处理来源于人工修改后的excel文件的域名信息
+	 * 处理来源于人工修改后的excel文件的域名信息，只做更新操作
 	 * 从下往上的处理流程
-	 * 先判断域名等级，在处理其父级域名信息
+	 * 以excel数据为基准 更新已经存在的域名信息
 	 * @param domain 人工处理后的域名信息，必须包含url属性，同时其他属性基本健全
 	 * @return 对数据库影响行数大于0返回true
 	 */

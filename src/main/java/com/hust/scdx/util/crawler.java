@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -131,6 +132,125 @@ public class crawler {
 		return list;          
     }  
 
+  //爬取大众日报  paper.dzwww.com
+    /**
+     * 爬取大众日报
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private static List<String> getContent4(String url){
+    	
+    	List<String> list = new ArrayList<>();
+        // TODO Auto-generated method stub          
+        Document doc;  
+        try {
+			doc=Jsoup.connect(url).get();
+			//正文
+	        Elements pElements=doc.select("span[id=contenttext]");
+	        for (Element element : pElements) {
+	        	String str = trim(element.toString());
+	        	for (String s : str.split("<br>")) {
+	        		if(!StringUtils.isBlank(s) && s.contains("。")){
+		        		list.add(trim(s)); 
+		        	}
+				}	        	
+				//System.out.println(element.text());
+			}
+	        list.remove(0);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} 
+		return list;          
+    }
+    
+    //爬取齐鲁网  paper.dzwww.com
+    /**
+     * 爬取齐鲁网
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private static List<String> getContent5(String url){
+    	
+    	List<String> list = new ArrayList<>();
+        Document doc;  
+        try {
+			doc=Jsoup.connect(url).get();
+			//正文
+	        Elements pElements=doc.select("div.article-main>p");
+	        for (Element element : pElements) {
+	        	String str = trim(element.text());
+	        	if(!StringUtils.isBlank(str)&& str.contains("。")){
+		        	list.add(str); 
+				}	        	
+				//System.out.println(element.text());
+			}
+	        list.remove(list.size()-1);
+		} catch (IOException e) {
+			return null;
+		} 
+		return list;          
+    }
+  //爬取泸州网  news.lzep.cn
+    /**
+     * 爬取泸州网
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private static List<String> getContent6(String url){
+    	
+    	List<String> list = new ArrayList<>();
+        // TODO Auto-generated method stub          
+        Document doc;  
+        try {
+			doc=Jsoup.connect(url).get();
+			//正文
+	        Elements pElements=doc.select("div.article-content>p");
+	        for (Element element : pElements) {
+	        	String str = trim(element.text());
+	        	if(!StringUtils.isBlank(str) && str.contains("。")){
+		        	list.add(str); 
+				}	        	
+				//System.out.println(element.text());
+			}
+		} catch (IOException e) {
+			return null;
+		} 
+		return list;          
+    }
+    
+  //爬取司法网  moj.gov.cn
+    /**
+     * 爬取司法部
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    private static List<String> getContent7(String url){
+    	
+    	List<String> list = new ArrayList<>();
+        // TODO Auto-generated method stub          
+        Document doc;  
+        try {
+			doc=Jsoup.connect(url).get();
+			//正文
+	        Elements pElements=doc.select("div.con>span>p");
+	        for (Element element : pElements) {
+	        	String str = trim(element.text());
+	        	if(!StringUtils.isBlank(str) && str.contains("。")){
+		        	list.add(str); 
+				}	        	
+				//System.out.println(element.text());
+			}
+		} catch (IOException e) {
+			return null;
+		} 
+		return list;          
+    }
+    
     public static List<String> getSummary(String url){
     	List<String> list = new ArrayList<>();
     	switch (UrlUtil.getUrl(url)) {
@@ -149,7 +269,18 @@ public class crawler {
 		case "sichuanpeace.gov.cn":
 			list = getContent3(url);
 			break;
-
+		case "paper.dzwww.com":
+			list = getContent4(url);
+			break;
+		case "news.iqilu.com":
+			list = getContent5(url);
+			break;
+		case "news.lzep.cn":
+			list = getContent6(url);
+			break;
+		case "moj.gov.cn":
+			list = getContent7(url);
+			break;
 		default:
 			return null;
 		}		

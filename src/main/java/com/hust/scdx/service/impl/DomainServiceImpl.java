@@ -73,7 +73,7 @@ public class DomainServiceImpl implements DomainService {
 				return false;
 			}
 			String[] attr = content.remove(0);
-			boolean nameFlag=true,columnFlag=true,typeFlag = true;
+			boolean nameFlag=true,columnFlag=true,typeFlag = true,rankFlag = true;
 			int urlIndex = AttrUtil.findIndexOfUrl(attr);
 			int nameIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEBNAME_PATTERN);//网站名
 			if(nameIndex == -1){
@@ -86,6 +86,10 @@ public class DomainServiceImpl implements DomainService {
 			int typeIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.TYPE_PATTERN);//类型
 			if(typeIndex == -1){
 				typeFlag = false;
+			}
+			int rankIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.RANK_PATTERN);//类型
+			if(rankIndex == -1){
+				rankFlag = false;
 			}
 			
 			// 获取其他属性列的下标
@@ -121,6 +125,13 @@ public class DomainServiceImpl implements DomainService {
 						d.setType(string[typeIndex]);
 					}
 				}
+				if(rankFlag){
+					if(StringUtils.isBlank(string[rankIndex])){
+						d.setRank("其他");
+					}else{
+						d.setRank(string[rankIndex]);
+					}
+				}
 				/**
 				 * 添加其他属性 注意判null
 				 */
@@ -147,21 +158,32 @@ public class DomainServiceImpl implements DomainService {
 				return false;
 			}
 			String[] attr = content.get(0);
-			// 存放域名信息
+			// 存放已知域名信息，用来更新域名
 			List<Domain> list = new ArrayList<>();
+			List<Domain> unexist = new ArrayList<Domain>();
 	
 				for (int i = 1; i < content.size(); i++) {
 					String[] info = content.get(i);
 					Domain domain = Array2Domain(info);
 					if(domain == null)
 						continue;
-					list.add(domain);
+					if(Constant.existDomain.containsKey(domain.getUrl()))
+						list.add(domain);
+					else
+						unexist.add(domain);
 				}
 			
 			int count = 0;
+			//更新已知url
+			System.out.println("共"+list.size()+"条已知域名需要更新！");
 			for (Domain d : list) {
 				if (addDomain(d))
 					count++;
+			}
+			//添加未知url
+			System.out.println("共"+unexist.size()+"条未知域名需要添加！");
+			if(unexist.size()>0){
+				addUnknowDomain(unexist);
 			}
 			if (count > 0)
 				return true;
@@ -196,11 +218,12 @@ public class DomainServiceImpl implements DomainService {
 					father.setUuid(fatherUuid);
 					father.setUrl(one);					
 					father.setUpdateTime(new Date());
-					father.setIsFather(true);
+					father.setIsFather(false);
 					if (!domainOneDao.insertDomain(father)){						
 						return false;
 					}else{
 						//添加成功，写入全局域名存放在数据库中
+						domainOne = father;
 						updateExistDomain(father);
 					}
 				} else {
@@ -218,13 +241,12 @@ public class DomainServiceImpl implements DomainService {
 						//添加成功，写入全局域名存放在数据库中
 						updateExistDomain(dt);
 						//插入成功则判断其父的isFather是否为真，诺为否则更新
-						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
-						if (null != dm && !dm.getIsFather()) {
-							dm.setIsFather(true);
-							dm.setUuid(fatherUuid);
-							dm.setUpdateTime(new Date());
-							if(domainOneDao.updateDomainOneInfo(dm)){
-								updateExistDomain(dm);
+//						DomainOne dm = domainOneDao.getDomainOneByUrl(one);
+						if (null != domainOne && !domainOne.getIsFather()) {
+							domainOne.setIsFather(true);
+							domainOne.setUpdateTime(new Date());
+							if(domainOneDao.updateDomainOneInfo(domainOne)){
+								updateExistDomain(domainOne);
 							}
 						}
 					} else {
@@ -266,8 +288,56 @@ public class DomainServiceImpl implements DomainService {
 			return true;
 		return false;
 	}
-	
 	@Override
+	public boolean addDomain(Domain domain) {
+		String url = UrlUtil.getUrl(domain.getUrl());
+		if (null != url) {
+			String one = UrlUtil.getDomainOne(url);
+			if(null == one){
+				//此时 url为ip地址
+				one = url;
+			}
+			String two = UrlUtil.getDomainTwo(url);
+			if (null != two) {
+				DomainTwo domainTwo = domainTwoDao.getDomainTwoByUrl(two);
+				if(null == domainTwo){
+					logger.error(two+"二级域名更新失败！");
+					return false;
+				}
+				DomainTwo dt = domain.getDomainTwoBaseProperty();
+				dt.setUuid(domainTwo.getUuid());
+				dt.setUrl(two);
+				dt.setUpdateTime(new Date());
+				if (!domainTwoDao.updateDomainTwo(dt))
+					return false;
+				else{
+					updateExistDomain(dt);
+				}				
+			}else{
+				// 不是二级域名，就一定是一级域名
+				DomainOne domainOne = domainOneDao.getDomainOneByUrl(one);
+				if(null == domainOne){
+					logger.error(one+"一级域名更新失败！");
+					return false;
+				}
+				//更新一级域名信息
+				DomainOne dm = domain.getDomainOneBaseProperty();
+				dm.setUuid(domainOne.getUuid());
+				dm.setUrl(one);
+				dm.setUpdateTime(new Date());
+				if (!domainOneDao.updateDomainOneInfo(dm))
+					return false;
+				else{
+					updateExistDomain(dm);
+				}
+			}
+		}else
+			return false;
+		return true;
+	}
+	
+	
+/*	@Override
 	public boolean addDomain(Domain domain) {
 		// TODO Auto-generated method stub
 //		int flag = 0;
@@ -375,8 +445,7 @@ public class DomainServiceImpl implements DomainService {
 			return false;
 		}		
 		return true;
-
-	}
+	}*/
 	
 	@Override
 	public boolean deleteDomainOneById(String uuid) {

@@ -98,7 +98,7 @@ public class UrlUtil {
 				url = url.substring(4);
 			}
 			if (isDomain(url) || isIp(url)) {
-				logger.info("不符合格式无法直接提取域名的url：" + url);
+				logger.info("不带http协议的域名url：" + url);
 				return url;
 			} else {
 				return null;
