@@ -86,5 +86,6 @@ function domainTwoInfoChange() {
 }
 
 function back(){
-    jumpto("website-infor");
+	window.history.go(-1);
+ //   jumpto("website-infor");
 }

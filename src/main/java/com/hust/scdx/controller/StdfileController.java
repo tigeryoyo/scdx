@@ -177,10 +177,12 @@ public class StdfileController {
 		case "1":
 			endTime = new Date();
 			startTime = new Date(endTime.getTime()-1*24*60*60*1000);
+			endTime = null;
 			break;
 		case "2":
 			endTime = new Date();
 			startTime = new Date(endTime.getTime()-7*24*60*60*1000);
+			endTime = null;
 			break;
 		default:
 			break;

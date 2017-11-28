@@ -1,6 +1,7 @@
 package com.hust.scdx.constant;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.hust.scdx.model.Domain;
 
@@ -15,8 +16,7 @@ public class Constant {
 	/**
 	 * 已经存在的域名，用于检测新来的域名是否存在数据库中
 	 */
-	public static HashMap<String, Domain> existDomain = new HashMap<String, Domain>();
-
+	public static ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>();
 	// 切片
 	public final static int slices = 1250;
 	// 线程数

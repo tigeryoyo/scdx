@@ -7,7 +7,7 @@
 	t_temp.setMilliseconds(0);
 	var t_startTime = t_temp.getTime() - 30*24*60*60*1000;
 	var tempS  = new Date(t_startTime);
-	start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+":"+tempS.getMinutes()+":"+tempS.getSeconds();            
+	var start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+"0:"+tempS.getMinutes()+"0:"+tempS.getSeconds()+"0";            
 	$("#startTime").attr("placeholder", start);
 	$("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
 }

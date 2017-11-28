@@ -431,7 +431,8 @@ public class StdfileServiceImpl implements StdfileService {
 					logger.error("提取摘要信息出错！");
 				}
 			}
-			organization.sort(null);
+			Collections.sort(organization);
+			//organization.sort(null);
 			String str_organization = "（";
 			if (organization.size() == 0) {
 				str_organization = "（"+topicName+"）";

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import com.hust.scdx.constant.Constant.AttrID;
 import com.hust.scdx.constant.Constant.Interval;
@@ -17,18 +18,41 @@ public class AttrUtil {
 	 * @param attrs
 	 * @return
 	 */
-	// 标题
+	/**
+	 *  标题
+	 *   "标题|内容"
+	 */
 	public static final String TITLE_PATTERN = "标题|内容";
-	// url
+	/**
+	 *  url
+	 *  "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
+	 */
 	public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
-	// 时间
+	/**
+	 *  时间
+	 *  "发布时间|发贴时间|时间"
+	 */
 	public static final String TIME_PATTERN = "发布时间|发贴时间|时间";
-	// 网站名称
+	/**
+	 *  网站名称
+	 *  "网站|媒体名称"
+	 */
 	public static final String WEBNAME_PATTERN = "网站|媒体名称";
-	// 网站类型
+	/**
+	 *  网站类型
+	 *  "来源|类型|资源类型"
+	 */
 	public static final String TYPE_PATTERN = "来源|类型|资源类型";
-	// 网站所属模块
+	/**
+	 *  网站所属模块
+	 *  "板块|频道"
+	 */
 	public static final String COLUMN_PATTERN = "板块|频道";
+	/**
+	 * 网站级别
+	 * "媒体级别"
+	 */
+	public static final String RANK_PATTERN = "媒体级别";
 
 	public static int[] findEssentialIndex(String[] attrs) {
 		int indexOfTitle = findIndexOfTitle(attrs);
@@ -159,7 +183,7 @@ public class AttrUtil {
 	 * @return
 	 */
 	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content,
-			HashMap<String, Domain> domains) {
+			ConcurrentHashMap<String, Domain> domains) {
 		HashMap<String, TreeMap<String, Integer>> map = new HashMap<String, TreeMap<String, Integer>>();
 		int indexOfUrl = findIndexOfUrl(content.get(0));
 		int indexOfTime = findIndexOfTime(content.get(0));
