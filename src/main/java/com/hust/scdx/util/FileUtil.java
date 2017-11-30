@@ -179,11 +179,11 @@ public class FileUtil {
 				indexs[i] = index;
 			} else {
 				if (AttrUtil.isTitle(attrs[i])) {
-					indexs[i] = AttrUtil.findIndexOfTitle(attrs);
+					indexs[i] = AttrUtil.findIndexOfTitle(globalAttrs);
 				} else if (AttrUtil.isUrl(attrs[i])) {
-					indexs[i] = AttrUtil.findIndexOfUrl(attrs);
+					indexs[i] = AttrUtil.findIndexOfUrl(globalAttrs);
 				} else if (AttrUtil.isTime(attrs[i])) {
-					indexs[i] = AttrUtil.findIndexOfTime(attrs);
+					indexs[i] = AttrUtil.findIndexOfTime(globalAttrs);
 				} else {
 					globalAttrs.add(attrs[i]);
 					indexs[i] = globalAttrs.size() - 1;
