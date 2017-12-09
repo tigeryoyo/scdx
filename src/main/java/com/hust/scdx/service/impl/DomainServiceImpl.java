@@ -78,6 +78,7 @@ public class DomainServiceImpl implements DomainService {
 			int nameIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEBNAME_PATTERN);//网站名
 			if(nameIndex == -1){
 				nameFlag = false;
+				return false;
 			}
 			int columnIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.COLUMN_PATTERN);//栏目
 			if(columnIndex == -1){
@@ -87,7 +88,7 @@ public class DomainServiceImpl implements DomainService {
 			if(typeIndex == -1){
 				typeFlag = false;
 			}
-			int rankIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.RANK_PATTERN);//类型
+			int rankIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.RANK_PATTERN);//级别
 			if(rankIndex == -1){
 				rankFlag = false;
 			}
@@ -102,7 +103,8 @@ public class DomainServiceImpl implements DomainService {
 				d.setUrl(string[urlIndex]);
 				if(nameFlag){
 					if(StringUtils.isBlank(string[nameIndex])){
-						d.setName("其他");
+						continue;
+					//	d.setName("其他");
 					}else{
 						d.setName(string[nameIndex]);
 					}					
@@ -193,7 +195,7 @@ public class DomainServiceImpl implements DomainService {
 			return false;
 		}
 
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -484,8 +486,10 @@ public class DomainServiceImpl implements DomainService {
 		if(StringUtils.isBlank(url))
 			return null;
 		String name = baseInfo[DomainExcelAttr.NAME_INDEX].trim();
-		if(StringUtils.isBlank(name))
+		if(StringUtils.isBlank(name) || name.equals("其他")){
 			name = null;
+			return null;
+		}
 		String column = baseInfo[DomainExcelAttr.COLUMN_INDEX].trim();
 		if(StringUtils.isBlank(column))
 			column = null;

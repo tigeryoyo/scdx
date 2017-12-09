@@ -5,6 +5,7 @@
 <title>映射表管理——编辑映射表</title>
 	<script type="text/javascript" src="js/website.js"></script>
 <script type="text/javascript" src="js/website-details.js"></script>
+<script type="text/javascript" src="js/website-incidence.js"></script>
 <style type="text/css">
 span{
 	 white-space: nowrap;
@@ -34,18 +35,95 @@ span{
 				</tr>
 				<tr>
 					<td width="117" height="50">类型：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_type" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" disabled="disabled" id="new_type">
+						<option>新闻</option>
+						<option>资讯</option>
+						<option>报纸</option>
+						<option>论坛</option>
+						<option>博客</option>
+						<option>微博</option>
+						<option>微信</option>
+						<option>问答</option>
+						<option>贴吧</option>
+						<option>境外</option>
+						<option>其他</option>
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">级别：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_rank" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
+						<option>中央</option>
+						<option>省级</option>
+						<option>其他</option>
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">影响范围：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_incidence" /></td>
+					<td width="323" height="50"><select
+						class="form-control incidence_provience" style="width:188px;"
+						disabled="disabled">
+						<option>全国</option>
+						<option>北京市</option>
+						<option>天津市</option>
+						<option>上海市</option>
+						<option>重庆市</option>
+						<option>河北省</option>
+						<option>山西省</option>
+						<option>辽宁省</option>
+						<option>吉林省</option>
+						<option>黑龙江</option>
+						<option>江苏省</option>
+						<option>浙江省</option>
+						<option>安徽省</option>
+						<option>福建省</option>
+						<option>江西省</option>
+						<option>山东省</option>
+						<option>河南省</option>
+						<option>湖北省</option>
+						<option>湖南省</option>
+						<option>广东省</option>
+						<option>海南省</option>
+						<option>四川省</option>
+						<option>贵州省</option>
+						<option>云南省</option>
+						<option>陕西省</option>
+						<option>甘肃省</option>
+						<option>青海省</option>
+						<option>台湾省</option>
+						<option>内蒙古自治区</option>
+						<option>广西壮族自治区</option>
+						<option>西藏自治区</option>
+						<option>宁夏回族自治区</option>
+						<option>新疆维吾尔自治区</option>
+						<option>香港</option>
+						<option>澳门</option>
+						<option>其他</option>
+					</select> <select class="form-control incidence_city" style="width:188px;"
+						disabled="disabled">
+						<option>成都市</option>
+						<option>自贡市</option>
+						<option>攀枝花市</option>
+						<option>泸州市</option>
+						<option>德阳市</option>
+						<option>绵阳市</option>
+						<option>广元市</option>
+						<option>遂宁市</option>
+						<option>内江市</option>
+						<option>乐山市</option>
+						<option>南充市</option>
+						<option>宜宾市</option>
+						<option>广安市</option>
+						<option>达州市</option>
+						<option>眉山市</option>
+						<option>雅安市</option>
+						<option>巴中市</option>
+						<option>资阳市</option>
+						<option>阿坝州</option>
+						<option>甘孜州</option>
+						<option>凉山州</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">权重：</td>
@@ -93,7 +171,12 @@ span{
                 $("#new_column").val(two.column);
                 $("#new_type").val(two.type);
                 $("#new_rank").val(two.rank);
-                $("#new_incidence").val(two.incidence);
+                var incidence = two.incidence.split("-");
+				$(".incidence_provience").val(incidence[0]);
+				switchCityByPro(incidence[0]);
+				if(incidence.length >　1){
+					$(".incidence_city").val(incidence[1]);
+				}
                 $("#new_weight").val(two.weight);
 				row = '<p data-id="'+one.uuid+'">'
                         +'<span style="width: 170px; display: inline; float: left">'+one.url+'</span>'

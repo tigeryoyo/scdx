@@ -7,7 +7,8 @@ function websiteInforEdit() {
     $("#new_column").removeAttr("disabled");
     $("#new_type").removeAttr("disabled");
     $("#new_rank").removeAttr("disabled");
-    $("#new_incidence").removeAttr("disabled");
+    $(".incidence_provience").removeAttr("disabled");
+    $(".incidence_city").removeAttr("disabled");
     $("#new_weight").removeAttr("disabled");
     $("#btn_edit").css("display","none");
     $("#btn_submit").css("display","block");
@@ -25,7 +26,7 @@ function domainOneInfoChange() {
             column:$("#new_column").val(),
             type:$("#new_type").val(),
             rank:$("#new_rank").val(),
-            incidence:$("#new_incidence").val(),
+            incidence:$(".incidence_provience").val()+"-"+$(".incidence_city").val(),
             weight:$("#new_weight").val()
         },
         datatype:"json",
@@ -61,7 +62,7 @@ function domainTwoInfoChange() {
             column:$("#new_column").val(),
             type:$("#new_type").val(),
             rank:$("#new_rank").val(),
-            incidence:$("#new_incidence").val(),
+            incidence:$(".incidence_provience").val()+"-"+$(".incidence_city").val(),
             weight:$("#new_weight").val()
         },
         datatype:"json",
