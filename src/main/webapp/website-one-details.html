@@ -3,70 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <title>映射表管理——编辑映射表</title>
-	<script type="text/javascript" src="js/website.js"></script>
+<script type="text/javascript" src="js/website.js"></script>
 <script type="text/javascript" src="js/website-details.js"></script>
+<script type="text/javascript" src="js/website-incidence.js"></script>
 <style type="text/css">
-span{
-	 white-space: nowrap;
+span {
+	white-space: nowrap;
 }
 </style>
 </head>
 <body>
 	<div class="s_nav">
-		当前位置： <a href="javascript:;" onclick="jumpto('website-infor')">映射表管理</a> >>编辑映射表
+		当前位置： <a href="javascript:;" onclick="jumpto('website-infor')">映射表管理</a>
+		>>编辑映射表
 	</div>
 	<div class="user_infor">
 		<form>
 			<table width="500" border="0" class="change_tab">
 				<tr>
 					<td width="117" height="50">域名：</td>
-					<td width="323" height="50"><input type="text" class="form-control" id="url" disabled="disabled" /></td>
+					<td width="323" height="50"><input type="text"
+						class="form-control" id="url" disabled="disabled" /></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">名称：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_name" /></td>
+					<td width="323" height="50"><input type="text"
+						class="form-control" disabled="disabled" id="new_name" /></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">栏目：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_column" /></td>
+					<td width="323" height="50"><input type="text"
+						class="form-control" disabled="disabled" id="new_column" /></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">类型：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_type" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" disabled="disabled" id="new_type">
+						<option>新闻</option>
+						<option>资讯</option>
+						<option>报纸</option>
+						<option>论坛</option>
+						<option>博客</option>
+						<option>微博</option>
+						<option>微信</option>
+						<option>问答</option>
+						<option>贴吧</option>
+						<option>境外</option>
+						<option>其他</option>
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">级别：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_rank" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
+						<option>中央</option>
+						<option>省级</option>
+						<option>其他</option>
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">影响范围：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_incidence" /></td>
+					<td width="323" height="50"><select
+						class="form-control incidence_provience" style="width:188px;"
+						disabled="disabled">
+						<option>全国</option>
+						<option>北京市</option>
+						<option>天津市</option>
+						<option>上海市</option>
+						<option>重庆市</option>
+						<option>河北省</option>
+						<option>山西省</option>
+						<option>辽宁省</option>
+						<option>吉林省</option>
+						<option>黑龙江</option>
+						<option>江苏省</option>
+						<option>浙江省</option>
+						<option>安徽省</option>
+						<option>福建省</option>
+						<option>江西省</option>
+						<option>山东省</option>
+						<option>河南省</option>
+						<option>湖北省</option>
+						<option>湖南省</option>
+						<option>广东省</option>
+						<option>海南省</option>
+						<option>四川省</option>
+						<option>贵州省</option>
+						<option>云南省</option>
+						<option>陕西省</option>
+						<option>甘肃省</option>
+						<option>青海省</option>
+						<option>台湾省</option>
+						<option>内蒙古自治区</option>
+						<option>广西壮族自治区</option>
+						<option>西藏自治区</option>
+						<option>宁夏回族自治区</option>
+						<option>新疆维吾尔自治区</option>
+						<option>香港</option>
+						<option>澳门</option>
+						<option>其他</option>
+					</select> <select class="form-control incidence_city" style="width:188px;"
+						disabled="disabled">
+						<option>成都市</option>
+						<option>自贡市</option>
+						<option>攀枝花市</option>
+						<option>泸州市</option>
+						<option>德阳市</option>
+						<option>绵阳市</option>
+						<option>广元市</option>
+						<option>遂宁市</option>
+						<option>内江市</option>
+						<option>乐山市</option>
+						<option>南充市</option>
+						<option>宜宾市</option>
+						<option>广安市</option>
+						<option>达州市</option>
+						<option>眉山市</option>
+						<option>雅安市</option>
+						<option>巴中市</option>
+						<option>资阳市</option>
+						<option>阿坝州</option>
+						<option>甘孜州</option>
+						<option>凉山州</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">权重：</td>
-					<td width="323" height="50"><input type="text" class="form-control" disabled="disabled"
-													   id="new_weight" /></td>
+					<td width="323" height="50"><input type="text"
+						class="form-control" disabled="disabled" id="new_weight" /></td>
 				</tr>
 				<tr>
-					<td width="117" height="50">
-						子域名：
-					</td>
-					<td id="sub_domain" width="373" height="50">
-
-					</td>
+					<td width="117" height="50">子域名：</td>
+					<td id="sub_domain" width="373" height="50"></td>
 				</tr>
 				<tr>
 					<td width="117" height="70">
-						<button id="btn_edit" type="button"  class="btn btn-primary" onclick="websiteInforEdit()" >编辑</button>
-						<button id="btn_submit" type="button"  class="btn btn-primary" onclick="domainOneInfoChange()" style="display: none">提交</button>
+						<button id="btn_edit" type="button" class="btn btn-primary"
+							onclick="websiteInforEdit()">编辑</button>
+						<button id="btn_submit" type="button" class="btn btn-primary"
+							onclick="domainOneInfoChange()" style="display: none">提交</button>
 					</td>
 					<td width="323" height="70">
-						<button type="button"  class="btn btn-primary" onclick="back()">返回</button>
+						<button type="button" class="btn btn-primary" onclick="back()">返回</button>
 					</td>
 				</tr>
 			</table>
@@ -75,41 +153,54 @@ span{
 </body>
 <script>
 	var uuid = getCookie("domain_id");
-	console.log("-------"+uuid);
-	$.ajax({
-	    type:"post",
-		url:"/domain/selectDomainOneById",
-		data:{
-	      uuid:uuid  
-		},
-		datatype:"json",
-		success:function (msg) {
-			if(msg.status=="OK"){
-                $("#sub_domain").html("");
-				one = msg.result.one;
-				two = msg.result.two;
-				$("#url").val(one.url);
-				$("#new_name").val(one.name);
-                $("#new_column").val(one.column);
-                $("#new_type").val(one.type);
-                $("#new_rank").val(one.rank);
-                $("#new_incidence").val(one.incidence);
-                $("#new_weight").val(one.weight);
-                $.each(two,function (idx,item) {
-					row = '<p data-id="'+item.uuid+'">'
-                        +'<span style="width: 170px; display: inline; float: left">'+item.url+'</span>'
-                        +'<span style="width: 120px; display: inline; float: left">'+item.name+'</span>'
-                        + '<span><a href="javascript:" style="margin: 2px 0px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a> </span>'
-                        +'</p>';
-					$("#sub_domain").append(row);
-                })
-			}else{
-			    alert("获取详细信息失败！");
-			}
-        },
-        error: function () {
-            alert("数据请求失败");
-        }
-	})
+	console.log("-------" + uuid);
+	$
+			.ajax({
+				type : "post",
+				url : "/domain/selectDomainOneById",
+				data : {
+					uuid : uuid
+				},
+				datatype : "json",
+				success : function(msg) {
+					if (msg.status == "OK") {
+						$("#sub_domain").html("");
+						one = msg.result.one;
+						two = msg.result.two;
+						$("#url").val(one.url);
+						$("#new_name").val(one.name);
+						$("#new_column").val(one.column);
+						$("#new_type").val(one.type);
+						$("#new_rank").val(one.rank);
+						var incidence = one.incidence.split("-");
+						$(".incidence_provience").val(incidence[0]);
+						switchCityByPro(incidence[0]);
+						if(incidence.length >　1){
+							$(".incidence_city").val(incidence[1]);
+						}
+						$("#new_weight").val(one.weight);
+						$
+								.each(
+										two,
+										function(idx, item) {
+											row = '<p data-id="'+item.uuid+'">'
+													+ '<span style="width: 170px; display: inline; float: left">'
+													+ item.url
+													+ '</span>'
+													+ '<span style="width: 120px; display: inline; float: left">'
+													+ item.name
+													+ '</span>'
+													+ '<span><a href="javascript:" style="margin: 2px 0px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a> </span>'
+													+ '</p>';
+											$("#sub_domain").append(row);
+										})
+					} else {
+						alert("获取详细信息失败！");
+					}
+				},
+				error : function() {
+					alert("数据请求失败");
+				}
+			})
 </script>
 </html>
