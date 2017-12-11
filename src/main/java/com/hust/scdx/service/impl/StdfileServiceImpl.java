@@ -432,7 +432,6 @@ public class StdfileServiceImpl implements StdfileService {
 				}
 			}
 			Collections.sort(organization);
-			//organization.sort(null);
 			String str_organization = "（";
 			if (organization.size() == 0) {
 				str_organization = "（"+topicName+"）";
@@ -440,6 +439,8 @@ public class StdfileServiceImpl implements StdfileService {
 				for (Domain domain : organization) {
 					if(domain == null){
 						logger.error("域名为空，摘要信息提取出错！");
+						continue;
+					}else if(domain.getName().equals("其他")){
 						continue;
 					}
 					str_organization += domain.getName()+ "、";
