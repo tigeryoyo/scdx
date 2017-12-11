@@ -475,7 +475,7 @@ public class DomainController {
 			name = "";
 		}
 		String column = one.getColumn();
-		if (null == column || column.equals("其他")) {
+		if (null == column) {
 			column = "";
 		}
 		String type = one.getType();
@@ -487,7 +487,7 @@ public class DomainController {
 			rank = "";
 		}
 		String incidence = one.getIncidence();
-		if (null == incidence || incidence.equals("其他")) {
+		if (null == incidence || incidence.equals("其他")|| incidence.equals("其他-其他")) {
 			incidence = "";
 		}
 		String weight = one.getWeight().toString();
@@ -507,7 +507,7 @@ public class DomainController {
 			name = "";
 		}
 		String column = two.getColumn();
-		if (null == column || column.equals("其他")) {
+		if (null == column ) {
 			column = "";
 		}
 		String type = two.getType();
@@ -519,7 +519,7 @@ public class DomainController {
 			rank = "";
 		}
 		String incidence = two.getIncidence();
-		if (null == incidence || incidence.equals("其他")) {
+		if (null == incidence || incidence.equals("其他")|| incidence.equals("其他-其他")) {
 			incidence = "";
 		}
 		String weight = two.getWeight().toString();

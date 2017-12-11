@@ -140,4 +140,11 @@ public class Domain implements Comparable<Domain>{
 		// TODO Auto-generated method stub
 		return (o.weight-this.weight);
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Url:"+this.getUrl()+"Name:"+this.getName()+"Column:"+this.getColumn()+"Type:"+this.getType()+"Rank:"+this.getRank()+"Incidence"+this.getIncidence()+"Weight"+this.getWeight();
+	}
+	
 }
