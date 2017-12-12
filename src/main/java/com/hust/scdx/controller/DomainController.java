@@ -403,7 +403,7 @@ public class DomainController {
 			HttpServletResponse response) {
 		List<String[]> result = new ArrayList<>();
 		String fileName = "error.xls";
-		String[] attr = { "域名", "网站名", "栏目", "类型", "级别", "影响范围", "权重" };
+		String[] attr = { "域名", "网站名", "栏目", "类型", "级别", "影响范围", "权重","已维护","域名等级","父级域名"};
 		result.add(attr);
 		switch (flag) {
 		case 0:
@@ -417,7 +417,7 @@ public class DomainController {
 				DomainOne one = oneList.get(i);
 				result.add(getDomainInfo(one));
 				for (DomainTwo two : twoList.get(i)) {
-					result.add(getDomainInfo(two));
+					result.add(getDomainInfo(two,one.getUrl()));
 				}
 			}
 			break;
@@ -435,7 +435,7 @@ public class DomainController {
 			condition3.setName("其他");
 			List<DomainTwo> twoList2 = domainService.getDomainTwoByCondition(condition3);
 			for (DomainTwo domainTwo : twoList2) {
-				result.add(getDomainInfo(domainTwo));
+				result.add(getDomainInfo(domainTwo,domainService.getDomainOneById(domainTwo.getFatherUuid()).getUrl()));
 			}
 			break;
 
@@ -479,19 +479,19 @@ public class DomainController {
 			column = "";
 		}
 		String type = one.getType();
-		if (null == type || type.equals("其他")) {
+		if (null == type) {
 			type = "";
 		}
 		String rank = one.getRank();
-		if (null == rank || rank.equals("其他")) {
+		if (null == rank) {
 			rank = "";
 		}
 		String incidence = one.getIncidence();
-		if (null == incidence || incidence.equals("其他")|| incidence.equals("其他-其他")) {
+		if (null == incidence) {
 			incidence = "";
 		}
 		String weight = one.getWeight().toString();
-		String[] str = { url, name, column, type, rank, incidence, weight };
+		String[] str = { url, name, column, type, rank, incidence, weight,"0","1",url};
 		return str;
 	}
 
@@ -500,7 +500,7 @@ public class DomainController {
 	 * @param two
 	 * @return
 	 */
-	private String[] getDomainInfo(DomainTwo two) {
+	private String[] getDomainInfo(DomainTwo two,String fatherUrl) {
 		String url = two.getUrl();
 		String name = two.getName();
 		if (null == name || name.equals("其他")) {
@@ -511,19 +511,19 @@ public class DomainController {
 			column = "";
 		}
 		String type = two.getType();
-		if (null == type || type.equals("其他")) {
+		if (null == type) {
 			type = "";
 		}
 		String rank = two.getRank();
-		if (null == rank || rank.equals("其他")) {
+		if (null == rank) {
 			rank = "";
 		}
 		String incidence = two.getIncidence();
-		if (null == incidence || incidence.equals("其他")|| incidence.equals("其他-其他")) {
+		if (null == incidence) {
 			incidence = "";
 		}
 		String weight = two.getWeight().toString();
-		String[] str = { url, name, column, type, rank, incidence, weight };
+		String[] str = { url, name, column, type, rank, incidence, weight,"0","2",fatherUrl};
 		return str;
 	}
 }
