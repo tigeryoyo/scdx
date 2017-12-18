@@ -12,6 +12,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.collect.Maps;
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant;
+import com.hust.scdx.constant.Constant.Algorithm;
 import com.hust.scdx.constant.Constant.AttrID;
+import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.constant.Constant.Interval;
 import com.hust.scdx.constant.Constant.KEY;
 import com.hust.scdx.constant.Constant.StdfileMap;
@@ -33,12 +39,17 @@ import com.hust.scdx.constant.Constant.WordFont;
 import com.hust.scdx.dao.StdfileDao;
 import com.hust.scdx.dao.TopicDao;
 import com.hust.scdx.model.Domain;
+import com.hust.scdx.model.Result;
 import com.hust.scdx.model.Stdfile;
+import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
+import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.StdfileService;
+import com.hust.scdx.service.TopicService;
 import com.hust.scdx.service.UserService;
+import com.hust.scdx.service.impl.ExtfileServiceImpl.MiningThread;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
@@ -61,6 +72,8 @@ public class StdfileServiceImpl implements StdfileService {
 	TopicDao topicDao;
 	@Autowired
 	StdfileDao stdfileDao;
+	@Autowired
+	private TopicService topicService;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -137,6 +150,19 @@ public class StdfileServiceImpl implements StdfileService {
 	}
 
 	/**
+	 * 根据时间范围获取标准数据并去重聚类
+	 */
+	@Override
+	public List<String[]> analyzeByTimeRange(String topicId, String startTime, String endTime, HttpServletRequest request) {
+		// 把聚类的结果变成空格区分的stdfile文件。
+		//
+		//
+		// 搜content
+		List<String[]> content = new ArrayList<String[]>();
+		return FileUtil.getStdfileDisplaylist2(mining(topicId, content, request));
+	}
+
+	/**
 	 * 根据stdfileId得到标准文件
 	 */
 	@Override
@@ -148,8 +174,8 @@ public class StdfileServiceImpl implements StdfileService {
 		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
 		@SuppressWarnings("unchecked")
-		Map<String, TreeMap<String, Integer>> statMap = AttrUtil
-				.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), Constant.existDomain);
+		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT),
+				Constant.existDomain);
 		stdfileMap.put(StdfileMap.STAT, statMap);
 		return stdfileMap;
 	}
@@ -169,8 +195,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex,
-			HttpServletRequest request) {
+	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex, HttpServletRequest request) {
 		try {
 			// 标准数据
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
@@ -198,6 +223,220 @@ public class StdfileServiceImpl implements StdfileService {
 	}
 
 	/**
+	 * 对content进行聚类
+	 * 
+	 * @param content
+	 *            去重排序并取并集后基础文件的内容。
+	 * @param user
+	 * @return
+	 */
+	private List<String[]> mining(String topicId, List<String[]> content, HttpServletRequest request) {
+		if (content == null) {
+			logger.info("content内容为空。");
+			return null;
+		}
+		// 属性行提取出来
+		String[] attrs = content.remove(0);
+		User user = userService.selectCurrentUser(request);
+		// 开始聚类
+		List<List<Integer>> origRess = multipleMining(user, attrs, content);
+		if (origRess == null) {
+			logger.error("聚类失败。");
+			return null;
+		}
+		// 若参与聚类的数据条数大于一个切片长度
+		if (content.size() > Constant.slices) {
+			List<String[]> newContent = new ArrayList<String[]>();
+			int csize = origRess.size();
+			List<Integer> sub;
+			int index;
+			for (int i = 0; i < csize; i++) {
+				sub = origRess.get(i);
+				index = sub.get(0);
+				newContent.add(content.get(index));
+			}
+			List<List<Integer>> newOrigRess = multipleMining(user, attrs, newContent);
+			if (newOrigRess == null) {
+				logger.error("聚类失败。");
+				return null;
+			}
+
+			List<List<Integer>> tmp = new ArrayList<List<Integer>>(origRess);
+			origRess.clear();
+			csize = newOrigRess.size();
+			for (int i = 0; i < csize; i++) {
+				sub = newOrigRess.get(i);
+				List<Integer> item = new ArrayList<Integer>();
+				for (int _index : sub) {
+					item.addAll(tmp.get(_index));
+				}
+				origRess.add(item);
+			}
+		}
+		List<String[]> res = clean(attrs, content, origRess);
+		if (res.isEmpty()) {
+			logger.error("聚类失败。");
+			return null;
+		}
+
+		// 将此次记录插入数据库stdfile表中、将res作为stdfile文件存入文件系统
+		Stdfile stdfile = new Stdfile();
+		stdfile.setCreator(user.getTrueName());
+		stdfile.setUploadTime(new Date());
+		stdfile.setStdfileName("stdfile_cluster_result");
+		stdfile.setLineNumber(res.size());
+		stdfile.setSize(0);
+		stdfile.setTopicId(topicId);
+		stdfile.setStdfileId("stdfile_cluster_result");
+		stdfileDao.insertTop(stdfile, res);
+
+		// 更新该条topic属性值
+		Topic topic = new Topic();
+		topic.setTopicId(topicId);
+		topic.setLastOperator(user.getUserName());
+		topic.setLastUpdateTime(new Date());
+		if (topicService.updateTopicInfo(topic) <= 0) {
+			logger.error("更新topic记录失败。");
+		}
+
+		return res;
+	}
+
+	/**
+	 * 多线程聚类
+	 * 
+	 * @param user
+	 * @param attrs
+	 *            属性行
+	 * @param content
+	 *            除了属性行的全部数据
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private List<List<Integer>> multipleMining(User user, String[] attrs, List<String[]> content) {
+		List<List<Integer>> origRess = new ArrayList<List<Integer>>();
+		int csize = content.size();
+		int fromIndex, toIndex;
+		// len为切片个数
+		int len = csize / Constant.slices + (csize % Constant.slices == 0 ? 0 : 1);
+		// 参数为处理聚类的线程个数
+		ExecutorService excutorService = Executors.newFixedThreadPool(len > Constant.threads ? Constant.threads : len);
+		Future<List<List<Integer>>>[] tasks = new Future[len];
+		List<String[]> subContent;
+		for (int i = 0; i < len; i++) {
+			fromIndex = i * Constant.slices;
+			toIndex = (i == len - 1 ? csize : (i + 1) * Constant.slices);
+			subContent = content.subList(fromIndex, toIndex);
+			tasks[i] = excutorService.submit(new MiningThread(attrs, subContent, i, Algorithm.DIGITAL, user.getAlgorithm(), user.getGranularity()));
+		}
+
+		for (int i = 0; i < len; i++) {
+			try {
+				origRess.addAll(tasks[i].get());
+			} catch (Exception e) {
+				logger.error("多线程聚类失败。");
+				return null;
+			}
+		}
+		excutorService.shutdown();
+		return origRess;
+	}
+
+	/**
+	 * 聚类线程：对subContent进行聚类
+	 * 
+	 * @author tigerto
+	 *
+	 */
+	class MiningThread implements Callable<List<List<Integer>>> {
+
+		String[] attrs;
+		List<String[]> subContent;
+		int index;
+		int converterType;
+		int algorithmType;
+		int granularity;
+
+		public MiningThread(String[] attrs, List<String[]> subContent, int index, int converterType, int algorithmType, int granularity) {
+			this.attrs = attrs;
+			this.subContent = subContent;
+			this.index = index;
+			this.converterType = converterType;
+			this.algorithmType = algorithmType;
+			this.granularity = granularity;
+		}
+
+		@Override
+		public List<List<Integer>> call() throws Exception {
+			List<List<Integer>> result = new ArrayList<List<Integer>>();
+			List<List<Integer>> res = miningService.getOrigClusters(attrs, subContent, converterType, algorithmType, granularity);
+			int resSize = res.size();
+			int subSize;
+			List<Integer> newSub, subList;
+			for (int i = 0; i < resSize; i++) {
+				newSub = new ArrayList<Integer>();
+				subList = res.get(i);
+				subSize = subList.size();
+				for (int j = 0; j < subSize; j++) {
+					newSub.add(subList.get(j) + index * Constant.slices);
+				}
+				result.add(newSub);
+			}
+			return result;
+		}
+	}
+
+	/**
+	 * 
+	 * @param attrs
+	 *            属性行
+	 * @param content
+	 *            除了属性行的内容
+	 * @param origRess
+	 *            聚类结果
+	 * @return
+	 */
+	private List<String[]> clean(String[] attrs, List<String[]> content, List<List<Integer>> origRess) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
+		int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
+		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		// 重载排序的方法，按照降序。类中数量多的排在前面。
+		Collections.sort(origRess, new Comparator<List<Integer>>() {
+			@Override
+			public int compare(List<Integer> o1, List<Integer> o2) {
+				// TODO Auto-generated method stub
+				return o2.size() - o1.size();
+			}
+		});
+		// 对于类内的排序，则先按照标题排序，再按照时间先后。
+		for (List<Integer> set : origRess) {
+			Collections.sort(set, new Comparator<Integer>() {
+				@Override
+				public int compare(Integer o1, Integer o2) {
+					// 先按照标题顺序
+					int compare = content.get(o1)[indexOfTitle].compareTo(content.get(o2)[indexOfTitle]);
+					// 若标题相同，使用时间进行排序。
+					if (compare == 0) {
+						compare = content.get(o1)[indexOfTime].compareTo(content.get(o2)[indexOfTime]);
+					}
+					return compare;
+				}
+			});
+		}
+
+		List<String[]> res = new ArrayList<String[]>();
+		res.add(attrs);
+		for (List<Integer> list : origRess) {
+			for (int i : list) {
+				res.add(content.get(i));
+			}
+			res.add(new String[0]);
+		}
+		return res;
+	}
+
+	/**
 	 * 产生核心报告
 	 * 
 	 * @return
@@ -209,8 +448,7 @@ public class StdfileServiceImpl implements StdfileService {
 
 			WordUtil wu = new WordUtil();
 			wu.addParaText("(" + topicName + ")专供", new Env().bold(true).fontType(WordFont.KAITI));
-			wu.addParaText("舆情参阅", new Env().fontSize(52).bold(true).fontType(WordFont.XINSONGTI)
-					.fontColor(WordFont.GREEN).alignment("center"));
+			wu.addParaText("舆情参阅", new Env().fontSize(52).bold(true).fontType(WordFont.XINSONGTI).fontColor(WordFont.GREEN).alignment("center"));
 			Env titleEnv = new Env().fontSize(22).bold(true).fontType(WordFont.SONGTI);
 			Env mainEnv = new Env().fontType(WordFont.FANGSONG);
 			Env mainBEnv = new Env(mainEnv).bold(true).fontType(WordFont.SONGTI);
@@ -227,8 +465,7 @@ public class StdfileServiceImpl implements StdfileService {
 			List<List<String[]>> content = convert(tmp);
 			// 标记，每一个类簇的最早出现的新闻index
 			List<Integer> marked = (List<Integer>) stdfileMap.get(StdfileMap.MARKED);
-			HashMap<String, TreeMap<String, Integer>> statMap = (HashMap<String, TreeMap<String, Integer>>) stdfileMap
-					.get(StdfileMap.STAT);
+			HashMap<String, TreeMap<String, Integer>> statMap = (HashMap<String, TreeMap<String, Integer>>) stdfileMap.get(StdfileMap.STAT);
 			TreeMap<String, Integer> timeMap = statMap.get(AttrID.TIME);
 			TreeMap<String, Integer> typeMap = statMap.get(AttrID.TYPE);
 			// 信息总数
@@ -276,13 +513,11 @@ public class StdfileServiceImpl implements StdfileService {
 
 			// 监测信息量日分布情况
 			wu.addParaText("监测信息量日分布情况", titleEnv);
-			wu.addParaText(
-					first + " 至" + last + "，通过四川电信互联网舆情信息服务平台监测数据显示，本时间段内与“" + topicName + "”相关互联网信息" + total + " ，条，",
-					mainEnv);
+			wu.addParaText(first + " 至" + last + "，通过四川电信互联网舆情信息服务平台监测数据显示，本时间段内与“" + topicName + "”相关互联网信息" + total + " ，条，", mainEnv);
 			wu.appendParaText("未发现“正/负”面舆情。", mainBEnv);
 			wu.addParaText("信息具体情况如下：", mainEnv);
-			wu.addParaText("监测数据显示，" + topicName + first + " 至 " + last + "相关信息总量 " + total + " 条，平均每日信息量为 " + avg
-					+ " 条。其中，" + peakD + "当天的相关信息量是本周最大峰值，相关信息共有 " + peakC + " 条，占一周信息量的 ", mainEnv);
+			wu.addParaText("监测数据显示，" + topicName + first + " 至 " + last + "相关信息总量 " + total + " 条，平均每日信息量为 " + avg + " 条。其中，" + peakD
+					+ "当天的相关信息量是本周最大峰值，相关信息共有 " + peakC + " 条，占一周信息量的 ", mainEnv);
 			wu.appendParaText(peak + "%", mainRBEnv);
 			wu.appendParaText("，主要为", mainEnv);
 			List<String[]> theDayInfo = statTheDay(content, marked, peakD, indexOfTitle, indexOfTime);
@@ -297,7 +532,7 @@ public class StdfileServiceImpl implements StdfileService {
 			// 舆情聚焦（摘要）
 			wu.addParaText("舆情聚焦", titleEnv);
 			List<String[]> summary = new ArrayList<>();
-			summary = generateSummary(attrs, content,marked,topicName);
+			summary = generateSummary(attrs, content, marked, topicName);
 			int num = 1;
 			for (String[] strings : summary) {
 				wu.addParaText((num++) + ". " + strings[0], mainBEnv);
@@ -312,9 +547,7 @@ public class StdfileServiceImpl implements StdfileService {
 			wu.addParaText("（责任编辑：汪静远）", env2);
 			wu.addParaText("四川电信互联网舆情信息服务中心 ", env3);
 			wu.addParaText("声明：", env3);
-			wu.appendParaText(
-					"以上舆情信息仅供参考，用户对于舆情信息所反映出的问题或状况的处理，应综合其他信息加以判断和利用，仅凭以上舆情信息做出判断、进行决策等处理措施造成不利后果及损失的，我单位不承担任何责任。",
-					env1);
+			wu.appendParaText("以上舆情信息仅供参考，用户对于舆情信息所反映出的问题或状况的处理，应综合其他信息加以判断和利用，仅凭以上舆情信息做出判断、进行决策等处理措施造成不利后果及损失的，我单位不承担任何责任。", env1);
 			return wu.getDoc();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -352,8 +585,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 * 
 	 * @return
 	 */
-	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay,
-			int indexOfTitle, int indexOfTime) {
+	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay, int indexOfTitle, int indexOfTime) {
 		List<String[]> res = new ArrayList<String[]>();
 		int size = content.size();
 		for (int i = 0; i < size; i++) {
@@ -378,34 +610,36 @@ public class StdfileServiceImpl implements StdfileService {
 		});
 		return res;
 	}
-	
-	
+
 	/**
 	 * 爬取数据生成摘要
-	 * @param attrs 属性列
-	 * @param allContent 文本内容  String[]为一条新闻记录 List<String[]>为一个类簇
+	 * 
+	 * @param attrs
+	 *            属性列
+	 * @param allContent
+	 *            文本内容 String[]为一条新闻记录 List<String[]>为一个类簇
 	 * @return
 	 */
-	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent,List<Integer> marked,String topicName) {
+	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent, List<Integer> marked, String topicName) {
 		List<String[]> summary = new ArrayList<>();
 		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
 		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
-		if(allContent== null || allContent.size() == 0){
+		if (allContent == null || allContent.size() == 0) {
 			return summary;
 		}
-		for (int i = 0; i < allContent.size(); i ++){
+		for (int i = 0; i < allContent.size(); i++) {
 			List<String[]> content = allContent.get(i);
 			String title = null;
 			List<String> sentence = null;
 			List<Domain> organization = new ArrayList<Domain>();
-			Set<String> urlSet =new HashSet<String>();
+			Set<String> urlSet = new HashSet<String>();
 			// 是否找到了要摘要的文章
 			boolean flag = false;
 			// 找到可以爬的sentence
 			for (String[] str : content) {
-				try{
+				try {
 					String url = UrlUtil.getUrl(str[urlIndex]);
-					if(url==null)
+					if (url == null)
 						continue;
 					if (!flag) {
 						sentence = crawler.getSummary(str[urlIndex]);
@@ -418,15 +652,15 @@ public class StdfileServiceImpl implements StdfileService {
 							sentence = s.getSummary(null);
 						}
 					}
-					if(!urlSet.contains(url)){
+					if (!urlSet.contains(url)) {
 						urlSet.add(url);
-						if(Constant.existDomain.get(url) == null){
-							logger.error(url+"暂未录入existDomain中！");
-						}else{
+						if (Constant.existDomain.get(url) == null) {
+							logger.error(url + "暂未录入existDomain中！");
+						} else {
 							organization.add(Constant.existDomain.get(url));
 						}
 					}
-				}catch(Exception e){
+				} catch (Exception e) {
 					e.printStackTrace();
 					logger.error("提取摘要信息出错！");
 				}
@@ -434,16 +668,16 @@ public class StdfileServiceImpl implements StdfileService {
 			Collections.sort(organization);
 			String str_organization = "（";
 			if (organization.size() == 0) {
-				str_organization = "（"+topicName+"）";
+				str_organization = "（" + topicName + "）";
 			} else {
 				for (Domain domain : organization) {
-					if(domain == null){
+					if (domain == null) {
 						logger.error("域名为空，摘要信息提取出错！");
 						continue;
-					}else if(domain.getName().equals("其他")){
+					} else if (domain.getName().equals("其他")) {
 						continue;
 					}
-					str_organization += domain.getName()+ "、";
+					str_organization += domain.getName() + "、";
 				}
 				str_organization = str_organization.substring(0, str_organization.length() - 1) + "）";
 			}
@@ -460,4 +694,5 @@ public class StdfileServiceImpl implements StdfileService {
 		}
 		return summary;
 	}
+
 }

@@ -1,253 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hust.scdx.dao.mapper.StdfileMapper">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
-	<resultMap id="BaseResultMap" type="com.hust.scdx.model.Stdfile">
-		<id column="stdfile_id" jdbcType="VARCHAR" property="stdfileId" />
-		<result column="stdfile_name" jdbcType="VARCHAR" property="stdfileName" />
-		<result column="topic_id" jdbcType="VARCHAR" property="topicId" />
-		<result column="size" jdbcType="INTEGER" property="size" />
-		<result column="line_number" jdbcType="INTEGER" property="lineNumber" />
-		<result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
-		<result column="creator" jdbcType="VARCHAR" property="creator" />
-	</resultMap>
-	<sql id="Example_Where_Clause">
-		<where>
-			<foreach collection="oredCriteria" item="criteria" separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" prefixOverrides="and" suffix=")">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach close=")" collection="criterion.value" item="listItem"
-										open="(" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Update_By_Example_Where_Clause">
-		<where>
-			<foreach collection="example.oredCriteria" item="criteria"
-				separator="or">
-				<if test="criteria.valid">
-					<trim prefix="(" prefixOverrides="and" suffix=")">
-						<foreach collection="criteria.criteria" item="criterion">
-							<choose>
-								<when test="criterion.noValue">
-									and ${criterion.condition}
-								</when>
-								<when test="criterion.singleValue">
-									and ${criterion.condition} #{criterion.value}
-								</when>
-								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
-									#{criterion.secondValue}
-								</when>
-								<when test="criterion.listValue">
-									and ${criterion.condition}
-									<foreach close=")" collection="criterion.value" item="listItem"
-										open="(" separator=",">
-										#{listItem}
-									</foreach>
-								</when>
-							</choose>
-						</foreach>
-					</trim>
-				</if>
-			</foreach>
-		</where>
-	</sql>
-	<sql id="Base_Column_List">
-		stdfile_id, stdfile_name, topic_id, size, line_number, upload_time, creator
-	</sql>
-	<select id="selectByExample" parameterType="com.hust.scdx.model.StdfileExample"
-		resultMap="BaseResultMap">
-		select
-		<if test="distinct">
-			distinct
-		</if>
-		<include refid="Base_Column_List" />
-		from stdfile
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-		<if test="orderByClause != null">
-			order by ${orderByClause}
-		</if>
-	</select>
-	<select id="selectByPrimaryKey" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
-		select 'true' as QUERYID,
-		<include refid="Base_Column_List" />
-		from stdfile
-		where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
-	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from stdfile
-		where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
-	</delete>
-	<delete id="deleteByExample" parameterType="com.hust.scdx.model.StdfileExample">
-		delete from stdfile
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</delete>
-	<insert id="insert" parameterType="com.hust.scdx.model.Stdfile">
-		insert into stdfile (stdfile_id, stdfile_name, topic_id,
-		size, line_number, upload_time,
-		creator)
-		values (#{stdfileId,jdbcType=VARCHAR}, #{stdfileName,jdbcType=VARCHAR},
-		#{topicId,jdbcType=VARCHAR},
-		#{size,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER}, #{uploadTime,jdbcType=TIMESTAMP},
-		#{creator,jdbcType=VARCHAR})
-	</insert>
-	<insert id="insertSelective" parameterType="com.hust.scdx.model.Stdfile">
-		insert into stdfile
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="stdfileId != null">
-				stdfile_id,
-			</if>
-			<if test="stdfileName != null">
-				stdfile_name,
-			</if>
-			<if test="topicId != null">
-				topic_id,
-			</if>
-			<if test="size != null">
-				size,
-			</if>
-			<if test="lineNumber != null">
-				line_number,
-			</if>
-			<if test="uploadTime != null">
-				upload_time,
-			</if>
-			<if test="creator != null">
-				creator,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="stdfileId != null">
-				#{stdfileId,jdbcType=VARCHAR},
-			</if>
-			<if test="stdfileName != null">
-				#{stdfileName,jdbcType=VARCHAR},
-			</if>
-			<if test="topicId != null">
-				#{topicId,jdbcType=VARCHAR},
-			</if>
-			<if test="size != null">
-				#{size,jdbcType=INTEGER},
-			</if>
-			<if test="lineNumber != null">
-				#{lineNumber,jdbcType=INTEGER},
-			</if>
-			<if test="uploadTime != null">
-				#{uploadTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="creator != null">
-				#{creator,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<select id="countByExample" parameterType="com.hust.scdx.model.StdfileExample"
-		resultType="java.lang.Long">
-		select count(*) from stdfile
-		<if test="_parameter != null">
-			<include refid="Example_Where_Clause" />
-		</if>
-	</select>
-	<update id="updateByExampleSelective" parameterType="map">
-		update stdfile
-		<set>
-			<if test="record.stdfileId != null">
-				stdfile_id = #{record.stdfileId,jdbcType=VARCHAR},
-			</if>
-			<if test="record.stdfileName != null">
-				stdfile_name = #{record.stdfileName,jdbcType=VARCHAR},
-			</if>
-			<if test="record.topicId != null">
-				topic_id = #{record.topicId,jdbcType=VARCHAR},
-			</if>
-			<if test="record.size != null">
-				size = #{record.size,jdbcType=INTEGER},
-			</if>
-			<if test="record.lineNumber != null">
-				line_number = #{record.lineNumber,jdbcType=INTEGER},
-			</if>
-			<if test="record.uploadTime != null">
-				upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="record.creator != null">
-				creator = #{record.creator,jdbcType=VARCHAR},
-			</if>
-		</set>
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByExample" parameterType="map">
-		update stdfile
-		set stdfile_id = #{record.stdfileId,jdbcType=VARCHAR},
-		stdfile_name = #{record.stdfileName,jdbcType=VARCHAR},
-		topic_id = #{record.topicId,jdbcType=VARCHAR},
-		size = #{record.size,jdbcType=INTEGER},
-		line_number = #{record.lineNumber,jdbcType=INTEGER},
-		upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
-		creator = #{record.creator,jdbcType=VARCHAR}
-		<if test="_parameter != null">
-			<include refid="Update_By_Example_Where_Clause" />
-		</if>
-	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.hust.scdx.model.Stdfile">
-		update stdfile
-		<set>
-			<if test="stdfileName != null">
-				stdfile_name = #{stdfileName,jdbcType=VARCHAR},
-			</if>
-			<if test="topicId != null">
-				topic_id = #{topicId,jdbcType=VARCHAR},
-			</if>
-			<if test="size != null">
-				size = #{size,jdbcType=INTEGER},
-			</if>
-			<if test="lineNumber != null">
-				line_number = #{lineNumber,jdbcType=INTEGER},
-			</if>
-			<if test="uploadTime != null">
-				upload_time = #{uploadTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="creator != null">
-				creator = #{creator,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.Stdfile">
-		update stdfile
-		set stdfile_name = #{stdfileName,jdbcType=VARCHAR},
-		topic_id = #{topicId,jdbcType=VARCHAR},
-		size = #{size,jdbcType=INTEGER},
-		line_number = #{lineNumber,jdbcType=INTEGER},
-		upload_time = #{uploadTime,jdbcType=TIMESTAMP},
-		creator = #{creator,jdbcType=VARCHAR}
-		where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
-	</update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+  <resultMap id="BaseResultMap" type="com.hust.scdx.model.Stdfile">
+    <id column="stdfile_id" jdbcType="VARCHAR" property="stdfileId" />
+    <result column="stdfile_name" jdbcType="VARCHAR" property="stdfileName" />
+    <result column="topic_id" jdbcType="VARCHAR" property="topicId" />
+    <result column="size" jdbcType="INTEGER" property="size" />
+    <result column="line_number" jdbcType="INTEGER" property="lineNumber" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="datatime" jdbcType="VARCHAR" property="datatime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stdfile_id, stdfile_name, topic_id, size, line_number, upload_time, creator, datatime
+  </sql>
+  <select id="selectByExample" parameterType="com.hust.scdx.model.StdfileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stdfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stdfile
+    where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stdfile
+    where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hust.scdx.model.StdfileExample">
+    delete from stdfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hust.scdx.model.Stdfile">
+    insert into stdfile (stdfile_id, stdfile_name, topic_id, 
+      size, line_number, upload_time, 
+      creator, datatime)
+    values (#{stdfileId,jdbcType=VARCHAR}, #{stdfileName,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, 
+      #{size,jdbcType=INTEGER}, #{lineNumber,jdbcType=INTEGER}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{datatime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hust.scdx.model.Stdfile">
+    insert into stdfile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stdfileId != null">
+        stdfile_id,
+      </if>
+      <if test="stdfileName != null">
+        stdfile_name,
+      </if>
+      <if test="topicId != null">
+        topic_id,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="lineNumber != null">
+        line_number,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="datatime != null">
+        datatime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stdfileId != null">
+        #{stdfileId,jdbcType=VARCHAR},
+      </if>
+      <if test="stdfileName != null">
+        #{stdfileName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="datatime != null">
+        #{datatime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hust.scdx.model.StdfileExample" resultType="java.lang.Long">
+    select count(*) from stdfile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stdfile
+    <set>
+      <if test="record.stdfileId != null">
+        stdfile_id = #{record.stdfileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stdfileName != null">
+        stdfile_name = #{record.stdfileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topicId != null">
+        topic_id = #{record.topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        size = #{record.size,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineNumber != null">
+        line_number = #{record.lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.uploadTime != null">
+        upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datatime != null">
+        datatime = #{record.datatime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stdfile
+    set stdfile_id = #{record.stdfileId,jdbcType=VARCHAR},
+      stdfile_name = #{record.stdfileName,jdbcType=VARCHAR},
+      topic_id = #{record.topicId,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=INTEGER},
+      line_number = #{record.lineNumber,jdbcType=INTEGER},
+      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      datatime = #{record.datatime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hust.scdx.model.Stdfile">
+    update stdfile
+    <set>
+      <if test="stdfileName != null">
+        stdfile_name = #{stdfileName,jdbcType=VARCHAR},
+      </if>
+      <if test="topicId != null">
+        topic_id = #{topicId,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="lineNumber != null">
+        line_number = #{lineNumber,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="datatime != null">
+        datatime = #{datatime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.Stdfile">
+    update stdfile
+    set stdfile_name = #{stdfileName,jdbcType=VARCHAR},
+      topic_id = #{topicId,jdbcType=VARCHAR},
+      size = #{size,jdbcType=INTEGER},
+      line_number = #{lineNumber,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      datatime = #{datatime,jdbcType=VARCHAR}
+    where stdfile_id = #{stdfileId,jdbcType=VARCHAR}
+  </update>
 </mapper>

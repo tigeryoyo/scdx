@@ -19,38 +19,35 @@ public class AttrUtil {
 	 * @return
 	 */
 	/**
-	 *  标题
-	 *   "标题|内容"
+	 * 标题 "标题|内容"
 	 */
 	public static final String TITLE_PATTERN = "标题|内容";
 	/**
-	 *  url
-	 *  "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
+	 * url "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
 	 */
 	public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
 	/**
-	 *  时间
-	 *  "发布时间|发贴时间|时间"
+	 * 时间 "发布时间|发贴时间|时间"
 	 */
-	public static final String TIME_PATTERN = "发布时间|发贴时间|时间";
+	public static final String TIME_PATTERN = "发布时间|发帖时间|发贴时间|时间";
 	/**
-	 *  网站名称
-	 *  "网站|媒体名称"
+	 * 发帖人 "发帖人|发贴人"
+	 */
+	public static final String POSTING = "发帖人|发贴人|作者|发布人|来源/发布人|发布者昵称";
+	/**
+	 * 网站名称 "网站|媒体名称"
 	 */
 	public static final String WEBNAME_PATTERN = "网站|媒体名称";
 	/**
-	 *  网站类型
-	 *  "来源|类型|资源类型"
+	 * 网站类型 "来源|类型|资源类型"
 	 */
-	public static final String TYPE_PATTERN = "来源|类型|资源类型";
+	public static final String TYPE_PATTERN = "来源|类型|资源类型|媒体类型";
 	/**
-	 *  网站所属模块
-	 *  "板块|频道"
+	 * 网站所属模块 "板块|频道"
 	 */
-	public static final String COLUMN_PATTERN = "板块|频道";
+	public static final String COLUMN_PATTERN = "板块|频道|频道分类";
 	/**
-	 * 网站级别
-	 * "媒体级别"
+	 * 网站级别 "媒体级别"
 	 */
 	public static final String RANK_PATTERN = "媒体级别";
 
@@ -62,9 +59,25 @@ public class AttrUtil {
 		return new int[] { indexOfTitle, indexOfUrl, indexOfTime };
 	}
 
+	public static boolean isImp(String attr) {
+		return Pattern.matches(TITLE_PATTERN + "|" + URL_PATTERN + "|" + TIME_PATTERN + "|" + WEBNAME_PATTERN + "|" + TYPE_PATTERN + "|"
+				+ COLUMN_PATTERN + "|" + RANK_PATTERN + "|" + POSTING, attr);
+	}
+
 	public static int findIndexOfSth(String[] attrs, String sth) {
 		for (int i = 0; i < attrs.length; i++) {
 			if (Pattern.matches(sth, attrs[i])) {
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
+	public static int findIndexOfSth(List<String> attrs, String sth) {
+		int size = attrs.size();
+		for (int i = 0; i < size; i++) {
+			if (Pattern.matches(sth, attrs.get(i))) {
 				return i;
 			}
 		}
@@ -176,14 +189,21 @@ public class AttrUtil {
 		return false;
 	}
 
+	public static boolean isSth(String attr, String pattern) {
+		if (Pattern.matches(pattern, attr)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * 统计日期-数量与来源-数量
 	 * 
 	 * @param content
 	 * @return
 	 */
-	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content,
-			ConcurrentHashMap<String, Domain> domains) {
+	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content, ConcurrentHashMap<String, Domain> domains) {
 		HashMap<String, TreeMap<String, Integer>> map = new HashMap<String, TreeMap<String, Integer>>();
 		int indexOfUrl = findIndexOfUrl(content.get(0));
 		int indexOfTime = findIndexOfTime(content.get(0));

@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
 import com.hust.scdx.constant.Constant.StdfileMap;
+import com.sun.tools.doclint.HtmlTag.Attr;
 
 public class FileUtil {
 	/**
@@ -138,10 +139,13 @@ public class FileUtil {
 			}
 		});
 
-		String[] tmp = new String[globalAttrs.size()];
-		globalAttrs.toArray(tmp);
-		content.add(0, tmp);
-		return content;
+		// String[] tmp = new String[globalAttrs.size()];
+		// globalAttrs.toArray(tmp);
+		// content.add(0,tmp);
+		// return content;
+
+		// 调整属性顺序消耗比较多的运行时间
+		return adjustPropertyLine(globalAttrs, content);
 	}
 
 	/**
@@ -178,12 +182,47 @@ public class FileUtil {
 			if (index != -1) { // 防止相似属性
 				indexs[i] = index;
 			} else {
-				if (AttrUtil.isTitle(attrs[i])) {
+				if (AttrUtil.isSth(attrs[i], AttrUtil.TITLE_PATTERN)) {
 					indexs[i] = AttrUtil.findIndexOfTitle(globalAttrs);
-				} else if (AttrUtil.isUrl(attrs[i])) {
+					globalAttrs.set(indexs[i], "标题");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.URL_PATTERN)) {
 					indexs[i] = AttrUtil.findIndexOfUrl(globalAttrs);
-				} else if (AttrUtil.isTime(attrs[i])) {
+					globalAttrs.set(indexs[i], "链接");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.TIME_PATTERN)) {
 					indexs[i] = AttrUtil.findIndexOfTime(globalAttrs);
+					globalAttrs.set(indexs[i], "发帖时间");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.COLUMN_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.COLUMN_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "板块");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.TYPE_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.TYPE_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "来源");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.WEBNAME_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.WEBNAME_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "网站");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.POSTING)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.POSTING);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "发帖人");
 				} else {
 					globalAttrs.add(attrs[i]);
 					indexs[i] = globalAttrs.size() - 1;
@@ -191,6 +230,87 @@ public class FileUtil {
 			}
 		}
 		return indexs;
+	}
+
+	/**
+	 * 调整属性行
+	 * 
+	 * @param attrs
+	 * @param content
+	 */
+	private static List<String[]> adjustPropertyLine(List<String> attrs, List<String[]> content) {
+		int attrSize = attrs.size();
+		int[] orderAttrs = new int[attrSize];
+		List<String> newAttrs = new ArrayList<String>();
+		int order = 0;
+		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.COLUMN_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfTitle(attrs);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.POSTING);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfTime(attrs);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfUrl(attrs);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.TYPE_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		}
+
+		for (int i = 0; i < attrSize; i++) {
+			if (!AttrUtil.isImp(attrs.get(i))) {
+				orderAttrs[order++] = i;
+				newAttrs.add(attrs.get(i));
+			}
+		}
+
+		List<String[]> res = new ArrayList<String[]>();
+		int contentSize = content.size();
+		attrSize = newAttrs.size();
+		for (int i = 0; i < contentSize; i++) {
+			String[] cline = content.get(i);
+			String[] line = new String[attrSize];
+			for (int j = 0; j < line.length; j++) {
+				if (orderAttrs[j] < cline.length) {
+					line[j] = cline[orderAttrs[j]];
+				} else {
+					line[j] = "";
+				}
+			}
+			res.add(line);
+		}
+		String[] tmp = new String[newAttrs.size()];
+		newAttrs.toArray(tmp);
+		res.add(0, tmp);
+		return res;
 	}
 
 	/**
@@ -363,6 +483,40 @@ public class FileUtil {
 	}
 
 	/**
+	 * title、url、time、amount
+	 * 
+	 * @param stdfilePath
+	 *            标准数据路径
+	 * @return
+	 */
+	public static List<String[]> getStdfileDisplaylist2(List<String[]> list) {
+		String[] row = list.get(0);
+		int indexOfTitle = AttrUtil.findIndexOfTitle(row);
+		int indexOfUrl = AttrUtil.findIndexOfUrl(row);
+		int indexOfTime = AttrUtil.findIndexOfTime(row);
+		int size = list.size();
+		int i = 1;
+		while (i < size) {
+			String title = "", url = "";
+			int amount = 0;
+			String latestTime = "9999-12-12 23:59:59";
+			while ((row = list.get(i)).length != 0) {
+				amount++;
+				if (latestTime.compareTo(row[indexOfTime]) > 0) {
+					latestTime = row[indexOfTime];
+					title = row[indexOfTitle];
+					url = row[indexOfUrl];
+				}
+			}
+			if (amount != 0) {
+				list.add(new String[] { title, url, latestTime, String.valueOf(amount) });
+			}
+			i++;
+		}
+		return list;
+	}
+
+	/**
 	 * <content,List<String[]>>， <marked,List<Integer>>
 	 * 获取stdfile内容与待标记的id集合（每个类中的下标）
 	 * 
@@ -411,6 +565,43 @@ public class FileUtil {
 	}
 
 	/**
+	 * <content,List<String[]>>， <marked,List<Integer>>
+	 * 获取stdfile内容与待标记的id集合（每个类中的下标）
+	 * 
+	 * @param stdfilePath
+	 * @return
+	 */
+	public static Map<String, Object> getStdfileExcelcontent2(List<String[]> list) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String[]> content = new ArrayList<String[]>();
+		List<Integer> marked = new ArrayList<Integer>();
+		String[] row = list.get(0);
+		content.add(row);
+		int indexOfTime = AttrUtil.findIndexOfTime(row);
+		int size = list.size();
+		int j = 1;
+		while (j < size) {
+			String latestTime = "9999-12-12 23:59:59";
+			int markedIndex = 0;
+			int i = 0;
+			while ((row = list.get(i)).length != 0) {
+				if (latestTime.compareTo(row[indexOfTime]) > 0) {
+					latestTime = row[indexOfTime];
+					markedIndex = i;
+				}
+				i++;
+			}
+			if (i != 0) {
+				marked.add(markedIndex);
+			}
+			j++;
+		}
+		map.put(StdfileMap.CONTENT, list);
+		map.put(StdfileMap.MARKED, marked);
+		return map;
+	}
+
+	/**
 	 * 获取目标cluster
 	 * 
 	 * @param stdfilePath
@@ -423,15 +614,15 @@ public class FileUtil {
 			String line = br.readLine();
 			String[] row = line.split("\t");
 			list.add(row);
-			//targetIndex为0时，统计所有类信息
-			if(targetIndex == 0){
-				while(line!= null){
+			// targetIndex为0时，统计所有类信息
+			if (targetIndex == 0) {
+				while (line != null) {
 					while (!StringUtils.isBlank((line = br.readLine()))) {
 						row = line.split("\t");
 						list.add(row);
 					}
 				}
-			}else{
+			} else {
 				int i = 0;
 				do {
 					if (i == targetIndex) {

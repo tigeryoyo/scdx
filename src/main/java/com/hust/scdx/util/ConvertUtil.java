@@ -46,6 +46,21 @@ public class ConvertUtil implements Converter<String, Date> {
 	}
 
 	/**
+	 * 存储路径 例如 2017/07/07
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public static String convertDateToStdPath(String date) {
+		try {
+			return date.substring(0, 4) + "/" + date.substring(5, 7) + "/" + date.substring(8, 10) + "/";
+		} catch (Exception e) {
+			logger.error("转换日期错误。");
+		}
+		return Constant.UNKNOWN;
+	}
+
+	/**
 	 * 用于生成聚类后结果文件名
 	 * 
 	 * @param date

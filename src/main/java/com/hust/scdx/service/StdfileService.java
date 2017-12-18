@@ -25,4 +25,6 @@ public interface StdfileService {
 
 	Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request);
 
+	List<String[]> analyzeByTimeRange(String topicId, String startTime, String endTime, HttpServletRequest request);
+
 }

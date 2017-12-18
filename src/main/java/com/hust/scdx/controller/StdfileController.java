@@ -32,8 +32,10 @@ import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
+import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
+import com.hust.scdx.util.TimeUtil;
 
 @Controller
 @RequestMapping("/stdfile")
@@ -97,8 +99,8 @@ public class StdfileController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/downloadStdfileByStdfileId", method = RequestMethod.POST)
-	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
-			HttpServletRequest request, HttpServletResponse response) {
+	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request,
+			HttpServletResponse response) {
 		Map<String, Object> map = stdfileService.getStdfileById(stdfileId);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
@@ -112,8 +114,7 @@ public class StdfileController {
 			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
 			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
 					(List<Integer>) map.get(StdfileMap.MARKED));
-			workbook = ExcelUtil.exportStatToExcel(workbook,
-					(Map<String, TreeMap<String, Integer>>) map.get(StdfileMap.STAT));
+			workbook = ExcelUtil.exportStatToExcel(workbook, (Map<String, TreeMap<String, Integer>>) map.get(StdfileMap.STAT));
 			workbook.write(outputStream);
 		} catch (Exception e) {
 			logger.error("下载结果失败。");
@@ -134,8 +135,7 @@ public class StdfileController {
 	 */
 	@RequestMapping(value = "/downloadAbstractByStdfileId", method = RequestMethod.POST)
 	public Object downloadAbstractByStdfileId(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request,
-			HttpServletResponse response) {
+			@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = stdfileService.getAbstractById(topicId, stdfileId);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
@@ -171,17 +171,17 @@ public class StdfileController {
 	@RequestMapping("/queryStdfilesByTimeRange")
 	public Object queryStdfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
-			@RequestParam(value = "startTime", required = true) Date startTime,
-			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
+			HttpServletRequest request) {
 		switch (timeRangeType) {
 		case "1":
 			endTime = new Date();
-			startTime = new Date(endTime.getTime()-1*24*60*60*1000);
+			startTime = new Date(endTime.getTime() - 1 * 24 * 60 * 60 * 1000);
 			endTime = null;
 			break;
 		case "2":
 			endTime = new Date();
-			startTime = new Date(endTime.getTime()-7*24*60*60*1000);
+			startTime = new Date(endTime.getTime() - 7 * 24 * 60 * 60 * 1000);
 			endTime = null;
 			break;
 		default:
@@ -204,10 +204,33 @@ public class StdfileController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/analyzeByStdfileId", method = RequestMethod.POST)
-	public Object analyzeByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId,
-			HttpServletRequest request) {
+	public Object analyzeByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request) {
 		// title、url、time、amount
 		List<String[]> list = stdfileService.analyzeByStdfileId(stdfileId);
+		if (list == null || list.isEmpty()) {
+			return ResultUtil.errorWithMsg("分析标准数据出错。");
+		}
+		return ResultUtil.success(list);
+	}
+
+	/**
+	 * 根据数据时间分析标准数据
+	 * 
+	 * @param stdfileId
+	 *            标准数据id
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/analyzeByTimeRange", method = RequestMethod.POST)
+	public Object analyzeByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
+			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
+			@RequestParam(value = "startTime", required = true) Date startTime1, @RequestParam(value = "endTime", required = true) Date endTime1,
+			HttpServletRequest request) {
+		String startTime = "2016-09-01";
+		String endTime = "2016-09-20";
+		// title、url、time、amount
+		List<String[]> list = stdfileService.analyzeByTimeRange(topicId, startTime, endTime, request);
 		if (list == null || list.isEmpty()) {
 			return ResultUtil.errorWithMsg("分析标准数据出错。");
 		}
