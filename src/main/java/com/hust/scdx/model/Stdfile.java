@@ -1,15 +1,11 @@
 package com.hust.scdx.model;
-
 import java.io.Serializable;
 import java.util.Date;
 
-public class Stdfile implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private String stdfileId;
+public class Stdfile implements Serializable  {
+    private static final long serialVersionUID = 1L;
+    
+    private String stdfileId;
 
     private String stdfileName;
 
@@ -22,6 +18,8 @@ public class Stdfile implements Serializable {
     private Date uploadTime;
 
     private String creator;
+
+    private String datatime;
 
     public String getStdfileId() {
         return stdfileId;
@@ -77,5 +75,13 @@ public class Stdfile implements Serializable {
 
     public void setCreator(String creator) {
         this.creator = creator == null ? null : creator.trim();
+    }
+
+    public String getDatatime() {
+        return datatime;
+    }
+
+    public void setDatatime(String datatime) {
+        this.datatime = datatime == null ? null : datatime.trim();
     }
 }
