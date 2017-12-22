@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50637
+Source Server         : mysql
+Source Server Version : 50633
 Source Host           : localhost:3306
 Source Database       : scdx
 
 Target Server Type    : MYSQL
-Target Server Version : 50637
+Target Server Version : 50633
 File Encoding         : 65001
 
-Date: 2017-11-21 21:25:20
+Date: 2017-12-22 10:50:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -60,11 +60,14 @@ INSERT INTO `domain_one` VALUES ('02c9f807-3e36-498f-9c36-849ba9e871db', 'xiejin
 INSERT INTO `domain_one` VALUES ('02cccfb4-b6ab-409c-bd25-6cfff9fdc04e', 'shanxiol.com', '山西人事人才网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:24');
 INSERT INTO `domain_one` VALUES ('031d33ad-5bf9-40a0-beea-5db90fdcbc33', 'cditv.cn', '无限成都', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:05');
 INSERT INTO `domain_one` VALUES ('0332c53f-31fc-4819-a73c-5d3bb5081ab8', 'luzhou.gov.cn', '泸州市安监局', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:43');
+INSERT INTO `domain_one` VALUES ('03489d72-2d14-49a4-a280-261be6cfec0d', 'qdjimo.com', '即墨信息港', '教育', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('03dddcb4-8674-4578-8240-0bf57d4bec7d', 'lzwyedu.com', '兰州外语职业学院', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:49');
 INSERT INTO `domain_one` VALUES ('03e983b4-a342-4b96-9735-4ee4c3a7a474', 'yntv.cn', '云视网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:51');
 INSERT INTO `domain_one` VALUES ('03f58b1d-8b2a-4255-8b08-4433f92b1014', 'ltaaa.com', '龙腾网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:44');
 INSERT INTO `domain_one` VALUES ('03fa90f5-feb0-44e5-8966-5c2d0bea7c12', 'cctv.com', '中国网络电视台', '其他', '新闻', '中央', '其他', '0', '1', '2017-08-15 11:05:36');
 INSERT INTO `domain_one` VALUES ('042cddb4-0a10-43b1-96cc-3f0cacd1b067', 'rfa.org', '自由亚洲电台-RFA', '其他', '境外', '外媒', '其他', '0', '0', '2017-08-15 11:05:28');
+INSERT INTO `domain_one` VALUES ('043fb93b-8a18-41f5-aa2d-16d31bcae9f5', 'freekaobo.com', '考博论坛', '最新', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
+INSERT INTO `domain_one` VALUES ('0440106d-779e-4593-995e-bac6c72482cc', 'gyxww.cn', '广元新闻网', '图片', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('04c844ab-c2cc-493a-ae75-79b464f714c1', 'luxiwang.com', '鲁西网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:43');
 INSERT INTO `domain_one` VALUES ('04d57bbc-72d3-4326-aea3-7b00f529669e', '23xfw.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:24');
 INSERT INTO `domain_one` VALUES ('04e3f5fd-ca97-4b9a-b2c7-d3d4e109a431', 'my.gov.cn', '绵阳市政府', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:40');
@@ -81,6 +84,7 @@ INSERT INTO `domain_one` VALUES ('05db717c-bc42-49d5-95b9-71ace5502199', 'xichan
 INSERT INTO `domain_one` VALUES ('0605ed89-1d67-4c34-9b20-2bc399fbb06d', '473132.com', '河南油田论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:05');
 INSERT INTO `domain_one` VALUES ('062be028-8106-46d8-8154-0e9907d40cab', 'darongcheng.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('06482857-815f-4f4a-ad35-1321ad99152a', 'quyangnet.com', '99街曲阳网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
+INSERT INTO `domain_one` VALUES ('0667f419-440f-41e1-aea1-30bae5764a23', 'bxkxw.com', '百讯网', '社会民生', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('06760f8a-b1f2-4a29-8773-575ab7d77dc8', 'ktouch.org', '合肥左邻右舍论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:07');
 INSERT INTO `domain_one` VALUES ('06dd34ca-7beb-49aa-a887-e1e07e1fd32a', 'huaxia.com', '华夏经纬网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:02');
 INSERT INTO `domain_one` VALUES ('06ed02c7-880e-4de3-8867-7f5ccdc04cbf', 'newssc.org', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:20');
@@ -105,11 +109,13 @@ INSERT INTO `domain_one` VALUES ('08943958-7c91-471a-8270-40f2184c14d4', 'nxdzkj
 INSERT INTO `domain_one` VALUES ('08a3a82b-190b-4fbf-a434-7018ff29a146', 'longmatan.gov.cn', '龙马潭区人社局', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:44');
 INSERT INTO `domain_one` VALUES ('08c837cd-4c0b-407e-8764-5d9a3e2f632f', 'quanjiao.gov.cn', '全椒县人民政府', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:28');
 INSERT INTO `domain_one` VALUES ('08dec685-0622-48b0-bd67-a5d0d4bd2e3c', 'sgmsw.cn', '韶关民声网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:21');
+INSERT INTO `domain_one` VALUES ('08f1570d-f442-400d-8ea8-7eb02beb84b2', 'snyq.org', '三农舆情网', '要闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('09122b03-1fd6-449b-83bf-5c15789bed61', 'jsule.com', '江苏城市论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:56');
 INSERT INTO `domain_one` VALUES ('097346b8-6a0c-4aae-bfb1-b790ec633ba8', 'sxcm.net', '三峡都市报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:25');
 INSERT INTO `domain_one` VALUES ('097f245c-5051-459d-8311-00f4edacc6ee', 'ybxsfj.com', '宜宾县司法局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:53');
 INSERT INTO `domain_one` VALUES ('09a41135-2dfb-4f14-8bab-8db2721ace23', 'trxw.gov.cn', '铜仁新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:09');
 INSERT INTO `domain_one` VALUES ('09b6d875-2b56-4c6b-ac15-608205f30474', 'dcxw.org', '九江晨豹论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:51');
+INSERT INTO `domain_one` VALUES ('09b82f51-5513-4b5b-a0be-bdd53b33d91b', 'sinopecbid.com', '中国石化招标网', '废标公告', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('09d8a6ce-5c40-48a4-8fb3-1255e401145d', 'ztnews.net', '昭通日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:05:49');
 INSERT INTO `domain_one` VALUES ('0a3eaed8-3977-4c6d-83dc-b782ffef98b3', 'court.gov.cn', '中华人民共和国最高人民法院', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:33');
 INSERT INTO `domain_one` VALUES ('0a4135fd-cd2e-40bd-b93a-073e51969ff5', 'fupingbbs.com', '富平网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:14');
@@ -126,8 +132,9 @@ INSERT INTO `domain_one` VALUES ('0b4b7be7-2351-4171-89dc-ef8625d1eb2f', 'hazs09
 INSERT INTO `domain_one` VALUES ('0b742a0b-d04a-49eb-9ac9-b91525100b77', 'asean168.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:20');
 INSERT INTO `domain_one` VALUES ('0bab3c1b-84ec-40fd-9276-47275befd3ef', 'xntv.tv', '西宁网络电视台', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:03');
 INSERT INTO `domain_one` VALUES ('0bb8e43e-3159-42a8-9a56-cecf481e8f27', 'baiinfo.com', '百川资讯', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:32');
+INSERT INTO `domain_one` VALUES ('0bbd3c9c-aa69-448d-8c91-9722ed64dcd2', 'sss.net.cn', '四川社会科学在线', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('0bd0c9ba-ce2a-46d8-94d8-5ce720978df7', 'cnii.com.cn', '中国信息产业网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:34');
-INSERT INTO `domain_one` VALUES ('0bd88f20-f100-4a77-a7b8-06fba26b9a6c', 'gdin.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('0bd88f20-f100-4a77-a7b8-06fba26b9a6c', 'gdin.net', '广师后院', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('0c0590fa-f546-47da-82e2-9149341ace4e', 'xbkfw.cn', '西部开发网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('0c1f094c-3d2b-4477-9c9c-26c50f5a355f', 'cznews.gov.cn', '沧州新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:28');
 INSERT INTO `domain_one` VALUES ('0c53de4b-b4eb-4620-ab60-8b63bad1e495', 'nongmin.com.cn', '农民互联网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:35');
@@ -154,10 +161,12 @@ INSERT INTO `domain_one` VALUES ('0e9855d0-9489-4108-8d5f-00287141c33a', 'dowate
 INSERT INTO `domain_one` VALUES ('0ea27c36-f3fa-4ac7-ac3a-2a2cc01ffd45', 'gaotie.cn', '高铁网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:14');
 INSERT INTO `domain_one` VALUES ('0eafaaa5-fc45-4b32-8e91-1ece31d12d17', 'artron.net', '雅昌艺术网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:56');
 INSERT INTO `domain_one` VALUES ('0ecb8107-fb75-4014-8770-7bcef325d300', 'jfdaily.com', '解放网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:54');
+INSERT INTO `domain_one` VALUES ('0ecf713a-fbb9-4918-9842-4600c6256577', 'wenchuan.gov.cn', '中国汶川', '汶川旅游', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('0eda10d4-6902-4466-9df1-a2b91c6c4628', 'takungpao.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:28');
 INSERT INTO `domain_one` VALUES ('0f01d00e-f40a-4caf-95f8-f3f9e47eca18', 'chsi.com.cn', '中国高等教育学生信息网', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:47');
 INSERT INTO `domain_one` VALUES ('0f1008ee-ed34-424c-89fa-576de169979a', 'wehefei.com', '合肥新闻资讯', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:07');
 INSERT INTO `domain_one` VALUES ('0f393d77-2a06-4720-81cd-85fe3625b206', 'taizhou.com.cn', '中国台州网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:37');
+INSERT INTO `domain_one` VALUES ('0f575e34-5d7c-46b5-9f85-010f3d2e842d', 'jy.gov.cn', '江油市人民政府网站', '工作动态', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('0f613485-3c49-48fe-92e2-8d8d117b8607', 'hebeijfw.com', '中新网河北频道', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:32');
 INSERT INTO `domain_one` VALUES ('0f8b6696-3f3a-4171-bd91-5ba92218a0d9', 'chinafarming.com', '中国畜牧网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:46');
 INSERT INTO `domain_one` VALUES ('0f98fabd-2d13-4e13-b334-834901582af2', 'lsiptv.cn', '凉山电视台', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:46');
@@ -169,6 +178,7 @@ INSERT INTO `domain_one` VALUES ('10155948-4d03-4275-a0f2-e194872c9df7', 'panzhi
 INSERT INTO `domain_one` VALUES ('102a7969-1a85-4351-8a35-ad1c77f27939', 'tjjh.gov.cn', '静海政务公众信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:51');
 INSERT INTO `domain_one` VALUES ('104dd7f4-f510-41bc-955b-e9ae041ba329', 'baotounews.com.cn', '包头日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:31');
 INSERT INTO `domain_one` VALUES ('10508da5-110e-4dcc-ab64-9a1a91a03c9a', 'xdf.cn', '新东方网', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:46');
+INSERT INTO `domain_one` VALUES ('106f8ac3-8a67-45d0-a5de-da986db6b7a6', 'wanyuan.gov.cn', '中国万源', '政府信息公开目录', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('1076c40e-fa77-4317-aeb6-a9d8fb370216', 'lezishan.com', '乐善中国网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:48');
 INSERT INTO `domain_one` VALUES ('109b8c4b-22a9-407e-9b64-68eaac347e65', 'hbgrb.net', '河工新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:06');
 INSERT INTO `domain_one` VALUES ('10debc7c-d37a-40d9-9b0b-e93819d93954', 'jingtanwang.com', '京探网论坛', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:52');
@@ -177,7 +187,7 @@ INSERT INTO `domain_one` VALUES ('1137b6f5-ca1f-4879-8515-e7f59f5c2f00', 'zjgrrb
 INSERT INTO `domain_one` VALUES ('1149c518-9976-47e1-ac82-060d1e199f8b', 'fcgsnews.com', '防城港市新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:17');
 INSERT INTO `domain_one` VALUES ('117f4e28-399d-468f-9efc-b1e9cb0f6b5e', '81.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('11879984-419d-4452-b7a3-fda64bddb9ea', 'jryh.com.cn', '今日玉环', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:54');
-INSERT INTO `domain_one` VALUES ('11a0c7e1-bb57-4c05-a86e-01f9f3ae6899', 'wmxa.cn', '西安文明网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:04');
+INSERT INTO `domain_one` VALUES ('11a0c7e1-bb57-4c05-a86e-01f9f3ae6899', 'wmxa.cn', '西安文明网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('11b3e0ec-bea2-4877-8ca5-58aaeb0fd576', 'qi-che.com', '汽车中国网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:31');
 INSERT INTO `domain_one` VALUES ('11c1ffd2-7cc3-45d1-b740-0722b4d829f7', '360.cn', '360论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:37');
 INSERT INTO `domain_one` VALUES ('11cd2403-81c7-4202-a6a7-14e0fabf3c88', '219.156.123.48:8080', '河南法制报', '其他', '报纸', '省级', '其他', '0', '0', '2017-08-15 11:07:06');
@@ -190,6 +200,7 @@ INSERT INTO `domain_one` VALUES ('128ad96a-1e37-406e-b6b3-9c9569a0270d', 'czxww.
 INSERT INTO `domain_one` VALUES ('12988e2e-c51c-4b12-b8c8-0579a6e843c7', 'chengdu.cn', '郫县热网', '其他', '博客', '其他', '其他', '0', '1', '2017-08-15 11:06:33');
 INSERT INTO `domain_one` VALUES ('12a615d9-c94e-462b-ad09-2c117cd89897', 'ntjoy.com', '江海明珠网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:57');
 INSERT INTO `domain_one` VALUES ('12ee65b2-6998-4fba-8242-96a3646dce45', 'jdbbs.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
+INSERT INTO `domain_one` VALUES ('133b8785-15be-499b-a80f-22d8ca34792c', 'gaqss.com', '广安全搜索论坛', '广安新闻', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('1355aaa3-b4a8-4615-9726-5cc58079e98d', 'ph66.com', '平湖在线论坛', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:33');
 INSERT INTO `domain_one` VALUES ('1419d2dc-c61a-4088-a416-b0c36d763025', 'doc88.com', '道客巴巴', '其他', '文库', '文库', '其他', '0', '0', '2017-08-15 11:07:22');
 INSERT INTO `domain_one` VALUES ('143c6dc4-9b47-4d86-89bd-d4c50c1aed1b', 'ku6.com', '酷6网', '其他', '视频', '其他', '其他', '0', '1', '2017-08-15 11:06:49');
@@ -197,12 +208,14 @@ INSERT INTO `domain_one` VALUES ('1483f38c-5fc1-4949-9baa-f2920563ca54', 'eeo.co
 INSERT INTO `domain_one` VALUES ('148baa43-2f66-4b81-9ba6-d2e4141f0829', '5253.com', '5253手游论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:37');
 INSERT INTO `domain_one` VALUES ('148c69bc-3ee0-4c82-8f21-d2750b5c4ea0', 'jzxww.com.cn', '晋中日报', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:52');
 INSERT INTO `domain_one` VALUES ('14a82447-524e-475a-a9cf-8a03d3b873f5', 'microbell.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
+INSERT INTO `domain_one` VALUES ('14d59173-aeb7-499f-ac5f-0800aaec7e3b', 'hteacher.net', '华图教师网', '招教动态', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('14f570a9-2346-4817-a05b-1559ba756dc9', 'tb520.com', '江海网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:57');
 INSERT INTO `domain_one` VALUES ('15024d2c-8771-4b17-94c3-daf502b2daca', 'jszhaobiao.com', '中国建设招标网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:43');
 INSERT INTO `domain_one` VALUES ('1518260d-7d9f-4383-9ee4-df5696c8ddb0', '0518.biz', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:24');
 INSERT INTO `domain_one` VALUES ('152140f5-02c5-4f78-8a8e-3a58390e3d24', 'tuxi.com.cn', '突袭网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:08');
 INSERT INTO `domain_one` VALUES ('152339b6-4d8f-4674-b87c-e01fe65f5cb7', 'huopao.com', '火炮军事网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('1541dc1d-747b-45d1-af3e-21941f2961be', 'ycnews.cn', '盐城新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:55');
+INSERT INTO `domain_one` VALUES ('1572603b-de89-4769-af33-aa0c449d483d', 'ytcutv.com', '烟台网络电视', 'app频道', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('157cf80a-0d8e-4da1-a00c-6e72dd100e9f', 'jiaodong.net', '胶东在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:55');
 INSERT INTO `domain_one` VALUES ('158840eb-44d8-4f07-94ef-c45fac6d687e', 'dzshbw.com', '大众生活报官网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:23');
 INSERT INTO `domain_one` VALUES ('15b16fb7-ddc6-4505-bffb-4a82d807995b', 'scpc.gov.cn', '四川省平昌县人民政府门户网站', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:15');
@@ -248,7 +261,7 @@ INSERT INTO `domain_one` VALUES ('1ab3c20a-6545-497e-bedf-e86fe1f955cd', 'mingji
 INSERT INTO `domain_one` VALUES ('1afff2e9-f6c5-4c2d-9898-dfb603d484c5', 'dbw.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:18');
 INSERT INTO `domain_one` VALUES ('1b16b921-fcae-4aa8-b6e2-e952777f3ee4', '0531s.com', '都市济南', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:18');
 INSERT INTO `domain_one` VALUES ('1b1de6c7-cabb-41df-930c-b28883275962', 'wfnews.com.cn', '潍坊晚报', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:06');
-INSERT INTO `domain_one` VALUES ('1b4e60d7-5832-4be7-884e-8316c1a2093a', 'sznews.com', '深圳新闻网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:21');
+INSERT INTO `domain_one` VALUES ('1b4e60d7-5832-4be7-884e-8316c1a2093a', 'sznews.com', '深圳新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('1b622a59-767f-459e-8981-eb2d5be9b151', 'shucheng.gov.cn', '舒城县人民政府', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:18');
 INSERT INTO `domain_one` VALUES ('1b66dc32-dabb-4fd3-99f5-2883566f1dc0', 'dyqcw.com', '无锡汽车论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:05');
 INSERT INTO `domain_one` VALUES ('1bca8752-819a-4cbd-8d2c-dc7732621792', 'jinbifun.com', '金碧坊论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:54');
@@ -266,6 +279,7 @@ INSERT INTO `domain_one` VALUES ('1cc04d10-08aa-476e-8506-e10f41a5d3b2', 'xiangw
 INSERT INTO `domain_one` VALUES ('1cd39daa-8ef3-433a-accd-f799d5bfed2f', 'taiwan.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('1ce61efe-fc59-45db-9556-7093bb1ff47c', 'asxxg.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:20');
 INSERT INTO `domain_one` VALUES ('1d059db5-6202-41b2-90ed-bd3e65b5d07a', 'ishaanxi.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:22');
+INSERT INTO `domain_one` VALUES ('1d574392-3275-4d50-be2c-76d0bfa34341', 'cnki.com.cn', '知网空间', '期刊全文', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('1d637d5e-deda-476b-bfce-d6f00c93b222', 'haianw.com', '海安论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('1d6825b5-27c5-49b1-8eb1-a20a4a5e1b14', 'moj.gov.cn', '中华人民共和国司法部网站', '其他', '其他', '中央', '其他', '0', '0', '2017-08-15 11:05:33');
 INSERT INTO `domain_one` VALUES ('1d6d535e-b48c-4914-80b6-74105b9cf8a9', 'wuning123.com', '彭泽51社区', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:34');
@@ -290,6 +304,7 @@ INSERT INTO `domain_one` VALUES ('1f811284-0b98-42ad-b0b7-d170f6d35b87', 'sun079
 INSERT INTO `domain_one` VALUES ('1f995d91-bfea-4cad-9048-323763736fc1', '365jilin.com', '吉林东亚网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('1fbf6fd1-17b0-4807-a27e-46ebe1fd9e48', 'rznews.cn', '日照新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:26');
 INSERT INTO `domain_one` VALUES ('1ff0b271-43ef-470d-bd1e-fe69c6288a39', 'jmdsqy.com', '荆门信息港论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:52');
+INSERT INTO `domain_one` VALUES ('2013eaaf-eab1-4b5a-8dd5-996e17e72a42', 'dziran.com.cn', '苏州热线网', '教育', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('20253942-2772-4336-95d0-1b21d40d3c18', 'cnchu.com', '荆州日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:52');
 INSERT INTO `domain_one` VALUES ('2079176d-80a9-4ec3-a049-f0f1c3b0a981', 'js7tv.cn', '中国军视网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:42');
 INSERT INTO `domain_one` VALUES ('207ef000-cdeb-4b2c-a31b-1b5f5dda5d5e', 'oxfam.org.cn', '香港环球新闻网', '其他', '境外', '外媒', '其他', '0', '0', '2017-08-15 11:06:03');
@@ -313,6 +328,7 @@ INSERT INTO `domain_one` VALUES ('2316e039-1bf2-473d-9f26-db9c84e45be1', 'jinnon
 INSERT INTO `domain_one` VALUES ('23306bcc-9cb9-4806-b62d-b7cf85a3b84a', 'szbbs.org', '中国随州网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('234c2f8c-7bd0-4725-9b37-8b37f3ef3ee9', 'z888.net', '澄缘似海论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:26');
 INSERT INTO `domain_one` VALUES ('2359519c-97f2-42a5-8f90-ef766d363f22', 'wandahealth.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:44');
+INSERT INTO `domain_one` VALUES ('235b5f0d-9680-4763-b70e-dba787edebdc', 'fzdaily.cn', '抚州网', '各地新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('236f580e-f893-4897-88b3-c59d51815acd', 'baidu.com', '百度', '百度搜索', '搜索', '中央', '全国', '100', '1', '2017-08-15 11:05:28');
 INSERT INTO `domain_one` VALUES ('23800cff-cf02-480e-84f6-205a2f95b352', 'ytny.gov.cn', '烟台市农业局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:55');
 INSERT INTO `domain_one` VALUES ('238330b8-8171-48c3-9dca-52b85209860f', 'hnwmw.com', '湖南文明网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:04');
@@ -335,7 +351,7 @@ INSERT INTO `domain_one` VALUES ('25bd7800-8c94-4359-9321-c9d6f0b07d54', 'ijxxs.
 INSERT INTO `domain_one` VALUES ('25bdf0f6-181e-4285-ad8f-baf12945c83d', 'fqmhw.net', '封丘门户', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:16');
 INSERT INTO `domain_one` VALUES ('25c7aebf-c887-4b10-84d4-6b8b89dd0372', 'qingdaonews.com', '青青岛论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:29');
 INSERT INTO `domain_one` VALUES ('25f35530-0c65-4eac-b516-ecb9dc0147a3', 'bidnews.cn', '全国招标信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:28');
-INSERT INTO `domain_one` VALUES ('26193367-ab9f-42b8-91ae-2f85e806230f', 'xiancn.com', '西安晚报', '其他', '报纸', '省级', '其他', '0', '0', '2017-08-15 11:06:04');
+INSERT INTO `domain_one` VALUES ('26193367-ab9f-42b8-91ae-2f85e806230f', 'xiancn.com', '西安晚报', '其他', '报纸', '省级', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('263267fc-f2f2-4d20-8cdd-abd02d105e5e', 'xinmin.cn', '新民网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:05:59');
 INSERT INTO `domain_one` VALUES ('263ea7ef-91e5-44e4-873f-1ac7a4d2806c', 'baozoumanhua.com', '暴走漫画', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:31');
 INSERT INTO `domain_one` VALUES ('2643928a-75d0-453d-9505-f308777aa5e5', 'classic023.com', '重庆论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:31');
@@ -371,9 +387,10 @@ INSERT INTO `domain_one` VALUES ('29542c83-3792-4e50-b322-8bce8382524e', 'family
 INSERT INTO `domain_one` VALUES ('2991b139-5640-4d34-8525-4aeab21ca65b', 'pagx.cn', '平安广西网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:06:33');
 INSERT INTO `domain_one` VALUES ('29a7c200-9500-4a45-93b3-bcd8302db387', 'pacq.gov.cn', '重庆长安网', '其他', '其他', '省级', '其他', '0', '0', '2017-08-15 11:05:30');
 INSERT INTO `domain_one` VALUES ('29d6904d-3a0d-4e27-b827-71436919c949', '370830.net', '汶上新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:05');
+INSERT INTO `domain_one` VALUES ('29e381b6-f836-483e-a8b9-d01f6520b719', 'bzsczj.gov.cn', '巴中市财政局', '财政预决算', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('2a01d058-2807-45ad-99a3-b74898c70bb9', '076299.com', '河源论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:05');
 INSERT INTO `domain_one` VALUES ('2a038640-8247-4f69-8f74-4c29fd154fed', '1545ts.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-11-05 21:34:06');
-INSERT INTO `domain_one` VALUES ('2a23b92f-f24a-4886-9d92-6a3b237fc2db', 'zibosky.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
+INSERT INTO `domain_one` VALUES ('2a23b92f-f24a-4886-9d92-6a3b237fc2db', 'zibosky.com', '淄博时空', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('2a2ab0dc-7c94-4064-be46-d2f2a5e99a86', 'dyhlw.gov.cn', '德阳市监察局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:22');
 INSERT INTO `domain_one` VALUES ('2a535bd3-fa06-486e-bef1-7ecc4e0d9e02', 'pzh.gov.cn', '中国攀枝花', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:41');
 INSERT INTO `domain_one` VALUES ('2a8a790c-2a1c-45e2-b7cd-bf527be270eb', 'xnwbw.com', '西宁晚报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:03');
@@ -449,10 +466,10 @@ INSERT INTO `domain_one` VALUES ('31f4a74f-0a93-49bc-8440-bc2ff83da22e', 'tianji
 INSERT INTO `domain_one` VALUES ('31fd5c02-aa11-4a2f-935b-9b079b789ebb', 'kf.cn', '开封网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:51');
 INSERT INTO `domain_one` VALUES ('321be3a7-0d78-4347-a5d5-30a76d37ff7d', 'zyyouth.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
 INSERT INTO `domain_one` VALUES ('32258309-df8b-4fe2-9857-fa060da7ab53', 'berui.com', '百瑞房产网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:32');
-INSERT INTO `domain_one` VALUES ('3226a0f9-512d-4bf8-95be-7b954faaf7aa', 'lszedu.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:11');
+INSERT INTO `domain_one` VALUES ('3226a0f9-512d-4bf8-95be-7b954faaf7aa', 'lszedu.cn', '凉山教育', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('32298dee-1bdb-4621-970a-291d8cfe8c7d', 'gxjgdj.com', '广西机关党建', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:11');
 INSERT INTO `domain_one` VALUES ('322e1e64-ec59-41ca-893b-f9b8063a5a95', 'wst.cn', '二泉论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:18');
-INSERT INTO `domain_one` VALUES ('3231c012-6c13-46ce-80e4-a17772077ef8', '5281.cc', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('3231c012-6c13-46ce-80e4-a17772077ef8', '5281.cc', '复转军人网论坛', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('32457f38-c516-4a36-bf7b-e6e37b760f96', '0731o.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:24');
 INSERT INTO `domain_one` VALUES ('3247f50e-7254-4485-b353-8555277e1246', 'scio.gov.cn', '中华人民共和国国务院新闻办公室', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:33');
 INSERT INTO `domain_one` VALUES ('32636dd0-246d-4a95-bdbb-0c38987b1aaa', 'kelamayi.com.cn', '克拉玛依日报', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:50');
@@ -479,18 +496,18 @@ INSERT INTO `domain_one` VALUES ('346f48ed-d7b8-41df-ba17-84b24a874a15', 'aisixi
 INSERT INTO `domain_one` VALUES ('34dbb9f5-f615-440e-8c22-83b1ab0bc54a', 'liangshanpeace.gov.cn', '凉山长安网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:46');
 INSERT INTO `domain_one` VALUES ('34ef6973-d7f2-447c-a3b8-fa6529f2de45', 'nxnews.net', '宁夏新闻网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:17');
 INSERT INTO `domain_one` VALUES ('350365a1-8670-4e87-86d6-6c2ab949a02c', 'eyh.cn', '余杭新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:52');
-INSERT INTO `domain_one` VALUES ('350bfe15-dd6c-4495-a625-7adf6ea3f11c', 'zzbtv.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
-INSERT INTO `domain_one` VALUES ('35368210-9993-40f3-9a48-b95fb5ee8263', 'yb.gov.cn', '宜宾市人民政府', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:53');
+INSERT INTO `domain_one` VALUES ('350bfe15-dd6c-4495-a625-7adf6ea3f11c', 'zzbtv.com', '株洲传媒网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
+INSERT INTO `domain_one` VALUES ('35368210-9993-40f3-9a48-b95fb5ee8263', 'yb.gov.cn', '宜宾市人民政府', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('358bd582-c293-441f-ac85-e754645a8ebc', 'jsdushi.cn', '江苏都市网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:56');
 INSERT INTO `domain_one` VALUES ('35999671-2dab-4c44-8a56-d081a1422106', 'ahwang.cn', '安徽网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:34');
 INSERT INTO `domain_one` VALUES ('35aab492-2885-4c51-b25d-84c81a28e78b', 'n8n8.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:39');
 INSERT INTO `domain_one` VALUES ('35bf50f1-e5dd-45aa-a0a6-13b14cb0324d', 'tlfw.net', '吐鲁番网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:08');
 INSERT INTO `domain_one` VALUES ('35e511a3-1488-486e-988f-635fbcfe75fb', 'zbytb.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
-INSERT INTO `domain_one` VALUES ('360868c8-d700-4e52-993b-6a28267bd9f9', '0751.cc', '韶关生活网论坛', '查看新贴', '论坛', '其他', '其他', '0', '0', '2017-11-21 16:43:16');
 INSERT INTO `domain_one` VALUES ('3623ca58-b17c-42cc-af00-529c6c1b0a0b', 'bingtuannet.com', '兵团日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:29');
 INSERT INTO `domain_one` VALUES ('3676162d-5cbc-42dc-9201-c4db81e31d19', 'huazhiedu.com', '华智教育', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:01');
 INSERT INTO `domain_one` VALUES ('3695b6bf-e6a4-4b2a-ac58-8532af149613', 'cqyuna.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:38');
 INSERT INTO `domain_one` VALUES ('36c74f1e-0c32-41a8-875c-27c9785277bd', 'lqez.cn', '龙泉驿站网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:44');
+INSERT INTO `domain_one` VALUES ('36eb6cd1-619b-4f4d-a4b2-e00ed7e53c05', 'bswxw.com', '璧山网', '头条新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('36fbefb0-a9f3-4d53-b712-2735b679b8b2', 'lzgd.com.cn', '柳州广播电视网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:44');
 INSERT INTO `domain_one` VALUES ('37037ac3-f3a1-4524-bedb-bd4a064497d9', 'ahedu.gov.cn', '安徽教育网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:34');
 INSERT INTO `domain_one` VALUES ('372764f0-f097-4c19-bc51-75606731d8d3', 'tjcaw.gov.cn', '天津长安网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:10');
@@ -502,6 +519,7 @@ INSERT INTO `domain_one` VALUES ('3802c5f0-a78f-44c7-ae7b-7d8df141f94d', 'scyanb
 INSERT INTO `domain_one` VALUES ('38267699-ea5e-4191-9674-16d94dca9b40', 'e0734.com', '中国衡阳新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:05');
 INSERT INTO `domain_one` VALUES ('3828ece7-d9e6-412c-9d53-33dc84c858a4', '0579.cn', '大金华论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:24');
 INSERT INTO `domain_one` VALUES ('3831de88-5cb4-4069-be08-713abf328605', 'gog.cn', '金黔在线', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:53');
+INSERT INTO `domain_one` VALUES ('38378f74-65a9-4357-ace1-0cdcbd22c151', 'dgbc.cn', '达古冰山', '达古新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('3872a52d-1c4d-4746-a4ca-4e464a7d516c', 'acfun.cn', '淘米视频', '其他', '视频', '其他', '其他', '0', '0', '2017-08-15 11:06:11');
 INSERT INTO `domain_one` VALUES ('38807207-ff13-4bdd-8f6c-e446537fb9f9', 'xiqxx.net', '公平正义网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:13');
 INSERT INTO `domain_one` VALUES ('38a7d76a-4d3a-46cf-8d75-67cd96ad59f8', 'tynews.com.cn', '太原新闻网It频道', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:13');
@@ -517,6 +535,7 @@ INSERT INTO `domain_one` VALUES ('3a05c01d-b913-418e-9167-4d94fab70c56', 'nanlin
 INSERT INTO `domain_one` VALUES ('3a574c87-2d32-4987-8d26-1c6e3be6fb10', 'scdytv.com', '德阳传媒网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:22');
 INSERT INTO `domain_one` VALUES ('3a5f40e3-4da3-437d-a98c-7274986f8114', 'unionews.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
 INSERT INTO `domain_one` VALUES ('3aa3b77e-afe2-4fb8-8b69-22417aa9273d', 'redhongan.com', '黄冈网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:01');
+INSERT INTO `domain_one` VALUES ('3ab30873-764a-40de-9b1a-a4e379dd8b38', 'onlinejl.com', '吉林在线', '', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('3adbf654-3154-4104-877c-bf8e3cccc346', 'zynews.cc', '河南头条', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:06');
 INSERT INTO `domain_one` VALUES ('3addaf8c-6203-433f-bb1a-38b56a76d0db', 'sjzcmw.com', '石家庄传媒网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:48');
 INSERT INTO `domain_one` VALUES ('3afb00b4-463f-48ac-870b-883c75ded651', 'people.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:23');
@@ -528,10 +547,11 @@ INSERT INTO `domain_one` VALUES ('3b99e27a-edb4-48d6-b3d8-b53852016f23', 'py0793
 INSERT INTO `domain_one` VALUES ('3ba02eef-202c-423b-a6ab-0865f57a08ac', 'jschina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:19');
 INSERT INTO `domain_one` VALUES ('3ba7baaa-cf11-429d-8f9f-89d4e534307d', 'xinminweekly.com.cn', '新民周刊网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:59');
 INSERT INTO `domain_one` VALUES ('3ba974b0-8ebc-4363-91da-c0ced30ae312', 'ixian.cn', '荣耀西安网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:26');
-INSERT INTO `domain_one` VALUES ('3be5ca5a-a688-4042-8c33-28f2728d9a9d', 'gxnews.com.cn', '广西新闻网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:11');
+INSERT INTO `domain_one` VALUES ('3be5ca5a-a688-4042-8c33-28f2728d9a9d', 'gxnews.com.cn', '广西新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('3c1d73e5-e162-4398-ac5b-451cbfcf3c38', 'jmsk.cn', '荆门时空网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:52');
 INSERT INTO `domain_one` VALUES ('3c35512a-4936-4a87-8d85-c90aaf9c396a', 'chaozhoudaily.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:45');
 INSERT INTO `domain_one` VALUES ('3c3a5fc1-5354-433f-af1a-d96aaf5a27cd', 'luzhoupeace.gov.cn', '泸州长安网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:43');
+INSERT INTO `domain_one` VALUES ('3c3dbdd5-5b78-4b47-aa08-4c61a3a3f9db', 'edu-hb.com', '招生考试网', '四川高考', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('3cadba69-a224-4eaa-ab53-bfe2aaaca408', 'aylt.cn', '安阳论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:33');
 INSERT INTO `domain_one` VALUES ('3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', 'workercn.cn', '中公网河北频道', '其他', '新闻', '中央', '其他', '0', '1', '2017-08-15 11:05:47');
 INSERT INTO `domain_one` VALUES ('3ce9284a-f87a-45ee-a61e-c9113853d437', 'hbfzb.com', '河北法制网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:06');
@@ -543,7 +563,7 @@ INSERT INTO `domain_one` VALUES ('3d78cdbb-5a73-4faa-ac1b-b512e630334f', 'nmgzf.
 INSERT INTO `domain_one` VALUES ('3d9723de-9939-4dd2-910c-b06e43f8bb3f', 'crd.net.cn', '中国改革报', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:44');
 INSERT INTO `domain_one` VALUES ('3dcf9592-3bc8-47dc-8bb1-798736770c43', '168hs.com', '黄山论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:00');
 INSERT INTO `domain_one` VALUES ('3de59d89-2482-4767-90a4-cac4cf67acc8', 'chinateacher.com.cn', '中国教师报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:05:42');
-INSERT INTO `domain_one` VALUES ('3e1220c2-e6b7-44c5-bcad-b77bd694a6c8', 'anhui163.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('3e1220c2-e6b7-44c5-bcad-b77bd694a6c8', 'anhui163.net', '网上安徽论坛', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('3e298deb-1ff4-4b22-8d6b-de5ec2977409', 'fzcinic.org.cn', '快讯网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:49');
 INSERT INTO `domain_one` VALUES ('3e3cf3c3-df60-4050-98e4-a461086750e4', 'aiweibang.com', '爱微帮', '其他', '微信', '微信', '其他', '0', '0', '2017-08-15 11:07:34');
 INSERT INTO `domain_one` VALUES ('3e3e8d2f-11e9-4775-b4d1-e61568c7a96a', 'youth.cn', '中国青年网', '首页', '新闻', '中央', '全国', '100', '1', '2017-10-12 14:59:14');
@@ -551,9 +571,11 @@ INSERT INTO `domain_one` VALUES ('3e54c45a-1b8d-44e9-9158-f9f03fa39f1a', '365ta.
 INSERT INTO `domain_one` VALUES ('3e734d7c-45e7-4029-a135-b4d3725a053b', 'huaxunwang.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
 INSERT INTO `domain_one` VALUES ('3e7e0b4b-01f9-471f-9302-ed0bbd784514', 'pzhnews.org', '攀枝花新闻', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:35');
 INSERT INTO `domain_one` VALUES ('3e81a366-b387-484f-992f-386a46c4a09d', '9ist.com', '水头在线论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:17');
+INSERT INTO `domain_one` VALUES ('3e97dd23-7769-4f5e-bea1-1a1d822db337', 'chinanmn.com', '中国网络新闻传媒网', '社会资讯', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('3e9eca9b-fc8f-4a1d-94e2-e5d89856bdd2', '203.192.15.131', '新华每日电讯', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:01');
 INSERT INTO `domain_one` VALUES ('3f16c750-0d82-49ac-a578-1c4e18625558', 'sanjun.com', '三军情报网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:25');
 INSERT INTO `domain_one` VALUES ('3f20506b-ec5e-47a4-92a7-70a3f742705e', 'rijigu.com', '日记谷', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:26');
+INSERT INTO `domain_one` VALUES ('3f236812-ea31-4091-b56d-5fdf29dfea44', 'juebu.org', '决不食品安全论坛', '食品安全曝光台', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('3f3d1c99-ca2c-460b-874b-82d7f921023a', 'lyg01.net', '连网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:47');
 INSERT INTO `domain_one` VALUES ('3f54ea80-c254-4b53-9ac2-92dbe0d78bf0', 'gzu521.com', '贵州学习网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:10');
 INSERT INTO `domain_one` VALUES ('3f5e37b1-7830-46d5-942a-82ada2810a96', 'xg99.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:07');
@@ -565,6 +587,7 @@ INSERT INTO `domain_one` VALUES ('3ff4d0cf-41e1-49db-b00c-260a8e67c7e4', 'ahlife
 INSERT INTO `domain_one` VALUES ('40254040-432f-4d82-be06-2a92c6150ea1', 'eastmoney.com', '东方财富网股吧', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:20');
 INSERT INTO `domain_one` VALUES ('404b09d9-1a7a-426c-a362-e4d918c46e0b', 'leshan.cn', '乐山新闻', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:48');
 INSERT INTO `domain_one` VALUES ('404ec8d5-f274-4cc1-9ee0-96abbdb87db1', 'dldj.gov.cn', '大连党建网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:24');
+INSERT INTO `domain_one` VALUES ('4053b3ba-9d3c-45a2-8387-77174b71a9fd', 'criminalprocedurelaw.cn', '中国刑事诉讼法律网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('407fedc5-7662-4a53-8649-aa125e002922', 'guan5.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('4084e713-2b27-4acb-9c0d-c92cc2542c0e', '7xys.com', '黑龙江省鸡西市新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:05');
 INSERT INTO `domain_one` VALUES ('40b450b1-0182-414d-aba6-a5591af2ca95', 'rmzxb.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:27');
@@ -574,6 +597,7 @@ INSERT INTO `domain_one` VALUES ('41071877-bb27-407f-930b-ee49b12d68cc', 'chinaj
 INSERT INTO `domain_one` VALUES ('4130cb73-1d7e-4285-8e54-12ff90c81271', 'sciencenet.cn', '科学网', '其他', '新闻', '其他', '其他', '0', '1', '2017-11-21 11:32:47');
 INSERT INTO `domain_one` VALUES ('41779cb9-27cb-4c8d-b427-1c769194a140', 'gov.cn', '中国政府网', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('41910d1d-191b-4384-839f-4129b4fedc77', 'zibomama.com', '淄博妈妈网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:29');
+INSERT INTO `domain_one` VALUES ('41ce4fcf-a459-421b-8181-622b422e5924', 'takefoto.cn', '北晚新视觉', '今日主打', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('424f3c79-442a-4335-83bd-ce1993124334', 'cqn.com.cn', '中国质量新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('426b7ad1-01cc-41f1-937f-f5f523983845', 'forestry.gov.cn', '国家林业局', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:07:10');
 INSERT INTO `domain_one` VALUES ('429352e1-c26a-4ac4-bc18-3351d7015101', 'fj12345.gov.cn', '福建省12345政务服务平台', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:15');
@@ -583,7 +607,7 @@ INSERT INTO `domain_one` VALUES ('42f01848-c295-4a84-8191-0a865bb43760', 'gzdsw.
 INSERT INTO `domain_one` VALUES ('42fcf732-9eb4-4945-9481-bfe05bf0a77f', 'dahebao.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:07');
 INSERT INTO `domain_one` VALUES ('431dc0ff-595f-409a-8302-9de79979660b', 'fjtv.net', '福建省广播影视集团', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:15');
 INSERT INTO `domain_one` VALUES ('433053ca-20bf-4ac3-900e-572731eabf68', '4c.cn', '成都第四城', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:27');
-INSERT INTO `domain_one` VALUES ('43546c95-e499-4763-a73f-d44f2a763c67', 'msdy.org.cn', '民生调研网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:40');
+INSERT INTO `domain_one` VALUES ('43546c95-e499-4763-a73f-d44f2a763c67', 'msdy.org.cn', '民生调研网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('436e35ae-f0f7-43d9-bf02-2d04e6c016ea', 'poyangzaixian.com', '婺源人论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('436fe219-bc4f-4cdf-b429-16982556bcdd', 'gsjy.net', '杭州市拱墅区教育局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:08');
 INSERT INTO `domain_one` VALUES ('438edfd0-a043-4f17-8d88-b1c08615e5a5', '2500sz.com', '名城苏州', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:39');
@@ -608,7 +632,7 @@ INSERT INTO `domain_one` VALUES ('45caab92-2df4-412b-99db-75c9c7cd1f61', 'newwes
 INSERT INTO `domain_one` VALUES ('45cd8c84-ea43-4507-9911-428b877833eb', 'gxylnews.com:8080', '玉林晚报', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:52');
 INSERT INTO `domain_one` VALUES ('45ee67b0-ea29-4287-9fdc-fdc9ce6129a1', 'taian.gov.cn', '中国泰安', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:37');
 INSERT INTO `domain_one` VALUES ('45f9ba1d-46c3-427e-9f5d-40a9dce194a9', 'cnfood.cn', '中国食品报四川食品', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:38');
-INSERT INTO `domain_one` VALUES ('4601587f-4fdd-4158-a041-1738991e609c', 'sportscn.com', '华体网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:02');
+INSERT INTO `domain_one` VALUES ('4601587f-4fdd-4158-a041-1738991e609c', 'sportscn.com', '华体网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('460c3ceb-f03b-463f-924c-9465680eb0e3', 'minzhunews.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:41');
 INSERT INTO `domain_one` VALUES ('460e6513-b066-48de-a6fc-ad054d7e7c93', 'boxun.com', '博讯', '其他', '境外', '外媒', '其他', '0', '0', '2017-08-15 11:07:28');
 INSERT INTO `domain_one` VALUES ('461cb410-c5c4-4d81-8758-6944995ac107', 'jxcn.cn', '中国江西网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:05:43');
@@ -621,10 +645,12 @@ INSERT INTO `domain_one` VALUES ('475e995e-5dfb-4663-af99-666a4ecc72b0', 'fz-edu
 INSERT INTO `domain_one` VALUES ('4790dc6a-f33a-485a-a290-8e2b727985dd', 'doczj.com', '文档之家', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:50');
 INSERT INTO `domain_one` VALUES ('47a36eb2-ce6b-4d86-aa1b-450ba4c2af81', 'zj.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:17');
 INSERT INTO `domain_one` VALUES ('47bad800-7f56-46e5-bafd-e3907efbed88', 'ytlz.gov.cn', '鹰潭市食品和药品监督管理局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:53');
+INSERT INTO `domain_one` VALUES ('47ee5e78-279f-42e2-8980-cb8c571d58c9', 'feng.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('480001cc-0055-4b70-bcb9-d852c485b382', 'dzjj.gov.cn', '德州市纪委(监察局)', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:22');
 INSERT INTO `domain_one` VALUES ('48105de3-e215-46ae-ba9c-3ce2669ea6ac', 'scnongye.com.cn', '四川农村日报', '其他', '报纸', '省级', '其他', '0', '1', '2017-08-15 11:06:16');
 INSERT INTO `domain_one` VALUES ('48154e91-9981-43d3-be50-67aaa63da4f3', 'qiuyi.cn', '健康120', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:57');
 INSERT INTO `domain_one` VALUES ('4829f7a3-7be3-4578-9e6a-a514e39c75e3', '21xc.com', '许昌网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:56');
+INSERT INTO `domain_one` VALUES ('4855dcb1-4b3f-4396-881c-7c1c767fca4a', 'akjunshi.com', 'AK军事网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('4883e297-929d-4df1-9808-58b275c984a0', 'shu163.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-11-05 21:34:12');
 INSERT INTO `domain_one` VALUES ('488c3b67-0fb0-45dc-91e4-98c15e715cc1', 'gazx.org', '广安在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:12');
 INSERT INTO `domain_one` VALUES ('48e5b19c-1685-430a-befa-72f064f2e87e', '4001031313.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:44');
@@ -654,6 +680,7 @@ INSERT INTO `domain_one` VALUES ('4b3c9d61-8bc5-44d9-973d-dc1f4c601c6d', 'ahjjjc
 INSERT INTO `domain_one` VALUES ('4bc7dcd2-b6d2-431b-864a-4df0153da504', 'whga.gov.cn', '平安武汉网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:33');
 INSERT INTO `domain_one` VALUES ('4bfb954e-1bd6-47de-b093-3152d797134b', 'cbg.cn', '重庆网络广播电视台', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:05:31');
 INSERT INTO `domain_one` VALUES ('4c3693f6-93ad-48e6-b546-ad6a4618bffe', 'gsjw.gov.cn', '甘肃廉政网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:14');
+INSERT INTO `domain_one` VALUES ('4c603d54-368a-439a-bc14-5e20144f658a', 'ncswtzb.gov.cn', '南充市委统战部', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('4c707203-5dcb-4b5e-955e-ff703fd12ccd', 'myzaker.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:05');
 INSERT INTO `domain_one` VALUES ('4c954816-8df0-4708-8474-09aa6e82ff9f', 'zgjjdb.com.cn', '上海经济新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:22');
 INSERT INTO `domain_one` VALUES ('4cafd8a8-c79e-43d5-893c-e6da3a0f567e', 'chxia.com', '巢湖小虾社区', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:27');
@@ -686,11 +713,13 @@ INSERT INTO `domain_one` VALUES ('4f6bb609-bf25-4703-af80-7aa9ff35a7e4', 'ahcaw.
 INSERT INTO `domain_one` VALUES ('4f874f44-891e-43de-8861-51d03be10ee8', 'hihaimen.com', '99街海门论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:37');
 INSERT INTO `domain_one` VALUES ('4f9a780a-cca7-4f25-9853-856c29d59a0e', 'wanhoocar.com', '万户论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:08');
 INSERT INTO `domain_one` VALUES ('500a3b71-6637-4ec9-bc13-b8b78ef470e9', 'xftz.cn', '幸福黄金网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:57');
+INSERT INTO `domain_one` VALUES ('505ac1f6-0b97-4f3d-a25a-be23c2371cf9', 'xunlei.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '1', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('507d2988-97af-42e4-83dd-62d0124c0d9c', 'pxrc.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('508a5ace-58c3-4fe0-ad99-116abfeeb37d', 'taoguba.com.cn', '淘股吧', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:11');
 INSERT INTO `domain_one` VALUES ('508e5384-51e1-46ee-9908-733ea6b76c67', 'guancha.cn', '观察者', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:13');
 INSERT INTO `domain_one` VALUES ('50962792-0834-4953-9e42-8451719bd365', 'tailainet.com', '99街泰来网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
 INSERT INTO `domain_one` VALUES ('50a3b074-acf1-400f-9bbb-998e7a33f6b0', 'dezhouluntan.com', '德州社区', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:22');
+INSERT INTO `domain_one` VALUES ('50cd9617-c39f-4c76-a6af-dd49c73c723a', 'lznews.cn', '鲁中网', '社会', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('50ceee4a-b685-415d-a471-41982a0c786f', 'isso.com.cn', '易索论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:53');
 INSERT INTO `domain_one` VALUES ('51395785-a253-4bd0-88fe-10eed3d27d96', 'suyoo.cn', '苏友网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:14');
 INSERT INTO `domain_one` VALUES ('5143f0f6-7f15-41fe-8106-ca0437cd7b0f', 'chinacourt.org', '淄博市法院', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:51');
@@ -709,9 +738,10 @@ INSERT INTO `domain_one` VALUES ('5315d5a8-fc7a-4d61-9cad-95208b5f72bf', 'pchous
 INSERT INTO `domain_one` VALUES ('531a69e4-5bd7-4aac-b870-8e6b1f8438a7', 'gomemaker.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:40');
 INSERT INTO `domain_one` VALUES ('5321560f-98df-4ef4-ab10-a45020248d69', 'yongzhou.gov.cn', '永州新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:52');
 INSERT INTO `domain_one` VALUES ('53443488-dfd4-4cc8-ab3a-28c6060381eb', 'lcdaily.cn', '临沧日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:45');
+INSERT INTO `domain_one` VALUES ('535bd8f6-4cc6-48f7-a518-5ab0a78fba24', 'iiyi.com', '爱爱医', '医学新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('535e1109-dcc7-4716-aaa8-df269e9ee4d5', 'xinjiangnet.com.cn', '新疆网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:00');
 INSERT INTO `domain_one` VALUES ('537cfce6-8e4a-4852-b6e0-5a3a16e9d6e5', 'yidubbs.com', '宜都论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:53');
-INSERT INTO `domain_one` VALUES ('53897480-a346-4f6e-b379-f16f545797bb', 'he-bei.cn', '河北网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:06');
+INSERT INTO `domain_one` VALUES ('53897480-a346-4f6e-b379-f16f545797bb', 'he-bei.cn', '河北网', '其他', '新闻', '省级', '其他', '0', '1', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('539558db-adb8-41c1-be1f-e58e49efb7cb', 'cqyznews.com', '渝中新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:52');
 INSERT INTO `domain_one` VALUES ('53ab7877-37e3-4611-a1e4-e0230ac37464', 'shantou.gov.cn', '汕头仲裁委员会', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:23');
 INSERT INTO `domain_one` VALUES ('53bea48e-92b6-4e36-889f-802a7c97b39b', '66163.com', '福建之窗', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:15');
@@ -730,6 +760,7 @@ INSERT INTO `domain_one` VALUES ('54f9785c-6921-4a8b-94ae-4ad26c9dd57f', 'brjr.c
 INSERT INTO `domain_one` VALUES ('552f46b8-ec6b-4256-bca5-bbd380cfa31d', 'zzxw.net', '忠州新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:31');
 INSERT INTO `domain_one` VALUES ('554a90d0-cb9a-4d7e-b48a-fdca8aeba9cc', 'blhbnews.com', '中国经济网环保频道', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:42');
 INSERT INTO `domain_one` VALUES ('5571f17a-01b4-4c11-83d2-6a44d1707269', 'wzs.org.cn', '世界浙商网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:20');
+INSERT INTO `domain_one` VALUES ('55743683-4c09-4deb-95f0-c3f7ead5b146', 'scsdnews.com', '新郫县报', '文旅广角', '报纸', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('55770314-542d-4bf2-9961-9d83ec722ba6', 'sohu.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('55995057-f71d-4a26-b987-dab97af81f65', 'takungpao.com.hk', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('55a254ca-8767-4eed-9fda-c19ac53eddb2', 'gsjindu.com', '甘肃禁毒网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:14');
@@ -738,8 +769,10 @@ INSERT INTO `domain_one` VALUES ('55bdb4b1-5d59-451c-91e4-a9ac7638bf7b', 'webcar
 INSERT INTO `domain_one` VALUES ('55df4928-45a7-41bd-ac8b-6e152de685fe', 'xcg666.com', '中国舆情网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('55f9896a-1e8f-4cb6-be2b-16db11f1824b', 'nnwb.com', '南宁晚报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:37');
 INSERT INTO `domain_one` VALUES ('5615a4c4-3b91-4ed0-84fe-976f6cd64e4d', '163t.cc', '毕奇网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:29');
+INSERT INTO `domain_one` VALUES ('561b1c15-f81f-4770-9880-20aed8272d77', 'lzqss.net', '泸州全搜索论坛', '酒城茶话', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('564d90ba-aa0a-494d-aa5c-a02205f3b7b0', 'apdnews.com', '亚太日报', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:55');
 INSERT INTO `domain_one` VALUES ('56594ce0-21b6-45ea-9901-d113a15bae7a', 'zjrb.cn', '诸暨网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:30');
+INSERT INTO `domain_one` VALUES ('56638e61-80fe-469e-96bc-e3098937e055', '218.89.38.109:8082', '阿坝州小金县', '', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('56908abb-56c6-4983-a48c-ea030b444726', 'tjhpcaw.gov.cn', '和平区长安网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:06');
 INSERT INTO `domain_one` VALUES ('56ac2bb5-73b5-43bc-8c50-1157f9d36237', 'sxxc.gov.cn', '陕西宣传网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:23');
 INSERT INTO `domain_one` VALUES ('57099c55-650a-4b92-9bce-f5c225ebbc0c', 'scxxb.com.cn', '市场信息报', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:20');
@@ -755,6 +788,7 @@ INSERT INTO `domain_one` VALUES ('57cb294a-d228-489b-8b40-c6ff4a0139b0', '008666
 INSERT INTO `domain_one` VALUES ('57fb4a72-484c-48bb-924d-3784f1d0dc73', '218.89.38.109:8080', '阿坝州政府信息公开', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:35');
 INSERT INTO `domain_one` VALUES ('58076050-654b-4f6f-b4cf-c3f9f9ca88a4', 'lyd.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:19');
 INSERT INTO `domain_one` VALUES ('580996e5-731b-49e1-857c-071bf73ba583', '202.149.227.159', '中国石化报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
+INSERT INTO `domain_one` VALUES ('5849be8d-9341-4839-bf25-7be989e73997', 'gdol.cn', '西南在线生活', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('584cbdc6-be4e-42c8-9eec-7aadf36e6c99', 'gdtv.cn', '广东广播电视台', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:12');
 INSERT INTO `domain_one` VALUES ('58a36aca-2bf8-4576-92b3-4ba4d4fa5159', 'pzzc.net', '邳州论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:34');
 INSERT INTO `domain_one` VALUES ('58ea5d45-30b4-4a1c-b05f-ffe36f28f09f', 'anhuinews.com', '中安在线合肥频道', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:47');
@@ -783,6 +817,7 @@ INSERT INTO `domain_one` VALUES ('5b55dfa1-714f-4d58-bb02-928ded286e39', 'cnxz.c
 INSERT INTO `domain_one` VALUES ('5b84e71e-e0b4-45b7-a7e4-e8a6e18254a4', 'chizichina.com', '赤子新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:26');
 INSERT INTO `domain_one` VALUES ('5bbccf3c-9437-4129-a5f2-62d6141c1ea4', 'gaopingedu.net', '晋城市高平教育局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:53');
 INSERT INTO `domain_one` VALUES ('5bd862dd-aa0d-4896-8d58-696e4e24661f', 'zgm.cn', '自贡新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:28');
+INSERT INTO `domain_one` VALUES ('5be48c17-0dda-4691-946b-1ffb29f80510', 'cnncai.com', '第一财讯网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('5c2939fc-594c-469a-be00-05e2ccdcc364', 'zznews.gov.cn', '株洲新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:30');
 INSERT INTO `domain_one` VALUES ('5c296c23-1b80-4a5b-b074-48f231bc45b2', 'gdongw.com', '广东网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:12');
 INSERT INTO `domain_one` VALUES ('5c6fb69d-8211-4df9-b36c-a682f9fd6e87', 'sanjin.tv', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
@@ -804,6 +839,7 @@ INSERT INTO `domain_one` VALUES ('5e1a7d6b-dc8f-40d6-b6b4-3fcbcdb69c1c', 'n21.cc
 INSERT INTO `domain_one` VALUES ('5e30c606-4660-4451-8e5d-8d7dc5f81406', 'ofweek.com', '光电新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:12');
 INSERT INTO `domain_one` VALUES ('5e5f59c9-1cce-41a9-8d04-67fa083358c4', '58188.com', '顶尖财经网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:21');
 INSERT INTO `domain_one` VALUES ('5e676d1d-8f54-43c7-9e2b-734b79f2d1bc', 'xz.gov.cn', '中国徐州', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:34');
+INSERT INTO `domain_one` VALUES ('5eac6e8f-641b-4d03-83b3-1ebb6d056d5f', '3773.com.cn', '3773考试网', '阳光高考', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('5ec1b714-a32e-49af-86c8-039e03e3094c', 'cbt.com.cn', '中华工商时报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:05:33');
 INSERT INTO `domain_one` VALUES ('5ec3aee7-2708-4570-a123-ac2c71b09d9f', 'nnnews.net', '南宁新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:37');
 INSERT INTO `domain_one` VALUES ('5ef0f4fd-c886-4326-aa10-b8dcdbdba6ba', 'pdsxww.com', '平顶山新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:33');
@@ -824,11 +860,11 @@ INSERT INTO `domain_one` VALUES ('6084c3b7-fb4c-4f38-a6c9-9441f38bd1cf', '9998.t
 INSERT INTO `domain_one` VALUES ('6099f695-27bc-4223-98c2-91bc537af495', 'liquannet.com', '99街礼泉网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
 INSERT INTO `domain_one` VALUES ('60b26b3b-d592-44f4-bc75-1eb0884ee12b', 'liangjiang.gov.cn', '重庆两江新区管理委员会', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:31');
 INSERT INTO `domain_one` VALUES ('60cb7807-7d1b-4bc6-a505-24e661672fa7', 'sxjjjcw.cn', '山西家居建材网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:24');
-INSERT INTO `domain_one` VALUES ('60d147ea-ca00-4423-837a-906f9dfa3c87', 'zijing.org', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:27');
+INSERT INTO `domain_one` VALUES ('60d147ea-ca00-4423-837a-906f9dfa3c87', 'zijing.org', '紫荆网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('60db44d6-b6dd-4027-b521-ca058e5b19b4', 'lnmedia.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
 INSERT INTO `domain_one` VALUES ('611bdc6c-414d-415e-8835-6deb4b16ca78', 'cdagri.gov.cn', '成都市农业信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:27');
 INSERT INTO `domain_one` VALUES ('6153d127-9d03-43fd-8c11-db46fad46613', 'qthedu.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:12');
-INSERT INTO `domain_one` VALUES ('6158c83e-2f6c-441c-a755-f4ba04e9bcb0', 'bjnew.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('6158c83e-2f6c-441c-a755-f4ba04e9bcb0', 'bjnew.net', '北京在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('61805efc-b95c-4d22-a920-eaf6e14bf0db', 'zhonghongwang.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
 INSERT INTO `domain_one` VALUES ('61a4ed2c-3898-4287-9511-fd0fb34f2739', 'hdzxw.com', '海峡网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:08');
 INSERT INTO `domain_one` VALUES ('61b16d49-65d4-4ded-b790-90099ef0a177', 'xjdaily.com', '新疆日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:00');
@@ -850,6 +886,7 @@ INSERT INTO `domain_one` VALUES ('64bf2582-301a-434a-a833-f52fc49604b2', 's10000
 INSERT INTO `domain_one` VALUES ('64f2df16-d387-41ed-951e-4bf278b222c1', 'huaxi100.com', '华西都市网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:02');
 INSERT INTO `domain_one` VALUES ('6523ec10-7a5e-46d0-95ba-5ac25c07419a', 'my399.com', '哈尔滨新闻网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('6526cb52-0357-4532-8544-131e1eea3840', '222.132.157.151:9988', '泰安日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:12');
+INSERT INTO `domain_one` VALUES ('652d1551-d690-49d2-b305-84d9b83280b9', 'dehuaca.com', '憨鼠社区', '新帖', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('65390d5d-4e67-4cb9-98bf-f75d2e16be29', 'xinhebbs.com', '新河论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:02');
 INSERT INTO `domain_one` VALUES ('653f6c2c-37e9-4d00-b68d-b64568064ed4', 'yidianzixun.com', '一点资讯', '其他', '新闻', '其他网站', '其他', '0', '0', '2017-08-15 11:05:54');
 INSERT INTO `domain_one` VALUES ('6583e848-3988-4f21-a5b1-2df0ad237fd7', '1news.cc', '长春晚报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:05:49');
@@ -884,14 +921,16 @@ INSERT INTO `domain_one` VALUES ('6a0718a5-ad92-4c0e-8d6b-e78627b64db6', 'caogen
 INSERT INTO `domain_one` VALUES ('6a1b3d1e-dbec-4e26-a663-5f76d79826d6', 'jk3721.com', '健康知识网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:57');
 INSERT INTO `domain_one` VALUES ('6a8319f3-c0ed-4d5c-8275-723da89fbb66', '88148.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('6a95cfe8-32f8-4bc2-8f5d-60f64202bec1', 'kugz.net', '酷广州论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:49');
+INSERT INTO `domain_one` VALUES ('6aa7bb77-c103-40df-b7ae-798480bc66be', 'nanchongpeace.gov.cn', '南充长安网', '政法要闻', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('6ab8dea8-8e82-4bc2-83d7-8f259b438065', 'beinet.net.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:10');
-INSERT INTO `domain_one` VALUES ('6acca929-1d7b-4c4c-81cf-a8dc8fc28f8e', 'tfol.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:05');
+INSERT INTO `domain_one` VALUES ('6acca929-1d7b-4c4c-81cf-a8dc8fc28f8e', 'tfol.com', '天府热线', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('6ae86d16-1251-4893-bf42-a1bb5b65bc0d', 'fengshui-168.com', '美好生活论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:41');
 INSERT INTO `domain_one` VALUES ('6b21d2f4-2e0f-47b0-85a1-c3e5937007dc', 'dlxww.com', '大连新闻网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:24');
 INSERT INTO `domain_one` VALUES ('6b3cd5ec-a6be-4afc-9c63-73d58450aec5', 'bzcec.gov.cn', '巴中文化交流网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:33');
 INSERT INTO `domain_one` VALUES ('6b548d0a-f4d3-48b2-a39a-f0e6f786451e', 'ncjjwang.com', '南充经济网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:39');
 INSERT INTO `domain_one` VALUES ('6b616a95-1815-4cae-bb00-a6e7aaad3f38', 'cankaoxiaoxi.com', '参考消息', '其他', '新闻', '中央', '其他', '0', '1', '2017-08-15 11:07:28');
 INSERT INTO `domain_one` VALUES ('6b68586d-80f3-46f3-8631-9bd7bbc2e76b', 'hezeribao.com', '牡丹晚报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:39');
+INSERT INTO `domain_one` VALUES ('6bc8549c-3f70-4684-8739-81b027b3d2cb', 'xihaiannews.com', '青岛西海岸新闻网', '文教', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('6bd42a4b-3294-42a2-938e-ca9544626543', 'yangmeidu.cn', '杨梅渡论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:54');
 INSERT INTO `domain_one` VALUES ('6c2fbddc-65c5-4213-aa79-bce288edda5a', 'zgsyb.com', '中国水运报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('6c6224ff-07cf-4bb2-a599-50c3dd38bd68', 'cqrb.cn', '重庆日报新闻', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:05:31');
@@ -910,9 +949,12 @@ INSERT INTO `domain_one` VALUES ('6de75ac0-441d-4d20-9a10-8a21fe20c0c7', 'backpa
 INSERT INTO `domain_one` VALUES ('6ded96b8-b357-4c68-9821-654da2fdffa2', 'cnrmz.cn', '中国民族广播网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:41');
 INSERT INTO `domain_one` VALUES ('6df72750-3a27-40ef-b469-19aab2a777ad', 'zhiding.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:43');
 INSERT INTO `domain_one` VALUES ('6e281249-2a3e-4cf8-b083-85d940ff2b99', '514200.com', '大埔论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:24');
+INSERT INTO `domain_one` VALUES ('6e48bf68-2889-4c97-b02e-6b2073eb7633', 'ceiea.com', '中国教育装备网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('6e73e36b-b09b-4162-a944-345798342722', '51test.net', '无忧考网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:05');
+INSERT INTO `domain_one` VALUES ('6ed66406-6eee-470f-9d7f-4fa9ef0190c1', '99.com.cn', '99健康网', '新闻', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('6ef09416-6a33-4128-ae6a-7a6e3e61502d', 'liuqiu-china.com', '中国琉球网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:41');
 INSERT INTO `domain_one` VALUES ('6f11b2eb-767d-464a-92b4-71cd4a486bd4', 'sqrb.com.cn', '商丘新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:22');
+INSERT INTO `domain_one` VALUES ('6f3044e7-3307-4c4f-848b-1a887ef35cfe', 'mier123.com', '米谈天下', '灌水乐园', '论坛', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('6ff62b87-f591-4016-9f16-bae30b2aa655', 'pconline.com.cn', '太平洋电脑网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:13');
 INSERT INTO `domain_one` VALUES ('6ffea3b0-0bd0-491d-ad84-657f533d15e5', 'nhxxg.com', '宁海网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:36');
 INSERT INTO `domain_one` VALUES ('70a3dcc1-732a-46d4-abff-539bcdfc9528', 'chndsnews.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:45');
@@ -922,6 +964,7 @@ INSERT INTO `domain_one` VALUES ('7136464e-e66d-4a9a-b21b-aced2be97833', 'qhepb.
 INSERT INTO `domain_one` VALUES ('719f3588-29aa-42fb-9a98-924a63fb9594', 'zhongguofazhi.org', '中国法治E时代法律事务专家', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:45');
 INSERT INTO `domain_one` VALUES ('71ed1a75-171b-4e6f-a1ab-44884ea05fcd', 'cnautotime.cn', '中国时代车网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('723b8ed3-c203-4020-b61f-4567254a76d6', 'lishiquwen.com', '历史趣闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:47');
+INSERT INTO `domain_one` VALUES ('725d9299-7633-489a-b4f4-b81872d72c78', 'etmoc.com', '中国烟草市场', '各地烟草', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('72646156-893a-471f-8943-ad6875d58883', 'zxxww.com', '竹溪新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:30');
 INSERT INTO `domain_one` VALUES ('7270c61d-9f7f-4d88-a682-3146d92e4eed', 'bzedu.gov.cn', '巴中市教育局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:33');
 INSERT INTO `domain_one` VALUES ('72727192-dcaf-4b81-9774-7b0541fd1ab6', 'ailiuxue.com', '留学网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:44');
@@ -931,6 +974,7 @@ INSERT INTO `domain_one` VALUES ('7297ba22-fe18-4df0-affc-6d44e92c12d1', 'sptv-1
 INSERT INTO `domain_one` VALUES ('72a47fa7-fab2-40fd-826d-91497f30042b', 'yfcnn.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
 INSERT INTO `domain_one` VALUES ('72cbc910-818a-44fe-b8e8-4947e881cdc6', '0551ren.com', '合肥人网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:07');
 INSERT INTO `domain_one` VALUES ('72e34312-48b5-478e-ac92-3af304432c25', 'scnjnews.com', '内江新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:37');
+INSERT INTO `domain_one` VALUES ('72f746e0-ca0d-4eba-a019-b3868df61534', 'ncsgzw.gov.cn', '南充市国资委', '国资研究', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('731fe3c7-588c-41d2-82df-286041de614d', 'cm868.com', '茂名传媒论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:42');
 INSERT INTO `domain_one` VALUES ('733a8d2b-49a8-498d-be8d-47ffa872d1fb', 'wangjing.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-11-05 21:34:12');
 INSERT INTO `domain_one` VALUES ('736a885f-6246-4145-b01e-9b165a414715', 'jzrb.com', '焦作网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:55');
@@ -944,6 +988,7 @@ INSERT INTO `domain_one` VALUES ('74209b17-c422-4fb5-b6e0-0f1e80ce2030', 'lsrmw.
 INSERT INTO `domain_one` VALUES ('742ad363-d2d8-4fd2-b03f-5282288d0904', '50cnnet.com', '物联网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('7438447c-36d3-448c-a721-78a47374b679', 'toutiao.com', '今日头条', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:54');
 INSERT INTO `domain_one` VALUES ('747d79db-9758-4e9a-a8ac-abbd2c52c693', 'med126.com', '医学全在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:54');
+INSERT INTO `domain_one` VALUES ('749a8c66-6920-451e-b7ce-54a933e5696c', 'bzsga.gov.cn', '巴中市公安局', '区县警讯', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('74b5ffdd-b8c5-43de-b214-985f7d1547f9', 'zhuxibbs.com', '99街竹溪网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
 INSERT INTO `domain_one` VALUES ('74d8203a-543e-4fc5-a096-2c33eb067ca5', 'yuqinge.com', '豫青网', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:49');
 INSERT INTO `domain_one` VALUES ('74f93120-80ba-4998-abc0-675220906ffb', 'pedaily.cn', '投资界新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:09');
@@ -962,7 +1007,7 @@ INSERT INTO `domain_one` VALUES ('7603ed83-7b04-4f59-b215-7637e45a0c6b', 'hhhtne
 INSERT INTO `domain_one` VALUES ('76145d5b-68e2-46e3-84a1-cac60a4094fa', 'hkwb.net', '海口网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('7634b56f-2ff5-4251-a816-24ee756554c2', 'gscn.com.cn', '中国甘肃网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:05:44');
 INSERT INTO `domain_one` VALUES ('767ea79e-26c4-4e2c-9d00-9f0f0d878476', 'cermn.com', '中国法治', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:45');
-INSERT INTO `domain_one` VALUES ('76813132-e658-46ff-b679-b325f6f42403', 'yangtse.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
+INSERT INTO `domain_one` VALUES ('76813132-e658-46ff-b679-b325f6f42403', 'yangtse.com', '扬子晚报网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('7695fbfb-df6e-4028-80f6-1dde4d5995db', 'cn2che.com', '中国二手车城', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:45');
 INSERT INTO `domain_one` VALUES ('76c37f2b-be7c-4c75-9655-d06d820f7d4c', 'jconline.gov.cn', '晋城在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:53');
 INSERT INTO `domain_one` VALUES ('76cb0146-d11b-433f-a7b7-34d726ab90df', 'ldhtdq.com', '综合新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:28');
@@ -979,6 +1024,7 @@ INSERT INTO `domain_one` VALUES ('77dfac71-5b94-4846-a16b-32c8e9cf3b58', 'sczj.g
 INSERT INTO `domain_one` VALUES ('782e2b22-1243-4b21-9346-9ce075709676', 'hupub.com', '北京论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:30');
 INSERT INTO `domain_one` VALUES ('7896775e-3419-472b-b38a-07c9fb813ce1', 'leiphone.com', '雷锋网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:48');
 INSERT INTO `domain_one` VALUES ('7898a7a5-b627-4209-9847-349c3f65c779', 'hfbb.com', '合肥市创业网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:07');
+INSERT INTO `domain_one` VALUES ('789aad00-48bb-4ee2-9218-acfefbd8a89a', 'wuhu.cc', '芜湖江东论坛', '天下网事', '论坛', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('78a5fb43-4fa7-4973-873f-c9edf5422373', 'jynews.net', '揭阳新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:55');
 INSERT INTO `domain_one` VALUES ('7916e0fd-762b-471b-b0af-052f0a48dc81', 'xdkb.net', '现代快报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:03');
 INSERT INTO `domain_one` VALUES ('7961759b-2448-459e-8b6e-201af469df56', 'everyday-news.com.cn', '每日新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:41');
@@ -986,7 +1032,7 @@ INSERT INTO `domain_one` VALUES ('7967053b-7b6b-4409-9faf-ecf1bd67b906', 'jiemia
 INSERT INTO `domain_one` VALUES ('796d271f-1b32-4286-8220-93ae334badbf', 'nndj.gov.cn', '绿城党旗红党建信息平台', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:42');
 INSERT INTO `domain_one` VALUES ('7974ed3e-b441-4819-aee5-cdf416c7e07c', 'mygqt.org.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:41');
 INSERT INTO `domain_one` VALUES ('79965db0-465f-412c-b5c5-c8e7c21c78a4', 'twoeggz.com', '蛋蛋赞', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:45');
-INSERT INTO `domain_one` VALUES ('79af709c-b184-4365-af77-15261b50afe5', 'wj001.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:05');
+INSERT INTO `domain_one` VALUES ('79af709c-b184-4365-af77-15261b50afe5', 'wj001.com', '武进新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('7a18b20b-1e0c-4da1-a59d-2e3215914cbe', 'hncyfw.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
 INSERT INTO `domain_one` VALUES ('7a4a4db1-61e4-48ed-a04a-ce739fc7acaa', 'haretu.com', '麦兔事业编招考网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:46');
 INSERT INTO `domain_one` VALUES ('7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '163.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:17');
@@ -1007,6 +1053,7 @@ INSERT INTO `domain_one` VALUES ('7cbe237d-d9e0-4a57-bd55-996d068efbe0', 'cmx.go
 INSERT INTO `domain_one` VALUES ('7cbf2011-bc47-40ef-b6dc-79cb452d31b7', '17ok.com', '财界社区', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:28');
 INSERT INTO `domain_one` VALUES ('7ccdc694-d78e-4963-848e-5888e5d2055c', 'mmscsw.org', '中国民主同盟四川省委员会', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:49');
 INSERT INTO `domain_one` VALUES ('7d0820b0-a4a7-4d73-b7a4-3e75915d5730', 'xjrb.com', '肇庆西江网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:49');
+INSERT INTO `domain_one` VALUES ('7d0846dc-2087-4967-af80-caee50b0e6d1', 'wldsb.com', '武陵传媒网', '国际新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('7d35e6d9-48c8-432e-978b-1a048745b2d2', 'gzonline.net', '花都信息港', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:03');
 INSERT INTO `domain_one` VALUES ('7d3bc532-0eb3-4847-91e4-2c235f895b2c', 'dnkb.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:45');
 INSERT INTO `domain_one` VALUES ('7d50e5ac-ab55-4409-9ffd-f9453f807dbc', 'xuexila.com', '学习啦', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:49');
@@ -1022,19 +1069,20 @@ INSERT INTO `domain_one` VALUES ('7e86d1ae-6009-4561-b59c-7c1b0211943e', 'zged.c
 INSERT INTO `domain_one` VALUES ('7e902bd9-31f0-44ce-a6e6-4b8ddbc75a65', 'szsnews.net', '石嘴山日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:20');
 INSERT INTO `domain_one` VALUES ('7e9240b5-443b-4c52-a499-72c72620a527', 'sanyarb.com.cn', '三亚日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:25');
 INSERT INTO `domain_one` VALUES ('7ea28372-e596-4c49-9427-bac7be01b877', 'weifang.gov.cn', '中国潍坊', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:36');
+INSERT INTO `domain_one` VALUES ('7eb01187-ad74-4a8c-9a9d-2b91e3b21188', 'bendibao.com', '北京本地宝', '首页', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('7ed6d29c-30b4-48a7-ad71-43c191b10428', 'stheadline.com', '星岛日报网', '其他', '境外', '外媒', '其他', '0', '1', '2017-08-15 11:05:58');
 INSERT INTO `domain_one` VALUES ('7f080afa-73cf-48a5-b915-beb43f0e35bb', 'dxal.gov.cn', '大兴安岭林业管理局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:23');
 INSERT INTO `domain_one` VALUES ('7f305e32-f7b3-4355-ae01-d7edadbb5c0d', 'cnjxol.com', '嘉兴在线', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:58');
 INSERT INTO `domain_one` VALUES ('7f3cb531-2c56-4514-9000-b1beff25f499', 'chinaenwc.com', '中国企业新闻观察网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:40');
 INSERT INTO `domain_one` VALUES ('7f48cc6b-ec70-4509-972b-25666162255d', 'sz-qb.com', '深圳侨报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:21');
 INSERT INTO `domain_one` VALUES ('7f4eb057-4f03-4dac-b52a-cd52469be457', 'heduwang.com', '中共山东省委党校', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:47');
-INSERT INTO `domain_one` VALUES ('7f5198d3-e2cc-4797-8d7c-4e00f137a84c', 'cssn.cn', '中国社会科学网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
+INSERT INTO `domain_one` VALUES ('7f5198d3-e2cc-4797-8d7c-4e00f137a84c', 'cssn.cn', '中国社会科学网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('7f5e61fa-63dd-4136-b588-6af112d05c41', 'lianshui.cn', '涟水在线论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:46');
 INSERT INTO `domain_one` VALUES ('7f64a06c-4fd5-4154-b66e-edda06d75ee2', 'bengbu.gov.cn', '中国蚌埠', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:46');
 INSERT INTO `domain_one` VALUES ('7f812c94-c0cd-4b7a-9938-75310120d659', 'xh58.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
 INSERT INTO `domain_one` VALUES ('7f836cc5-ba12-4696-8d29-ee1c0d789cee', '108sq.com', '108社区网', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:38');
 INSERT INTO `domain_one` VALUES ('7f8ac895-fa9f-4628-956b-4e7c13464dac', 'dezhoudaily.com', '兴德论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:57');
-INSERT INTO `domain_one` VALUES ('7f9155bb-0498-4b1d-8c57-0880371a07a5', 'dmnic.org', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('7f9155bb-0498-4b1d-8c57-0880371a07a5', 'dmnic.org', '中商新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('7f9e2f80-28c1-409e-ab21-95f4c178b993', 'gzznmj.gov.cn', '甘孜州农业畜牧局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:14');
 INSERT INTO `domain_one` VALUES ('7fa2be38-3e35-4fd3-826c-86f71debcfbd', 'ccyp.com', '华人工商网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:03');
 INSERT INTO `domain_one` VALUES ('7fae0fd1-a8b4-42ba-b5bf-4cf41cb395e3', 'chemall.com.cn', '中国石油和化工网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
@@ -1055,6 +1103,7 @@ INSERT INTO `domain_one` VALUES ('814a8de5-3d45-4462-9cd2-f8370daca7c9', 'pingna
 INSERT INTO `domain_one` VALUES ('8153334e-0202-40f4-931f-e668169ace6b', 'sczyga.cn', '资阳市公安局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:29');
 INSERT INTO `domain_one` VALUES ('815e8aac-e646-4453-b77f-2a3d89d2b3b0', 'house365.com', '蠡园茶坊', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:48');
 INSERT INTO `domain_one` VALUES ('816252f7-6530-488f-9734-1098904fc710', '3023.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:05');
+INSERT INTO `domain_one` VALUES ('8192e5be-ad45-4f9a-95b5-14cc9438ccf2', 'dawuge.com', '大吴哥网', '每日新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('81982d65-453b-41a0-a044-b38f98619017', '112seo.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:44');
 INSERT INTO `domain_one` VALUES ('81a86cc3-d02d-4ff3-addd-3940b3195ee5', '514743.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:38');
 INSERT INTO `domain_one` VALUES ('81da405e-87e8-4e51-99d3-bd0b173f0a9a', 'gjgwy.net', '新疆公务员考试网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:00');
@@ -1067,7 +1116,7 @@ INSERT INTO `domain_one` VALUES ('82ed961f-57e4-4848-9957-395c30a02227', 'ylxq.c
 INSERT INTO `domain_one` VALUES ('8326720b-8415-4f71-aa26-7a1415e5bb3f', 'hq0564.com', '霍邱论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('83304481-ec6a-4a05-9109-e1cc5fbd2d3e', 'czs.gov.cn', '中国郴州', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:46');
 INSERT INTO `domain_one` VALUES ('83491172-c827-4285-9d52-daa362342ab8', 'bzagri.gov.cn', '巴中市农业信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:33');
-INSERT INTO `domain_one` VALUES ('834cdbb6-e5c1-427a-a713-76de435ba7e4', 'xinyang.la', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
+INSERT INTO `domain_one` VALUES ('834cdbb6-e5c1-427a-a713-76de435ba7e4', 'xinyang.la', '信阳生活网论坛', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('8385c06c-ae61-463f-8a29-27d2373da3ac', 'swsm.net', '汕尾市民网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:23');
 INSERT INTO `domain_one` VALUES ('83946d9d-3a84-4643-a967-610ae0131b4b', 'gdga.gov.cn', '广东省公安厅', '各地警务', '新闻', '其他', '其他', '0', '0', '2017-11-21 16:43:15');
 INSERT INTO `domain_one` VALUES ('83982ef6-d102-40e8-90ec-69049cc27b3b', 'chunan123.com', '99街淳安网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:37');
@@ -1079,6 +1128,7 @@ INSERT INTO `domain_one` VALUES ('84534fa9-a547-47c7-a6f8-d5e3893bd13f', 'zixunj
 INSERT INTO `domain_one` VALUES ('845e02aa-f9a9-4746-ba30-ae5f119bf77d', 'gywb.cn', '贵阳新闻网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:11');
 INSERT INTO `domain_one` VALUES ('84677b81-04c0-455a-8729-53e3059ff25f', 'wnnews.cn', '渭南新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:06');
 INSERT INTO `domain_one` VALUES ('846a1560-fc63-462c-9200-7b8ec9ef2962', 'maxlaw.cn', '大律师网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:24');
+INSERT INTO `domain_one` VALUES ('84780fee-4a45-4da9-bf4e-5cfb20b434e5', 'sccnt.gov.cn', '四川省文化厅', '动态信息', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('8478dfbb-e745-4a8a-aa40-8c9c5f90b05d', 'hbtv.com.cn', '湖北网络广播电视台', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:04');
 INSERT INTO `domain_one` VALUES ('84b5d0a0-2144-4872-b43b-88228a92761c', 'ahtv.cn', '安徽电视台', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:34');
 INSERT INTO `domain_one` VALUES ('84ce3cd5-cc74-4583-978c-96dd437d87dc', 'luaninfo.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
@@ -1093,7 +1143,7 @@ INSERT INTO `domain_one` VALUES ('860d062a-87fa-4a0f-bba9-a44f648bf892', 'cqcb.c
 INSERT INTO `domain_one` VALUES ('860fa868-d9b5-43b1-9398-d7c42dff84bd', 'yzwb.com', '扬州晚报网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:54');
 INSERT INTO `domain_one` VALUES ('86455659-9ead-4caf-a934-e006fca633d1', 'zsr.cc', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:27');
 INSERT INTO `domain_one` VALUES ('8651f5dc-e934-4fdb-914e-f9b352b037ee', 'yb983.com', '延边信息港', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:55');
-INSERT INTO `domain_one` VALUES ('865e75fe-108c-45b2-bd06-b0d1e3036ea7', 'pinggu.org', '经管之家', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:52');
+INSERT INTO `domain_one` VALUES ('865e75fe-108c-45b2-bd06-b0d1e3036ea7', 'pinggu.org', '经管之家', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('86633fb5-55d6-4c78-b085-9bceb7f79a74', 'aihami.com', '楚秀网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:26');
 INSERT INTO `domain_one` VALUES ('866aa152-a6d0-4e75-a8f1-6b225380d57d', 'chinaxiaokang.com', '中国小康网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('866ae72b-9932-42fb-8e31-42e54e709622', 'fjscnews.com', '顺昌新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:17');
@@ -1108,6 +1158,7 @@ INSERT INTO `domain_one` VALUES ('87480b13-e105-4cda-b7b4-57758ebaa874', 'e763.c
 INSERT INTO `domain_one` VALUES ('8761bd00-17a4-4cd1-a949-74e05810ffc8', 'tjnkcaw.gov.cn', '南开区长安网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:37');
 INSERT INTO `domain_one` VALUES ('8765ae6b-def3-4a9e-96ed-92972f53d688', 'ganzitv.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
 INSERT INTO `domain_one` VALUES ('877fa3c9-a2e6-4193-95ac-7ad93d13a98d', 'clzg.cn', '彩龙论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:28');
+INSERT INTO `domain_one` VALUES ('8786abc9-4a16-4f90-ac09-e30bfa0cf0ab', 'ncxcw.gov.cn', '南充宣传网', '文化建设', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('879d1e5e-305c-4a0b-b170-dccd8a5b6c8e', 'scpta.gov.cn', '四川人事考试网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:16');
 INSERT INTO `domain_one` VALUES ('87a4d2da-982a-4afc-a48b-6b12c3bad0f4', 'chezhilv.cn', '车之旅社区', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:27');
 INSERT INTO `domain_one` VALUES ('87a982cf-4a80-4571-8b58-1244820c98f1', 'tuanjiewang.cn', '团结网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:08');
@@ -1125,6 +1176,7 @@ INSERT INTO `domain_one` VALUES ('8948bea7-159c-42a4-bb56-523e4f66d4a9', 'hdzc.n
 INSERT INTO `domain_one` VALUES ('8951084f-1df7-41ac-ba30-a051b8897ea0', 'he-nan.com', '河南网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:42');
 INSERT INTO `domain_one` VALUES ('89512285-4025-4739-aeec-36889bd537e1', 'pzhgd.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:12');
 INSERT INTO `domain_one` VALUES ('8952a813-404b-465c-a4e7-3e28f88f72e2', 'yl-p.com', '永隆铺bbs', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:52');
+INSERT INTO `domain_one` VALUES ('899a2b32-cf05-497a-a130-48a91daf6c68', '4hw.com.cn', '四海网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('899cb780-cc07-4946-82bf-4d40d9fb7307', 'hebnews.cn', '雁阵论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:55');
 INSERT INTO `domain_one` VALUES ('8a14c5fe-98e9-47e8-9f83-6088430a670b', 'zxip.com', '慈溪论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:25');
 INSERT INTO `domain_one` VALUES ('8a169150-067b-4f59-b223-cd4addd47533', 'btime.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:23');
@@ -1140,7 +1192,7 @@ INSERT INTO `domain_one` VALUES ('8b0d0ce1-b5e4-490d-8927-2dbbddf872a1', 'eastda
 INSERT INTO `domain_one` VALUES ('8b295050-c7f2-40ab-964b-b4381b944637', 'zgcsb.org.cn', '中国城市报官网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:46');
 INSERT INTO `domain_one` VALUES ('8b434035-0df1-40f5-bea8-cb729ff05d59', 'jxfz.gov.cn', '中国抚州', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:44');
 INSERT INTO `domain_one` VALUES ('8b55148f-2bbd-481f-81c8-df8e4c0783c5', 'xxhunan.com', '潇湘信息港论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:02');
-INSERT INTO `domain_one` VALUES ('8b788890-c66e-4102-9078-0defa53bbea9', 'cnr.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:45');
+INSERT INTO `domain_one` VALUES ('8b788890-c66e-4102-9078-0defa53bbea9', 'cnr.cn', '央广网吉林分网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('8bb3f2de-1139-484f-92d1-fa2950661839', 'csxww.com', '常熟新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:27');
 INSERT INTO `domain_one` VALUES ('8bd02b06-93b0-47b2-bb91-84dff047c484', 'qdcaijing.com', '青岛财经网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:30');
 INSERT INTO `domain_one` VALUES ('8bec23af-f052-471c-becc-e7061b291490', 'leyunapp.com', '乐云分享论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:48');
@@ -1149,6 +1201,7 @@ INSERT INTO `domain_one` VALUES ('8c20a9ac-422c-49d0-a975-0b8ac94158ef', 'shangh
 INSERT INTO `domain_one` VALUES ('8c309eec-4903-4c4e-8962-044788630d96', 'nanning.gov.cn', '南宁政务信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:37');
 INSERT INTO `domain_one` VALUES ('8c3d4dcf-ff2b-449e-9d36-2ec9a308192a', '3jnews.com', '中国社会舆论网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('8c470730-1965-44e9-b561-163d98ad8931', 'sywg.com', '申银万国证券', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:21');
+INSERT INTO `domain_one` VALUES ('8c4856e8-2743-40f2-ab5a-122c74b92a2a', 'univs.cn', '中国大学生在线', '时事经纬', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('8c545a6f-1607-4653-87b1-eb2d9ac4ff76', 'chinaice.cn', '中国产经网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:46');
 INSERT INTO `domain_one` VALUES ('8c6723e2-54ab-4af9-b1b6-2dc33476e1b8', 'gaokao.com', '高考网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:45');
 INSERT INTO `domain_one` VALUES ('8c747a14-2438-4b9f-906b-5beedec1aa49', 'liangjan.com', '亮剑网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:45');
@@ -1192,12 +1245,13 @@ INSERT INTO `domain_one` VALUES ('9154b611-f54b-4e41-9625-34c955f52fe4', 'cnjiay
 INSERT INTO `domain_one` VALUES ('91a8fded-5984-42f2-8afa-3bbea4000607', 'w-cun.com', '舞村网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:46');
 INSERT INTO `domain_one` VALUES ('91c4c72a-e3cc-4843-95c3-10ec82ab2a11', 'chinareform.org.cn', '中国改革论坛网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:44');
 INSERT INTO `domain_one` VALUES ('9215d52f-d843-46f1-bbfb-12a647091c6f', 'ijiangyin.com', '大澄网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:25');
+INSERT INTO `domain_one` VALUES ('9223bbef-3aea-467b-bdec-de51575a084e', 'iweihai.cc', '爱威海论坛网', '最新', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('92278bd5-f19a-467e-bb9c-ecaa9d47aab4', 'tigtag.com', '滴答网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:21');
 INSERT INTO `domain_one` VALUES ('92287dfb-02aa-4e3a-8a9c-05af09a8251e', 'nxep.gov.cn', '宁夏环保厅', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:35');
 INSERT INTO `domain_one` VALUES ('9232f70e-4af4-4637-a09a-f618ff99c6f5', 'pzhedu.cn', '攀枝花教育局', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:35');
 INSERT INTO `domain_one` VALUES ('923d9b90-0c42-46a8-9d68-ee4c988815c1', 'kepuchina.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
 INSERT INTO `domain_one` VALUES ('92624a85-1b51-4edd-b990-e16896408f72', 'hehechengde.cn', '和合承德网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:26');
-INSERT INTO `domain_one` VALUES ('92ea391b-718c-4b84-b2a9-fd09459c0024', 'fzyshcn.com', '法制与社会', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:17');
+INSERT INTO `domain_one` VALUES ('92ea391b-718c-4b84-b2a9-fd09459c0024', 'fzyshcn.com', '法制与社会', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('92eaa380-db98-4bd1-943b-deb550a3c86a', 'ahyx.gov.cn', '岳西网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:51');
 INSERT INTO `domain_one` VALUES ('931fe586-67a1-4eff-9b89-ba59d616576d', 'haodf.com', '好大夫在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:07');
 INSERT INTO `domain_one` VALUES ('93211c69-a720-478a-80ca-cea91dedf5fb', 'comnews.cn', '中国西部网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:35');
@@ -1238,11 +1292,12 @@ INSERT INTO `domain_one` VALUES ('95de52ba-8edd-4000-87b2-7eada966dbb3', '91daxu
 INSERT INTO `domain_one` VALUES ('9669f215-9dda-4ca4-a373-2dcafdb09afa', 'zgkqw.com', '中国柯桥网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:42');
 INSERT INTO `domain_one` VALUES ('96aeaeba-fcb0-42b3-8263-16a6bdd22d4f', 'canjiren.org', '自强人公益论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:28');
 INSERT INTO `domain_one` VALUES ('971bd3ab-476d-4de8-9946-6c09e44e3234', 'ssrb.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:39');
+INSERT INTO `domain_one` VALUES ('973b8c60-1fd6-418b-9b6a-b15d6e6f95de', '222.215.23.86', '巴中市政府信息公开网', '市教育局', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('973bffbb-2899-4ffb-abfc-fad9de493b69', 'deyi.com', '武汉生活消费社区', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:05');
 INSERT INTO `domain_one` VALUES ('973ec625-db89-434a-9317-3a4ec3e522a4', 'hsdaily.cn', '黄山日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:07:00');
 INSERT INTO `domain_one` VALUES ('9767eced-e903-4d18-b8bf-c50c84da5080', 'cqfishing.net', '重庆钓鱼论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:31');
 INSERT INTO `domain_one` VALUES ('97759a5d-bc6e-438b-b7e8-b857d03850fc', 'ihaiyan.com', '海盐网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:08');
-INSERT INTO `domain_one` VALUES ('97881031-4b03-40ab-b121-08b8bb2d3034', 'gmw.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:19');
+INSERT INTO `domain_one` VALUES ('97881031-4b03-40ab-b121-08b8bb2d3034', 'gmw.cn', '光明网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('97a28864-2e0f-4ea7-bd46-28bc233f8e1e', 'onlinedown.net', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:42');
 INSERT INTO `domain_one` VALUES ('97aef373-ce19-4eaa-bbf1-375f8aaf08b4', 'dinglia.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:45');
 INSERT INTO `domain_one` VALUES ('97b3b78c-ad6f-4b57-883b-caf3daec4991', 'xbxxb.com', '西北在线', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:04');
@@ -1298,6 +1353,7 @@ INSERT INTO `domain_one` VALUES ('9ceba96d-e97a-4267-9fea-d419eac16542', 'ynlf.g
 INSERT INTO `domain_one` VALUES ('9d1c426d-4d55-4917-8699-5ddcdbed621d', 'bjx.com.cn', '北极星节能环保网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:30');
 INSERT INTO `domain_one` VALUES ('9d1fd701-1802-412d-863f-1d5a19f3547f', 'gaosan.com', '高三网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:48');
 INSERT INTO `domain_one` VALUES ('9d24510c-9383-4a43-a190-69ffac54d13f', 'zunyiol.com', '遵义在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:28');
+INSERT INTO `domain_one` VALUES ('9d2d6c43-0212-4780-b4cb-e2b8ac943c69', 'nanchong.gov.cn', '南充市政府', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('9d2da8d8-3346-4f45-b968-7b6b831e3247', 'huberx.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:40');
 INSERT INTO `domain_one` VALUES ('9d5115aa-df54-4f6f-8524-715a808f5e1d', 'yuxi.cn', '玉溪网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:52');
 INSERT INTO `domain_one` VALUES ('9d5586da-459c-4d05-a417-e4d0b48b00a7', 'czwyz.com', '南谯区乌衣镇生活门户网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:37');
@@ -1336,6 +1392,7 @@ INSERT INTO `domain_one` VALUES ('a0181514-80da-4b0a-9aa5-9707ed361aa1', 'chinac
 INSERT INTO `domain_one` VALUES ('a0398265-7e22-4b44-83eb-a4d2bd84ed97', 'haiyan.gov.cn', '中国海盐', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:43');
 INSERT INTO `domain_one` VALUES ('a060d5f6-523a-4ddd-8e26-4aca33a703e2', 'yyrtv.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:22');
 INSERT INTO `domain_one` VALUES ('a063d086-5743-49ed-ad74-81d1638463ce', 'tangxian.cc', '唐县城市在线论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:12');
+INSERT INTO `domain_one` VALUES ('a08de866-27c9-4f03-b76c-177e1cd8f179', 'junshis.com', '三军网', '社会万象', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('a0a772f9-1122-4fdc-9e41-84a746cec704', 'zmdnews.cn', '驻马店日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:05:30');
 INSERT INTO `domain_one` VALUES ('a0ad13d7-5901-4dae-a17a-29df525bfe35', '703804.com', '柒零叁温州论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:32');
 INSERT INTO `domain_one` VALUES ('a0b33288-8670-4de3-ba2e-e81bd16f8bdc', 'tibetol.cn', '西藏在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:04');
@@ -1356,6 +1413,7 @@ INSERT INTO `domain_one` VALUES ('a27f8951-1f35-4586-a356-34cd003ed846', 'whinfo
 INSERT INTO `domain_one` VALUES ('a2956ace-f9d4-43c4-9db7-79d7b8eaa265', 'chinalxnet.com', '中国临夏网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:40');
 INSERT INTO `domain_one` VALUES ('a2d25b2d-29cc-4d31-a933-6334b70a5e5b', 'jy1w.com', '雄州网社区', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:57');
 INSERT INTO `domain_one` VALUES ('a2d77203-9a9e-4944-8cfe-b1f68e0bc972', 'hunan.gov.cn', '湖南省司法厅', '其他', '其他', '省级', '其他', '0', '1', '2017-08-15 11:07:04');
+INSERT INTO `domain_one` VALUES ('a307611b-0515-4f5f-bfff-f33b4d738f28', 'scncaj.gov.cn', '南充市安监局', '', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('a3456156-0c0f-4bb6-b343-cdd5cf0dd158', 'yueyang.gov.cn', '岳阳市政府门户网站', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:51');
 INSERT INTO `domain_one` VALUES ('a35db87f-b8f8-4a60-beab-711820175efc', 'nmgsft.gov.cn', '内蒙古自治区司法厅', '其他', '其他', '省级', '其他', '0', '0', '2017-08-15 11:06:36');
 INSERT INTO `domain_one` VALUES ('a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', 'huanqiu.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:26');
@@ -1367,11 +1425,12 @@ INSERT INTO `domain_one` VALUES ('a4399871-5bd5-43c8-9a7d-0f7dfab98c6a', 'huaiha
 INSERT INTO `domain_one` VALUES ('a48a2131-360a-4a42-bb57-595261ab3677', 'jnwb.net', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:21');
 INSERT INTO `domain_one` VALUES ('a4aef456-17dd-4a29-897b-bca29e473887', 'huzhou.gov.cn', '湖州门户网站', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:03');
 INSERT INTO `domain_one` VALUES ('a4cb9b67-bbbd-4b4f-9295-1b457f451711', 'cuew.com', '中国城市经济网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:46');
-INSERT INTO `domain_one` VALUES ('a5d44673-78b5-4e15-aebe-d541f853b0ac', 'haiwainet.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:49');
+INSERT INTO `domain_one` VALUES ('a5d44673-78b5-4e15-aebe-d541f853b0ac', 'haiwainet.cn', '海外网', '其他', '其他', '其他', '其他', '0', '1', '2017-12-01 11:29:30');
 INSERT INTO `domain_one` VALUES ('a5e670f1-b83a-443d-ae3f-3ba97cff1914', 'gansudaily.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:19');
 INSERT INTO `domain_one` VALUES ('a5ea0815-cc27-42d5-8f57-aa9263b2b8cc', 'ynta.gov.cn', '云南旅游政务网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:51');
 INSERT INTO `domain_one` VALUES ('a6806efa-a6a2-48ef-bc24-d9c1092e4f9c', 'dcqzf.gov.cn', '桂林市叠彩区', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:10');
 INSERT INTO `domain_one` VALUES ('a7441181-c493-4bf0-9059-ed234b042f8a', 'voc.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:22');
+INSERT INTO `domain_one` VALUES ('a751a351-3790-47ca-87bf-7f1d4117ec1a', 'yibin.gov.cn', '宜宾市人民政府', '政务公开', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('a8197a8f-e219-4de5-bde0-c93afe722241', 'nanhaitoday.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('a84582c2-e115-4d7a-8282-d780826972e1', 'hh.cn', '中国红河', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:43');
 INSERT INTO `domain_one` VALUES ('a84ced6f-6103-46de-90b8-c491926b8d1b', 'ccoo.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:27');
@@ -1394,14 +1453,16 @@ INSERT INTO `domain_one` VALUES ('ab77428a-6d0e-4b18-b585-66d4433d7afe', 'edu24o
 INSERT INTO `domain_one` VALUES ('aba65a8e-17bd-400a-ab80-8918f6c9c1ab', 'jshb.gov.cn', '江苏省环保厅', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:56');
 INSERT INTO `domain_one` VALUES ('abb90bb2-8ac5-4508-b934-aa8a4ccb13a9', 'fzrmw.com', '抚州人民网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:15');
 INSERT INTO `domain_one` VALUES ('abda7844-58ca-477b-bd8d-e5e9ec093a4c', 'wxrb.com.cn', '六安网-大别山在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:44');
+INSERT INTO `domain_one` VALUES ('abebde51-b209-40f3-8202-18cfead291fc', 'scnjw.gov.cn', '四川农村信息网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('abefdbd4-47e1-43d5-bcfe-cb2d33a7107e', 'tflqy.com', '天府龙泉驿', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:11');
 INSERT INTO `domain_one` VALUES ('ac1d948f-0b20-4370-aea9-4bfda7ec96c2', 'xj163.cn', '丝路花语', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:17');
 INSERT INTO `domain_one` VALUES ('ac23b9e2-d847-42ef-b48c-21c2813e9645', 'qh.gov.cn', '青海省人民政府', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:30');
 INSERT INTO `domain_one` VALUES ('ac346c91-2654-42a8-a9b6-b59a35b6a429', 'weblz.com.cn', '泸州电视台', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:43');
 INSERT INTO `domain_one` VALUES ('ac390a09-d002-41e6-9cdd-193c76b97fcc', 'longanbbs.com', '99街隆安网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
 INSERT INTO `domain_one` VALUES ('ac7b3d4f-56ad-4d1d-b9d9-4853556240e3', '0873js.com', '建水在线网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:57');
+INSERT INTO `domain_one` VALUES ('ad1a4ebb-8b57-4577-950b-d0be7ca29839', 'cdstm.cn', '中国数字科技馆', '大千世界', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('ad2de7d1-505f-4f9a-8326-8c71a15be042', 'yunnan.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:18');
-INSERT INTO `domain_one` VALUES ('ad37dcb4-1a2f-47fa-9579-f8c99b25e786', 'sxgov.cn', '黄河新闻网大同频道', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:00');
+INSERT INTO `domain_one` VALUES ('ad37dcb4-1a2f-47fa-9579-f8c99b25e786', 'sxgov.cn', '黄河新闻网大同频道', '其他', '新闻', '省级', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('ad4cf804-04d2-4ac1-9cde-965daa8e8dde', 't56.net', '泰无聊论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:12');
 INSERT INTO `domain_one` VALUES ('adcb962b-11c0-4ebf-a069-42d094ff1e3f', 'sced.cn', '四川经济网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:16');
 INSERT INTO `domain_one` VALUES ('adcc850b-9886-4a53-906f-9b3b9d218cc0', 'zgrxrmyy.com', '荣县人民医院', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:48');
@@ -1412,11 +1473,12 @@ INSERT INTO `domain_one` VALUES ('ae0d3f31-aba5-4f91-b67b-f7623e823e4e', 'hfss.g
 INSERT INTO `domain_one` VALUES ('ae15862d-a64e-463e-aae3-b8e0cbbb4f73', '0517w.com', '涟水网论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:46');
 INSERT INTO `domain_one` VALUES ('ae42ea63-74cb-4c31-acf3-8331bff6fc4f', 'ccstock.cn', '中国资本证券网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:48');
 INSERT INTO `domain_one` VALUES ('ae4e8d68-e569-430f-ba3a-4cfe5eb74a3c', 'cqyy.net', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:31');
-INSERT INTO `domain_one` VALUES ('ae6a744f-31fe-4f28-91b1-4c4346599d7d', 'china.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:45');
+INSERT INTO `domain_one` VALUES ('ae6a744f-31fe-4f28-91b1-4c4346599d7d', 'china.com.cn', '其他', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('aeac4a31-c229-4ba6-a247-7ffcfb966124', 'chinawestnews.net', '西部资讯网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('aec1873c-e1f7-4250-b948-874ea0b9fe12', 'cnqjw.com', '潜江新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:31');
 INSERT INTO `domain_one` VALUES ('aeea0dfc-e7d5-4cd9-afc0-40e851c2c149', 'faw-mazda.com', '壹马会车主论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:54');
 INSERT INTO `domain_one` VALUES ('aef76a55-c655-4c65-b8fa-f75409921625', '60.216.0.164:99', '山东商报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:24');
+INSERT INTO `domain_one` VALUES ('af074ffd-55c6-4ab1-b22f-c403a15202f1', 'tengtv.com', '滕国网', '镇街科局新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('af532239-f17b-48b1-bf14-7d7fb6e9d9a9', 'yelezx.com', '全线新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:28');
 INSERT INTO `domain_one` VALUES ('af5b807e-8055-427d-ada1-308f58d1338d', 'folou.com', '地藏缘论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:21');
 INSERT INTO `domain_one` VALUES ('af63fd5c-cf5d-4e87-b923-93973ae62f3c', 'myrb.net', '中国绵阳新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:41');
@@ -1491,14 +1553,16 @@ INSERT INTO `domain_one` VALUES ('b76b08d4-4770-4340-92c4-39b4af91f098', '05273.
 INSERT INTO `domain_one` VALUES ('b76d4ee1-0674-4c0d-81bb-899d0293a267', 'southcn.com', '南方论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-11-21 16:43:14');
 INSERT INTO `domain_one` VALUES ('b7883266-a700-4188-a2fb-bb2077c34d09', 'chinanews.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:45');
 INSERT INTO `domain_one` VALUES ('b78bd13c-b0b7-4d6d-940a-6ccadc5d95ec', 'ahrtv.cn', '安徽网络广播电台', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:34');
-INSERT INTO `domain_one` VALUES ('b7c5e6c6-4cb0-4b30-89d2-fa865f291bf6', 'ccnews.gov.cn', '长春新闻网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:49');
-INSERT INTO `domain_one` VALUES ('b7fb0843-2393-4557-99da-f3b90a25ea27', 'shzx.org', '四海资讯', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:15');
+INSERT INTO `domain_one` VALUES ('b7c5e6c6-4cb0-4b30-89d2-fa865f291bf6', 'ccnews.gov.cn', '长春新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
+INSERT INTO `domain_one` VALUES ('b7fb0843-2393-4557-99da-f3b90a25ea27', 'shzx.org', '四海资讯', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('b802168d-187a-4041-8cb0-a316bcb07ef2', 'yzga.gov.cn', '宝应县公安局', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:31');
 INSERT INTO `domain_one` VALUES ('b8063487-8818-458a-8c16-e61ba2fc9bf0', 'jl.gov.cn', '吉林省人民政府', '其他', '其他', '省级', '其他', '0', '1', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('b816b24a-9b6d-4394-8145-f4733b484158', 'cnforex.com', '环球外汇', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:01');
 INSERT INTO `domain_one` VALUES ('b851b137-79c3-49f0-9dfa-1fbb3aeba4f0', 'soyuli.com', '中国水产流通网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
+INSERT INTO `domain_one` VALUES ('b855deab-b739-421c-9175-9396a4529036', 'zuanke8.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('b87b8e2c-e670-4cdb-95e3-c7c8dc842fdc', '81ce.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('b887d89e-dfc2-4b6f-9d02-0e20c8254ae8', 'dz19.net', '凤凰山下', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:16');
+INSERT INTO `domain_one` VALUES ('b8ddca35-54a6-4eba-ad9d-4e1d5b2fedda', 'cww.net.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('b90cde8a-5fd6-4426-b474-99101ea1e756', '168gamer.net', '168游戏论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:37');
 INSERT INTO `domain_one` VALUES ('b910b925-4544-4b5a-b1b8-4bd73ee71d3a', 'hzsfj.gov.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:10');
 INSERT INTO `domain_one` VALUES ('b9349f51-a4db-44f1-be7a-af58517f1c26', 'bztdxxl.com', '中国企业员工互动论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:05:40');
@@ -1506,6 +1570,7 @@ INSERT INTO `domain_one` VALUES ('b951f0c3-51d1-46c1-93f3-efa243761d0a', 'huagu.
 INSERT INTO `domain_one` VALUES ('b9575fac-a411-45d6-9da1-5246f175cd84', 'jxntv.cn', '江西电视台', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:55');
 INSERT INTO `domain_one` VALUES ('b96c1d98-af54-45a2-b70d-1e950fb70b4f', 'why.com.cn', '青年报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:29');
 INSERT INTO `domain_one` VALUES ('b9730775-25ed-4e1c-a85a-a3180d143a9d', 'cceeo.com', '北京经济网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:30');
+INSERT INTO `domain_one` VALUES ('b998464a-d092-4f8b-992d-8b6527d617c1', 'scsn.cn', '遂宁之窗', '遂宁影讯', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('b99d65cb-b8be-4e1c-83f4-cc9518ff4666', 'jrj.com.cn', '金融界时评', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:53');
 INSERT INTO `domain_one` VALUES ('b9a7455f-a6b4-4e38-8175-b478ba2d657e', 'xkb.com.cn', '新快网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:00');
 INSERT INTO `domain_one` VALUES ('b9a78324-9440-4ebf-9dd6-6d0e80d403a7', 'uczzd.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:41');
@@ -1583,6 +1648,7 @@ INSERT INTO `domain_one` VALUES ('c2985f53-f013-4cce-a759-b6c8bec53e6f', 'hh.gov
 INSERT INTO `domain_one` VALUES ('c306dbf0-38aa-4a56-8b47-e33671312de6', 'bjfedora.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:45');
 INSERT INTO `domain_one` VALUES ('c31fe517-a998-47d8-bbc4-521f143914b5', 'dbcsq.com', '海东时报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('c32ad2ef-d3de-4617-84ee-62f603d7fa06', 'tingredian.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
+INSERT INTO `domain_one` VALUES ('c34cbabc-cb40-47b2-9be9-5dfba265acad', 'guilinnet.com', '桂林网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('c36d3035-0c8a-43cf-8adf-0eddfe9093fd', 'ahwmw.cn', '安徽文明单位网', '省直机关工委', '新闻', '其他', '其他', '0', '1', '2017-11-21 16:43:15');
 INSERT INTO `domain_one` VALUES ('c3778fbb-83ae-447e-a83a-82e9363021d0', 'gznsnews.com', 'e南沙', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:35');
 INSERT INTO `domain_one` VALUES ('c384f8d1-1fa8-401d-974e-1992ccce091d', 'cneb.gov.cn', '中国国家应急广播', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:05:44');
@@ -1604,11 +1670,13 @@ INSERT INTO `domain_one` VALUES ('c5467abf-1746-4efc-8876-833bec1a1567', 'fzbtv.
 INSERT INTO `domain_one` VALUES ('c5496ce9-faee-48dd-aa5d-c0534ef4d44b', '022china.com', '中国网滨海高新', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:37');
 INSERT INTO `domain_one` VALUES ('c54ae03d-2540-4fe6-b6a8-344b696b106d', '110.com', '法律咨询', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:18');
 INSERT INTO `domain_one` VALUES ('c551e5bd-ae1d-4771-aa04-6c0a14f51d25', 'znqnet.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-11-05 21:34:07');
+INSERT INTO `domain_one` VALUES ('c5552d40-9037-472e-9e29-0e87b7146adb', 'cnqc.gov.cn', '广元市青川县', '部门公告', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('c5588cbf-0a8d-4a04-bb6b-260d6e4cdd70', 'sdchina.com', '中国山东网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:05:39');
 INSERT INTO `domain_one` VALUES ('c5756412-9cbf-404d-bec4-5118e8415e51', 'thrbs.com', '通化日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:06:09');
 INSERT INTO `domain_one` VALUES ('c576e32b-b688-4d2c-aeb1-68895b15b6e5', 'timedg.com', '东莞时间网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:19');
 INSERT INTO `domain_one` VALUES ('c583c7d0-f617-460b-a069-4bbbd10b2e67', 'hixinle.com', '99街新乐网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
-INSERT INTO `domain_one` VALUES ('c5d7ad61-308d-4c98-8d96-acd41862293b', 'ncntv.com.cn', '营山阿迪尔婚庆网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:53');
+INSERT INTO `domain_one` VALUES ('c5953768-0cf5-4eec-afca-7198728dbcb5', 'libai.cn', '江油食品药品监督管理局', '首页', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
+INSERT INTO `domain_one` VALUES ('c5d7ad61-308d-4c98-8d96-acd41862293b', 'ncntv.com.cn', '营山阿迪尔婚庆网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('c5db0b8a-148e-49ae-a4bd-d5791c8b4c9b', '66law.cn', '华律网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:03');
 INSERT INTO `domain_one` VALUES ('c60e77cc-3b9d-493e-b52c-173647618ade', 'jingyan.gov.cn', '四川井研县政府网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:16');
 INSERT INTO `domain_one` VALUES ('c644c234-a154-4389-8970-6baa9253ec8c', 'chinagate.cn', '中国发展门户网', '其他', '新闻', '中央', '其他', '0', '1', '2017-08-15 11:05:45');
@@ -1634,7 +1702,8 @@ INSERT INTO `domain_one` VALUES ('c817b328-2e55-43cf-a9f5-d64bc6fcfd60', 'qjxxw.
 INSERT INTO `domain_one` VALUES ('c820424b-052b-40da-929d-6be84ec6dee7', 'ccdy.cn', '中国文化传媒网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:39');
 INSERT INTO `domain_one` VALUES ('c880ea73-645e-451b-8386-5e8839dc565e', 'ycmhz.com.cn', '中国宜春门户站', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('c8a8530a-79bc-4a77-a395-b8b4d6a87320', 'lijiangtv.com', '丽江热线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:47');
-INSERT INTO `domain_one` VALUES ('c8d8e26e-1b7c-4a0c-b33b-e5bfd6d72204', 'chengdubbs.cn', '成都论坛', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:27');
+INSERT INTO `domain_one` VALUES ('c8cc0749-af01-4b50-9b64-c2062ffde258', 'tobnews.com', '透博网', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
+INSERT INTO `domain_one` VALUES ('c8d8e26e-1b7c-4a0c-b33b-e5bfd6d72204', 'chengdubbs.cn', '成都论坛', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('c92dad40-0cb6-487f-86e6-189dca24ca30', 'cdsb.com', '成都商报', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:48');
 INSERT INTO `domain_one` VALUES ('c93c7cc1-6be5-41a4-92d3-d88d588b1a3c', 'dp168.com', '东坡论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:19');
 INSERT INTO `domain_one` VALUES ('c93cf603-a5d8-40ef-84f9-4d737a374572', 'sctv.com', '四川广播电视台', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:16');
@@ -1670,6 +1739,7 @@ INSERT INTO `domain_one` VALUES ('cd5eb20b-63f4-4611-9543-30fec0217fe2', '51zixu
 INSERT INTO `domain_one` VALUES ('cd728a1b-d633-42b3-b2e4-1e39d87cc768', 'tjgaj.gov.cn', '天津市公安局', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:10');
 INSERT INTO `domain_one` VALUES ('cdbe8c74-7bb2-48f3-82ac-3eb1e3dbf011', 'hbjwjc.gov.cn', '湖北省监察厅', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:04');
 INSERT INTO `domain_one` VALUES ('cdbf85ae-1467-41a8-bcfb-76fc69dd6188', 'hxsbs.com', '华兴时报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:07:02');
+INSERT INTO `domain_one` VALUES ('cdcbd13c-2747-4d88-a949-f1a069217db6', 'ybwb.cn', '宜宾晚报网', '教育新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('cddc2ff1-ef6b-4da0-a73b-0d9ef18ae44c', 'gsdwhm.com', '大为书画网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:23');
 INSERT INTO `domain_one` VALUES ('cdf13adc-4527-43fd-95c7-5c818f3889af', 'csvoa.com', '蓬莱新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:34');
 INSERT INTO `domain_one` VALUES ('ce053dea-8324-4d26-93d6-78b711324536', 'mzyfz.com', '民主与法制网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:40');
@@ -1680,6 +1750,7 @@ INSERT INTO `domain_one` VALUES ('cef0a6cd-e30f-4a42-841f-dd0ef6b4ecb5', 'fy168.
 INSERT INTO `domain_one` VALUES ('cef68b13-45e1-4d24-b25b-cda3abc10cc2', 'gxtv.cn', '广西电视网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:11');
 INSERT INTO `domain_one` VALUES ('cf45695b-6a1f-4d21-a2cd-506e3e0a0b2f', 'moc.gov.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:11');
 INSERT INTO `domain_one` VALUES ('cf757c0e-e7cf-4575-9ab4-f1b3aedf480d', 'xin94.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:12');
+INSERT INTO `domain_one` VALUES ('cfa41eb8-f90f-4c3f-85e9-02fbe327548f', 'lzljtfzx.com', '泸州老窖天府中学', '首页', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('cfe75595-7fe6-4b11-bb4b-1929d765acb6', 'changsha.gov.cn', '长沙门户', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:49');
 INSERT INTO `domain_one` VALUES ('d011b704-0953-4708-b28d-2e374a439bee', 'southmoney.com', '南方财富网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:38');
 INSERT INTO `domain_one` VALUES ('d01361dd-183d-4826-803a-ca23bd30fd47', 'zdface.com', '妆点网', '其他', '资讯', '其他', '其他', '0', '1', '2017-11-21 11:32:48');
@@ -1688,12 +1759,13 @@ INSERT INTO `domain_one` VALUES ('d04e35e0-6d7c-4897-9afc-caa8aefd6b62', 'howbuy
 INSERT INTO `domain_one` VALUES ('d0790d83-2941-4f30-b52a-004897dc7f0d', 'ytxww.com', '岳塘新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:51');
 INSERT INTO `domain_one` VALUES ('d0b0805e-5134-48f6-9dae-a46d0003e4fa', 'lottery.gov.cn', '内蒙古体彩网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:36');
 INSERT INTO `domain_one` VALUES ('d0d4623a-f3fd-4137-9753-66427f52c3a8', 'uu56.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:08');
-INSERT INTO `domain_one` VALUES ('d0f9334e-5868-44d1-91a9-ce4b13693425', 'kankancity.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
+INSERT INTO `domain_one` VALUES ('d0f9334e-5868-44d1-91a9-ce4b13693425', 'kankancity.com', '看看城事', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('d1019845-95f2-4157-a838-7a37d8de96a9', 'tech-food.com', '中国食品科技网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('d1033208-6f90-4e26-a58e-0ecf39dd78cd', 'zhongtaixin.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:11');
 INSERT INTO `domain_one` VALUES ('d1379c9a-8471-4681-b327-3559719a6e10', 'pafj.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:12');
 INSERT INTO `domain_one` VALUES ('d13ca022-e8b4-4e73-98ea-61dc6b76721f', 'greatwuyi.com', '大武夷新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:23');
 INSERT INTO `domain_one` VALUES ('d141d479-129c-4852-a9cd-e3329d34cced', 'sanwen.net', '中国散文网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:39');
+INSERT INTO `domain_one` VALUES ('d1475661-d774-4597-b311-66e07b57a9ed', 'tui56.com', '推56站长论坛', '站长杂谈', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('d1592304-eb11-4898-89a0-0ea339d9df72', 'fjqlw.com', '沙县工商联（商会）', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:25');
 INSERT INTO `domain_one` VALUES ('d16266a4-c04f-4d66-a58d-d99d4f944859', 'lsz.gov.cn', '凉山彝族自治州政府网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:46');
 INSERT INTO `domain_one` VALUES ('d16e50f8-b17f-4e27-a3f4-e10e5c64b32f', 'dqccc.com', '地球村博客', '其他', '博客', '其他', '其他', '0', '1', '2017-08-15 11:07:21');
@@ -1711,13 +1783,14 @@ INSERT INTO `domain_one` VALUES ('d29a7b0e-045d-4e20-a6a8-eae067d13d83', 'hs0471
 INSERT INTO `domain_one` VALUES ('d2a53e7a-4d9a-44bf-9009-390cff4e58ff', 'xyzc.cn', '兴义之窗', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:57');
 INSERT INTO `domain_one` VALUES ('d2a6f3d1-2d61-43d4-8880-39cc708b419e', 'hcwang.cn', '河池日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:06');
 INSERT INTO `domain_one` VALUES ('d2d14f71-c159-4065-a4e0-a7c49e97528d', 'macaodaily.com', '澳门日报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:07:33');
+INSERT INTO `domain_one` VALUES ('d2e5e116-c895-40bf-acf3-8e1e0c3b505a', 'shangc.net', '尚之潮网', '', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('d2e5e478-d770-4a07-b7c1-9d38cfdd45a1', 'xmnn.cn', '厦门日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:25');
 INSERT INTO `domain_one` VALUES ('d2f0a89e-4141-42e1-a116-3d8828c15ebc', 'atzg.cn', '自贡都市网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:05:28');
 INSERT INTO `domain_one` VALUES ('d2fec8cb-289a-413e-9718-491f5d614395', 'tdcm.cn', '陶都传媒网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:11');
-INSERT INTO `domain_one` VALUES ('d31b0129-33a4-4d67-96df-84b3c2d83f1e', 'wccdaily.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-05 21:34:04');
+INSERT INTO `domain_one` VALUES ('d31b0129-33a4-4d67-96df-84b3c2d83f1e', 'wccdaily.com.cn', '华西都市报', '其他', '报纸', '其他', '其他', '0', '0', '2017-12-17 01:00:03');
 INSERT INTO `domain_one` VALUES ('d31f8f8c-6467-4d3e-9fb1-2620440cfe17', '58mj.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-11-16 10:34:19');
 INSERT INTO `domain_one` VALUES ('d326ba23-bba7-40b1-9765-a6f0de801e60', 'bbnews.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:45');
-INSERT INTO `domain_one` VALUES ('d3332e4b-4ec2-45db-af1f-ac9e314c23c4', '81lj.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('d3332e4b-4ec2-45db-af1f-ac9e314c23c4', '81lj.com', '八一亮剑论坛', '其他', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('d3988aeb-0933-40d9-bc0e-77d5772a363b', '10yan.com', '秦楚网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:30');
 INSERT INTO `domain_one` VALUES ('d39dfde7-d428-4971-85d7-10a770854c19', 'tengzhou.com.cn', '滕州信息港', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:11');
 INSERT INTO `domain_one` VALUES ('d3dde3e0-bacc-4e55-b3ca-0d67b2059164', 'jiangyanwang.cn', '姜堰网论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:55');
@@ -1756,6 +1829,7 @@ INSERT INTO `domain_one` VALUES ('d6d145f1-6723-4d15-801f-b2f7076a6d92', 'srzc.c
 INSERT INTO `domain_one` VALUES ('d6eb4cc6-04bb-48e9-8b2a-347e7c709ef9', 'cqwsnews.gov.cn', '万盛论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:08');
 INSERT INTO `domain_one` VALUES ('d704cb27-72c5-4c9a-8c4c-ce91ba5675f2', 'fjsyxww.com', '中国永庆集团', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:34');
 INSERT INTO `domain_one` VALUES ('d731e4ba-927e-44d1-9d46-4ff2d9ccd6b5', 'ln19.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:26');
+INSERT INTO `domain_one` VALUES ('d73c97aa-f601-432e-a562-5ff97fb2259d', 'teachercn.com', '中教网', '综合新闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('d74d2337-da12-4d35-9f15-aba34bd53785', 'chengzhou.net', '成州论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:07:26');
 INSERT INTO `domain_one` VALUES ('d75071e2-b90d-415e-a6eb-58077d60a158', 'ifeng.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:05:16');
 INSERT INTO `domain_one` VALUES ('d7a046c6-59db-42ae-9f0f-5f36c1ae96f3', 'dqdaily.com', '大庆网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:23');
@@ -1772,9 +1846,10 @@ INSERT INTO `domain_one` VALUES ('d8372f96-32bf-41dc-bb51-d790da69b540', '71.cn'
 INSERT INTO `domain_one` VALUES ('d83b591c-b58c-439f-89d0-1b14da791a99', 'tiexue.net', '铁血社区', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:09');
 INSERT INTO `domain_one` VALUES ('d875c9e5-212f-4b20-a991-6ddd7125d79f', 'dl.gov.cn', '中国大连', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:45');
 INSERT INTO `domain_one` VALUES ('d8a28fc6-1d90-4567-8178-8cea79e15e8b', 'netease.com', '梦幻西游2官方论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:41');
+INSERT INTO `domain_one` VALUES ('d8a59995-cda2-4c93-a656-160afd9103cb', 'cngold.org', '金投网', '能源资讯', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('d8aef5c5-0122-4b6f-a51c-a03461309112', 'ccin.com.cn', '中化新网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:33');
 INSERT INTO `domain_one` VALUES ('d8b465e1-25d9-4140-aef1-ee914ac32fd2', 'bzedu.com.cn', '巴中教育网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:33');
-INSERT INTO `domain_one` VALUES ('d8b7ae23-d177-4c51-b66a-bea474f5957d', 'cssq.net', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
+INSERT INTO `domain_one` VALUES ('d8b7ae23-d177-4c51-b66a-bea474f5957d', 'cssq.net', '超盛网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('d8c117dd-d279-4ab5-b1e3-1f41da1868fd', 'haidong.gov.cn', '海东地区行政公署', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('d8c7b007-7977-4e93-8294-b3975d78f605', 'guoxue.com', '国学网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:10');
 INSERT INTO `domain_one` VALUES ('d8da2793-120d-4e97-8bf5-41670154b16e', 'hainan.net', '海南在线', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:07:09');
@@ -1783,6 +1858,7 @@ INSERT INTO `domain_one` VALUES ('d95165ca-5272-4e07-b70c-3c09b09a1524', 'szgxq.
 INSERT INTO `domain_one` VALUES ('d95cbb34-8906-4de2-b9e6-77c2e40a8c29', 'beihai.gov.cn:8080', '北海日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:30');
 INSERT INTO `domain_one` VALUES ('d96383bc-1c7a-4d68-b68b-35b89365752e', 'sogou.com', '搜狗问问', '其他', '问答', '问答', '其他', '0', '1', '2017-08-15 11:06:14');
 INSERT INTO `domain_one` VALUES ('d9aa8950-3326-4cf7-8d74-74aeed0ecb55', 'szlg.com', '龙岗网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:44');
+INSERT INTO `domain_one` VALUES ('d9c06507-5317-4a74-b6b8-e195732d58e3', 'sass.cn', '四川省社会科学院', '理论研究', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('d9ea9f22-6cb2-4a1f-9935-567a16f8ca25', 'hnntv.cn', '海南网络广播电视台', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:09');
 INSERT INTO `domain_one` VALUES ('da17eaac-0a29-4937-9963-77d3079a2d68', 'sc.gov.cn', '四川省人民政府', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:15');
 INSERT INTO `domain_one` VALUES ('da291012-84a3-44e5-a138-04923d86ae5c', 'tibet3.com', '西海都市报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:04');
@@ -1790,6 +1866,7 @@ INSERT INTO `domain_one` VALUES ('da3c0156-c102-4e88-a0ee-0f581b23d99a', 'people
 INSERT INTO `domain_one` VALUES ('da4df563-3163-4c32-92fb-0b3aa56d9133', 'pearvideo.com', '梨视频', '其他', '视频', '其他', '其他', '0', '0', '2017-08-15 11:06:48');
 INSERT INTO `domain_one` VALUES ('da50323c-45ba-41f2-a4fe-35f340e98f64', 'szhgh.com', '红歌会网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:05');
 INSERT INTO `domain_one` VALUES ('da7beb6e-3b86-4023-834f-8c3dcd982da0', 'sichuanpeace.gov.cn', '四川长安网', '其他', '其他', '省级', '其他', '0', '0', '2017-08-15 11:06:15');
+INSERT INTO `domain_one` VALUES ('da836e7c-bfdd-4281-95fb-3efd2f78d959', 'scbzol.com', '搜狗', '新闻搜索', '搜索', '其他', '其他', '0', '0', '2017-12-17 01:00:05');
 INSERT INTO `domain_one` VALUES ('da8e47e0-4518-4273-815b-194629ad26e9', 'anlaiwuyou.net', '俺莱芜有论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:33');
 INSERT INTO `domain_one` VALUES ('daaa12ec-86a5-49d3-be66-2f19afb7b7d9', 'jnzx.cc', '济宁城市在线论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('daaded21-1d48-42b6-9e6b-a8872da1bc2b', 'cq69.com', '驴友空间', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:42');
@@ -1809,8 +1886,9 @@ INSERT INTO `domain_one` VALUES ('dc953dc4-8138-4d92-bf95-bbd9fb2f8153', '12371.
 INSERT INTO `domain_one` VALUES ('dcb28701-2a95-4d47-9e9b-dc55093ff127', 'dbs110.gov.cn', '调兵山市公安局', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:09');
 INSERT INTO `domain_one` VALUES ('dcbd3f3e-cec8-4979-91eb-384fa6d1ec7d', 'suiw.cn', '中国随州网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:38');
 INSERT INTO `domain_one` VALUES ('dcbed3af-6dfa-4d57-8da1-9d009260da22', 'cnepaper.net', '今日婺城', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:54');
-INSERT INTO `domain_one` VALUES ('dcc8a092-88eb-4231-81ce-749aba71d04e', 'qhnews.com', '青海新闻网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:30');
+INSERT INTO `domain_one` VALUES ('dcc8a092-88eb-4231-81ce-749aba71d04e', 'qhnews.com', '青海新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('dccc42db-69a8-44cf-9a2a-527cedb7d6c4', 'sina.com.hk', '新浪网（香港）', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:59');
+INSERT INTO `domain_one` VALUES ('dcdf171e-8dae-4e88-aeea-f75f9e1447e1', 'le.com', '乐视网', '体育', '视频', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('dce5dd66-9bce-4325-85eb-ac3370d18e38', 'efw.cn', '无锡房产', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:05');
 INSERT INTO `domain_one` VALUES ('dd10a61c-8e8c-4140-be32-604831d50127', 'qinzhou360.com', '钦州360网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:30');
 INSERT INTO `domain_one` VALUES ('dd17d44d-93bb-48e9-b894-dd7b60d062a6', 'smelzh.gov.cn', '兰州市中小企业网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:49');
@@ -1822,6 +1900,8 @@ INSERT INTO `domain_one` VALUES ('dd4f18f3-0b5e-4a0c-8032-c925554a3885', 'ncqss.
 INSERT INTO `domain_one` VALUES ('dd7d5089-b098-408e-9ee3-995f83a30e66', 'hzjgnews.com.cn', '杭州市工业经济信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:08');
 INSERT INTO `domain_one` VALUES ('dd938f38-d3c4-4acf-adee-494a90a18735', 'hainei.org', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
 INSERT INTO `domain_one` VALUES ('dd93d468-babd-4412-800d-007d00c3d00b', 'cnwomen.com.cn', '中国女性网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:44');
+INSERT INTO `domain_one` VALUES ('dda85d85-74c2-49a9-89b8-f1aaed00a0b3', 'meipian.me', '精彩美篇', '首页', '其他', '其他', '其他', '0', '1', '2017-12-17 01:00:07');
+INSERT INTO `domain_one` VALUES ('dde26d00-f8c6-4d71-bc88-0583fb5489ca', '2laibin.com', '爱来宾论坛', '最新', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('ddf63849-0611-4859-9b05-fe8fa31cdb73', 'suining.gov.cn', '遂宁市政府信息公开', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:13');
 INSERT INTO `domain_one` VALUES ('ddfb5444-d819-4c2a-896c-2dbe05a02c2c', 'zigongpeace.gov.cn', '自贡长安网', '首页', '新闻', '其他', '其他', '0', '0', '2017-11-21 16:43:15');
 INSERT INTO `domain_one` VALUES ('ddff5cde-8c93-4c58-9d03-f57a6b54e943', 'hy-chuang.com', '环球新观察网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:01');
@@ -1870,6 +1950,7 @@ INSERT INTO `domain_one` VALUES ('e3779d0f-c6b1-4494-b4e2-d0c6ff3528e9', 'ybvv.c
 INSERT INTO `domain_one` VALUES ('e405c8c8-b9e9-446e-a69d-b76e9c5e45c2', 'shzfzz.net', '上海政法综治网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:22');
 INSERT INTO `domain_one` VALUES ('e40706b4-270b-4b01-acae-311d4b2110a1', 'tibetannet.com', '青海电视台', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:30');
 INSERT INTO `domain_one` VALUES ('e41671e1-5e0f-4f43-af11-b0b365c832fb', 'kaixian.tv', '汉丰网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:08');
+INSERT INTO `domain_one` VALUES ('e431cec6-bcd8-409d-bfea-d3c0908500e4', 'emoney.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('e43d6d61-3141-48fd-a9b4-d52d5f0159ce', 'wys123.com', '武夷山论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('e4874eca-705e-428e-8d22-118a58b25e09', 'bj148.org', '首都政法网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:18');
 INSERT INTO `domain_one` VALUES ('e48bfa00-13ec-41a6-be1e-d8dcf636faeb', 'byz5.com', '好集网宝鸡在线论坛', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:07');
@@ -1924,11 +2005,14 @@ INSERT INTO `domain_one` VALUES ('ea7af60e-3186-465d-a689-23654888d831', 'hitax.
 INSERT INTO `domain_one` VALUES ('ea957ce1-5eb7-44bb-be1e-e7970f60ac91', 'zjk169.net', '张家口资讯网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:50');
 INSERT INTO `domain_one` VALUES ('ea95c7ec-3cb2-4131-b658-466c06fff04e', 'ziyangpeace.gov.cn', '资阳长安网', '其他', '其他', '其他', '其他', '0', '1', '2017-11-21 16:43:14');
 INSERT INTO `domain_one` VALUES ('eaa9b3e9-362b-464a-bec7-b10d2ea1d4a8', 'hongshannet.cn', '红山网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:04');
+INSERT INTO `domain_one` VALUES ('eae029c0-aaf7-4938-8de6-0619c9d8f331', 'wuxinghuayuan.com', '南充五星花园', '最新', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('eae08b54-a9f2-4196-9d81-8772a8a4e5ea', 'tj.gov.cn', '中国天津', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:05:37');
+INSERT INTO `domain_one` VALUES ('eb1a9e61-abac-4598-ae0b-dccf535a6e41', '36683.com', '中华健康网', '健康资讯', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('eb411126-cdba-4b6b-a9b3-9413d81d8c4f', 'syd.com.cn', '沈阳网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:06:20');
 INSERT INTO `domain_one` VALUES ('eb42769e-1e32-4d12-8414-1e0f3fffb72c', 'cnqiang.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:25');
 INSERT INTO `domain_one` VALUES ('eb9385c5-269d-4455-9eef-d30e65708eb5', 'qjrb.cn', '曲靖新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:28');
 INSERT INTO `domain_one` VALUES ('eba2de46-b4c1-4f02-913e-586f0f66e67f', 'tygabmfw.gov.cn', '太原公安便民服务在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:13');
+INSERT INTO `domain_one` VALUES ('ebc93982-60ff-4a78-a7c9-027d7d69316c', 'hoopchina.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '1', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('ebd45231-0107-4959-8665-da7b99aaf091', 'zynews.cn', '中原网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:05:32');
 INSERT INTO `domain_one` VALUES ('ebec0fce-e5cd-408d-99c0-fb2e6bb84558', 'taihainet.com', '台海网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:13');
 INSERT INTO `domain_one` VALUES ('ec0e332c-a4d0-424f-b293-226da8709bdd', 'huatu.com', '华图教育', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:02');
@@ -1959,6 +2043,7 @@ INSERT INTO `domain_one` VALUES ('ef762a27-8338-4eaa-ba81-225139ad9a2c', 'mdmmm.
 INSERT INTO `domain_one` VALUES ('ef8a85f5-cf2f-4deb-bb3f-97092c5aad09', 'njdaily.cn', '南报网', '其他', '新闻', '省级', '其他', '0', '1', '2017-08-15 11:06:39');
 INSERT INTO `domain_one` VALUES ('eff2b81b-a94f-4a98-9908-be5187bd5a45', 'qstheory.cn', '求是理论网', '其他', '新闻', '中央', '其他', '0', '0', '2017-08-15 11:06:29');
 INSERT INTO `domain_one` VALUES ('f0016e7a-5004-4203-a021-8864c3b0f55d', 'amb-chine.fr', '中国驻法大使馆', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:33');
+INSERT INTO `domain_one` VALUES ('f02856b0-88d0-4ca5-9b63-564dcb052cc8', 'ytbbs.com', '烟台论坛', '最新发表', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('f02b54da-f472-43a3-9da7-02174f31304c', 'hanzhong123.com', '汉中城市在线论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:08');
 INSERT INTO `domain_one` VALUES ('f0379c8d-94cb-4c8c-a5da-b55cbad641d2', 'workerbj.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-11-05 21:34:12');
 INSERT INTO `domain_one` VALUES ('f04049b2-4044-488e-8789-863c07b0e510', 'bilibili.com', '哔哩哔哩', '其他', '视频', '其他', '其他', '0', '0', '2017-08-15 11:07:29');
@@ -1982,6 +2067,8 @@ INSERT INTO `domain_one` VALUES ('f2dd6121-495a-4942-ab2d-e854e22b4935', 'financ
 INSERT INTO `domain_one` VALUES ('f2ff676d-68b0-44d1-bcd0-ccc11ab84dce', '3g.cn', '3G门户', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:07:37');
 INSERT INTO `domain_one` VALUES ('f3208c98-847c-4d9b-8edd-4d12b7a87ef2', 'gazx.gov.cn', '广西壮族自治区公安厅', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:11');
 INSERT INTO `domain_one` VALUES ('f338d996-0da5-45cc-b1d0-d44c2b914cfc', 'chinabyte.com', '比特网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:29');
+INSERT INTO `domain_one` VALUES ('f34f8f88-3d11-4fb4-ab8c-e88060c38410', 'rugao35.com', '如阜新闻网', '社会新闻', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
+INSERT INTO `domain_one` VALUES ('f3674b33-f8f8-4617-a931-9676eb0ceea5', 'chinastock.com.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('f367f1ff-374d-4779-8c50-1557ef9f7631', 'tyjcy.gov.cn', '内蒙古自治区人民检察院', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:36');
 INSERT INTO `domain_one` VALUES ('f3b74faf-d0be-4e43-bdaa-18604ab3ec4b', 'rzw.com.cn', '日照网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:26');
 INSERT INTO `domain_one` VALUES ('f3bc1e5c-cbc2-4bc1-85b5-804b7d4b61d4', 'jjxw.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:40');
@@ -2004,6 +2091,7 @@ INSERT INTO `domain_one` VALUES ('f5d17e51-93d7-4ede-9c1e-1b565f67f719', 'xinhua
 INSERT INTO `domain_one` VALUES ('f5de3338-adab-42f2-ba5d-c6b9b9debe3f', 'jn001.com', '济宁新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:59');
 INSERT INTO `domain_one` VALUES ('f5df1a33-2213-4c6d-89f1-d75cae7d596b', 'sipac.gov.cn', '苏州工业园区', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:13');
 INSERT INTO `domain_one` VALUES ('f5e5de86-ab00-421b-8df0-0ca5edd576f9', 'xj917.com', '新疆综合网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:00');
+INSERT INTO `domain_one` VALUES ('f60e1cb2-ee0e-4ea9-9daf-d75f94ede09d', 'jyrm.cn', '姜堰人民论坛', '最新回复', '论坛', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('f668653d-d699-4128-b81f-53e1b9bce346', '0813bbs.cn', '贡井论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:13');
 INSERT INTO `domain_one` VALUES ('f66eb3b5-4703-4c53-bfdb-224e94c561df', 'njd1.com', '内江第一城', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:37');
 INSERT INTO `domain_one` VALUES ('f690b4f4-6101-42bd-8fc6-940c9b76b6e8', 'ouryao.com', '蒲公英论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:32');
@@ -2011,10 +2099,10 @@ INSERT INTO `domain_one` VALUES ('f6e486b8-5c35-4982-8801-11407905fb10', 'scedu1
 INSERT INTO `domain_one` VALUES ('f7056175-39e2-4ab2-b331-2a23dfdeeaa3', 'bokee.net', '企博网', '其他', '博客', '其他', '其他', '0', '0', '2017-08-15 11:06:32');
 INSERT INTO `domain_one` VALUES ('f717bc6b-a74a-4f05-bafc-b0b71378f50a', 'fsswj.gov.cn', '抚顺水务网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:15');
 INSERT INTO `domain_one` VALUES ('f71b7de0-5ea2-40b1-b2b3-ed50042273fb', '0597kk.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:24');
-INSERT INTO `domain_one` VALUES ('f71ec6e0-baec-450c-bea0-c3214c359cb0', 'sinopr.org', '中国公共资源交易网', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:05:44');
+INSERT INTO `domain_one` VALUES ('f71ec6e0-baec-450c-bea0-c3214c359cb0', 'sinopr.org', '中国公共资源交易网', '其他', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('f72b681b-41e4-44a7-84bb-3946d2a85f3c', 'xiaomayi.net', '小蚂蚁论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:02');
 INSERT INTO `domain_one` VALUES ('f7a2f0ee-dbf1-4092-a106-79496bdaf3a1', 'metalnews.cn', '中国金属新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:42');
-INSERT INTO `domain_one` VALUES ('f7aba0a4-baef-4021-ab01-a9ea3c812246', 'gjnews.cn', '各界新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:14');
+INSERT INTO `domain_one` VALUES ('f7aba0a4-baef-4021-ab01-a9ea3c812246', 'gjnews.cn', '各界新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:06');
 INSERT INTO `domain_one` VALUES ('f7b0c6e0-d451-4759-b828-57ba2adcabb4', 'sina.com', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:43');
 INSERT INTO `domain_one` VALUES ('f7fb3dd1-296b-4071-b2f3-e19e54f31a27', 'dlagri.gov.cn', '大理农业信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:24');
 INSERT INTO `domain_one` VALUES ('f800481a-838b-4047-b7a7-a7a3c4d8815a', 'legaldaily.com.cn', '法制网', '其他', '新闻', '中央', '其他', '0', '1', '2017-08-15 11:07:17');
@@ -2033,7 +2121,7 @@ INSERT INTO `domain_one` VALUES ('f9914734-ced3-4f73-b0e2-c3682cf9025b', 'sg169.
 INSERT INTO `domain_one` VALUES ('f99b89ff-4e4a-44da-a3be-902befdd36af', 'xichong.gov.cn', '西充县政府网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('f9af98f5-8677-4cc1-94c8-68b0fe9e63a0', 'weixinyidu.com', '头条易读', '其他', '微信', '微信', '其他', '0', '0', '2017-08-15 11:06:09');
 INSERT INTO `domain_one` VALUES ('f9e73dd4-7814-4e5a-bcbb-f40c88df8845', 'jaghc.com', '吉安信息网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:59');
-INSERT INTO `domain_one` VALUES ('fa23414e-b29d-4f4a-a6f6-96831f3638ed', 'scwmw.gov.cn', '四川文明网', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:06:15');
+INSERT INTO `domain_one` VALUES ('fa23414e-b29d-4f4a-a6f6-96831f3638ed', 'scwmw.gov.cn', '四川文明网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('fa2b22ca-9993-4664-8a49-902e056d381a', 'lzbs.com.cn', '兰州新闻网', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:06:49');
 INSERT INTO `domain_one` VALUES ('fa4aec2e-fdba-4787-abce-79e95e3fe2d0', 'gxsky.com', '时空论坛', '其他', '论坛', '论坛', '其他', '0', '1', '2017-08-15 11:06:20');
 INSERT INTO `domain_one` VALUES ('fa671601-0624-4511-abc1-b84b6f2abfd1', '0830bbs.com', '泸州论坛', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:06:43');
@@ -2045,12 +2133,14 @@ INSERT INTO `domain_one` VALUES ('fad3bc35-47b3-4e78-a607-ae0d9c8d28a3', 'leju.c
 INSERT INTO `domain_one` VALUES ('faf3c211-e226-4b4d-acaf-0a63ecd41925', 'zjwb.com.cn', '珠江晚报', '其他', '报纸', '其他', '其他', '0', '0', '2017-08-15 11:05:30');
 INSERT INTO `domain_one` VALUES ('fafa48d7-f3aa-41be-9bbb-0ed2e0088e6f', 'shuangliao.gov.cn', '双辽市人民政府', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:06:18');
 INSERT INTO `domain_one` VALUES ('fb27cad6-a076-4e0a-a7d7-19f226bd4949', 'jisnews.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:46');
+INSERT INTO `domain_one` VALUES ('fb32644c-b792-4869-a63e-dad23dced36e', 'snzj.gov.cn', '遂宁市质监局', '遂宁要闻', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:07');
 INSERT INTO `domain_one` VALUES ('fb32d78d-480b-43bc-a48b-e5f49b58621a', 'noyes.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('fb3a2813-1323-4f3e-87ad-b59027991305', 'ao853.com', '去澳门网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:28');
 INSERT INTO `domain_one` VALUES ('fb3a78af-f8e6-4d85-a96c-4ae440e87f09', 'meitanbbs.com', '99街湄潭网', '其他', '论坛', '论坛', '其他', '0', '0', '2017-08-15 11:07:36');
 INSERT INTO `domain_one` VALUES ('fb4662c3-912a-4f72-a2d8-772500c924ef', 'cz001.com.cn', '武进日报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:06:04');
 INSERT INTO `domain_one` VALUES ('fb70a5b0-6901-4d73-a551-c17c97ecd814', 'cjk3d.net', '水资讯网', '其他', '新闻', '其他', '其他', '0', '1', '2017-08-15 11:06:17');
 INSERT INTO `domain_one` VALUES ('fb76de08-447e-4769-8e4b-70abad1ca99b', 'tjbhnews.com', '滨海时报', '其他', '报纸', '其他', '其他', '0', '1', '2017-08-15 11:07:29');
+INSERT INTO `domain_one` VALUES ('fb7a069b-bee4-4a8f-9e9b-21517e6c5e55', 'c114.net', '其他', '社会综合', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('fba94016-cadb-49fe-b134-459ef41be4a0', 'xcf.cn', '新财富', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:02');
 INSERT INTO `domain_one` VALUES ('fbabd758-172d-4b57-a6aa-b649368ecfbd', 'people.cn', '手机人民网', '其他', '手机', '中央', '其他', '0', '1', '2017-08-15 11:06:19');
 INSERT INTO `domain_one` VALUES ('fc150a2d-5e4e-4011-a7d6-7027b2f77539', 'jiangshi99.com', '中国讲师网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:05:43');
@@ -2075,14 +2165,16 @@ INSERT INTO `domain_one` VALUES ('fe19f877-9e51-4543-92e2-21d1f52ed31e', 'qyu.cn
 INSERT INTO `domain_one` VALUES ('fe57eb39-ad17-4eaa-a248-74414a306b9d', 'scrxw.cc', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('fe73a37d-4db1-4fbb-9f66-3227b5f25bc7', 'sdluw.com', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:47');
 INSERT INTO `domain_one` VALUES ('fe8523cf-1e9c-4504-b753-e2f2f6a76c04', 'cqspb.cn', '沙坪坝外宣网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:25');
+INSERT INTO `domain_one` VALUES ('fe8b790e-47ae-488b-8263-447e2a173071', 'letv.com', '乐视网', '体育', '视频', '其他', '其他', '0', '0', '2017-12-17 01:00:04');
 INSERT INTO `domain_one` VALUES ('fe8fed17-8d8c-449f-8f7f-6b4a97083fd9', 'fabao365.com', '法邦网', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:50');
+INSERT INTO `domain_one` VALUES ('febb8cd4-e7b9-4b05-b3d2-51036b532338', 'ganzixinwen.com', '其他', '社会综合', '新闻', '其他', '其他', '0', '0', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('fefff7e1-799e-4b93-9754-caf035cd8b54', 'yasyy.com', '雅安市人民医院', '其他', '资讯', '其他', '其他', '0', '0', '2017-11-21 11:32:48');
 INSERT INTO `domain_one` VALUES ('ff0ab78f-ee9c-4752-bdb1-9ae841c905d5', 'yahoo.com', '雅虎（香港）', '其他', '境外', '外媒', '其他', '0', '1', '2017-08-15 11:05:56');
 INSERT INTO `domain_one` VALUES ('ff85e217-8f1a-4584-a010-1321dda75217', 'shifengnews.cn', '石峰新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:20');
 INSERT INTO `domain_one` VALUES ('ff90e2dc-d278-4e4c-a519-e3bcdc856fa7', 'aqzyzx.com', '枞阳在线', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:07:25');
 INSERT INTO `domain_one` VALUES ('ffce1401-fd25-4ef8-bd33-99c392b05660', 'dywang.cn', '其他', '其他', '其他', '其他', '其他', '0', '1', '2017-08-15 11:07:46');
 INSERT INTO `domain_one` VALUES ('ffdb4ab6-fef6-4972-829c-d988ce85c46b', 'gdta.gov.cn', '广东省旅游局', '其他', '新闻', '省级', '其他', '0', '0', '2017-08-15 11:07:12');
-INSERT INTO `domain_one` VALUES ('ffe7943c-a594-49b3-b21f-bf227ebe3b24', 'snxw.com', '遂宁新闻网', '其他', '新闻', '其他', '其他', '0', '0', '2017-08-15 11:06:13');
+INSERT INTO `domain_one` VALUES ('ffe7943c-a594-49b3-b21f-bf227ebe3b24', 'snxw.com', '遂宁新闻网', '其他', '新闻', '其他', '其他', '0', '1', '2017-12-17 01:00:08');
 INSERT INTO `domain_one` VALUES ('ffef74cb-f519-4f41-92f7-de11d9d73f6f', 'yangqiu.cn', '其他', '其他', '其他', '其他', '其他', '0', '0', '2017-08-15 11:07:48');
 
 -- ----------------------------
@@ -2117,14 +2209,16 @@ INSERT INTO `domain_two` VALUES ('00a0b15d-5a04-4fd2-9e08-bc5a861dbccd', 'hb.jjj
 INSERT INTO `domain_two` VALUES ('00b03880-eb61-4794-a420-baf00499fa26', 'junlian.ccoo.cn', '筠连在线', '其他', '新闻', '其他', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:51');
 INSERT INTO `domain_two` VALUES ('00ceb7ae-6fdd-442a-a97b-48c3c726519e', 'chuzhong.eol.cn', '中国教育在线', '其他', '新闻', '其他', '其他', '0', '33b209e1-a367-469b-a6e7-a635704c21ba', '2017-08-15 11:05:42');
 INSERT INTO `domain_two` VALUES ('00ff31d6-b097-4bd1-99ff-6ac5e110a617', 'm.xuexila.com', '学习啦', '其他', '资讯', '其他', '其他', '0', '7d50e5ac-ab55-4409-9ffd-f9453f807dbc', '2017-11-21 11:32:48');
+INSERT INTO `domain_two` VALUES ('011ab6de-555d-4091-a823-68b9bfd72b16', 'sckjb.newssc.org', '四川科技报', '第01版：要闻', '报纸', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('01539af9-4e42-4bd5-bf96-b111dfb85b0b', 'gd.cri.cn', '国际在线广东频道', '其他', '新闻', '其他', '其他', '0', '5feb369f-0c96-4c37-9829-fa1e35390064', '2017-08-15 11:07:10');
-INSERT INTO `domain_two` VALUES ('01d49172-e88d-4804-9250-ec3e13022379', 'sports.sina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:07:44');
+INSERT INTO `domain_two` VALUES ('01d49172-e88d-4804-9250-ec3e13022379', 'sports.sina.com.cn', '新浪', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('01d63d15-ff4f-4e1f-8412-a3ddd093c143', 'star.cjmx.com', '超级明星', '其他', '新闻', '其他', '其他', '0', '9ac667be-accc-4262-8acd-93e7925b130a', '2017-08-15 11:07:27');
 INSERT INTO `domain_two` VALUES ('022687a3-abf0-4416-9397-5d615ee58973', 'bbs.cntv.cn', '复兴论坛', '其他', '论坛', '论坛', '其他', '0', 'baba572f-8c77-4555-9f34-f200ce43fd86', '2017-08-15 11:07:14');
 INSERT INTO `domain_two` VALUES ('0271cd39-cc18-488f-a5a9-7b0ff21340af', 'txy.hebei.com.cn', '长城网', '其他', '新闻', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-08-15 11:05:49');
 INSERT INTO `domain_two` VALUES ('029a1f26-5ad0-48ac-b06a-2935d1b5d903', 'news.hynews.net', '淮安新闻网', '其他', '新闻', '其他', '其他', '0', '5a0236fa-d522-4108-8bc0-b67bbf6f8321', '2017-08-15 11:07:01');
 INSERT INTO `domain_two` VALUES ('02ad1f98-308d-44db-b092-9617cd0d2df5', 'iask.sina.com.cn', '爱问知识人', '其他', '问答', '问答', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:07:34');
 INSERT INTO `domain_two` VALUES ('02ed1410-ef25-4dfe-8453-270a44d86fa8', 'jjc.cq.gov.cn', '重庆市监察局', '其他', '新闻', '其他', '其他', '0', '8f3f4e50-f96f-4051-93a3-4f88665aee28', '2017-08-15 11:05:31');
+INSERT INTO `domain_two` VALUES ('02fb8dfd-d698-42ea-a053-b4f15734b10b', 'wusheng.ccoo.cn', '武胜热线网', '首页', '新闻', '其他', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('03a70225-9427-419b-b3e1-c3276d7fcea1', 'iptvlm.zjol.com.cn', '杭州西湖网', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:07:07');
 INSERT INTO `domain_two` VALUES ('04bea4a0-7873-4911-b0ab-d96af225346b', 'bbs.e23.cn', '舜网-济南论坛', '其他', '论坛', '论坛', '其他', '0', '8eb70685-3d51-4466-83d2-c99fb1efcadf', '2017-08-15 11:06:17');
 INSERT INTO `domain_two` VALUES ('04cae0e6-e944-4ae0-9b39-e5eb72253797', 'zx.nanjing.gov.cn', '中国南京', '其他', '新闻', '其他', '其他', '0', '308b7521-c024-4564-8f3f-5733cbcb519b', '2017-08-15 11:05:41');
@@ -2134,10 +2228,11 @@ INSERT INTO `domain_two` VALUES ('04dcb056-6913-4246-95b4-abea6dcbcbe0', 'm.thep
 INSERT INTO `domain_two` VALUES ('0543adf0-fe8a-4949-806a-1322439c85ec', 'law.cyol.com', '其他', '其他', '其他', '其他', '其他', '0', 'b4695e23-8245-4434-a14d-715acb110a55', '2017-08-15 11:05:20');
 INSERT INTO `domain_two` VALUES ('055dc3a3-833b-433d-9dde-a259af5c7e6e', 'news.wehefei.com', '合肥新闻资讯', '其他', '新闻', '其他', '其他', '0', '0f1008ee-ed34-424c-89fa-576de169979a', '2017-08-15 11:07:07');
 INSERT INTO `domain_two` VALUES ('058d8b6c-1db2-4ae1-afb8-92510a7963db', 'bendi.news.163.com', '网易广东', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:06:07');
+INSERT INTO `domain_two` VALUES ('05aac85f-238f-45f3-8b8a-03d6d8660393', 'edu.chinajilin.com.cn', '中国吉林网', '', '新闻', '其他', '其他', '0', '41071877-bb27-407f-930b-ee49b12d68cc', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('067cb5d7-16d6-4b18-87b5-331f60f3bb0d', 'jiaozuo.ccoo.cn', '焦作在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:55');
 INSERT INTO `domain_two` VALUES ('06fb9bff-a24f-43ef-bac2-f19c5acbcbeb', 'shop.lyss123.com', '其他', '其他', '其他', '其他', '其他', '0', '5cf350e9-befb-47c8-9c8b-3d9f363cf560', '2017-08-15 11:05:23');
 INSERT INTO `domain_two` VALUES ('07284cb5-04f5-4103-9381-db93a6b73956', 'sc.sina.com.cn', '新浪四川', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:59');
-INSERT INTO `domain_two` VALUES ('07d273c1-7c3d-4bec-b482-97c9245b05a9', 'news.syd.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'eb411126-cdba-4b6b-a9b3-9413d81d8c4f', '2017-11-05 21:34:06');
+INSERT INTO `domain_two` VALUES ('07d273c1-7c3d-4bec-b482-97c9245b05a9', 'news.syd.com.cn', '沈阳网', '其他', '新闻', '其他', '其他', '0', 'eb411126-cdba-4b6b-a9b3-9413d81d8c4f', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('07ec2ccd-1989-4c6a-af3c-0bf788030890', 'paper.lfxww.com', '临汾日报', '其他', '报纸', '其他', '其他', '0', '216f7d23-2c1e-4db5-93a6-e5eb9d81d5b9', '2017-08-15 11:06:45');
 INSERT INTO `domain_two` VALUES ('08187f60-a21b-4456-bb73-f4f2e13bfe8e', 'licaishi.sina.com.cn', '新浪理财师', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:59');
 INSERT INTO `domain_two` VALUES ('084d76d9-ca94-48f6-9c97-ca5e6b1c6087', 'politics.people.com.cn', '人民网', '时政', '新闻', '中央', '全国', '100', '8072b856-1b59-407d-ac52-8adfb9a2ddb7', '2017-07-19 15:22:18');
@@ -2152,22 +2247,26 @@ INSERT INTO `domain_two` VALUES ('0a410ef4-016e-48ab-8232-167cff40b728', 'fazhi.
 INSERT INTO `domain_two` VALUES ('0a42d774-5c20-4d55-8080-58747efe83fb', 'heze.sdchina.com', '其他', '其他', '其他', '其他', '其他', '0', 'c5588cbf-0a8d-4a04-bb6b-260d6e4cdd70', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('0a5df300-ba41-45ec-ad29-8127a2dc39e0', 'bbs.hest.cn', '海斯特钓具连锁论坛', '其他', '论坛', '论坛', '其他', '0', '00a949d4-38ac-4147-a419-30836b1ed86a', '2017-08-15 11:07:09');
 INSERT INTO `domain_two` VALUES ('0a651c21-1fd1-4888-894f-91b408c7ee41', 'wx.sina.com.cn', '新浪无锡', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:59');
+INSERT INTO `domain_two` VALUES ('0aa2a85c-62d9-4590-889d-76e90b413a91', 'groups.tianya.cn', '天涯社区', '天天315', '论坛', '其他', '其他', '0', 'd180ef53-2206-48b8-884c-7b04b61c487c', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('0aba0bb0-e8d3-4d75-8f75-5080634dd846', 'legal.china.com.cn', '中国网法治频道', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('0accd24b-65f1-49ee-97aa-9f105f564a1f', 'irm.cninfo.com.cn', '深交所互动易', '其他', '问答', '问答', '其他', '0', '2f7fae43-7c3d-4d26-ab36-e0eff25c4ae7', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('0ade81d4-c902-4087-8e4d-a58273011de0', 'ly.zgnhzx.com', '宁化在线', '其他', '新闻', '其他', '其他', '0', '2697e279-295d-4615-a680-80b72a1ff038', '2017-08-15 11:06:35');
-INSERT INTO `domain_two` VALUES ('0aeb34d6-79cf-4a96-9519-765ea6030c6c', 'bbs.safehoo.com', '其他', '其他', '其他', '其他', '其他', '0', '2e2e1dd2-ce95-4d62-8227-7ff881b3632b', '2017-08-15 11:05:17');
+INSERT INTO `domain_two` VALUES ('0aeb34d6-79cf-4a96-9519-765ea6030c6c', 'bbs.safehoo.com', '安全管理论坛', '其他', '论坛', '其他', '其他', '0', '2e2e1dd2-ce95-4d62-8227-7ff881b3632b', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('0b1514d3-448e-4066-9fb6-eebfb494b826', 'news.hainan.net', '海南在线', '其他', '新闻', '省级', '其他', '0', 'd8da2793-120d-4e97-8bf5-41670154b16e', '2017-08-15 11:07:09');
+INSERT INTO `domain_two` VALUES ('0b5eb847-6b14-4f63-8b7e-d92ce1834001', 'sn.newssc.org', '四川新闻网遂宁频道', '要闻', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('0b761ab0-0aca-4b06-8353-d8d1bf62391f', 'news.xxnet.com.cn', '湘西网', '其他', '新闻', '其他', '其他', '0', '44d4e4cc-0f29-4129-90b2-787a7875549f', '2017-08-15 11:06:03');
 INSERT INTO `domain_two` VALUES ('0b90d483-4fce-4cb3-ad18-2728f5611cc2', 'epaper.rmzxb.com.cn', '人民政协报', '其他', '报纸', '中央', '其他', '0', '40b450b1-0182-414d-aba6-a5591af2ca95', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('0b9a1029-ce5e-4229-ab0e-d3743f23d4c7', 'ngdsb.hinews.cn', '南国都市报', '其他', '报纸', '其他', '其他', '0', 'c191750f-b78e-44cd-b902-3ad854c35108', '2017-08-15 11:06:38');
 INSERT INTO `domain_two` VALUES ('0bb46be9-77ca-4181-aca4-4cdcd24544a1', 'qhyq.qhnews.com', '青海新闻网', '其他', '新闻', '其他', '其他', '0', 'dcc8a092-88eb-4231-81ce-749aba71d04e', '2017-08-15 11:06:30');
 INSERT INTO `domain_two` VALUES ('0bdc4892-1147-4fa0-a7f0-1fb1463b6fa4', 'paper.cnwomen.com.cn', '中国妇女报', '其他', '报纸', '其他', '其他', '0', 'dd93d468-babd-4412-800d-007d00c3d00b', '2017-08-15 11:05:44');
+INSERT INTO `domain_two` VALUES ('0c1df2f9-8562-4d07-b127-51cd67d7d476', 'qbj.ccoo.cn', '青白江在线网', '首页', '新闻', '其他', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('0c2fc802-4ba1-4659-a6d8-83dcc0e81e12', 'xyq.netease.com', '梦幻西游2官方论坛', '其他', '论坛', '论坛', '其他', '0', 'd8a28fc6-1d90-4567-8178-8cea79e15e8b', '2017-08-15 11:06:41');
-INSERT INTO `domain_two` VALUES ('0c30b9e8-a012-4eea-bdb6-5620328ae108', 'cq.cqnews.net', '其他', '其他', '其他', '其他', '其他', '0', 'a14117b2-235a-42ea-bae5-7ca7cc38e747', '2017-08-15 11:07:38');
+INSERT INTO `domain_two` VALUES ('0c30b9e8-a012-4eea-bdb6-5620328ae108', 'cq.cqnews.net', '华龙网', '其他', '新闻', '其他', '其他', '0', 'a14117b2-235a-42ea-bae5-7ca7cc38e747', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('0c369cfe-8343-4b56-90b6-8d16ad2feea2', 'partner.qianlong.com', '其他', '其他', '其他', '其他', '其他', '0', '54e5636c-85d4-4ed5-b38f-3e28b43f837c', '2017-11-05 21:34:05');
 INSERT INTO `domain_two` VALUES ('0c46c5a7-652b-4eb7-a0cc-b770622db35a', 'bbs.ruoren.com', '若人论坛', '其他', '论坛', '论坛', '其他', '0', '9af931a8-ce28-44f4-b1fb-02b2d00de243', '2017-08-15 11:06:26');
 INSERT INTO `domain_two` VALUES ('0c49acc5-faf1-4c94-81c0-686df3e6c70a', 'sc.wenming.cn', '中国文明网_四川', '其他', '新闻', '其他', '其他', '0', 'e7211fcf-2818-43a3-99b5-5cc3e9b272a8', '2017-08-15 11:05:35');
 INSERT INTO `domain_two` VALUES ('0c5aa6c5-36e9-4175-9118-78875aa9bb87', 'ay.ziyangpeace.gov.cn', '资阳长安网', '安岳县', '新闻', '其他', '其他', '0', 'ea95c7ec-3cb2-4131-b658-466c06fff04e', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('0c64ac4c-9a2b-48ef-a4a0-738280260457', 'xzb.scol.com.cn', '消费质量报', '', '报纸', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('0c64c309-dd2e-4bcc-a983-1fb24c79ad58', 'ccwb.1news.cc', '长春晚报', '其他', '报纸', '其他', '其他', '0', '6583e848-3988-4f21-a5b1-2df0ad237fd7', '2017-08-15 11:05:49');
 INSERT INTO `domain_two` VALUES ('0c8d5fcd-9c99-4775-ad50-67ee15cc694b', 'finance.zdcj.net', '正点财经', '其他', '新闻', '其他', '其他', '0', '2d978c7c-6753-42ed-96c0-125b25a8fbef', '2017-08-15 11:05:48');
 INSERT INTO `domain_two` VALUES ('0cb9978e-a149-44c0-9dae-bb312dd21de0', 'lsrb.ls666.com', '凉山日报', '其他', '报纸', '其他', '其他', '0', '682d25ab-fddf-4fff-85c5-6cdac1bd8728', '2017-08-15 11:06:46');
@@ -2178,24 +2277,27 @@ INSERT INTO `domain_two` VALUES ('0d5ff453-fea7-4297-921e-e25c52a7860e', 'digi.d
 INSERT INTO `domain_two` VALUES ('0d639a0e-fafa-41f1-b620-969d23657c76', 'finance.gog.cn', '其他', '其他', '其他', '其他', '其他', '0', '3831de88-5cb4-4069-be08-713abf328605', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('0d8a2f78-1cd7-43a1-93dc-f616883f2de3', 'langlailangqu.blog.caixin.com', '财新博客', '其他', '博客', '其他', '其他', '0', '8da0fea4-cec3-41b3-8ecd-8fbecc861760', '2017-08-15 11:07:28');
 INSERT INTO `domain_two` VALUES ('0d9e47bf-fcea-4010-b302-1a9ef58ec4f9', 'guoqing.china.com.cn', '中国网中国国情', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:36');
-INSERT INTO `domain_two` VALUES ('0dc0eb47-4590-4961-ba27-99f0d7940188', 'magazine.newssc.org', '四川新闻网', '其他', '其他', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:06:15');
+INSERT INTO `domain_two` VALUES ('0dc0eb47-4590-4961-ba27-99f0d7940188', 'magazine.newssc.org', '四川新闻网', '其他', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('0e13eb50-450e-4c9c-9cdb-0f0ad6ad1a63', 'bbs.aboluowang.com', '阿波罗论坛', '其他', '境外', '外媒', '其他', '0', '8e7f9a1a-db97-42cf-a4db-dc9c4fe477f6', '2017-08-15 11:07:35');
 INSERT INTO `domain_two` VALUES ('0e50cf70-f26b-4a2f-b5f7-6d293cea681a', 'e.hznews.com', '惠州日报', '其他', '报纸', '其他', '其他', '0', '9dae1664-6374-40de-a925-026ef2fc0655', '2017-08-15 11:07:00');
+INSERT INTO `domain_two` VALUES ('0e6bf74f-9e7f-4aa6-b47b-2f148f669566', 'ncrb.cnncw.cn', '南充日报', 'A1:要闻', '报纸', '其他', '其他', '0', '181f56ad-cd44-4d55-898d-0a7c190533e6', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('0e766e41-b2b7-4efd-951a-81590c501991', 'news.aweb.com.cn', '农博网', '其他', '新闻', '其他', '其他', '0', '1653805f-dd21-42ee-9b32-eb83b0e215fa', '2017-08-15 11:06:35');
 INSERT INTO `domain_two` VALUES ('0ea76f1e-34e8-48b2-b253-164b0e070723', 'mi.chinabyte.com', '比特网', '其他', '其他', '其他', '其他', '0', 'f338d996-0da5-45cc-b1d0-d44c2b914cfc', '2017-08-15 11:07:29');
-INSERT INTO `domain_two` VALUES ('0eb1a367-0f35-4a45-b47e-e69a20b26d65', 'ku.m.chinanews.com', '其他', '其他', '其他', '其他', '其他', '0', 'bc2e97dc-a541-4872-affe-2ef1997809c7', '2017-11-05 21:34:10');
+INSERT INTO `domain_two` VALUES ('0eb1a367-0f35-4a45-b47e-e69a20b26d65', 'ku.m.chinanews.com', '其他', '其他', '新闻', '其他', '其他', '0', 'bc2e97dc-a541-4872-affe-2ef1997809c7', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('0eb4d950-5eec-496c-8c77-8bf66050ee83', 'paper.taizhou.com.cn', '台州商报', '其他', '报纸', '其他', '其他', '0', '0f393d77-2a06-4720-81cd-85fe3625b206', '2017-08-15 11:06:13');
 INSERT INTO `domain_two` VALUES ('0edd3ce5-e167-4013-ad46-cbfff217c10b', 'cqsb.cqtimes.cn', '重庆时报', '其他', '报纸', '省级', '其他', '0', '95aedc46-78bb-4f2a-89e0-9169babecc67', '2017-08-15 11:05:31');
 INSERT INTO `domain_two` VALUES ('0eef1301-40f9-476c-a14e-6331327e39fe', 'news.takungpao.com', '大公网', '其他', '境外', '外媒', '其他', '0', '0eda10d4-6902-4466-9df1-a2b91c6c4628', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('0ef7cdc1-96ed-4c7a-9ec1-2e5ca67080c5', 'club.cul.sohu.com', '搜狐论坛', '其他', '论坛', '论坛', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-08-15 11:06:14');
+INSERT INTO `domain_two` VALUES ('0fa06a2d-f152-42f4-8c9e-6d2383c9ff26', 'teach.scol.com.cn', '四川在线', '首页', '新闻', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('0fc54d8f-ae72-43e6-aaa2-98b977319a8a', 'blog.chengdu.cn', '郫县热网', '其他', '博客', '其他', '其他', '0', '12988e2e-c51c-4b12-b8c8-0579a6e843c7', '2017-08-15 11:06:33');
 INSERT INTO `domain_two` VALUES ('0fe8a5d7-2adc-4e14-8961-25934cf249e9', 'bbs.my0511.com', '梦溪讨论社区', '其他', '论坛', '论坛', '其他', '0', '6dc5b1bb-beae-4e4f-9455-12c69ef78b31', '2017-08-15 11:06:41');
 INSERT INTO `domain_two` VALUES ('1029fcf7-a997-4314-999b-d52ed3feea8e', 'yzwb.sjzdaily.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'e6d00f58-0435-4117-8748-ecf427b79f49', '2017-08-15 11:07:49');
+INSERT INTO `domain_two` VALUES ('102bba6c-5415-4fca-9dd0-2c72800d5c62', 'j.news.163.com', '网易荐新闻', '教育', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('102f9fd1-627e-494c-8cd9-919c9a751a75', 'bbs.jy1w.com', '雄州网社区', '其他', '论坛', '论坛', '其他', '0', 'a2d25b2d-29cc-4d31-a933-6334b70a5e5b', '2017-08-15 11:05:57');
 INSERT INTO `domain_two` VALUES ('106390a8-1637-4a11-a0dd-783e27c2618b', 'weixin.niurenqushi.com', '牛人微信', '其他', '微信', '微信', '其他', '0', '00679a7a-6f9a-4b4e-a226-2458d94821ed', '2017-08-15 11:06:35');
 INSERT INTO `domain_two` VALUES ('1075b2d5-12c6-4936-9a0a-d367ba97e5fd', 'epaper.jn001.com', '济宁晚报', '其他', '报纸', '其他', '其他', '0', 'f5de3338-adab-42f2-ba5d-c6b9b9debe3f', '2017-08-15 11:06:59');
-INSERT INTO `domain_two` VALUES ('10a9e0d2-3f32-4a44-82c4-b159d6a09a18', 'hn.china.com', '其他', '其他', '其他', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:05:20');
-INSERT INTO `domain_two` VALUES ('10aae6ed-02ec-462c-940a-39a372943d9b', 'china.huanqiu.com', '其他', '其他', '其他', '其他', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-11-05 21:34:05');
+INSERT INTO `domain_two` VALUES ('10a9e0d2-3f32-4a44-82c4-b159d6a09a18', 'hn.china.com', '中华网河南', '其他', '新闻', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('10aae6ed-02ec-462c-940a-39a372943d9b', 'china.huanqiu.com', '环球网', '其他', '新闻', '其他', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('10de2a1b-b3aa-4a3a-85d3-0adb7ce21706', 'news.qz828.com', '衢州新闻网', '其他', '新闻', '其他', '其他', '0', 'e246b828-7d84-4dcb-a594-c40fcf5d420d', '2017-08-15 11:06:29');
 INSERT INTO `domain_two` VALUES ('10fc5d98-678f-4421-a465-f4f25db2edf5', 'nz.ailiuxue.com', '留学网', '其他', '新闻', '其他', '其他', '0', '72727192-dcaf-4b81-9774-7b0541fd1ab6', '2017-08-15 11:06:45');
 INSERT INTO `domain_two` VALUES ('111f1040-5370-40db-af4f-21f22a6ff335', 'xmwb.xinmin.cn', '新民晚报', '其他', '报纸', '其他', '其他', '0', '263267fc-f2f2-4d20-8cdd-abd02d105e5e', '2017-08-15 11:05:59');
@@ -2203,6 +2305,7 @@ INSERT INTO `domain_two` VALUES ('11365434-8515-4714-afa6-01c723a212d6', 'world.
 INSERT INTO `domain_two` VALUES ('11443326-5b7f-4357-b18d-8fc60d82e111', 'epaper.bjnews.com.cn', '新京报', '其他', '报纸', '省级', '其他', '0', '80ec843e-23d6-46d4-87ba-04204dc2b724', '2017-08-15 11:06:00');
 INSERT INTO `domain_two` VALUES ('116b017a-7a43-4b5b-8ea1-55164915dce9', 'epaper2.wjol.net.cn', '马鞍山日报', '其他', '报纸', '其他', '其他', '0', 'dfd61991-2f81-4eea-9218-dcb1183bbe4e', '2017-08-15 11:06:42');
 INSERT INTO `domain_two` VALUES ('118fb1bd-dc63-4cc9-a3da-9da8ce04cb79', 'news.subaonet.com', '其他', '其他', '其他', '其他', '其他', '0', '2313cac3-97ad-4827-9918-7a640ad2b951', '2017-08-15 11:05:22');
+INSERT INTO `domain_two` VALUES ('11ab6a49-d21d-4813-87bb-81fb6fa12c72', 'bbs.kid.qq.com', '腾讯社区', '儿童论坛查看新贴', '论坛', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('11dbc224-736a-469c-ba0f-e92390cebab2', 'gaj.chengdu.gov.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ece580a1-b4c2-4379-9bf6-225bb98ee6eb', '2017-11-05 21:34:11');
 INSERT INTO `domain_two` VALUES ('11ec3338-e616-47c6-b60a-1bbb47946893', 'zgsc.china.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:07:49');
 INSERT INTO `domain_two` VALUES ('11f75541-ffcd-4ffd-9193-9d35f4ab43a0', 'sc.news.163.com', '中华网成都', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:05:33');
@@ -2210,10 +2313,11 @@ INSERT INTO `domain_two` VALUES ('1214d7a0-2690-40c8-9187-d5ef0a4d0629', 'news.x
 INSERT INTO `domain_two` VALUES ('1222276c-7158-4d3f-a483-3ad19b045f49', 'roll.znqnet.com', '其他', '其他', '其他', '其他', '其他', '0', 'c551e5bd-ae1d-4771-aa04-6c0a14f51d25', '2017-11-05 21:34:07');
 INSERT INTO `domain_two` VALUES ('1286e482-850f-42d8-9633-e3633ee01d27', 'hlj.chinanews.com', '其他', '其他', '其他', '其他', '其他', '0', 'bc2e97dc-a541-4872-affe-2ef1997809c7', '2017-08-15 11:07:46');
 INSERT INTO `domain_two` VALUES ('128d9d8d-f426-415f-a9eb-27edf5cf492f', '4gsjb.cqnews.net', '华龙网', '食品', '新闻', '其他', '其他', '0', 'a14117b2-235a-42ea-bae5-7ca7cc38e747', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('1295c441-f9c5-4b14-bce1-6a2ecdab75b1', 'bbs.tezhongzhuangbei.com', '中警论坛', '天南地北', '论坛', '其他', '其他', '0', '05bb2863-7158-4d15-86ea-f0c3d40a81b3', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('12a855be-4e07-432f-9d55-05d9f246ce26', 'news.wh.ahhouse.com', '芜湖房地产交易网新闻', '其他', '新闻', '其他', '其他', '0', '87a9f57c-56ca-4e7c-8f7b-c954c33b706e', '2017-08-15 11:06:05');
 INSERT INTO `domain_two` VALUES ('12f158a3-681d-49ad-bf4d-c05768f033f1', 'news.e23.cn', '舜网', '其他', '新闻', '其他', '其他', '0', '8eb70685-3d51-4466-83d2-c99fb1efcadf', '2017-08-15 11:06:17');
 INSERT INTO `domain_two` VALUES ('12f77f48-6e44-4bab-ae75-07f2a0ba4e7e', 'xian.qq.com', '腾讯大秦网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
-INSERT INTO `domain_two` VALUES ('13568ca7-2968-45bb-b519-752e3fd3774a', 'news.qtv.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '8404a6c7-68a8-4612-9b1e-d87140ad19c4', '2017-08-15 11:05:22');
+INSERT INTO `domain_two` VALUES ('13568ca7-2968-45bb-b519-752e3fd3774a', 'news.qtv.com.cn', '青岛网络电视台', '其他', '新闻', '其他', '其他', '0', '8404a6c7-68a8-4612-9b1e-d87140ad19c4', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('13769daa-4310-47ad-9167-bc2e723e5557', 'forum.home.news.cn', '新华网论坛', '其他', '论坛', '论坛', '其他', '0', '0836f967-099f-423f-af88-d904526b5bc5', '2017-08-15 11:06:01');
 INSERT INTO `domain_two` VALUES ('13c5498a-5068-4097-b1a9-fdac6091f40b', 'xichong.ccoo.cn', '西充在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:04');
 INSERT INTO `domain_two` VALUES ('13dfd179-7ac6-4c93-9366-e26410b96acc', 'fj.chinaso.com', '中国搜索', '其他', '新闻', '其他', '其他', '0', '12598ab1-2725-4f86-8258-46f06c71bce8', '2017-08-15 11:05:38');
@@ -2225,6 +2329,7 @@ INSERT INTO `domain_two` VALUES ('147d4420-6af1-4f06-82fa-b88cab168524', 'news.i
 INSERT INTO `domain_two` VALUES ('151af0af-0431-471a-a0c4-bc0f1756e9f1', 'law.shaoyangnews.net', '其他', '其他', '其他', '其他', '其他', '0', '2b4ca90c-3fd1-48f5-a3d0-63036d865b4f', '2017-11-05 21:34:11');
 INSERT INTO `domain_two` VALUES ('157990b3-0bd1-4a93-a9cd-ed792fe6c43a', 'bbs.514200.com', '大埔论坛', '其他', '论坛', '论坛', '其他', '0', '6e281249-2a3e-4cf8-b083-85d940ff2b99', '2017-08-15 11:07:24');
 INSERT INTO `domain_two` VALUES ('158ea2a3-9376-4355-937f-98b82be53012', 'news.guilinlife.com', '其他', '其他', '其他', '其他', '其他', '0', '19868ae6-5d4a-49ba-ae0a-6d78652097c7', '2017-08-15 11:05:21');
+INSERT INTO `domain_two` VALUES ('15ad5204-e380-4153-a61b-3a69902be3a5', 'vip.stock.finance.sina.com.cn', '其他', '财经金融', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('15c70051-18a1-468b-ae30-816e33ecfb58', 'x.cnbb.com.cn', '互联天地论坛', '其他', '论坛', '论坛', '其他', '0', 'c4abb315-e223-48eb-af59-23669915e701', '2017-08-15 11:07:03');
 INSERT INTO `domain_two` VALUES ('15cf434c-40e5-43b1-ba4c-604064dd37ec', 'paper.chinaso.com', '中国资讯网', '其他', '新闻', '其他', '其他', '0', '12598ab1-2725-4f86-8258-46f06c71bce8', '2017-08-15 11:05:33');
 INSERT INTO `domain_two` VALUES ('16a2717d-bdd0-456c-b1e0-f8614d9a4835', 'bbs.lianshui.cn', '涟水在线论坛', '其他', '论坛', '论坛', '其他', '0', '7f5e61fa-63dd-4136-b588-6af112d05c41', '2017-08-15 11:06:46');
@@ -2233,9 +2338,10 @@ INSERT INTO `domain_two` VALUES ('16a6975c-1661-4636-acda-335222b58065', 'epaper
 INSERT INTO `domain_two` VALUES ('16acd9b4-5a39-42cc-b39a-bee9f1cf8d1f', 'epaper.cnxz.com.cn', '徐州日报', '其他', '报纸', '其他', '其他', '0', '5b55dfa1-714f-4d58-bb02-928ded286e39', '2017-08-15 11:05:57');
 INSERT INTO `domain_two` VALUES ('16cae6fb-2610-4ae8-9b76-713f6624004c', 'v.ifeng.com', '凤凰视频', '其他', '视频', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
 INSERT INTO `domain_two` VALUES ('16f85e05-2f64-402a-818c-3cdaa4536e59', 'edu.dezhoudaily.com', '德州新闻网', '其他', '新闻', '其他', '其他', '0', '7f8ac895-fa9f-4628-956b-4e7c13464dac', '2017-08-15 11:07:21');
+INSERT INTO `domain_two` VALUES ('17102a03-295c-4682-b222-7aac65b5d5a2', 'news.cnstock.com', '其他', '社会综合', '新闻', '其他', '其他', '0', '28fcf470-d160-4625-92a5-23c30abd0177', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('172b0266-9f1d-4b27-865a-18d87438bc33', 'news.17173.com', '17173中国游戏第一门户', '头条要闻', '新闻', '其他', '其他', '0', 'c64e74aa-2597-498e-9fde-8f76a7775a7f', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('17584650-28d6-44f2-9290-3a99d0f49212', 'news.xmnn.cn', '厦门网', '其他', '新闻', '其他', '其他', '0', 'd2e5e478-d770-4a07-b7c1-9d38cfdd45a1', '2017-08-15 11:06:25');
-INSERT INTO `domain_two` VALUES ('178978ad-6fbb-4e25-98a5-b29d4d366cd8', 'api.iclient.ifeng.com', '其他', '其他', '其他', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:05:16');
+INSERT INTO `domain_two` VALUES ('178978ad-6fbb-4e25-98a5-b29d4d366cd8', 'api.iclient.ifeng.com', '凤凰新闻客户端', '其他', '手机', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('17ed3fce-772f-4302-9a91-1aaefad9e574', 'bbs.0476vip.com', '赤峰生活论坛', '其他', '论坛', '论坛', '其他', '0', '49d5c341-d4ad-4175-a1e0-e96b1be75613', '2017-08-15 11:07:26');
 INSERT INTO `domain_two` VALUES ('18a0573b-50b3-465c-a149-50bf85c2ff55', 'gaokao.eol.cn', '中国教育在线', '其他', '资讯', '其他', '其他', '0', '33b209e1-a367-469b-a6e7-a635704c21ba', '2017-11-21 11:32:45');
 INSERT INTO `domain_two` VALUES ('18b5c6cb-141a-40bb-be1b-97ec5aa86596', 'cangxi.ccoo.cn', '苍溪在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:07:28');
@@ -2257,7 +2363,7 @@ INSERT INTO `domain_two` VALUES ('1a881e10-240f-4d5c-a08b-46fdf1c715c3', 'news.y
 INSERT INTO `domain_two` VALUES ('1aabec73-7e05-41b9-a967-2cbcf86e8441', 'gxrb.gxnews.com.cn', '广西日报', '其他', '报纸', '省级', '其他', '0', '3be5ca5a-a688-4042-8c33-28f2728d9a9d', '2017-08-15 11:07:11');
 INSERT INTO `domain_two` VALUES ('1acd2f2a-1047-43ae-a469-efe76a6a7fe4', 'ent.zdface.com', '妆点网', '其他', '资讯', '其他', '其他', '0', 'd01361dd-183d-4826-803a-ca23bd30fd47', '2017-11-21 11:32:48');
 INSERT INTO `domain_two` VALUES ('1adf9232-07ce-4db6-9377-1d78893da4fc', 'jxrb.cnjxol.com', '嘉兴日报', '其他', '报纸', '其他', '其他', '0', '7f305e32-f7b3-4355-ae01-d7edadbb5c0d', '2017-08-15 11:06:58');
-INSERT INTO `domain_two` VALUES ('1ae4599c-c96a-4f6a-a9c7-e4096da875f8', 'society.nen.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '0c61aeb8-4a3f-4f1b-9198-0c658b912733', '2017-08-15 11:05:23');
+INSERT INTO `domain_two` VALUES ('1ae4599c-c96a-4f6a-a9c7-e4096da875f8', 'society.nen.com.cn', '东北新闻网', '其他', '新闻', '其他', '其他', '0', '0c61aeb8-4a3f-4f1b-9198-0c658b912733', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('1af91f19-3cfd-41c8-9a30-be5d2f80e2e0', 'szbk.chuzhou.cn', '皖东晨刊', '其他', '报纸', '其他', '其他', '0', '9f2374cb-3b37-45df-84b6-e0f61f8d0c73', '2017-08-15 11:06:08');
 INSERT INTO `domain_two` VALUES ('1bcaf962-8794-4849-97fc-d32352a276f3', 'bbs.taian.com', '泰安论坛', '其他', '论坛', '论坛', '其他', '0', '30dd12b6-0e82-43e2-a2a2-9a106f75d2ea', '2017-08-15 11:06:13');
 INSERT INTO `domain_two` VALUES ('1c0968fe-21a4-4c18-9215-5ab0bdbd6f0e', 'npaper.dtnews.cn', '大同日报', '其他', '报纸', '其他', '其他', '0', '490e7134-e477-41f9-a916-6fa01cee6de3', '2017-08-15 11:07:23');
@@ -2266,19 +2372,20 @@ INSERT INTO `domain_two` VALUES ('1c49d8e4-4922-47ae-9a3b-f6e405fd52c0', 'bbs.wj
 INSERT INTO `domain_two` VALUES ('1c697132-2cbd-490b-9bf1-1b6551e38dfb', 'money.qq.com', '腾讯财经', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('1c8c436c-a2f9-4df5-96d0-f0c48c8ac4e0', 'dc.sznews.com', '深圳新闻网', '其他', '新闻', '省级', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('1cb36223-3ea0-404d-bf5f-ecfab13e46b7', 'bbs.12371.cn', '入围中国社区', '其他', '论坛', '论坛', '其他', '0', 'dc953dc4-8138-4d92-bf95-bbd9fb2f8153', '2017-08-15 11:06:26');
+INSERT INTO `domain_two` VALUES ('1cb77c75-a6eb-407a-a401-c9ac55eeaa05', 'news.cyol.com', '其他', '社会综合', '新闻', '其他', '其他', '0', 'b4695e23-8245-4434-a14d-715acb110a55', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('1cea972c-c3f1-4564-a1f8-71e9a499ef58', 'bbs.bztdxxl.com', '中国企业员工互动论坛', '其他', '论坛', '论坛', '其他', '0', 'b9349f51-a4db-44f1-be7a-af58517f1c26', '2017-08-15 11:05:40');
 INSERT INTO `domain_two` VALUES ('1d3d90f8-0649-403a-9f03-80328f7026be', 'bbs.wfits.com', '潍坊论坛', '其他', '论坛', '论坛', '其他', '0', '0a837c25-cb55-4e05-8c23-f57e2d4bcdd8', '2017-08-15 11:06:06');
 INSERT INTO `domain_two` VALUES ('1d657557-29bf-4577-9cbf-0baa4a2b0a35', 'ctdsb.cnhubei.com', '楚天都市报', '其他', '报纸', '其他', '其他', '0', '8e614309-27a6-4349-a1cf-c8a0e87cc83f', '2017-08-15 11:07:26');
 INSERT INTO `domain_two` VALUES ('1d809555-0e04-49eb-a9f2-02ec1090d3c2', 'wuxi.house.qq.com', '腾讯房产', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('1dada3ce-672a-4386-a1a8-8777b7938d34', 'hi.jcy.gov.cn', '天涯正义网', '其他', '新闻', '其他', '其他', '0', '21d78acd-bc58-449c-9cfe-7157dc70359e', '2017-08-15 11:06:10');
-INSERT INTO `domain_two` VALUES ('1db36bb7-abd7-4afc-8e5d-d7dcad9bdcb3', 'news.roboo.com', '儒豹新闻', '其他', '其他', '其他', '其他', '0', '1812511c-642a-4094-abed-e65da744e60a', '2017-08-15 11:06:26');
+INSERT INTO `domain_two` VALUES ('1db36bb7-abd7-4afc-8e5d-d7dcad9bdcb3', 'news.roboo.com', '儒豹新闻', '其他', '新闻', '其他', '其他', '0', '1812511c-642a-4094-abed-e65da744e60a', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('1e0e53f4-a381-4c86-b9ae-4f70f31f771e', 'news.sdinfo.net', '齐鲁热线', '其他', '新闻', '其他', '其他', '0', '2e6abcfa-0471-4852-bf25-d1d8cf635b33', '2017-08-15 11:06:32');
 INSERT INTO `domain_two` VALUES ('1e5ee8be-da3e-4d44-8c23-3482d123100c', 'news.ts.cn', '天山网', '其他', '其他', '其他', '其他', '0', '1be56864-3b6f-4eb9-90dc-87ac62550da6', '2017-08-15 11:06:10');
 INSERT INTO `domain_two` VALUES ('1e677455-3d20-4253-b7b0-7f8aed4cc550', 'bbs.lzszg.com', '龙之声论坛', '其他', '论坛', '论坛', '其他', '0', '9f77d67a-9944-4103-986a-3c1ed466ec5e', '2017-08-15 11:06:44');
 INSERT INTO `domain_two` VALUES ('1e75b654-34dc-4fad-8229-e2813f53d375', 'bbs.cnnb.com.cn', '天一论坛', '其他', '论坛', '论坛', '其他', '0', '1805c49d-bd19-4aaf-be29-3bd0d8d7da22', '2017-08-15 11:06:10');
 INSERT INTO `domain_two` VALUES ('1e870fa7-8060-4008-8653-e1a654e37d80', 'mini.eastday.com', '东方头条', '其他', '新闻', '其他', '其他', '0', '8b0d0ce1-b5e4-490d-8927-2dbbddf872a1', '2017-08-15 11:07:20');
 INSERT INTO `domain_two` VALUES ('1eb8dc56-59f7-4190-bf53-020764bbda4e', 'sjz.hebei.com.cn', '石家庄政法网', '其他', '新闻', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-08-15 11:06:20');
-INSERT INTO `domain_two` VALUES ('1ef7c200-091a-40c0-9e4e-8589de330ba9', 'legal.gmw.cn', '光明网', '其他', '其他', '其他', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-08-15 11:07:12');
+INSERT INTO `domain_two` VALUES ('1ef7c200-091a-40c0-9e4e-8589de330ba9', 'legal.gmw.cn', '光明网', '其他', '新闻', '其他', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('1f0f12a5-9803-4dfb-b4bc-0376b8ba4aad', 'bbs.10yan.com', '秦楚论坛', '其他', '论坛', '论坛', '其他', '0', 'd3988aeb-0933-40d9-bc0e-77d5772a363b', '2017-08-15 11:06:30');
 INSERT INTO `domain_two` VALUES ('1fd5bf99-f913-4c30-858e-a3d727d2875c', 'sports.sohu.com', '其他', '其他', '其他', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-08-15 11:07:44');
 INSERT INTO `domain_two` VALUES ('1ff214f9-00f8-472a-b736-0550b4698099', 'safety.panyu.gov.cn', '番禹政府门户网站', '其他', '新闻', '其他', '其他', '0', '162518b1-31d2-432f-923e-cf5b820b6338', '2017-08-15 11:07:17');
@@ -2319,6 +2426,7 @@ INSERT INTO `domain_two` VALUES ('25aea3b0-bb47-4e7d-8b58-e6481e783553', 'club.c
 INSERT INTO `domain_two` VALUES ('25c83498-6ceb-4010-9fc6-7d1453f85902', 'news.qzwb.com', '其他', '其他', '其他', '其他', '其他', '0', 'd1a63185-ab37-47d5-8933-75adf6638661', '2017-08-15 11:05:22');
 INSERT INTO `domain_two` VALUES ('25d58dd3-a3a5-49f7-8a79-6248657d8898', 'v.qq.com', '腾讯视频', '其他', '视频', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('25e77674-35ea-47fe-a7a4-09c483f7155d', 'news.china.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:07:41');
+INSERT INTO `domain_two` VALUES ('25f137e2-a8f3-4d5f-905c-19855952f9f6', 'edu.lzep.cn', '泸州新闻网', '教育', '新闻', '其他', '其他', '0', 'a8f76068-ae4e-43b1-89a4-288960ea147c', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('2649bc51-283e-4eaf-841b-37f0d7abc712', 'static.baiinfo.com', '百川资讯', '其他', '新闻', '其他', '其他', '0', '0bb8e43e-3159-42a8-9a56-cecf481e8f27', '2017-08-15 11:07:32');
 INSERT INTO `domain_two` VALUES ('2677a7b4-a218-4ad9-b9b7-3cd0dcb63919', 'news.bsuc.cc', '其他', '其他', '其他', '其他', '其他', '0', 'f3c8c7f2-6233-4783-84ca-4ed7feff6ca4', '2017-08-15 11:05:21');
 INSERT INTO `domain_two` VALUES ('2678dc02-7c3e-4ddf-9081-e6abe474b652', 'bbs.shm.com.cn', '烟台水母论坛', '其他', '论坛', '论坛', '其他', '0', '31c22583-7884-4d07-8ee3-c03c9fd72889', '2017-08-15 11:05:55');
@@ -2328,6 +2436,7 @@ INSERT INTO `domain_two` VALUES ('26d9d059-b2f0-4daf-897b-a42a969a6179', 'henan.
 INSERT INTO `domain_two` VALUES ('26e55113-7a1a-44ac-9949-bbbd96104ff6', 'bbs.backpacker.net.cn', '背包客中国户外', '其他', '论坛', '论坛', '其他', '0', '6de75ac0-441d-4d20-9a10-8a21fe20c0c7', '2017-08-15 11:07:29');
 INSERT INTO `domain_two` VALUES ('26e82b52-b70b-4892-b226-0854f659b12d', 'news.yyrtv.com', '其他', '其他', '其他', '其他', '其他', '0', 'a060d5f6-523a-4ddd-8e26-4aca33a703e2', '2017-08-15 11:05:22');
 INSERT INTO `domain_two` VALUES ('270e5780-8381-4c05-8db5-83c1414778ce', 'cn.apdnews.com', '亚太日报', '其他', '新闻', '其他', '其他', '0', '564d90ba-aa0a-494d-aa5c-a02205f3b7b0', '2017-08-15 11:05:56');
+INSERT INTO `domain_two` VALUES ('271e8ada-0c43-4d13-b809-31e66a36387a', 'run.sports.163.com', '网易', '体育滚动', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('276d179c-221b-4cbf-9bd8-24000ce8ef12', 'news.beiww.com', '北纬网', '其他', '资讯', '其他', '其他', '0', '1e17e8c2-5f84-4f62-a7ae-9d84f58e21f3', '2017-11-21 11:32:49');
 INSERT INTO `domain_two` VALUES ('27784254-7dae-4b3f-bf01-b62f3517a2e4', 'bbs.zxip.com', '慈溪论坛', '其他', '论坛', '论坛', '其他', '0', '8a14c5fe-98e9-47e8-9f83-6088430a670b', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('27c6b299-1b9a-4d90-bec4-280a9757a256', 'sz.szhk.com', '深港在线', '其他', '新闻', '其他', '其他', '0', 'd2552ea2-23d9-4774-8045-e1f588a417aa', '2017-08-15 11:06:21');
@@ -2336,6 +2445,7 @@ INSERT INTO `domain_two` VALUES ('288c3c05-d28b-49a7-949a-de3cbb2472d7', 'news.2
 INSERT INTO `domain_two` VALUES ('28c9e6f5-2147-4e1b-ae3b-1349f9e4bd64', 'edu.china.com.cn', '中国网教育', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:36');
 INSERT INTO `domain_two` VALUES ('28e0f2d1-0bfb-459b-9285-e5f60e8e83df', 'news.cutv.com', '其他', '其他', '其他', '其他', '其他', '0', '2e05b02a-c395-4bfd-997d-caa41664e3af', '2017-08-15 11:05:21');
 INSERT INTO `domain_two` VALUES ('29451b96-f7f8-4881-93d5-85f40d4824e0', 'news.szhk.com', '其他', '其他', '其他', '其他', '其他', '0', 'd2552ea2-23d9-4774-8045-e1f588a417aa', '2017-08-15 11:05:22');
+INSERT INTO `domain_two` VALUES ('295e9a1a-df09-45dd-82f8-62267dac3a05', 'tianxiabbs.dqccc.com', '地球村天下论坛', '教育培训', '论坛', '其他', '其他', '0', 'd16e50f8-b17f-4e27-a3f4-e10e5c64b32f', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('296bafc7-4429-46bc-b25c-cc5b6c097942', 'club.isso.com.cn', '易索论坛', '其他', '论坛', '论坛', '其他', '0', '50ceee4a-b685-415d-a471-41982a0c786f', '2017-08-15 11:05:53');
 INSERT INTO `domain_two` VALUES ('29db5952-bb82-4670-9b45-5b56c1b025d8', 'law.southcn.com', '南方网', '法治频道', '新闻', '其他', '其他', '0', 'b76d4ee1-0674-4c0d-81bb-899d0293a267', '2017-11-21 16:43:13');
 INSERT INTO `domain_two` VALUES ('29e1fb96-08fa-4d64-a423-bc503c2b6441', 'bbs.dyqcw.com', '无锡汽车论坛', '其他', '论坛', '论坛', '其他', '0', '1b66dc32-dabb-4fd3-99f5-2883566f1dc0', '2017-08-15 11:06:05');
@@ -2345,13 +2455,16 @@ INSERT INTO `domain_two` VALUES ('2a17bb25-614a-408e-8f72-c927463dccf4', 'edu.si
 INSERT INTO `domain_two` VALUES ('2a3e0cd6-96ad-494e-bf4f-5b6e3edaa9dd', 'news.iqilu.com', '齐鲁网烟台频道', '其他', '新闻', '其他', '其他', '0', 'afadfd65-b3c5-445f-b26b-3f0eed5934ce', '2017-08-15 11:06:32');
 INSERT INTO `domain_two` VALUES ('2a6fffb4-49ac-49eb-a12f-7b36163fd258', 'bbs.scol.com.cn', '四川在线天府论坛', '其他', '论坛', '论坛', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-08-15 11:06:15');
 INSERT INTO `domain_two` VALUES ('2aa2aa9f-80bc-41a6-8aa7-22b274293340', 'xbxsf.nwupl.cn', '西北刑事法律网', '首页', '新闻', '其他', '其他', '0', '07793e80-6a15-484f-a816-c89a896804fa', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('2ae33c59-181f-4f1c-a29b-eac253a25974', 'edu.newssc.org', '四川新闻网', '教育频道', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('2af7efe2-d4f5-4cdc-95a8-4901568c3a68', 'itech.ifeng.com', '手机凤凰网', '其他', '手机', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:06:19');
+INSERT INTO `domain_two` VALUES ('2b347c04-7550-46ee-b4b5-88c0e3aa20fd', 'sports.qq.com', '腾讯', '体育滚动', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('2b9e01ae-1e93-4e2e-ab85-0735dd529f0d', 'gjzx.jschina.com.cn', '江苏外宣', '其他', '新闻', '省级', '其他', '0', '3ba02eef-202c-423b-a6ab-0865f57a08ac', '2017-08-15 11:06:56');
 INSERT INTO `domain_two` VALUES ('2bbcbf2f-719f-4efb-a062-7da40e10c1e9', 'bbs.0817ch.com', '南充零距离论坛', '其他', '论坛', '论坛', '其他', '0', '52349380-23b6-4968-b5d5-bba5ad0b19e0', '2017-08-15 11:06:39');
 INSERT INTO `domain_two` VALUES ('2c22fa03-4c46-4f2f-bd3b-eb055c4ae439', 'news.fjsen.com', '东南网', '图片中心', '新闻', '其他', '其他', '0', '9c6fd9f4-4d57-458d-9b4a-4faa45ec38a5', '2017-11-21 16:43:13');
 INSERT INTO `domain_two` VALUES ('2c4aa87d-20b7-4f77-8bad-f7684344c89b', 'szsb.sznews.com', '深圳商报', '其他', '报纸', '其他', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('2c6a0a5e-1e6c-413f-8913-8daf7da92f93', 'nxq.lzjcy.gov.cn', '其他', '其他', '其他', '其他', '其他', '0', '16b2e4b4-3c5d-42b2-beb4-3bb06066cfca', '2017-11-05 21:34:13');
 INSERT INTO `domain_two` VALUES ('2c6e3414-bd72-465a-aa9b-0becb8166602', 'dingan.ccoo.cn', '我爱定安论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:05');
+INSERT INTO `domain_two` VALUES ('2caff635-981c-4ecb-ba28-f084726c4436', 'bbs.mier123.com', '米谈天下', '灌水乐园', '论坛', '其他', '其他', '0', '6f3044e7-3307-4c4f-848b-1a887ef35cfe', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('2cd2b8fc-cc3e-4557-ae89-d7ea35f21cdd', 'hb.qq.com', '腾讯大楚网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('2d00f84e-b05d-4829-a865-e341cc979391', 'bbs.canjiren.org', '自强人公益论坛', '其他', '论坛', '论坛', '其他', '0', '96aeaeba-fcb0-42b3-8263-16a6bdd22d4f', '2017-08-15 11:05:28');
 INSERT INTO `domain_two` VALUES ('2d023f12-af26-4d00-9aee-3f4bda696bec', 'hb.sina.cn', '手机新浪网', '其他', '其他', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-08-15 11:06:19');
@@ -2360,15 +2473,18 @@ INSERT INTO `domain_two` VALUES ('2d5986e7-2943-4481-b954-3b09d4478be5', 'bbs.le
 INSERT INTO `domain_two` VALUES ('2d75598f-6b2e-4bc6-9a27-f3a6d43dfe33', 'nyj.cnts.gov.cn', '江门市台山市政府网', '其他', '新闻', '其他', '其他', '0', '8d2711d3-431d-4edf-825c-9b8173e63a3d', '2017-08-15 11:06:56');
 INSERT INTO `domain_two` VALUES ('2d8531a5-b733-475a-8e4a-e04faaea82e5', 'nxfy.chinacourt.org', '四川下豁法院网', '纳溪区', '新闻', '其他', '其他', '0', '5143f0f6-7f15-41fe-8106-ca0437cd7b0f', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('2d8d8ef8-91b8-4119-aaf4-8fd498bd170d', 'ngb.537114.com', '金乡信息港', '其他', '新闻', '其他', '其他', '0', 'd7b5b106-b62e-46ed-aa94-4674913f7e97', '2017-08-15 11:06:53');
-INSERT INTO `domain_two` VALUES ('2dc3f7f8-01ac-4541-860a-32ab7649cefb', 'bbs.xnnews.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'b33d1a43-df54-473d-a214-45e926cf51b9', '2017-08-15 11:05:17');
+INSERT INTO `domain_two` VALUES ('2dc3f7f8-01ac-4541-860a-32ab7649cefb', 'bbs.xnnews.com.cn', '咸宁新闻论坛', '其他', '论坛', '其他', '其他', '0', 'b33d1a43-df54-473d-a214-45e926cf51b9', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('2dfe61e9-e677-4caa-8f5e-0858ca1f334a', 'huishui.ccoo.cn', '惠水城市在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:07:00');
 INSERT INTO `domain_two` VALUES ('2e0811f1-e051-4e03-806f-e0f72d0b6d11', 'bbs.lohjs.com', '南京论坛乐活社区', '其他', '论坛', '论坛', '其他', '0', '83b800f8-292a-4a25-b095-11e6ea526d21', '2017-08-15 11:06:37');
 INSERT INTO `domain_two` VALUES ('2e1675c0-7039-4909-9510-423af088952e', 'chengdu.auto.sohu.com', '搜狐汽车', '其他', '新闻', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-08-15 11:06:14');
 INSERT INTO `domain_two` VALUES ('2e42275b-d37e-4c0c-bc3f-f9d8fedfdda9', 'meishi.yznews.com.cn', '扬州网', '其他', '新闻', '其他', '其他', '0', '633a3c5a-bcb7-4811-904b-3e25e8f03bb3', '2017-08-15 11:05:54');
 INSERT INTO `domain_two` VALUES ('2e7f8d47-094f-47f4-b0fb-9e4d806106f9', '14722469.blog.hexun.com', '和讯博客', '其他', '博客', '其他', '其他', '0', 'd44b9e3e-4bd9-40be-87cb-e1badf5b0b64', '2017-08-15 11:07:06');
+INSERT INTO `domain_two` VALUES ('2eb0d647-cb78-4cb6-9404-1c9e75732c5e', 'fiber.ofweek.com', '其他', '社会综合', '新闻', '其他', '其他', '0', '5e30c606-4660-4451-8e5d-8d7dc5f81406', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('2f0fdcf5-cf2f-467e-accb-e5d548f35b17', 'baby.sina.cn', '手机新浪网', '其他', '其他', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-08-15 11:06:19');
 INSERT INTO `domain_two` VALUES ('2f552e56-8552-4a45-9dff-c2ef656cc3df', 'hn.qq.com', '腾讯大湘网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
-INSERT INTO `domain_two` VALUES ('300f9d24-790d-4bb2-bc9e-1dd3987257a7', 'fxb.591hx.com', '其他', '其他', '其他', '其他', '其他', '0', '7289ddeb-2138-4b5b-bd5c-601dbc2b42ec', '2017-08-15 11:05:19');
+INSERT INTO `domain_two` VALUES ('2f969d8b-19e4-4e7d-b321-b79ec687203b', 'edu.eastday.com', '东方网', '滚动新闻', '新闻', '其他', '其他', '0', '8b0d0ce1-b5e4-490d-8927-2dbbddf872a1', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('300f9d24-790d-4bb2-bc9e-1dd3987257a7', 'fxb.591hx.com', '华讯财经', '其他', '新闻', '其他', '其他', '0', '7289ddeb-2138-4b5b-bd5c-601dbc2b42ec', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('301ddd37-ba65-45cf-a560-134f2f05d9b9', 'sports.btime.com', '北京时间', '体育', '新闻', '其他', '其他', '0', '8a169150-067b-4f59-b223-cd4addd47533', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('30499147-f007-4426-b355-85be4beff9b6', 'news.hanxingtv.com', '汉兴网', '其他', '新闻', '其他', '其他', '0', '28e1c72d-5678-4225-8bb6-37b31c376fdb', '2017-08-15 11:07:08');
 INSERT INTO `domain_two` VALUES ('30714d13-e5b0-4c45-96cd-2ddf2d2806f5', 'bbs.0552jie.com', '蚌埠街论坛', '其他', '论坛', '论坛', '其他', '0', 'd18c0b05-5c6c-4cfa-90e4-4d85d1b5984f', '2017-08-15 11:07:31');
 INSERT INTO `domain_two` VALUES ('3071c666-02d7-40e5-8f5d-855aec6ecd8f', 'msn.ynet.com', '其他', '其他', '其他', '其他', '其他', '0', '331a855b-ce63-4990-aa34-c7c30dfd8997', '2017-08-15 11:05:20');
@@ -2381,12 +2497,13 @@ INSERT INTO `domain_two` VALUES ('314584ca-3b0b-49ab-a843-083bb49e9212', 'qh.chi
 INSERT INTO `domain_two` VALUES ('314a87c8-00c2-4a01-88bc-7c0e969cf85c', 'wenhua.cjn.cn', '长江网', '其他', '新闻', '其他', '其他', '0', '574cc83e-4f1a-4d79-9c2b-ea4cba088fd7', '2017-08-15 11:05:49');
 INSERT INTO `domain_two` VALUES ('31aa9f67-ef90-4091-9afb-7b8069827949', 'fengshang.china.com.cn', '中国网中国风尚', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:36');
 INSERT INTO `domain_two` VALUES ('31ae41c8-8ed1-4646-bdf0-f5249f0a455a', 'w.rednet.cn', '红网', '其他', '资讯', '其他', '其他', '0', 'b2280e6d-dba6-474a-ab86-e29cf342018b', '2017-11-21 11:32:46');
-INSERT INTO `domain_two` VALUES ('31bef8b2-6edd-43f2-a713-f8fb73749e3d', 'society.dbw.cn', '东北网', '其他', '其他', '其他', '其他', '0', '1afff2e9-f6c5-4c2d-9898-dfb603d484c5', '2017-08-15 11:07:20');
+INSERT INTO `domain_two` VALUES ('31bef8b2-6edd-43f2-a713-f8fb73749e3d', 'society.dbw.cn', '东北网', '其他', '新闻', '其他', '其他', '0', '1afff2e9-f6c5-4c2d-9898-dfb603d484c5', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('31d6b0f1-3b2d-4c76-be6f-26a30c81140a', 'slide.news.sina.com.cn', '新浪', '其他', '其他', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:06:00');
 INSERT INTO `domain_two` VALUES ('3218a5dd-917a-466b-837e-e31b34cbc1f7', 'sd.china.com', '中华网山东频道', '其他', '新闻', '中央', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:05:33');
 INSERT INTO `domain_two` VALUES ('323f7a43-2964-43cc-85cf-19464db87e5f', 'stocknews.sc.cn', '投资金融报', '其他', '报纸', '其他', '其他', '0', 'b2c6acfd-d0c5-4016-b80e-2388d79b96f5', '2017-08-15 11:06:09');
 INSERT INTO `domain_two` VALUES ('32854de4-85a3-4e59-b90f-cfbb076606e0', 'qx.tynews.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '38a7d76a-4d3a-46cf-8d75-67cd96ad59f8', '2017-08-15 11:07:43');
-INSERT INTO `domain_two` VALUES ('32b572e8-484a-45cb-a866-9c65889d74f1', 'm.ce.cn', '其他', '其他', '其他', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-11-05 21:34:04');
+INSERT INTO `domain_two` VALUES ('32b572e8-484a-45cb-a866-9c65889d74f1', 'm.ce.cn', '其他', '其他', '新闻', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('32e2d6e3-642d-4f9d-9535-5391464b326e', 'news.xiancn.com', '西安新闻网', '首页', '新闻', '其他', '其他', '0', '26193367-ab9f-42b8-91ae-2f85e806230f', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('32e93cfc-8592-42e1-824a-f7d217584f63', 'v.youku.com', '优酷', '其他', '视频', '其他', '其他', '0', '2920f9d2-2393-4874-aedf-d8433fbb9630', '2017-08-15 11:05:52');
 INSERT INTO `domain_two` VALUES ('332bcf32-c9fd-4b20-b81c-460df4e45050', 'zjfzb.zjol.com.cn', '浙江法制报', '其他', '报纸', '省级', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:05:48');
 INSERT INTO `domain_two` VALUES ('332fd645-c846-45ca-bb91-323055404b71', 'xumu.jinnong.cn', '中国农药网', '其他', '新闻', '其他', '其他', '0', '2316e039-1bf2-473d-9f26-db9c84e45be1', '2017-08-15 11:05:41');
@@ -2415,6 +2532,7 @@ INSERT INTO `domain_two` VALUES ('360a25d7-2565-4fc0-bc26-bc8d01a04552', 'changy
 INSERT INTO `domain_two` VALUES ('36191756-7e9b-41b0-95de-ea5bd4b59adc', 'news.china.com', '中华网', '其他', '新闻', '中央', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:05:33');
 INSERT INTO `domain_two` VALUES ('362320c4-fd3e-470e-9ae3-a2e2485ba66e', 'szb.nanhaitoday.com', '其他', '其他', '其他', '其他', '其他', '0', 'a8197a8f-e219-4de5-bde0-c93afe722241', '2017-08-15 11:07:44');
 INSERT INTO `domain_two` VALUES ('3644cfde-3dc8-4e8b-9317-e0651a9f20e7', 'mn.lzep.cn', '泸州新闻网', '其他', '资讯', '其他', '其他', '0', 'a8f76068-ae4e-43b1-89a4-288960ea147c', '2017-11-21 11:32:45');
+INSERT INTO `domain_two` VALUES ('36caf9c2-2976-4d1d-9ff8-c13db7c5716d', 'we.sportscn.com', '华体网', '新闻', '新闻', '其他', '其他', '0', '4601587f-4fdd-4158-a041-1738991e609c', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('36d426c7-de52-4831-b94d-9d8fa579185c', 't.comnews.cn', '中国商务新闻网', '其他', '其他', '其他', '其他', '0', '93211c69-a720-478a-80ca-cea91dedf5fb', '2017-08-15 11:05:39');
 INSERT INTO `domain_two` VALUES ('37318c00-3c2a-46ae-adbd-6cd485ba446b', 'wsqwj.huizhou.gov.cn', '惠州市外侨局', '其他', '新闻', '其他', '其他', '0', '9a2d2bcb-0060-4e43-a972-98e5a9ab9de8', '2017-08-15 11:07:00');
 INSERT INTO `domain_two` VALUES ('374d98b0-70b6-4809-aa9f-17e333265091', 'news.whwd.com', '文登之窗', '其他', '新闻', '其他', '其他', '0', '181083b7-277d-4cdb-b2a1-45f3354ac3ef', '2017-08-15 11:06:05');
@@ -2433,6 +2551,7 @@ INSERT INTO `domain_two` VALUES ('392aaec9-59b8-47b9-b681-1a64fc3b1969', 'fzzx.g
 INSERT INTO `domain_two` VALUES ('3956798f-6929-4e83-b646-0a85b6a49c63', 'meili.lywww.com', '魅力临沂手机网', '其他', '手机', '其他', '其他', '0', '27a7782f-551d-4adf-bba5-c9ac9a9d187b', '2017-08-15 11:06:41');
 INSERT INTO `domain_two` VALUES ('3a011eb6-03fb-4ca8-9c48-0bb99b31f4a1', 'news.yuqinge.com', '豫青网', '其他', '资讯', '其他', '其他', '0', '74d8203a-543e-4fc5-a096-2c33eb067ca5', '2017-11-21 11:32:49');
 INSERT INTO `domain_two` VALUES ('3abee9b9-1c69-4731-898f-17fe006d668b', 'stock.stockstar.com', '证券之星', '其他', '新闻', '其他', '其他', '0', '9e52bd6d-da22-4a88-88a3-e427deb085cd', '2017-08-15 11:05:47');
+INSERT INTO `domain_two` VALUES ('3acf48f8-bca0-425c-8cd1-eb2580a09c97', 'huanbao.newssc.org', '四川新闻网', '环保频道', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('3ae6dbf7-9f71-49de-a19c-43c63c22296e', 'shanxi.youth.cn', '中国青年网山西频道', '其他', '新闻', '中央', '其他', '0', '3e3e8d2f-11e9-4775-b4d1-e61568c7a96a', '2017-08-15 11:05:39');
 INSERT INTO `domain_two` VALUES ('3b03cf15-14a2-4f05-b47d-f47601795b8e', 'guangyuan.house.qq.com', '聊宅网-河南城市', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:45');
 INSERT INTO `domain_two` VALUES ('3b341d44-1d0a-4982-b270-df173865aa85', 'santai.ccoo.cn', '三台在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:25');
@@ -2446,7 +2565,7 @@ INSERT INTO `domain_two` VALUES ('3ca455bf-6f1e-428e-96db-eb279b865001', 'financ
 INSERT INTO `domain_two` VALUES ('3cb15a3f-7666-436c-acb0-7014780cccd9', 'ms.newssc.org', '其他', '其他', '其他', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:05:20');
 INSERT INTO `domain_two` VALUES ('3cf24456-38e9-4c23-ab18-08bf1b2b7b27', 'shehui.china.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:23');
 INSERT INTO `domain_two` VALUES ('3d135af2-3ed9-4f56-8820-1eb9409d854f', 'news.jsdushi.cn', '江苏都市网', '其他', '新闻', '其他', '其他', '0', '358bd582-c293-441f-ac85-e754645a8ebc', '2017-08-15 11:06:56');
-INSERT INTO `domain_two` VALUES ('3d27cbac-c689-486a-adbf-2b683126a09e', 'money.huagu.com', '其他', '其他', '其他', '其他', '其他', '0', 'b951f0c3-51d1-46c1-93f3-efa243761d0a', '2017-08-15 11:05:20');
+INSERT INTO `domain_two` VALUES ('3d27cbac-c689-486a-adbf-2b683126a09e', 'money.huagu.com', '华股财经', '其他', '新闻', '其他', '其他', '0', 'b951f0c3-51d1-46c1-93f3-efa243761d0a', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('3db705db-3506-42bb-869c-02db441e96ac', 'epaper.qingdaonews.com', '青岛早报', '其他', '报纸', '其他', '其他', '0', '25c7aebf-c887-4b10-84d4-6b8b89dd0372', '2017-08-15 11:06:30');
 INSERT INTO `domain_two` VALUES ('3dd5f596-92fc-48b0-bc0c-59e4d00538c1', 'news.cnhubei.com', '荆楚网', '其他', '新闻', '其他', '其他', '0', '8e614309-27a6-4349-a1cf-c8a0e87cc83f', '2017-08-15 11:06:52');
 INSERT INTO `domain_two` VALUES ('3de43bc8-fb4a-4b67-a6bf-657f15f8a2f7', 'zjrb.zjol.com.cn', '浙江日报', '其他', '报纸', '省级', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:05:48');
@@ -2471,8 +2590,10 @@ INSERT INTO `domain_two` VALUES ('40a07212-8290-4c75-a9e6-02c337f413b7', 'bbs.cj
 INSERT INTO `domain_two` VALUES ('40ab03d1-26aa-4c9e-a098-c6025bcd0730', 'wfwb.wfnews.com.cn', '潍坊晚报', '其他', '其他', '其他', '其他', '0', '1b1de6c7-cabb-41df-930c-b28883275962', '2017-08-15 11:06:06');
 INSERT INTO `domain_two` VALUES ('40b44230-fdb3-43fb-a208-f38a00940534', 'sports.ycwb.com', '其他', '其他', '其他', '其他', '其他', '0', 'b9fd6806-e279-478f-b720-992d86db0fad', '2017-08-15 11:07:44');
 INSERT INTO `domain_two` VALUES ('40fad38d-9f5a-4093-bba5-7a4404b96f1a', 'dezhou.dzwww.com', '其他', '其他', '其他', '其他', '其他', '0', '53deb994-6d76-4899-b53e-b634ebe261db', '2017-08-15 11:07:38');
+INSERT INTO `domain_two` VALUES ('411eed4c-fae2-4894-90a5-d2ca55283b5e', 'sq.nanchongpeace.gov.cn', '南充长安网', '顺庆', '新闻', '其他', '其他', '0', '6aa7bb77-c103-40df-b7ae-798480bc66be', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('41462582-fe8e-4ef3-bea4-edc3c110c485', 'bbs.xwh.cn', '新文化网社区', '其他', '论坛', '论坛', '其他', '0', '8e4d3775-26b5-4f4c-bb9e-2d2bc1a60b6c', '2017-08-15 11:05:58');
 INSERT INTO `domain_two` VALUES ('417006b7-43c7-4cad-b062-2992f33ed240', 'bbs.lz520.net', '古城家园', '其他', '论坛', '论坛', '其他', '0', 'e8dcc9e9-f886-4a3c-9478-a260003329f4', '2017-08-15 11:07:13');
+INSERT INTO `domain_two` VALUES ('417ce972-79cf-4d53-947a-e0273270f1c7', 'bbs.wuhu.cc', '芜湖江东论坛', '天下网事', '论坛', '其他', '其他', '0', '789aad00-48bb-4ee2-9218-acfefbd8a89a', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('41b7b041-5d63-4bbc-8526-8e5a9fc56f89', 'bbs.0550.com', 'E滁州社区', '其他', '论坛', '论坛', '其他', '0', '264da7c8-cd2f-4665-9206-fc4eb3e2555c', '2017-08-15 11:07:35');
 INSERT INTO `domain_two` VALUES ('42691836-f711-4077-bff6-b630cd1ccd36', 'military.people.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:07:41');
 INSERT INTO `domain_two` VALUES ('42d98090-6283-4729-a162-ae4e08432c50', 'news.2500sz.com', '名城苏州', '其他', '新闻', '其他', '其他', '0', '438edfd0-a043-4f17-8d88-b1c08615e5a5', '2017-08-15 11:06:39');
@@ -2488,14 +2609,19 @@ INSERT INTO `domain_two` VALUES ('463ca870-69b1-4680-bb44-902868c42dba', 'dsb.gz
 INSERT INTO `domain_two` VALUES ('4642e423-e0a5-431e-acb6-85fe9b0d02f4', 'news.jinghua.cn', '京华网', '其他', '新闻', '省级', '其他', '0', '39b3de73-c9d9-4dc4-91b2-f7b86a358e78', '2017-08-15 11:06:52');
 INSERT INTO `domain_two` VALUES ('4652807b-8837-4830-a321-9d82eba46863', 'toutiao.china.com', '中华网', '其他', '资讯', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-11-21 11:32:45');
 INSERT INTO `domain_two` VALUES ('4696b70b-4c0f-41c9-8eee-56c743925092', 'wfrb.wfnews.com.cn', '潍坊日报', '其他', '报纸', '其他', '其他', '0', '1b1de6c7-cabb-41df-930c-b28883275962', '2017-08-15 11:06:06');
+INSERT INTO `domain_two` VALUES ('46de0dbc-c9f4-41ca-8f01-55d3b08e3763', 'news.lz520.net', '阆中在线', '旅游文化', '新闻', '其他', '其他', '0', 'e8dcc9e9-f886-4a3c-9478-a260003329f4', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('46ff23d8-4d65-4922-8424-11f3c9c816f1', 'bbs.86516.com', '彭城社区', '其他', '论坛', '论坛', '其他', '0', '8425bc3b-9039-4108-b538-479f8b8bbe95', '2017-08-15 11:06:34');
 INSERT INTO `domain_two` VALUES ('470c4cd8-d881-4847-867f-072c45bb30fd', 'cjrb.cjn.cn', '长江日报', '其他', '报纸', '省级', '其他', '0', '574cc83e-4f1a-4d79-9c2b-ea4cba088fd7', '2017-08-15 11:05:49');
+INSERT INTO `domain_two` VALUES ('471cd626-2d9d-4d22-950d-7c931929ff20', 'e.myrb.net', '绵阳日报', '第A1版:要闻', '报纸', '其他', '其他', '0', 'af63fd5c-cf5d-4e87-b923-93973ae62f3c', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('4737714e-b653-4d00-b337-453b26aae0c1', 'bbs.familydoctor.com.cn', '家庭医生在线论坛', '其他', '论坛', '论坛', '其他', '0', '29542c83-3792-4e50-b322-8bce8382524e', '2017-08-15 11:06:58');
 INSERT INTO `domain_two` VALUES ('474f93c2-5488-4ba2-af9a-5012678b28a1', 'jx.people.com.cn', '人民网江西频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
+INSERT INTO `domain_two` VALUES ('4754eb6c-37ab-4640-ada3-fb4faeaa2e79', 'edu.hsw.cn', '华商网', '教育新闻', '新闻', '其他', '其他', '0', '8590057f-20d1-4588-8d21-5c5da836d0d7', '2017-12-17 01:00:05');
+INSERT INTO `domain_two` VALUES ('475c6e1f-d3cd-4c7a-ab03-c3283abe31ba', 'news.btime.com', '北京时间', '新闻', '新闻', '其他', '其他', '0', '8a169150-067b-4f59-b223-cd4addd47533', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('47606234-90d6-4ad8-b762-8d26da123254', 'news.timedg.com', '东莞时间网', '其他', '新闻', '其他', '其他', '0', 'c576e32b-b688-4d2c-aeb1-68895b15b6e5', '2017-08-15 11:07:19');
 INSERT INTO `domain_two` VALUES ('478bc4cd-cff5-4c77-882b-7e9e8d9e6e34', 'linqu.ccoo.cn', '临朐在线网', '其他', '新闻', '其他', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:45');
 INSERT INTO `domain_two` VALUES ('478f5f7a-5cfe-46ac-9adb-4bc3019de259', 'epaper.hf365.com', '江淮晨报', '其他', '报纸', '其他', '其他', '0', '8dd67576-fdbd-4261-9602-33e6f684da4e', '2017-08-15 11:06:56');
 INSERT INTO `domain_two` VALUES ('47b7be73-7fcd-4bd9-bb1f-67dd0981e19b', 'difang.gmw.cn', '光明网', '其他', '新闻', '中央', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-08-15 11:07:12');
+INSERT INTO `domain_two` VALUES ('4803b5b6-0e20-44af-bd17-aac82403a621', 'zy.newssc.org', '四川新闻网资阳频道', '首页', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('486465e9-f371-495a-abe9-52a576d00b1c', 'hanzhong.hsw.cn', '汉中特快', '其他', '新闻', '其他', '其他', '0', '8590057f-20d1-4588-8d21-5c5da836d0d7', '2017-08-15 11:07:08');
 INSERT INTO `domain_two` VALUES ('4866ee75-32d8-4b13-ba59-130e874af866', 'econ.taiwan.cn', '中国台湾网', '其他', '新闻', '其他', '其他', '0', '1cd39daa-8ef3-433a-accd-f799d5bfed2f', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('48e57fd0-e1a8-406d-914d-4ba3e70bbbac', 'news.zgjjdb.com.cn', '上海经济新闻网', '其他', '新闻', '其他', '其他', '0', '4c954816-8df0-4708-8474-09aa6e82ff9f', '2017-08-15 11:06:22');
@@ -2527,14 +2653,17 @@ INSERT INTO `domain_two` VALUES ('4bb8b135-8f77-4725-8921-7d0835f8cafd', 'baoji.
 INSERT INTO `domain_two` VALUES ('4bde8a62-7d22-4933-8dfe-da965926f0d3', 'eslrb.slrbs.com', '商洛日报', '其他', '报纸', '其他', '其他', '0', '4ec83030-bbb5-4992-b84e-03179931328d', '2017-08-15 11:06:23');
 INSERT INTO `domain_two` VALUES ('4c200ac1-48b6-4412-8378-f3f6524b38f6', 'tech.sina.com.cn', '新浪科技', '科技', '科技', '中央', '全国', '10', 'ca9ba1ae-033d-46a7-bd58-f5410780a37d', '2017-07-19 16:45:09');
 INSERT INTO `domain_two` VALUES ('4c337a27-936b-4e3f-8a95-62c9fc5c2996', 'bhrb.beihai.gov.cn:8080', '北海日报', '其他', '报纸', '其他', '其他', '0', 'd95cbb34-8906-4de2-b9e6-77c2e40a8c29', '2017-08-15 11:07:31');
+INSERT INTO `domain_two` VALUES ('4c362289-d756-4da4-8d74-a6e303c2f5f5', 'jr.he-bei.cn', '河北网', '首页', '新闻', '其他', '其他', '0', '53897480-a346-4f6e-b379-f16f545797bb', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('4c411c2c-13b6-4c80-8b0a-c55fff4beb36', 'finance.66163.com', '福建之窗', '其他', '新闻', '其他', '其他', '0', '53bea48e-92b6-4e36-889f-802a7c97b39b', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('4c4f80b7-72ed-4f55-8458-4c065969fa9b', 'news.hbtv.com.cn', '湖北网络广播电视台', '其他', '新闻', '省级', '其他', '0', '8478dfbb-e745-4a8a-aa40-8c9c5f90b05d', '2017-08-15 11:07:04');
 INSERT INTO `domain_two` VALUES ('4c56ae4c-24cf-455c-8254-c2e0a64f95bb', '3g.china.com', '手机中华网', '其他', '其他', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:06:19');
+INSERT INTO `domain_two` VALUES ('4c836e8f-1634-433a-9239-8f55920b7de2', 'news.sdchina.com', '中国山东网', '即时新闻', '新闻', '其他', '其他', '0', 'c5588cbf-0a8d-4a04-bb6b-260d6e4cdd70', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('4cb46dcb-49fd-4014-b71b-b13b8427d3aa', 'gx.wenming.cn', '其他', '其他', '其他', '其他', '其他', '0', 'e7211fcf-2818-43a3-99b5-5cc3e9b272a8', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('4cc0f9f8-d4df-48d5-b44d-3041d92ecef0', 'life.ynet.com', '其他', '其他', '其他', '其他', '其他', '0', '331a855b-ce63-4990-aa34-c7c30dfd8997', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('4cd225e3-cc2f-42a1-9620-cf8828d3eb4d', 'ifutian.sznews.com', '深圳福田网', '其他', '新闻', '其他', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('4cd9b224-4c83-4f9a-a623-120aab68d35c', 'news.yunnan.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ad2de7d1-505f-4f9a-8326-8c71a15be042', '2017-11-05 21:34:06');
 INSERT INTO `domain_two` VALUES ('4cf5079e-66d1-4c67-a55e-0bf7a1b7dc84', 'bbs.hsw.cn', '华商论坛', '其他', '论坛', '论坛', '其他', '0', '8590057f-20d1-4588-8d21-5c5da836d0d7', '2017-08-15 11:07:03');
+INSERT INTO `domain_two` VALUES ('4d0e9f2f-b9fe-4d39-90fb-8eb14f25a919', 'blog.kdnet.net', '凯迪中途岛博客', '文章', '博客', '其他', '其他', '0', '8bfacd21-c753-4c2e-a0e7-f5f4b9361951', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('4d24a938-a4e7-4853-9850-538ee91d59c4', 'hlj.ifeng.com', '其他', '其他', '其他', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('4d2f4dd3-315d-4730-8871-0d7c14271e70', 'headline.fjtv.net', '福建省广播影视集团', '其他', '新闻', '其他', '其他', '0', '431dc0ff-595f-409a-8302-9de79979660b', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('4d59750f-c014-4707-8e05-3502179ce6cb', 'stzc.shantou.gov.cn', '汕头仲裁委员会', '其他', '新闻', '其他', '其他', '0', '53ab7877-37e3-4611-a1e4-e0230ac37464', '2017-08-15 11:06:23');
@@ -2546,6 +2675,7 @@ INSERT INTO `domain_two` VALUES ('4e1c7633-5604-43d1-a874-f756cba71c36', 'auto.c
 INSERT INTO `domain_two` VALUES ('4e376486-0994-4062-a2cf-dd5a3df6e2b6', 'zibo.dzwww.com', '其他', '其他', '其他', '其他', '其他', '0', '53deb994-6d76-4899-b53e-b634ebe261db', '2017-08-15 11:05:28');
 INSERT INTO `domain_two` VALUES ('4edca358-0ab4-4140-b863-ec7fbd4c9c0e', 'paper.people.com.cn', '人民日报海外版', '其他', '报纸', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:28');
 INSERT INTO `domain_two` VALUES ('4f0a4dd5-163f-4570-ba8e-1cdf82c2aaa0', 'news.creaders.net', '万维读者网', '其他', '境外', '外媒', '其他', '0', '9408b0d3-3390-476c-babf-14ef9cc984fa', '2017-08-15 11:06:08');
+INSERT INTO `domain_two` VALUES ('4f12ecb8-5085-4d53-987e-6c08a26fe6ef', 'news.sohu.com', '搜狐', '快讯', '新闻', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('4f4b572e-035f-4edb-932e-f21f843da8e4', 'taizhou.19lou.com', '台州19楼', '其他', '论坛', '论坛', '其他', '0', 'c1e45e42-fa52-48e7-957f-8758213dddf2', '2017-08-15 11:06:13');
 INSERT INTO `domain_two` VALUES ('4face59d-342e-4420-bd49-002870831794', 'jdnews.zjol.com.cn', '金东新闻网', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:06:54');
 INSERT INTO `domain_two` VALUES ('4fb91534-a249-4bf3-8d00-e33a76578d72', 'o.xiancity.cn', '西安网', '其他', '新闻', '省级', '其他', '0', '6964be01-f5d7-4825-9c5b-5fb5ea7cca5d', '2017-08-15 11:06:04');
@@ -2569,6 +2699,7 @@ INSERT INTO `domain_two` VALUES ('525ed756-fdda-41f4-bf87-d0342ab6b16f', 'hk.sin
 INSERT INTO `domain_two` VALUES ('52694712-6eac-4c08-b845-09076449e693', 'scjjrb.newssc.org', '四川经济日报', '其他', '报纸', '省级', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:06:16');
 INSERT INTO `domain_two` VALUES ('52c79cf8-d2cb-45a0-a173-b048ffbce880', 'media.china.com.cn', '中国网传媒经济', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('52f1f808-b88d-4f89-9080-38d0dd729de8', 'bbs.dagangcheng.com', '大港城论坛', '其他', '论坛', '论坛', '其他', '0', '071a81a4-3b62-4b91-bb89-6c22ac3ca46f', '2017-08-15 11:07:25');
+INSERT INTO `domain_two` VALUES ('532b35de-076f-40e9-a844-5c1a624c3c2b', 'edu.sxgov.cn', '山西黄河新闻网', '教育频道', '新闻', '其他', '其他', '0', 'ad37dcb4-1a2f-47fa-9579-f8c99b25e786', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('53389a66-0680-4c40-b128-e5090e28193a', 'luzhou.ccoo.cn', '泸州在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:43');
 INSERT INTO `domain_two` VALUES ('533ef3a8-1c61-4899-813f-4635be7a556a', 'news.xiangw.com', '襄阳网', '其他', '新闻', '其他', '其他', '0', '1cc04d10-08aa-476e-8506-e10f41a5d3b2', '2017-08-15 11:06:03');
 INSERT INTO `domain_two` VALUES ('533f6be9-d12f-4609-94d5-1074babe8ee5', 'bbs.zjol.com.cn', '潮鸣论坛', '其他', '论坛', '论坛', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:07:27');
@@ -2578,6 +2709,7 @@ INSERT INTO `domain_two` VALUES ('547f61e6-61e5-4e20-85dd-ef4b43cbde83', 'news.w
 INSERT INTO `domain_two` VALUES ('54c6ae56-40ea-471b-9bf0-5154727bfde0', 'sports.gxnews.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3be5ca5a-a688-4042-8c33-28f2728d9a9d', '2017-08-15 11:07:43');
 INSERT INTO `domain_two` VALUES ('552d032b-2403-4468-8c47-d62f74a8d6c8', 'bjcb.morningpost.com.cn', '北京晨报', '其他', '报纸', '省级', '其他', '0', '22b2f5b1-0947-4cdd-9f89-91fbecf97a11', '2017-08-15 11:07:30');
 INSERT INTO `domain_two` VALUES ('5540e6c8-3aec-46fa-b3c3-6eff148c1c12', 'news.cctv.com', '中国网络电视台', '其他', '新闻', '中央', '其他', '0', '03fa90f5-feb0-44e5-8966-5c2d0bea7c12', '2017-08-15 11:05:36');
+INSERT INTO `domain_two` VALUES ('55814730-3e8b-4c0a-8522-27e424b7db54', 'lx.huanqiu.com', '环球网', '新闻中心', '新闻', '其他', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('55d53988-1af2-4605-8638-7005195018f3', 'newspaper.jfdaily.com', '上海法治报', '其他', '报纸', '省级', '其他', '0', '0ecb8107-fb75-4014-8770-7bcef325d300', '2017-08-15 11:06:22');
 INSERT INTO `domain_two` VALUES ('55e37d72-e556-4bd5-af7b-4d70ed112ba8', 'huanbao.bjx.com.cn', '北极星节能环保网', '其他', '新闻', '其他', '其他', '0', '9d1c426d-4d55-4917-8699-5ddcdbed621d', '2017-08-15 11:07:30');
 INSERT INTO `domain_two` VALUES ('55fab1d8-3c1e-4e5d-82cf-a70285922910', 'bbs.kktie.com', '天涯看看帖网', '其他', '论坛', '水军网站', '其他', '0', 'b9ea35b9-1044-4de3-b452-68abd0b28476', '2017-08-15 11:06:10');
@@ -2587,6 +2719,8 @@ INSERT INTO `domain_two` VALUES ('565d3579-8052-44c1-aef9-e89c30071eb9', 'wb.hgd
 INSERT INTO `domain_two` VALUES ('56c342c4-4de2-4955-8ff9-f82e760b350a', 'buy.autohome.com.cn', '汽车之家', '其他', '新闻', '其他', '其他', '0', '68345e44-7fd8-4187-adc8-c8e34c5e9c57', '2017-08-15 11:06:31');
 INSERT INTO `domain_two` VALUES ('56d49beb-a524-4ad8-abad-92684288580e', 'hlj.cri.cn', '国际在线黑龙江频道', '其他', '新闻', '其他', '其他', '0', '5feb369f-0c96-4c37-9829-fa1e35390064', '2017-08-15 11:07:10');
 INSERT INTO `domain_two` VALUES ('572e61b3-6a5a-45c4-a188-90b475f71d43', 'epaper.ccdy.cn', '其他', '其他', '其他', '其他', '其他', '0', 'c820424b-052b-40da-929d-6be84ec6dee7', '2017-08-15 11:07:39');
+INSERT INTO `domain_two` VALUES ('575aab6d-1798-47a7-9337-a98867b6d0e7', 'bbs.cssn.cn', '中国社会科学论坛', '最新', '论坛', '其他', '其他', '0', '7f5198d3-e2cc-4797-8d7c-4e00f137a84c', '2017-12-17 01:00:08');
+INSERT INTO `domain_two` VALUES ('577b79d5-301b-4923-98d5-1e8ae71604d7', 'bj.bendibao.com', '北京本地宝', '首页', '新闻', '其他', '其他', '0', '7eb01187-ad74-4a8c-9a9d-2b91e3b21188', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('5788c2dd-9a28-4376-9d4b-c1cf70bcf6da', 'news.yesky.com', '其他', '其他', '其他', '其他', '其他', '0', '18f1d968-2988-4d49-9991-f420c7f3f4ae', '2017-08-15 11:07:42');
 INSERT INTO `domain_two` VALUES ('57ae36b4-a832-4626-8cea-1115bc68fb0d', 'wenhui.news365.com.cn', '上海文汇报', '其他', '报纸', '其他', '其他', '0', '54b1a6be-3c62-4742-8135-3bc56b4a1678', '2017-08-15 11:06:22');
 INSERT INTO `domain_two` VALUES ('57c559cd-b43b-4322-b450-d7da35c07653', 'dzb.scnongye.com.cn', '四川农村日报', '其他', '报纸', '省级', '其他', '0', '48105de3-e215-46ae-ba9c-3ce2669ea6ac', '2017-08-15 11:06:16');
@@ -2630,11 +2764,13 @@ INSERT INTO `domain_two` VALUES ('5e42c33c-63cf-463b-8fe1-e5efce58ac9a', 'view.i
 INSERT INTO `domain_two` VALUES ('5e4ae446-26c7-412b-866c-4a8328e13c5d', 'bbs.ihaiyan.com', '海盐网论坛', '其他', '论坛', '论坛', '其他', '0', '97759a5d-bc6e-438b-b7e8-b857d03850fc', '2017-08-15 11:07:08');
 INSERT INTO `domain_two` VALUES ('5e56430f-c976-4ef4-b7ea-6645ad1640d3', 'news.lyd.com.cn', '洛阳网', '其他', '新闻', '其他', '其他', '0', '58076050-654b-4f6f-b4cf-c3f9f9ca88a4', '2017-08-15 11:06:43');
 INSERT INTO `domain_two` VALUES ('5e609245-41b4-4bce-b7b7-e8caed61e440', 'bbs.tiexue.net', '铁血社区', '其他', '论坛', '论坛', '其他', '0', 'd83b591c-b58c-439f-89d0-1b14da791a99', '2017-08-15 11:06:09');
-INSERT INTO `domain_two` VALUES ('5e64f200-ddcc-4a3d-a71d-77b74e6f5537', 'culture.newssc.org', '其他', '其他', '其他', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:07:38');
+INSERT INTO `domain_two` VALUES ('5e64f200-ddcc-4a3d-a71d-77b74e6f5537', 'culture.newssc.org', '四川新闻网', '其他', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('5e8b694f-a7e0-435e-bc1d-7e735202c08a', 'society.ynet.com', '其他', '其他', '其他', '其他', '其他', '0', '331a855b-ce63-4990-aa34-c7c30dfd8997', '2017-08-15 11:05:23');
 INSERT INTO `domain_two` VALUES ('5eb94ef0-2ee7-4739-97de-3ad1e8fa10c0', 'nanfeng.ccoo.cn', '抚州人社区', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('5ec10a82-d42e-4baf-9e22-94433e682704', 'bbs.28tui.com', '28推论坛', '其他', '论坛', '论坛', '其他', '0', 'ecc09700-2dc9-4e69-82c6-108f0ec14e4c', '2017-08-15 11:07:37');
+INSERT INTO `domain_two` VALUES ('5f1f34c5-79dc-4bbd-a90d-980bbbfbb443', 'fpymj.yb.gov.cn', '宜宾市防震减灾局信息网', '单位概况', '新闻', '其他', '其他', '0', '35368210-9993-40f3-9a48-b95fb5ee8263', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('5f972229-88ce-4966-8b07-db9af2443963', 'read.sportspress.cn', '中国体育报', '其他', '报纸', '其他', '其他', '0', 'beef941b-e3dc-4326-bd23-95ba1eaf43dd', '2017-08-15 11:05:37');
+INSERT INTO `domain_two` VALUES ('60315de6-7806-4f84-904b-5bb5edac5a18', 'bbs.xunlei.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '505ac1f6-0b97-4f3d-a25a-be23c2371cf9', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('60370789-dc8b-42f1-99fe-4ca1dbeb9065', 'jiangsu.china.com.cn', '中国网江苏频道', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('607633ef-1d55-4c52-ae9a-2de9e0d15243', 'bbs.xmfish.com', '厦门小鱼论坛', '其他', '论坛', '论坛', '其他', '0', 'e122843e-7910-48a9-9004-bb8ad96eab2d', '2017-08-15 11:06:25');
 INSERT INTO `domain_two` VALUES ('60b51539-7ba7-4961-9b4b-84c1ceb41127', 'news.01ny.cn', '南阳网', '其他', '新闻', '其他', '其他', '0', '21473baf-171a-4791-bc33-200c2064f631', '2017-08-15 11:06:37');
@@ -2657,6 +2793,7 @@ INSERT INTO `domain_two` VALUES ('634c527f-03f7-4534-b96f-e09ff529d691', 'sc.jcy
 INSERT INTO `domain_two` VALUES ('63aecc76-888b-4547-90d7-35693318f8e8', 'qd.ifeng.com', '凤凰网青岛频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
 INSERT INTO `domain_two` VALUES ('63fce852-3168-40b4-bed5-79bd559ebbf0', 'news.163.com', '网易', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:06:07');
 INSERT INTO `domain_two` VALUES ('64123022-0314-4c8b-8b7a-12a86472db95', 'wenwen.sogou.com', '搜狗问问', '其他', '问答', '问答', '其他', '0', 'd96383bc-1c7a-4d68-b68b-35b89365752e', '2017-08-15 11:06:14');
+INSERT INTO `domain_two` VALUES ('641ffe6f-d8b6-4431-9c2f-b8a22d1ca14e', 'rs.comnews.cn', '中国商务新闻网', '影视', '新闻', '其他', '其他', '0', '93211c69-a720-478a-80ca-cea91dedf5fb', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('64dc9ca3-f2f8-440e-813a-7eade15e9fe1', 'zcrb.zcwin.com', '增城日报', '其他', '报纸', '其他', '其他', '0', 'e2856860-ee19-4b37-9e8a-9c8b557d2305', '2017-08-15 11:05:50');
 INSERT INTO `domain_two` VALUES ('652c731b-a064-42fd-9264-6aad8e0a7689', 'news.xntv.tv', '西宁网络电视台', '其他', '新闻', '其他', '其他', '0', '0bab3c1b-84ec-40fd-9276-47275befd3ef', '2017-08-15 11:06:03');
 INSERT INTO `domain_two` VALUES ('656323c3-f82b-4d21-8ab4-baae92710b95', 'bbs.msnews.com.cn', '东坡老家论坛', '其他', '论坛', '论坛', '其他', '0', '69997d55-9b4c-4ef8-816a-aa37922f019a', '2017-08-15 11:07:19');
@@ -2683,14 +2820,18 @@ INSERT INTO `domain_two` VALUES ('691ccc27-d889-418d-8f25-54380cce0508', 'gz.peo
 INSERT INTO `domain_two` VALUES ('69833a10-6e2f-443a-82d2-115e0e8021ba', 'sc.stock.cnfol.com', '中金在线', '其他', '新闻', '其他', '其他', '0', '642cee0f-0ace-49a7-b358-1c7b1ec88ff6', '2017-08-15 11:05:33');
 INSERT INTO `domain_two` VALUES ('698d56fd-b621-4118-9ab3-b790a5b9ddec', 'finance.people.com.cn', '人民网财经', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('69ec2d8b-de29-45e1-8e34-c6f765cce092', 'qingdao.news.163.com', '网易青岛', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:06:07');
+INSERT INTO `domain_two` VALUES ('6a54fa59-379f-4a89-8177-f8607a8987dd', 'jy.libai.cn', '绵阳市江油县', '公示公告', '新闻', '其他', '其他', '0', 'c5953768-0cf5-4eec-afca-7198728dbcb5', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('6a766f8b-dce5-4eae-8ed2-e231e0bb0567', 'kp.pgkx.org', '平谷区科学技术协会', '其他', '新闻', '其他', '其他', '0', '9b2ec118-4370-4e54-bcd8-dc137dcc3d9f', '2017-08-15 11:06:33');
 INSERT INTO `domain_two` VALUES ('6b0d08c4-1cc1-4df3-a89f-e2cfff76c0c1', 'dm.china.com.cn', '中国网东盟频道', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('6b0f5a46-d4bd-44eb-935e-4cabc3b3eb6a', 'politics.rmlt.com.cn', '人民论坛网', '其他', '新闻', '其他', '其他', '0', 'c6659cac-9e7b-4dc1-bb23-42371a03831b', '2017-08-15 11:06:28');
 INSERT INTO `domain_two` VALUES ('6b3b5b72-db43-4983-93b8-383d0ad97209', 'bbs.tianya.cn', '天涯文学社区', '其他', '论坛', '论坛', '其他', '0', 'd180ef53-2206-48b8-884c-7b04b61c487c', '2017-08-15 11:06:10');
+INSERT INTO `domain_two` VALUES ('6b4b833c-d5b5-4742-8905-98d5ebd1a1e8', 'nanchong.scol.com.cn', '四川在线', '首页', '新闻', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('6b4dc6cf-7d5b-49bc-8f97-86b58c7b2e07', 'club.kdslife.com', 'PCHOME社区', '其他', '论坛', '论坛', '其他', '0', 'b71f0ecc-7c49-41db-8a75-174a5fb68d93', '2017-08-15 11:07:35');
 INSERT INTO `domain_two` VALUES ('6b838a3c-7b92-4d4e-9ba7-9340c1a28984', 'szb.northnews.cn', '内蒙古日报', '其他', '报纸', '省级', '其他', '0', '44f7eedd-f629-42a4-b6d3-41e0b93b4f02', '2017-08-15 11:06:36');
 INSERT INTO `domain_two` VALUES ('6c17baca-f2ed-4d10-a315-65fe85c7fb1d', 'e.thecover.cn', '华西都市报', '其他', '报纸', '省级', '其他', '0', '7c5df3c1-a090-4e59-a4bf-a773fc08d6cd', '2017-08-15 11:07:02');
 INSERT INTO `domain_two` VALUES ('6c17d067-edf3-46e2-99eb-da279dfae627', 'xh.hebei.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-08-15 11:07:48');
+INSERT INTO `domain_two` VALUES ('6c4c3789-e1c2-4d65-a667-4f68ac28158f', 'news.rugao35.com', '如阜新闻网', '社会新闻', '新闻', '其他', '其他', '0', 'f34f8f88-3d11-4fb4-ab8c-e88060c38410', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('6c754634-f7bd-472d-8cbd-04da979a6072', 'd.youth.cn', '中国青年网', '青年观察', '新闻', '其他', '其他', '0', '3e3e8d2f-11e9-4775-b4d1-e61568c7a96a', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('6c9f52c8-8e0c-46f2-95a5-e670345adf37', 'entrepreneur.juhangye.com', '其他', '其他', '其他', '其他', '其他', '0', '6d4e4096-a560-47f0-82ce-b2fae61c806a', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('6d42996a-bf70-43bf-a589-25a9fa8c464e', 'fj.qq.com', '腾讯大闽网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('6d567aca-f73d-4164-a140-da7c088e017f', 'sports.china.com', '其他', '其他', '其他', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:07:43');
@@ -2700,16 +2841,20 @@ INSERT INTO `domain_two` VALUES ('6dc16ea9-50b7-4292-973d-a31d6681f116', 'daily.
 INSERT INTO `domain_two` VALUES ('6df9feb7-e697-4099-bc95-2673a2e78449', 'jnrb.e23.cn', '济南日报', '其他', '报纸', '其他', '其他', '0', '8eb70685-3d51-4466-83d2-c99fb1efcadf', '2017-08-15 11:06:59');
 INSERT INTO `domain_two` VALUES ('6e7aff9b-4bbd-4607-8d2e-a22ee22b91f9', 'bbs.jljbbs.com', '嘉陵江社区', '其他', '论坛', '论坛', '其他', '0', 'ec9cb386-4392-484b-b5d7-c57becbae3ff', '2017-08-15 11:06:58');
 INSERT INTO `domain_two` VALUES ('6e9308a4-c9ba-4942-9810-a7baebb024c6', 'rb.dywang.cn', '德阳晚报', '其他', '报纸', '其他', '其他', '0', 'ffce1401-fd25-4ef8-bd33-99c392b05660', '2017-08-15 11:07:22');
+INSERT INTO `domain_two` VALUES ('6e978e22-40a8-4d9d-b546-a749dd89aab4', 'xuexi.haiwainet.cn', '海外网', '其他', '资讯', '其他', '其他', '0', 'a5d44673-78b5-4e15-aebe-d541f853b0ac', '2017-11-29 08:55:12');
 INSERT INTO `domain_two` VALUES ('6ea08924-56d2-4d43-8d1d-e6e79eede959', 'health.china.com.cn', '中国网健康中国', '其他', '新闻', '中央', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:37');
 INSERT INTO `domain_two` VALUES ('6ea6f5a3-b620-455e-a56d-3d9099363d21', 'rizhao.dzwww.com', '大众网', '其他', '新闻', '其他', '其他', '0', '53deb994-6d76-4899-b53e-b634ebe261db', '2017-08-15 11:07:22');
+INSERT INTO `domain_two` VALUES ('6ec00189-d656-44b2-a7c9-593d7a54fcd2', 'art.sinmeng.com', '新梦网', '艺考', '新闻', '其他', '其他', '0', 'd7d78505-0697-4581-b4ef-a6c6da7870d9', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('6f185a4c-15ed-42d5-9c28-adfd33f9e2c4', 'zgqt.zj.cn', '中国青田网', '其他', '新闻', '其他', '其他', '0', '47a36eb2-ce6b-4d86-aa1b-450ba4c2af81', '2017-08-15 11:05:39');
 INSERT INTO `domain_two` VALUES ('6f3db11c-dc29-4f58-b94a-c0482e30643a', 'home.ifeng.com', '其他', '其他', '其他', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-11-05 21:34:08');
 INSERT INTO `domain_two` VALUES ('6f435c9f-31b7-4b59-8166-e9bd2ae720b9', 'paper.tlnews.com.cn', '今日桐庐', '其他', '报纸', '其他', '其他', '0', '9a9898e7-b041-4622-8983-e157a9fc4f8c', '2017-08-15 11:06:54');
 INSERT INTO `domain_two` VALUES ('6f4c0712-9e4f-4671-91c3-2be09a1713e3', 'hi.people.com.cn', '人民网海南视窗', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('6f6b8e63-beb2-457a-84a1-5416677cc4da', 'house.china.com.cn', '地产中国网', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:07:21');
 INSERT INTO `domain_two` VALUES ('6fcfd114-eec3-44b3-bf4b-250f7bd76193', 'health.msn.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '940ab855-f53e-42f5-990d-22bd89e597cb', '2017-08-15 11:05:19');
+INSERT INTO `domain_two` VALUES ('6ffe3953-9c7c-473a-a435-7be457ac8684', 'news.emoney.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', 'e431cec6-bcd8-409d-bfea-d3c0908500e4', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('70351894-1745-446a-b262-c7ac1a9ccb04', 'jjckb.xinhuanet.com', '其他', '其他', '其他', '其他', '其他', '0', '2f7603ed-30ef-46a9-aeb2-143a0c0ddd70', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('7050ef2b-b597-4a9d-b8aa-297f51547d16', 'ln.ifeng.com', '凤凰网辽宁频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
+INSERT INTO `domain_two` VALUES ('708a6eda-2db3-458d-baab-a9d22cf71dc2', 'sports.jxnews.com.cn', '江西大江网', '综合体育', '新闻', '其他', '其他', '0', 'bffd1934-e830-447a-876d-dc93974d00aa', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('70e34b1b-d89b-421b-9a10-73fd82290f23', 'cq.ifeng.com', '凤凰网重庆频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('70e93b1d-20d1-4a67-a1fc-cd5c684be478', 'news.lzep.cn', '泸州新闻网', '其他', '新闻', '其他', '其他', '0', 'a8f76068-ae4e-43b1-89a4-288960ea147c', '2017-08-15 11:06:43');
 INSERT INTO `domain_two` VALUES ('70f4fa34-86f6-4818-a420-d191dcafcac9', 'news.huanbohainews.com.cn', '环渤海新闻网', '其他', '新闻', '其他', '其他', '0', 'f8fd97ce-db4e-43ef-9ae6-cdf271063b17', '2017-08-15 11:07:01');
@@ -2722,15 +2867,19 @@ INSERT INTO `domain_two` VALUES ('71c31a95-5bd6-4158-a1b5-11494a93bd77', 'sfj.my
 INSERT INTO `domain_two` VALUES ('71e85945-6e93-4069-870f-a4d2dbc0ceab', 'epaper.jhnews.com.cn', '金华晚报', '其他', '报纸', '其他', '其他', '0', '0a8f7e35-ed84-434b-9189-be2a14b793de', '2017-08-15 11:06:54');
 INSERT INTO `domain_two` VALUES ('71ece8e5-babb-49ee-bfd7-d50316140366', 'app.zibo.gov.cn', '淄博市人民政府', '其他', '新闻', '其他', '其他', '0', 'fd0164e4-12a5-439c-b00e-a7e17c03465d', '2017-08-15 11:05:29');
 INSERT INTO `domain_two` VALUES ('721102ae-68d8-40e7-8bf6-d9c345c4a11d', 'szb.xnnews.com.cn', '香城都市报', '其他', '报纸', '其他', '其他', '0', 'b33d1a43-df54-473d-a214-45e926cf51b9', '2017-08-15 11:06:03');
+INSERT INTO `domain_two` VALUES ('722a20db-d74a-4492-a85c-7dab4470cdbe', 'edu.ycwb.com', '金羊网', '教育', '新闻', '其他', '其他', '0', 'b9fd6806-e279-478f-b720-992d86db0fad', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('7243aaa0-7a4d-433d-8a12-61c8b2c5e841', 'bbs.t56.net', '泰无聊论坛', '其他', '论坛', '论坛', '其他', '0', 'ad4cf804-04d2-4ac1-9cde-965daa8e8dde', '2017-08-15 11:06:12');
+INSERT INTO `domain_two` VALUES ('725de385-bcb4-401f-8713-d43744eb603e', 'sichuan.hexun.com', '和讯', '四川新闻', '新闻', '其他', '其他', '0', 'd44b9e3e-4bd9-40be-87cb-e1badf5b0b64', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('729d84e9-b742-4751-a278-7d6e7751a1f3', 'news.cnchu.com', '荆州日报', '其他', '报纸', '其他', '其他', '0', '20253942-2772-4336-95d0-1b21d40d3c18', '2017-08-15 11:06:52');
 INSERT INTO `domain_two` VALUES ('72a0987e-9a1a-4195-8675-9c7080f8dce8', 'society.stnn.cc', '其他', '其他', '其他', '其他', '其他', '0', '4554271c-33ed-416a-9245-ad4cdafa65b9', '2017-08-15 11:05:23');
+INSERT INTO `domain_two` VALUES ('72a49c4a-03d5-428e-a2b6-7e4a1515c2b6', 'acftu.workercn.cn', '其他', '时尚娱乐', '新闻', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('72b481a7-a189-46e6-8db2-eb63ebc74904', 'topic.ts.cn', '天山网', '其他', '新闻', '其他', '其他', '0', '1be56864-3b6f-4eb9-90dc-87ac62550da6', '2017-08-15 11:06:10');
 INSERT INTO `domain_two` VALUES ('72fa8c8b-4c8a-427a-8cd0-619049464d18', 'xxgk.tianchang.gov.cn', '天长市政府信息公开网', '其他', '新闻', '其他', '其他', '0', '052ba783-ddf0-4faa-99fb-246895c588a1', '2017-08-15 11:06:09');
 INSERT INTO `domain_two` VALUES ('7322c95e-967b-4cf7-aa48-64d029f07948', 'epaper.hehechengde.cn', '承德日报', '其他', '报纸', '其他', '其他', '0', '92624a85-1b51-4edd-b990-e16896408f72', '2017-08-15 11:07:26');
 INSERT INTO `domain_two` VALUES ('73922546-f54e-4fee-a9d1-93f2c646edc9', 'epaper.sanyarb.com.cn', '三亚日报', '其他', '报纸', '其他', '其他', '0', '7e9240b5-443b-4c52-a499-72c72620a527', '2017-08-15 11:06:25');
 INSERT INTO `domain_two` VALUES ('73ac10b2-a11e-4a55-9873-eb5321b80bd1', 'bbs.iqilu.com', '齐鲁社区', '其他', '论坛', '论坛', '其他', '0', 'afadfd65-b3c5-445f-b26b-3f0eed5934ce', '2017-08-15 11:06:32');
 INSERT INTO `domain_two` VALUES ('73f9b3f3-a369-4a90-b125-14f46ebd3d70', 'sx.huatu.com', '华图教育', '其他', '其他', '其他', '其他', '0', 'ec0e332c-a4d0-424f-b293-226da8709bdd', '2017-08-15 11:07:02');
+INSERT INTO `domain_two` VALUES ('7460a899-ccb6-4fc6-9157-5015d0f5e73a', 'energy.cngold.org', '金投网', '能源资讯', '新闻', '其他', '其他', '0', 'd8a59995-cda2-4c93-a656-160afd9103cb', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('7465d1f1-f58c-4d0e-a017-69edf7c3e72c', 'news.changsha.cn', '星辰在线', '其他', '新闻', '其他', '其他', '0', '33c966de-4f71-4bef-8443-40145b401f4d', '2017-08-15 11:05:58');
 INSERT INTO `domain_two` VALUES ('74819a6f-4e8d-4d67-ae3e-2bb6cc773a4a', 'forum.81.cn', '中国军网社区', '其他', '论坛', '论坛', '其他', '0', 'dfec5077-706a-40ba-a35f-03bc55a814dd', '2017-08-15 11:05:42');
 INSERT INTO `domain_two` VALUES ('7491835b-9c55-45f0-82a8-4276609fdf16', 'xiyiyi2007.blog.cnstock.com', '上证博客', '其他', '博客', '其他', '其他', '0', '28fcf470-d160-4625-92a5-23c30abd0177', '2017-08-15 11:06:22');
@@ -2739,6 +2888,7 @@ INSERT INTO `domain_two` VALUES ('74db8ad2-9210-427e-91ff-ebbcddaa8bbf', 'wb.lhr
 INSERT INTO `domain_two` VALUES ('75048b11-c8a0-4c1d-9e47-35258829e460', 'xw.kunming.cn', '昆明信息港', '其他', '新闻', '其他', '其他', '0', '95cc7ce0-30ad-4eb1-a09c-fab34b2396f4', '2017-08-15 11:06:49');
 INSERT INTO `domain_two` VALUES ('75141b21-dc97-4cbd-856a-ef5e55f91890', 'chongqing.fyfz.cn', '法律博客网', '其他', '博客', '其他', '其他', '0', '281723fb-fa7c-4235-a1dc-d3dfb4b0fae6', '2017-08-15 11:07:18');
 INSERT INTO `domain_two` VALUES ('755bf2e0-2dfc-4f67-9665-50b9d9c72473', 'news.focus.cn', '搜狐焦点网-重庆', '其他', '新闻', '其他', '其他', '0', 'a0da5844-a360-479a-b34d-7badf0d31b9f', '2017-08-15 11:06:14');
+INSERT INTO `domain_two` VALUES ('758fc151-553b-41c0-a1f3-755be87434a0', 'finance.qq.com', '其他', '社会综合', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('75962797-9b4f-4494-8c66-63b5f4d3c025', 'dzb.scfzbs.com', '四川法制报', '其他', '报纸', '省级', '其他', '0', '95c223a4-2b69-43da-9b93-7945277e8233', '2017-08-15 11:06:17');
 INSERT INTO `domain_two` VALUES ('75bb2211-2d0e-4204-8641-4c79db942281', 'news.xmtv.cn', '台海网络电视台', '其他', '视频', '其他', '其他', '0', 'ec3c93df-ecb4-43af-bff7-14004859a76c', '2017-08-15 11:06:13');
 INSERT INTO `domain_two` VALUES ('75c130ac-d269-4c01-ae5d-b820c5cac8e9', 'zj.xinhuanet.com', '新华浙江', '其他', '新闻', '中央', '其他', '0', '2f7603ed-30ef-46a9-aeb2-143a0c0ddd70', '2017-08-15 11:06:01');
@@ -2756,7 +2906,10 @@ INSERT INTO `domain_two` VALUES ('77d20c23-3182-484a-88c0-4161ccaab970', 'cd.hou
 INSERT INTO `domain_two` VALUES ('77d602e7-517f-4915-a6fe-1e6bb9521037', 'wenda.so.com', '搜狐问答', '其他', '问答', '问答', '其他', '0', 'bf25ae08-c183-414d-b64a-94284e51e829', '2017-08-15 11:06:14');
 INSERT INTO `domain_two` VALUES ('77de1da0-001f-4fd7-aabe-cba8da9c99a8', 'wenda.bsuc.cc', '其他', '其他', '其他', '其他', '其他', '0', 'f3c8c7f2-6233-4783-84ca-4ed7feff6ca4', '2017-08-15 11:05:24');
 INSERT INTO `domain_two` VALUES ('783b11de-44aa-4350-a394-65bc410de792', 'dpaper.sxcm.net', '三峡都市报', '其他', '报纸', '其他', '其他', '0', '097346b8-6a0c-4aae-bfb1-b790ec633ba8', '2017-08-15 11:06:25');
+INSERT INTO `domain_two` VALUES ('785818df-9b9c-4ddf-80de-e8154b9dd159', 'sinanews.sina.cn', '新浪新闻客户端', '四川', '手机', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-12-17 01:04:34');
+INSERT INTO `domain_two` VALUES ('786bd3c3-45a9-46a1-bede-9ae8058d3b65', 'jour.cssn.cn', '中国社会科学网', '学科', '新闻', '其他', '其他', '0', '7f5198d3-e2cc-4797-8d7c-4e00f137a84c', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('78e23d04-ba37-411c-805a-7f6f97e38d90', 'c.contx.cn', '广阅通', '其他', '资讯', '其他', '其他', '0', '266120d6-6750-4f5a-b866-6129385c5362', '2017-11-21 11:32:48');
+INSERT INTO `domain_two` VALUES ('78ea850e-e6bf-4c6f-b1ea-0c61fe1cd3d1', 'news.lznews.cn', '鲁中网', '社会', '新闻', '其他', '其他', '0', '50cd9617-c39f-4c76-a6af-dd49c73c723a', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('78f2a4af-813e-430e-b509-92e367132817', 'woshipm.baijia.baidu.com', '百度百家', '其他', '新闻', '其他', '其他', '0', '236f580e-f893-4897-88b3-c59d51815acd', '2017-08-15 11:07:32');
 INSERT INTO `domain_two` VALUES ('795cf14c-5cb0-4abc-9b7f-41cff0aeac07', 'cq.chinanews.com', '中新网重庆频道', '其他', '新闻', '中央', '其他', '0', 'bc2e97dc-a541-4872-affe-2ef1997809c7', '2017-08-15 11:05:32');
 INSERT INTO `domain_two` VALUES ('79793e08-355d-4d9f-a209-c2e764577638', 'job.workercn.cn', '其他', '其他', '其他', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-08-15 11:07:40');
@@ -2773,12 +2926,14 @@ INSERT INTO `domain_two` VALUES ('7b6e0816-f36e-4655-97af-e633ef11d501', 'slj.hu
 INSERT INTO `domain_two` VALUES ('7ba4f773-5bd3-4550-a102-ef63df346760', 'xinhua-rss.zhongguowangshi.com', '其他', '其他', '其他', '其他', '其他', '0', '5e00dbbf-0b07-4970-9bd1-9853ebf575df', '2017-08-15 11:07:49');
 INSERT INTO `domain_two` VALUES ('7be764c2-ac2f-4b4e-9598-23f7ca6e6610', 'epaper.wuhunews.cn', '大江晚报', '其他', '报纸', '省级', '其他', '0', 'ec21fc4b-d339-4061-bb61-1beea8e65985', '2017-08-15 11:07:24');
 INSERT INTO `domain_two` VALUES ('7c0c3744-ca2b-4067-b8f3-44313880ae51', 'hzdaily.hangzhou.com.cn', '每日商报', '其他', '报纸', '其他', '其他', '0', 'a116af5d-b902-4f41-9156-09ce18bfb58e', '2017-08-15 11:06:41');
+INSERT INTO `domain_two` VALUES ('7c27f900-552d-4727-a9a3-6651dc84cde0', 'club.learning.sohu.com', '搜狐论坛', '教师之家', '论坛', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('7c5932b4-b904-4c4b-991b-6bf6c11d1648', 'dy.newssc.org', '其他', '其他', '其他', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-11-05 21:34:08');
 INSERT INTO `domain_two` VALUES ('7c79eaf0-cd01-4107-8017-28d8531e4b11', 'bbs.17173.com', '17173论坛社区', '其他', '论坛', '论坛', '其他', '0', 'c64e74aa-2597-498e-9fde-8f76a7775a7f', '2017-08-15 11:07:37');
 INSERT INTO `domain_two` VALUES ('7c8df3ac-9069-46e4-8b7f-ca75b7ad6c6e', 'shanxishufajiaxh.meishujia.cn', '山西省书法家协会', '其他', '新闻', '其他', '其他', '0', 'c46904c6-f131-40b7-bc34-f4df60e14ab2', '2017-08-15 11:06:24');
 INSERT INTO `domain_two` VALUES ('7cb36a7a-bc67-4eb1-aebc-df283719fe39', 'cgj.jxfz.gov.cn', '中国抚州', '其他', '新闻', '其他', '其他', '0', '8b434035-0df1-40f5-bea8-cb729ff05d59', '2017-08-15 11:05:45');
 INSERT INTO `domain_two` VALUES ('7cdc61f0-c1ac-4579-b85a-8a1bb42a2a30', 'epaper.citygf.com', '佛山日报', '其他', '报纸', '其他', '其他', '0', 'eda3ff43-8015-476c-a6e2-c6bdfe64ae5b', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('7ce33526-ee66-4ede-bec8-95515e8db9c0', 't.m.youth.cn', '中国青年网', '其他', '其他', '其他', '其他', '0', '3e3e8d2f-11e9-4775-b4d1-e61568c7a96a', '2017-08-15 11:05:40');
+INSERT INTO `domain_two` VALUES ('7d2bbfc8-fe75-424b-8f5d-c552172df920', 'yanting.my.gov.cn', '盐亭县人民政府网站', '部门动态', '新闻', '其他', '其他', '0', '04e3f5fd-ca97-4b9a-b2c7-d3d4e109a431', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('7d2dcf00-10ec-4ae1-bf00-299d79cd3f5f', 'news.21cn.com', '21CN', '滚动新闻', '新闻', '其他', '其他', '0', 'd0411cad-f8d7-4e0f-b6d1-6e5dd08d44b6', '2017-11-21 16:43:13');
 INSERT INTO `domain_two` VALUES ('7d785338-4476-4744-b5a9-299d477b069e', 'xh.dazhoupeace.gov.cn', '达州长安网', '其他', '其他', '其他', '其他', '0', 'e81bdd4c-25cb-469d-9c0a-08898d879564', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('7da1b783-3c8f-4d6c-a1e3-4be4aa0e4e31', 'qjwb.zjol.com.cn', '钱江晚报', '其他', '报纸', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:06:31');
@@ -2800,7 +2955,9 @@ INSERT INTO `domain_two` VALUES ('8027ab0d-8cd4-4557-b4e3-e62073798d2a', 'jcw.sh
 INSERT INTO `domain_two` VALUES ('8051c2b5-e3b5-4bfc-8d03-f79913e7a806', 'gh.ccoo.cn', '广汉城市在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:07:12');
 INSERT INTO `domain_two` VALUES ('80da42cd-c201-4fd5-a175-610d3d6386f3', 'zj.zjol.com.cn', '浙，就是我', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:05:49');
 INSERT INTO `domain_two` VALUES ('8104126a-6d09-428a-8945-0c490f8283fe', 'bbs.qianlong.com', '其他', '其他', '其他', '其他', '其他', '0', '54e5636c-85d4-4ed5-b38f-3e28b43f837c', '2017-08-15 11:05:17');
+INSERT INTO `domain_two` VALUES ('810cd1e4-a157-4c8f-b7af-5d64acac0fe1', 'edu.dahe.cn', '大河网教育频道', '教育要闻', '新闻', '其他', '其他', '0', 'ed031acc-1d29-42d8-8f72-634521893784', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('81390466-060f-4ec4-946a-f6c6fdd0c858', 'whb.news365.com.cn', '文汇报', '其他', '新闻', '其他', '其他', '0', '54b1a6be-3c62-4742-8135-3bc56b4a1678', '2017-08-15 11:06:05');
+INSERT INTO `domain_two` VALUES ('815b262f-7bee-469a-8d97-42db7aab4283', 'report.hebei.com.cn', '长城网', '长城原创', '新闻', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('81ce7146-8ef4-4a22-914b-9bdbe4ff7f83', 'junshi.xilu.com', '西陆网', '其他', '新闻', '其他', '其他', '0', '3f763b46-64a7-4c97-8e98-907e9508c213', '2017-08-15 11:06:03');
 INSERT INTO `domain_two` VALUES ('81e77c33-232b-4095-8f74-bdfbbddce39c', 'bbs.755gg.com', '去玩玩游戏论坛', '其他', '论坛', '论坛', '其他', '0', '5abf6333-0e69-40cd-a35e-8966ee9b759f', '2017-08-15 11:06:28');
 INSERT INTO `domain_two` VALUES ('82008396-add0-4e89-a700-3021e2166ea7', 'gaokao.sinmeng.com', '新梦网', '其他', '新闻', '其他', '其他', '0', 'd7d78505-0697-4581-b4ef-a6c6da7870d9', '2017-08-15 11:05:59');
@@ -2820,6 +2977,7 @@ INSERT INTO `domain_two` VALUES ('847490dd-0e17-47b1-8583-831fe505b946', 'sd.chi
 INSERT INTO `domain_two` VALUES ('84910352-70b5-4635-b200-8addbd94b66f', 'epaper.cqn.com.cn', '中国质量报', '其他', '报纸', '其他', '其他', '0', '424f3c79-442a-4335-83bd-ce1993124334', '2017-08-15 11:05:34');
 INSERT INTO `domain_two` VALUES ('84918343-8161-45fc-9bea-a7b41bf7bc1f', 'hainan.ifeng.com', '凤凰网海南频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
 INSERT INTO `domain_two` VALUES ('849d8070-c264-4fd1-bb52-f4ffda4dbe31', 'pjnews.zjol.com.cn', '浦江新闻网', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:06:32');
+INSERT INTO `domain_two` VALUES ('84b34181-ac4e-497f-8e6d-8a23adf315e9', 'guangdong.eol.cn', '中国教育在线', '生涯规划', '新闻', '其他', '其他', '0', '33b209e1-a367-469b-a6e7-a635704c21ba', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('84c2e3d4-432a-4fc5-9a4d-ce2711865bce', 'hb.people.com.cn', '人民网湖北频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('84e209bf-8cd7-4656-8e0a-dcecc763a7d7', 'scnews.newssc.org', '四川社区家园', '其他', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:06:15');
 INSERT INTO `domain_two` VALUES ('84e9624e-27ef-442d-af59-f90b25985cc8', 'szb.loulanwang.com', '库尔勒晚报', '其他', '报纸', '其他', '其他', '0', 'ea6db78d-ef2d-4319-be28-14fc3462929e', '2017-08-15 11:06:50');
@@ -2848,7 +3006,7 @@ INSERT INTO `domain_two` VALUES ('888a03e7-0596-4d6d-a63f-bfbe7191173d', 'news.j
 INSERT INTO `domain_two` VALUES ('8890d016-6bf2-4008-aec4-64b5938066d4', 'vr.ofweek.com', '其他', '其他', '其他', '其他', '其他', '0', '5e30c606-4660-4451-8e5d-8d7dc5f81406', '2017-11-05 21:34:06');
 INSERT INTO `domain_two` VALUES ('88943964-888e-401b-8b66-389bf3e9ca6f', 'tech.qq.com', '腾讯', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('88af1398-f21f-4421-aab7-590fb56a986c', 'peterlin88888888.blogchina.com', '其他', '其他', '其他', '其他', '其他', '0', 'b5b8ca8a-d2ec-4d23-afec-b8d1aa98b571', '2017-08-15 11:05:22');
-INSERT INTO `domain_two` VALUES ('890cfaf2-6426-4cf7-9145-c01b9b2b84e2', 'health.zijing.org', '其他', '其他', '其他', '其他', '其他', '0', '60d147ea-ca00-4423-837a-906f9dfa3c87', '2017-08-15 11:05:19');
+INSERT INTO `domain_two` VALUES ('890cfaf2-6426-4cf7-9145-c01b9b2b84e2', 'health.zijing.org', '紫荆网', '其他', '新闻', '其他', '其他', '0', '60d147ea-ca00-4423-837a-906f9dfa3c87', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('891c547e-fd5e-47a6-b7d0-d67b42f2ba04', 'club.kdnet.net', '凯迪社区', '其他', '论坛', '论坛', '其他', '0', '8bfacd21-c753-4c2e-a0e7-f5f4b9361951', '2017-08-15 11:06:50');
 INSERT INTO `domain_two` VALUES ('891d6242-1680-4abb-82ac-5f2656bd23c7', 'yjsjy.cug.edu.cn', '中国地质大学', '其他', '资讯', '其他', '其他', '0', 'e2b6e040-2ede-4ebb-99f4-9c95d694ce68', '2017-11-21 11:32:47');
 INSERT INTO `domain_two` VALUES ('89366b7d-a089-460e-97c5-745bc2455290', 'pyrb.dayoo.com', '番禺日报', '其他', '报纸', '其他', '其他', '0', '935f9a35-854a-47a6-b2f8-a9b842d62581', '2017-08-15 11:07:17');
@@ -2872,7 +3030,7 @@ INSERT INTO `domain_two` VALUES ('8b2a42e5-82dd-4a7f-9ee3-c4cbc1689ac6', 'bbs.he
 INSERT INTO `domain_two` VALUES ('8b385836-6717-4b75-9ad9-949d862895b7', 'bbs.dahe.cn', '大河论坛', '其他', '论坛', '论坛', '其他', '0', 'ed031acc-1d29-42d8-8f72-634521893784', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('8b60b8ea-efaa-4af6-9770-ea0c8d848f4b', 'csgy.rmzxb.com.cn', '人民政协网', '其他', '新闻', '中央', '其他', '0', '40b450b1-0182-414d-aba6-a5591af2ca95', '2017-08-15 11:06:26');
 INSERT INTO `domain_two` VALUES ('8b93b35a-fbb0-486f-ba10-5624f09f4a8d', 'wenku.baidu.com', '百度文库', '其他', '文库', '文库', '其他', '0', '236f580e-f893-4897-88b3-c59d51815acd', '2017-08-15 11:07:32');
-INSERT INTO `domain_two` VALUES ('8baa7222-ce73-4244-8f86-dd358c1feb63', 'news.jschina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3ba02eef-202c-423b-a6ab-0865f57a08ac', '2017-11-05 21:34:06');
+INSERT INTO `domain_two` VALUES ('8baa7222-ce73-4244-8f86-dd358c1feb63', 'news.jschina.com.cn', '中国江苏网', '其他', '新闻', '其他', '其他', '0', '3ba02eef-202c-423b-a6ab-0865f57a08ac', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('8bdd763f-b335-41cc-be85-f9ff2b48e030', 'epaper.oeeee.com', '南方都市报', '其他', '报纸', '省级', '其他', '0', 'd50422bc-5105-437e-b347-183e6c4b674e', '2017-08-15 11:06:38');
 INSERT INTO `domain_two` VALUES ('8c8f50d3-8c6e-429b-ab4e-02cdad581ccb', 'tech.huanqiu.com', '其他', '其他', '其他', '其他', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-08-15 11:07:44');
 INSERT INTO `domain_two` VALUES ('8c936ae6-2b2a-4414-a21f-a3a08905a3c8', 'travel.cnr.cn', '央广网旅游频道', '其他', '新闻', '其他', '其他', '0', '8b788890-c66e-4102-9078-0defa53bbea9', '2017-08-15 11:05:55');
@@ -2880,12 +3038,13 @@ INSERT INTO `domain_two` VALUES ('8c94fd15-31c6-4f05-a721-c90a4afd44bb', 'szb.hu
 INSERT INTO `domain_two` VALUES ('8caf02ca-cb3e-4df1-a1d4-87e32d1b0c10', 'news.xiancity.cn', '其他', '其他', '其他', '其他', '其他', '0', '6964be01-f5d7-4825-9c5b-5fb5ea7cca5d', '2017-08-15 11:07:42');
 INSERT INTO `domain_two` VALUES ('8ccad8e5-67b5-44b0-a7e9-4189f69aa6d3', 'news.zynews.com', '其他', '其他', '其他', '其他', '其他', '0', '67345066-d8be-4c4c-9d4d-c4c5330d09b9', '2017-08-15 11:05:22');
 INSERT INTO `domain_two` VALUES ('8d111f8b-93b5-4117-ad0e-68638566c864', 'bbs.weiphone.com', '威锋论坛', '其他', '论坛', '论坛', '其他', '0', '27c5bb9c-dea6-4e21-ae91-bb0f8b8618bc', '2017-08-15 11:06:07');
-INSERT INTO `domain_two` VALUES ('8e26bb6f-2f97-449e-96e6-9d3c5e99c2dd', 'news.sinmeng.com', '其他', '其他', '其他', '其他', '其他', '0', 'd7d78505-0697-4581-b4ef-a6c6da7870d9', '2017-08-15 11:05:22');
+INSERT INTO `domain_two` VALUES ('8e26bb6f-2f97-449e-96e6-9d3c5e99c2dd', 'news.sinmeng.com', '新梦网', '其他', '新闻', '其他', '其他', '0', 'd7d78505-0697-4581-b4ef-a6c6da7870d9', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('8e4c6dea-2b3c-4c14-a480-cb4eb8c57724', 'jlwb.njnews.cn', '金陵晚报', '其他', '报纸', '其他', '其他', '0', '988ee3f2-7d17-4b42-a7e3-9b4cd0b0503c', '2017-08-15 11:06:53');
 INSERT INTO `domain_two` VALUES ('8e6527f9-6aea-49ac-9789-8b0e25515c40', 'zjnews.china.com.cn', '中国网浪潮新闻', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:36');
 INSERT INTO `domain_two` VALUES ('8eaafd19-8dd3-433f-9720-123ef4056865', 'ly.scdaily.cn', '问政四川', '其他', '新闻', '其他', '其他', '0', '5196aa08-bbd2-448d-9170-e2b472977441', '2017-08-15 11:06:05');
 INSERT INTO `domain_two` VALUES ('8ed3a609-8ed0-46bb-a319-20760f4a805a', 'smdhme.fyfz.cn', '环球网博客', '其他', '博客', '其他', '其他', '0', '281723fb-fa7c-4235-a1dc-d3dfb4b0fae6', '2017-08-15 11:07:01');
 INSERT INTO `domain_two` VALUES ('8f090e28-a62f-41ed-8a47-4f70374eef49', 'blog.artron.net', '雅昌博客', '其他', '博客', '其他', '其他', '0', '0eafaaa5-fc45-4b32-8e91-1ece31d12d17', '2017-08-15 11:05:56');
+INSERT INTO `domain_two` VALUES ('8f87ab26-ed1b-4570-9ecf-61813e258255', 'ybwbep.jj831.com', '宜宾晚报', '第B1版：教育周刊', '报纸', '其他', '其他', '0', '5c87210a-98df-4e29-9eea-c9eb69310c8f', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('8f98cc6e-4490-42d4-87ac-d98267eda849', 'house.sun0769.com', '东莞阳光网', '其他', '其他', '其他', '其他', '0', '0aedf187-ba27-43f8-86f2-c197634fd562', '2017-08-15 11:07:19');
 INSERT INTO `domain_two` VALUES ('8fd53768-2e19-48b6-a729-586e6e150e6c', 'bbs.classic023.com', '重庆论坛', '其他', '论坛', '论坛', '其他', '0', '2643928a-75d0-453d-9505-f308777aa5e5', '2017-08-15 11:05:31');
 INSERT INTO `domain_two` VALUES ('8fda448a-1e02-4362-bbed-bf170a777326', 'yndaily.yunnan.cn', '云南日报', '其他', '报纸', '其他', '其他', '0', 'ad2de7d1-505f-4f9a-8326-8c71a15be042', '2017-08-15 11:05:51');
@@ -2920,26 +3079,32 @@ INSERT INTO `domain_two` VALUES ('9488765c-b3b0-4ca7-a49a-86efdbf6d158', 'photo.
 INSERT INTO `domain_two` VALUES ('9581b969-e9bb-4c59-9200-78e1a13dc593', 'news.hexun.com', '和讯', '其他', '新闻', '省级', '其他', '0', 'd44b9e3e-4bd9-40be-87cb-e1badf5b0b64', '2017-08-15 11:07:06');
 INSERT INTO `domain_two` VALUES ('963afe96-be7b-4702-ade2-a24f3fa4c7b2', 'szb.gdzjdaily.com.cn', '湛江日报', '其他', '报纸', '其他', '其他', '0', 'ec67237d-a7d8-445d-8482-01f6324c6e87', '2017-08-15 11:05:50');
 INSERT INTO `domain_two` VALUES ('966f4520-2233-4187-a02a-5ff1caa3e1c3', 'tour.sdchina.com', '中国山东网', '其他', '新闻', '省级', '其他', '0', 'c5588cbf-0a8d-4a04-bb6b-260d6e4cdd70', '2017-08-15 11:05:39');
+INSERT INTO `domain_two` VALUES ('9671c0b0-f0c9-49c3-bfc4-04f7c98389b4', 'bbs.feng.com', '其他', '社会综合', '论坛', '其他', '其他', '0', '47ee5e78-279f-42e2-8980-cb8c571d58c9', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('96deb2f6-a802-425a-8908-73fb49796c71', 'jsnews.jschina.com.cn', '中国江苏网', '其他', '新闻', '省级', '其他', '0', '3ba02eef-202c-423b-a6ab-0865f57a08ac', '2017-08-15 11:05:43');
 INSERT INTO `domain_two` VALUES ('973a332e-303b-4fc8-9317-454078e1ad95', 'm.uczzd.cn', '其他', '其他', '其他', '其他', '其他', '0', 'b9a78324-9440-4ebf-9dd6-6d0e80d403a7', '2017-08-15 11:07:41');
 INSERT INTO `domain_two` VALUES ('974a18a3-f80e-4e71-bb7f-424c33196b8b', 'news.cnr.cn', '中广网', '其他', '新闻', '其他', '其他', '0', '8b788890-c66e-4102-9078-0defa53bbea9', '2017-08-15 11:05:46');
 INSERT INTO `domain_two` VALUES ('975d7977-ec34-4a42-bde9-e41b17a1be98', 'edu.news.k618.cn', '未来网', '其他', '资讯', '其他', '其他', '0', 'aa583562-2cf9-4557-9222-f2f648bed289', '2017-11-21 11:32:46');
 INSERT INTO `domain_two` VALUES ('976f7430-2300-4dfe-bd8a-04fae3a2ba24', 'tj.people.com.cn', '人民网天津频道', '其他', '新闻', '其他', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
-INSERT INTO `domain_two` VALUES ('97cb4afe-4550-42a3-97dd-47f75a3e51ff', 'news.zijing.org', '其他', '其他', '其他', '其他', '其他', '0', '60d147ea-ca00-4423-837a-906f9dfa3c87', '2017-08-15 11:05:22');
+INSERT INTO `domain_two` VALUES ('97cb4afe-4550-42a3-97dd-47f75a3e51ff', 'news.zijing.org', '紫荆网', '其他', '新闻', '其他', '其他', '0', '60d147ea-ca00-4423-837a-906f9dfa3c87', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('97fda6d3-800e-40ab-8f24-d8838d2de9a4', 'gxg.huatu.com', '华图教育', '党政公选', '新闻', '其他', '其他', '0', 'ec0e332c-a4d0-424f-b293-226da8709bdd', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('9813591d-8c97-44c0-9215-a19ddd260abd', 'sc.cnfood.cn', '中国食品报四川食品', '其他', '新闻', '其他', '其他', '0', '45f9ba1d-46c3-427e-9f5d-40a9dce194a9', '2017-08-15 11:05:38');
 INSERT INTO `domain_two` VALUES ('9894a19e-d8c3-4933-aa30-80d5734fc1a9', 'go.aiyimeng.com', '沂蒙热线', '其他', '新闻', '其他', '其他', '0', 'e9ba2c92-d08d-4620-b0d9-50c6dd941987', '2017-08-15 11:05:54');
 INSERT INTO `domain_two` VALUES ('98e0add1-1f13-42ea-a1da-0ea78216822f', 'sd.youth.cn', '中国青年网山东频道', '其他', '新闻', '中央', '其他', '0', '3e3e8d2f-11e9-4775-b4d1-e61568c7a96a', '2017-08-15 11:05:39');
 INSERT INTO `domain_two` VALUES ('98e7518a-013b-4bd4-9b8d-b3c04c7b0bc3', 'news1.cqnews.net', '其他', '其他', '其他', '其他', '其他', '0', 'a14117b2-235a-42ea-bae5-7ca7cc38e747', '2017-08-15 11:07:42');
 INSERT INTO `domain_two` VALUES ('9913931e-942d-40c0-9a86-004cdc1e628a', 'njcb.xhby.net', '南京晨报', '其他', '报纸', '省级', '其他', '0', '94f927e9-fb1b-4ffd-9c17-f45ebe5e5345', '2017-08-15 11:06:38');
+INSERT INTO `domain_two` VALUES ('991ddd0e-a0c4-4d58-ab6e-572c023deb0e', 'news.haiwainet.cn', '海外网', '其他', '资讯', '其他', '其他', '0', 'a5d44673-78b5-4e15-aebe-d541f853b0ac', '2017-11-29 08:55:12');
 INSERT INTO `domain_two` VALUES ('9929a788-281d-4bee-819d-2e3d93cecc7b', 'bbs1.people.com.cn', '强国社区', '其他', '论坛', '论坛', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:30');
+INSERT INTO `domain_two` VALUES ('997465ce-4555-4b9a-b306-b902a06c01ab', 'edu.gmw.cn', '光明网', '教育滚动', '新闻', '其他', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('99dd27db-b67d-4d69-a70e-6d7a78cae8fd', 'bid.10huan.com', '其他', '其他', '其他', '其他', '其他', '0', 'd44db596-6f00-4f25-b843-cddfbfb43aa0', '2017-08-15 11:07:38');
+INSERT INTO `domain_two` VALUES ('99e5c0ff-edef-47b9-a62c-8e5473e9bdd1', 'edu.ifeng.com', '凤凰网', '国际智库', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('9a44039e-fb0e-45e3-9d95-0855394b3c75', 'kj.dazhoupeace.gov.cn', '达州长安网', '其他', '其他', '其他', '其他', '0', 'e81bdd4c-25cb-469d-9c0a-08898d879564', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('9a664be4-14a8-4ad8-9f1b-a1a5f5120879', 'health.lyd.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '58076050-654b-4f6f-b4cf-c3f9f9ca88a4', '2017-08-15 11:05:19');
+INSERT INTO `domain_two` VALUES ('9a774440-845f-4982-aa35-626440bd325b', 'news.hangzhou.com.cn', '杭州网', '社会新闻', '新闻', '其他', '其他', '0', 'a116af5d-b902-4f41-9156-09ce18bfb58e', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('9a8b489c-47ad-4eec-9ca9-fa015b771e61', 'zwgk.quanjiao.gov.cn', '全椒县人民政府', '其他', '新闻', '其他', '其他', '0', '08c837cd-4c0b-407e-8764-5d9a3e2f632f', '2017-08-15 11:06:28');
 INSERT INTO `domain_two` VALUES ('9a91e266-fe80-4d07-9a0a-c7ac1e4b293c', 'bbs.lygbst.cn', '在海一方社区', '其他', '论坛', '论坛', '其他', '0', '5a2ae479-a9f5-4a1c-a1a9-302b153a1639', '2017-08-15 11:05:50');
 INSERT INTO `domain_two` VALUES ('9abcc3d9-3aa5-44b7-b81b-c125498a1b8d', 'gxxwfb.gxnews.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3be5ca5a-a688-4042-8c33-28f2728d9a9d', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('9ad3838d-7ce4-4c68-936b-df530bfa08f7', 'china.nmgnews.com.cn', '内蒙古新闻网', '其他', '新闻', '其他', '其他', '0', 'bd428bc9-4705-4bcf-9bbf-0d8ecc018fce', '2017-08-15 11:06:36');
+INSERT INTO `domain_two` VALUES ('9ada3e6d-85e6-4f29-88c8-17b23e91f81e', 'news.wmxa.cn', '西安文明网', '首页', '新闻', '其他', '其他', '0', '11a0c7e1-bb57-4c05-a86e-01f9f3ae6899', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('9aebefa8-6cbd-4ade-a71e-f22a39b57746', 'hebi.mofcom.gov.cn', '中原网小记者站', '其他', '新闻', '其他', '其他', '0', '4abe1a4c-c399-403a-9ca3-9d49c482dfae', '2017-08-15 11:05:32');
 INSERT INTO `domain_two` VALUES ('9aef2223-e1d9-4587-9f33-55ce5b7a4580', 'epaper.syd.com.cn', '沈阳日报', '其他', '报纸', '省级', '其他', '0', 'eb411126-cdba-4b6b-a9b3-9413d81d8c4f', '2017-08-15 11:06:20');
 INSERT INTO `domain_two` VALUES ('9b768f77-7801-4ea0-8e03-22b79081cc82', 'epaper.ynet.com', '北京青年报', '其他', '报纸', '省级', '其他', '0', '331a855b-ce63-4990-aa34-c7c30dfd8997', '2017-08-15 11:07:30');
@@ -2955,6 +3120,7 @@ INSERT INTO `domain_two` VALUES ('9cab118f-2f08-44a6-a318-7d26683e732c', 'bbs.ka
 INSERT INTO `domain_two` VALUES ('9cab7dfb-12a1-4f4e-992c-ba27dda88e34', 'scwc.ccoo.cn', '旺苍在线网', '其他', '新闻', '其他', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:06:07');
 INSERT INTO `domain_two` VALUES ('9cb86c1c-80d2-4d5d-97f7-0a10cdf4675d', 'blog.qlmoney.com', '益邦投资', '其他', '博客', '其他', '其他', '0', 'dfb775b8-c6df-453c-8d4d-cec48aa010a8', '2017-08-15 11:05:53');
 INSERT INTO `domain_two` VALUES ('9cba70f1-ddd2-4891-b118-fb53d94c05b9', 'paper.mm111.net', '茂名日报', '其他', '报纸', '其他', '其他', '0', 'd7a5bb84-2a99-4d7e-b167-f8a58ba5618e', '2017-08-15 11:06:42');
+INSERT INTO `domain_two` VALUES ('9cbcce7a-86b5-4b92-8076-301d5c62e5b3', 'yl.nanchongpeace.gov.cn', '南充长安网', '仪陇', '新闻', '其他', '其他', '0', '6aa7bb77-c103-40df-b7ae-798480bc66be', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('9ce03ab1-8b21-484f-8616-171578c67903', 'blog.sciencenet.cn', '科学网', '其他', '博客', '其他', '其他', '0', '4130cb73-1d7e-4285-8e54-12ff90c81271', '2017-11-21 11:32:47');
 INSERT INTO `domain_two` VALUES ('9d1ecf3b-5bd5-4f17-8986-a038097d11a8', 'cnews.chinadaily.com.cn', '中国日报中文网', '其他', '新闻', '中央', '其他', '0', '0243483f-9914-4683-93ee-9f9588d7c1bc', '2017-08-15 11:05:39');
 INSERT INTO `domain_two` VALUES ('9d5104fc-4e25-4a2b-ab80-a493345c196c', 'job.qdu.edu.cn', '青岛大学', '其他', '资讯', '其他', '其他', '0', 'e2b6e040-2ede-4ebb-99f4-9c95d694ce68', '2017-11-21 11:32:46');
@@ -2968,11 +3134,12 @@ INSERT INTO `domain_two` VALUES ('9e54a015-d235-4650-bd1f-5cb101e30449', 'rd.nan
 INSERT INTO `domain_two` VALUES ('9f28f0d8-316c-40e8-9a25-27affff18f63', 'news.gog.cn', '其他', '其他', '其他', '其他', '其他', '0', '3831de88-5cb4-4069-be08-713abf328605', '2017-08-15 11:07:42');
 INSERT INTO `domain_two` VALUES ('9f291b2c-0f84-4cf2-9321-009978c2831e', 'city.sina.com.cn', '新浪城市频道', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:06:00');
 INSERT INTO `domain_two` VALUES ('9f30cfaf-85b3-4299-b78b-cc0d409215f5', 'photo.sina.cn', '其他', '其他', '其他', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-08-15 11:05:23');
-INSERT INTO `domain_two` VALUES ('9f407979-2af4-4e42-982e-3b146c13c2ed', 'edu.qq.com', '其他', '其他', '其他', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:05:18');
+INSERT INTO `domain_two` VALUES ('9f407979-2af4-4e42-982e-3b146c13c2ed', 'edu.qq.com', '腾讯', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('9f721fb5-cdf6-4a17-9894-90a0c6ae71de', 'jinhua.19lou.com', '金华19楼', '其他', '论坛', '论坛', '其他', '0', 'c1e45e42-fa52-48e7-957f-8758213dddf2', '2017-08-15 11:06:54');
 INSERT INTO `domain_two` VALUES ('9f822b6a-b6cd-408c-9f0d-f3a52f8312be', 'science.china.com.cn', '科学中国', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:06:50');
 INSERT INTO `domain_two` VALUES ('9fa773df-3456-4a90-9098-aa6ab8357ebb', 'bbs.dazhoushan.com', '大舟山论坛', '其他', '论坛', '论坛', '其他', '0', 'f289d5c3-9a99-43d8-8edd-a710c04e06a4', '2017-08-15 11:07:22');
 INSERT INTO `domain_two` VALUES ('9fcab6e0-40e1-4fd0-93d4-7a6c3217f503', 'bbs.qianhuaweb.com', '其他', '其他', '其他', '其他', '其他', '0', '6001f666-aeb8-4bce-9535-9962a2a9a8d7', '2017-08-15 11:05:17');
+INSERT INTO `domain_two` VALUES ('9ff1a9da-c100-479f-a018-2f2ff6a41d74', 'll.sxgov.cn', '黄河新闻网吕梁频道', '教育', '新闻', '其他', '其他', '0', 'ad37dcb4-1a2f-47fa-9579-f8c99b25e786', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('a008ff97-925e-4e8d-b919-11b47c1056fc', 'dhnews.zjol.com.cn', '定海新闻网', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:07:20');
 INSERT INTO `domain_two` VALUES ('a022e8ec-205e-4bb2-91c8-35cb5815ca94', 'sc.people.com.cn', '人民网四川频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('a04c48e0-3be7-4f62-a546-0322426fd63d', 'news.jnnc.com', '新视听', '其他', '其他', '其他', '其他', '0', 'b547aa1b-1758-4fec-9870-08ce81ddb77e', '2017-08-15 11:05:58');
@@ -2985,10 +3152,12 @@ INSERT INTO `domain_two` VALUES ('a1f5db51-8eed-45e2-91c7-2769ed4b0aae', 'news.y
 INSERT INTO `domain_two` VALUES ('a20eac9a-5ee5-4b4d-936a-65a6216943f9', 'bbs.jiaozhou.net', '胶州网论坛', '其他', '论坛', '论坛', '其他', '0', 'f4168aad-79ed-4f06-baf0-e817216652b1', '2017-08-15 11:06:55');
 INSERT INTO `domain_two` VALUES ('a2199ec9-75bb-49c5-8239-a5fc271f288b', 'd.ahwmw.cn', '安徽文明单位网', '省直机关工委', '新闻', '其他', '其他', '0', 'c36d3035-0c8a-43cf-8adf-0eddfe9093fd', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('a21ef0c6-56c0-418f-8c3c-9793d3427902', 'epaper.ahwang.cn', '新安晚报数字报', '其他', '报纸', '其他', '其他', '0', '35999671-2dab-4c44-8a56-d081a1422106', '2017-08-15 11:06:02');
+INSERT INTO `domain_two` VALUES ('a25cb669-9838-49e8-90a4-afdf95476506', 'news.cri.cn', '国际在线', '国内频道', '新闻', '其他', '其他', '0', '5feb369f-0c96-4c37-9829-fa1e35390064', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('a2766ee2-2376-49cd-b290-80c12c2f0a77', 'fund.10jqka.com.cn', '同花顺金融服务网', '其他', '新闻', '其他', '其他', '0', 'ca7757ca-ab4f-4941-bd84-0066211fc74e', '2017-08-15 11:06:09');
+INSERT INTO `domain_two` VALUES ('a2942678-4aff-4de7-ba82-d3438965cc9e', 'news.sznews.com', '深圳新闻网', '首页', '新闻', '其他', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('a29a99ba-7689-42c5-8af6-d3ade69851f6', 'v.ku6.com', '酷6网', '其他', '视频', '其他', '其他', '0', '143c6dc4-9b47-4d86-89bd-d4c50c1aed1b', '2017-08-15 11:06:49');
 INSERT INTO `domain_two` VALUES ('a2b56476-ba7d-4736-9cf2-b6ae70cf7ee8', 'bbs.yl-p.com', '永隆铺bbs', '其他', '论坛', '论坛', '其他', '0', '8952a813-404b-465c-a4e7-3e28f88f72e2', '2017-08-15 11:05:52');
-INSERT INTO `domain_two` VALUES ('a30335d6-677e-4513-aecd-db340f1aaaf9', 'edu.china.com', '其他', '其他', '其他', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-08-15 11:05:18');
+INSERT INTO `domain_two` VALUES ('a30335d6-677e-4513-aecd-db340f1aaaf9', 'edu.china.com', '中华网', '其他', '新闻', '其他', '其他', '0', 'f24a0954-145b-4368-b05d-f7ebe0fef1e2', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('a312ff3d-3d41-4743-8091-1106e8037afb', 'bbs.xj163.cn', '丝路花语', '其他', '论坛', '论坛', '其他', '0', 'ac1d948f-0b20-4370-aea9-4bfda7ec96c2', '2017-08-15 11:06:17');
 INSERT INTO `domain_two` VALUES ('a31e4d28-66b5-463b-a8a8-5f260bb3ca8c', 'bbs.zx520.com', '我爱泸州', '其他', '论坛', '论坛', '其他', '0', 'ca9aa1de-1e50-4a26-ae42-7eeeda85ace0', '2017-08-15 11:06:05');
 INSERT INTO `domain_two` VALUES ('a346272b-fe6d-463f-8286-8edfdd4d4d46', 'nmtc.lottery.gov.cn', '内蒙古体彩网', '其他', '新闻', '其他', '其他', '0', 'd0b0805e-5134-48f6-9dae-a46d0003e4fa', '2017-08-15 11:06:36');
@@ -3019,13 +3188,14 @@ INSERT INTO `domain_two` VALUES ('a7612794-d836-4bed-b356-24e32b30b68d', 'epaper
 INSERT INTO `domain_two` VALUES ('a77d7d0e-1f28-4135-90dd-c5e65baf2a8e', 'gdjct.gd.gov.cn', '南粤清风', '其他', '新闻', '其他', '其他', '0', '317fca98-1f7d-403e-b157-e901dad42371', '2017-08-15 11:06:37');
 INSERT INTO `domain_two` VALUES ('a788823b-7dc2-4618-887a-8595923d8dff', 'ps.51zixuewang.com', '其他', '其他', '其他', '其他', '其他', '0', 'cd5eb20b-63f4-4611-9543-30fec0217fe2', '2017-11-05 21:34:09');
 INSERT INTO `domain_two` VALUES ('a78a617e-2b25-4de6-9aa2-f674a3853582', 'jy.t56.net', '罗唐人家论坛', '其他', '论坛', '论坛', '其他', '0', 'ad4cf804-04d2-4ac1-9cde-965daa8e8dde', '2017-08-15 11:06:43');
-INSERT INTO `domain_two` VALUES ('a7c2917e-428e-4f99-861c-94de52463610', 'edu.qianlong.com', '其他', '其他', '其他', '其他', '其他', '0', '54e5636c-85d4-4ed5-b38f-3e28b43f837c', '2017-08-15 11:05:18');
+INSERT INTO `domain_two` VALUES ('a7c2917e-428e-4f99-861c-94de52463610', 'edu.qianlong.com', '千龙网', '其他', '新闻', '其他', '其他', '0', '54e5636c-85d4-4ed5-b38f-3e28b43f837c', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('a7dc9f77-e26b-4625-b811-25e87bb2548c', 'zg.ccoo.cn', '自贡城市在线论坛', '其他', '论坛', '论坛', '其他', '0', 'a84ced6f-6103-46de-90b8-c491926b8d1b', '2017-08-15 11:05:28');
 INSERT INTO `domain_two` VALUES ('a800dec9-d0d2-45a1-9cce-b3a88d2e570c', 'qingdao.mofcom.gov.cn', '山东商务之窗', '其他', '新闻', '其他', '其他', '0', '4abe1a4c-c399-403a-9ca3-9d49c482dfae', '2017-08-15 11:06:24');
 INSERT INTO `domain_two` VALUES ('a816ddfc-5b82-4ab8-b71f-d24cfb66202e', 'bbs.hupu.com', '虎扑体育论坛', '其他', '论坛', '论坛', '其他', '0', 'f0f9e85b-b196-420a-9db2-446266d410de', '2017-08-15 11:07:03');
 INSERT INTO `domain_two` VALUES ('a83121a5-4c8b-4370-ab42-9d220a38b2a2', 'art.china.cn', '艺术中国', '其他', '新闻', '其他', '其他', '0', 'b17b1aed-515a-4cc6-b3cb-b505e830974d', '2017-08-15 11:05:53');
 INSERT INTO `domain_two` VALUES ('a84e016d-5a8f-4bb7-ad6e-1aefd1c05f31', 'mil.chinaiiss.com', '中国战略网', '其他', '新闻', '其他', '其他', '0', 'fc26c9ef-663c-4194-8828-d814ef0e2fd3', '2017-08-15 11:05:34');
 INSERT INTO `domain_two` VALUES ('a864a880-e34f-4223-9e4c-182730fb9cf8', 'ccwb.yunnan.cn', '春城晚报', '其他', '报纸', '其他', '其他', '0', 'ad2de7d1-505f-4f9a-8326-8c71a15be042', '2017-08-15 11:07:25');
+INSERT INTO `domain_two` VALUES ('a869992f-5511-4210-adc9-c413855966f9', 'bbs.hoopchina.com', '其他', '社会综合', '论坛', '其他', '其他', '0', 'ebc93982-60ff-4a78-a7c9-027d7d69316c', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('a896d920-a323-4653-9d8f-12cfd91ff061', 'v.sj.360.cn', '360官网', '其他', '资讯', '其他', '其他', '0', '11c1ffd2-7cc3-45d1-b740-0722b4d829f7', '2017-11-21 11:32:50');
 INSERT INTO `domain_two` VALUES ('a8abb901-6aa8-4aef-93fb-8fd28656dffe', 'bbs.0566cc.cc', '池州查查网', '其他', '论坛', '论坛', '其他', '0', '885ba7cc-ea73-43b1-a034-5d81e4467664', '2017-08-15 11:07:26');
 INSERT INTO `domain_two` VALUES ('a8b5af47-4868-47f0-8fbc-b24cedef1341', 'paper.wenweipo.com', '其他', '其他', '其他', '其他', '其他', '0', '44a89760-e381-4324-9454-b3de0e4cdd2f', '2017-08-15 11:07:43');
@@ -3039,9 +3209,11 @@ INSERT INTO `domain_two` VALUES ('a9c09246-051f-49ec-a3ad-026b65b566c4', 'epaper
 INSERT INTO `domain_two` VALUES ('aa117143-9e99-45e6-b03c-8e79a2bc3707', 'lc.scnjnews.com', '内江新闻网', '其他', '资讯', '其他', '其他', '0', '72e34312-48b5-478e-ac92-3af304432c25', '2017-11-21 11:32:50');
 INSERT INTO `domain_two` VALUES ('aa15b7cf-0aa0-46cf-827f-ab86d1eed5ed', 'gongyi.gmw.cn', '其他', '其他', '其他', '其他', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-08-15 11:05:19');
 INSERT INTO `domain_two` VALUES ('aaa68c3b-8603-4103-b2cf-8a1bfc2102a7', 'news.qiuyi.cn', '健康120', '其他', '新闻', '其他', '其他', '0', '48154e91-9981-43d3-be50-67aaa63da4f3', '2017-08-15 11:06:57');
+INSERT INTO `domain_two` VALUES ('aad84430-a480-4997-ad45-7b8c0cf1e19b', 'special.cqnews.net', '华龙网', '首页', '新闻', '其他', '其他', '0', 'a14117b2-235a-42ea-bae5-7ca7cc38e747', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('ab0a0619-8908-47c8-ba25-26f01039e104', 'zqrb.ccstock.cn', '证券日报', '其他', '报纸', '其他', '其他', '0', 'ae42ea63-74cb-4c31-acf3-8331bff6fc4f', '2017-08-15 11:05:48');
 INSERT INTO `domain_two` VALUES ('ab4f8d3e-7958-4b0d-9202-391245cfe0dc', 'media.weibo.cn', '新浪长微博', '其他', '其他', '其他', '其他', '0', '5f411992-3950-4aea-8ab9-d98f8affee7c', '2017-08-15 11:05:59');
 INSERT INTO `domain_two` VALUES ('ab7aacc6-8acf-4076-adbd-365cfe98e627', 'gzdaily.dayoo.com', '广州日报', '其他', '报纸', '省级', '其他', '0', '935f9a35-854a-47a6-b2f8-a9b842d62581', '2017-08-15 11:07:11');
+INSERT INTO `domain_two` VALUES ('abd129c1-5e0a-4c04-8a83-e5f739e851d5', 'jc.sxgov.cn', '黄河新闻网晋城频道', '首页', '新闻', '其他', '其他', '0', 'ad37dcb4-1a2f-47fa-9579-f8c99b25e786', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('abfca0ed-0ec7-466b-8ba7-72bffc352997', 'bbs.voc.com.cn', '华声论坛', '其他', '论坛', '论坛', '其他', '0', 'a7441181-c493-4bf0-9059-ed234b042f8a', '2017-08-15 11:07:03');
 INSERT INTO `domain_two` VALUES ('ac162f07-cd10-4a30-bca2-e18b321ef523', 'gx.people.com.cn', '人民网广西频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('ac536f1e-6d69-4b23-a34a-14c7e071ac7d', 'news.gscn.com.cn', '中国甘肃网', '其他', '新闻', '省级', '其他', '0', '7634b56f-2ff5-4251-a816-24ee756554c2', '2017-08-15 11:05:44');
@@ -3083,6 +3255,7 @@ INSERT INTO `domain_two` VALUES ('b28e205c-f499-4067-bde2-f572d8a5b537', 'hongdo
 INSERT INTO `domain_two` VALUES ('b2ebd84b-57fb-4373-a22a-59295a0f7565', 'zj.qq.com', '腾讯大浙网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('b33e2390-15db-4d1e-8f26-1654c4e50d48', 'top.todayonhistory.com', '历史上的今天', '其他', '新闻', '其他', '其他', '0', '2c7e97a9-315b-45a6-a5ca-66080381431f', '2017-08-15 11:06:47');
 INSERT INTO `domain_two` VALUES ('b354a921-9899-4b4e-9c13-f98b3209ef01', 'bbs.abab.com', 'ABAB游戏论坛', '其他', '论坛', '论坛', '其他', '0', 'fddc36e0-93bb-4206-8a59-df2c4146601b', '2017-08-15 11:07:36');
+INSERT INTO `domain_two` VALUES ('b3e12c95-3e15-45c1-be8b-59af9cdb805a', 'stock.10jqka.com.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', 'ca7757ca-ab4f-4941-bd84-0066211fc74e', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('b41344f1-1933-4adc-9482-ea27ec0e3f89', 'epaper.ssrb.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '971bd3ab-476d-4de8-9946-6c09e44e3234', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('b45e8254-db33-4db0-8d16-d864e0e83cc0', 'hsb.hsw.cn', '华商报网', '其他', '新闻', '其他', '其他', '0', '8590057f-20d1-4588-8d21-5c5da836d0d7', '2017-08-15 11:07:03');
 INSERT INTO `domain_two` VALUES ('b46a9ccb-069a-4e23-ba95-4391084846de', 'news.gmw.cn', '其他', '其他', '其他', '其他', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-08-15 11:05:21');
@@ -3096,7 +3269,7 @@ INSERT INTO `domain_two` VALUES ('b5916e6d-8b1f-4bf1-95dd-21074b54aebb', 'jnsb.e
 INSERT INTO `domain_two` VALUES ('b59384f4-7714-42aa-ad34-456f5433ed3d', 'nx.people.com.cn', '人民网宁夏频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('b5b101c7-eef6-4e21-8aa3-9680bb9de8af', 'epaper.anhuinews.com', '其他', '其他', '其他', '其他', '其他', '0', '58ea5d45-30b4-4a1c-b05f-ffe36f28f09f', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('b5bea5ec-0ad2-4104-ae36-8fda657be220', 'gs.ynpanj.cn', '云南怒江长安网', '其他', '新闻', '其他', '其他', '0', '4cc25654-19fa-480e-9cc5-1dddc159a2bc', '2017-08-15 11:05:51');
-INSERT INTO `domain_two` VALUES ('b6161cfb-ecb3-48ce-8462-a53c9ecbbc2d', 'yisheng.china.com.cn', '其他', '其他', '其他', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:28');
+INSERT INTO `domain_two` VALUES ('b6161cfb-ecb3-48ce-8462-a53c9ecbbc2d', 'yisheng.china.com.cn', '中国好医生', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('b6325032-aa5e-4bec-9870-7d70c9532626', 'dzb.eliuyang.cn', '浏阳日报', '其他', '报纸', '其他', '其他', '0', '199fc3ba-fe2b-4f00-b526-f4822b2845aa', '2017-08-15 11:06:45');
 INSERT INTO `domain_two` VALUES ('b645974f-4c7d-4404-b90e-61afe2b1201b', 'dingzhou.hbfzb.com', '河北法制网', '其他', '其他', '其他', '其他', '0', '3ce9284a-f87a-45ee-a61e-c9113853d437', '2017-08-15 11:07:06');
 INSERT INTO `domain_two` VALUES ('b6820005-f199-4154-b86e-dce603c4c3f9', 'epaper.hilizi.com', '半岛晨报', '其他', '报纸', '其他', '其他', '0', 'bfdd9764-2108-4600-9f7f-14389afd3f10', '2017-08-15 11:07:32');
@@ -3104,17 +3277,19 @@ INSERT INTO `domain_two` VALUES ('b6aadefc-5a3d-4c5a-bb35-bf4345c3318f', 'jiangs
 INSERT INTO `domain_two` VALUES ('b6eadb41-575f-4e52-b17d-cf4dbf7fb5b8', 'hb.xinhuanet.com', '新华湖北', '其他', '新闻', '中央', '其他', '0', '2f7603ed-30ef-46a9-aeb2-143a0c0ddd70', '2017-08-15 11:06:01');
 INSERT INTO `domain_two` VALUES ('b703d471-77d2-44af-bca0-f8e9e5850908', 'np.jj831.com', '宜宾日报', '其他', '报纸', '其他', '其他', '0', '5c87210a-98df-4e29-9eea-c9eb69310c8f', '2017-08-15 11:05:53');
 INSERT INTO `domain_two` VALUES ('b79cd726-5c87-4c9e-899c-5e8dd810886e', 'luoyang.house.163.com', '网易房产', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:06:07');
-INSERT INTO `domain_two` VALUES ('b7c4ea03-712c-439a-8b87-e1f757e07d06', 'society.workercn.cn', '其他', '其他', '其他', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-11-05 21:34:10');
+INSERT INTO `domain_two` VALUES ('b7c4ea03-712c-439a-8b87-e1f757e07d06', 'society.workercn.cn', '中工网', '其他', '新闻', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('b83b6540-62d9-4dd3-9d50-4a986953af95', 'bj.news.163.com', '其他', '其他', '其他', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-11-05 21:34:11');
 INSERT INTO `domain_two` VALUES ('b84af0bd-77de-4210-9b13-e26ba95e7730', 'legal.people.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:07:40');
-INSERT INTO `domain_two` VALUES ('b861a12d-8eae-4ef9-98d1-84d9cc1acd7d', 'edu.163.com', '其他', '其他', '其他', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:05:18');
+INSERT INTO `domain_two` VALUES ('b861a12d-8eae-4ef9-98d1-84d9cc1acd7d', 'edu.163.com', '网易', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('b861f437-5767-4b29-81e3-db3f41b91084', 'finance1.ce.cn', '其他', '其他', '其他', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-08-15 11:07:39');
+INSERT INTO `domain_two` VALUES ('b8ab3293-4e15-443d-b7a4-96f34adffa36', 'wh.yesky.com', '天极网', '', '新闻', '其他', '其他', '0', '18f1d968-2988-4d49-9991-f420c7f3f4ae', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('b8b34cef-afcf-4605-ad9b-aa058a56566c', 'fjrb.fjsen.com', '福建日报', '其他', '报纸', '省级', '其他', '0', '9c6fd9f4-4d57-458d-9b4a-4faa45ec38a5', '2017-08-15 11:07:15');
 INSERT INTO `domain_two` VALUES ('b8b69420-5667-40a2-a221-2f22f5ff097e', 'szbbs.sznews.com', '深圳新闻论坛', '其他', '论坛', '论坛', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('b8c2a177-081b-4e07-8bad-f6021febc21a', 'finance.cib.com.cn', '兴业银行', '其他', '新闻', '其他', '其他', '0', '24bf2602-0e26-4268-808c-5fdc89a84917', '2017-08-15 11:05:57');
 INSERT INTO `domain_two` VALUES ('b90acd08-c068-4a3f-8e54-2658db4d6582', 'epaper.xxsb.com', '信息时报', '其他', '报纸', '其他', '其他', '0', 'b2ff88e3-1fab-43aa-8306-08422aadce97', '2017-08-15 11:05:58');
 INSERT INTO `domain_two` VALUES ('b92223c3-9aef-4902-a8e4-4e74c7e30be1', 'news.tezhongzhuangbei.com', '中国警察装备网', '其他', '新闻', '中央', '其他', '0', '05bb2863-7158-4d15-86ea-f0c3d40a81b3', '2017-08-15 11:05:42');
 INSERT INTO `domain_two` VALUES ('b92f3bca-e512-4a90-9809-691b765f8b5a', 'news.blhbnews.com', '中国经济网环保频道', '其他', '新闻', '其他', '其他', '0', '554a90d0-cb9a-4d7e-b48a-fdca8aeba9cc', '2017-08-15 11:05:42');
+INSERT INTO `domain_two` VALUES ('b942e0c5-384b-4c33-b70a-0faa81f9ad37', 'bbs.gjnews.cn', '凯林社区论坛', '谈天说地', '论坛', '其他', '其他', '0', 'f7aba0a4-baef-4021-ab01-a9ea3c812246', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('b9790d61-ede2-4f89-9aec-3123de3c5fea', 'bj.xinhuanet.com', '其他', '其他', '其他', '其他', '其他', '0', '2f7603ed-30ef-46a9-aeb2-143a0c0ddd70', '2017-11-05 21:34:07');
 INSERT INTO `domain_two` VALUES ('b9a7ba85-4517-4bc0-aeae-2458b8e43943', 'aq.ahxf.gov.cn', '安庆先锋网', '其他', '新闻', '其他', '其他', '0', 'c7709bb8-4d4d-4001-9e36-2bdc47ba9564', '2017-08-15 11:07:33');
 INSERT INTO `domain_two` VALUES ('b9aa0a18-db23-464e-82e1-2a2a06c059c4', 'gov.longhoo.net', '龙虎网', '其他', '新闻', '其他', '其他', '0', 'f86eb89c-2d1f-4286-a66b-4bb24f324a4d', '2017-08-15 11:06:44');
@@ -3128,6 +3303,7 @@ INSERT INTO `domain_two` VALUES ('ba8ec20d-03cb-4837-b807-a269123d0da9', 'wap.ce
 INSERT INTO `domain_two` VALUES ('ba9c19c8-518c-4a94-ba0e-b826cfb9ab5d', 'sc.sina.cn', '手机新浪网', '其他', '手机', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-08-15 11:06:19');
 INSERT INTO `domain_two` VALUES ('babbf603-ba62-483a-a5f3-856ea368d07a', 'dzb.gzmzb.com', '贵州民族报', '其他', '报纸', '其他', '其他', '0', '4dd6d69a-b1d8-484b-9a85-fd0b39d68a98', '2017-08-15 11:07:11');
 INSERT INTO `domain_two` VALUES ('bb1af7a3-db3a-4cd7-a29a-a1717a37b7b3', 'news.he-nan.com', '其他', '其他', '其他', '其他', '其他', '0', '8951084f-1df7-41ac-ba30-a051b8897ea0', '2017-08-15 11:07:42');
+INSERT INTO `domain_two` VALUES ('bbc8a267-1ade-49ff-a8a7-173633d2a838', 'edu.cyol.com', '中青在线', '教育资讯', '新闻', '其他', '其他', '0', 'b4695e23-8245-4434-a14d-715acb110a55', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('bbcb6768-a52d-4007-b938-c57f37e6a301', 'czrb.bohaitoday.com', '沧州日报', '其他', '报纸', '其他', '其他', '0', 'e7ee8b12-f4fa-451b-a232-3dee17e26cd6', '2017-08-15 11:07:28');
 INSERT INTO `domain_two` VALUES ('bbd33c38-cbfd-4299-9b1d-372863fbc6bc', 'bbs.uu.cc', '游娱社区', '其他', '论坛', '论坛', '其他', '0', 'ecab4182-5f30-444f-9ef6-259127546903', '2017-08-15 11:05:52');
 INSERT INTO `domain_two` VALUES ('bc155e64-d1a4-4895-8d0b-2965ea4cf83e', 'edu.dbw.cn', '其他', '其他', '其他', '其他', '其他', '0', '1afff2e9-f6c5-4c2d-9898-dfb603d484c5', '2017-08-15 11:05:18');
@@ -3135,6 +3311,7 @@ INSERT INTO `domain_two` VALUES ('bc78243c-ea18-4311-bab9-b7d505616789', 'guba.e
 INSERT INTO `domain_two` VALUES ('bced1bea-d3bc-409b-9d0d-62be14bb1f6f', 'szb.jgsdaily.com:9999', '井冈山报', '其他', '报纸', '其他', '其他', '0', 'cb195596-17ed-4c81-9cdb-34edb2ee7c0b', '2017-08-15 11:06:52');
 INSERT INTO `domain_two` VALUES ('bd046e14-71e4-425d-a707-7b92bddb6229', 'roll.sohu.com', '其他', '其他', '其他', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-08-15 11:05:23');
 INSERT INTO `domain_two` VALUES ('bd15a216-ed20-4c82-886e-4601fa09d3ad', 'zwgk.bengbu.gov.cn', '中国蚌埠', '其他', '新闻', '其他', '其他', '0', '7f64a06c-4fd5-4154-b66e-edda06d75ee2', '2017-08-15 11:05:46');
+INSERT INTO `domain_two` VALUES ('bd27388c-42b8-4c7b-a040-f754cb637538', 'bs.cq.gov.cn', '璧山县人民政府', '头条要闻', '新闻', '其他', '其他', '0', '8f3f4e50-f96f-4051-93a3-4f88665aee28', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('bd280f32-7c63-4477-af2c-3d3883904d08', 'hebei.ifeng.com', '凤凰网河北频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
 INSERT INTO `domain_two` VALUES ('bd903cd7-ea40-4ebc-8d73-1deaec9df90f', 'bbs.17ok.com', '财界社区', '其他', '论坛', '论坛', '其他', '0', '7cbf2011-bc47-40ef-b6dc-79cb452d31b7', '2017-08-15 11:07:28');
 INSERT INTO `domain_two` VALUES ('bdc6f213-42b8-4d8e-b175-f39a292707b7', 'bbs.cnncw.cn', '三国源论坛', '其他', '论坛', '论坛', '其他', '0', '181f56ad-cd44-4d55-898d-0a7c190533e6', '2017-08-15 11:06:26');
@@ -3152,10 +3329,12 @@ INSERT INTO `domain_two` VALUES ('c06d3a39-1302-44ef-976d-37c1655a37b8', 'epaper
 INSERT INTO `domain_two` VALUES ('c08a8a20-720d-46b7-bd4e-3f0bc82b87bd', 'tj.jjj.qq.com', '腾讯大燕网天津站', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('c09baa19-6091-48c0-8ddb-9a4b951f865a', 'bbs.chezhilv.cn', '车之旅社区', '其他', '论坛', '论坛', '其他', '0', '87a4d2da-982a-4afc-a48b-6b12c3bad0f4', '2017-08-15 11:07:27');
 INSERT INTO `domain_two` VALUES ('c0f6a422-dd1d-4fe2-86b9-50d7870a5a42', '315ah.ccn.com.cn', '安徽消费维权网', '其他', '新闻', '其他', '其他', '0', '8ce38013-f4b5-4a3e-a16b-6a7c2cf86249', '2017-08-15 11:07:34');
+INSERT INTO `domain_two` VALUES ('c1724c05-e0c8-4039-b3e1-e802f156bfb4', 'pinpai.china.com.cn', '其他', '社会综合', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('c18235b9-02ef-4394-96f2-862ae10842e2', 'bbs.huanqiu.com', '环球网论坛', '其他', '论坛', '论坛', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-08-15 11:07:01');
 INSERT INTO `domain_two` VALUES ('c1a1a271-8f24-43bd-a5a5-d71b36f2ef2e', 'paper.jyb.cn', '中国教育报', '其他', '报纸', '其他', '其他', '0', '4d4e026a-9438-4a81-aef2-c32bc937f7e5', '2017-08-15 11:05:42');
 INSERT INTO `domain_two` VALUES ('c1b4930c-7794-4a44-a3a6-ea51d3ccf609', 'spirit.tjkx.com', '糖酒快讯网', '其他', '新闻', '其他', '其他', '0', '2cf54785-3ee4-4710-b985-d569b5df2011', '2017-08-15 11:06:12');
 INSERT INTO `domain_two` VALUES ('c1cdf234-5127-4337-8e40-a931c620dea7', 'cd.qq.com', '腾讯大成网', '热点新闻', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('c1d4dde8-9ee7-4dce-bbe4-640dee3efc90', 'jk.shangc.net', '尚之潮网', '', '新闻', '其他', '其他', '0', 'd2e5e116-c895-40bf-acf3-8e1e0c3b505a', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('c21d76d3-d202-4988-8164-2782b16e0b17', 'jxxznews.zjol.com.cn', '秀洲新闻网', '其他', '新闻', '其他', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:05:57');
 INSERT INTO `domain_two` VALUES ('c220717f-cf0b-4ffb-aa03-d8e72d55b6ae', 'ncwb.cnncw.cn', '南充晚报', '其他', '报纸', '其他', '其他', '0', '181f56ad-cd44-4d55-898d-0a7c190533e6', '2017-08-15 11:06:38');
 INSERT INTO `domain_two` VALUES ('c23492cf-c539-4591-acaa-4105a2b10ade', 'bbs.17500.cn', '乐彩论坛', '其他', '论坛', '论坛', '其他', '0', '0e8d6350-fcc0-4d18-8b66-0175b6716e3c', '2017-08-15 11:06:49');
@@ -3205,12 +3384,15 @@ INSERT INTO `domain_two` VALUES ('c91a1f53-b58b-41dd-8b6a-0f47c1f3e991', 'bbs.ti
 INSERT INTO `domain_two` VALUES ('c937c392-ba13-4dc8-b61c-ae635887c97d', 'news.inv.org.cn', '投资者之家', '其他', '新闻', '其他', '其他', '0', '9e6be651-efbb-4162-b841-d443e328dcc2', '2017-08-15 11:06:09');
 INSERT INTO `domain_two` VALUES ('c950651c-6f74-4049-9a04-b91f6d7cd85c', 'xingye.pagx.cn', '平安广西网', '其他', '新闻', '省级', '其他', '0', '2991b139-5640-4d34-8525-4aeab21ca65b', '2017-08-15 11:06:33');
 INSERT INTO `domain_two` VALUES ('ca058908-470b-423c-9280-05bd2325eccb', 'bbs.zz18.com', '涿州网论坛', '其他', '论坛', '论坛', '其他', '0', '7dc1855f-76db-4f32-95a6-04e8f059fc7d', '2017-08-15 11:05:29');
+INSERT INTO `domain_two` VALUES ('ca0c3c83-c451-40ea-9614-4a778f70c806', 'bbs.ncntv.com.cn', '无线南充论坛', '最新', '论坛', '其他', '其他', '0', 'c5d7ad61-308d-4c98-8d96-acd41862293b', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('ca1c3e00-dc11-41ae-8254-ded0ef80af38', 'xh.xhby.net', '新华日报', '其他', '报纸', '中央', '其他', '0', '94f927e9-fb1b-4ffd-9c17-f45ebe5e5345', '2017-08-15 11:06:01');
 INSERT INTO `domain_two` VALUES ('ca447e22-1aa9-4a85-94be-98f13126a27d', 'news.xtol.cn', '湘潭在线民情在线', '其他', '新闻', '其他', '其他', '0', 'b723e279-68e3-483b-957e-8c01c5d079c6', '2017-08-15 11:06:03');
 INSERT INTO `domain_two` VALUES ('ca91d999-0c51-43d0-aaf1-ff4440c70315', 'nmg.sina.com.cn', '新浪内蒙古', '金融动态', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('cabbfcb3-57dc-42dc-8d42-385ac256443a', 'news.k618.cn', '未来网', '其他', '新闻', '其他', '其他', '0', 'aa583562-2cf9-4557-9222-f2f648bed289', '2017-08-15 11:06:06');
 INSERT INTO `domain_two` VALUES ('cabd1e4e-a031-4f9d-88ae-ab8b01ffd3e8', 'szb.qzwb.com', '泉州晚报', '其他', '报纸', '其他', '其他', '0', 'd1a63185-ab37-47d5-8933-75adf6638661', '2017-08-15 11:06:28');
+INSERT INTO `domain_two` VALUES ('cace55bf-7494-427e-b374-3d9b96e8915c', 'news.onlinejl.com', '吉林在线', '', '新闻', '其他', '其他', '0', '3ab30873-764a-40de-9b1a-a4e379dd8b38', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('cae96a94-685d-4a04-a9c6-4fc081648de7', 'sh.people.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:05:23');
+INSERT INTO `domain_two` VALUES ('cb0883dd-0bf6-408a-aa9c-9c8249852006', 'suse.edu.cn', '四川理工学院', '校园快讯', '新闻', '其他', '其他', '0', 'e2b6e040-2ede-4ebb-99f4-9c95d694ce68', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('cb261789-6508-48fa-9423-cb93ba62ca14', 'n.cztv.com', '新蓝网', '其他', '新闻', '其他', '其他', '0', '342932bd-8f0d-4e37-b4c9-d70f1f335f3f', '2017-08-15 11:06:00');
 INSERT INTO `domain_two` VALUES ('cb41e161-6bd4-401c-9b5f-4a168ccdbc64', 'm.news.cn', '其他', '其他', '其他', '其他', '其他', '0', '0836f967-099f-423f-af88-d904526b5bc5', '2017-08-15 11:07:41');
 INSERT INTO `domain_two` VALUES ('cb88a8b4-82d0-4fbb-93ba-6fa2842a1371', 'news.zj.com', '浙江消费维权网', '其他', '新闻', '其他', '其他', '0', 'c000a6c9-6ed1-4d0c-8dbe-33c5b6fb9bfa', '2017-08-15 11:05:48');
@@ -3227,7 +3409,10 @@ INSERT INTO `domain_two` VALUES ('cd3210c7-79de-4e79-b54a-c2e4fc89fd79', 'epaper
 INSERT INTO `domain_two` VALUES ('cda90e77-8501-4717-9f87-fcd89b661f62', 'news.cenews.com.cn', '中国环境报', '其他', '报纸', '其他', '其他', '0', '4453e6db-d0ea-4fa5-aabc-ac82e75b0f63', '2017-08-15 11:05:43');
 INSERT INTO `domain_two` VALUES ('cdaaa7df-5b99-4ccf-9f93-a32b151d13e5', 'm.sgnet.cc', '中国寿光网手机版', '其他', '新闻', '其他', '其他', '0', 'c26e811e-852f-4a52-91ad-d6e6812b2091', '2017-08-15 11:05:38');
 INSERT INTO `domain_two` VALUES ('cde251c7-e4f4-4c41-bc20-0d4b3dbf8b36', 'sft.hunan.gov.cn', '湖南省司法厅', '其他', '其他', '省级', '其他', '0', 'a2d77203-9a9e-4944-8cfe-b1f68e0bc972', '2017-08-15 11:07:04');
+INSERT INTO `domain_two` VALUES ('cdf0dbce-f90f-4419-9e32-012ade278f7e', 'lt.bznews.org', '眉山日报', '头版', '报纸', '其他', '其他', '0', 'db6713c6-2ccc-41f3-a777-7182976dd84e', '2017-12-17 01:00:08');
+INSERT INTO `domain_two` VALUES ('ce0c6cca-f1c9-483f-a4df-b59b333879cc', 'bm.szhk.com', '深港在线', '便民频道', '新闻', '其他', '其他', '0', 'd2552ea2-23d9-4774-8045-e1f588a417aa', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('ce32bf65-77d3-4523-9474-8d3c17af0466', 'wb.gywb.cn', '贵阳晚报', '其他', '报纸', '其他', '其他', '0', '845e02aa-f9a9-4746-ba30-ae5f119bf77d', '2017-08-15 11:07:11');
+INSERT INTO `domain_two` VALUES ('ce377285-5bb6-4fca-a913-fd17fab4e9ca', 'dzb.scdaily.cn', '四川日报电子版', '要 闻', '报纸', '其他', '其他', '0', '5196aa08-bbd2-448d-9170-e2b472977441', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('ce60e867-d5c3-4ffc-9246-f9f166099507', 'hebei.sina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:19');
 INSERT INTO `domain_two` VALUES ('ceb4e4aa-c877-42db-a3c4-fb625c67b372', 'gz.ifeng.com', '凤凰网广州频道', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
 INSERT INTO `domain_two` VALUES ('cf457482-c1c2-4324-8992-85c4219f7e38', 'sh.sina.com.cn', '新浪上海', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:59');
@@ -3239,17 +3424,20 @@ INSERT INTO `domain_two` VALUES ('cf917fcf-7d82-4e8a-a5ce-fffc41e9a3c9', 'cq.sin
 INSERT INTO `domain_two` VALUES ('cfb5acbd-ccd3-4c4e-ac7b-73e04af8098e', 'bbs.jrj.com.cn', '金融界论坛', '其他', '论坛', '论坛', '其他', '0', 'b99d65cb-b8be-4e1c-83f4-cc9518ff4666', '2017-08-15 11:06:53');
 INSERT INTO `domain_two` VALUES ('cfbd222c-c3fd-413b-bfd9-4534f07a9a6b', 'sc.cri.cn', '国际在线四川频道', '其他', '新闻', '中央', '其他', '0', '5feb369f-0c96-4c37-9829-fa1e35390064', '2017-08-15 11:07:10');
 INSERT INTO `domain_two` VALUES ('d085d132-6b40-4895-8b0d-2ae86709c5fd', 'slj.weifang.gov.cn', '中国潍坊', '其他', '新闻', '其他', '其他', '0', '7ea28372-e596-4c49-9427-bac7be01b877', '2017-08-15 11:05:36');
+INSERT INTO `domain_two` VALUES ('d09d03ed-ecbf-4f49-bf3e-07b928a714b4', 'edu.southcn.com', '南方网', '每日滚动', '新闻', '其他', '其他', '0', 'b76d4ee1-0674-4c0d-81bb-899d0293a267', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('d0b0b991-d0b5-4e6a-8468-b97ae01a2712', 'town.zjol.com.cn', '中国网浙江频道', '其他', '新闻', '中央', '其他', '0', 'fd0ce6b5-73a2-4ac7-9746-37395a991a6d', '2017-08-15 11:05:36');
 INSERT INTO `domain_two` VALUES ('d0b99a50-46b8-4715-988d-2e7bfe787812', 'bbs.oeeee.com', '奥一论坛', '其他', '论坛', '论坛', '其他', '0', 'd50422bc-5105-437e-b347-183e6c4b674e', '2017-08-15 11:07:33');
+INSERT INTO `domain_two` VALUES ('d0e572f9-56c3-4a5f-b59b-9d739e9c7fbe', 'jk.scol.com.cn', '四川在线', '健康频道', '新闻', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('d1377a43-ee0d-4a1e-a82f-71548758e8cd', 'ajj.luzhou.gov.cn', '泸州市安监局', '其他', '新闻', '其他', '其他', '0', '0332c53f-31fc-4819-a73c-5d3bb5081ab8', '2017-08-15 11:06:43');
 INSERT INTO `domain_two` VALUES ('d16743e5-a858-437a-8a0c-cba91637c8fd', 'travel.syd.com.cn', '沈阳网', '其他', '新闻', '省级', '其他', '0', 'eb411126-cdba-4b6b-a9b3-9413d81d8c4f', '2017-08-15 11:06:20');
 INSERT INTO `domain_two` VALUES ('d16970e2-c281-465a-ad42-875cded82fbe', 'bbs.18qiang.com', '义乌18腔论坛', '其他', '论坛', '论坛', '其他', '0', 'b0395938-b4c0-4cb5-b889-2777c80be1c4', '2017-08-15 11:05:53');
-INSERT INTO `domain_two` VALUES ('d17aa929-a504-4837-9b9d-1a5c77d502e2', 'news.hebei.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-08-15 11:07:42');
+INSERT INTO `domain_two` VALUES ('d17aa929-a504-4837-9b9d-1a5c77d502e2', 'news.hebei.com.cn', '长城网', '其他', '新闻', '其他', '其他', '0', '2cc707a1-75ae-4935-9b2e-3542a6cf9d65', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('d19813ce-73a0-45d9-bff6-9cf595df7591', 'gx.sina.cn', '手机新浪网', '其他', '其他', '其他', '其他', '0', 'dbffe534-68bc-4d1f-89b8-1034c50d9031', '2017-08-15 11:06:19');
 INSERT INTO `domain_two` VALUES ('d1bb9980-34db-4f58-bae0-502f2e6bca65', 'news.asxxg.cn', '其他', '其他', '其他', '其他', '其他', '0', '1ce61efe-fc59-45db-9556-7093bb1ff47c', '2017-08-15 11:05:20');
 INSERT INTO `domain_two` VALUES ('d21066a7-1dbd-4b73-8470-5e50f328710b', 'jj.lzep.cn', '泸州新闻网', '其他', '资讯', '其他', '其他', '0', 'a8f76068-ae4e-43b1-89a4-288960ea147c', '2017-11-21 11:32:49');
 INSERT INTO `domain_two` VALUES ('d274f067-228a-4c65-8f6c-3ad4a8840f0b', 'jrqd.qidongnews.com', '通州日报', '其他', '报纸', '其他', '其他', '0', 'e322bfda-accc-4a07-b6cd-ef5502a0372d', '2017-08-15 11:06:09');
 INSERT INTO `domain_two` VALUES ('d278c006-2461-4080-bab3-af7f127c30d3', 'news.0857js.net', '金沙之窗网', '其他', '新闻', '其他', '其他', '0', '544309db-9873-43ff-8f55-de74c9c66854', '2017-08-15 11:06:53');
+INSERT INTO `domain_two` VALUES ('d27f6226-a8a3-4160-ba66-389c4e496553', 'ct.gyxww.cn', '广元新闻网', '朝天', '新闻', '其他', '其他', '0', '0440106d-779e-4593-995e-bac6c72482cc', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('d3544e68-971b-43fa-b5e2-ee80635034ff', 'sjzrb.sjzdaily.com.cn', '石家庄日报', '其他', '报纸', '省级', '其他', '0', 'e6d00f58-0435-4117-8748-ecf427b79f49', '2017-08-15 11:06:20');
 INSERT INTO `domain_two` VALUES ('d363ff5b-26b6-4162-add7-0426e51fb5d0', 'epaper.gxnews.com.cn', '当代生活报', '其他', '报纸', '其他', '其他', '0', '3be5ca5a-a688-4042-8c33-28f2728d9a9d', '2017-08-15 11:07:22');
 INSERT INTO `domain_two` VALUES ('d3a338aa-0cdd-4dc1-975c-b55765293e94', 'new.qi-che.com', '其他', '其他', '其他', '其他', '其他', '0', '11b3e0ec-bea2-4877-8ca5-58aaeb0fd576', '2017-08-15 11:05:20');
@@ -3266,10 +3454,12 @@ INSERT INTO `domain_two` VALUES ('d6db3f4d-7dae-429c-83eb-c67b50ae9513', 'lep.cc
 INSERT INTO `domain_two` VALUES ('d6e3c2a4-2b6f-4c1d-92b8-e22c8d237042', 'blog.tibetcul.com', '藏人文化博客', '其他', '博客', '其他', '其他', '0', '2de61185-0a8f-42d0-8177-9ee14ff17dd9', '2017-08-15 11:07:28');
 INSERT INTO `domain_two` VALUES ('d73478ed-48fd-4d69-a908-ec650d568e9f', 'bbs.0833hy.com', '洪雅论坛', '其他', '论坛', '论坛', '其他', '0', 'bf4c7235-2d54-4bb2-b7f0-811f25f1dfbe', '2017-08-15 11:07:04');
 INSERT INTO `domain_two` VALUES ('d756a497-78b0-4910-95b7-6dd1c68e9625', 'jlrbszb.chinajilin.com.cn', '吉林日报', '其他', '其他', '其他', '其他', '0', '41071877-bb27-407f-930b-ee49b12d68cc', '2017-08-15 11:06:59');
+INSERT INTO `domain_two` VALUES ('d7761da4-1e08-4943-a0e5-50b2496a5f77', 'sports.china.com.cn', '中国网体育中国', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('d781e1e3-5265-4bf4-a3e7-9b850f3560ba', 'news.cnfol.com', '其他', '其他', '其他', '其他', '其他', '0', '642cee0f-0ace-49a7-b358-1c7b1ec88ff6', '2017-08-15 11:07:42');
 INSERT INTO `domain_two` VALUES ('d78741f3-5eae-4429-9504-1a65ed7ac25e', 'news.jy1w.com', '简阳网', '其他', '新闻', '其他', '其他', '0', 'a2d25b2d-29cc-4d31-a933-6334b70a5e5b', '2017-08-15 11:06:57');
 INSERT INTO `domain_two` VALUES ('d79d2439-3f4d-4754-9482-adbd9e643721', 'sc.leju.com', '新浪乐居安徽', '其他', '新闻', '其他', '其他', '0', 'fad3bc35-47b3-4e78-a607-ae0d9c8d28a3', '2017-08-15 11:05:59');
 INSERT INTO `domain_two` VALUES ('d7cd468a-c6a9-4f1c-83db-378f4ca9d0e9', 'news.takungpao.com.hk', '其他', '其他', '其他', '其他', '其他', '0', '55995057-f71d-4a26-b987-dab97af81f65', '2017-08-15 11:07:42');
+INSERT INTO `domain_two` VALUES ('d7d0f518-9969-466b-893f-c54684de1fe8', 'df.ce.cn', '中国经济网', '地方新闻大滚动', '新闻', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('d826db79-b660-477d-9efb-25e821c68112', 'zj.people.com.cn', '人民网浙江频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('d84d468b-2c04-4d60-9ed9-bd9cfe304b5b', 'bbs.xineurope.com', '战法论坛', '其他', '论坛', '论坛', '其他', '0', 'e346c72c-9d64-4d21-a2d1-d9c14dcf1b7e', '2017-08-15 11:05:50');
 INSERT INTO `domain_two` VALUES ('d8715cca-c42d-4672-85a6-85d95aad32d8', 'opinion.jrj.com.cn', '金融界时评', '其他', '新闻', '其他', '其他', '0', 'b99d65cb-b8be-4e1c-83f4-cc9518ff4666', '2017-08-15 11:06:53');
@@ -3280,6 +3470,7 @@ INSERT INTO `domain_two` VALUES ('d93dbaf3-ce71-4bd2-aab0-413ffd983f82', 'bbs.sg
 INSERT INTO `domain_two` VALUES ('d944b3fa-5c89-4841-b0a2-ebb85b6bcaf6', 'epaper.jnwb.net', '江南晚报', '其他', '报纸', '其他', '其他', '0', 'a48a2131-360a-4a42-bb57-595261ab3677', '2017-08-15 11:06:56');
 INSERT INTO `domain_two` VALUES ('d94b0fc5-dc35-4b45-94fc-283deb4af4ea', 'sports.dzwww.com', '其他', '其他', '其他', '其他', '其他', '0', '53deb994-6d76-4899-b53e-b634ebe261db', '2017-08-15 11:07:43');
 INSERT INTO `domain_two` VALUES ('d9685dcb-49e1-46b4-a8a5-ae3fe328f1f9', 'ehsb.hsw.cn', '华商报', '其他', '报纸', '省级', '其他', '0', '8590057f-20d1-4588-8d21-5c5da836d0d7', '2017-08-15 11:07:03');
+INSERT INTO `domain_two` VALUES ('d9955a61-e133-4fda-b06e-35dfdbfb5beb', 'jy.snxw.com', '遂宁新闻网', '教育新闻', '新闻', '其他', '其他', '0', 'ffe7943c-a594-49b3-b21f-bf227ebe3b24', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('d9983848-82f6-499a-b9d4-4945f14775c1', 'bbs.cnjxl.com', '高县金线岭', '其他', '论坛', '论坛', '其他', '0', '9dfaf96e-4dc6-473e-a79e-714ad4ca57b2', '2017-08-15 11:07:14');
 INSERT INTO `domain_two` VALUES ('d9afe84b-ed06-4ed6-9b05-4a167580d1b1', 'blog.dqccc.com', '地球村博客', '其他', '博客', '其他', '其他', '0', 'd16e50f8-b17f-4e27-a3f4-e10e5c64b32f', '2017-08-15 11:07:21');
 INSERT INTO `domain_two` VALUES ('d9f2dd4a-82fb-40fa-b552-c6feb876c273', 'bbs.hepuwang.com', '合浦论坛', '其他', '论坛', '论坛', '其他', '0', '455daa67-641d-49c0-948a-4286747c79f3', '2017-08-15 11:07:06');
@@ -3297,14 +3488,14 @@ INSERT INTO `domain_two` VALUES ('db3e92a2-9c91-4564-96c9-3538a38dfefb', 'fanfu.
 INSERT INTO `domain_two` VALUES ('db595bb2-4a8b-440e-a49a-f13024c5e632', 'jrwc.cnepaper.net', '今日婺城', '其他', '报纸', '其他', '其他', '0', 'dcbed3af-6dfa-4d57-8da1-9d009260da22', '2017-08-15 11:06:54');
 INSERT INTO `domain_two` VALUES ('db71acec-3f77-4154-9b53-bf180426baec', 'ah.people.com.cn', '人民网安徽频道', '其他', '新闻', '中央', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:27');
 INSERT INTO `domain_two` VALUES ('db7833ac-7f83-4f5b-9c7a-1723c3810f08', 'm.leju.com', '手机新浪乐居网', '其他', '手机', '其他', '其他', '0', 'fad3bc35-47b3-4e78-a607-ae0d9c8d28a3', '2017-08-15 11:06:19');
-INSERT INTO `domain_two` VALUES ('dc3c68e0-f9ef-4d8d-89e4-22218621393c', 'epaper.scdaily.cn', '其他', '其他', '其他', '其他', '其他', '0', '5196aa08-bbd2-448d-9170-e2b472977441', '2017-08-15 11:07:39');
+INSERT INTO `domain_two` VALUES ('dc3c68e0-f9ef-4d8d-89e4-22218621393c', 'epaper.scdaily.cn', '四川日报', '其他', '报纸', '其他', '其他', '0', '5196aa08-bbd2-448d-9170-e2b472977441', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('dc428cdf-dcc6-47d6-85ff-51b816d3e5dc', 'bang.dahe.cn', '大河邦邦网', '其他', '论坛', '论坛', '其他', '0', 'ed031acc-1d29-42d8-8f72-634521893784', '2017-08-15 11:07:25');
 INSERT INTO `domain_two` VALUES ('dc8f951f-92d7-40d3-ac8f-7c95c7258130', 'news.jxnews.com.cn', '江西大江网', '其他', '新闻', '其他', '其他', '0', 'bffd1934-e830-447a-876d-dc93974d00aa', '2017-08-15 11:06:56');
 INSERT INTO `domain_two` VALUES ('dca492ef-9b76-458c-abad-72d2e0085298', 'tour.cyol.com', '中青在线', '其他', '新闻', '其他', '其他', '0', 'b4695e23-8245-4434-a14d-715acb110a55', '2017-08-15 11:05:33');
 INSERT INTO `domain_two` VALUES ('dcb51d3c-dae8-4c24-94cd-b799816d5561', 'news.66wz.com', '温州网', '其他', '新闻', '其他', '其他', '0', 'b6410c68-16dd-4e6f-a64a-237bb415cdfe', '2017-08-15 11:06:06');
 INSERT INTO `domain_two` VALUES ('dd16e4e1-6ae6-4b4b-a5eb-8f8219bb4a8b', 'jsb.jsxww.cn', '嘉兴日报嘉善版', '其他', '报纸', '其他', '其他', '0', '0aefe8bf-20c0-4f38-855c-ab9addd742b2', '2017-08-15 11:06:58');
 INSERT INTO `domain_two` VALUES ('dd31cf2d-fb01-4061-887b-fe90c921320c', 'news.cnjiwang.com', '中国吉林网', '其他', '新闻', '省级', '其他', '0', '518b0284-b0e2-4fa2-9586-a840c174fd34', '2017-08-15 11:05:43');
-INSERT INTO `domain_two` VALUES ('dd3541a9-e12e-4a4b-b212-81d0df1b0241', 'local.newssc.org', '其他', '其他', '其他', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:07:40');
+INSERT INTO `domain_two` VALUES ('dd3541a9-e12e-4a4b-b212-81d0df1b0241', 'local.newssc.org', '四川新闻网', '其他', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('dd53f173-3c56-4ae7-8cba-dbe0035d8403', 'js.chinaso.com', '其他', '其他', '其他', '其他', '其他', '0', '12598ab1-2725-4f86-8258-46f06c71bce8', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('dd7fee1b-1d79-42ad-ac92-8f1907d1103d', 'bbs.luanren.com', '六安人', '其他', '论坛', '论坛', '其他', '0', 'bf5737b6-2ded-4815-b52c-88c25963a663', '2017-08-15 11:06:44');
 INSERT INTO `domain_two` VALUES ('dd98a2e2-367a-474d-8463-d6ca400f92ef', 'news.dayoo.com', '大洋网', '其他', '新闻', '其他', '其他', '0', '935f9a35-854a-47a6-b2f8-a9b842d62581', '2017-08-15 11:07:23');
@@ -3319,9 +3510,11 @@ INSERT INTO `domain_two` VALUES ('dee634da-aecb-4d01-9922-9702533f0faa', 'news.m
 INSERT INTO `domain_two` VALUES ('dee8a9ea-8a50-408b-b8f1-bf190a2452b4', 'bbs.cm868.com', '茂名传媒论坛', '其他', '论坛', '论坛', '其他', '0', '731fe3c7-588c-41d2-82df-286041de614d', '2017-08-15 11:06:42');
 INSERT INTO `domain_two` VALUES ('df053e4a-b7e8-4c6e-91f4-66612451ea57', 'bbs.eduol.cn', '教育在线论坛', '其他', '论坛', '论坛', '其他', '0', '8b053187-5dd3-4f54-92cc-584fb1656f79', '2017-08-15 11:06:55');
 INSERT INTO `domain_two` VALUES ('df075651-bcdd-44e1-bf2b-9f9d26eff8cb', 'slide.chongqing.sina.com.cn', '新浪重庆', '重庆图集', '其他', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('df4dde16-5fb0-494b-b6c7-c0cc13c18702', 'e.comnews.cn', '中国商务新闻网', '新媒体商汇文艺', '新闻', '其他', '其他', '0', '93211c69-a720-478a-80ca-cea91dedf5fb', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('df587ddd-b454-4914-b5b8-76a05b3f5fce', 'sztqb.sznews.com', '深圳特区报', '其他', '报纸', '其他', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('df5b8215-ef1f-4b24-88ca-8a7cdbbcf1b0', 'xj.news.163.com', '网易新疆', '首页', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-11-21 16:43:15');
 INSERT INTO `domain_two` VALUES ('df634ce0-f738-4e77-8f67-2bdc84c31d07', 'bbs.ybxww.com', '互动宜宾', '其他', '论坛', '论坛', '其他', '0', 'c1f03328-6001-4c58-ab9c-f87efb22f8e0', '2017-08-15 11:07:03');
+INSERT INTO `domain_two` VALUES ('df646790-b54e-42fd-84a7-670bc7188d8b', 'finance.hebnews.cn', '河北新闻网', '财经频道', '新闻', '其他', '其他', '0', '899cb780-cc07-4946-82bf-4d40d9fb7307', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('df8e15bc-94d0-4d62-9f75-2d2732b25a16', 'bbs.ybvv.com', '宜宾零距离论坛', '其他', '论坛', '论坛', '其他', '0', 'e3779d0f-c6b1-4494-b4e2-d0c6ff3528e9', '2017-08-15 11:05:54');
 INSERT INTO `domain_two` VALUES ('dfc3e60e-8f54-4ad2-855f-7a23725379ae', 'paper.stardaily.com.cn', '北京娱乐信报', '其他', '报纸', '其他', '其他', '0', '579f721c-ba97-446e-a666-7d9ff8761947', '2017-08-15 11:07:30');
 INSERT INTO `domain_two` VALUES ('dffe5210-f471-4890-a47e-c3a817ed3f82', 'news.qingdaozaixian.com', '其他', '其他', '其他', '其他', '其他', '0', '2665286f-8dab-4f1f-b504-ba54b8a232a9', '2017-08-15 11:05:21');
@@ -3335,12 +3528,13 @@ INSERT INTO `domain_two` VALUES ('e0f91a29-9ac9-4ece-961f-7aa9ccf22412', 'q.sohu
 INSERT INTO `domain_two` VALUES ('e13e315c-ba8b-4e15-b6d8-dda6d330fbf5', 'culture.kaiwind.com', '凯风网', '其他', '新闻', '其他', '其他', '0', '0de78e2b-7ee3-44ea-a042-b25fa095acb6', '2017-08-15 11:06:50');
 INSERT INTO `domain_two` VALUES ('e1422168-9a2e-4c12-9f0f-732409d58f04', 'yn.news.163.com', '网易云南', '其他', '新闻', '其他', '其他', '0', '7a62de7c-ddc0-401c-a843-9e0d71a63cf4', '2017-08-15 11:06:07');
 INSERT INTO `domain_two` VALUES ('e17a1d62-74a7-4585-bc94-d81188ba0fb0', 'health.jschina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '3ba02eef-202c-423b-a6ab-0865f57a08ac', '2017-08-15 11:05:19');
+INSERT INTO `domain_two` VALUES ('e19d0953-9510-4403-adee-b8e73afd1a54', 'news.99.com.cn', '99健康网', '新闻', '新闻', '其他', '其他', '0', '6ed66406-6eee-470f-9d7f-4fa9ef0190c1', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('e1bb6af4-fce4-478b-9c77-9b83c1154ea1', 'gx.sina.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:07:40');
 INSERT INTO `domain_two` VALUES ('e1c31c69-708f-4145-af6d-a174f643351e', 'paper.zbnews.net', '淄博晚报', '其他', '报纸', '其他', '其他', '0', 'cb9a1455-72a2-4069-9fe4-9b1a2cbf3c44', '2017-08-15 11:05:29');
 INSERT INTO `domain_two` VALUES ('e214dad0-9037-4b57-baf4-3c3a3456ee86', 'zixun.lzep.cn', '泸州新闻网', '其他', '资讯', '其他', '其他', '0', 'a8f76068-ae4e-43b1-89a4-288960ea147c', '2017-11-21 11:32:50');
 INSERT INTO `domain_two` VALUES ('e24f2a17-5727-4382-9709-984df1e498dc', 'epaper.dezhoudaily.com', '德州晚报', '其他', '报纸', '其他', '其他', '0', '7f8ac895-fa9f-4628-956b-4e7c13464dac', '2017-08-15 11:07:22');
-INSERT INTO `domain_two` VALUES ('e284c8ee-a3da-4c4e-a946-baa1398c1867', 'news.scol.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-08-15 11:05:22');
-INSERT INTO `domain_two` VALUES ('e2e3b7de-c5db-4f6c-84a9-d5d33399cff6', 'survey.btime.com', '其他', '其他', '其他', '其他', '其他', '0', '8a169150-067b-4f59-b223-cd4addd47533', '2017-08-15 11:05:23');
+INSERT INTO `domain_two` VALUES ('e284c8ee-a3da-4c4e-a946-baa1398c1867', 'news.scol.com.cn', '四川在线', '其他', '新闻', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:03');
+INSERT INTO `domain_two` VALUES ('e2e3b7de-c5db-4f6c-84a9-d5d33399cff6', 'survey.btime.com', '北京时间', '其他', '新闻', '其他', '其他', '0', '8a169150-067b-4f59-b223-cd4addd47533', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('e2e8a810-f1bc-4425-9747-dedb5bbb899f', 'gd.xinhuanet.com', '其他', '其他', '其他', '其他', '其他', '0', '2f7603ed-30ef-46a9-aeb2-143a0c0ddd70', '2017-08-15 11:05:25');
 INSERT INTO `domain_two` VALUES ('e3110226-0751-407d-99f3-9ac36add6cc3', 'bbs.bato.cn', '其他', '其他', '其他', '其他', '其他', '0', '0d83db07-6462-47b4-939f-38f4867d936f', '2017-08-15 11:05:16');
 INSERT INTO `domain_two` VALUES ('e367b865-8021-458e-91cc-e300296def24', 'ln.qq.com', '腾讯大辽网', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
@@ -3362,6 +3556,7 @@ INSERT INTO `domain_two` VALUES ('e61cc1fa-5ff5-4818-a008-a46c9202bddf', 'bbs.pc
 INSERT INTO `domain_two` VALUES ('e62101db-3095-421b-b075-4a2385710eab', 'qz.china.com.cn', '浙江省衢州市人民检察院', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:48');
 INSERT INTO `domain_two` VALUES ('e62179f6-c5f1-446b-bea6-f3e4d3c82806', 'politics.caijing.com.cn', '财经网', '其他', '新闻', '其他', '其他', '0', '3053edd7-1dda-4929-9fda-36a4a40d12ef', '2017-08-15 11:07:28');
 INSERT INTO `domain_two` VALUES ('e65c98fa-73e6-45cd-ac95-716e521f94ff', 'epaper.xxcb.cn', '潇湘晨报数字版', '其他', '报纸', '其他', '其他', '0', 'b6cba74a-6a1d-4c9a-851a-d4c41d98500c', '2017-08-15 11:06:02');
+INSERT INTO `domain_two` VALUES ('e673b28c-9619-47ff-8e2e-7ee2677221c5', 'edu.cnr.cn', '央广网', '快讯', '新闻', '其他', '其他', '0', '8b788890-c66e-4102-9078-0defa53bbea9', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('e6749f3e-0cab-4a36-b3e6-1ffb64856bfd', 'szb.sgrb.com', '韶关日报', '其他', '报纸', '其他', '其他', '0', 'fd50e792-f443-4df9-b81b-ad296cccaaf1', '2017-08-15 11:06:21');
 INSERT INTO `domain_two` VALUES ('e6d6713f-917f-4e08-861a-c3ae5c3b2f55', 'zixun.wlstock.com', '万隆证券网', '其他', '新闻', '其他', '其他', '0', 'e761d121-43be-4bae-914e-adbbe8c00019', '2017-08-15 11:06:08');
 INSERT INTO `domain_two` VALUES ('e6e7139e-a9cd-4f5b-a61c-ac39d3111815', 'finance.ifeng.com', '凤凰网财经', '其他', '新闻', '其他', '其他', '0', 'd75071e2-b90d-415e-a6eb-58077d60a158', '2017-08-15 11:07:16');
@@ -3386,23 +3581,25 @@ INSERT INTO `domain_two` VALUES ('e9140893-3031-4a61-a016-ad137f319e55', 'f.voc.
 INSERT INTO `domain_two` VALUES ('e91982c8-35ea-47fe-85a2-c9fdc47c83a7', 'video.tudou.com', '其他', '其他', '其他', '其他', '其他', '0', '7c9323b4-fd0a-4bba-9cc4-2a1b78d48682', '2017-11-05 21:34:12');
 INSERT INTO `domain_two` VALUES ('e92f3f59-16c9-4d87-b701-48c0deb11975', 'sz.nxnews.net', '法治新报', '其他', '报纸', '其他', '其他', '0', '34ef6973-d7f2-447c-a3b8-fa6529f2de45', '2017-08-15 11:07:17');
 INSERT INTO `domain_two` VALUES ('e93a70fd-2398-4f0a-ac6e-9e82f036384a', 'news.online.qh.cn', '青海热线', '其他', '其他', '其他', '其他', '0', 'c453b0c7-57af-4e1b-9f64-e3528ea8bd5b', '2017-08-15 11:06:30');
-INSERT INTO `domain_two` VALUES ('e945563d-d6ea-4a40-95b0-1d3f4805d4c7', 'news.workercn.cn', '其他', '其他', '其他', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-11-05 21:34:07');
+INSERT INTO `domain_two` VALUES ('e945563d-d6ea-4a40-95b0-1d3f4805d4c7', 'news.workercn.cn', '中工网', '其他', '新闻', '其他', '其他', '0', '3cdc50b8-81e8-40b7-ab98-10cc3e7e1fd4', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('e96d3377-ccbe-46af-b5ea-9f6c634b2b19', 'news.hnr.cn', '其他', '其他', '其他', '其他', '其他', '0', '775ed38c-004d-4f6f-8191-a899996f1750', '2017-08-15 11:05:21');
 INSERT INTO `domain_two` VALUES ('e9b37f52-3bd0-4531-a138-8cda44c0f654', 'cdtb.chengdu.gov.cn', '成都市人民政府台湾事务办公室', '其他', '新闻', '其他', '其他', '0', 'ece580a1-b4c2-4379-9bf6-225bb98ee6eb', '2017-08-15 11:07:27');
 INSERT INTO `domain_two` VALUES ('e9cba0fd-729e-4cf3-9b62-f37636e26589', 'wc.66wz.com', '中国文成网', '其他', '新闻', '其他', '其他', '0', 'b6410c68-16dd-4e6f-a64a-237bb415cdfe', '2017-08-15 11:05:36');
-INSERT INTO `domain_two` VALUES ('e9ebde8a-ec0e-4b36-8686-4199fc74458a', 'mianyang.scol.com.cn', '其他', '其他', '其他', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-08-15 11:07:41');
+INSERT INTO `domain_two` VALUES ('e9ebde8a-ec0e-4b36-8686-4199fc74458a', 'mianyang.scol.com.cn', '四川在线', '其他', '新闻', '其他', '其他', '0', '7507af54-aac8-46a6-a4d8-a977b8d21421', '2017-12-17 01:00:04');
 INSERT INTO `domain_two` VALUES ('e9f1ac5c-6ec9-4570-81a5-7e00d49e37b1', 'epaper.gmw.cn', '光明日报数字报', '其他', '报纸', '中央', '其他', '0', '97881031-4b03-40ab-b121-08b8bb2d3034', '2017-08-15 11:07:12');
 INSERT INTO `domain_two` VALUES ('ea206dd8-c393-4efb-bc67-3ecad883ee2b', 'e.jznews.com.cn', '荆州新闻网e线民生', '其他', '新闻', '其他', '其他', '0', '1eef0558-30d1-4592-acba-2f3bb30602ca', '2017-08-15 11:06:52');
 INSERT INTO `domain_two` VALUES ('ea29f30e-b593-4f3b-9aed-bdfdcc5437ae', 'bs.shzfzz.net', '上海政法综治网', '其他', '新闻', '其他', '其他', '0', 'e405c8c8-b9e9-446e-a69d-b76e9c5e45c2', '2017-08-15 11:06:22');
 INSERT INTO `domain_two` VALUES ('ea3fe8bd-c692-4cea-941e-5dc3bec955ca', 'news.blogchina.com', '博客中国', '其他', '博客', '其他', '其他', '0', 'b5b8ca8a-d2ec-4d23-afec-b8d1aa98b571', '2017-08-15 11:07:29');
+INSERT INTO `domain_two` VALUES ('ea4decae-189f-4283-9370-8f712753a3cc', 'gp.nanchongpeace.gov.cn', '南充长安网', '高坪', '新闻', '其他', '其他', '0', '6aa7bb77-c103-40df-b7ae-798480bc66be', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('ea6f7fbf-a8c7-4c05-9e28-9ae9495d56d5', 'region.scdaily.cn', '其他', '其他', '其他', '其他', '其他', '0', '5196aa08-bbd2-448d-9170-e2b472977441', '2017-08-15 11:05:23');
 INSERT INTO `domain_two` VALUES ('ea760c67-8643-4ef2-a0c6-352f784c9f48', 'csr.mos.gov.cn', '中国纪检监察报', '其他', '报纸', '其他', '其他', '0', '303f7f53-5cc6-49bb-bd04-11ad6c9b807e', '2017-08-15 11:05:43');
 INSERT INTO `domain_two` VALUES ('ea802c84-8946-4eba-970b-16ae7274c83b', 'data.eastmoney.com', '东方财富网', '其他', '新闻', '其他', '其他', '0', '40254040-432f-4d82-be06-2a92c6150ea1', '2017-08-15 11:07:20');
+INSERT INTO `domain_two` VALUES ('ea9456c8-b7bf-4839-be6b-48613bde7101', 'lz.nanchongpeace.gov.cn', '南充长安网', '阆中', '新闻', '其他', '其他', '0', '6aa7bb77-c103-40df-b7ae-798480bc66be', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('eaa8d5cb-eede-46e7-9340-c75e2c600fea', 'ah.wenming.cn', '中国文明网_安徽', '其他', '新闻', '其他', '其他', '0', 'e7211fcf-2818-43a3-99b5-5cc3e9b272a8', '2017-08-15 11:05:35');
 INSERT INTO `domain_two` VALUES ('eac9a595-b492-489f-a28d-aece4fda5e38', 'job.shu163.com', '其他', '其他', '其他', '其他', '其他', '0', '4883e297-929d-4df1-9808-58b275c984a0', '2017-11-05 21:34:12');
 INSERT INTO `domain_two` VALUES ('eace9193-a496-48e3-b2e6-c6a056912f8d', 'news.gxnews.com.cn', '广西新闻网', '其他', '新闻', '省级', '其他', '0', '3be5ca5a-a688-4042-8c33-28f2728d9a9d', '2017-08-15 11:07:11');
 INSERT INTO `domain_two` VALUES ('ead04125-0693-426e-8f1c-721c8357876e', 'epaper.qlwb.com.cn', '齐鲁晚报', '其他', '报纸', '省级', '其他', '0', 'a20133ee-155c-4b36-b0de-f1fbe011abbb', '2017-08-15 11:06:32');
-INSERT INTO `domain_two` VALUES ('eae2abdc-0ee8-4301-8231-7e7684fe0ff8', 'news.cjn.cn', '长江网', '其他', '其他', '其他', '其他', '0', '574cc83e-4f1a-4d79-9c2b-ea4cba088fd7', '2017-08-15 11:05:49');
+INSERT INTO `domain_two` VALUES ('eae2abdc-0ee8-4301-8231-7e7684fe0ff8', 'news.cjn.cn', '长江网', '其他', '新闻', '其他', '其他', '0', '574cc83e-4f1a-4d79-9c2b-ea4cba088fd7', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('eb51451f-264d-4585-a60d-d3e252bf6a1a', 'news.zxxww.com', '竹溪新闻网', '其他', '新闻', '其他', '其他', '0', '72646156-893a-471f-8943-ad6875d58883', '2017-08-15 11:05:30');
 INSERT INTO `domain_two` VALUES ('eb7bce72-d951-4cf7-8880-9713b0549994', 'district.ce.cn', '其他', '其他', '其他', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-08-15 11:07:38');
 INSERT INTO `domain_two` VALUES ('ec0a5200-02cb-4b29-a21b-520576117923', 'club.history.sina.com.cn', '新浪论坛', '其他', '论坛', '论坛', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:05:59');
@@ -3413,8 +3610,9 @@ INSERT INTO `domain_two` VALUES ('ecac31d2-9d65-48d5-ab47-d6d3d6390d3f', 'sc.chi
 INSERT INTO `domain_two` VALUES ('ecd540ea-0e19-4bc8-bf6b-7ef892d33be1', 'health.huanqiu.com', '其他', '其他', '其他', '其他', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-08-15 11:05:19');
 INSERT INTO `domain_two` VALUES ('ed1991ee-5322-4d6b-8e42-cebdeb7fbf08', 'wh.nmgzf.gov.cn', '内蒙古长安网', '其他', '其他', '省级', '其他', '0', '3d78cdbb-5a73-4faa-ac1b-b512e630334f', '2017-08-15 11:06:36');
 INSERT INTO `domain_two` VALUES ('ed340075-46b5-4256-9192-f901256b4ddd', 'api.k.sohu.com', '搜狐新闻客户端', '其他', '手机', '其他', '其他', '0', '55770314-542d-4bf2-9961-9d83ec722ba6', '2017-08-15 11:06:14');
-INSERT INTO `domain_two` VALUES ('ed5dfe45-21f5-4240-ac8c-bc7016cb91b2', 'news.qq.com', '其他', '其他', '其他', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-11-05 21:34:07');
-INSERT INTO `domain_two` VALUES ('ed898ca5-4bb4-42a2-8787-ba716b27c4d9', 'sc.huatu.com', '华图教育', '其他', '其他', '其他', '其他', '0', 'ec0e332c-a4d0-424f-b293-226da8709bdd', '2017-08-15 11:07:02');
+INSERT INTO `domain_two` VALUES ('ed5dfe45-21f5-4240-ac8c-bc7016cb91b2', 'news.qq.com', '腾讯', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('ed898ca5-4bb4-42a2-8787-ba716b27c4d9', 'sc.huatu.com', '华图教育', '其他', '新闻', '其他', '其他', '0', 'ec0e332c-a4d0-424f-b293-226da8709bdd', '2017-12-17 01:00:04');
+INSERT INTO `domain_two` VALUES ('edca162c-6e93-4a44-a4d2-7eda3d849d98', 'mycd.qq.com', '大成社区', '南充播报', '论坛', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-12-17 01:00:05');
 INSERT INTO `domain_two` VALUES ('ee21d2ab-20e6-4389-a264-3c4ba3c6d061', 'finance.ce.cn', '其他', '其他', '其他', '其他', '其他', '0', '317509bc-5eb8-4393-a3a8-396738dfb7af', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('ee280345-2478-4c32-84ad-5971447a5e24', 'news.huaxi100.com', '华西都市网', '其他', '新闻', '省级', '其他', '0', '64f2df16-d387-41ed-951e-4bf278b222c1', '2017-08-15 11:07:02');
 INSERT INTO `domain_two` VALUES ('ee79768a-0957-4ec9-ac47-3dd7c1cca6d1', 'news.jstv.com', '江苏网络广播电视台', '其他', '新闻', '省级', '其他', '0', 'f44e5644-3c7d-48bd-b94b-8324efe1b35f', '2017-08-15 11:06:56');
@@ -3432,6 +3630,7 @@ INSERT INTO `domain_two` VALUES ('f0cf2565-8159-422e-912c-3f28f068ee86', 'paper.
 INSERT INTO `domain_two` VALUES ('f11532d2-0112-4131-9a78-15fde3eec183', 'szrb.sz-news.com.cn', '随州日报', '其他', '报纸', '其他', '其他', '0', '0238c133-dad6-4ebd-9abe-4253e214d3d2', '2017-08-15 11:06:13');
 INSERT INTO `domain_two` VALUES ('f118cdff-87de-479e-98c2-295126d6273a', 'city.newssc.org', '四川新闻网', '其他', '新闻', '省级', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-08-15 11:06:15');
 INSERT INTO `domain_two` VALUES ('f12d66c9-f55d-49a4-9580-944a2c4c31cc', 'tiandong.pagx.cn', '平安广西网', '平安田东', '新闻', '其他', '其他', '0', '2991b139-5640-4d34-8525-4aeab21ca65b', '2017-11-21 16:43:14');
+INSERT INTO `domain_two` VALUES ('f12f3f29-39e3-482e-a177-fd287160c5a9', 'bbs.pinggu.org', '中金论坛', '股市大家谈', '论坛', '其他', '其他', '0', '865e75fe-108c-45b2-bd06-b0d1e3036ea7', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('f15c043e-e922-43c1-8051-b3801d4b0b08', 'opinion.huanqiu.com', '环球网时评', '其他', '新闻', '中央', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-08-15 11:07:01');
 INSERT INTO `domain_two` VALUES ('f16618a6-e3b5-4aac-82a7-663caa50fcf2', 'paper.dzwww.com', '新晨报', '其他', '报纸', '其他', '其他', '0', '53deb994-6d76-4899-b53e-b634ebe261db', '2017-08-15 11:06:02');
 INSERT INTO `domain_two` VALUES ('f1932386-195c-4f1e-b4e0-35db7dfa799d', 'bbs.sg169.com', '韶关家园论坛', '其他', '论坛', '论坛', '其他', '0', 'f9914734-ced3-4f73-b0e2-c3682cf9025b', '2017-08-15 11:06:21');
@@ -3441,6 +3640,7 @@ INSERT INTO `domain_two` VALUES ('f253115d-2994-4c68-bf41-f2945f2fa15c', 'jjjc.j
 INSERT INTO `domain_two` VALUES ('f25e229c-9613-4749-a400-0ac5dcb60f85', 'bbs.meishanren.com', '眉山人网', '其他', '论坛', '论坛', '其他', '0', '51975dde-fd5f-4f97-87e9-2f9fb8b9054c', '2017-08-15 11:06:42');
 INSERT INTO `domain_two` VALUES ('f26defbb-5c8a-4e41-a4a8-e3a490d1754e', 'bbs.ly.shangdu.com', '洛阳信息港论坛', '其他', '论坛', '论坛', '其他', '0', '63941e71-86d5-4212-a8aa-4e995d09956f', '2017-08-15 11:06:43');
 INSERT INTO `domain_two` VALUES ('f29a8589-6d50-401b-bda4-159532cc5aa9', 'news.cqyy.net', '重庆市城口县人民政府', '其他', '新闻', '其他', '其他', '0', 'ae4e8d68-e569-430f-ba3a-4cfe5eb74a3c', '2017-08-15 11:05:31');
+INSERT INTO `domain_two` VALUES ('f2bd1f63-b5db-400f-899a-66ee700017a7', 'nc.newssc.org', '四川新闻网南充频道', '首页', '新闻', '其他', '其他', '0', '06ed02c7-880e-4de3-8867-7f5ccdc04cbf', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('f2ffd13b-8bf2-4d5f-94f4-61210333aaf0', 'liuyan.people.com.cn', '四川地方领导留言板', '其他', '论坛', '论坛', '其他', '0', '3afb00b4-463f-48ac-870b-883c75ded651', '2017-08-15 11:06:17');
 INSERT INTO `domain_two` VALUES ('f3170593-cf08-497c-af16-b6086138d814', 'games.qq.com', '腾讯游戏', '其他', '新闻', '其他', '其他', '0', '2e5e133c-a48e-44a0-8b59-f30d42d6b49a', '2017-08-15 11:06:11');
 INSERT INTO `domain_two` VALUES ('f35affba-df4f-4253-8b96-531168d8ca69', 'bbs.zbgl.net', '淄博旮旯论坛', '其他', '论坛', '论坛', '其他', '0', '82208b2e-6aa1-4c41-a625-d42a48556b70', '2017-08-15 11:05:29');
@@ -3453,19 +3653,23 @@ INSERT INTO `domain_two` VALUES ('f45c0ff0-e3d7-4851-8ad6-5738137668a5', 'max.bo
 INSERT INTO `domain_two` VALUES ('f474e7a2-5238-42a4-9321-19bbc438d8b7', 'auto.china.com.cn', '中国汽车', '其他', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-08-15 11:05:40');
 INSERT INTO `domain_two` VALUES ('f48c4691-1565-4586-9b70-f30421ace9aa', 'std.stheadline.com', '星岛日报网', '其他', '境外', '外媒', '其他', '0', '7ed6d29c-30b4-48a7-ad71-43c191b10428', '2017-08-15 11:05:58');
 INSERT INTO `domain_two` VALUES ('f552a3fa-4efb-4c9d-844e-adf722b0099e', 'rollnews.tuxi.com.cn', '突袭网', '其他', '其他', '其他', '其他', '0', '152140f5-02c5-4f78-8a8e-3a58390e3d24', '2017-08-15 11:06:09');
+INSERT INTO `domain_two` VALUES ('f561ceee-28b6-46e7-a163-20d20282a06b', 'jyfda.libai.cn', '江油食品药品监督管理局', '首页', '新闻', '其他', '其他', '0', 'c5953768-0cf5-4eec-afca-7198728dbcb5', '2017-12-17 01:00:06');
 INSERT INTO `domain_two` VALUES ('f5768908-0ec5-4364-8611-b2b17235382b', 'club.faw-mazda.com', '壹马会车主论坛', '其他', '论坛', '论坛', '其他', '0', 'aeea0dfc-e7d5-4cd9-afc0-40e851c2c149', '2017-08-15 11:05:54');
 INSERT INTO `domain_two` VALUES ('f622284d-6080-481b-bc4e-112d66be9ccc', 'news.cnwest.com', '陕西新闻网', '其他', '新闻', '省级', '其他', '0', '5d91cbd6-f5a7-4e69-8e53-9d46f0631333', '2017-08-15 11:06:23');
 INSERT INTO `domain_two` VALUES ('f65a977d-5b46-4e3d-8b1a-0a94831d1a9f', 'club.autohome.com.cn', '汽车之家论坛', '其他', '论坛', '论坛', '其他', '0', '68345e44-7fd8-4187-adc8-c8e34c5e9c57', '2017-08-15 11:06:31');
 INSERT INTO `domain_two` VALUES ('f65c0da9-2b3b-4490-bad3-487fc34a2a29', 'epaper.hezeribao.com', '牡丹晚报', '其他', '报纸', '其他', '其他', '0', '6b68586d-80f3-46f3-8631-9bd7bbc2e76b', '2017-08-15 11:06:39');
 INSERT INTO `domain_two` VALUES ('f692ddd9-2a38-4b76-b229-71ef09f0bb1e', 'news.nb0817.com', '南部信息网', '其他', '新闻', '其他', '其他', '0', '288d8305-db46-4c6e-9e4f-caa5ff1a1f5c', '2017-08-15 11:06:39');
+INSERT INTO `domain_two` VALUES ('f6f1e5ef-6d5a-4323-9e9c-8d64b24ac305', 'wb.sznews.com', '深圳晚报', '第B06版：娱乐新闻', '报纸', '其他', '其他', '0', '1b4e60d7-5832-4be7-884e-8316c1a2093a', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('f737a375-7cab-41f8-ac28-3bbaaf08ce5c', 'society.firefox.sina.com', '其他', '其他', '其他', '其他', '其他', '0', 'f7b0c6e0-d451-4759-b828-57ba2adcabb4', '2017-08-15 11:07:43');
 INSERT INTO `domain_two` VALUES ('f759cf8d-b673-4910-b75e-10b09c7934cc', 'yj.ziyangpeace.gov.cn', '资阳长安网', '雁江区', '新闻', '其他', '其他', '0', 'ea95c7ec-3cb2-4131-b658-466c06fff04e', '2017-11-21 16:43:14');
 INSERT INTO `domain_two` VALUES ('f7723246-f13f-45ed-b9f6-3bf9a1430a8b', 'news.cnhan.com', '汉网', '其他', '新闻', '其他', '其他', '0', 'bfc4dc1a-3d44-4dea-babb-9ea1e244b305', '2017-08-15 11:07:08');
+INSERT INTO `domain_two` VALUES ('f7f087f2-5bfd-451a-b415-560e73ff9aba', 'a.meipian.me', '精彩美篇', '首页', '其他', '其他', '其他', '0', 'dda85d85-74c2-49a9-89b8-f1aaed00a0b3', '2017-12-17 01:00:07');
 INSERT INTO `domain_two` VALUES ('f88dd83d-0bd8-4837-91f7-18916c9b436a', 'bbs.enjoykorea.net', '乐在韩国论坛', '其他', '论坛', '论坛', '其他', '0', '2b24bb7d-bb81-4272-9b29-07358f7a5326', '2017-08-15 11:06:48');
 INSERT INTO `domain_two` VALUES ('f8a3eee6-ad52-4ab5-8c8e-08c8ee47ae74', 'bbs.wy000.com', '威远零距离论坛', '其他', '论坛', '论坛', '其他', '0', 'b5c15ab8-5e22-41d4-9dc4-2576f753ef44', '2017-08-15 11:06:06');
 INSERT INTO `domain_two` VALUES ('f93b7c94-bc0a-4eb5-8615-605b38a5c9a7', 'news.dg.fang.com', '房天下', '其他', '新闻', '其他', '其他', '0', 'f1d372bc-7d46-460d-a30e-b2dcb84874de', '2017-08-15 11:07:17');
 INSERT INTO `domain_two` VALUES ('f958e334-ed75-4fab-a13c-fc0b9f642ce0', 'bbs.wst.cn', '二泉论坛', '其他', '论坛', '论坛', '其他', '0', '322e1e64-ec59-41ca-893b-f9b8063a5a95', '2017-08-15 11:07:18');
 INSERT INTO `domain_two` VALUES ('f96bcdb5-9126-473e-ae2e-152a4863e9c3', 'society.huanqiu.com', '环球网', '其他', '新闻', '中央', '其他', '0', 'a3d84ce8-14f2-4bec-a1e2-8f7cbd239dc0', '2017-08-15 11:07:01');
+INSERT INTO `domain_two` VALUES ('f9d131ff-b166-4205-88fd-152db1db52eb', 'ou.china.com.cn', '中国网', '开放大学', '新闻', '其他', '其他', '0', 'ae6a744f-31fe-4f28-91b1-4c4346599d7d', '2017-12-17 01:00:08');
 INSERT INTO `domain_two` VALUES ('f9d76a45-00b7-41cc-9f27-241495596e93', 'gcjob.bjx.com.cn', '北极星电力网', '其他', '新闻', '其他', '其他', '0', '9d1c426d-4d55-4917-8699-5ddcdbed621d', '2017-08-15 11:07:30');
 INSERT INTO `domain_two` VALUES ('fa126e8f-d8f9-4f25-b61d-a041e517e8ff', 'finance.n8n8.cn', '其他', '其他', '其他', '其他', '其他', '0', '35aab492-2885-4c51-b25d-84c81a28e78b', '2017-08-15 11:07:39');
 INSERT INTO `domain_two` VALUES ('fa1dbef9-b4ac-4156-bf0d-a16db5644058', 'ee.ofweek.com', '光电新闻网', '其他', '新闻', '其他', '其他', '0', '5e30c606-4660-4451-8e5d-8d7dc5f81406', '2017-08-15 11:07:12');
@@ -3485,7 +3689,7 @@ INSERT INTO `domain_two` VALUES ('fc240f9c-9f1e-41ec-8c1c-52b7d5a5ee21', 'bbs.go
 INSERT INTO `domain_two` VALUES ('fc3a93bd-5a05-414f-ac93-07e9f3c88d58', 'finance.sina.com.cn', '新浪财经', '其他', '新闻', '其他', '其他', '0', '59a96080-437b-43c4-a9f0-67d6b730ffe4', '2017-08-15 11:06:00');
 INSERT INTO `domain_two` VALUES ('fc508c52-afdc-4dec-9e66-975724690848', 'news.xinmin.cn', '新民网', '其他', '新闻', '省级', '其他', '0', '263267fc-f2f2-4d20-8cdd-abd02d105e5e', '2017-08-15 11:05:59');
 INSERT INTO `domain_two` VALUES ('fcbf89aa-371f-45fa-bf9b-c1426cc55d15', 'tieba.baidu.com', '百度贴吧', '其他', '贴吧', '贴吧', '其他', '0', '236f580e-f893-4897-88b3-c59d51815acd', '2017-08-15 11:07:32');
-INSERT INTO `domain_two` VALUES ('fcc07854-937c-404f-8d25-f010c4bb9f86', 'news.lanzhou.cn', '其他', '其他', '其他', '其他', '其他', '0', '985c56b8-4353-46ee-9d31-804b34408b21', '2017-08-15 11:05:21');
+INSERT INTO `domain_two` VALUES ('fcc07854-937c-404f-8d25-f010c4bb9f86', 'news.lanzhou.cn', '中国兰州网', '其他', '新闻', '其他', '其他', '0', '985c56b8-4353-46ee-9d31-804b34408b21', '2017-12-17 01:00:03');
 INSERT INTO `domain_two` VALUES ('fccbc5da-bef5-4b99-8481-79c5fb796f8d', 'jy.leshan.cn', '乐山新闻', '其他', '其他', '其他', '其他', '0', '404b09d9-1a7a-426c-a362-e4d918c46e0b', '2017-08-15 11:06:48');
 INSERT INTO `domain_two` VALUES ('fce46202-4626-4b78-8724-4d62d9650b06', 'hzlyzw.hz66.com', '湖州旅游局政务网', '其他', '新闻', '其他', '其他', '0', 'f28bb82d-8272-428a-99bc-85e4a75f0681', '2017-08-15 11:07:04');
 INSERT INTO `domain_two` VALUES ('fd367584-726e-4984-9247-fc9a365329d1', 'm.cnr.cn', '手机央广网', '其他', '其他', '其他', '其他', '0', '8b788890-c66e-4102-9078-0defa53bbea9', '2017-08-15 11:06:19');
@@ -3526,8 +3730,6 @@ CREATE TABLE `extfile` (
 -- ----------------------------
 -- Records of extfile
 -- ----------------------------
-INSERT INTO `extfile` VALUES ('7499a84d-a108-40ec-b5be-07bed57174b3', '测试1048-1000.xls', '205f276b-6378-4403-873c-819b8594f243', '未知', '1344', '1048', '2017-11-21 21:23:39', '开发者');
-INSERT INTO `extfile` VALUES ('c2e33271-c538-47ea-bd37-4a7a06138748', '测试587-581.xls', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', '未知', '681', '568', '2017-10-30 13:33:29', '管理员admin');
 
 -- ----------------------------
 -- Table structure for power
@@ -3643,9 +3845,6 @@ CREATE TABLE `result` (
 -- ----------------------------
 -- Records of result
 -- ----------------------------
-INSERT INTO `result` VALUES ('1dfe345b-0ec9-4647-a261-60c1011f2fb0', 'ddd2017112121-2017112121', '205f276b-6378-4403-873c-819b8594f243', 'huster', '2017-11-21 21:23:49');
-INSERT INTO `result` VALUES ('34982e17-fbc2-4b65-b6fd-cd0511a6293e', '测试专题2017103013-2017103013', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', 'huster', '2017-11-16 09:37:34');
-INSERT INTO `result` VALUES ('e5efb523-98b6-4627-b4a7-e91f5ba5ce7e', '测试专题2017103013-2017103013', '0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', 'huster', '2017-11-16 09:37:56');
 
 -- ----------------------------
 -- Table structure for role
@@ -3926,6 +4125,7 @@ CREATE TABLE `stdfile` (
   `line_number` int(11) NOT NULL COMMENT '内容行数',
   `upload_time` datetime NOT NULL COMMENT '上传时间',
   `creator` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '上传人',
+  `datatime` varchar(1024) COLLATE utf8_bin DEFAULT NULL COMMENT '标准数据文件内数据的时间list',
   PRIMARY KEY (`stdfile_id`),
   KEY `file_fk_topic_id` (`topic_id`) USING BTREE,
   CONSTRAINT `stdfile_ibfk_1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`topic_id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -3934,7 +4134,6 @@ CREATE TABLE `stdfile` (
 -- ----------------------------
 -- Records of stdfile
 -- ----------------------------
-INSERT INTO `stdfile` VALUES ('54a932e5-7984-4509-969e-2f7ead2b3159', 'ddd2017112121-2017112121.xls', '205f276b-6378-4403-873c-819b8594f243', '697', '1169', '2017-11-21 21:24:09', '开发者');
 
 -- ----------------------------
 -- Table structure for stopword
@@ -3974,8 +4173,6 @@ CREATE TABLE `topic` (
 -- ----------------------------
 -- Records of topic
 -- ----------------------------
-INSERT INTO `topic` VALUES ('0f4f3f5e-34f7-42fc-bee1-a38be5a6920f', '测试专题', '未知', '2017-10-30 13:24:52', 'admin', 'huster', '2017-11-16 09:37:56');
-INSERT INTO `topic` VALUES ('205f276b-6378-4403-873c-819b8594f243', 'ddd', '未知', '2017-11-21 21:23:21', 'huster', 'huster', '2017-11-21 21:23:50');
 
 -- ----------------------------
 -- Table structure for user
