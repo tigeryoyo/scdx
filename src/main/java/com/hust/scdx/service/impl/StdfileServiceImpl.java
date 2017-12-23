@@ -13,12 +13,14 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,9 +175,12 @@ public class StdfileServiceImpl implements StdfileService {
 		String stdfileName = stdfile.getStdfileName();
 		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
+		//为统计日期-数量与来源-数量，合并内存中的两个Domain
+		ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
+		existDomain.putAll(Constant.unmarkedDomain);
 		@SuppressWarnings("unchecked")
 		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT),
-				Constant.existDomain);
+				existDomain);
 		stdfileMap.put(StdfileMap.STAT, statMap);
 		return stdfileMap;
 	}
@@ -654,10 +659,14 @@ public class StdfileServiceImpl implements StdfileService {
 					}
 					if (!urlSet.contains(url)) {
 						urlSet.add(url);
-						if (Constant.existDomain.get(url) == null) {
-							logger.error(url + "暂未录入existDomain中！");
+						if (Constant.markedDomain.get(url) == null) {
+							if(Constant.unmarkedDomain.get(url) == null){
+								logger.error(url + "暂未录入内存域名信息库中！");
+							}else{
+								organization.add(Constant.unmarkedDomain.get(url));
+							}
 						} else {
-							organization.add(Constant.existDomain.get(url));
+							organization.add(Constant.markedDomain.get(url));
 						}
 					}
 				} catch (Exception e) {
@@ -674,7 +683,7 @@ public class StdfileServiceImpl implements StdfileService {
 					if (domain == null) {
 						logger.error("域名为空，摘要信息提取出错！");
 						continue;
-					} else if (domain.getName().equals("其他")) {
+					} else if (StringUtils.isBlank(domain.getName()) || domain.getName().equals("其他")) {
 						continue;
 					}
 					str_organization += domain.getName() + "、";

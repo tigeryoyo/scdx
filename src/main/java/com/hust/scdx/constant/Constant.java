@@ -3,6 +3,8 @@ package com.hust.scdx.constant;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.eclipse.jetty.util.ConcurrentHashSet;
+
 import com.hust.scdx.model.Domain;
 
 public class Constant {
@@ -14,9 +16,20 @@ public class Constant {
 	public final static String INVALID_TIME = "1970-01-01";
 
 	/**
-	 * 已经存在的域名，用于检测新来的域名是否存在数据库中
+	 * 被标记为已维护的域名
 	 */
-	public static ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>();
+	public static ConcurrentHashMap<String, Domain> markedDomain = new ConcurrentHashMap<String, Domain>();
+	
+	/**
+	 * 没有被标记为已维护的域名
+	 */
+	public static ConcurrentHashMap<String, Domain> unmarkedDomain = new ConcurrentHashMap<String, Domain>();
+	
+	/**
+	 * 类型-权重
+	 */
+	public static ConcurrentHashSet<String> typeMap = new ConcurrentHashSet<String>();
+	
 	// 切片
 	public final static int slices = 1250;
 	// 线程数
@@ -86,6 +99,7 @@ public class Constant {
 		public static final int RANK_INDEX = 4;
 		public static final int INCIDENCE_INDEX = 5;
 		public static final int WEIGHT_INDEX = 6;
+		public static final int MAINTENANCE_STATUS_INDEX = 7;
 	}
 
 	public static class Algorithm {

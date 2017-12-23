@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,6 +24,7 @@ import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.constant.Constant.Resutt;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.dao.ResultDao;
+import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.params.ResultQueryCondition;
 import com.hust.scdx.service.MiningService;
@@ -388,7 +390,10 @@ public class ResultServiceImpl implements ResultService {
 				}
 			}
 			List<Integer> marked = getMarked(modifyClusters, modifyCounts);
-			Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics(resultContent, Constant.existDomain);
+			//为统计日期-数量与来源-数量，合并内存中的两个Domain
+			ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
+			existDomain.putAll(Constant.unmarkedDomain);
+			Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics(resultContent, existDomain);
 			res.put(Resutt.STAT, statMap);
 			res.put(Resutt.RESULT, resultContent);
 			res.put(Resutt.RESULTNAME, result.getResName());

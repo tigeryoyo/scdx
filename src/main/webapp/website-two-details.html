@@ -57,7 +57,7 @@ span{
 						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
 						<option>中央</option>
 						<option>省级</option>
-						<option>其他</option>
+						<option>其他媒体</option>
 						<option>无</option>
 						</select></td>
 				</tr>
@@ -66,7 +66,8 @@ span{
 					<td width="323" height="50"><select
 						class="form-control incidence_provience" style="width:188px;"
 						disabled="disabled">
-						<option>全国</option>
+						<option>全国</option>						
+						<option>四川省</option>
 						<option>北京市</option>
 						<option>天津市</option>
 						<option>上海市</option>
@@ -87,7 +88,6 @@ span{
 						<option>湖南省</option>
 						<option>广东省</option>
 						<option>海南省</option>
-						<option>四川省</option>
 						<option>贵州省</option>
 						<option>云南省</option>
 						<option>陕西省</option>
@@ -133,6 +133,13 @@ span{
 													   id="new_weight" /></td>
 				</tr>
 				<tr>
+					<td width="117" height="50">维护状态：</td>
+					<td width="323" height="50">
+						<input type="radio" disabled="disabled" name="maintenance_status" value="1">已维护
+						<input type="radio" disabled="disabled" name="maintenance_status" value="0">待维护
+					</td>
+				</tr>
+				<tr>
 					<td width="117" height="50">
 						父域名：
 					</td>
@@ -155,7 +162,7 @@ span{
 </body>
 <script>
 	var uuid = getCookie("domain_id");
-	console.log("-------"+uuid);
+	loadType();
 	$.ajax({
 	    type:"post",
 		url:"/domain/selectDomainTwoById",
@@ -180,10 +187,15 @@ span{
 					$(".incidence_city").val(incidence[1]);
 				}
                 $("#new_weight").val(two.weight);
+                if(two.maintenanceStatus){
+					$("input[name='maintenance_status'][value=1]").attr("checked",true);
+				}else{
+					$("input[name='maintenance_status'][value=0]").attr("checked",true);
+				}
 				row = '<p data-id="'+one.uuid+'">'
-                        +'<span style="width: 170px; display: inline; float: left">'+one.url+'</span>'
-                        +'<span style="width: 120px; display: inline; float: left">'+one.name+'</span>'
-                        + '<span><a href="javascript:" style="margin: 2px 0px; text-decoration:underline" onclick="showOneDetails(this)">详情</a></span>'
+                        +'<span style="width: 190px; display: inline; float: left;overflow:hidden;text-overflow:ellipsis;" title="'+one.url+'">'+one.url+'</span>'
+                        +'<span style="width: 140px; display: inline; float: left;margin-left:5px;overflow:hidden;text-overflow:ellipsis;" title="'+one.name+'">'+one.name+'</span>'
+                        + '<span><a href="javascript:" style="margin-left:5px; text-decoration:underline" onclick="showOneDetails(this)">详情</a></span>'
                         +'</p>';
 				$("#super_domain").append(row);
 			}else{

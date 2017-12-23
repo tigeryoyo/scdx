@@ -17,6 +17,10 @@ public class SourceTypeDao {
 	@Autowired
 	private SourceTypeMapper sourceTypeMapper;
 
+	public SourceType selectSourTypeById(int id){
+		return sourceTypeMapper.selectByPrimaryKey(id);
+	}
+	
 	public List<SourceType> selectSourceType(int start, int limit) {
 		SourceTypeExample example = new SourceTypeExample();
 		Criteria criteria = example.createCriteria();

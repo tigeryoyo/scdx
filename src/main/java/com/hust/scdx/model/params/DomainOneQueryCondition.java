@@ -9,6 +9,7 @@ public class DomainOneQueryCondition {
 	private String incidence;
 	private String rank;
 	private Integer weight;
+	private Boolean maintenanceStatus;
 	private Integer start;
 	private Integer limit;
 
@@ -82,6 +83,14 @@ public class DomainOneQueryCondition {
 
 	public void setWeight(Integer weight) {
 		this.weight = weight;
+	}
+
+	public Boolean getMaintenanceStatus() {
+		return maintenanceStatus;
+	}
+
+	public void setMaintenanceStatus(Boolean maintenanceStatus) {
+		this.maintenanceStatus = maintenanceStatus;
 	}
 
 	public Integer getStart() {

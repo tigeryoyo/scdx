@@ -51,13 +51,16 @@ public class DomainTwoDao {
 		if (!StringUtils.isBlank(condition.getIncidence())) {
 			criteria.andIncidenceEqualTo(condition.getIncidence());
 		}
+		if (null != condition.getMaintenanceStatus()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
+		}
 		if (null != condition.getFatherId()) {
 			criteria.andFatherUuidEqualTo(condition.getFatherId());
 		}
 		if (null != condition.getWeight()) {
 			criteria.andWeightEqualTo(condition.getWeight());
 		}
-		example.setOrderByClause("update_time desc,url");
+		example.setOrderByClause("maintenance_status desc,update_time desc,url");
 		list = domainTwoMapper.selectByExample(example);
 		return list;
 	}
@@ -73,7 +76,7 @@ public class DomainTwoDao {
 		DomainTwoExample example = new DomainTwoExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andFatherUuidEqualTo(fatherUuid);
-		example.setOrderByClause("update_time desc,url");
+		example.setOrderByClause("maintenance_status desc,update_time desc,url");
 		list = domainTwoMapper.selectByExample(example);
 		return list;
 	}
@@ -164,6 +167,9 @@ public class DomainTwoDao {
 		}
 		if (null != condition.getFatherId()) {
 			criteria.andFatherUuidEqualTo(condition.getFatherId());
+		}
+		if (null != condition.getMaintenanceStatus()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
 		}
 		if (null != condition.getWeight()) {
 			criteria.andWeightEqualTo(condition.getWeight());

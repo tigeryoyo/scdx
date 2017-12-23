@@ -19,9 +19,11 @@ import com.hust.scdx.constant.Config;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.DomainOneDao;
 import com.hust.scdx.dao.DomainTwoDao;
+import com.hust.scdx.dao.SourceTypeDao;
 import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainTwo;
+import com.hust.scdx.model.SourceType;
 import com.hust.scdx.model.params.DomainOneQueryCondition;
 import com.hust.scdx.model.params.DomainTwoQueryCondition;
 
@@ -46,12 +48,57 @@ public class UrlUtil {
 
 	// 三级域名提取
 	// private static final String RE_THI = "(\\w*\\.){3,}";
-	
+
 	/**
 	 * 初始化全局域名对象，添加未知URL时减少数据库查询操作
 	 */
-	static{		
-		//初始化域名对象
+	static{
+		// 初始化域名对象
+				ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
+				DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
+				DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
+				oneCondition.setLimit(0);
+				oneCondition.setStart(0);
+				for (DomainOne domainOne : domainOneDao.getDomainOneOrderByTime(oneCondition)) {
+					Domain domain = new Domain();
+					domain.setDomainFormOne(domainOne);
+					if (domain.getMaintenanceStatus()) {
+						Constant.markedDomain.put(domainOne.getUrl(), domain);
+					} else {
+						Constant.unmarkedDomain.put(domainOne.getUrl(), domain);
+					}
+				}
+				DomainTwoDao domaintwoDao = applicationContext.getBean(DomainTwoDao.class);
+				DomainTwoQueryCondition twoCondition = new DomainTwoQueryCondition();
+				for (DomainTwo domainTwo : domaintwoDao.getDomainTwoByCondition(twoCondition)) {
+					Domain domain = new Domain();
+					domain.setDomainFormTwo(domainTwo);
+					if (domain.getMaintenanceStatus()) {
+						Constant.markedDomain.put(domainTwo.getUrl(), domain);
+					} else {
+						Constant.unmarkedDomain.put(domainTwo.getUrl(), domain);
+					}
+				}
+				/**
+				 * 初始化类型
+				 */
+				SourceTypeDao sourceTypeDao = applicationContext.getBean(SourceTypeDao.class);
+				List<SourceType> types = sourceTypeDao.selectSourceType(0, 0);
+				for (SourceType sourceType : types) {
+					Constant.typeMap.add(sourceType.getName());
+				}
+	}
+	public static void initialDomainAndType() {
+		if(Constant.markedDomain.size()>0){
+			Constant.markedDomain.clear();
+		}
+		if(Constant.unmarkedDomain.size()>0){
+			Constant.unmarkedDomain.clear();
+		}
+		if(Constant.typeMap.size()>0){
+			Constant.typeMap.clear();
+		}
+		// 初始化域名对象
 		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
 		DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
 		DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
@@ -60,16 +107,31 @@ public class UrlUtil {
 		for (DomainOne domainOne : domainOneDao.getDomainOneOrderByTime(oneCondition)) {
 			Domain domain = new Domain();
 			domain.setDomainFormOne(domainOne);
-			Constant.existDomain.put(domainOne.getUrl(),domain);
+			if (domain.getMaintenanceStatus()) {
+				Constant.markedDomain.put(domainOne.getUrl(), domain);
+			} else {
+				Constant.unmarkedDomain.put(domainOne.getUrl(), domain);
+			}
 		}
 		DomainTwoDao domaintwoDao = applicationContext.getBean(DomainTwoDao.class);
 		DomainTwoQueryCondition twoCondition = new DomainTwoQueryCondition();
 		for (DomainTwo domainTwo : domaintwoDao.getDomainTwoByCondition(twoCondition)) {
 			Domain domain = new Domain();
 			domain.setDomainFormTwo(domainTwo);
-			Constant.existDomain.put(domainTwo.getUrl(),domain);			
+			if (domain.getMaintenanceStatus()) {
+				Constant.markedDomain.put(domainTwo.getUrl(), domain);
+			} else {
+				Constant.unmarkedDomain.put(domainTwo.getUrl(), domain);
+			}
 		}
-//		System.out.println("---------------existDomain------"+Constant.existDomain.size());
+		/**
+		 * 初始化类型
+		 */
+		SourceTypeDao sourceTypeDao = applicationContext.getBean(SourceTypeDao.class);
+		List<SourceType> types = sourceTypeDao.selectSourceType(0, 0);
+		for (SourceType sourceType : types) {
+			Constant.typeMap.add(sourceType.getName());
+		}
 	}
 
 	/**
@@ -174,7 +236,7 @@ public class UrlUtil {
 		}
 		String head = "";
 		String end = "";
-		Pattern pattern1 = Pattern.compile("\\."+RE);
+		Pattern pattern1 = Pattern.compile("\\." + RE);
 		Matcher matcher1 = pattern1.matcher(url);
 		if (matcher1.find()) {
 			end = matcher1.group();
@@ -183,7 +245,7 @@ public class UrlUtil {
 			return null;
 		}
 		Pattern pattern2 = Pattern.compile(RE_SEC);
-		Matcher matcher2 = pattern2.matcher(url+".");
+		Matcher matcher2 = pattern2.matcher(url + ".");
 		if (matcher2.find()) {
 			head = matcher2.group();
 		} else

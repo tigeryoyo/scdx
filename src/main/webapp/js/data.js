@@ -27,8 +27,12 @@ function paint() {
 			begin();
 		},
         success : function(msg) {
+        	if (msg.status == "OK") {
             parseTime(msg.result.time);
             parseAmount(msg.result.count);
+        	}else{
+        		alert(msg.result);
+        	}
         },      
         error : function() {
             alert("请求失败");

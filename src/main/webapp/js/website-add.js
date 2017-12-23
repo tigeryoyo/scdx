@@ -1,7 +1,11 @@
 function addWebsite() {
-	weight = $("#weight").val();
+	var weight = $("#weight").val();
 	if(weight == "" || weight==undefined)
 		weight = "0";
+	var maintenanceStatus = true;
+	if($("input[name='maintenance_status']:checked").val()==0){
+		maintenanceStaus = false;
+	}
 	$.ajax({
 		type : "post",
 		url : "/domain/addDomain",
@@ -12,7 +16,8 @@ function addWebsite() {
             type : $("#type").val(),
 			rank : $("#rank").val(),
             incidence : $("#incidence").val(),
-            weight : parseInt(weight)
+            weight : parseInt(weight),
+            maintenanceStatus:maintenanceStatus
 		},
 		dataType : "json",
 		beforeSend : function() {

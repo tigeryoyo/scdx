@@ -20,6 +20,8 @@ public class Domain implements Comparable<Domain>{
 
     private Integer weight;
     
+    private Boolean maintenanceStatus;
+    
 	public String getUrl() {
 		return url;
 	}
@@ -76,6 +78,14 @@ public class Domain implements Comparable<Domain>{
 		this.weight = weight;
 	}
 	
+	public Boolean getMaintenanceStatus() {
+        return maintenanceStatus;
+    }
+
+    public void setMaintenanceStatus(Boolean maintenanceStatus) {
+        this.maintenanceStatus = maintenanceStatus;
+    }
+	
 	public void setDomainFormOne(DomainOne one){
 		this.url = one.getUrl();
 		this.name = one.getName();
@@ -84,6 +94,7 @@ public class Domain implements Comparable<Domain>{
 		this.rank = one.getRank();
 		this.incidence = one.getIncidence();
 		this.weight = one.getWeight();
+		this.maintenanceStatus = one.getMaintenanceStatus();
 	}
 	
 	public void setDomainFormTwo(DomainTwo two){
@@ -94,6 +105,7 @@ public class Domain implements Comparable<Domain>{
 		this.rank = two.getRank();
 		this.incidence = two.getIncidence();
 		this.weight = two.getWeight();
+		this.maintenanceStatus = two.getMaintenanceStatus();
 	}
 	
 	/**
@@ -112,6 +124,7 @@ public class Domain implements Comparable<Domain>{
 		one.setRank(rank);
 		one.setWeight(weight);
 		one.setIncidence(incidence);
+		one.setMaintenanceStatus(maintenanceStatus);
 		return one;
 	}
 	
@@ -131,6 +144,7 @@ public class Domain implements Comparable<Domain>{
 		two.setRank(rank);
 		two.setWeight(weight);
 		two.setIncidence(incidence);
+		two.setMaintenanceStatus(maintenanceStatus);
 		return two;
 	}
 
@@ -144,7 +158,7 @@ public class Domain implements Comparable<Domain>{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Url:"+this.getUrl()+"Name:"+this.getName()+"Column:"+this.getColumn()+"Type:"+this.getType()+"Rank:"+this.getRank()+"Incidence"+this.getIncidence()+"Weight"+this.getWeight();
+		return "Url:"+this.getUrl()+"  Name:"+this.getName()+"  Column:"+this.getColumn()+"  Type:"+this.getType()+"  Rank:"+this.getRank()+"  Incidence:"+this.getIncidence()+"  Weight:"+this.getWeight()+"  MaintenanceStatus:"+this.getMaintenanceStatus();
 	}
 	
 }

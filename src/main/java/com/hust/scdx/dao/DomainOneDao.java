@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.mapper.DomainOneMapper;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainOneExample;
@@ -78,6 +77,9 @@ public class DomainOneDao {
 		if (null != condition.getIsFather()) {
 			criteria.andIsFatherEqualTo(condition.getIsFather());
 		}
+		if (null != condition.getMaintenanceStatus()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
+		}
 		if (null != condition.getWeight()) {
 			criteria.andWeightEqualTo(condition.getWeight());
 		}
@@ -91,7 +93,7 @@ public class DomainOneDao {
 		} else {
 			example.setLimit(0);
 		}
-		example.setOrderByClause("update_time desc,url");
+		example.setOrderByClause("maintenance_status desc,update_time desc,url");
 
 		return domainOneMapper.selectByExample(example);
 	}
