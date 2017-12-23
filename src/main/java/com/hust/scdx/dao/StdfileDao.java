@@ -2,10 +2,9 @@ package com.hust.scdx.dao;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -24,7 +23,6 @@ import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.CommonUtil;
 import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.FileUtil;
-import com.hust.scdx.util.StringUtil;
 import com.hust.scdx.util.TimeUtil;
 
 @Repository
@@ -81,7 +79,7 @@ public class StdfileDao {
 		String[] attrs = list.get(0);
 		int size = list.size();
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-		Map<String, List<String[]>> map = new HashMap<String, List<String[]>>();
+		TreeMap<String, List<String[]>> map = new TreeMap<String, List<String[]>>();
 		String datatime = "";
 		for (int i = 1; i < size; i++) {
 			String[] line = list.get(i);
