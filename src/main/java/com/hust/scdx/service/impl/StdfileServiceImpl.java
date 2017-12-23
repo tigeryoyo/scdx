@@ -1,7 +1,9 @@
 package com.hust.scdx.service.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -110,7 +112,7 @@ public class StdfileServiceImpl implements StdfileService {
 			return 0;
 		}
 		Stdfile stdfile = new Stdfile();
-		stdfile.setCreator(user.getTrueName());
+		stdfile.setCreator(user.getUserName());
 		stdfile.setUploadTime(new Date());
 		stdfile.setStdfileName(file.getOriginalFilename());
 		stdfile.setLineNumber(list.size());
@@ -155,12 +157,9 @@ public class StdfileServiceImpl implements StdfileService {
 	 * 根据时间范围获取标准数据并去重聚类
 	 */
 	@Override
-	public List<String[]> analyzeByTimeRange(String topicId, String startTime, String endTime, HttpServletRequest request) {
+	public List<String[]> analyzeByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
 		// 把聚类的结果变成空格区分的stdfile文件。
-		//
-		//
-		// 搜content
-		List<String[]> content = new ArrayList<String[]>();
+		List<String[]> content = FileUtil.readExtfiles(getFilespathByTimeRange(startTime, endTime, userService.selectCurrentUser(request), topicId));
 		return FileUtil.getStdfileDisplaylist2(mining(topicId, content, request));
 	}
 
@@ -171,16 +170,18 @@ public class StdfileServiceImpl implements StdfileService {
 	public Map<String, Object> getStdfileById(String stdfileId) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+		if (stdfileId.equals("stdfile_cluster_result")) {
+			stdfilePath = DIRECTORY.STDFILE + stdfileId;
+		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
 		String stdfileName = stdfile.getStdfileName();
 		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
-		//为统计日期-数量与来源-数量，合并内存中的两个Domain
+		// 为统计日期-数量与来源-数量，合并内存中的两个Domain
 		ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
 		existDomain.putAll(Constant.unmarkedDomain);
 		@SuppressWarnings("unchecked")
-		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT),
-				existDomain);
+		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), existDomain);
 		stdfileMap.put(StdfileMap.STAT, statMap);
 		return stdfileMap;
 	}
@@ -193,6 +194,52 @@ public class StdfileServiceImpl implements StdfileService {
 		Map<String, Object> stdfileMap = getStdfileById(stdfileId);
 		stdfileMap.put(StdfileMap.REPORT, generateReport(topicId, stdfileMap));
 		return stdfileMap;
+	}
+
+	/**
+	 * 根据时间范围得到文件的路径集合
+	 * 
+	 * @param startTime
+	 * @param endTime
+	 * @param user
+	 * @return
+	 */
+	private String[] getFilespathByTimeRange(Date startTime, Date endTime, User user, String topicId) {
+		Calendar sCal = Calendar.getInstance();
+		sCal.setTime(startTime);
+		int syear = sCal.get(Calendar.YEAR);
+		int smonth = sCal.get(Calendar.MONTH) + 1;
+		int sday = sCal.get(Calendar.DAY_OF_MONTH);
+		sCal.setTime(endTime);
+		int eyear = sCal.get(Calendar.YEAR);
+		int emonth = sCal.get(Calendar.MONTH) + 1;
+		int eday = sCal.get(Calendar.DAY_OF_MONTH);
+
+		List<String> filespath = new ArrayList<String>();
+		for (int i = syear; i <= eyear; i++) {
+			for (int j = (i == syear ? smonth : 1); j <= (i == eyear ? emonth : 12); j++) {
+				for (int k = (syear == eyear && smonth == emonth ? sday : 1); k <= (i == eyear && j == emonth ? eday : 31); k++) {
+					String dirPath = DIRECTORY.STDFILE + String.valueOf(i) + "/" + String.format("%2d", j).replace(" ", "0") + "/"
+							+ String.format("%2d", k).replace(" ", "0") + "/";
+					if (new File(dirPath).exists()) {
+						File dir = new File(dirPath);
+						String[] filelist = dir.list();
+						for (String str : filelist) {
+							Stdfile stdfile = stdfileDao.queryStdfileById(str);
+							if (stdfile != null && stdfile.getCreator().equals(user.getUserName()) && stdfile.getTopicId().equals(topicId)) {
+								filespath.add(dirPath + str);
+							}
+						}
+					}
+				}
+			}
+		}
+		String[] tmp = new String[filespath.size()];
+		int i = 0;
+		for (String s : filespath) {
+			tmp[i++] = s;
+		}
+		return tmp;
 	}
 
 	/**
@@ -286,7 +333,7 @@ public class StdfileServiceImpl implements StdfileService {
 
 		// 将此次记录插入数据库stdfile表中、将res作为stdfile文件存入文件系统
 		Stdfile stdfile = new Stdfile();
-		stdfile.setCreator(user.getTrueName());
+		stdfile.setCreator(user.getUserName());
 		stdfile.setUploadTime(new Date());
 		stdfile.setStdfileName("stdfile_cluster_result");
 		stdfile.setLineNumber(res.size());
@@ -660,9 +707,9 @@ public class StdfileServiceImpl implements StdfileService {
 					if (!urlSet.contains(url)) {
 						urlSet.add(url);
 						if (Constant.markedDomain.get(url) == null) {
-							if(Constant.unmarkedDomain.get(url) == null){
+							if (Constant.unmarkedDomain.get(url) == null) {
 								logger.error(url + "暂未录入内存域名信息库中！");
-							}else{
+							} else {
 								organization.add(Constant.unmarkedDomain.get(url));
 							}
 						} else {

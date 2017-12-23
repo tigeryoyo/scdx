@@ -32,10 +32,8 @@ import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
-import com.hust.scdx.util.ConvertUtil;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
-import com.hust.scdx.util.TimeUtil;
 
 @Controller
 @RequestMapping("/stdfile")
@@ -225,10 +223,22 @@ public class StdfileController {
 	@RequestMapping(value = "/analyzeByTimeRange", method = RequestMethod.POST)
 	public Object analyzeByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
-			@RequestParam(value = "startTime", required = true) Date startTime1, @RequestParam(value = "endTime", required = true) Date endTime1,
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
 			HttpServletRequest request) {
-		String startTime = "2016-09-01";
-		String endTime = "2016-09-20";
+		switch (timeRangeType) {
+		case "1":
+			endTime = new Date();
+			startTime = new Date(endTime.getTime() - 1 * 24 * 60 * 60 * 1000);
+			endTime = null;
+			break;
+		case "2":
+			endTime = new Date();
+			startTime = new Date(endTime.getTime() - 7 * 24 * 60 * 60 * 1000);
+			endTime = null;
+			break;
+		default:
+			break;
+		}
 		// title、url、time、amount
 		List<String[]> list = stdfileService.analyzeByTimeRange(topicId, startTime, endTime, request);
 		if (list == null || list.isEmpty()) {
