@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainTwo;
@@ -133,7 +134,8 @@ public class DomainController {
 			@RequestParam(value = "type", required = true) String type,
 			@RequestParam(value = "rank", required = true) String rank,
 			@RequestParam(value = "incidence", required = true) String incidence,
-			@RequestParam(value = "weight", required = true) Integer weight, HttpServletRequest request) {
+			@RequestParam(value = "weight", required = true) Integer weight, 
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
 		if (StringUtils.isBlank(url)) {
 			url = null;
 		}
@@ -160,6 +162,7 @@ public class DomainController {
 		domain.setRank(rank);
 		domain.setIncidence(incidence);
 		domain.setWeight(weight);
+		domain.setMaintenanceStatus(maintenanceStatus);
 		if (domainService.addDomain(domain))
 			return ResultUtil.success("添加成功！");
 		return ResultUtil.errorWithMsg("添加失败！");
@@ -318,7 +321,8 @@ public class DomainController {
 			@RequestParam(value = "type", required = true) String type,
 			@RequestParam(value = "rank", required = true) String rank,
 			@RequestParam(value = "incidence", required = true) String incidence,
-			@RequestParam(value = "weight", required = true) Integer weight, HttpServletRequest request) {
+			@RequestParam(value = "weight", required = true) Integer weight,
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
 		DomainOne one = new DomainOne();
 		System.out.println(uuid);
 		one.setUuid(uuid);
@@ -329,6 +333,7 @@ public class DomainController {
 		one.setRank(rank);
 		one.setIncidence(incidence);
 		one.setWeight(weight);
+		one.setMaintenanceStatus(maintenanceStatus);
 		one.setUpdateTime(new Date());
 		if (domainService.updateDomainOne(one))
 			return ResultUtil.success("修改成功！");
@@ -358,7 +363,8 @@ public class DomainController {
 			@RequestParam(value = "type", required = true) String type,
 			@RequestParam(value = "rank", required = true) String rank,
 			@RequestParam(value = "incidence", required = true) String incidence,
-			@RequestParam(value = "weight", required = true) Integer weight, HttpServletRequest request) {
+			@RequestParam(value = "weight", required = true) Integer weight, 
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
 		DomainTwo two = new DomainTwo();
 		two.setUuid(uuid);
 		two.setUrl(url);
@@ -368,12 +374,61 @@ public class DomainController {
 		two.setRank(rank);
 		two.setIncidence(incidence);
 		two.setWeight(weight);
+		two.setMaintenanceStatus(maintenanceStatus);
 		two.setUpdateTime(new Date());
 		if (domainService.updateDomainTwo(two))
 			return ResultUtil.success("修改成功！");
 		return ResultUtil.errorWithMsg("修改失败！");
 	}
 
+	/**
+	 * 修改一级域名的维护状态
+	 * @param uuid 指定域名的uuid
+	 * @param url 指定域名的url
+	 * @param maintenanceStatus 要修改的状态
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/changeOneStatus")
+	public Object changeOneStatus(@RequestParam(value = "uuid", required = true) String uuid,
+			@RequestParam(value = "url", required = true) String url,
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
+		DomainOne one = new DomainOne();
+		one.setUuid(uuid);
+		one.setUrl(url);
+		one.setMaintenanceStatus(maintenanceStatus);
+		one.setUpdateTime(new Date());
+		if (domainService.updateDomainOne(one))
+			return ResultUtil.success("修改成功！");
+		return ResultUtil.errorWithMsg("修改失败！");
+	}
+	
+	/**
+	 * 修改二级域名的维护状态
+	 * @param uuid 指定域名的uuid
+	 * @param url 指定域名的url
+	 * @param maintenanceStatus 要修改的状态
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/changeTwoStatus")
+	public Object changeTwoStatus(@RequestParam(value = "uuid", required = true) String uuid,
+			@RequestParam(value = "url", required = true) String url,
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
+		DomainTwo two = new DomainTwo();
+		two.setUuid(uuid);
+		two.setUrl(url);
+		two.setMaintenanceStatus(maintenanceStatus);
+		two.setUpdateTime(new Date());
+		if (domainService.updateDomainTwo(two))
+			return ResultUtil.success("修改成功！");
+		return ResultUtil.errorWithMsg("修改失败！");
+	}
+	
+	
+	
 	/**
 	 * 上传域名信息excel文件 并根据文件内容更新或插入域名信息
 	 * 
@@ -437,6 +492,13 @@ public class DomainController {
 			for (DomainTwo domainTwo : twoList2) {
 				result.add(getDomainInfo(domainTwo,domainService.getDomainOneById(domainTwo.getFatherUuid()).getUrl()));
 			}
+		/*	fileName = "unknowDomainInfo.xls";
+			for(Domain domain:Constant.markedDomain.values()){
+				result.add(getDomainInfo(domain));
+			}
+			for(Domain domain:Constant.unmarkedDomain.values()){
+				result.add(getDomainInfo(domain));
+			}*/
 			break;
 
 		default:
@@ -491,7 +553,8 @@ public class DomainController {
 			incidence = "";
 		}
 		String weight = one.getWeight().toString();
-		String[] str = { url, name, column, type, rank, incidence, weight,"0","1",url};
+		String status = one.getMaintenanceStatus()?"1":"0";
+		String[] str = { url, name, column, type, rank, incidence, weight,status,"1",url};
 		return str;
 	}
 
@@ -523,7 +586,40 @@ public class DomainController {
 			incidence = "";
 		}
 		String weight = two.getWeight().toString();
-		String[] str = { url, name, column, type, rank, incidence, weight,"0","2",fatherUrl};
+		String status = two.getMaintenanceStatus()?"1":"0";
+		String[] str = { url, name, column, type, rank, incidence, weight,status,"2",fatherUrl};
 		return str;
+	}
+	private String[] getDomainInfo(Domain domain) {
+		String url = domain.getUrl();
+		String name = domain.getName();
+		if (null == name || name.equals("其他")) {
+			name = "";
+		}
+		String column = domain.getColumn();
+		if (null == column ) {
+			column = "";
+		}
+		String type = domain.getType();
+		if (null == type) {
+			type = "";
+		}
+		String rank = domain.getRank();
+		if (null == rank) {
+			rank = "";
+		}
+		String incidence = domain.getIncidence();
+		if (null == incidence) {
+			incidence = "";
+		}
+		String status = domain.getMaintenanceStatus()?"1":"0";
+		String weight = domain.getWeight().toString();
+		if(UrlUtil.getDomainTwo(url) == null){
+			String[] str = { url, name, column, type, rank, incidence, weight,status,"1",url};
+			return str;
+		}else{
+			String[] str = { url, name, column, type, rank, incidence, weight,status,"2",UrlUtil.getDomainOne(url)};
+			return str;
+		}
 	}
 }

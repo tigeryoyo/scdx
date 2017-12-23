@@ -20,4 +20,6 @@ public interface SourceTypeService {
 	int insertSourceType(String name);
 
 	int updateSourceType(SourceType sourceType);
+	
+	boolean mergedSourceType(int[] ids,String newName);
 }

@@ -19,6 +19,8 @@ public class DomainOne {
 
     private Integer weight;
 
+    private Boolean maintenanceStatus;
+
     private Boolean isFather;
 
     private Date updateTime;
@@ -85,6 +87,14 @@ public class DomainOne {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Boolean getMaintenanceStatus() {
+        return maintenanceStatus;
+    }
+
+    public void setMaintenanceStatus(Boolean maintenanceStatus) {
+        this.maintenanceStatus = maintenanceStatus;
     }
 
     public Boolean getIsFather() {

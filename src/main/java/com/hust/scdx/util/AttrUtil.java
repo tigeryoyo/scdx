@@ -50,6 +50,14 @@ public class AttrUtil {
 	 * 网站级别 "媒体级别"
 	 */
 	public static final String RANK_PATTERN = "媒体级别";
+	/**
+	 * 网站权重 "权重"
+	 */
+	public static final String WEIGHT_PATTERN = "权重";
+	/**
+	 * 网站影响范围 "影响范围"
+	 */
+	public static final String INCIDENCE_PATTERN = "影响范围";
 
 	public static int[] findEssentialIndex(String[] attrs) {
 		int indexOfTitle = findIndexOfTitle(attrs);

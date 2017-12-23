@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hust.scdx.dao.mapper.DomainOneMapper">
- <resultMap id="BaseResultMap" type="com.hust.scdx.model.DomainOne">
+  <resultMap id="BaseResultMap" type="com.hust.scdx.model.DomainOne">
     <id column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -10,6 +10,7 @@
     <result column="rank" jdbcType="VARCHAR" property="rank" />
     <result column="incidence" jdbcType="VARCHAR" property="incidence" />
     <result column="weight" jdbcType="INTEGER" property="weight" />
+    <result column="maintenance_status" jdbcType="BIT" property="maintenanceStatus" />
     <result column="is_father" jdbcType="BIT" property="isFather" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, url, name, domain_one.column, type, rank, incidence, weight, is_father, update_time
+    uuid, url, name, domain_one.column, type, rank, incidence, weight, maintenance_status, is_father, update_time
   </sql>
   <select id="selectByExample" parameterType="com.hust.scdx.model.DomainOneExample" resultMap="BaseResultMap">
     select
@@ -80,14 +81,14 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from domain_one 
+    from domain_one
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
-    <if test="start != 0 or limit != 0" >
+	<if test="start != 0 or limit != 0" >
     	limit #{start},#{limit}
     </if>
   </select>
@@ -110,15 +111,14 @@
   <insert id="insert" parameterType="com.hust.scdx.model.DomainOne">
     insert into domain_one (uuid, url, name, 
       domain_one.column, type, rank, 
-      incidence, weight, is_father, 
-      update_time)
+      incidence, weight, maintenance_status, 
+      is_father, update_time)
     values (#{uuid,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{column,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR}, 
-      #{incidence,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{isFather,jdbcType=BIT}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{incidence,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{maintenanceStatus,jdbcType=BIT}, 
+      #{isFather,jdbcType=BIT}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  
-   <insert id="insertBatch" parameterType="java.util.List">
+  <insert id="insertBatch" parameterType="java.util.List">
     REPLACE into domain_one 
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="uuid != null">
@@ -144,6 +144,9 @@
       </if>
       <if test="weight != null">
         weight,
+      </if>
+	  <if test="maintenanceStatus != null">
+        maintenance_status,
       </if>
       <if test="isFather != null">
         is_father,
@@ -178,6 +181,9 @@
       </if>
       <if test="weight != null">
         #{item.weight,jdbcType=INTEGER},
+      </if>
+	  <if test="maintenanceStatus != null">
+        #{item.maintenanceStatus,jdbcType=BIT},
       </if>
       <if test="isFather != null">
         #{item.isFather,jdbcType=BIT},
@@ -215,6 +221,9 @@
       <if test="weight != null">
         weight,
       </if>
+	  <if test="maintenanceStatus != null">
+        maintenance_status,
+      </if>
       <if test="isFather != null">
         is_father,
       </if>
@@ -248,6 +257,9 @@
       </if>
       <if test="weight != null">
         #{item.weight,jdbcType=INTEGER},
+      </if>
+	  <if test="maintenanceStatus != null">
+        #{item.maintenanceStatus,jdbcType=BIT},
       </if>
       <if test="isFather != null">
         #{item.isFather,jdbcType=BIT},
@@ -285,6 +297,9 @@
       <if test="weight != null">
         weight,
       </if>
+      <if test="maintenanceStatus != null">
+        maintenance_status,
+      </if>
       <if test="isFather != null">
         is_father,
       </if>
@@ -316,6 +331,9 @@
       </if>
       <if test="weight != null">
         #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="maintenanceStatus != null">
+        #{maintenanceStatus,jdbcType=BIT},
       </if>
       <if test="isFather != null">
         #{isFather,jdbcType=BIT},
@@ -358,6 +376,9 @@
       <if test="record.weight != null">
         weight = #{record.weight,jdbcType=INTEGER},
       </if>
+      <if test="record.maintenanceStatus != null">
+        maintenance_status = #{record.maintenanceStatus,jdbcType=BIT},
+      </if>
       <if test="record.isFather != null">
         is_father = #{record.isFather,jdbcType=BIT},
       </if>
@@ -379,6 +400,7 @@
       rank = #{record.rank,jdbcType=VARCHAR},
       incidence = #{record.incidence,jdbcType=VARCHAR},
       weight = #{record.weight,jdbcType=INTEGER},
+      maintenance_status = #{record.maintenanceStatus,jdbcType=BIT},
       is_father = #{record.isFather,jdbcType=BIT},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -409,6 +431,9 @@
       <if test="weight != null">
         weight = #{weight,jdbcType=INTEGER},
       </if>
+      <if test="maintenanceStatus != null">
+        maintenance_status = #{maintenanceStatus,jdbcType=BIT},
+      </if>
       <if test="isFather != null">
         is_father = #{isFather,jdbcType=BIT},
       </if>
@@ -427,6 +452,7 @@
       rank = #{rank,jdbcType=VARCHAR},
       incidence = #{incidence,jdbcType=VARCHAR},
       weight = #{weight,jdbcType=INTEGER},
+      maintenance_status = #{maintenanceStatus,jdbcType=BIT},
       is_father = #{isFather,jdbcType=BIT},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where uuid = #{uuid,jdbcType=VARCHAR}

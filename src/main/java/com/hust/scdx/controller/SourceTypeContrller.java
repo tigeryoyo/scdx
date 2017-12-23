@@ -73,7 +73,7 @@ public class SourceTypeContrller {
 	@ResponseBody
 	@RequestMapping(value = "/insertSourceType")
 	public Object insertSourceType(@RequestParam(value = "name", required = true) String name) {
-		int status = sourceTypeService.insertSourceType(name);
+		int status = sourceTypeService.insertSourceType(name.trim());
 		if (status == 0) {
 			return ResultUtil.errorWithMsg("insert sourceType error");
 		}
@@ -92,5 +92,15 @@ public class SourceTypeContrller {
 			return ResultUtil.errorWithMsg("update sourceType error");
 		}
 		return ResultUtil.success("update data success");
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/mergedSourceType")
+	public Object mergedSourceType(@RequestParam(value = "ids", required = true) int[] ids,
+			@RequestParam(value = "newName", required = true) String newName) {
+		if (!sourceTypeService.mergedSourceType(ids, newName)) {
+			return ResultUtil.errorWithMsg("合并类型失败！");
+		}
+		return ResultUtil.success("合并类型成功！");
 	}
 }

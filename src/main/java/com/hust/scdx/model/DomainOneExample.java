@@ -10,16 +10,16 @@ public class DomainOneExample {
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
-    
-    private int limit;
+	
+	private int limit;
     
     private int start;
 
     public DomainOneExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
-
-    public int getLimit() {
+	
+	public int getLimit() {
 		return limit;
 	}
 
@@ -35,7 +35,7 @@ public class DomainOneExample {
 		this.start = start;
 	}
 
-	public void setOrderByClause(String orderByClause) {
+    public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
@@ -675,6 +675,66 @@ public class DomainOneExample {
             return (Criteria) this;
         }
 
+        public Criteria andMaintenanceStatusIsNull() {
+            addCriterion("maintenance_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusIsNotNull() {
+            addCriterion("maintenance_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusEqualTo(Boolean value) {
+            addCriterion("maintenance_status =", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotEqualTo(Boolean value) {
+            addCriterion("maintenance_status <>", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusGreaterThan(Boolean value) {
+            addCriterion("maintenance_status >", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("maintenance_status >=", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusLessThan(Boolean value) {
+            addCriterion("maintenance_status <", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("maintenance_status <=", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusIn(List<Boolean> values) {
+            addCriterion("maintenance_status in", values, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotIn(List<Boolean> values) {
+            addCriterion("maintenance_status not in", values, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("maintenance_status between", value1, value2, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("maintenance_status not between", value1, value2, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andIsFatherIsNull() {
             addCriterion("is_father is null");
             return (Criteria) this;
@@ -851,8 +911,8 @@ public class DomainOneExample {
         public String getTypeHandler() {
             return typeHandler;
         }
-        
-        protected Criterion() {
+		
+		protected Criterion() {
 			super();
 		}
 

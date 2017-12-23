@@ -655,6 +655,66 @@ public class DomainTwoExample {
             return (Criteria) this;
         }
 
+        public Criteria andMaintenanceStatusIsNull() {
+            addCriterion("maintenance_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusIsNotNull() {
+            addCriterion("maintenance_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusEqualTo(Boolean value) {
+            addCriterion("maintenance_status =", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotEqualTo(Boolean value) {
+            addCriterion("maintenance_status <>", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusGreaterThan(Boolean value) {
+            addCriterion("maintenance_status >", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("maintenance_status >=", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusLessThan(Boolean value) {
+            addCriterion("maintenance_status <", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("maintenance_status <=", value, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusIn(List<Boolean> values) {
+            addCriterion("maintenance_status in", values, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotIn(List<Boolean> values) {
+            addCriterion("maintenance_status not in", values, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("maintenance_status between", value1, value2, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaintenanceStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("maintenance_status not between", value1, value2, "maintenanceStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andFatherUuidIsNull() {
             addCriterion("father_uuid is null");
             return (Criteria) this;
@@ -841,8 +901,8 @@ public class DomainTwoExample {
         public String getTypeHandler() {
             return typeHandler;
         }
-        
-        protected Criterion() {
+		
+		 protected Criterion() {
 			super();
 		}
 

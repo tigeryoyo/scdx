@@ -59,7 +59,7 @@ span {
 						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
 						<option>中央</option>
 						<option>省级</option>
-						<option>其他</option>
+						<option>其他媒体</option>
 						<option>无</option>
 						</select></td>
 				</tr>
@@ -69,6 +69,7 @@ span {
 						class="form-control incidence_provience" style="width:188px;"
 						disabled="disabled">
 						<option>全国</option>
+						<option>四川省</option>
 						<option>北京市</option>
 						<option>天津市</option>
 						<option>上海市</option>
@@ -89,7 +90,6 @@ span {
 						<option>湖南省</option>
 						<option>广东省</option>
 						<option>海南省</option>
-						<option>四川省</option>
 						<option>贵州省</option>
 						<option>云南省</option>
 						<option>陕西省</option>
@@ -135,6 +135,13 @@ span {
 						class="form-control" disabled="disabled" id="new_weight" /></td>
 				</tr>
 				<tr>
+					<td width="117" height="50">维护状态：</td>
+					<td width="323" height="50">
+						<input type="radio" disabled="disabled" name="maintenance_status" value="1">已维护
+						<input type="radio" disabled="disabled" name="maintenance_status" value="0">待维护
+					</td>
+				</tr>
+				<tr>
 					<td width="117" height="50">子域名：</td>
 					<td id="sub_domain" width="373" height="50"></td>
 				</tr>
@@ -155,7 +162,7 @@ span {
 </body>
 <script>
 	var uuid = getCookie("domain_id");
-	console.log("-------" + uuid);
+	loadType();
 	$
 			.ajax({
 				type : "post",
@@ -181,18 +188,23 @@ span {
 							$(".incidence_city").val(incidence[1]);
 						}
 						$("#new_weight").val(one.weight);
+						if(one.maintenanceStatus){
+							$("input[name='maintenance_status'][value=1]").attr("checked",true);
+						}else{
+							$("input[name='maintenance_status'][value=0]").attr("checked",true);
+						}
 						$
 								.each(
 										two,
 										function(idx, item) {
 											row = '<p data-id="'+item.uuid+'">'
-													+ '<span style="width: 170px; display: inline; float: left">'
+													+ '<span style="width: 190px; display: inline; float: left;overflow:hidden;text-overflow:ellipsis;"title="'+item.url+'">'
 													+ item.url
 													+ '</span>'
-													+ '<span style="width: 120px; display: inline; float: left">'
+													+ '<span style="width: 140px; display: inline; float: left;margin-left:5px;overflow:hidden;text-overflow:ellipsis;" title="'+item.name+'">'
 													+ item.name
 													+ '</span>'
-													+ '<span><a href="javascript:" style="margin: 2px 0px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a> </span>'
+													+ '<span><a href="javascript:" style="margin-left:5px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a> </span>'
 													+ '</p>';
 											$("#sub_domain").append(row);
 										})

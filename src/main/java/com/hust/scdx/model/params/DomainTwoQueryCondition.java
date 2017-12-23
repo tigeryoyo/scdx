@@ -8,6 +8,7 @@ public class DomainTwoQueryCondition {
 	private String rank;
 	private Integer weight;
 	private String incidence;
+	private Boolean maintenanceStatus;
 	private String fatherId;
 
 	public String getName() {
@@ -64,6 +65,14 @@ public class DomainTwoQueryCondition {
 
 	public void setIncidence(String incidence) {
 		this.incidence = incidence;
+	}
+
+	public Boolean getMaintenanceStatus() {
+		return maintenanceStatus;
+	}
+
+	public void setMaintenanceStatus(Boolean maintenanceStatus) {
+		this.maintenanceStatus = maintenanceStatus;
 	}
 
 	public String getFatherId() {
