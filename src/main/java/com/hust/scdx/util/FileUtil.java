@@ -266,19 +266,25 @@ public class FileUtil {
 	 */
 	private static List<String[]> adjustPropertyLine(List<String> attrs, List<String[]> content) {
 		int attrSize = attrs.size();
-		int[] orderAttrs = new int[attrSize + 3];
+		int[] orderAttrs = new int[attrSize + 6];
 		List<String> newAttrs = new ArrayList<String>();
 		int order = 0;
 		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
 		if (index != -1) {
 			orderAttrs[order++] = index;
 			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add("网站");
 		}
 
 		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.COLUMN_PATTERN);
 		if (index != -1) {
 			orderAttrs[order++] = index;
 			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add("板块");
 		}
 
 		index = AttrUtil.findIndexOfTitle(attrs);
@@ -309,6 +315,9 @@ public class FileUtil {
 		if (index != -1) {
 			orderAttrs[order++] = index;
 			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add("类型");
 		}
 
 		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
@@ -365,8 +374,8 @@ public class FileUtil {
 		res.add(0, tmp);
 		return res;
 	}
-	
-	private static List<String[]> fillContentFromDomain(List<String[]> content){
+
+	private static List<String[]> fillContentFromDomain(List<String[]> content) {
 		List<String[]> res = new ArrayList<String[]>();
 		String[] attrs = content.remove(0);
 		int urlIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.URL_PATTERN);
@@ -379,77 +388,77 @@ public class FileUtil {
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
 			String tUrl = UrlUtil.getDomainTwo(url);
-			if(tUrl == null){
-				//如果二级域名不存在，则url为一级域名
-				if(Constant.markedDomain.containsKey(url)){
-					//如果该一级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
+			if (tUrl == null) {
+				// 如果二级域名不存在，则url为一级域名
+				if (Constant.markedDomain.containsKey(url)) {
+					// 如果该一级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
 					Domain domain = Constant.markedDomain.get(url);
 					strs[nameIndex] = domain.getName();
 					strs[columnIndex] = domain.getColumn();
 					strs[typeIndex] = domain.getType();
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
-					strs[weightIndex] = domain.getWeight()+"";
-				}else if(Constant.unmarkedDomain.containsKey(url)){
-					//若不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
-						Domain domain = Constant.unmarkedDomain.get(url);
-						if(StringUtils.isBlank(strs[nameIndex])){
-							strs[nameIndex] = domain.getName();
-						}
-						if(StringUtils.isBlank(strs[columnIndex])){
-							strs[columnIndex] = domain.getColumn();
-						}
-						if(StringUtils.isBlank(strs[typeIndex])){
-							strs[typeIndex] = domain.getType();
-						}
-						if(StringUtils.isBlank(strs[rankIndex])){
-							strs[rankIndex] = domain.getRank();
-						}
-						if(StringUtils.isBlank(strs[incidenceIndex])){
-							strs[incidenceIndex] = domain.getIncidence();
-						}
-						if(StringUtils.isBlank(strs[weightIndex])){
-							strs[weightIndex] = domain.getWeight()+"";
+					strs[weightIndex] = domain.getWeight() + "";
+				} else if (Constant.unmarkedDomain.containsKey(url)) {
+					// 若不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
+					Domain domain = Constant.unmarkedDomain.get(url);
+					if (StringUtils.isBlank(strs[nameIndex])) {
+						strs[nameIndex] = domain.getName();
+					}
+					if (StringUtils.isBlank(strs[columnIndex])) {
+						strs[columnIndex] = domain.getColumn();
+					}
+					if (StringUtils.isBlank(strs[typeIndex])) {
+						strs[typeIndex] = domain.getType();
+					}
+					if (StringUtils.isBlank(strs[rankIndex])) {
+						strs[rankIndex] = domain.getRank();
+					}
+					if (StringUtils.isBlank(strs[incidenceIndex])) {
+						strs[incidenceIndex] = domain.getIncidence();
+					}
+					if (StringUtils.isBlank(strs[weightIndex])) {
+						strs[weightIndex] = domain.getWeight() + "";
 					}
 				}
-			}else{
-				//tUrl不为null则，tUrl为二级域名，url为其一级域名
-				if(Constant.markedDomain.containsKey(tUrl)){
-					//如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
+			} else {
+				// tUrl不为null则，tUrl为二级域名，url为其一级域名
+				if (Constant.markedDomain.containsKey(tUrl)) {
+					// 如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
 					Domain domain = Constant.markedDomain.get(tUrl);
 					strs[nameIndex] = domain.getName();
 					strs[columnIndex] = domain.getColumn();
 					strs[typeIndex] = domain.getType();
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
-					strs[weightIndex] = domain.getWeight()+"";
-				}else if(Constant.markedDomain.containsKey(url)){
-					//如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
+					strs[weightIndex] = domain.getWeight() + "";
+				} else if (Constant.markedDomain.containsKey(url)) {
+					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
 					Domain domain = Constant.markedDomain.get(url);
 					strs[nameIndex] = domain.getName();
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
-					strs[weightIndex] = domain.getWeight()+"";
-				}else if(Constant.unmarkedDomain.containsKey(tUrl)){
-					//若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
+					strs[weightIndex] = domain.getWeight() + "";
+				} else if (Constant.unmarkedDomain.containsKey(tUrl)) {
+					// 若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
 					Domain domain = Constant.unmarkedDomain.get(tUrl);
-					if(StringUtils.isBlank(strs[nameIndex])){
+					if (StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if(StringUtils.isBlank(strs[columnIndex])){
+					if (StringUtils.isBlank(strs[columnIndex])) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if(StringUtils.isBlank(strs[typeIndex])){
+					if (StringUtils.isBlank(strs[typeIndex])) {
 						strs[typeIndex] = domain.getType();
 					}
-					if(StringUtils.isBlank(strs[rankIndex])){
+					if (StringUtils.isBlank(strs[rankIndex])) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if(StringUtils.isBlank(strs[incidenceIndex])){
+					if (StringUtils.isBlank(strs[incidenceIndex])) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
-					if(StringUtils.isBlank(strs[weightIndex])){
-						strs[weightIndex] = domain.getWeight()+"";
+					if (StringUtils.isBlank(strs[weightIndex])) {
+						strs[weightIndex] = domain.getWeight() + "";
 					}
 				}
 			}
@@ -693,8 +702,12 @@ public class FileUtil {
 					i++;
 				}
 				if (i != 0) {
-					marked.add(markedIndex);
 					content.addAll(cluster);
+					if (i != 1) {
+						marked.add(markedIndex);
+					} else {
+						continue;
+					}
 				}
 				if (StringUtils.isEmpty(line)) {
 					content.add(new String[0]);
