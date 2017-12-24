@@ -142,6 +142,13 @@ public class StdfileServiceImpl implements StdfileService {
 		con.setEndTime(endTime);
 		return stdfileDao.queryStdfilesByCondtion(con);
 	}
+	/**
+	 * 查找最近一次上传的文件
+	 * @return
+	 */
+	public Stdfile getLastedStdfile(){
+		return stdfileDao.queryLastedStdfile();
+	}
 
 	/**
 	 * 根据标准数据id分析标准数据 title、url、time、amount

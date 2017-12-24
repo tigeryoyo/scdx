@@ -12,7 +12,7 @@
 }
 $('.topicName').text("专题名称：" + getCookie("topicName"));
 var fileBuf = null;
-var stdfileId = null;
+var stdfileId = "stdfile_cluster_result";
 /**
  * 拖拽
  */
@@ -87,21 +87,56 @@ $(function() {
 });
 
 /**
- * 根据时间范围查找标准文件。 *
+ * 查找最近一次上传的文件 *
  * 
  * @param startTime
  *            开始时间
  * @param endTime
  *            结束时间
  */
-function queryStdfilesByTimeRange(timeRangeType,startTime,endTime) {
-	if(startTime == "" || startTime=="undefined" || endTime=="" || endTime=="undefined"){
-		alert("时间选择有误");
-		return ;
-	}
+function queryLastedStdfile() {
 	$.ajax({
 		type : "POST",
-		url : "/stdfile/queryStdfilesByTimeRange",
+		url : "/stdfile/queryStdfile",
+		data : {
+			topicId : getCookie("topicId"),
+		},
+		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				var file = msg.result;
+				$("#fileName").html(file.stdfileName);
+				$("#fileUpTime").html(new Date(file.uploadTime.time).format('yyyy-MM-dd hh:mm:ss'));
+				var str = file.datatime.split(";");
+				console.log(str);
+				$("#dataStartTime").html(str[0]);
+				$("#dataEndTime").html(str[str.length-2]);
+				
+			} else {
+				alert(msg.result);
+			}
+		},
+		error : function() {
+			alert("查询最近一次文件的上传记录失败！");
+		},
+		complete:function(){
+			stop();
+		}
+	});
+}
+
+
+//根据时间显示数据分类详情
+function queryStdDataByTimeRange(timeRangeType,startTime,endTime){
+	console.log(timeRangeType)
+	console.log(startTime)
+	console.log(endTime)
+	$.ajax({
+		type : "post",
+		url : "/stdfile/analyzeByTimeRange",
 		data : {
 			topicId : getCookie("topicId"),
 			timeRangeType:timeRangeType,
@@ -114,51 +149,12 @@ function queryStdfilesByTimeRange(timeRangeType,startTime,endTime) {
 			},
 		success : function(msg) {
 			if (msg.status == "OK") {
-				$("#extList").html("");
-				var items = msg.result;
-				$.each(items,function(idx,item){
-					row = '<tr>'
-                        +'<td width="182px;" data-id="'+item.stdfileId+'" style="cursor: pointer;" title="'+item.stdfileName+'" onclick="showDetail(this)">'
-                        +item.stdfileName
-                        +'</td>'
-                        +'<td width="179px;">'+new Date(item.uploadTime.time).format('yyyy-MM-dd hh:mm:ss')
-                        +'</tr>';
-					$("#extList").append(row);                        
-				})
-				$("#extList tr:first td:first").click();
-			} else {
-				alert(msg.result);
-			}
-		},
-		error : function() {
-			alert("查询历史上传记录失败！");
-		},
-		complete:function(){
-			stop();
-		}
-	});
-}
-
-//显示标准文件的分类详情
-function showDetail(e){
-	stdfileId = $(e).attr("data-id");
-	$.ajax({
-		type : "post",
-		url : "/stdfile/analyzeByStdfileId",
-		data : {
-			stdfileId : stdfileId
-		},
-		dataType : "json",
-		beforeSend : function() {
-			begin();
-			},
-		success : function(msg) {
-			if (msg.status == "OK") {
 				$('.summary_tab table tr:not(:first)').html('');
 				var items = msg.result;
 				for (var i = 0; i < (items.length>300?300:items.length); i++) {
 					// items第一行存储index，故从i+1读起
 					var item = items[i];
+					console.log(item);
 					var rows = '<tr><td height="32" align="center">'+(i+1)+'</td><td height="32" align="center">' + item[0] + '</td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'+
 						'<a href="javascript:;" onclick="toPaint(' + i + ',\'' + item[0].replace(/\"/g, " ").replace(/\'/g, " ") + '\')">' + item[3] + '</a>'+
 						'</td></tr>';
@@ -213,7 +209,7 @@ function uploadStd() {
 				$("#drop_area").text("文件「 " + fileBuf.name + " 」上传成功。");
 				$(".btn_del_all").attr("disabled", true);
 				$(".btn_upl_all").attr("disabled", true);
-				searchTimeChange();
+				queryLastedStdfile();
 			} else {
 				alert("aa"+msg.result);
 			}
@@ -333,7 +329,7 @@ function searchTimeChange(){
             }
             break;
     }
-    queryStdfilesByTimeRange(index,start,end);
+    queryStdDataByTimeRange(index,start,end);
 }
 
 function timeChange(){

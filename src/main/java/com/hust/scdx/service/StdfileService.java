@@ -16,6 +16,8 @@ public interface StdfileService {
 	int deleteStdfileByTopicId(String topicId);
 
 	List<Stdfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime);
+	
+	Stdfile getLastedStdfile();
 
 	List<String[]> analyzeByStdfileId(String stdfileId);
 

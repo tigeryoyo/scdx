@@ -191,6 +191,31 @@ public class StdfileController {
 		}
 		return ResultUtil.success(list);
 	}
+	
+	/**
+	 * 查找最近一次上传的文件
+	 * 
+	 * @param topicId
+	 *            专题id
+	 * @param startTime
+	 *            开始时间
+	 * @param endTime
+	 *            结束时间
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/queryStdfile")
+	public Object queryStdfile(@RequestParam(value = "topicId", required = true) String topicId,
+			HttpServletRequest request) {
+		Stdfile file =  stdfileService.getLastedStdfile();
+		if(file == null){
+			return ResultUtil.unknowError();
+		}
+		return ResultUtil.success(file);
+	}
+		
+	
 
 	/**
 	 * 分析标准数据文件
@@ -225,22 +250,22 @@ public class StdfileController {
 			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
 			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
 			HttpServletRequest request) {
+		System.out.println("-------------------------------------------");
 		switch (timeRangeType) {
 		case "1":
 			endTime = new Date();
 			startTime = new Date(endTime.getTime() - 1 * 24 * 60 * 60 * 1000);
-			endTime = null;
 			break;
 		case "2":
 			endTime = new Date();
 			startTime = new Date(endTime.getTime() - 7 * 24 * 60 * 60 * 1000);
-			endTime = null;
 			break;
 		default:
 			break;
 		}
 		// title、url、time、amount
 		List<String[]> list = stdfileService.analyzeByTimeRange(topicId, startTime, endTime, request);
+		System.out.println(list.size());
 		if (list == null || list.isEmpty()) {
 			return ResultUtil.errorWithMsg("分析标准数据出错。");
 		}
