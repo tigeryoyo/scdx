@@ -13,7 +13,7 @@
     min-height: 125px;
     max-height: 150px;
     border-top: 1px solid #999999;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
     display: inline-block;
     margin-bottom: -1px;
@@ -56,10 +56,25 @@
                 </div>
             </div>
         <div style="border-top:1px solid #999999;">
-            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid #999999;">标准数据</span>
+            <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid #999999;">最近上传文件：</span>
             <span style="width: 384px;height: 30px;display: inline-block;text-align: left;line-height: 30px;float:right">新增文件：</span>
                 <div class="fileList" style="width: 384px;border-right:1px solid #999999">
                     <table id="extList">
+                    	<tr>
+                    		<td colspan="3" id="fileName">文件名</td>
+                    	</tr>
+                    	<tr style="height:30px;">
+                    		<td colspan="1">上传时间：</td>
+                    		<td colspan="2" id="fileUpTime"></td>
+                    	</tr >
+                    	<tr style="height:69px;">
+                    		<td colspan="1">数据时间：</td>
+                    		<td colspan="2">
+                    			<span id="dataStartTime"></span>
+                    			<span style="display:block;margin:3px 0px; ">至</span>
+                    			<span id="dataEndTime"></span>
+                    		</td>
+                    	</tr>
                     </table>
                 </div>
                 <div class="fileList" style="float: right;position:relative;overflow:hidden;">
@@ -102,6 +117,7 @@
 <script type="text/javascript" src="js/std-analysis.js"></script>
 <script type="text/javascript" src="js/jedate.js"></script>
 <script type="text/javascript">
+	queryLastedStdfile();
 	$("input[name=searchTime]").click(searchTimeChange);
 	//searchTimeChange();  
 </script>

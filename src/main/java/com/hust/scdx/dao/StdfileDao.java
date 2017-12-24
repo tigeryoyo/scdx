@@ -161,6 +161,18 @@ public class StdfileDao {
 		example.setOrderByClause("upload_time desc");
 		return stdfileMapper.selectByExample(example);
 	}
+	
+	public Stdfile queryLastedStdfile(){
+		StdfileExample example = new StdfileExample();
+		Criteria criteria = example.createCriteria();
+		example.setOrderByClause("upload_time desc");
+		example.setLimit(1);
+		List<Stdfile> files = stdfileMapper.selectByExample(example);
+		if(files.size()!= 1){
+			return null;
+		}
+		return files.get(0);
+	}
 
 	/**
 	 * 根据标准数据id删除数据库记录与文件。
