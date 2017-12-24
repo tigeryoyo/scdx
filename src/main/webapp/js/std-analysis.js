@@ -122,8 +122,8 @@ function queryLastedStdfile() {
 				var str = file.datatime.split(";");
 				console.log(str);
 				if(str.length>2){
-					$("#dataStartTime").html(str[str.length-2]);
-					$("#dataEndTime").html(str[0]);
+					$("#dataStartTime").html(str[0]);
+					$("#dataEndTime").html(str[str.length-2]);
 				}else{
 					$("#dataStartTime").html(str[0]);
 					$("#dataEndTime").html(str[0]);
@@ -372,10 +372,10 @@ function searchTimeChange(){
     queryStdDataByTimeRange(index,start,end);
 }
 
-function timeChange(){
-	if((index = $("input[name='searchTime']:checked").val() == '3')&&($("#startTime").val()!="")&&($("#endTime").val()!=""))
-		searchTimeChange();
-}
+//function timeChange(){
+//	if((index = $("input[name='searchTime']:checked").val() == '3')&&($("#startTime").val()!="")&&($("#endTime").val()!=""))
+//		searchTimeChange();
+//}
 
 //画图页面跳转
 function toPaint(targetIndex, title) {

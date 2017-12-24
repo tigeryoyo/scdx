@@ -17,7 +17,7 @@ public interface StdfileService {
 
 	List<Stdfile> queryExtfilesByTimeRange(String topicId, Date startTime, Date endTime);
 	
-	Stdfile getLastedStdfile();
+	Stdfile getLastedStdfile(String topicId);
 
 	List<String[]> analyzeByStdfileId(String stdfileId);
 

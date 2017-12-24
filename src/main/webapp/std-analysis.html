@@ -54,6 +54,7 @@
                 截至时间：
                 <input type="text" style="width: 155px;display: inline-block" class="form-control" readonly id="endTime" onclick="showTime(this)"/>
                 </div>
+                <button style="margin-left:60px;" class="btn btn-primary" onClick="searchTimeChange()">搜索</button>
             </div>
         <div style="border-top:1px solid #999999;">
             <span style="width: 384px;height: 30px;display: inline-block;text-align: center;line-height: 30px;border-right:1px solid #999999;">最近上传文件：</span>
@@ -118,7 +119,7 @@
 <script type="text/javascript" src="js/jedate.js"></script>
 <script type="text/javascript">
 	queryLastedStdfile();
-	$("input[name=searchTime]").click(searchTimeChange);
+//	$("input[name=searchTime]").click(searchTimeChange);
 	//searchTimeChange();  
 </script>
 </html>
