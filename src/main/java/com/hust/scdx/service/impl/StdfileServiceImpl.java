@@ -142,11 +142,13 @@ public class StdfileServiceImpl implements StdfileService {
 		con.setEndTime(endTime);
 		return stdfileDao.queryStdfilesByCondtion(con);
 	}
+
 	/**
 	 * 查找最近一次上传的文件
+	 * 
 	 * @return
 	 */
-	public Stdfile getLastedStdfile(){
+	public Stdfile getLastedStdfile() {
 		return stdfileDao.queryLastedStdfile();
 	}
 
@@ -179,14 +181,13 @@ public class StdfileServiceImpl implements StdfileService {
 		String stdfileName = stdfileId;
 		if (stdfileId.equals("stdfile_cluster_result")) {
 			stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
-		}else{
+		} else {
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
-			System.out.println(stdfileId);
 			stdfileName = stdfile.getStdfileName();
 			stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
-		if(stdfileName.lastIndexOf(".")!= -1)
+		if (stdfileName.lastIndexOf(".") != -1)
 			stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
 		// 为统计日期-数量与来源-数量，合并内存中的两个Domain
@@ -203,7 +204,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	@Override
 	public Map<String, Object> getAbstractById(String topicId, String stdfileId, HttpServletRequest request) {
-		Map<String, Object> stdfileMap = getStdfileById(stdfileId,request);
+		Map<String, Object> stdfileMap = getStdfileById(stdfileId, request);
 		stdfileMap.put(StdfileMap.REPORT, generateReport(topicId, stdfileMap));
 		return stdfileMap;
 	}
@@ -262,10 +263,11 @@ public class StdfileServiceImpl implements StdfileService {
 	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex, HttpServletRequest request) {
 		try {
 			// 标准数据
-			String stdfilePath;
+			String stdfilePath = "";
+			String filename = "";
 			if (stdfileId.equals("stdfile_cluster_result")) {
 				stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
-			}else{
+			} else {
 				Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 				stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 			}
@@ -570,8 +572,10 @@ public class StdfileServiceImpl implements StdfileService {
 
 			// 舆情聚焦
 			wu.addParaText("舆情聚焦", titleEnv);
-			int len = content.size();
-			for (int i = 0; i < len; i++) {
+			int c = content.size();
+			int m = marked.size();
+			int size = c == m ? c : c - 1;
+			for (int i = 0; i < size - 1; i++) {
 				String[] row = content.get(i).get(marked.get(i));
 				wu.addParaText((i + 1) + ". " + row[indexOfTitle], mainBEnv);
 				wu.addParaText("（相关新闻" + content.get(i).size() + "条。）", mainSEnv);
@@ -656,7 +660,9 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay, int indexOfTitle, int indexOfTime) {
 		List<String[]> res = new ArrayList<String[]>();
-		int size = content.size();
+		int c = content.size();
+		int m = marked.size();
+		int size = c == m ? c : c - 1;
 		for (int i = 0; i < size; i++) {
 			List<String[]> cluster = content.get(i);
 			int count = 0;
