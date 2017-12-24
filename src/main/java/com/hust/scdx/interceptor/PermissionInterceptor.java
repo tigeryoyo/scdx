@@ -28,32 +28,33 @@ public class PermissionInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		try {
-			HttpSession session = request.getSession();
-			User user = (User) session.getAttribute(Constant.UESR);
-			if (user == null) {
-				logger.warn("用户未登陆，请重新登陆。");
-				response.sendRedirect("/");
-				return false;
-			}
-			String url = request.getRequestURI();
-			if (url.endsWith(".html")) {
-				return true;
-			}
-			HashSet<String> powers = (HashSet<String>) session.getAttribute(Constant.USERPOWER);
-			
-			if(powers==null){
-				return false;
-			}
-			
-			if (powers.contains(url)) {
-				return true;
-			}
-		} catch (Exception e) {
-			response.sendRedirect("/error.html");
-			logger.error("permissionInterceptor 错误。 \t" + e.toString());
-		}
-		return false;
+		return true;
+//		try {
+//			HttpSession session = request.getSession();
+//			User user = (User) session.getAttribute(Constant.UESR);
+//			if (user == null) {
+//				logger.warn("用户未登陆，请重新登陆。");
+//				response.sendRedirect("/");
+//				return false;
+//			}
+//			String url = request.getRequestURI();
+//			if (url.endsWith(".html")) {
+//				return true;
+//			}
+//			HashSet<String> powers = (HashSet<String>) session.getAttribute(Constant.USERPOWER);
+//			
+//			if(powers==null){
+//				return false;
+//			}
+//			
+//			if (powers.contains(url)) {
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			response.sendRedirect("/error.html");
+//			logger.error("permissionInterceptor 错误。 \t" + e.toString());
+//		}
+//		return false;
 	}
 
 	@Override
