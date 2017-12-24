@@ -169,7 +169,7 @@ public class StdfileServiceImpl implements StdfileService {
 	public List<String[]> analyzeByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
 		// 把聚类的结果变成空格区分的stdfile文件。
 		List<String[]> content = FileUtil.readExtfiles(getFilespathByTimeRange(startTime, endTime, userService.selectCurrentUser(request), topicId));
-		return FileUtil.getStdfileDisplaylist2(mining(topicId, content, request));
+		return FileUtil.getStdfileDisplaylist2(mining(topicId, content, startTime, endTime, request));
 	}
 
 	/**
@@ -301,7 +301,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 * @param user
 	 * @return
 	 */
-	private List<String[]> mining(String topicId, List<String[]> content, HttpServletRequest request) {
+	private List<String[]> mining(String topicId, List<String[]> content, Date startTime, Date endTime, HttpServletRequest request) {
 		if (content == null) {
 			logger.info("content内容为空。");
 			return null;
@@ -357,6 +357,7 @@ public class StdfileServiceImpl implements StdfileService {
 		stdfile.setStdfileName("stdfile_cluster_result");
 		stdfile.setLineNumber(res.size());
 		stdfile.setSize(0);
+		stdfile.setDatatime(TimeUtil.DateToStr(startTime).substring(0, 10) + ";" + TimeUtil.DateToStr(endTime).substring(0, 10));
 		stdfile.setTopicId(topicId);
 		stdfile.setStdfileId("stdfile_cluster_result");
 		stdfileDao.insertTop(stdfile, res, user.getUserName());
