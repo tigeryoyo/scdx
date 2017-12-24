@@ -72,10 +72,19 @@ $(function() {
 						alert("文件「 " + filename + " 」属行行不符合规定。");
 					}
 				},
-				error : function() {
-					//stop();
-					alert("文件预览失败！");
-				},
+				error: function (jqXHR, textStatus, errorThrown) {
+		            var status = jqXHR.status;
+		            if(status == 0){
+		            	alert("网络连接错误！");
+		            }else if(status == 200){
+		            	alert("您没有权限使用该资源...");
+		            }else if(status == 500){
+		            	alert("文件预览失败！");
+		            }
+		            else{
+		            	alert(textStatus);
+		            }
+		        },
 				complete:function(){
 					stop();
 				}
@@ -112,16 +121,31 @@ function queryLastedStdfile() {
 				$("#fileUpTime").html(new Date(file.uploadTime.time).format('yyyy-MM-dd hh:mm:ss'));
 				var str = file.datatime.split(";");
 				console.log(str);
-				$("#dataStartTime").html(str[0]);
-				$("#dataEndTime").html(str[str.length-2]);
+				if(str.length>2){
+					$("#dataStartTime").html(str[str.length-2]);
+					$("#dataEndTime").html(str[0]);
+				}else{
+					$("#dataStartTime").html(str[0]);
+					$("#dataEndTime").html(str[0]);
+				}
 				
 			} else {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("查询最近一次文件的上传记录失败！");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else if(status == 500){
+            	alert("查询最近一次上传的文件失败！");
+            }
+            else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -174,9 +198,16 @@ function queryStdDataByTimeRange(timeRangeType,startTime,endTime){
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert(msg.result);
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -214,9 +245,18 @@ function uploadStd() {
 				alert("aa"+msg.result);
 			}
 		},
-		error : function() {
-			alert("上传失败!");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else if(status == 500){
+            	alert("文件上传失败！");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete: function(){
 			stop();
 		},
@@ -333,7 +373,7 @@ function searchTimeChange(){
 }
 
 function timeChange(){
-	if(index = $("input[name='searchTime']:checked").val() == '3')
+	if((index = $("input[name='searchTime']:checked").val() == '3')&&($("#startTime").val()!="")&&($("#endTime").val()!=""))
 		searchTimeChange();
 }
 

@@ -26,9 +26,16 @@ function createTopic() {
 				alert("创建专题失败。");
 			}
 		},
-		error : function() {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}

@@ -62,9 +62,19 @@ $(function() {
 							alert("文件「 " + filename+" 」属行行不符合规定。");
 						}
 					},
-					error : function() {
-						alert("文件预览失败！");
-					},
+					error: function (jqXHR, textStatus, errorThrown) {
+			            var status = jqXHR.status;
+			            if(status == 0){
+			            	alert("网络连接错误！");
+			            }else if(status == 200){
+			            	alert("您没有权限使用该资源...");
+			            }else if(status == 500){
+			            	alert("文件预览失败！");
+			            }
+			            else{
+			            	alert(textStatus);
+			            }
+			        },
 					complete:function(){
 						stop();
 					}

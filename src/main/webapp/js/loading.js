@@ -34,33 +34,33 @@
 			var ch = $(content).outerHeight();
 			var cw = $(content).outerWidth();
 			if ($(target)[0].tagName == "HTML") {
-				ch = Math.max($(target).height(), $(window).height());
-				cw = Math.max($(target).width(), $(window).width());
+			//	ch = Math.max($(target).height(), $(window).height());
+			//	cw = Math.max($(target).width(), $(window).width());
 			}
-			loading.height(ch).width(cw);
-			loading.find('div').height(ch).width(cw);
+			//loading.height(ch).width(cw);
+			//loading.find('div').height(ch).width(cw);
 			if (ch < 100) {
-				loading.find('i').height(ch).width(ch);
+			//	loading.find('i').height(ch).width(ch);
 			}
 			var offset = $(content).offset();
 			loading.css({
-				top : offset.top,
-				left : offset.left
+			//	top : offset.top,
+			//	left : offset.left
 			});
 			var icon = loading.find('i');
 			var h = ch, w = cw, top = 0, left = 0;
 			if ($(target)[0].tagName == "HTML") {
-				h = $(window).height();
-				w = $(window).width();
-				top = (h - icon.height()) / 2 + $(window).scrollTop();
-				left = (w - icon.width()) / 2 + $(window).scrollLeft();
+			//	h = $(window).height();
+			//	w = $(window).width();
+			//	top = (h - icon.height()) / 2 + $(window).scrollTop();
+			//	left = (w - icon.width()) / 2 + $(window).scrollLeft();
 			} else {
-				top = (h - icon.height()) / 2;
-				left = (w - icon.width()) / 2;
+			//	top = (h - icon.height()) / 2;
+			//	left = (w - icon.width()) / 2;
 			}
 			icon.css({
-				top : top,
-				left : left
+			//	top : top,
+			//	left : left
 			})
 		},
 		init : function(settings) {

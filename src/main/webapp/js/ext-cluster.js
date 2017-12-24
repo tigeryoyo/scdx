@@ -63,10 +63,16 @@ function queryExtfilesByTimeRange(timeRangeType,startTime,endTime) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		//	 stop();
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -116,9 +122,16 @@ function queryResultByTimeRange(timeRangeType,startTime,endTime) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -195,9 +208,16 @@ function getDisplayResultById() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -307,10 +327,16 @@ function miningByTimeRange() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限使用该资源...");
-			stop();
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete: function(){
 			stop();
 		},
@@ -343,9 +369,16 @@ function resetResultById() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -389,9 +422,16 @@ function combineResultItemsByIndices() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -435,9 +475,16 @@ function deleteResultItemsByIndices() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -480,9 +527,16 @@ function deleteClusterItemsByIndices() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}

@@ -79,8 +79,15 @@ function websiteInforShow(page) {
                 $('#domain_content').html("");
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -108,8 +115,15 @@ function initShowPage(currenPage) {
                 //              console.log(msg.result);
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -122,6 +136,7 @@ function initSearchPage(currenPage) {
     if ("undefined" == typeof(currenPage) || null == currenPage) {
         currenPage = 1;
     }
+    console.log(typeof($("#web_url").val()));
     var obj2 = $("#web_name").val();
     var obj3 = $("#web_level").val();
     var obj4 = $("#web_weight").val();
@@ -131,7 +146,7 @@ function initSearchPage(currenPage) {
         data: {
             url: $("#web_url").val(),
             name: obj2,
-            rank: obj3,
+            type: obj3,
             weight: obj4
         },
         dataType: "json",
@@ -147,8 +162,15 @@ function initSearchPage(currenPage) {
                 alert(msg.result);
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -158,7 +180,6 @@ function initSearchPage(currenPage) {
 
 // 信息搜索
 function websiteInforSearch(page) {
-    search_click = true;
     // var obj1 = $("#web_url").val();
     var obj2 = $("#web_name").val();
     var obj3 = $("#web_level").val();
@@ -169,8 +190,7 @@ function websiteInforSearch(page) {
         data: {
             url: $("#web_url").val(),
             name: obj2,
-            // level:obj3,
-            rank: obj3,
+            type: obj3,
             weight: obj4,
             start: (parseInt(10 * page - 10)),
             limit: 10
@@ -245,8 +265,15 @@ function websiteInforSearch(page) {
                 $('#domain_content').html("");
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -318,8 +345,15 @@ function changeOneStatus(uuid,url,status){
 	            	initShowPage(1);
 	            }
 	        },
-	        error: function () {
-	        	 alert("您没有权限使用该资源...");
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
 	        },
 	        complete:function(){
 				stop();
@@ -361,8 +395,15 @@ function changeTwoStatus(uuid,url,status){
             	initShowPage(1)
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -391,8 +432,15 @@ function delDomainOne(e) {
             }else
                 alert(msg.result);
         },
-        error: function () {
-        	 alert("您没有权限删除一级域名。");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -420,8 +468,15 @@ function delDomainTwo(e) {
             }else
                 alert(msg.result);
         },
-        error: function () {
-        	 alert("您没有权限删除二级域名。");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();

@@ -42,9 +42,16 @@ function addStopword() {
 			}
 		//	stop();
 		},
-		error : function() {
-			 alert("您没有权限添加停用词。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -126,10 +133,19 @@ $(function() {
 							alert(msg.result);
 						}
 					},
-					error : function() {
-						alert("预览失败");
-						//stop();
-					},
+					error: function (jqXHR, textStatus, errorThrown) {
+			            var status = jqXHR.status;
+			            if(status == 0){
+			            	alert("网络连接错误！");
+			            }else if(status == 200){
+			            	alert("您没有权限使用该资源...");
+			            }else if(status == 500){
+			            	alert("预览失败！");
+			            }
+			            else{
+			            	alert(textStatus);
+			            }
+			        },
 					complete: function(){
 						stop();
 					}

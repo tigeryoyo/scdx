@@ -27,7 +27,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.StdfileMap;
+import com.hust.scdx.model.Domain;
 import com.sun.tools.doclint.HtmlTag.Attr;
 
 public class FileUtil {
@@ -145,7 +147,7 @@ public class FileUtil {
 		// return content;
 
 		// 调整属性顺序消耗比较多的运行时间
-		return adjustPropertyLine(globalAttrs, content);
+		return fillContentFromDomain(adjustPropertyLine(globalAttrs, content));
 	}
 
 	/**
@@ -363,6 +365,99 @@ public class FileUtil {
 		res.add(0, tmp);
 		return res;
 	}
+	
+	private static List<String[]> fillContentFromDomain(List<String[]> content){
+		List<String[]> res = new ArrayList<String[]>();
+		String[] attrs = content.remove(0);
+		int urlIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.URL_PATTERN);
+		int nameIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
+		int columnIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.COLUMN_PATTERN);
+		int typeIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.TYPE_PATTERN);
+		int rankIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
+		int incidenceIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.INCIDENCE_PATTERN);
+		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
+		for (String[] strs : content) {
+			String url = UrlUtil.getUrl(strs[urlIndex]);
+			String tUrl = UrlUtil.getDomainTwo(url);
+			if(tUrl == null){
+				//如果二级域名不存在，则url为一级域名
+				if(Constant.markedDomain.containsKey(url)){
+					//如果该一级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
+					Domain domain = Constant.markedDomain.get(url);
+					strs[nameIndex] = domain.getName();
+					strs[columnIndex] = domain.getColumn();
+					strs[typeIndex] = domain.getType();
+					strs[rankIndex] = domain.getRank();
+					strs[incidenceIndex] = domain.getIncidence();
+					strs[weightIndex] = domain.getWeight()+"";
+				}else if(Constant.unmarkedDomain.containsKey(url)){
+					//若不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
+						Domain domain = Constant.unmarkedDomain.get(url);
+						if(StringUtils.isBlank(strs[nameIndex])){
+							strs[nameIndex] = domain.getName();
+						}
+						if(StringUtils.isBlank(strs[columnIndex])){
+							strs[columnIndex] = domain.getColumn();
+						}
+						if(StringUtils.isBlank(strs[typeIndex])){
+							strs[typeIndex] = domain.getType();
+						}
+						if(StringUtils.isBlank(strs[rankIndex])){
+							strs[rankIndex] = domain.getRank();
+						}
+						if(StringUtils.isBlank(strs[incidenceIndex])){
+							strs[incidenceIndex] = domain.getIncidence();
+						}
+						if(StringUtils.isBlank(strs[weightIndex])){
+							strs[weightIndex] = domain.getWeight()+"";
+					}
+				}
+			}else{
+				//tUrl不为null则，tUrl为二级域名，url为其一级域名
+				if(Constant.markedDomain.containsKey(tUrl)){
+					//如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
+					Domain domain = Constant.markedDomain.get(tUrl);
+					strs[nameIndex] = domain.getName();
+					strs[columnIndex] = domain.getColumn();
+					strs[typeIndex] = domain.getType();
+					strs[rankIndex] = domain.getRank();
+					strs[incidenceIndex] = domain.getIncidence();
+					strs[weightIndex] = domain.getWeight()+"";
+				}else if(Constant.markedDomain.containsKey(url)){
+					//如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
+					Domain domain = Constant.markedDomain.get(url);
+					strs[nameIndex] = domain.getName();
+					strs[rankIndex] = domain.getRank();
+					strs[incidenceIndex] = domain.getIncidence();
+					strs[weightIndex] = domain.getWeight()+"";
+				}else if(Constant.unmarkedDomain.containsKey(tUrl)){
+					//若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
+					Domain domain = Constant.unmarkedDomain.get(tUrl);
+					if(StringUtils.isBlank(strs[nameIndex])){
+						strs[nameIndex] = domain.getName();
+					}
+					if(StringUtils.isBlank(strs[columnIndex])){
+						strs[columnIndex] = domain.getColumn();
+					}
+					if(StringUtils.isBlank(strs[typeIndex])){
+						strs[typeIndex] = domain.getType();
+					}
+					if(StringUtils.isBlank(strs[rankIndex])){
+						strs[rankIndex] = domain.getRank();
+					}
+					if(StringUtils.isBlank(strs[incidenceIndex])){
+						strs[incidenceIndex] = domain.getIncidence();
+					}
+					if(StringUtils.isBlank(strs[weightIndex])){
+						strs[weightIndex] = domain.getWeight()+"";
+					}
+				}
+			}
+			res.add(strs);
+		}
+		res.add(0, attrs);
+		return res;
+	}
 
 	/**
 	 * 从文件from拷贝至to,如果存在则覆盖。
@@ -547,6 +642,7 @@ public class FileUtil {
 		int indexOfTime = AttrUtil.findIndexOfTime(row);
 		int size = list.size();
 		int i = 1;
+		List<String[]> res = new ArrayList<String[]>();
 		while (i++ < size) {
 			String title = "", url = "";
 			int amount = 0;
@@ -560,10 +656,10 @@ public class FileUtil {
 				}
 			}
 			if (amount != 0) {
-				list.add(new String[] { title, url, latestTime, String.valueOf(amount) });
+				res.add(new String[] { title, url, latestTime, String.valueOf(amount) });
 			}
 		}
-		return list;
+		return res;
 	}
 
 	/**

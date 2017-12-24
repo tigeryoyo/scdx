@@ -207,7 +207,7 @@ public class DomainServiceImpl implements DomainService {
 						}
 					}
 					if (weightFlag) {
-						if (StringUtils.isBlank(string[weightIndex])) {
+						if (StringUtils.isBlank(string[weightIndex]) || string[weightIndex].equals("0")) {
 							// 从权重表中根据类型的权重赋予初始值
 							if (!StringUtils.isBlank(d.getType())) {
 								List<Weight> weights = weightDao.selectWeightByName(d.getType());
@@ -606,8 +606,18 @@ public class DomainServiceImpl implements DomainService {
 		if (StringUtils.isBlank(incidence))
 			incidence = "";
 		String weight = baseInfo[DomainExcelAttr.WEIGHT_INDEX].trim();
-		if (StringUtils.isBlank(weight) || !StringUtils.isNumeric(weight))
+		//如果weight为0或者为空，则从权重表中学习初始权重
+		if (StringUtils.isBlank(weight) || !StringUtils.isNumeric(weight) || weight.equals("0")){
+			/*if (!StringUtils.isBlank(type)) {
+				List<Weight> weights = weightDao.selectWeightByName(type);
+				if (weights.size() > 0) {
+					weight = weights.get(0).getWeight()+"";
+				} else {
+					weight = "0";
+				}
+			}*/
 			weight = "0";
+		}
 		String maintenance_status = baseInfo[DomainExcelAttr.MAINTENANCE_STATUS_INDEX].trim();
 		if (StringUtils.isBlank(maintenance_status) || !StringUtils.isNumeric(maintenance_status))
 			maintenance_status = "0";

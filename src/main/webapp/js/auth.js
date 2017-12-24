@@ -61,9 +61,16 @@ function selectUserInfor(page) {
 					alert(msg.result);
 				}
 			},
-			error : function(msg) {
-				alert("您没有权限访问该资源...");
-			},
+			error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        },
 			complete:function(){
 				stop();
 			}
@@ -91,9 +98,16 @@ function initUserShow(currenPage) {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -124,9 +138,16 @@ function initUserSearch(currenPage) {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -162,9 +183,16 @@ function accDel(userId) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限删除该用户。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -206,9 +234,16 @@ function selectRole() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 	});
 	// 下标0存的是当前用户的角色信息
 	return res;
@@ -271,9 +306,16 @@ function submitAccAdd() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限添加用户。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 							stop();
 						}
@@ -333,9 +375,16 @@ function submitAccChg() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限修改用户信息。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -411,9 +460,16 @@ function selectPowerByRoleId(roleId) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限编辑该用户。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 	});
 	return res;
 }
@@ -439,9 +495,16 @@ function initPowerShow(currenPage) {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -472,9 +535,16 @@ function initPowerSearch(currenPage) {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -531,9 +601,16 @@ function selectPowerInfor(page) {
 					alert(msg.result);
 				}
 			},
-			error : function(msg) {
-				alert("您没有权限访问该资源...");
-			},
+			error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        },
 			complete:function(){
 				stop();
 			}
@@ -565,9 +642,16 @@ function powerDel(powerId) {
 		success : function(msg) {
 			alert("删除该权限成功。");
 		},
-		error : function(msg) {
-			alert("您没有权限删除该权限。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		
 	});
 	jumpto('auth-power');
@@ -632,9 +716,16 @@ function submitPowerAdd() {
 		success : function(msg) {
 			alert(msg.result);
 		},
-		error : function(msg) {
-			alert("您没有权限添加权限。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 	});
 	jumpto('auth-power');
 }
@@ -673,9 +764,16 @@ function submitRoleChg() {
 		success : function(msg) {
 			alert(msg.result);
 		},
-		error : function(msg) {
-			alert("您没有权限添加权限。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 	})
 	showRolePower();
 }
@@ -715,9 +813,16 @@ function submitPowerChg(){
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限修改权限信息。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
