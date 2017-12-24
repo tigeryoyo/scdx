@@ -212,9 +212,9 @@ public class StdfileController {
 	@RequestMapping("/queryStdfile")
 	public Object queryStdfile(@RequestParam(value = "topicId", required = true) String topicId,
 			HttpServletRequest request) {
-		Stdfile file =  stdfileService.getLastedStdfile();
+		Stdfile file =  stdfileService.getLastedStdfile(topicId);
 		if(file == null){
-			return ResultUtil.unknowError();
+			return ResultUtil.errorWithMsg("该专题下还没有任何文件上传！");
 		}
 		return ResultUtil.success(file);
 	}
@@ -254,7 +254,6 @@ public class StdfileController {
 			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
 			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
 			HttpServletRequest request) {
-		System.out.println("-------------------------------------------");
 		switch (timeRangeType) {
 		case "1":
 			endTime = new Date();
@@ -269,9 +268,8 @@ public class StdfileController {
 		}
 		// title、url、time、amount
 		List<String[]> list = stdfileService.analyzeByTimeRange(topicId, startTime, endTime, request);
-		System.out.println(list.size());
 		if (list == null || list.isEmpty()) {
-			return ResultUtil.errorWithMsg("分析标准数据出错。");
+			return ResultUtil.errorWithMsg("该时间段数据为空！");
 		}
 		return ResultUtil.success(list);
 	}

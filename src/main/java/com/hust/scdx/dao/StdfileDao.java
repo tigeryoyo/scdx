@@ -162,9 +162,10 @@ public class StdfileDao {
 		return stdfileMapper.selectByExample(example);
 	}
 
-	public Stdfile queryLastedStdfile() {
+	public Stdfile queryLastedStdfile(String topicId) {
 		StdfileExample example = new StdfileExample();
 		Criteria criteria = example.createCriteria();
+		criteria.andTopicIdEqualTo(topicId);
 		example.setOrderByClause("upload_time desc");
 		example.setLimit(1);
 		List<Stdfile> files = stdfileMapper.selectByExample(example);
