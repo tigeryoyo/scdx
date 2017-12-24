@@ -69,7 +69,7 @@ public class AttrUtil {
 
 	public static boolean isImp(String attr) {
 		return Pattern.matches(TITLE_PATTERN + "|" + URL_PATTERN + "|" + TIME_PATTERN + "|" + WEBNAME_PATTERN + "|" + TYPE_PATTERN + "|"
-				+ COLUMN_PATTERN + "|" + RANK_PATTERN + "|" + POSTING, attr);
+				+ COLUMN_PATTERN + "|" + RANK_PATTERN + "|" + POSTING + "|" + RANK_PATTERN + "|" + WEIGHT_PATTERN + "|" + INCIDENCE_PATTERN, attr);
 	}
 
 	public static int findIndexOfSth(String[] attrs, String sth) {

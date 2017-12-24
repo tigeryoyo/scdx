@@ -223,6 +223,30 @@ public class FileUtil {
 						indexs[i] = j;
 					}
 					globalAttrs.set(indexs[i], "发帖人");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.RANK_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.RANK_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "媒体级别");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.INCIDENCE_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.INCIDENCE_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "影响范围");
+				} else if (AttrUtil.isSth(attrs[i], AttrUtil.WEIGHT_PATTERN)) {
+					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.WEIGHT_PATTERN);
+					if (j == -1) {
+						indexs[i] = globalAttrs.size() - 1;
+					} else {
+						indexs[i] = j;
+					}
+					globalAttrs.set(indexs[i], "权重");
 				} else {
 					globalAttrs.add(attrs[i]);
 					indexs[i] = globalAttrs.size() - 1;
@@ -240,7 +264,7 @@ public class FileUtil {
 	 */
 	private static List<String[]> adjustPropertyLine(List<String> attrs, List<String[]> content) {
 		int attrSize = attrs.size();
-		int[] orderAttrs = new int[attrSize];
+		int[] orderAttrs = new int[attrSize + 3];
 		List<String> newAttrs = new ArrayList<String>();
 		int order = 0;
 		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
@@ -285,6 +309,33 @@ public class FileUtil {
 			newAttrs.add(attrs.get(index));
 		}
 
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add(AttrUtil.RANK_PATTERN);
+		}
+
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.INCIDENCE_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add(AttrUtil.INCIDENCE_PATTERN);
+		}
+
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
+		}
+
 		for (int i = 0; i < attrSize; i++) {
 			if (!AttrUtil.isImp(attrs.get(i))) {
 				orderAttrs[order++] = i;
@@ -299,7 +350,7 @@ public class FileUtil {
 			String[] cline = content.get(i);
 			String[] line = new String[attrSize];
 			for (int j = 0; j < line.length; j++) {
-				if (orderAttrs[j] < cline.length) {
+				if (orderAttrs[j] != -1 && orderAttrs[j] < cline.length) {
 					line[j] = cline[orderAttrs[j]];
 				} else {
 					line[j] = "";
