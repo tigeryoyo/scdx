@@ -167,11 +167,11 @@ public class StdfileServiceImpl implements StdfileService {
 	 * 根据stdfileId得到标准文件
 	 */
 	@Override
-	public Map<String, Object> getStdfileById(String stdfileId) {
+	public Map<String, Object> getStdfileById(String stdfileId, HttpServletRequest request) {
 		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		if (stdfileId.equals("stdfile_cluster_result")) {
-			stdfilePath = DIRECTORY.STDFILE + stdfileId;
+			stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
 		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
 		String stdfileName = stdfile.getStdfileName();
@@ -190,8 +190,8 @@ public class StdfileServiceImpl implements StdfileService {
 	 * 根据topicId和stdfileId获取摘要
 	 */
 	@Override
-	public Map<String, Object> getAbstractById(String topicId, String stdfileId) {
-		Map<String, Object> stdfileMap = getStdfileById(stdfileId);
+	public Map<String, Object> getAbstractById(String topicId, String stdfileId, HttpServletRequest request) {
+		Map<String, Object> stdfileMap = getStdfileById(stdfileId,request);
 		stdfileMap.put(StdfileMap.REPORT, generateReport(topicId, stdfileMap));
 		return stdfileMap;
 	}
@@ -340,7 +340,7 @@ public class StdfileServiceImpl implements StdfileService {
 		stdfile.setSize(0);
 		stdfile.setTopicId(topicId);
 		stdfile.setStdfileId("stdfile_cluster_result");
-		stdfileDao.insertTop(stdfile, res);
+		stdfileDao.insertTop(stdfile, res, user.getUserName());
 
 		// 更新该条topic属性值
 		Topic topic = new Topic();

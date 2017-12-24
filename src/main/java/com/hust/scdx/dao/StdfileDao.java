@@ -120,15 +120,16 @@ public class StdfileDao {
 
 	/**
 	 * 将聚类后的数据作为标准文件插入至文件系统中，目录为 stdfile下的一级子目录
+	 * 
 	 * @param stdfile
 	 * @param res
 	 */
-	public void insertTop(Stdfile stdfile, List<String[]> res) {
-		FileUtil.write(DIRECTORY.STDFILE+stdfile.getStdfileId(), res);
+	public void insertTop(Stdfile stdfile, List<String[]> res, String userName) {
+		FileUtil.write(DIRECTORY.STDFILE + userName + "/" + stdfile.getStdfileId(), res);
 		stdfileMapper.deleteByPrimaryKey(stdfile.getStdfileId());
 		stdfileMapper.insert(stdfile);
 	}
-	
+
 	/**
 	 * 根据标准文件id查找对象
 	 * 
