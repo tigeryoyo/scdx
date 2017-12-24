@@ -99,7 +99,7 @@ public class StdfileController {
 	@RequestMapping(value = "/downloadStdfileByStdfileId", method = RequestMethod.POST)
 	public Object downloadStdfileByStdfileId(@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request,
 			HttpServletResponse response) {
-		Map<String, Object> map = stdfileService.getStdfileById(stdfileId);
+		Map<String, Object> map = stdfileService.getStdfileById(stdfileId, request);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}
@@ -134,7 +134,7 @@ public class StdfileController {
 	@RequestMapping(value = "/downloadAbstractByStdfileId", method = RequestMethod.POST)
 	public Object downloadAbstractByStdfileId(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "stdfileId", required = true) String stdfileId, HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> map = stdfileService.getAbstractById(topicId, stdfileId);
+		Map<String, Object> map = stdfileService.getAbstractById(topicId, stdfileId, request);
 		if (map == null || map.size() == 0) {
 			return ResultUtil.errorWithMsg("下载结果失败。");
 		}

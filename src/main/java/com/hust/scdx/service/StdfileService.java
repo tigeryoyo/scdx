@@ -19,12 +19,12 @@ public interface StdfileService {
 
 	List<String[]> analyzeByStdfileId(String stdfileId);
 
-	Map<String, Object> getStdfileById(String stdfileId);
+	Map<String, Object> getStdfileById(String stdfileId, HttpServletRequest request);
 	
-	Map<String, Object> getAbstractById(String topicId, String stdfileId);
-
 	Map<String, Object> statistic(String stdfileId, Integer interval,Integer targetIndex, HttpServletRequest request);
 
 	List<String[]> analyzeByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request);
+
+	Map<String, Object> getAbstractById(String topicId, String stdfileId, HttpServletRequest request);
 
 }
