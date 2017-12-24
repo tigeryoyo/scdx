@@ -112,9 +112,16 @@ function kmeans_conservation(){
 	        		alert(msg.result);
 	        	}
 	        },
-			error: function(){
-				alert("请求失败");
-			}
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        }
 	    	
 	    })
 }
@@ -142,9 +149,16 @@ function canopy_conservation() {
 	        		alert(msg.result);
 	        	}
 	        },
-			error: function(){
-				alert("请求失败");
-			}
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        }
 	    	
 	    })
 }
@@ -173,9 +187,16 @@ function dbscans_conservation() {
 	        		alert(msg.result);
 	        	}
 	        },
-			error: function(){
-				alert("请求失败");
-			}
+	        error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        }
 	    	
 	    })
 }
@@ -206,9 +227,17 @@ function kmeans_cluster(){
         complete : function(){
             stop();
         },
-        error: function(){
-            alert("请求失败!请检测k值是否为整数！");
-          //  stop();
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else if(status == 500){
+            	alert("请检查k值是否为整数！");
+            }else{
+            	alert(textStatus);
+            }
         }
     })
 }
@@ -241,9 +270,17 @@ function canopy_cluster(){
     //        console.log("all")
             stop();
         },
-        error: function(){
-            alert("请求失败！请确认阈值是否为纯小数！");
-        //    stop();
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else if(status == 500){
+            	alert("请检查阈值是否为纯小数！");
+            }else{
+            	alert(textStatus);
+            }
         }
     })
 }
@@ -275,9 +312,17 @@ function dbscan_cluster(){
         complete : function(){
             stop();
         },
-        error: function(){
-            alert("请求失败！请确认半径是否为纯小数，最小数量是否为整数！");
-         //   stop();
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else if(status == 500){
+            	alert("请确认半径是否为纯小数，最小数量是否为整数！");
+            }else{
+            	alert(textStatus);
+            }
         }
     })
 }
@@ -342,10 +387,18 @@ $(function() {
 							alert("文件「 " + filename+" 」属行行不符合规定。");
 						}
 					},
-					error : function() {
-					//	stop();
-						alert("文件预览失败！");
-					}
+					error: function (jqXHR, textStatus, errorThrown) {
+			            var status = jqXHR.status;
+			            if(status == 0){
+			            	alert("网络连接错误！");
+			            }else if(status == 200){
+			            	alert("您没有权限使用该资源...");
+			            }else if(status == 500){
+			            	alert("文件预览失败！");
+			            }else{
+			            	alert(textStatus);
+			            }
+			        }
 				});
 			} else {
 				alert("文件「 " + filename + " 」不是excel文件。");
@@ -393,10 +446,18 @@ function uploadAll() {
 				}
 				
 			},
-			error : function() {
-				alert("上传失败");
-			//	stop();
-			},
+			error: function (jqXHR, textStatus, errorThrown) {
+	            var status = jqXHR.status;
+	            if(status == 0){
+	            	alert("网络连接错误！");
+	            }else if(status == 200){
+	            	alert("您没有权限使用该资源...");
+	            }else if(status == 500){
+	            	alert("文件上传失败！");
+	            }else{
+	            	alert(textStatus);
+	            }
+	        },
 			complete : function(){
 	            stop();
 	        },

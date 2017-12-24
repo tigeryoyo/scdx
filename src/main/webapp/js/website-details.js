@@ -45,9 +45,16 @@ function domainOneInfoChange() {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete : function() {
 			stop();
 		}
@@ -84,9 +91,16 @@ function domainTwoInfoChange() {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete : function() {
 			stop();
 		}
@@ -116,9 +130,16 @@ function loadType() {
 				$("#new_type").append(content);
 			}
 		},
-		error : function() {
-			alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete : function() {
 			stop();
 		}

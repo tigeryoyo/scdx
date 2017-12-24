@@ -80,7 +80,6 @@ public class StdfileDao {
 		int size = list.size();
 		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
 		TreeMap<String, List<String[]>> map = new TreeMap<String, List<String[]>>();
-		String datatime = "";
 		for (int i = 1; i < size; i++) {
 			String[] line = list.get(i);
 			if (CommonUtil.isEmptyArray(line)) {
@@ -93,13 +92,14 @@ public class StdfileDao {
 			} else {
 				r = new ArrayList<String[]>();
 				r.add(line);
-				datatime += time + ";";
 			}
 			map.put(time, r);
 		}
-
+		String datatime = "";
 		for (Map.Entry<String, List<String[]>> entry : map.entrySet()) {
-			String dir = DIRECTORY.STDFILE + ConvertUtil.convertDateToStdPath(entry.getKey());
+			String timeKey = entry.getKey();
+			datatime += timeKey + ";";
+			String dir = DIRECTORY.STDFILE + ConvertUtil.convertDateToStdPath(timeKey);
 			if (!new File(dir).exists()) {
 				new File(dir).mkdirs();
 			}
@@ -161,14 +161,14 @@ public class StdfileDao {
 		example.setOrderByClause("upload_time desc");
 		return stdfileMapper.selectByExample(example);
 	}
-	
-	public Stdfile queryLastedStdfile(){
+
+	public Stdfile queryLastedStdfile() {
 		StdfileExample example = new StdfileExample();
 		Criteria criteria = example.createCriteria();
 		example.setOrderByClause("upload_time desc");
 		example.setLimit(1);
 		List<Stdfile> files = stdfileMapper.selectByExample(example);
-		if(files.size()!= 1){
+		if (files.size() != 1) {
 			return null;
 		}
 		return files.get(0);

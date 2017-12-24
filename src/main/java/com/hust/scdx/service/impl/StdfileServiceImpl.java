@@ -175,14 +175,19 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	@Override
 	public Map<String, Object> getStdfileById(String stdfileId, HttpServletRequest request) {
-		Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
-		String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+		String stdfilePath;
+		String stdfileName = stdfileId;
 		if (stdfileId.equals("stdfile_cluster_result")) {
 			stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
+		}else{
+			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
+			System.out.println(stdfileId);
+			stdfileName = stdfile.getStdfileName();
+			stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
-		String stdfileName = stdfile.getStdfileName();
-		stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
+		if(stdfileName.lastIndexOf(".")!= -1)
+			stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
 		// 为统计日期-数量与来源-数量，合并内存中的两个Domain
 		ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
@@ -257,8 +262,13 @@ public class StdfileServiceImpl implements StdfileService {
 	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex, HttpServletRequest request) {
 		try {
 			// 标准数据
-			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
-			String stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+			String stdfilePath;
+			if (stdfileId.equals("stdfile_cluster_result")) {
+				stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
+			}else{
+				Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
+				stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
+			}
 			List<String[]> cluster = FileUtil.getStdfileTargetCluster(stdfilePath, targetIndex);
 			if (cluster == null || cluster.isEmpty()) {
 				return null;
@@ -341,7 +351,7 @@ public class StdfileServiceImpl implements StdfileService {
 		// 将此次记录插入数据库stdfile表中、将res作为stdfile文件存入文件系统
 		Stdfile stdfile = new Stdfile();
 		stdfile.setCreator(user.getUserName());
-		stdfile.setUploadTime(new Date());
+		stdfile.setUploadTime(new Date(0));
 		stdfile.setStdfileName("stdfile_cluster_result");
 		stdfile.setLineNumber(res.size());
 		stdfile.setSize(0);

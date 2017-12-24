@@ -25,9 +25,16 @@ $(function() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert(msg.result);
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -79,9 +86,16 @@ function submitAccount() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限修改个人信息...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -122,9 +136,16 @@ function pwdChange() {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			alert("您没有权限修改密码...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}

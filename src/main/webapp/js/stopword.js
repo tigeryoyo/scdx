@@ -36,8 +36,15 @@ function stopwordInforShow(page){
                 $('.infor_tab02 tr:not(:first)').html("");
             }
         },
-        error: function(){
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -66,8 +73,15 @@ function initShowPage(currenPage){
                 alert(msg.result);
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -114,8 +128,15 @@ function stopwordInforSearch(page){
                 alert(msg.result);
             }
         },
-        error: function(){
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -145,8 +166,15 @@ function initSearchPage(currenPage){
                 alert(msg.result);
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -181,8 +209,15 @@ $(function(){
                         alert(msg.result);
                     }
                 } ,
-                error: function(){
-                	 alert("您没有权限删除停用词。");
+                error: function (jqXHR, textStatus, errorThrown) {
+                    var status = jqXHR.status;
+                    if(status == 0){
+                    	alert("网络连接错误！");
+                    }else if(status == 200){
+                    	alert("您没有权限使用该资源...");
+                    }else{
+                    	alert(textStatus);
+                    }
                 },
                 complete:function(){
 					stop();

@@ -26,9 +26,16 @@ function initShowPage(currentPage) {
 				alert(msg.result);
 			}
 		},
-		error : function() {
-			alert("您没有权限访问该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 							stop();
 						}
@@ -64,8 +71,15 @@ function initSearchPage(currenPage){
                 alert(msg.result);
             }
         },
-        error: function () {
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();
@@ -109,9 +123,16 @@ function allData(page) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限使用该资源...");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -145,9 +166,16 @@ function deleteTopic(topicId) {
 				alert(msg.result);
 			}
 		},
-		error : function(msg) {
-			 alert("您没有权限删除专题。");
-		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
 		complete:function(){
 			stop();
 		}
@@ -227,8 +255,15 @@ function searchData(page){
             }
 
         } ,
-        error:function(){
-        	 alert("您没有权限使用该资源...");
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert("网络连接错误！");
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
         },
         complete:function(){
 			stop();

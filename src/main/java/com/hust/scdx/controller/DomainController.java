@@ -204,7 +204,7 @@ public class DomainController {
 	@RequestMapping("/searchDomainOne")
 	public Object searchDomainOne(@RequestParam(value = "url", required = true) String url,
 			@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "rank", required = true) String rank,
+			@RequestParam(value = "type", required = true) String type,
 			@RequestParam(value = "weight", required = true) String weight,
 			@RequestParam(value = "start", required = true) int start,
 			@RequestParam(value = "limit", required = true) int limit, HttpServletRequest request) {
@@ -215,8 +215,8 @@ public class DomainController {
 		}
 		if (StringUtils.isNotBlank(name))
 			condition.setName(name);
-		if (StringUtils.isNotBlank(rank))
-			condition.setRank(rank);
+		if (StringUtils.isNotBlank(type))
+			condition.setType(type);
 		if (StringUtils.isNotBlank(weight))
 			condition.setWeight(Integer.parseInt(weight));
 		condition.setStart(start);
@@ -245,15 +245,15 @@ public class DomainController {
 	@RequestMapping("/searchDomainOneCount")
 	public Object searchDomainOneCount(@RequestParam(value = "url", required = true) String url,
 			@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "rank", required = true) String rank,
+			@RequestParam(value = "type", required = true) String type,
 			@RequestParam(value = "weight", required = true) String weight, HttpServletRequest request) {
 		DomainOneQueryCondition condition = new DomainOneQueryCondition();
 		if (StringUtils.isNotBlank(url))
 			condition.setUrl(url);
 		if (StringUtils.isNotBlank(name))
 			condition.setName(name);
-		if (StringUtils.isNotBlank(rank))
-			condition.setRank(rank);
+		if (StringUtils.isNotBlank(type))
+			condition.setType(type);
 		if (StringUtils.isNotBlank(weight))
 			condition.setWeight(Integer.parseInt(weight));
 		condition.setStart(0);

@@ -32,6 +32,7 @@ import com.hust.scdx.model.Stdfile;
 import com.hust.scdx.model.params.StdfileQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.StdfileService;
+import com.hust.scdx.service.UserService;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.ResultUtil;
 
@@ -53,6 +54,9 @@ public class StdfileController {
 	private StdfileService stdfileService;
 	@Autowired
 	private DomainService domainService;
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 上传标准数据文件
