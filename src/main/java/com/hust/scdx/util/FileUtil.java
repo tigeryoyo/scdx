@@ -547,11 +547,11 @@ public class FileUtil {
 		int indexOfTime = AttrUtil.findIndexOfTime(row);
 		int size = list.size();
 		int i = 1;
-		while (i < size) {
+		while (i++ < size) {
 			String title = "", url = "";
 			int amount = 0;
 			String latestTime = "9999-12-12 23:59:59";
-			while ((row = list.get(i)).length != 0) {
+			while ((row = list.get(i++)).length != 0) {
 				amount++;
 				if (latestTime.compareTo(row[indexOfTime]) > 0) {
 					latestTime = row[indexOfTime];
@@ -562,7 +562,6 @@ public class FileUtil {
 			if (amount != 0) {
 				list.add(new String[] { title, url, latestTime, String.valueOf(amount) });
 			}
-			i++;
 		}
 		return list;
 	}
