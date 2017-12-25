@@ -652,7 +652,7 @@ public class FileUtil {
 		int size = list.size();
 		int i = 1;
 		List<String[]> res = new ArrayList<String[]>();
-		while (i++ < size) {
+		while (i < size) {
 			String title = "", url = "";
 			int amount = 0;
 			String latestTime = "9999-12-12 23:59:59";
