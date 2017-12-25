@@ -205,6 +205,8 @@ public class DomainServiceImpl implements DomainService {
 						} else {
 							d.setRank(string[rankIndex]);
 						}
+					}else{
+						d.setRank("无");
 					}
 					if (weightFlag) {
 						if (StringUtils.isBlank(string[weightIndex]) || string[weightIndex].equals("0")) {
@@ -221,6 +223,13 @@ public class DomainServiceImpl implements DomainService {
 							}
 						} else {
 							d.setRank(string[weightIndex]);
+						}
+					}else if(!StringUtils.isBlank(d.getType())) {
+						List<Weight> weights = weightDao.selectWeightByName(d.getType());
+						if (weights.size() > 0) {
+							d.setWeight(weights.get(0).getWeight());
+						} else {
+							d.setWeight(0);
 						}
 					}
 					if (incidenceFlag) {
@@ -802,7 +811,7 @@ public class DomainServiceImpl implements DomainService {
 					}
 					Constant.unmarkedDomain.put(two.getUrl(), old);
 				}else{
-					Constant.markedDomain.put(two.getUrl(), domain);
+					Constant.unmarkedDomain.put(two.getUrl(), domain);
 				}
 			}
 		}
@@ -920,7 +929,8 @@ public class DomainServiceImpl implements DomainService {
 					}
 					Constant.unmarkedDomain.put(one.getUrl(), old);
 				}else{
-					Constant.markedDomain.put(one.getUrl(), domain);
+					//未知域名
+					Constant.unmarkedDomain.put(one.getUrl(), domain);
 				}
 			}
 		}
