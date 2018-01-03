@@ -261,7 +261,7 @@ function clearWeight() {
 }
 
 function weightInforChange() {
-	var weight = getCookie("weightInfor");
+	var weight = JSON.parse(getCookie("weightInfor"));
 	$.ajax({
 		type : "post",
 		url : "/weight/updateWeight",
