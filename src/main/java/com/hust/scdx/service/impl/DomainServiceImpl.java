@@ -609,7 +609,7 @@ public class DomainServiceImpl implements DomainService {
 		if (StringUtils.isBlank(type))
 			type = null;
 		String rank = baseInfo[DomainExcelAttr.RANK_INDEX].trim();
-		if (StringUtils.isBlank(rank))
+		if (StringUtils.isBlank(rank)|| rank.equals("null"))
 			rank = "无";
 		String incidence = baseInfo[DomainExcelAttr.INCIDENCE_INDEX].trim();
 		if (StringUtils.isBlank(incidence))
@@ -755,7 +755,9 @@ public class DomainServiceImpl implements DomainService {
 					}					
 					Constant.markedDomain.put(two.getUrl(), old);
 				}else{
-					Constant.markedDomain.put(two.getUrl(), domain);
+					Domain d = new Domain();
+					d.setDomainFormTwo(domainTwoDao.getDomainTwoByUrl(two.getUrl()));
+					Constant.markedDomain.put(two.getUrl(), d);
 				}
 			}
 		} else {//该域名不是已维护的域名
@@ -811,7 +813,9 @@ public class DomainServiceImpl implements DomainService {
 					}
 					Constant.unmarkedDomain.put(two.getUrl(), old);
 				}else{
-					Constant.unmarkedDomain.put(two.getUrl(), domain);
+					Domain d = new Domain();
+					d.setDomainFormTwo(domainTwoDao.getDomainTwoByUrl(two.getUrl()));
+					Constant.unmarkedDomain.put(two.getUrl(), d);
 				}
 			}
 		}
@@ -873,7 +877,9 @@ public class DomainServiceImpl implements DomainService {
 					}
 					Constant.markedDomain.put(one.getUrl(), old);
 				}else{
-					Constant.markedDomain.put(one.getUrl(), domain);
+					Domain d = new Domain();
+					d.setDomainFormOne(domainOneDao.getDomainOneByUrl(one.getUrl()));
+					Constant.markedDomain.put(one.getUrl(), d);
 				}
 			}
 		} else {//该域名不是已维护的域名
@@ -930,7 +936,9 @@ public class DomainServiceImpl implements DomainService {
 					Constant.unmarkedDomain.put(one.getUrl(), old);
 				}else{
 					//未知域名
-					Constant.unmarkedDomain.put(one.getUrl(), domain);
+					Domain d = new Domain();
+					d.setDomainFormOne(domainOneDao.getDomainOneByUrl(one.getUrl()));
+					Constant.unmarkedDomain.put(one.getUrl(), d);
 				}
 			}
 		}

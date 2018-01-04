@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public boolean updateUser(User user, String userRoleName) {
-		if (0 == userDao.updateByPrimaryKey(user)) {
+		if (0 == userDao.updateByPrimaryKeySelective(user)) {
 			logger.info("更改用户信息失败。");
 			return false;
 		}

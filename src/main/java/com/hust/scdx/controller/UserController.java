@@ -119,6 +119,32 @@ public class UserController {
 		}
 		return ResultUtil.success("修改个人信息成功。");
 	}
+	
+	
+	/**
+	 * 管理员更改用户基本信息
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateUserByAdmin")
+	public Object updateUserByAdmin(
+			@RequestParam(value = "userId", required = true) Integer userId,
+			@RequestParam(value = "trueName", required = true) String trueName,
+			@RequestParam(value = "telphone", required = true) String telphone,
+			@RequestParam(value = "email", required = true) String email,
+			@RequestParam(value = "userRoleName", required = false) String userRoleName, HttpServletRequest request) {
+		User user = new User();
+		user.setUserId(userId);
+		user.setTrueName(trueName);
+		user.setTelphone(telphone);
+		user.setEmail(email);
+		if (!userService.updateUser(user, userRoleName)) {
+			return ResultUtil.errorWithMsg("修改用户信息失败。");
+		}
+		return ResultUtil.success("修改用户信息成功。");
+	}
 
 	/**
 	 * 更改用户密码

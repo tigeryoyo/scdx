@@ -64,7 +64,7 @@ function selectUserInfor(page) {
 			error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else{
@@ -101,7 +101,7 @@ function initUserShow(currenPage) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -141,7 +141,7 @@ function initUserSearch(currenPage) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -186,7 +186,7 @@ function accDel(userId) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -237,7 +237,7 @@ function selectRole() {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -309,7 +309,7 @@ function submitAccAdd() {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -353,12 +353,13 @@ function submitAccChg() {
 		alert('角色为空，请重新选择。');
 		return;
 	}
+	var acc_selectedUser = JSON.parse(getCookie("acc_selectedUser"));
 	$.ajax({
 		type : "post",
-		url : "/user/updateUser",
+		url : "/user/updateUserByAdmin",
 		data : {
+			userId : parseInt(acc_selectedUser.userId),
 			trueName : $("#chg_trueName").val(),
-			password : $("#chg_userName").val(),
 			telphone : $("#chg_tel").val(),
 			email : $("#chg_email").val(),
 			userRoleName : $("#chg_userRoleName option:selected").val(),
@@ -378,7 +379,7 @@ function submitAccChg() {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -463,7 +464,7 @@ function selectPowerByRoleId(roleId) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -498,7 +499,7 @@ function initPowerShow(currenPage) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -520,8 +521,8 @@ function initPowerSearch(currenPage) {
 		type : "post",
 		url : "/power/selectPowerCount",
 		dataType : "json",
-		date : {
-			powerName : $("#power_search").val()
+		data : {
+			powerName : $("#power_search").val(),
 		},
 		beforeSend : function() {
 			begin();
@@ -538,7 +539,7 @@ function initPowerSearch(currenPage) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -604,7 +605,7 @@ function selectPowerInfor(page) {
 			error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else{
@@ -645,7 +646,7 @@ function powerDel(powerId) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -719,7 +720,7 @@ function submitPowerAdd() {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -767,7 +768,7 @@ function submitRoleChg() {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -816,7 +817,7 @@ function submitPowerChg(){
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{

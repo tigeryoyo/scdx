@@ -387,9 +387,6 @@ public class FileUtil {
 		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
-			if(url.equals("sc.cnr.cn")){
-				System.out.println(url);
-			}
 			String tUrl = UrlUtil.getDomainTwo(url);
 			if (tUrl == null) {
 				// 如果二级域名不存在，则url为一级域名
@@ -420,7 +417,6 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[incidenceIndex])) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
-					System.out.println(domain.getWeight());
 					if (StringUtils.isBlank(strs[weightIndex])) {
 						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = domain.getWeight();
@@ -431,7 +427,6 @@ public class FileUtil {
 							}
 						}else{
 							strs[weightIndex] = "0";
-							System.out.println(strs[weightIndex]+";"+domain.getWeight());
 						}
 					}
 				}
@@ -471,7 +466,6 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[incidenceIndex])) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
-					System.out.println(domain.getWeight());
 					if (StringUtils.isBlank(strs[weightIndex]) ) {
 						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = domain.getWeight();
@@ -481,7 +475,6 @@ public class FileUtil {
 								strs[weightIndex] = weight + "";
 							}
 						}else{
-							System.out.println(strs[weightIndex]+";"+domain.getWeight());
 							strs[weightIndex] = "0";
 						}
 					}

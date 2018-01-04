@@ -59,7 +59,6 @@ public class DomainController {
 			return ResultUtil.errorWithMsg("无域名信息！");
 		}
 		List<List<DomainTwo>> two = domainService.getDomainTwoByOne(one);
-
 		JSONObject json = new JSONObject();
 		json.put("one", one);
 		json.put("two", two);
@@ -222,8 +221,9 @@ public class DomainController {
 		condition.setStart(start);
 		condition.setLimit(limit);
 		List<DomainOne> list = domainService.getDomainOneByCondition(condition);
-		if (null == list || list.size() == 0)
+		if (null == list || list.size() == 0){
 			return ResultUtil.errorWithMsg("无相关域名信息！");
+		}
 		List<List<DomainTwo>> two = domainService.getDomainTwoByOne(list);
 		JSONObject json = new JSONObject();
 		json.put("one", list);
@@ -324,7 +324,6 @@ public class DomainController {
 			@RequestParam(value = "weight", required = true) Integer weight,
 			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
 		DomainOne one = new DomainOne();
-		System.out.println(uuid);
 		one.setUuid(uuid);
 		one.setUrl(url);
 		one.setName(name);
