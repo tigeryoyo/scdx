@@ -353,12 +353,13 @@ function submitAccChg() {
 		alert('角色为空，请重新选择。');
 		return;
 	}
+	var acc_selectedUser = JSON.parse(getCookie("acc_selectedUser"));
 	$.ajax({
 		type : "post",
-		url : "/user/updateUser",
+		url : "/user/updateUserByAdmin",
 		data : {
+			userId : parseInt(acc_selectedUser.userId),
 			trueName : $("#chg_trueName").val(),
-			password : $("#chg_userName").val(),
 			telphone : $("#chg_tel").val(),
 			email : $("#chg_email").val(),
 			userRoleName : $("#chg_userRoleName option:selected").val(),
@@ -520,8 +521,8 @@ function initPowerSearch(currenPage) {
 		type : "post",
 		url : "/power/selectPowerCount",
 		dataType : "json",
-		date : {
-			powerName : $("#power_search").val()
+		data : {
+			powerName : $("#power_search").val(),
 		},
 		beforeSend : function() {
 			begin();

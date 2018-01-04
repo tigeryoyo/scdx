@@ -127,4 +127,12 @@ public class UserDao {
 		return userMapper.selectByExample(example);
 	}
 
+	/**
+	 * 根据id修改用户信息，如信息为null则不修改
+	 * @param record
+	 * @return
+	 */
+	public int updateByPrimaryKeySelective(User record) {
+		return userMapper.updateByPrimaryKeySelective(record);
+	}
 }
