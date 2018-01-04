@@ -39,7 +39,7 @@ function stopwordInforShow(page){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -76,7 +76,7 @@ function initShowPage(currenPage){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -131,7 +131,7 @@ function stopwordInforSearch(page){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -169,7 +169,7 @@ function initSearchPage(currenPage){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -212,7 +212,7 @@ $(function(){
                 error: function (jqXHR, textStatus, errorThrown) {
                     var status = jqXHR.status;
                     if(status == 0){
-                    	alert("网络连接错误！");
+                    	alert(textStatus);
                     }else if(status == 200){
                     	alert("您没有权限使用该资源...");
                     }else{

@@ -115,7 +115,7 @@ function kmeans_conservation(){
 	        error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else{
@@ -152,7 +152,7 @@ function canopy_conservation() {
 	        error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else{
@@ -190,7 +190,7 @@ function dbscans_conservation() {
 	        error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else{
@@ -230,7 +230,7 @@ function kmeans_cluster(){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else if(status == 500){
@@ -273,7 +273,7 @@ function canopy_cluster(){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else if(status == 500){
@@ -315,7 +315,7 @@ function dbscan_cluster(){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else if(status == 500){
@@ -390,7 +390,7 @@ $(function() {
 					error: function (jqXHR, textStatus, errorThrown) {
 			            var status = jqXHR.status;
 			            if(status == 0){
-			            	alert("网络连接错误！");
+			            	alert(textStatus);
 			            }else if(status == 200){
 			            	alert("您没有权限使用该资源...");
 			            }else if(status == 500){
@@ -449,7 +449,7 @@ function uploadAll() {
 			error: function (jqXHR, textStatus, errorThrown) {
 	            var status = jqXHR.status;
 	            if(status == 0){
-	            	alert("网络连接错误！");
+	            	alert(textStatus);
 	            }else if(status == 200){
 	            	alert("您没有权限使用该资源...");
 	            }else if(status == 500){

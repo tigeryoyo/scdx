@@ -29,7 +29,7 @@ function initShowPage(currentPage) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -75,7 +75,7 @@ function initSearchPage(currenPage){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -128,7 +128,7 @@ function allData(page) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -171,7 +171,7 @@ function deleteTopic(topicId) {
 		error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
@@ -259,7 +259,7 @@ function searchData(page){
         error: function (jqXHR, textStatus, errorThrown) {
             var status = jqXHR.status;
             if(status == 0){
-            	alert("网络连接错误！");
+            	alert(textStatus);
             }else if(status == 200){
             	alert("您没有权限使用该资源...");
             }else{
