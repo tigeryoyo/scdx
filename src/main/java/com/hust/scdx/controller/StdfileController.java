@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,8 +114,8 @@ public class StdfileController {
 			response.setContentType("multipart/form-data");
 
 			String resultName = new String(((String) map.get(StdfileMap.NAME)).getBytes(), "ISO8859-1");
-			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
-			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xlsx");
+			XSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(StdfileMap.CONTENT),
 					(List<Integer>) map.get(StdfileMap.MARKED));
 			workbook = ExcelUtil.exportStatToExcel(workbook, (Map<String, TreeMap<String, Integer>>) map.get(StdfileMap.STAT));
 			workbook.write(outputStream);
