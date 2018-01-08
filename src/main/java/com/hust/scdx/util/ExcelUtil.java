@@ -19,6 +19,8 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.hust.scdx.constant.Constant.AttrID;
@@ -231,7 +233,7 @@ public class ExcelUtil {
 	 * @param lists
 	 * @return
 	 */
-	public static HSSFWorkbook exportStatToExcel(HSSFWorkbook workbook, Map<String, TreeMap<String, Integer>> map) {
+	public static XSSFWorkbook exportStatToExcel(XSSFWorkbook workbook, Map<String, TreeMap<String, Integer>> map) {
 		Sheet sheet = workbook.createSheet("日期统计");
 		TreeMap<String, Integer> timeMap = map.get(AttrID.TIME);
 		int i = 0;
@@ -276,12 +278,12 @@ public class ExcelUtil {
 	 *            待标记的id集合（每个类中的下标）
 	 * @return
 	 */
-	public static HSSFWorkbook exportToExcelMarked(List<String[]> content, List<Integer> marked) {
-		HSSFWorkbook workbook = new HSSFWorkbook();
+	public static XSSFWorkbook exportToExcelMarked(List<String[]> content, List<Integer> marked) {
+		XSSFWorkbook workbook = new XSSFWorkbook();
 		// 生成单元格样式
-		HSSFCellStyle markedrowStyle = workbook.createCellStyle();
+		XSSFCellStyle markedrowStyle = workbook.createCellStyle();
 		// 新建font实体
-		HSSFFont hssfFont = workbook.createFont();
+		XSSFFont hssfFont = workbook.createFont();
 		// 设置字体颜色 ----红色标红
 		hssfFont.setColor(HSSFColor.RED.index);
 		markedrowStyle.setFont(hssfFont);

@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hust.scdx.constant.Constant.Resutt;
-import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.util.ExcelUtil;
@@ -223,8 +222,8 @@ public class ResultController {
 			response.setContentType("multipart/form-data");
 
 			String resultName = new String(((String) map.get(Resutt.RESULTNAME)).getBytes(), "ISO8859-1");
-			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xls");
-			HSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT),
+			response.setHeader("Content-Disposition", "attachment;filename=" + resultName + ".xlsx");
+			XSSFWorkbook workbook = ExcelUtil.exportToExcelMarked((List<String[]>) map.get(Resutt.RESULT),
 					(List<Integer>) map.get(Resutt.MARKED));
 			workbook = ExcelUtil.exportStatToExcel(workbook,
 					(Map<String, TreeMap<String, Integer>>) map.get(Resutt.STAT));
