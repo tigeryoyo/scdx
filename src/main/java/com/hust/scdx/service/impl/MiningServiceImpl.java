@@ -269,19 +269,22 @@ public class MiningServiceImpl implements MiningService {
         String[] attrs = content.remove(0);
         int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
         int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-        
+        int indexOfType = AttrUtil.findIndexOfSth(attrs, AttrUtil.TYPE_PATTERN);
+        int indexOfLevel = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
         for (String[] row : content) {
            
             if (CommonUtil.isEmptyArray(row)) {
                 continue;
             }
            
-            Domain domain = domainService.getDomainByUrl(row[indexOfUrl]);
+           /* Domain domain = domainService.getDomainByUrl(row[indexOfUrl]);
             if(domain == null){
             	continue;
             }
             String level = domain.getRank();
-            String type = domain.getType();
+            String type = domain.getType();*/
+            String level = row[indexOfLevel];
+            String type = row[indexOfType];
             String timeKey = TimeUtil.getTimeKey(row[indexOfTime], interval);
             Map<String, Map<String, Integer>> timeMap = map.get(timeKey);
             if (timeMap == null) {
@@ -339,6 +342,9 @@ public class MiningServiceImpl implements MiningService {
             return attention;
         }
         for (Entry<String, Integer> entry : map.entrySet()) {
+        	if(null == entry || null == entry.getKey()){
+        		continue;
+        	}
             int weight = weightDao.queryWeightByName(entry.getKey().toString());
             int atten = weight * entry.getValue();
             attention.put(entry.getKey(), atten);
