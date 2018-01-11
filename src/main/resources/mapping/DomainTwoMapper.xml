@@ -417,13 +417,13 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="column != null">
+      <if test="column != null and column != 'null'">
         domain_two.column = #{column,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
+      <if test="type != null and type !='null'">
         type = #{type,jdbcType=VARCHAR},
       </if>
-      <if test="rank != null">
+      <if test="rank != null and rank !='null'">
         rank = #{rank,jdbcType=VARCHAR},
       </if>
       <if test="incidence != null">

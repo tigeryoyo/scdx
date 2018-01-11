@@ -405,16 +405,16 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if (StringUtils.isBlank(strs[columnIndex])) {
+					if (StringUtils.isBlank(strs[columnIndex]) && null != domain.getColumn()) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if (StringUtils.isBlank(strs[typeIndex])) {
+					if (StringUtils.isBlank(strs[typeIndex]) && null != domain.getType()) {
 						strs[typeIndex] = domain.getType();
 					}
-					if (StringUtils.isBlank(strs[rankIndex])) {
+					if (StringUtils.isBlank(strs[rankIndex]) && null != domain.getRank()) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if (StringUtils.isBlank(strs[incidenceIndex])) {
+					if (StringUtils.isBlank(strs[incidenceIndex]) && null != domain.getIncidence()) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
 					if (StringUtils.isBlank(strs[weightIndex])) {
@@ -454,16 +454,16 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if (StringUtils.isBlank(strs[columnIndex])) {
+					if (StringUtils.isBlank(strs[columnIndex]) && null != domain.getColumn()) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if (StringUtils.isBlank(strs[typeIndex])) {
+					if (StringUtils.isBlank(strs[typeIndex]) && null != domain.getType()) {
 						strs[typeIndex] = domain.getType();
 					}
-					if (StringUtils.isBlank(strs[rankIndex])) {
+					if (StringUtils.isBlank(strs[rankIndex]) && null != domain.getRank()) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if (StringUtils.isBlank(strs[incidenceIndex])) {
+					if (StringUtils.isBlank(strs[incidenceIndex]) && null != domain.getIncidence()) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
 					if (StringUtils.isBlank(strs[weightIndex]) ) {
