@@ -195,6 +195,9 @@ public class StdfileServiceImpl implements StdfileService {
 			stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
+		if(stdfileMap == null){
+			return null;
+		}
 		if (stdfileName.lastIndexOf(".") != -1)
 			stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
