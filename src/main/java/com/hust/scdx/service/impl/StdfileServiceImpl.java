@@ -168,8 +168,7 @@ public class StdfileServiceImpl implements StdfileService {
 	@Override
 	public List<String[]> analyzeByTimeRange(String topicId, Date startTime, Date endTime, HttpServletRequest request) {
 		// 把聚类的结果变成空格区分的stdfile文件。
-		List<String[]> content = FileUtil.readExtfiles(
-				getFilespathByTimeRange(startTime, endTime, userService.selectCurrentUser(request), topicId));
+		List<String[]> content = FileUtil.readExtfiles(getFilespathByTimeRange(startTime, endTime, userService.selectCurrentUser(request), topicId));
 		if (content == null) {
 			return null;
 		}
@@ -187,15 +186,14 @@ public class StdfileServiceImpl implements StdfileService {
 			stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
 			Stdfile file = stdfileDao.queryStdfileById(stdfileId);
 			String[] timeStr = file.getDatatime().split(";");
-			stdfileName = topicDao.queryTopicById(file.getTopicId()).getTopicName() + timeStr[0].replace("-", "") + "-"
-					+ timeStr[1].replace("-", "");
+			stdfileName = topicDao.queryTopicById(file.getTopicId()).getTopicName() + timeStr[0].replace("-", "") + "-" + timeStr[1].replace("-", "");
 		} else {
 			Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 			stdfileName = stdfile.getStdfileName();
 			stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		}
 		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
-		if(stdfileMap == null){
+		if (stdfileMap == null) {
 			return null;
 		}
 		if (stdfileName.lastIndexOf(".") != -1)
@@ -205,8 +203,7 @@ public class StdfileServiceImpl implements StdfileService {
 		ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
 		existDomain.putAll(Constant.unmarkedDomain);
 		@SuppressWarnings("unchecked")
-		Map<String, TreeMap<String, Integer>> statMap = AttrUtil
-				.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), existDomain);
+		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), existDomain);
 		stdfileMap.put(StdfileMap.STAT, statMap);
 		return stdfileMap;
 	}
@@ -243,18 +240,15 @@ public class StdfileServiceImpl implements StdfileService {
 		List<String> filespath = new ArrayList<String>();
 		for (int i = syear; i <= eyear; i++) {
 			for (int j = (i == syear ? smonth : 1); j <= (i == eyear ? emonth : 12); j++) {
-				for (int k = (syear == eyear && smonth == emonth ? sday : 1); k <= (i == eyear && j == emonth ? eday
-						: 31); k++) {
-					String dirPath = DIRECTORY.STDFILE + String.valueOf(i) + "/"
-							+ String.format("%2d", j).replace(" ", "0") + "/"
+				for (int k = (syear == eyear && smonth == emonth ? sday : 1); k <= (i == eyear && j == emonth ? eday : 31); k++) {
+					String dirPath = DIRECTORY.STDFILE + String.valueOf(i) + "/" + String.format("%2d", j).replace(" ", "0") + "/"
 							+ String.format("%2d", k).replace(" ", "0") + "/";
 					if (new File(dirPath).exists()) {
 						File dir = new File(dirPath);
 						String[] filelist = dir.list();
 						for (String str : filelist) {
 							Stdfile stdfile = stdfileDao.queryStdfileById(str);
-							if (stdfile != null && stdfile.getCreator().equals(user.getUserName())
-									&& stdfile.getTopicId().equals(topicId)) {
+							if (stdfile != null && stdfile.getCreator().equals(user.getUserName()) && stdfile.getTopicId().equals(topicId)) {
 								filespath.add(dirPath + str);
 							}
 						}
@@ -275,15 +269,13 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex,
-			HttpServletRequest request) {
+	public Map<String, Object> statistic(String stdfileId, Integer interval, Integer targetIndex, HttpServletRequest request) {
 		try {
 			// 标准数据
 			String stdfilePath = "";
 			String filename = "";
 			if (stdfileId.equals("stdfile_cluster_result")) {
-				stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/"
-						+ stdfileId;
+				stdfilePath = DIRECTORY.STDFILE + userService.selectCurrentUser(request).getUserName() + "/" + stdfileId;
 			} else {
 				Stdfile stdfile = stdfileDao.queryStdfileById(stdfileId);
 				stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
@@ -318,8 +310,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 * @param user
 	 * @return
 	 */
-	private List<String[]> mining(String topicId, List<String[]> content, Date startTime, Date endTime,
-			HttpServletRequest request) {
+	private List<String[]> mining(String topicId, List<String[]> content, Date startTime, Date endTime, HttpServletRequest request) {
 		if (content == null) {
 			logger.info("content内容为空。");
 			return null;
@@ -375,8 +366,7 @@ public class StdfileServiceImpl implements StdfileService {
 		stdfile.setStdfileName("stdfile_cluster_result");
 		stdfile.setLineNumber(res.size());
 		stdfile.setSize(0);
-		stdfile.setDatatime(
-				TimeUtil.DateToStr(startTime).substring(0, 10) + ";" + TimeUtil.DateToStr(endTime).substring(0, 10));
+		stdfile.setDatatime(TimeUtil.DateToStr(startTime).substring(0, 10) + ";" + TimeUtil.DateToStr(endTime).substring(0, 10));
 		stdfile.setTopicId(topicId);
 		stdfile.setStdfileId("stdfile_cluster_result");
 		stdfileDao.insertTop(stdfile, res, user.getUserName());
@@ -418,8 +408,7 @@ public class StdfileServiceImpl implements StdfileService {
 			fromIndex = i * Constant.slices;
 			toIndex = (i == len - 1 ? csize : (i + 1) * Constant.slices);
 			subContent = content.subList(fromIndex, toIndex);
-			tasks[i] = excutorService.submit(new MiningThread(attrs, subContent, i, Algorithm.DIGITAL,
-					user.getAlgorithm(), user.getGranularity()));
+			tasks[i] = excutorService.submit(new MiningThread(attrs, subContent, i, Algorithm.DIGITAL, user.getAlgorithm(), user.getGranularity()));
 		}
 
 		for (int i = 0; i < len; i++) {
@@ -449,8 +438,7 @@ public class StdfileServiceImpl implements StdfileService {
 		int algorithmType;
 		int granularity;
 
-		public MiningThread(String[] attrs, List<String[]> subContent, int index, int converterType, int algorithmType,
-				int granularity) {
+		public MiningThread(String[] attrs, List<String[]> subContent, int index, int converterType, int algorithmType, int granularity) {
 			this.attrs = attrs;
 			this.subContent = subContent;
 			this.index = index;
@@ -462,8 +450,7 @@ public class StdfileServiceImpl implements StdfileService {
 		@Override
 		public List<List<Integer>> call() throws Exception {
 			List<List<Integer>> result = new ArrayList<List<Integer>>();
-			List<List<Integer>> res = miningService.getOrigClusters(attrs, subContent, converterType, algorithmType,
-					granularity);
+			List<List<Integer>> res = miningService.getOrigClusters(attrs, subContent, converterType, algorithmType, granularity);
 			int resSize = res.size();
 			int subSize;
 			List<Integer> newSub, subList;
@@ -542,8 +529,7 @@ public class StdfileServiceImpl implements StdfileService {
 
 			WordUtil wu = new WordUtil();
 			wu.addParaText("(" + topicName + ")专供", new Env().bold(true).fontType(WordFont.KAITI));
-			wu.addParaText("舆情参阅", new Env().fontSize(52).bold(true).fontType(WordFont.XINSONGTI)
-					.fontColor(WordFont.GREEN).alignment("center"));
+			wu.addParaText("舆情参阅", new Env().fontSize(52).bold(true).fontType(WordFont.XINSONGTI).fontColor(WordFont.GREEN).alignment("center"));
 			Env titleEnv = new Env().fontSize(22).bold(true).fontType(WordFont.SONGTI);
 			Env mainEnv = new Env().fontType(WordFont.FANGSONG);
 			Env mainBEnv = new Env(mainEnv).bold(true).fontType(WordFont.SONGTI);
@@ -560,8 +546,7 @@ public class StdfileServiceImpl implements StdfileService {
 			List<List<String[]>> content = convert(tmp);
 			// 标记，每一个类簇的最早出现的新闻index
 			List<Integer> marked = (List<Integer>) stdfileMap.get(StdfileMap.MARKED);
-			HashMap<String, TreeMap<String, Integer>> statMap = (HashMap<String, TreeMap<String, Integer>>) stdfileMap
-					.get(StdfileMap.STAT);
+			HashMap<String, TreeMap<String, Integer>> statMap = (HashMap<String, TreeMap<String, Integer>>) stdfileMap.get(StdfileMap.STAT);
 			TreeMap<String, Integer> timeMap = statMap.get(AttrID.TIME);
 			TreeMap<String, Integer> typeMap = statMap.get(AttrID.TYPE);
 			// 信息总数
@@ -600,7 +585,7 @@ public class StdfileServiceImpl implements StdfileService {
 			int c = content.size();
 			int m = marked.size();
 			int size = c == m ? c : c - 1;
-			for (int i = 0; i < size - 1; i++) {
+			for (int i = 0; i < size; i++) {
 				String[] row = content.get(i).get(marked.get(i));
 				wu.addParaText((i + 1) + ". " + row[indexOfTitle], mainBEnv);
 				wu.addParaText("（相关新闻" + content.get(i).size() + "条。）", mainSEnv);
@@ -611,13 +596,11 @@ public class StdfileServiceImpl implements StdfileService {
 
 			// 监测信息量日分布情况
 			wu.addParaText("监测信息量日分布情况", titleEnv);
-			wu.addParaText(
-					first + " 至" + last + "，通过四川电信互联网舆情信息服务平台监测数据显示，本时间段内与“" + topicName + "”相关互联网信息" + total + " ，条，",
-					mainEnv);
+			wu.addParaText(first + " 至" + last + "，通过四川电信互联网舆情信息服务平台监测数据显示，本时间段内与“" + topicName + "”相关互联网信息" + total + " ，条，", mainEnv);
 			wu.appendParaText("未发现“正/负”面舆情。", mainBEnv);
 			wu.addParaText("信息具体情况如下：", mainEnv);
-			wu.addParaText("监测数据显示，" + topicName + first + " 至 " + last + "相关信息总量 " + total + " 条，平均每日信息量为 " + avg
-					+ " 条。其中，" + peakD + "当天的相关信息量是本周最大峰值，相关信息共有 " + peakC + " 条，占一周信息量的 ", mainEnv);
+			wu.addParaText("监测数据显示，" + topicName + first + " 至 " + last + "相关信息总量 " + total + " 条，平均每日信息量为 " + avg + " 条。其中，" + peakD
+					+ "当天的相关信息量是本周最大峰值，相关信息共有 " + peakC + " 条，占一周信息量的 ", mainEnv);
 			wu.appendParaText(peak + "%", mainRBEnv);
 			wu.appendParaText("，主要为", mainEnv);
 			List<String[]> theDayInfo = statTheDay(content, marked, peakD, indexOfTitle, indexOfTime);
@@ -647,9 +630,7 @@ public class StdfileServiceImpl implements StdfileService {
 			wu.addParaText("（责任编辑：汪静远）", env2);
 			wu.addParaText("四川电信互联网舆情信息服务中心 ", env3);
 			wu.addParaText("声明：", env3);
-			wu.appendParaText(
-					"以上舆情信息仅供参考，用户对于舆情信息所反映出的问题或状况的处理，应综合其他信息加以判断和利用，仅凭以上舆情信息做出判断、进行决策等处理措施造成不利后果及损失的，我单位不承担任何责任。",
-					env1);
+			wu.appendParaText("以上舆情信息仅供参考，用户对于舆情信息所反映出的问题或状况的处理，应综合其他信息加以判断和利用，仅凭以上舆情信息做出判断、进行决策等处理措施造成不利后果及损失的，我单位不承担任何责任。", env1);
 			return wu.getDoc();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -687,8 +668,7 @@ public class StdfileServiceImpl implements StdfileService {
 	 * 
 	 * @return
 	 */
-	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay,
-			int indexOfTitle, int indexOfTime) {
+	private List<String[]> statTheDay(List<List<String[]>> content, List<Integer> marked, String theDay, int indexOfTitle, int indexOfTime) {
 		List<String[]> res = new ArrayList<String[]>();
 		int c = content.size();
 		int m = marked.size();
@@ -725,15 +705,17 @@ public class StdfileServiceImpl implements StdfileService {
 	 *            文本内容 String[]为一条新闻记录 List<String[]>为一个类簇
 	 * @return
 	 */
-	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent, List<Integer> marked,
-			String topicName) {
+	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent, List<Integer> marked, String topicName) {
 		List<String[]> summary = new ArrayList<>();
 		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
 		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
 		if (allContent == null || allContent.size() == 0) {
 			return summary;
 		}
-		for (int i = 0; i < allContent.size(); i++) {
+		int c = allContent.size();
+		int m = marked.size();
+		int size = c == m ? c : c - 1;
+		for (int i = 0; i < size; i++) {
 			List<String[]> content = allContent.get(i);
 			String title = null;
 			List<String> sentence = null;
