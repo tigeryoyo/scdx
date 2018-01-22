@@ -102,11 +102,11 @@ public class DomainServiceImpl implements DomainService {
 			if (rankIndex == -1) {
 				rankFlag = false;
 			}
-			int weightIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEIGHT_PATTERN);// 级别
+			int weightIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEIGHT_PATTERN);// 权重
 			if (weightIndex == -1) {
 				weightFlag = false;
 			}
-			int incidenceIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.INCIDENCE_PATTERN);// 级别
+			int incidenceIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.INCIDENCE_PATTERN);// 影响类型
 			if (incidenceIndex == -1) {
 				incidenceFlag = false;
 			}
@@ -159,14 +159,14 @@ public class DomainServiceImpl implements DomainService {
 						if (StringUtils.isBlank(string[weightIndex])) {
 							d.setWeight(null);
 						} else {
-							d.setRank(string[weightIndex]);
+							d.setWeight(Integer.parseInt(string[weightIndex]));
 						}
 					}
 					if (incidenceFlag) {
 						if (StringUtils.isBlank(string[incidenceIndex])) {
 							d.setIncidence(null);
 						} else {
-							d.setRank(string[incidenceIndex]);
+							d.setIncidence(string[incidenceIndex]);
 						}
 					}
 					addDomain(d);
@@ -222,7 +222,7 @@ public class DomainServiceImpl implements DomainService {
 								d.setWeight(0);
 							}
 						} else {
-							d.setRank(string[weightIndex]);
+							d.setWeight(Integer.parseInt(string[weightIndex]));
 						}
 					}else if(!StringUtils.isBlank(d.getType())) {
 						List<Weight> weights = weightDao.selectWeightByName(d.getType());
@@ -236,7 +236,7 @@ public class DomainServiceImpl implements DomainService {
 						if (StringUtils.isBlank(string[incidenceIndex])) {
 							d.setIncidence("");
 						} else {
-							d.setRank(string[incidenceIndex]);
+							d.setIncidence(string[incidenceIndex]);
 						}
 					}
 					list.add(d);
