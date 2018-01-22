@@ -548,12 +548,17 @@ function deleteClusterItemsByIndices() {
  * 
  */
 function downloadResultById() {
-	$(function() {
-		var form = $('<form method="POST" action="/result/downloadResultById">');
-		form.append($('<input type="hidden" name="resultId" value="' + resultId + '"/>'));
-		$('body').append(form);
-		form.submit(); // 自动提交
-	});
+	var flag = true;
+	if($("input[name='result_check']:checked").size())
+		flag = confirm("是否放弃勾选直接导出聚类结果？");
+	if(flag){
+		$(function() {
+			var form = $('<form method="POST" action="/result/downloadResultById">');
+			form.append($('<input type="hidden" name="resultId" value="' + resultId + '"/>'));
+			$('body').append(form);
+			form.submit(); // 自动提交
+		});
+	}
 }
 
 function showTime(e){
