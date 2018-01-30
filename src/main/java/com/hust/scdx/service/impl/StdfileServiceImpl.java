@@ -192,7 +192,7 @@ public class StdfileServiceImpl implements StdfileService {
 			stdfileName = stdfile.getStdfileName();
 			stdfilePath = DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId;
 		}
-		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent(stdfilePath);
+		Map<String, Object> stdfileMap = FileUtil.getStdfileExcelcontent3(stdfilePath);
 		if (stdfileMap == null) {
 			return null;
 		}
@@ -560,8 +560,8 @@ public class StdfileServiceImpl implements StdfileService {
 			// 信息峰值占比
 			float peak = 0.0f;
 			// 信息起止时间
-			String first = timeMap.pollFirstEntry().getKey();
-			String last = timeMap.pollLastEntry().getKey();
+			String first = timeMap.firstKey();
+			String last = timeMap.lastKey();
 			for (Map.Entry<String, Integer> entry : timeMap.entrySet()) {
 				int count = entry.getValue();
 				if (count > peakC) {
@@ -586,7 +586,13 @@ public class StdfileServiceImpl implements StdfileService {
 			int m = marked.size();
 			int size = c == m ? c : c - 1;
 			for (int i = 0; i < size; i++) {
-				String[] row = content.get(i).get(marked.get(i));
+				List<String[]> t = content.get(i);
+				String[] row = null;
+				int index = 0;
+				if (t.size() != 1) {
+					index = marked.get(i);
+				}
+				row = t.get(index);
 				wu.addParaText((i + 1) + ". " + row[indexOfTitle], mainBEnv);
 				wu.addParaText("（相关新闻" + content.get(i).size() + "条。）", mainSEnv);
 			}
@@ -607,9 +613,9 @@ public class StdfileServiceImpl implements StdfileService {
 			for (int i = 0; i < 3 && i < theDayInfo.size(); i++) {
 				String[] theday = theDayInfo.get(i);
 				wu.appendParaText("《" + theday[0] + "》", mainBEnv);
-				wu.addParaText("（" + theday[1] + "条）", mainSEnv);
+				wu.appendParaText("（" + theday[1] + "条）、", mainSEnv);
 			}
-			wu.addParaText("，相关转载转播。", mainEnv);
+			wu.appendParaText("，相关转载转播。", mainEnv);
 
 			wu.setBreak();
 			// 舆情聚焦（摘要）
@@ -684,7 +690,11 @@ public class StdfileServiceImpl implements StdfileService {
 				}
 			}
 			if (count != 0) {
-				res.add(new String[] { cluster.get(marked.get(i))[indexOfTitle], String.valueOf(count) });
+				int index = 0;
+				if (cluster.size() != 1) {
+					index = marked.get(i);
+				}
+				res.add(new String[] { cluster.get(index)[indexOfTitle], String.valueOf(count) });
 			}
 		}
 		Collections.sort(res, new Comparator<String[]>() {
@@ -717,7 +727,11 @@ public class StdfileServiceImpl implements StdfileService {
 		int size = c == m ? c : c - 1;
 		for (int i = 0; i < size; i++) {
 			List<String[]> content = allContent.get(i);
-			String title = null;
+			int index = 0;
+			if (content.size() != 1) {
+				index = marked.get(i);
+			}
+			String title = content.get(index)[titleIndex];
 			List<String> sentence = null;
 			List<Domain> organization = new ArrayList<Domain>();
 			Set<String> urlSet = new HashSet<String>();
@@ -733,7 +747,7 @@ public class StdfileServiceImpl implements StdfileService {
 						sentence = crawler.getSummary(str[urlIndex]);
 						if (null != sentence) {
 							flag = true;
-							title = str[titleIndex];
+							//title = str[titleIndex];
 							sentence.add(0, title);
 							Summary s = new Summary(sentence);
 							s.summary();
@@ -779,8 +793,11 @@ public class StdfileServiceImpl implements StdfileService {
 					str_sentence += string + "。";
 				}
 			} else {
-				title = content.get(marked.get(i))[titleIndex];
-				str_sentence = "由于该类新闻没有权威性较高的网站来获取新闻内容，故无法获得摘要。该类新闻的最早报道来源于：" + content.get(marked.get(i))[urlIndex];
+				int index2 = 0;
+				if (content.size() != 1) {
+					index2 = marked.get(i);
+				}
+				str_sentence = "由于该类新闻没有权威性较高的网站来获取新闻内容，故无法获得摘要。该类新闻的最早报道来源于：" + content.get(index2)[urlIndex];
 			}
 			summary.add(new String[] { title, str_sentence, str_organization });
 		}
