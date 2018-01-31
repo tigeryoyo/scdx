@@ -428,7 +428,12 @@ public class FileUtil {
 								strs[weightIndex] = weight + "";
 							}
 						}else{
-							strs[weightIndex] = "0";
+							Integer weight = domain.getWeight();
+							if(weight == null){
+								strs[weightIndex] = "0";
+							}else{
+								strs[weightIndex] = weight + "";
+							}
 						}
 					}
 				}
@@ -468,7 +473,7 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[incidenceIndex]) && null != domain.getIncidence()) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
-					if (StringUtils.isBlank(strs[weightIndex]) ) {
+					if (StringUtils.isBlank(strs[weightIndex])) {
 						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = domain.getWeight();
 							if(weight == null){
@@ -477,7 +482,12 @@ public class FileUtil {
 								strs[weightIndex] = weight + "";
 							}
 						}else{
-							strs[weightIndex] = "0";
+							Integer weight = domain.getWeight();
+							if(weight == null){
+								strs[weightIndex] = "0";
+							}else{
+								strs[weightIndex] = weight + "";
+							}
 						}
 					}
 				}
