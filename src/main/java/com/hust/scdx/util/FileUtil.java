@@ -30,7 +30,6 @@ import com.google.common.io.Files;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Domain;
-import com.sun.tools.doclint.HtmlTag.Attr;
 
 public class FileUtil {
 	/**
@@ -269,7 +268,16 @@ public class FileUtil {
 		int[] orderAttrs = new int[attrSize + 6];
 		List<String> newAttrs = new ArrayList<String>();
 		int order = 0;
-		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
+		
+		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
+		}
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
 		if (index != -1) {
 			orderAttrs[order++] = index;
 			newAttrs.add(attrs.get(index));
@@ -338,14 +346,7 @@ public class FileUtil {
 			newAttrs.add(AttrUtil.INCIDENCE_PATTERN);
 		}
 
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
-		}
+		
 
 		for (int i = 0; i < attrSize; i++) {
 			if (!AttrUtil.isImp(attrs.get(i))) {
