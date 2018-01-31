@@ -388,6 +388,7 @@ public class FileUtil {
 		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
+			String oUrl = UrlUtil.getDomainOne(url);
 			String tUrl = UrlUtil.getDomainTwo(url);
 			if (tUrl == null) {
 				// 如果二级域名不存在，则url为一级域名
@@ -432,7 +433,7 @@ public class FileUtil {
 					}
 				}
 			} else {
-				// tUrl不为null则，tUrl为二级域名，url为其一级域名
+				// tUrl不为null则，tUrl为二级域名，oUrl为其一级域名
 				if (Constant.markedDomain.containsKey(tUrl)) {
 					// 如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
 					Domain domain = Constant.markedDomain.get(tUrl);
@@ -442,9 +443,9 @@ public class FileUtil {
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
 					strs[weightIndex] = domain.getWeight() + "";
-				} else if (Constant.markedDomain.containsKey(url)) {
+				} else if (Constant.markedDomain.containsKey(oUrl)) {
 					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
-					Domain domain = Constant.markedDomain.get(url);
+					Domain domain = Constant.markedDomain.get(oUrl);
 					strs[nameIndex] = domain.getName();
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
