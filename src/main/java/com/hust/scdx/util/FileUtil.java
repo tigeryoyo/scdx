@@ -388,6 +388,10 @@ public class FileUtil {
 		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
+			if(url == null){
+				res.add(strs);
+				continue;
+			}
 			String oUrl = UrlUtil.getDomainOne(url);
 			String tUrl = UrlUtil.getDomainTwo(url);
 			if (tUrl == null) {
