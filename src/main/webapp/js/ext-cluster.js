@@ -6,10 +6,10 @@
 	t_temp.setSeconds(0);
 	t_temp.setMilliseconds(0);
 	var t_startTime = t_temp.getTime() - 30*24*60*60*1000;
+	var t_endTime = t_temp.getTime() + 24*60*60*1000-1000;
 	var tempS  = new Date(t_startTime);
-	var start = tempS.getFullYear()+"-"+(tempS.getMonth()+1)+"-"+tempS.getDate()+" "+tempS.getHours()+"0:"+tempS.getMinutes()+"0:"+tempS.getSeconds()+"0";            
-	$("#startTime").attr("placeholder", start);
-	$("#endTime").attr("placeholder", new Date().format("yyyy-MM-dd hh:mm:ss"));
+	$("#startTime").attr("placeholder", new Date(t_startTime).format("yyyy-MM-dd hh:mm:ss"));
+	$("#endTime").attr("placeholder", new Date(t_endTime).format("yyyy-MM-dd hh:mm:ss"));
 }
 /**
  * 此次聚类结果id
@@ -561,10 +561,10 @@ function downloadResultById() {
 	}
 }
 
-function showTime(e){
+function showSTime(e){
 	jeDate({
 		dateCell:"#"+$(e).attr("id"),
-            format:"YYYY-MM-DD hh:mm:ss",
+            format:"YYYY-MM-DD 00:00:00",
             isTime:true,
             minDate:"2016-01-01 00:00:00",
             trigger: "click",
@@ -576,7 +576,21 @@ function showTime(e){
             }
         })       
 }
-
+function showETime(e){
+	jeDate({
+		dateCell:"#"+$(e).attr("id"),
+            format:"YYYY-MM-DD 23:59:59",
+            isTime:true,
+            minDate:"2016-01-01 00:00:00",
+            trigger: "click",
+            choosefun:function(datas){
+            	timeChange();
+            },
+            okfun:function(datas){
+            	timeChange();
+            }
+        })       
+}
 function searchTimeChange(){
 	var index = $("input[name='searchTime']:checked").val();
     var startTime,endTime,start,end;
