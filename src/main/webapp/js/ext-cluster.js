@@ -148,7 +148,7 @@ function showResultByContent(items){
 	for (var i = 0; i < (items.length>300?300:items.length); i++) {
 		// items第一行存储index，故从i+1读起
 		var item = items[i];
-		var rows = '<tr><td height="32" align="left"><input type="checkbox" name="result_check" style="width:20px;height:20px" data-id="'+i+'" data-count="'+item[3]+'" class="' + i
+		var rows = '<tr><td height="32" align="left" style="cursor:pointer;" onclick="checkBoxClick(this)"><input onclick="checkBoxClickBubble()" type="checkbox" name="result_check" style="cursor:pointer;width:20px;height:20px" data-id="'+i+'" data-count="'+item[3]+'" class="' + i
 			+ '"/>&nbsp;'
 			+(i+1)+'</td><td height="32" align="center"><a href="'+item[1]+'" target="view_window" '
 		//	+'onclick="showClusterDetails('
@@ -350,6 +350,8 @@ function miningByTimeRange() {
  *            专题id
  */
 function resetResultById() {
+	var flag = confirm("是否重置所有操作？");
+	if(flag){
 	$.ajax({
 		type : "post",
 		url : "/result/resetResultById",
@@ -383,6 +385,7 @@ function resetResultById() {
 			stop();
 		}
 	});
+	}
 }
 
 /**
@@ -402,6 +405,8 @@ function combineResultItemsByIndices() {
 		alert("请选选择，在进行合并操作！");
 		return;
 	}
+	var flag = confirm("是否合并所选项？");
+	if(flag){
 	$.ajax({
 		type : "post",
 		url : "/result/combineResultItemsByIndices",
@@ -436,6 +441,7 @@ function combineResultItemsByIndices() {
 			stop();
 		}
 	});
+	}
 }
 
 /**
@@ -452,9 +458,11 @@ function deleteResultItemsByIndices() {
 		indices.push(parseInt($(input).attr("data-id")));
 	});
 	if(0 == indices.length){
-		alert("请选选择，在进行合并操作！");
+		alert("请选选择，在进行删除操作！");
 		return;
 	}
+	var flag = confirm("是否删除所选项？");
+	if(flag){
 	$.ajax({
 		type : "post",
 		url : "/result/deleteResultItemsByIndices",
@@ -489,6 +497,7 @@ function deleteResultItemsByIndices() {
 			stop();
 		}
 	});
+	}
 }
 
 /**
@@ -693,7 +702,7 @@ function showClusterDetails(index,resultId,count){
 					// items第一行存储index，故从i+1读起
 					item = items[i + 1];
 					url = item[indexOfUrl];
-					rows = '<tr><td height="32" align="center"><input type="checkbox" id="itemCheckbox" style="width:20px;height:20px" class="'
+					rows = '<tr><td height="32" align="center" ><input type="checkbox" id="itemCheckbox" style="width:20px;height:20px" class="'
 						+ i
 						+ '"/></td><td height="32" align="center"><a href="'
 						+ item[indexOfUrl]
@@ -811,3 +820,13 @@ $(function() {
     }
 
 })
+
+/**
+ * 
+ */
+function checkBoxClick(e){
+	$(e).children().click()
+}
+function checkBoxClickBubble(){
+	event.stopPropagation();
+}

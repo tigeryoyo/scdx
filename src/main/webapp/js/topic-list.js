@@ -148,6 +148,8 @@ function allData(page) {
  *            专题id
  */
 function deleteTopic(topicId) {
+	var flag = confirm("是否删除该专题？");
+	if(flag){
 	$.ajax({
 		type : "post",
 		url : "/topic/delete",
@@ -182,6 +184,7 @@ function deleteTopic(topicId) {
 							stop();
 						}
 	});
+	}
 }
 
 /**
