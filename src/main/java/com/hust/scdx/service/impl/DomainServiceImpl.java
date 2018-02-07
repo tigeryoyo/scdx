@@ -669,9 +669,12 @@ public class DomainServiceImpl implements DomainService {
 	public boolean updateDomainTwo(DomainTwo two) {
 		// TODO Auto-generated method stub
 		if (domainTwoDao.updateDomainTwo(two)) {
-			if(StringUtils.isBlank(two.getUrl())){
-				two = domainTwoDao.getDomainTwoById(two.getUuid());
-			}
+			two = domainTwoDao.getDomainTwoById(two.getUuid());
+			DomainOne one = domainOneDao.getDomainOneById(two.getFatherUuid());
+			if(null != one){
+				one.setUpdateTime(two.getUpdateTime());
+				updateDomainOne(one);
+			}			
 			updateExistDomain(two);
 			return true;
 		} else {
