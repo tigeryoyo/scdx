@@ -17,6 +17,9 @@ function websiteInforEdit() {
 
 function domainOneInfoChange() {
 	var uuid = getCookie("domain_id");
+	var maintenanceStatus = $("input[name='maintenance_status']:checked").val();
+	if(maintenanceStatus == 0)
+		if(!confirm("维护状态仍为未维护，是否继续提交修改？"))return;
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainOne",
@@ -63,6 +66,9 @@ function domainOneInfoChange() {
 
 function domainTwoInfoChange() {
 	var uuid = getCookie("domain_id");
+	var maintenanceStatus = $("input[name='maintenance_status']:checked").val();
+	if(maintenanceStatus == 0)
+		if(!confirm("维护状态仍为未维护，是否继续提交修改？"))return;
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainTwo",

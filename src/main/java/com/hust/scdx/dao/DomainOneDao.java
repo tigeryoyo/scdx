@@ -93,7 +93,7 @@ public class DomainOneDao {
 		} else {
 			example.setLimit(0);
 		}
-		example.setOrderByClause("maintenance_status desc,update_time desc,url");
+		example.setOrderByClause("update_time desc,url");
 
 		return domainOneMapper.selectByExample(example);
 	}
