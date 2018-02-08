@@ -151,10 +151,11 @@ span{
 				<tr>
 					<td width="117" height="70">
 						<button id="btn_edit" type="button"  class="btn btn-primary" onclick="websiteInforEdit()" >编辑</button>
-						<button id="btn_submit" type="button"  class="btn btn-primary" onclick="domainTwoInfoChange()" style="display: none">提交</button>
+						<button id="btn_submit_true" type="button"  class="btn btn-danger" onclick="domainTwoInfoChangeForTrue()" style="display: none" title="将维护状态设为已维护并直接提交">已维护</button>
 					</td>
 					<td width="323" height="70">
-						<button type="button"  class="btn btn-primary" onclick="back()">返回</button>
+						<button id="btn_submit" type="button"  class="btn btn-primary" onclick="domainTwoInfoChange()" style="display: none">提交</button>
+						<button id="btn_back" type="button"  class="btn btn-primary" style="margin-left:88px;" onclick="back()">返回</button>
 					</td>
 				</tr>
 			</table>

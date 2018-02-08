@@ -12,14 +12,13 @@ function websiteInforEdit() {
 	$("#new_weight").removeAttr("disabled");
 	$("input[name='maintenance_status']").removeAttr("disabled");
 	$("#btn_edit").css("display", "none");
-	$("#btn_submit").css("display", "block");
+	$("#btn_back").css("margin-left", "30px");
+	$("#btn_submit").css("display", "inline-block");
+	$("#btn_submit_true").css("display", "inline-block");
 }
 
 function domainOneInfoChange() {
 	var uuid = getCookie("domain_id");
-	var maintenanceStatus = $("input[name='maintenance_status']:checked").val();
-	if(maintenanceStatus == 0)
-		if(!confirm("维护状态仍为未维护，是否继续提交修改？"))return;
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainOne",
@@ -64,11 +63,53 @@ function domainOneInfoChange() {
 	})
 }
 
+function domainOneInfoChangeForTrue() {
+	var uuid = getCookie("domain_id");
+	$.ajax({
+		type : "post",
+		url : "/domain/updateDomainOne",
+		data : {
+			uuid : uuid,
+			url : $("#url").val(),
+			name : $("#new_name").val(),
+			column : $("#new_column").val(),
+			type : $("#new_type").val(),
+			rank : $("#new_rank").val(),
+			incidence : $(".incidence_provience").val() + "-"
+					+ $(".incidence_city").val(),
+			weight : $("#new_weight").val(),
+			maintenanceStatus : true
+		},
+		datatype : "json",
+		beforeSend : function() {
+			begin();
+		},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert(msg.result);
+				jumpto("website-one-details");
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+		complete : function() {
+			stop();
+		}
+	})
+}
+
 function domainTwoInfoChange() {
 	var uuid = getCookie("domain_id");
-	var maintenanceStatus = $("input[name='maintenance_status']:checked").val();
-	if(maintenanceStatus == 0)
-		if(!confirm("维护状态仍为未维护，是否继续提交修改？"))return;
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainTwo",
@@ -84,6 +125,51 @@ function domainTwoInfoChange() {
 			weight : $("#new_weight").val(),
 			maintenanceStatus : ($("input[name='maintenance_status']:checked")
 					.val() == 1)
+		},
+		datatype : "json",
+		beforeSend : function() {
+			begin();
+		},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert(msg.result);
+				jumpto("website-two-details");
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+		complete : function() {
+			stop();
+		}
+	})
+}
+
+function domainTwoInfoChangeForTrue() {
+	var uuid = getCookie("domain_id");
+	$.ajax({
+		type : "post",
+		url : "/domain/updateDomainTwo",
+		data : {
+			uuid : uuid,
+			url : $("#url").val(),
+			name : $("#new_name").val(),
+			column : $("#new_column").val(),
+			type : $("#new_type").val(),
+			rank : $("#new_rank").val(),
+			incidence : $(".incidence_provience").val() + "-"
+					+ $(".incidence_city").val(),
+			weight : $("#new_weight").val(),
+			maintenanceStatus : true
 		},
 		datatype : "json",
 		beforeSend : function() {
