@@ -56,6 +56,7 @@ import com.hust.scdx.service.UserService;
 import com.hust.scdx.service.impl.ExtfileServiceImpl.MiningThread;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ConvertUtil;
+import com.hust.scdx.util.DomainCacheManager;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.FileUtil;
 import com.hust.scdx.util.TimeUtil;
@@ -199,11 +200,8 @@ public class StdfileServiceImpl implements StdfileService {
 		if (stdfileName.lastIndexOf(".") != -1)
 			stdfileName = stdfileName.substring(0, stdfileName.lastIndexOf("."));
 		stdfileMap.put(StdfileMap.NAME, stdfileName);
-		// 为统计日期-数量与来源-数量，合并内存中的两个Domain
-		ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
-		existDomain.putAll(Constant.unmarkedDomain);
 		@SuppressWarnings("unchecked")
-		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT), existDomain);
+		Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics((List<String[]>) stdfileMap.get(StdfileMap.CONTENT));
 		stdfileMap.put(StdfileMap.STAT, statMap);
 		return stdfileMap;
 	}
@@ -756,14 +754,10 @@ public class StdfileServiceImpl implements StdfileService {
 					}
 					if (!urlSet.contains(url)) {
 						urlSet.add(url);
-						if (Constant.markedDomain.get(url) == null) {
-							if (Constant.unmarkedDomain.get(url) == null) {
-								logger.error(url + "暂未录入内存域名信息库中！");
-							} else {
-								organization.add(Constant.unmarkedDomain.get(url));
-							}
+						if (DomainCacheManager.getByUrl(url) == null) {
+							logger.error(url + "暂未录入内存域名信息库中！");
 						} else {
-							organization.add(Constant.markedDomain.get(url));
+							organization.add(DomainCacheManager.getByUrl(url));
 						}
 					}
 				} catch (Exception e) {
@@ -803,5 +797,4 @@ public class StdfileServiceImpl implements StdfileService {
 		}
 		return summary;
 	}
-
 }

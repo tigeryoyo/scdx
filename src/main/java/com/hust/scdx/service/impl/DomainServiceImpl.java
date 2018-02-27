@@ -28,6 +28,7 @@ import com.hust.scdx.model.params.DomainOneQueryCondition;
 import com.hust.scdx.model.params.DomainTwoQueryCondition;
 import com.hust.scdx.service.DomainService;
 import com.hust.scdx.util.AttrUtil;
+import com.hust.scdx.util.DomainCacheManager;
 import com.hust.scdx.util.ExcelUtil;
 import com.hust.scdx.util.UrlUtil;
 
@@ -70,7 +71,132 @@ public class DomainServiceImpl implements DomainService {
 		return twoList;
 	}
 
+	/**
+	 * 处理原始数据，提取原始数据中存在域名信息库但未被标记为已维护的域名信息，并将其作为预备资源存入数据库
+	 * @param file
+	 * @return
+	 */
 	@Override
+	public boolean addUnMaintainedFromOrigFile(MultipartFile file) {
+		// TODO Auto-generated method stub
+		try {
+			InputStream input = file.getInputStream();
+			String fileName = file.getOriginalFilename();
+			List<String[]> content = ExcelUtil.readExcel(fileName, input);
+			if (content == null || content.size() <= 1) {
+				logger.info("文件读取错误！");
+				return false;
+			}
+			String[] attr = content.remove(0);
+			boolean nameFlag = true, columnFlag = true, typeFlag = true, rankFlag = true, weightFlag = true,
+					incidenceFlag = true;
+			int urlIndex = AttrUtil.findIndexOfUrl(attr);
+			// 获取其他属性列的下标
+			int nameIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEBNAME_PATTERN);// 网站名
+			if (nameIndex == -1) {
+				nameFlag = false;
+			}
+			int columnIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.COLUMN_PATTERN);// 栏目
+			if (columnIndex == -1) {
+				columnFlag = false;
+			}
+			int typeIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.TYPE_PATTERN);// 类型
+			if (typeIndex == -1) {
+				typeFlag = false;
+			}
+			int rankIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.RANK_PATTERN);// 级别
+			if (rankIndex == -1) {
+				rankFlag = false;
+			}
+			int weightIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.WEIGHT_PATTERN);// 权重
+			if (weightIndex == -1) {
+				weightFlag = false;
+			}
+			int incidenceIndex = AttrUtil.findIndexOfSth(attr, AttrUtil.INCIDENCE_PATTERN);// 影响类型
+			if (incidenceIndex == -1) {
+				incidenceFlag = false;
+			}
+			//存放存在但未被标记为已维护的域名信息
+			List<Domain> unMaintainedList = new ArrayList<Domain>();
+			for (String[] string : content) {
+				if (string.length <= 0 || null == string) {
+					continue;
+				}
+				String url = UrlUtil.getUrl(string[urlIndex]);
+				if (DomainCacheManager.isMaintained(url)) {
+					// 已存在域名信息库，且被标记为已维护的
+					continue;
+				} else if(null != DomainCacheManager.getByUrl(url)){
+					// 存在但未被标记为已维护的域名信息，以原始信息为准统计信息
+					Domain d = new Domain();
+					d.setUrl(string[urlIndex]);
+					if (nameFlag) {
+						if (StringUtils.isBlank(string[nameIndex])) {
+							d.setName(null);
+						} else {
+							d.setName(string[nameIndex]);
+						}
+					}
+					if (columnFlag) {
+						if (StringUtils.isBlank(string[columnIndex])) {
+							d.setColumn(null);
+						} else {
+							if (string[columnIndex].length() > 32) {
+								d.setColumn(string[columnIndex].substring(0, 31));
+							} else {
+								d.setColumn(string[columnIndex]);
+							}
+						}
+					}
+					if (typeFlag) {
+						if (StringUtils.isBlank(string[typeIndex])) {
+							d.setType(null);
+						} else {
+							d.setType(string[typeIndex]);
+						}
+					}
+					if (rankFlag) {
+						if (StringUtils.isBlank(string[rankIndex])) {
+							d.setRank(null);
+						} else {
+							d.setRank(string[rankIndex]);
+						}
+					}
+					if (weightFlag) {
+						if (StringUtils.isBlank(string[weightIndex])&& !StringUtils.isNumeric(string[weightIndex])) {
+							d.setWeight(null);
+						} else {
+							d.setWeight(Integer.parseInt(string[weightIndex]));
+						}
+					}
+					if (incidenceFlag) {
+						if (StringUtils.isBlank(string[incidenceIndex])) {
+							d.setIncidence(null);
+						} else {
+							d.setIncidence(string[incidenceIndex]);
+						}
+					}
+					unMaintainedList.add(d);
+				}
+			}
+			
+			/**
+			 * 处理存在但未被维护的域名信息
+			 */
+			
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.info(e.toString());
+			return false;
+		}
+	}
+	/**
+	 * 处理标准数据，将标准数据中未知的域名信息添加到域名信息库
+	 * @param file
+	 * @return
+	 */
+	@Override  
 	public boolean addUnknowUrlFromFile(MultipartFile file) {
 		// TODO Auto-generated method stub
 		try {
@@ -110,17 +236,18 @@ public class DomainServiceImpl implements DomainService {
 			if (incidenceIndex == -1) {
 				incidenceFlag = false;
 			}
-			// 存放不存在域名信息库的未知域名信息
-			List<Domain> list = new ArrayList<>();
+			//存放存在但未被标记为已维护的域名信息
+			List<Domain> unknowList = new ArrayList<Domain>();
 			for (String[] string : content) {
 				if (string.length <= 0 || null == string) {
 					continue;
 				}
-				if (Constant.markedDomain.containsKey(UrlUtil.getUrl(string[urlIndex]))) {
-					// 被标记为已维护的域名信息不做处理
+				String url = UrlUtil.getUrl(string[urlIndex]);
+				if (DomainCacheManager.isMaintained(url)) {
+					// 已存在域名信息库，且被标记为已维护的
 					continue;
-				} else if (Constant.unmarkedDomain.containsKey(UrlUtil.getUrl(string[urlIndex]))) {
-					// 没有被标记为已维护的域名信息直接覆盖域名信息库(文件中没有的属性，设为null，即不更新)
+				} else if(null == DomainCacheManager.getByUrl(url)){
+					// 未知的域名信息,并根据已有信息初始化域名信息
 					Domain d = new Domain();
 					d.setUrl(string[urlIndex]);
 					if (nameFlag) {
@@ -156,59 +283,6 @@ public class DomainServiceImpl implements DomainService {
 						}
 					}
 					if (weightFlag) {
-						if (StringUtils.isBlank(string[weightIndex])) {
-							d.setWeight(null);
-						} else {
-							d.setWeight(Integer.parseInt(string[weightIndex]));
-						}
-					}
-					if (incidenceFlag) {
-						if (StringUtils.isBlank(string[incidenceIndex])) {
-							d.setIncidence(null);
-						} else {
-							d.setIncidence(string[incidenceIndex]);
-						}
-					}
-					addDomain(d);
-				} else {
-					// 未知的域名信息
-					Domain d = new Domain();
-					d.setUrl(string[urlIndex]);
-					if (nameFlag) {
-						if (StringUtils.isBlank(string[nameIndex])) {
-							d.setName("其他");
-						} else {
-							d.setName(string[nameIndex]);
-						}
-					}
-					if (columnFlag) {
-						if (StringUtils.isBlank(string[columnIndex])) {
-							d.setColumn("");
-						} else {
-							if (string[columnIndex].length() > 32) {
-								d.setColumn(string[columnIndex].substring(0, 31));
-							} else {
-								d.setColumn(string[columnIndex]);
-							}
-						}
-					}
-					if (typeFlag) {
-						if (StringUtils.isBlank(string[typeIndex])) {
-							d.setType("");
-						} else {
-							d.setType(string[typeIndex]);
-						}
-					}
-					if (rankFlag) {
-						if (StringUtils.isBlank(string[rankIndex])) {
-							d.setRank("无");
-						} else {
-							d.setRank(string[rankIndex]);
-						}
-					}else{
-						d.setRank("无");
-					}
-					if (weightFlag) {
 						if (StringUtils.isBlank(string[weightIndex]) || string[weightIndex].equals("0")) {
 							// 从权重表中根据类型的权重赋予初始值
 							if (!StringUtils.isBlank(d.getType())) {
@@ -239,40 +313,10 @@ public class DomainServiceImpl implements DomainService {
 							d.setIncidence(string[incidenceIndex]);
 						}
 					}
-					list.add(d);
+					unknowList.add(d);
 				}
-
-				/*
-				 * if (Constant.existDomain.containsKey(UrlUtil.getUrl(string[
-				 * urlIndex]))) { // 存在的域名信息若信息不完整（网站名为其他，或者其他属性为空）则更新该域名信息
-				 * Domain old =
-				 * Constant.existDomain.get(UrlUtil.getUrl(string[urlIndex]));//
-				 * 存放在域名信息库中的域名信息 Domain d = new Domain();// 存放需要更新的域名信息
-				 * d.setUrl(string[urlIndex]); boolean upflag = false;//
-				 * 判断是否需要更新 System.out.print(old.getUrl());
-				 * System.out.println("---------"+old.getName()); if
-				 * (old.getName().equals("其他")) { if (nameFlag &&
-				 * !StringUtils.isBlank(string[nameIndex]) &&
-				 * !string[nameIndex].trim().equals("其他")) {
-				 * d.setName(string[nameIndex]); upflag = true; } } if
-				 * (StringUtils.isBlank(old.getColumn())) { if (columnFlag &&
-				 * !StringUtils.isBlank(string[columnIndex])) { if
-				 * (string[columnIndex].length() > 32) {
-				 * d.setColumn(string[columnIndex].substring(0, 31)); } else {
-				 * d.setColumn(string[columnIndex]); } upflag = true; } } if
-				 * (StringUtils.isBlank(old.getType()) ||
-				 * old.getType().equals("其他")) { if (typeFlag &&
-				 * !StringUtils.isBlank(string[typeIndex])) {
-				 * d.setType(string[typeIndex]); upflag = true; } } if
-				 * (StringUtils.isBlank(old.getRank()) ||
-				 * old.getRank().equals("其他")) { if (rankFlag &&
-				 * !StringUtils.isBlank(string[rankIndex])) {
-				 * d.setRank(string[rankIndex]); upflag = true; } } if (upflag)
-				 * { addDomain(d); }
-				 */
 			}
-			// System.out.println("---------这是一个测试---------需要添加的未知url有----"+list.size());
-			return addUnknowDomain(list);
+			return addUnknowDomain(unknowList);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.info(e.toString());
@@ -301,8 +345,7 @@ public class DomainServiceImpl implements DomainService {
 				Domain domain = Array2Domain(info);
 				if (domain == null)
 					continue;
-				if (Constant.markedDomain.containsKey(domain.getUrl())
-						|| Constant.unmarkedDomain.containsKey(domain.getUrl()))
+				if (null!= DomainCacheManager.getByUrl(domain.getUrl()))
 					list.add(domain);
 				else
 					unexist.add(domain);
@@ -325,11 +368,15 @@ public class DomainServiceImpl implements DomainService {
 
 		return true;
 	}
-
+/**
+ * 给据给定域名信息，添加新的域名信息到域名信息库
+ * @param domain
+ * @return
+ */
 	@Override
 	public boolean addUnknowDomain(Domain domain) {
 		String url = UrlUtil.getUrl(domain.getUrl());
-		//判断域名中的类型属性是否存在，若存在且存存在类型表中则插入类型表中
+		//判断域名中的类型属性是否存在，若存在，且不存在类型表中则插入类型表中
 		if(!StringUtils.isBlank(domain.getType()) && !Constant.typeMap.contains(domain.getType())){
 			if(typeDao.insertSourceType(domain.getType())> 0){
 				Constant.typeMap.add(domain.getType());
@@ -354,27 +401,23 @@ public class DomainServiceImpl implements DomainService {
 					father.setUrl(one);
 					father.setUpdateTime(new Date());
 					father.setIsFather(false);
-					if (!domainOneDao.insertDomain(father)) {
+					if (!insertDomainOne(father)) {      
 						return false;
 					} else {
-						// 添加成功，写入全局域名存放在数据库中
 						domainOne = father;
-						updateExistDomain(father);
 					}
 				} else {
 					fatherUuid = domainOne.getUuid();
 				}
 				DomainTwo domainTwo = domainTwoDao.getDomainTwoByUrl(two);
-				// 不存在则插入，存在则更新
+				// 不存在则插入，存在则不做处理
 				if (null == domainTwo) {
 					DomainTwo dt = domain.getDomainTwoBaseProperty();
 					dt.setUuid(UUID.randomUUID().toString());
 					dt.setFatherUuid(fatherUuid);
 					dt.setUrl(two);
 					dt.setUpdateTime(new Date());
-					if (domainTwoDao.insertDomainTwo(dt)) {
-						// 添加成功，写入全局域名存放在数据库中
-						updateExistDomain(dt);
+					if (insertDomainTwo(dt)) {
 						// 插入成功则判断其父的isFather是否为真，若为否则更新
 						// DomainOne dm = domainOneDao.getDomainOneByUrl(one);
 						if (null != domainOne) {
@@ -387,9 +430,7 @@ public class DomainServiceImpl implements DomainService {
 									domainOne.setName(dt.getName());
 							}
 							domainOne.setUpdateTime(new Date());
-							if (domainOneDao.updateDomainOneInfo(domainOne)) {
-								updateExistDomain(domainOne);
-							}
+							updateDomainOne(domainOne);
 						}
 					} else {
 						return false;
@@ -405,12 +446,8 @@ public class DomainServiceImpl implements DomainService {
 					domainOne.setIsFather(false);
 					domainOne.setUrl(one);
 					domainOne.setUpdateTime(new Date());
-					if (!domainOneDao.insertDomain(domainOne))
+					if (!insertDomainOne(domainOne))
 						return false;
-					else {
-						// 添加成功，写入全局域名存放在数据库中
-						updateExistDomain(domainOne);
-					}
 				}
 			}
 		} else {
@@ -431,6 +468,11 @@ public class DomainServiceImpl implements DomainService {
 		return false;
 	}
 
+	/**
+	 * 根据给定域名信息，更新域名信息库
+	 * @param domain
+	 * @return
+	 */
 	@Override
 	public boolean addDomain(Domain domain) {
 		String url = UrlUtil.getUrl(domain.getUrl());
@@ -457,11 +499,8 @@ public class DomainServiceImpl implements DomainService {
 				dt.setUuid(domainTwo.getUuid());
 				dt.setUrl(two);
 				dt.setUpdateTime(new Date());
-				if (!domainTwoDao.updateDomainTwo(dt))
+				if (!updateDomainTwo(dt))
 					return false;
-				else {
-					updateExistDomain(dt);
-				}
 			} else {
 				// 不是二级域名，就一定是一级域名
 				DomainOne domainOne = domainOneDao.getDomainOneByUrl(one);
@@ -474,65 +513,36 @@ public class DomainServiceImpl implements DomainService {
 				dm.setUuid(domainOne.getUuid());
 				dm.setUrl(one);
 				dm.setUpdateTime(new Date());
-				if (!domainOneDao.updateDomainOneInfo(dm))
+				if (!updateDomainOne(dm))
 					return false;
-				else {
-					updateExistDomain(dm);
-				}
 			}
 		} else
 			return false;
 		return true;
 	}
 
-	/*
-	 * @Override public boolean addDomain(Domain domain) { // TODO
-	 * Auto-generated method stub // int flag = 0; String url =
-	 * UrlUtil.getUrl(domain.getUrl()); if (null != url) { String one =
-	 * UrlUtil.getDomainOne(url); if(null == one){ //此时 url为ip地址 one = url; }
-	 * String two = UrlUtil.getDomainTwo(url); if (null != two) { String
-	 * fatherUuid = ""; DomainOne domainOne =
-	 * domainOneDao.getDomainOneByUrl(one); // 一级域名存在就获取uuid，不存在就插入数据库并获取uuid if
-	 * (null == domainOne) { //一级域名不存在 插入一级域名 fatherUuid =
-	 * UUID.randomUUID().toString(); domainOne =
-	 * domain.getDomainOneBaseProperty(); domainOne.setUuid(fatherUuid);
-	 * domainOne.setUrl(one); domainOne.setIsFather(true);
-	 * domainOne.setUpdateTime(new Date()); if
-	 * (!domainOneDao.insertDomain(domainOne)){ return false; }else{
-	 * //添加成功，写入全局域名存放在数据库中 updateExistDomain(domainOne); } } else { fatherUuid
-	 * = domainOne.getUuid(); } DomainTwo domainTwo =
-	 * domainTwoDao.getDomainTwoByUrl(two); // 不存在则插入，存在则更新 if (null ==
-	 * domainTwo) { //插入二级域名 domainTwo = domain.getDomainTwoBaseProperty();
-	 * domainTwo.setUuid(UUID.randomUUID().toString()); domainTwo.setUrl(two);
-	 * domainTwo.setFatherUuid(fatherUuid); domainTwo.setUpdateTime(new Date());
-	 * if (domainTwoDao.insertDomainTwo(domainTwo)) { //添加成功，写入全局域名存放在数据库中
-	 * updateExistDomain(domainTwo); //插入二级域名成功后，更新对应一级域名的isFather属性 DomainOne
-	 * dm = domainOneDao.getDomainOneByUrl(one); if (null != dm &&
-	 * !dm.getIsFather()) { dm.setIsFather(true); dm.setUuid(fatherUuid);
-	 * dm.setUpdateTime(new Date()); if(domainOneDao.updateDomainOneInfo(dm)){
-	 * updateExistDomain(dm); } } } else { //插入二级域名失败 return false; } } else {
-	 * //更新二级域名 DomainTwo dt = domain.getDomainTwoBaseProperty();
-	 * dt.setUuid(domainTwo.getFatherUuid()); dt.setUrl(two);
-	 * dt.setFatherUuid(domainTwo.getFatherUuid()); dt.setUpdateTime(new
-	 * Date());
-	 * System.out.println("---------------------------测试fatherUUid是否一样-------"+
-	 * fatherUuid== domainTwo.getFatherUuid()); if
-	 * (!domainTwoDao.updateDomainTwo(dt)) return false; else{
-	 * updateExistDomain(dt); } } } else { // 不是二级域名，就一定是一级域名 DomainOne
-	 * domainOne = domainOneDao.getDomainOneByUrl(one); //
-	 * 一级域名存在就获取uuid，不存在就插入数据库并获取uuid if (null == domainOne) { //插入一级域名
-	 * domainOne = domain.getDomainOneBaseProperty();
-	 * domainOne.setUuid(UUID.randomUUID().toString()); domainOne.setUrl(one);
-	 * domainOne.setIsFather(false); domainOne.setUpdateTime(new Date()); if
-	 * (!domainOneDao.insertDomain(domainOne)) return false; else{
-	 * //添加成功，写入全局域名存放在数据库中 updateExistDomain(domainOne); } } else { //更新一级域名信息
-	 * DomainOne dm = domain.getDomainOneBaseProperty();
-	 * dm.setUuid(domainOne.getUuid()); dm.setUrl(one);
-	 * dm.setIsFather(domainOne.getIsFather()); dm.setUpdateTime(new Date()); if
-	 * (!domainOneDao.updateDomainOneInfo(dm)) return false; else{
-	 * updateExistDomain(dm); } } } }else{ return false; } return true; }
-	 */
-
+	public boolean insertDomainOne(DomainOne domainOne){
+		if(null != domainOne && null != domainOne.getUuid() && null != domainOne.getUrl()&&domainOneDao.insertDomain(domainOne)){
+			domainOne = domainOneDao.getDomainOneById(domainOne.getUuid());
+			Domain domain = new Domain();
+			domain.setDomainFormOne(domainOne);
+			DomainCacheManager.addDomain(domain);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean insertDomainTwo(DomainTwo domainTwo){
+		if(null != domainTwo && null != domainTwo.getUuid() && null != domainTwo.getUrl()&&domainTwoDao.insertDomainTwo(domainTwo)){
+			domainTwo = domainTwoDao.getDomainTwoById(domainTwo.getUuid());
+			Domain domain = new Domain();
+			domain.setDomainFormTwo(domainTwo);
+			DomainCacheManager.addDomain(domain);
+			return true;
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean deleteDomainOneById(String uuid) {
 		// TODO Auto-generated method stub
@@ -540,13 +550,12 @@ public class DomainServiceImpl implements DomainService {
 		List<DomainTwo> list = domainTwoDao.getDomainTwoByFatherId(uuid);
 		if (domainOneDao.delelteDomainOneById(uuid)) {
 			try {
-				// 删除内存中的域名信息
-				Constant.unmarkedDomain.remove(url);
-				Constant.markedDomain.remove(url);
+				if(null == DomainCacheManager.deleteByUrl(url))
+					logger.error(url+"删除缓存中的域名信息失败！");
 				// 同时级联删除内存中的二级域名信息
 				for (DomainTwo domainTwo : list) {
-					Constant.unmarkedDomain.remove(domainTwo.getUrl());
-					Constant.markedDomain.remove(domainTwo.getUrl());
+					if(null == DomainCacheManager.deleteByUrl(domainTwo.getUrl()))
+						logger.error(domainTwo.getUrl()+"删除缓存中的域名信息失败！");
 				}
 			} catch (Exception e) {
 				logger.error("删除内存中的域名信息失败！");
@@ -569,11 +578,10 @@ public class DomainServiceImpl implements DomainService {
 		String url = domainTwoDao.getDomainTwoById(uuid).getUrl();
 		if (domainTwoDao.deleteDomainById(uuid)) {
 			try {
-				// 删除内存中的域名信息
-				Constant.unmarkedDomain.remove(url);
-				Constant.markedDomain.remove(url);
+				if(null == DomainCacheManager.deleteByUrl(url))
+					logger.error(url+"删除缓存中的域名信息失败！");
 			} catch (Exception e) {
-				logger.error("删除内存中的域名信息失败！");
+				logger.error("删除缓存中的域名信息失败！");
 				logger.error(e.getMessage());
 			}
 			return true;
@@ -643,12 +651,12 @@ public class DomainServiceImpl implements DomainService {
 		} else {
 			domain.setMaintenanceStatus(true);
 		}
-		//判断域名中的类型属性是否存在，若存在且存存在类型表中则插入类型表中
+	/*	//判断域名中的类型属性是否存在，若存在且存存在类型表中则插入类型表中
 				if(!StringUtils.isBlank(domain.getType()) && !Constant.typeMap.contains(domain.getType())){
 					if(typeDao.insertSourceType(domain.getType())> 0){
 						Constant.typeMap.add(domain.getType());
 					}
-				}
+				}*/
 		return domain;
 	}
 
@@ -658,8 +666,11 @@ public class DomainServiceImpl implements DomainService {
 		if (domainOneDao.updateDomainOneInfo(one)) {
 			if(StringUtils.isBlank(one.getUrl())){
 				one = domainOneDao.getDomainOneById(one.getUuid());
+				Domain domain = new Domain();
+				domain.setDomainFormOne(one);
+				if(!DomainCacheManager.addDomain(domain))
+					logger.info(one.getUrl()+"更新到缓存失败！");
 			}
-			updateExistDomain(one);
 			return true;
 		}
 		return false;
@@ -671,8 +682,11 @@ public class DomainServiceImpl implements DomainService {
 		if (domainTwoDao.updateDomainTwo(two)) {
 			if(StringUtils.isBlank(two.getUrl())){
 				two = domainTwoDao.getDomainTwoById(two.getUuid());
+				Domain domain = new Domain();
+				domain.setDomainFormTwo(two);
+				if(!DomainCacheManager.addDomain(domain))
+					logger.info(two.getUrl()+"更新到缓存失败！");
 			}
-			updateExistDomain(two);
 			return true;
 		} else {
 			return false;
@@ -697,250 +711,5 @@ public class DomainServiceImpl implements DomainService {
 			}
 		}
 		return domain;
-	}
-
-	private void updateExistDomain(DomainTwo two) {
-		Domain domain = new Domain();
-		domain.setDomainFormTwo(two);
-		if (domain.getMaintenanceStatus() != null && domain.getMaintenanceStatus() == true) {// 维护状态存在，且为已维护
-			if (Constant.markedDomain.containsKey(two.getUrl())) {// 该已维护的域名存在内存中，则更新原内存中域名信息
-				Domain old = Constant.markedDomain.get(two.getUrl());
-				if (domain.getName() != null) {
-					old.setName(domain.getName());
-				} else {
-					System.out.println(two.getUrl() + "域名名为null，" + old.getName() + "-----------");
-				}
-				if (domain.getColumn() != null) {
-					old.setColumn(domain.getColumn());
-				}
-				if (domain.getType() != null) {
-					old.setType(domain.getType());
-				}
-				if (domain.getRank() != null) {
-					old.setRank(domain.getRank());
-				}
-				if (domain.getWeight() != null) {
-					old.setWeight(domain.getWeight());
-				}
-				if (domain.getIncidence() != null) {
-					old.setIncidence(domain.getIncidence());
-				}
-				Constant.markedDomain.put(two.getUrl(), old);
-			} else {// 该域名不存在markedDomain中，则添加到markedDomain中
-				// 若该域名原来是未维护状态，则从unmarkedDomian中移除,并将更新后的信息添加到markedDomain中
-				if (Constant.unmarkedDomain.containsKey(two.getUrl())) {
-					Domain old = Constant.unmarkedDomain.remove(two.getUrl());
-					if (domain.getName() != null) {
-						old.setName(domain.getName());
-					} else {
-						System.out.println(two.getUrl() + "域名名为null，" + old.getName() + "-----------");
-					}
-					if (domain.getColumn() != null) {
-						old.setColumn(domain.getColumn());
-					}
-					if (domain.getType() != null) {
-						old.setType(domain.getType());
-					}
-					if (domain.getRank() != null) {
-						old.setRank(domain.getRank());
-					}
-					if (domain.getWeight() != null) {
-						old.setWeight(domain.getWeight());
-					}
-					if (domain.getIncidence() != null) {
-						old.setIncidence(domain.getIncidence());
-					}
-					if (domain.getMaintenanceStatus() != null) {
-						old.setMaintenanceStatus(domain.getMaintenanceStatus());
-					}					
-					Constant.markedDomain.put(two.getUrl(), old);
-				}else{
-					Domain d = new Domain();
-					d.setDomainFormTwo(domainTwoDao.getDomainTwoByUrl(two.getUrl()));
-					Constant.markedDomain.put(two.getUrl(), d);
-				}
-			}
-		} else {//该域名不是已维护的域名
-			if (Constant.unmarkedDomain.containsKey(two.getUrl())) {// 该未维护的域名存在内存中，则更新原内存中域名信息
-				Domain old = Constant.unmarkedDomain.get(two.getUrl());
-				if (domain.getName() != null) {
-					old.setName(domain.getName());
-				} else {
-					System.out.println(two.getUrl() + "域名名为null，" + old.getName() + "-----------");
-				}
-				if (domain.getColumn() != null) {
-					old.setColumn(domain.getColumn());
-				}
-				if (domain.getType() != null) {
-					old.setType(domain.getType());
-				}
-				if (domain.getRank() != null) {
-					old.setRank(domain.getRank());
-				}
-				if (domain.getWeight() != null) {
-					old.setWeight(domain.getWeight());
-				}
-				if (domain.getIncidence() != null) {
-					old.setIncidence(domain.getIncidence());
-				}
-				Constant.unmarkedDomain.put(two.getUrl(), old);
-			} else {// 该域名不存在unmarkedDomain中，则添加到unmarkedDomain中
-				// 若该域名原来是已维护状态，则从markedDomian中移除,并将原信息更新后copy到unmarkedDomain中
-				if (Constant.markedDomain.containsKey(two.getUrl())) {
-					Domain old = Constant.markedDomain.remove(two.getUrl());
-					if (domain.getName() != null) {
-						old.setName(domain.getName());
-					} else {
-						System.out.println(two.getUrl() + "域名名为null，" + old.getName() + "-----------");
-					}
-					if (domain.getColumn() != null) {
-						old.setColumn(domain.getColumn());
-					}
-					if (domain.getType() != null) {
-						old.setType(domain.getType());
-					}
-					if (domain.getRank() != null) {
-						old.setRank(domain.getRank());
-					}
-					if (domain.getWeight() != null) {
-						old.setWeight(domain.getWeight());
-					}
-					if (domain.getIncidence() != null) {
-						old.setIncidence(domain.getIncidence());
-					}
-					if (domain.getMaintenanceStatus() != null) {
-						old.setMaintenanceStatus(domain.getMaintenanceStatus());
-					}
-					Constant.unmarkedDomain.put(two.getUrl(), old);
-				}else{
-					Domain d = new Domain();
-					d.setDomainFormTwo(domainTwoDao.getDomainTwoByUrl(two.getUrl()));
-					Constant.unmarkedDomain.put(two.getUrl(), d);
-				}
-			}
-		}
-	}
-
-	private void updateExistDomain(DomainOne one) {
-		Domain domain = new Domain();
-		domain.setDomainFormOne(one);
-		if (domain.getMaintenanceStatus() != null && domain.getMaintenanceStatus() == true) {// 维护状态存在，且为已维护
-			if (Constant.markedDomain.containsKey(one.getUrl())) {// 该已维护的域名存在内存中，则更新原内存中域名信息
-				Domain old = Constant.markedDomain.get(one.getUrl());
-				if (domain.getName() != null) {
-					old.setName(domain.getName());
-				} else {
-					System.out.println(one.getUrl() + "域名名为null，" + old.getName() + "-----------");
-				}
-				if (domain.getColumn() != null) {
-					old.setColumn(domain.getColumn());
-				}
-				if (domain.getType() != null) {
-					old.setType(domain.getType());
-				}
-				if (domain.getRank() != null) {
-					old.setRank(domain.getRank());
-				}
-				if (domain.getWeight() != null) {
-					old.setWeight(domain.getWeight());
-				}
-				if (domain.getIncidence() != null) {
-					old.setIncidence(domain.getIncidence());
-				}
-				Constant.markedDomain.put(one.getUrl(), old);
-			} else {// 该域名不存在markedDomain中，则添加到markedDomain中
-				// 若该域名原来是未维护状态，则从unmarkedDomian中移除
-				if (Constant.unmarkedDomain.containsKey(one.getUrl())) {
-					Domain old = Constant.unmarkedDomain.remove(one.getUrl());
-					if (domain.getName() != null) {
-						old.setName(domain.getName());
-					} else {
-						System.out.println(one.getUrl() + "域名名为null，" + old.getName() + "-----------");
-					}
-					if (domain.getColumn() != null) {
-						old.setColumn(domain.getColumn());
-					}
-					if (domain.getType() != null) {
-						old.setType(domain.getType());
-					}
-					if (domain.getRank() != null) {
-						old.setRank(domain.getRank());
-					}
-					if (domain.getWeight() != null) {
-						old.setWeight(domain.getWeight());
-					}
-					if (domain.getIncidence() != null) {
-						old.setIncidence(domain.getIncidence());
-					}
-					if (domain.getMaintenanceStatus() != null) {
-						old.setMaintenanceStatus(domain.getMaintenanceStatus());
-					}
-					Constant.markedDomain.put(one.getUrl(), old);
-				}else{
-					Domain d = new Domain();
-					d.setDomainFormOne(domainOneDao.getDomainOneByUrl(one.getUrl()));
-					Constant.markedDomain.put(one.getUrl(), d);
-				}
-			}
-		} else {//该域名不是已维护的域名
-			if (Constant.unmarkedDomain.containsKey(one.getUrl())) {// 该未维护的域名存在内存中，则更新原内存中域名信息
-				Domain old = Constant.unmarkedDomain.get(one.getUrl());
-				if (domain.getName() != null) {
-					old.setName(domain.getName());
-				} else {
-					System.out.println(one.getUrl() + "域名名为null，" + old.getName() + "-----------");
-				}
-				if (domain.getColumn() != null) {
-					old.setColumn(domain.getColumn());
-				}
-				if (domain.getType() != null) {
-					old.setType(domain.getType());
-				}
-				if (domain.getRank() != null) {
-					old.setRank(domain.getRank());
-				}
-				if (domain.getWeight() != null) {
-					old.setWeight(domain.getWeight());
-				}
-				if (domain.getIncidence() != null) {
-					old.setIncidence(domain.getIncidence());
-				}
-				Constant.unmarkedDomain.put(one.getUrl(), old);
-			} else {// 该域名不存在unmarkedDomain中，则添加到unmarkedDomain中
-				// 若该域名原来是已维护状态，则从markedDomian中移除
-				if (Constant.markedDomain.containsKey(one.getUrl())) {
-					Domain old = Constant.markedDomain.remove(one.getUrl());
-					if (domain.getName() != null) {
-						old.setName(domain.getName());
-					} else {
-						System.out.println(one.getUrl() + "域名名为null，" + old.getName() + "-----------");
-					}
-					if (domain.getColumn() != null) {
-						old.setColumn(domain.getColumn());
-					}
-					if (domain.getType() != null) {
-						old.setType(domain.getType());
-					}
-					if (domain.getRank() != null) {
-						old.setRank(domain.getRank());
-					}
-					if (domain.getWeight() != null) {
-						old.setWeight(domain.getWeight());
-					}
-					if (domain.getIncidence() != null) {
-						old.setIncidence(domain.getIncidence());
-					}
-					if (domain.getMaintenanceStatus() != null) {
-						old.setMaintenanceStatus(domain.getMaintenanceStatus());
-					}
-					Constant.unmarkedDomain.put(one.getUrl(), old);
-				}else{
-					//未知域名
-					Domain d = new Domain();
-					d.setDomainFormOne(domainOneDao.getDomainOneByUrl(one.getUrl()));
-					Constant.unmarkedDomain.put(one.getUrl(), d);
-				}
-			}
-		}
 	}
 }

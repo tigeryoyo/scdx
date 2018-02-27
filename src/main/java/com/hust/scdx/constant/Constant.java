@@ -16,14 +16,9 @@ public class Constant {
 	public final static String INVALID_TIME = "1970-01-01";
 
 	/**
-	 * 被标记为已维护的域名
+	 * 全局域名变量
 	 */
-	public static ConcurrentHashMap<String, Domain> markedDomain = new ConcurrentHashMap<String, Domain>();
-	
-	/**
-	 * 没有被标记为已维护的域名
-	 */
-	public static ConcurrentHashMap<String, Domain> unmarkedDomain = new ConcurrentHashMap<String, Domain>();
+	public static ConcurrentHashMap<String, Domain> DomainCache;
 	
 	/**
 	 * 类型-权重

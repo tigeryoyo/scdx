@@ -55,7 +55,7 @@ public class UrlUtil {
 	static{
 		// 初始化域名对象
 				ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
-				DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
+				/*DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
 				DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
 				oneCondition.setLimit(0);
 				oneCondition.setStart(0);
@@ -78,7 +78,7 @@ public class UrlUtil {
 					} else {
 						Constant.unmarkedDomain.put(domainTwo.getUrl(), domain);
 					}
-				}
+				}*/
 				/**
 				 * 初始化类型
 				 */
@@ -89,7 +89,8 @@ public class UrlUtil {
 				}
 	}
 	public static void initialDomainAndType() {
-		if(Constant.markedDomain.size()>0){
+		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
+	/*	if(Constant.markedDomain.size()>0){
 			Constant.markedDomain.clear();
 		}
 		if(Constant.unmarkedDomain.size()>0){
@@ -99,7 +100,6 @@ public class UrlUtil {
 			Constant.typeMap.clear();
 		}
 		// 初始化域名对象
-		ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
 		DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
 		DomainOneQueryCondition oneCondition = new DomainOneQueryCondition();
 		oneCondition.setLimit(0);
@@ -123,7 +123,7 @@ public class UrlUtil {
 			} else {
 				Constant.unmarkedDomain.put(domainTwo.getUrl(), domain);
 			}
-		}
+		}*/
 		/**
 		 * 初始化类型
 		 */
