@@ -238,7 +238,7 @@ public class StdfileServiceImpl implements StdfileService {
 		List<String> filespath = new ArrayList<String>();
 		for (int i = syear; i <= eyear; i++) {
 			for (int j = (i == syear ? smonth : 1); j <= (i == eyear ? emonth : 12); j++) {
-				for (int k = (syear == eyear && smonth == emonth ? sday : 1); k <= (i == eyear && j == emonth ? eday : 31); k++) {
+				for (int k = i == syear && j == smonth ? sday : 1; k <= (i == eyear && j == emonth ? eday : 31); k++) {
 					String dirPath = DIRECTORY.STDFILE + String.valueOf(i) + "/" + String.format("%2d", j).replace(" ", "0") + "/"
 							+ String.format("%2d", k).replace(" ", "0") + "/";
 					if (new File(dirPath).exists()) {
