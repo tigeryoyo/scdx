@@ -681,6 +681,13 @@ public class DomainServiceImpl implements DomainService {
 		// TODO Auto-generated method stub
 		if (domainTwoDao.updateDomainTwo(two)) {
 			two = domainTwoDao.getDomainTwoById(two.getUuid());
+			if(StringUtils.isBlank(two.getUrl())){
+				two = domainTwoDao.getDomainTwoById(two.getUuid());
+				Domain domain = new Domain();
+				domain.setDomainFormTwo(two);
+				if(!DomainCacheManager.addDomain(domain))
+					logger.info(two.getUrl()+"更新到缓存失败！");
+			}
 			DomainOne one = domainOneDao.getDomainOneById(two.getFatherUuid());
 			if(null != one){
 				one.setUpdateTime(two.getUpdateTime());

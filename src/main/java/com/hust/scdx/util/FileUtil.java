@@ -424,12 +424,6 @@ public class FileUtil {
 							strs[weightIndex] = weight + "";
 						}
 					}else{
-						Integer weight = domain.getWeight();
-						if(weight == null){
-							strs[weightIndex] = "0";
-						}else{
-							strs[weightIndex] = weight + "";
-						}
 						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = domain.getWeight();
 							if(weight == null){
@@ -452,9 +446,8 @@ public class FileUtil {
 					strs[rankIndex] = two.getRank();
 					strs[incidenceIndex] = two.getIncidence();
 					strs[weightIndex] = two.getWeight() + "";
-				} else if (Constant.markedDomain.containsKey(oUrl)) {
+				} else if (one!=null && one.getMaintenanceStatus()) {
 					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
-					Domain domain = Constant.markedDomain.get(oUrl);
 					strs[nameIndex] = one.getName();
 					strs[rankIndex] = one.getRank();
 					strs[incidenceIndex] = one.getIncidence();
@@ -485,12 +478,6 @@ public class FileUtil {
 								strs[weightIndex] = weight + "";
 							}
 					}else{
-						Integer weight = domain.getWeight();
-						if(weight == null){
-							strs[weightIndex] = "0";
-						}else{
-							strs[weightIndex] = weight + "";
-						}
 						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = two.getWeight();
 							if(weight == null){
