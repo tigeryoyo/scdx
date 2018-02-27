@@ -211,7 +211,7 @@ public class AttrUtil {
 	 * @param content
 	 * @return
 	 */
-	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content, ConcurrentHashMap<String, Domain> domains) {
+	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content) {
 		HashMap<String, TreeMap<String, Integer>> map = new HashMap<String, TreeMap<String, Integer>>();
 		int indexOfUrl = findIndexOfUrl(content.get(0));
 		int indexOfTime = findIndexOfTime(content.get(0));
@@ -235,7 +235,7 @@ public class AttrUtil {
 
 				// 统计类型-数量
 				// 先根据url查询域名表是否包含此条url
-				Domain domain = domains.get(row[indexOfUrl]);
+				Domain domain = DomainCacheManager.getByUrl(row[indexOfUrl]);
 				String type = row[indexOfType].trim();
 				if (domain != null) {
 					String tmp = domain.getType();

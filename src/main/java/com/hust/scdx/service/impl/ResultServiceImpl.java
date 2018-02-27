@@ -390,10 +390,7 @@ public class ResultServiceImpl implements ResultService {
 				}
 			}
 			List<Integer> marked = getMarked(modifyClusters, modifyCounts);
-			//为统计日期-数量与来源-数量，合并内存中的两个Domain
-			ConcurrentHashMap<String, Domain> existDomain = new ConcurrentHashMap<String, Domain>(Constant.markedDomain);
-			existDomain.putAll(Constant.unmarkedDomain);
-			Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics(resultContent, existDomain);
+			Map<String, TreeMap<String, Integer>> statMap = AttrUtil.statistics(resultContent);
 			res.put(Resutt.STAT, statMap);
 			res.put(Resutt.RESULT, resultContent);
 			res.put(Resutt.RESULTNAME, result.getResName());

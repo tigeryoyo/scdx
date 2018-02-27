@@ -127,4 +127,10 @@ public interface DomainService {
 	 * @return 清洗过后的域名对象
 	 */
 	Domain getDomainByUrl(String url);
+	
+	boolean insertDomainTwo(DomainTwo domainTwo);
+	
+	boolean insertDomainOne(DomainOne domainOne);
+	
+	boolean addUnMaintainedFromOrigFile(MultipartFile file);
 }

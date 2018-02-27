@@ -30,6 +30,7 @@ import com.google.common.io.Files;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Domain;
+import com.sun.tools.doclint.HtmlTag.Attr;
 
 public class FileUtil {
 	/**
@@ -146,7 +147,7 @@ public class FileUtil {
 		// return content;
 
 		// 调整属性顺序消耗比较多的运行时间
-		return fillContentFromDomain(adjustPropertyLine(globalAttrs, content));
+		return fillContentFromDomainCache(adjustPropertyLine(globalAttrs, content));
 	}
 
 	/**
@@ -268,16 +269,7 @@ public class FileUtil {
 		int[] orderAttrs = new int[attrSize + 6];
 		List<String> newAttrs = new ArrayList<String>();
 		int order = 0;
-		
-		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
-		}
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
+		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
 		if (index != -1) {
 			orderAttrs[order++] = index;
 			newAttrs.add(attrs.get(index));
@@ -346,7 +338,14 @@ public class FileUtil {
 			newAttrs.add(AttrUtil.INCIDENCE_PATTERN);
 		}
 
-		
+		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
+		if (index != -1) {
+			orderAttrs[order++] = index;
+			newAttrs.add(attrs.get(index));
+		} else {
+			orderAttrs[order++] = index;
+			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
+		}
 
 		for (int i = 0; i < attrSize; i++) {
 			if (!AttrUtil.isImp(attrs.get(i))) {
@@ -376,7 +375,7 @@ public class FileUtil {
 		return res;
 	}
 
-	private static List<String[]> fillContentFromDomain(List<String[]> content) {
+	private static List<String[]> fillContentFromDomainCache(List<String[]> content) {
 		List<String[]> res = new ArrayList<String[]>();
 		String[] attrs = content.remove(0);
 		int urlIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.URL_PATTERN);
@@ -388,50 +387,44 @@ public class FileUtil {
 		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
-			if(url == null){
-				res.add(strs);
-				continue;
-			}
-			String oUrl = UrlUtil.getDomainOne(url);
 			String tUrl = UrlUtil.getDomainTwo(url);
 			if (tUrl == null) {
 				// 如果二级域名不存在，则url为一级域名
-				if (Constant.markedDomain.containsKey(url)) {
+				Domain domain = DomainCacheManager.getByUrl(url);
+				if (null != domain && domain.getMaintenanceStatus()) {
 					// 如果该一级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
-					Domain domain = Constant.markedDomain.get(url);
 					strs[nameIndex] = domain.getName();
 					strs[columnIndex] = domain.getColumn();
 					strs[typeIndex] = domain.getType();
 					strs[rankIndex] = domain.getRank();
 					strs[incidenceIndex] = domain.getIncidence();
 					strs[weightIndex] = domain.getWeight() + "";
-				} else if (Constant.unmarkedDomain.containsKey(url)) {
+				} else if (null != domain) {
 					// 若不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
-					Domain domain = Constant.unmarkedDomain.get(url);
 					if (StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if (StringUtils.isBlank(strs[columnIndex]) && null != domain.getColumn()) {
+					if (StringUtils.isBlank(strs[columnIndex]) && StringUtils.isBlank(domain.getColumn())) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if (StringUtils.isBlank(strs[typeIndex]) && null != domain.getType()) {
+					if (StringUtils.isBlank(strs[typeIndex]) && StringUtils.isBlank(domain.getType())) {
 						strs[typeIndex] = domain.getType();
 					}
-					if (StringUtils.isBlank(strs[rankIndex]) && null != domain.getRank()) {
+					if (StringUtils.isBlank(strs[rankIndex]) && StringUtils.isBlank(domain.getRank())) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if (StringUtils.isBlank(strs[incidenceIndex]) && null != domain.getIncidence()) {
+					if (StringUtils.isBlank(strs[incidenceIndex]) && StringUtils.isBlank(domain.getIncidence())) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
 					if (StringUtils.isBlank(strs[weightIndex])) {
-						if(!StringUtils.isNumeric(strs[weightIndex])){
-							Integer weight = domain.getWeight();
-							if(weight == null){
-								strs[weightIndex] = "0";
-							}else{
-								strs[weightIndex] = weight + "";
-							}
+						Integer weight = domain.getWeight();
+						if(weight == null){
+							strs[weightIndex] = "0";
 						}else{
+							strs[weightIndex] = weight + "";
+						}
+					}else{
+						if(!StringUtils.isNumeric(strs[weightIndex])){
 							Integer weight = domain.getWeight();
 							if(weight == null){
 								strs[weightIndex] = "0";
@@ -442,51 +435,51 @@ public class FileUtil {
 					}
 				}
 			} else {
-				// tUrl不为null则，tUrl为二级域名，oUrl为其一级域名
-				if (Constant.markedDomain.containsKey(tUrl)) {
+				// tUrl不为null则，tUrl为二级域名，url为其一级域名
+				Domain two = DomainCacheManager.getByUrl(tUrl);
+				Domain one = DomainCacheManager.getByUrl(url);
+				if (null != two && two.getMaintenanceStatus()) {
 					// 如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
-					Domain domain = Constant.markedDomain.get(tUrl);
-					strs[nameIndex] = domain.getName();
-					strs[columnIndex] = domain.getColumn();
-					strs[typeIndex] = domain.getType();
-					strs[rankIndex] = domain.getRank();
-					strs[incidenceIndex] = domain.getIncidence();
-					strs[weightIndex] = domain.getWeight() + "";
-				} else if (Constant.markedDomain.containsKey(oUrl)) {
+					strs[nameIndex] = two.getName();
+					strs[columnIndex] = two.getColumn();
+					strs[typeIndex] = two.getType();
+					strs[rankIndex] = two.getRank();
+					strs[incidenceIndex] = two.getIncidence();
+					strs[weightIndex] = two.getWeight() + "";
+				} else if (one!=null && one.getMaintenanceStatus()) {
 					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
-					Domain domain = Constant.markedDomain.get(oUrl);
-					strs[nameIndex] = domain.getName();
-					strs[rankIndex] = domain.getRank();
-					strs[incidenceIndex] = domain.getIncidence();
-					strs[weightIndex] = domain.getWeight() + "";
-				} else if (Constant.unmarkedDomain.containsKey(tUrl)) {
+					strs[nameIndex] = one.getName();
+					strs[rankIndex] = one.getRank();
+					strs[incidenceIndex] = one.getIncidence();
+					strs[typeIndex] = one.getType();
+					strs[weightIndex] = one.getWeight() + "";
+				} else if (null!= two) {
 					// 若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
-					Domain domain = Constant.unmarkedDomain.get(tUrl);
 					if (StringUtils.isBlank(strs[nameIndex])) {
-						strs[nameIndex] = domain.getName();
+						strs[nameIndex] = two.getName();
 					}
-					if (StringUtils.isBlank(strs[columnIndex]) && null != domain.getColumn()) {
-						strs[columnIndex] = domain.getColumn();
+					if (StringUtils.isBlank(strs[columnIndex]) && StringUtils.isBlank(two.getColumn())) {
+						strs[columnIndex] = two.getColumn();
 					}
-					if (StringUtils.isBlank(strs[typeIndex]) && null != domain.getType()) {
-						strs[typeIndex] = domain.getType();
+					if (StringUtils.isBlank(strs[typeIndex]) && StringUtils.isBlank(two.getType())) {
+						strs[typeIndex] = two.getType();
 					}
-					if (StringUtils.isBlank(strs[rankIndex]) && null != domain.getRank()) {
-						strs[rankIndex] = domain.getRank();
+					if (StringUtils.isBlank(strs[rankIndex]) && StringUtils.isBlank(two.getRank())) {
+						strs[rankIndex] = two.getRank();
 					}
-					if (StringUtils.isBlank(strs[incidenceIndex]) && null != domain.getIncidence()) {
-						strs[incidenceIndex] = domain.getIncidence();
+					if (StringUtils.isBlank(strs[incidenceIndex]) && StringUtils.isBlank(two.getIncidence())) {
+						strs[incidenceIndex] = two.getIncidence();
 					}
-					if (StringUtils.isBlank(strs[weightIndex])) {
-						if(!StringUtils.isNumeric(strs[weightIndex])){
-							Integer weight = domain.getWeight();
+					if (StringUtils.isBlank(strs[weightIndex]) ) {
+							Integer weight = two.getWeight();
 							if(weight == null){
 								strs[weightIndex] = "0";
 							}else{
 								strs[weightIndex] = weight + "";
 							}
-						}else{
-							Integer weight = domain.getWeight();
+					}else{
+						if(!StringUtils.isNumeric(strs[weightIndex])){
+							Integer weight = two.getWeight();
 							if(weight == null){
 								strs[weightIndex] = "0";
 							}else{
