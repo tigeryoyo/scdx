@@ -48,7 +48,7 @@ public class TopicServiceImpl implements TopicService {
 		Topic topic = new Topic();
 		topic.setCreator(user.getUserName());
 		topic.setTopicName(topicName);
-		topic.setAttr("5;7;1;4;3;2;6;8;10;9;");
+		topic.setAttr(Constant.topicAttrOrder);
 		topic.setLastOperator(user.getUserName());
 		topic.setCreateTime(new Date());
 		topic.setLastUpdateTime(topic.getCreateTime());
@@ -105,6 +105,10 @@ public class TopicServiceImpl implements TopicService {
 			List<String> attrs_mainName = new ArrayList<String>();
 			List<String> attrs_alias = new ArrayList<String>();
 			AttrUtil attrUtil = AttrUtil.getSingleton();
+			String attrs = queryAttrByTopicId(topicId);
+			if (attrs == null || attrs.isEmpty()) {
+				attrs = Constant.topicAttrOrder;
+			}
 			String[] attrIds = queryAttrByTopicId(topicId).split(";");
 			for (String attrId : attrIds) {
 				Attr attr = attrService.queryAttrById(Integer.valueOf(attrId));
@@ -120,6 +124,27 @@ public class TopicServiceImpl implements TopicService {
 					} else if (attr.getAttrId() == 3) {
 						attrUtil.setTime_mainName(attr.getAttrMainname());
 						attrUtil.setTime_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 4) {
+						attrUtil.setPosting_mainName(attr.getAttrMainname());
+						attrUtil.setPosting_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 5) {
+						attrUtil.setWebname_mainName(attr.getAttrMainname());
+						attrUtil.setWebname_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 6) {
+						attrUtil.setType_mainName(attr.getAttrMainname());
+						attrUtil.setType_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 7) {
+						attrUtil.setColumn_mainName(attr.getAttrMainname());
+						attrUtil.setColumn_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 8) {
+						attrUtil.setRank_mainName(attr.getAttrMainname());
+						attrUtil.setRank_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 9) {
+						attrUtil.setWeight_mainName(attr.getAttrMainname());
+						attrUtil.setWeight_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 10) {
+						attrUtil.setIncidence_mainName(attr.getAttrMainname());
+						attrUtil.setIncidence_alias(attr.getAttrAlias());
 					}
 				}
 			}
