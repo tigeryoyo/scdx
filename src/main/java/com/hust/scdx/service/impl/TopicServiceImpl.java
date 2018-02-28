@@ -1,5 +1,6 @@
 package com.hust.scdx.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -11,14 +12,17 @@ import org.springframework.stereotype.Service;
 
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.TopicDao;
+import com.hust.scdx.model.Attr;
 import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.TopicQueryCondition;
+import com.hust.scdx.service.AttrService;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.service.ResultService;
 import com.hust.scdx.service.StdfileService;
 import com.hust.scdx.service.TopicService;
 import com.hust.scdx.service.UserService;
+import com.hust.scdx.util.AttrUtil;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -31,6 +35,8 @@ public class TopicServiceImpl implements TopicService {
 	@Autowired
 	StdfileService stdfileService;
 	@Autowired
+	AttrService attrService;
+	@Autowired
 	ResultService resultService;
 
 	/**
@@ -42,6 +48,7 @@ public class TopicServiceImpl implements TopicService {
 		Topic topic = new Topic();
 		topic.setCreator(user.getUserName());
 		topic.setTopicName(topicName);
+		topic.setAttr("5;7;1;4;3;2;6;8;10;9;");
 		topic.setLastOperator(user.getUserName());
 		topic.setCreateTime(new Date());
 		topic.setLastUpdateTime(topic.getCreateTime());
@@ -85,5 +92,42 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> queryTopic(TopicQueryCondition con) {
 		return topicDao.queryTopic(con);
+	}
+
+	@Override
+	public String queryAttrByTopicId(String topicId) {
+		return topicDao.queryAttrByTopicId(topicId);
+	}
+
+	@Override
+	public boolean setTopicAttr(String topicId) {
+		try {
+			List<String> attrs_mainName = new ArrayList<String>();
+			List<String> attrs_alias = new ArrayList<String>();
+			AttrUtil attrUtil = AttrUtil.getSingleton();
+			String[] attrIds = queryAttrByTopicId(topicId).split(";");
+			for (String attrId : attrIds) {
+				Attr attr = attrService.queryAttrById(Integer.valueOf(attrId));
+				if (attr != null) {
+					attrs_mainName.add(attr.getAttrMainname());
+					attrs_alias.add(attr.getAttrAlias());
+					if (attr.getAttrId() == 1) {
+						attrUtil.setTitle_mainName(attr.getAttrMainname());
+						attrUtil.setTitle_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 2) {
+						attrUtil.setUrl_mainName(attr.getAttrMainname());
+						attrUtil.setUrl_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 3) {
+						attrUtil.setTime_mainName(attr.getAttrMainname());
+						attrUtil.setTime_alias(attr.getAttrAlias());
+					}
+				}
+			}
+			attrUtil.setAttrs_mainName(attrs_mainName);
+			attrUtil.setAttrs_alias(attrs_alias);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }

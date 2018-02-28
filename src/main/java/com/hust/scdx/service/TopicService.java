@@ -16,10 +16,14 @@ public interface TopicService {
 
 	Topic queryTopicById(String topicId);
 	
+	String queryAttrByTopicId(String topicId);
+	
 	List<Topic> queryTopicByName(TopicQueryCondition con);
 
 	long queryTopicCount(TopicQueryCondition con);
 	
 	List<Topic> queryTopic(TopicQueryCondition con);
+
+	boolean setTopicAttr(String topicId);
 
 }

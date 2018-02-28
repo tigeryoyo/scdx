@@ -55,6 +55,15 @@ public class TopicDao {
 	}
 
 	/**
+	 * 根据topicId查找该attr
+	 * @param topicId
+	 * @return
+	 */
+	public String queryAttrByTopicId(String topicId) {
+		return queryTopicById(topicId).getAttr();
+	}
+
+	/**
 	 * 根据专题id删除专题.
 	 * 
 	 * @param topicId

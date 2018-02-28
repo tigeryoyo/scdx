@@ -68,6 +68,21 @@ public class TopicController {
 		return ResultUtil.success("删除「" + topicName + "」专题成功。");
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/setTopicAttr", method = RequestMethod.POST)
+	public Object setTopicAttr(@RequestParam(value = "topicId", required = true) String topicId, HttpServletRequest request) {
+		Topic topic = topicService.queryTopicById(topicId);
+		if (topic == null) {
+			logger.info("「" + topicId + "」专题不存在。");
+			return ResultUtil.errorWithMsg("该专题已被删除。");
+		}
+		if (!topicService.setTopicAttr(topicId)) {
+			logger.info("设置专题属性失败。");
+			return ResultUtil.errorWithMsg("设置专题属性失败。");
+		}
+		return ResultUtil.success("设置属性成功。");
+	}
+
 	/**
 	 * 查询自有的所有专题
 	 * 
@@ -104,7 +119,7 @@ public class TopicController {
 		}
 		return ResultUtil.success(count);
 	}
-	
+
 	/**
 	 * 查询所有专题
 	 * 

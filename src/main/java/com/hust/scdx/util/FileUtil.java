@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
-import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Domain;
 
@@ -85,7 +84,9 @@ public class FileUtil {
 		if (CommonUtil.hasEmptyArray(filenames)) {
 			return null;
 		}
-		// 属性list
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+
+		// 全局属性list
 		List<String> globalAttrs = new ArrayList<String>();
 		// 全局文件中已存在的url,key未url、Integer为当前url所在行的行数（从0开始）
 		HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
@@ -94,12 +95,12 @@ public class FileUtil {
 				String line = br.readLine();
 				String[] attrs = line.split("\t");
 				// 当前文件url、time所在列
-				int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
-				int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+				int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
+				int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 				// 当前文件的所有属性在全局文件的索引位置
-				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs) : getIndexOfExtfile(attrs, globalAttrs);
+				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs) : getIndexOfExtfile(attrUtil, attrs, globalAttrs);
 				// 全局文件time所在列
-				int globalIndexOfTime = AttrUtil.findIndexOfTime(globalAttrs);
+				int globalIndexOfTime = attrUtil.findIndexOf(globalAttrs, attrUtil.getTime_alias());
 				while (true) {
 					line = br.readLine();
 					if (!StringUtils.isBlank(line)) {
@@ -133,7 +134,7 @@ public class FileUtil {
 			}
 		}
 		// 对content进行排序
-		int indexOfTite = AttrUtil.findIndexOfTitle(globalAttrs);
+		int indexOfTite = attrUtil.findIndexOf(globalAttrs, attrUtil.getTitle_alias());
 		Collections.sort(content, new Comparator<String[]>() {
 			public int compare(String[] o1, String[] o2) {
 				return (o1[indexOfTite]).compareTo(o2[indexOfTite]);
@@ -146,7 +147,9 @@ public class FileUtil {
 		// return content;
 
 		// 调整属性顺序消耗比较多的运行时间
-		return fillContentFromDomain(adjustPropertyLine(globalAttrs, content));
+		return adjustPropertyLine(attrUtil, globalAttrs, content);
+		// return fillContentFromDomain(adjustPropertyLine(attrUtil,
+		// globalAttrs, content));
 	}
 
 	/**
@@ -167,91 +170,30 @@ public class FileUtil {
 	}
 
 	/**
-	 * 获取基础数据首行各个属性在公共属性集合中的索引位置,获取url所在列
+	 * 获取基础数据首行各个属性在公共属性集合中的索引位置
 	 * 
-	 * @param rowOne
-	 *            基础数据属性行
 	 * @param gloableAttrs
 	 *            所有属性集合
 	 * @return
 	 */
-	private static int[] getIndexOfExtfile(String[] attrs, List<String> globalAttrs) {
-		int[] indexs = null;
-		indexs = new int[attrs.length];
+	private static int[] getIndexOfExtfile(AttrUtil attrUtil, String[] attrs, List<String> globalAttrs) {
+		int[] indexs = new int[attrs.length];
+		List<String> attrs_alias = attrUtil.getAttrs_alias();
+		int m = -1, n = -1;
 		for (int i = 0; i < attrs.length; i++) {
-			int index = globalAttrs.indexOf(attrs[i]);
-			if (index != -1) { // 防止相似属性
-				indexs[i] = index;
+			m = attrUtil.isIndexOf(attrs[i]);
+			// m!=-1,代表该属性在自定义属性中存在
+			if (m != -1) {
+				n = attrUtil.findIndexOf(globalAttrs, attrs_alias.get(m));
 			} else {
-				if (AttrUtil.isSth(attrs[i], AttrUtil.TITLE_PATTERN)) {
-					indexs[i] = AttrUtil.findIndexOfTitle(globalAttrs);
-					globalAttrs.set(indexs[i], "标题");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.URL_PATTERN)) {
-					indexs[i] = AttrUtil.findIndexOfUrl(globalAttrs);
-					globalAttrs.set(indexs[i], "链接");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.TIME_PATTERN)) {
-					indexs[i] = AttrUtil.findIndexOfTime(globalAttrs);
-					globalAttrs.set(indexs[i], "发帖时间");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.COLUMN_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.COLUMN_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "板块");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.TYPE_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.TYPE_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "来源");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.WEBNAME_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.WEBNAME_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "网站");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.POSTING)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.POSTING);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "发帖人");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.RANK_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.RANK_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "媒体级别");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.INCIDENCE_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.INCIDENCE_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "影响范围");
-				} else if (AttrUtil.isSth(attrs[i], AttrUtil.WEIGHT_PATTERN)) {
-					int j = AttrUtil.findIndexOfSth(globalAttrs, AttrUtil.WEIGHT_PATTERN);
-					if (j == -1) {
-						indexs[i] = globalAttrs.size() - 1;
-					} else {
-						indexs[i] = j;
-					}
-					globalAttrs.set(indexs[i], "权重");
-				} else {
-					globalAttrs.add(attrs[i]);
-					indexs[i] = globalAttrs.size() - 1;
-				}
+				n = globalAttrs.indexOf(attrs[i]);
+			}
+			// n!=-1,代表该属性在全局属性中存在
+			if (n != -1) {
+				indexs[i] = n;
+			} else {
+				indexs[i] = globalAttrs.size();
+				globalAttrs.add(attrs[i]);
 			}
 		}
 		return indexs;
@@ -260,122 +202,60 @@ public class FileUtil {
 	/**
 	 * 调整属性行
 	 * 
-	 * @param attrs
+	 * @param globalAttrs
 	 * @param content
+	 * @return 调整属性行后的content
 	 */
-	private static List<String[]> adjustPropertyLine(List<String> attrs, List<String[]> content) {
-		int attrSize = attrs.size();
-		int[] orderAttrs = new int[attrSize + 6];
-		List<String> newAttrs = new ArrayList<String>();
-		int order = 0;
-		
-		int index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add(AttrUtil.WEIGHT_PATTERN);
-		}
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEBNAME_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add("网站");
-		}
-
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.COLUMN_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add("板块");
-		}
-
-		index = AttrUtil.findIndexOfTitle(attrs);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		}
-
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.POSTING);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		}
-
-		index = AttrUtil.findIndexOfTime(attrs);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		}
-
-		index = AttrUtil.findIndexOfUrl(attrs);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		}
-
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.TYPE_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add("类型");
-		}
-
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add(AttrUtil.RANK_PATTERN);
-		}
-
-		index = AttrUtil.findIndexOfSth(attrs, AttrUtil.INCIDENCE_PATTERN);
-		if (index != -1) {
-			orderAttrs[order++] = index;
-			newAttrs.add(attrs.get(index));
-		} else {
-			orderAttrs[order++] = index;
-			newAttrs.add(AttrUtil.INCIDENCE_PATTERN);
-		}
-
-		
-
-		for (int i = 0; i < attrSize; i++) {
-			if (!AttrUtil.isImp(attrs.get(i))) {
-				orderAttrs[order++] = i;
-				newAttrs.add(attrs.get(i));
+	private static List<String[]> adjustPropertyLine(AttrUtil attrUtil, List<String> globalAttrs, List<String[]> content) {
+		List<String[]> res = new ArrayList<String[]>();
+		List<String> attrs_mainName = attrUtil.getAttrs_mainName();
+		List<String> nattrs = new ArrayList<String>(attrs_mainName);
+		int size = globalAttrs.size();
+		int m = -1;
+		for (int i = 0; i < size; i++) {
+			m = attrUtil.isIndexOf(globalAttrs.get(i));
+			if (m != -1) {
+				globalAttrs.set(i, attrUtil.getAttrs_mainName().get(m));
 			}
 		}
+		// indices中元素为-1则说明自定义的属性在数据中并没有，需要填充...or
+		List<Integer> indices = new ArrayList<Integer>();
+		size = attrs_mainName.size();
+		for (int i = 0; i < size; i++) {
+			indices.add(globalAttrs.indexOf(attrs_mainName.get(i)));
+		}
 
-		List<String[]> res = new ArrayList<String[]>();
-		int contentSize = content.size();
-		attrSize = newAttrs.size();
-		for (int i = 0; i < contentSize; i++) {
+		size = globalAttrs.size();
+		for (int i = 0; i < size; i++) {
+			String attr = globalAttrs.get(i);
+			if (attrs_mainName.indexOf(attr) == -1) {
+				indices.add(i);
+				nattrs.add(attr);
+			}
+		}
+		// 一行新数据的长度
+		int nsize = indices.size();
+		// 数据条数（不包括属性行）
+		int csize = content.size();
+		for (int i = 0; i < csize; i++) {
 			String[] cline = content.get(i);
-			String[] line = new String[attrSize];
-			for (int j = 0; j < line.length; j++) {
-				if (orderAttrs[j] != -1 && orderAttrs[j] < cline.length) {
-					line[j] = cline[orderAttrs[j]];
+			String[] nline = new String[nsize];
+			for (int j = 0; j < nsize; j++) {
+				int n = indices.get(j);
+				if (n != -1) {
+					nline[j] = cline[n];
 				} else {
-					line[j] = "";
+					nline[j] = "";
 				}
 			}
-			res.add(line);
+			res.add(nline);
 		}
-		String[] tmp = new String[newAttrs.size()];
-		newAttrs.toArray(tmp);
+		String[] tmp = new String[nattrs.size()];
+		nattrs.toArray(tmp);
 		res.add(0, tmp);
 		return res;
 	}
-
+/**
 	private static List<String[]> fillContentFromDomain(List<String[]> content) {
 		List<String[]> res = new ArrayList<String[]>();
 		String[] attrs = content.remove(0);
@@ -388,7 +268,7 @@ public class FileUtil {
 		int weightIndex = AttrUtil.findIndexOfSth(attrs, AttrUtil.WEIGHT_PATTERN);
 		for (String[] strs : content) {
 			String url = UrlUtil.getUrl(strs[urlIndex]);
-			if(url == null){
+			if (url == null) {
 				res.add(strs);
 				continue;
 			}
@@ -423,18 +303,18 @@ public class FileUtil {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
 					if (StringUtils.isBlank(strs[weightIndex])) {
+						Integer weight = domain.getWeight();
+						if (weight == null) {
+							strs[weightIndex] = "0";
+						} else {
+							strs[weightIndex] = weight + "";
+						}
+					} else {
+						if (!StringUtils.isNumeric(strs[weightIndex])) {
 							Integer weight = domain.getWeight();
-							if(weight == null){
+							if (weight == null) {
 								strs[weightIndex] = "0";
-							}else{
-								strs[weightIndex] = weight + "";
-							}						
-					}else{
-						if(!StringUtils.isNumeric(strs[weightIndex])){
-							Integer weight = domain.getWeight();
-							if(weight == null){
-								strs[weightIndex] = "0";
-							}else{
+							} else {
 								strs[weightIndex] = weight + "";
 							}
 						}
@@ -452,14 +332,14 @@ public class FileUtil {
 					strs[rankIndex] = two.getRank();
 					strs[incidenceIndex] = two.getIncidence();
 					strs[weightIndex] = two.getWeight() + "";
-				} else if (one!=null && one.getMaintenanceStatus()) {
+				} else if (one != null && one.getMaintenanceStatus()) {
 					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
 					strs[nameIndex] = one.getName();
 					strs[rankIndex] = one.getRank();
 					strs[incidenceIndex] = one.getIncidence();
 					strs[typeIndex] = one.getType();
 					strs[weightIndex] = one.getWeight() + "";
-				} else if (null!= two) {
+				} else if (null != two) {
 					// 若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
 					if (StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = two.getName();
@@ -476,19 +356,19 @@ public class FileUtil {
 					if (StringUtils.isBlank(strs[incidenceIndex]) && !StringUtils.isBlank(two.getIncidence())) {
 						strs[incidenceIndex] = two.getIncidence();
 					}
-					if (StringUtils.isBlank(strs[weightIndex]) ) {
+					if (StringUtils.isBlank(strs[weightIndex])) {
+						Integer weight = two.getWeight();
+						if (weight == null) {
+							strs[weightIndex] = "0";
+						} else {
+							strs[weightIndex] = weight + "";
+						}
+					} else {
+						if (!StringUtils.isNumeric(strs[weightIndex])) {
 							Integer weight = two.getWeight();
-							if(weight == null){
+							if (weight == null) {
 								strs[weightIndex] = "0";
-							}else{
-								strs[weightIndex] = weight + "";
-							}
-					}else{
-						if(!StringUtils.isNumeric(strs[weightIndex])){
-							Integer weight = two.getWeight();
-							if(weight == null){
-								strs[weightIndex] = "0";
-							}else{
+							} else {
 								strs[weightIndex] = weight + "";
 							}
 						}
@@ -500,7 +380,7 @@ public class FileUtil {
 		res.add(0, attrs);
 		return res;
 	}
-
+**/
 	/**
 	 * 从文件from拷贝至to,如果存在则覆盖。
 	 * 
@@ -638,13 +518,14 @@ public class FileUtil {
 	 * @return
 	 */
 	public static List<String[]> getStdfileDisplaylist(String stdfilePath) {
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
 			ArrayList<String[]> list = new ArrayList<String[]>();
 			String line = br.readLine();
 			String[] row = line.split("\t");
-			int indexOfTitle = AttrUtil.findIndexOfTitle(row);
-			int indexOfUrl = AttrUtil.findIndexOfUrl(row);
-			int indexOfTime = AttrUtil.findIndexOfTime(row);
+			int indexOfTitle = attrUtil.findIndexOf(row, attrUtil.getTitle_alias());
+			int indexOfUrl = attrUtil.findIndexOf(row, attrUtil.getUrl_alias());
+			int indexOfTime = attrUtil.findIndexOf(row, attrUtil.getTime_alias());
 			do {
 				String title = "", url = "";
 				int amount = 0;
@@ -678,10 +559,11 @@ public class FileUtil {
 	 * @return
 	 */
 	public static List<String[]> getStdfileDisplaylist2(List<String[]> list) {
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		String[] row = list.get(0);
-		int indexOfTitle = AttrUtil.findIndexOfTitle(row);
-		int indexOfUrl = AttrUtil.findIndexOfUrl(row);
-		int indexOfTime = AttrUtil.findIndexOfTime(row);
+		int indexOfTitle = attrUtil.findIndexOf(row, attrUtil.getTitle_alias());
+		int indexOfUrl = attrUtil.findIndexOf(row, attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(row, attrUtil.getTime_alias());
 		int size = list.size();
 		int i = 1;
 		List<String[]> res = new ArrayList<String[]>();
@@ -713,13 +595,14 @@ public class FileUtil {
 	 */
 	public static Map<String, Object> getStdfileExcelcontent(String stdfilePath) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
 			List<String[]> content = new ArrayList<String[]>();
 			List<Integer> marked = new ArrayList<Integer>();
 			String line = br.readLine();
 			String[] row = line.split("\t");
 			content.add(row);
-			int indexOfTime = AttrUtil.findIndexOfTime(row);
+			int indexOfTime = attrUtil.findIndexOf(row, attrUtil.getTime_alias());
 			do {
 				String latestTime = "9999-12-12 23:59:59";
 				List<String[]> cluster = new ArrayList<String[]>();
@@ -765,11 +648,12 @@ public class FileUtil {
 	 */
 	public static Map<String, Object> getStdfileExcelcontent2(List<String[]> list) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		List<String[]> content = new ArrayList<String[]>();
 		List<Integer> marked = new ArrayList<Integer>();
 		String[] row = list.get(0);
 		content.add(row);
-		int indexOfTime = AttrUtil.findIndexOfTime(row);
+		int indexOfTime = attrUtil.findIndexOf(row, attrUtil.getTime_alias());
 		int size = list.size();
 		int j = 1;
 		while (j < size) {
@@ -802,13 +686,14 @@ public class FileUtil {
 	 */
 	public static Map<String, Object> getStdfileExcelcontent3(String stdfilePath) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		try (BufferedReader br = new BufferedReader(new FileReader(stdfilePath))) {
 			List<String[]> content = new ArrayList<String[]>();
 			List<Integer> marked = new ArrayList<Integer>();
 			String line = br.readLine();
 			String[] row = line.split("\t");
 			content.add(row);
-			int indexOfTime = AttrUtil.findIndexOfTime(row);
+			int indexOfTime = attrUtil.findIndexOf(row, attrUtil.getTime_alias());
 			do {
 				String latestTime = "9999-12-12 23:59:59";
 				List<String[]> cluster = new ArrayList<String[]>();
@@ -827,7 +712,7 @@ public class FileUtil {
 					content.addAll(cluster);
 					if (i != 1) {
 						marked.add(markedIndex);
-					} 
+					}
 				}
 				if (StringUtils.isEmpty(line)) {
 					content.add(new String[0]);

@@ -6,6 +6,7 @@
 		<id column="topic_id" jdbcType="VARCHAR" property="topicId" />
 		<result column="topic_name" jdbcType="VARCHAR" property="topicName" />
 		<result column="topic_type" jdbcType="VARCHAR" property="topicType" />
+		<result column="attr" jdbcType="VARCHAR" property="attr" />
 		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="creator" jdbcType="VARCHAR" property="creator" />
 		<result column="last_operator" jdbcType="VARCHAR" property="lastOperator" />
@@ -76,7 +77,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		topic_id, topic_name, topic_type, create_time, creator, last_operator,
+		topic_id, topic_name, topic_type, attr, create_time, creator, last_operator,
 		last_update_time
 	</sql>
 	<select id="selectByExample" parameterType="com.hust.scdx.model.TopicExample"
@@ -93,9 +94,6 @@
 		<if test="orderByClause != null">
 			order by ${orderByClause}
 		</if>
-		<if test="start != 0 or limit != 0" >
-    		limit #{start},#{limit}
-    	</if>
 	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -116,11 +114,12 @@
 	</delete>
 	<insert id="insert" parameterType="com.hust.scdx.model.Topic">
 		insert into topic (topic_id, topic_name, topic_type,
-		create_time, creator, last_operator,
-		last_update_time)
+		attr, create_time, creator,
+		last_operator, last_update_time)
 		values (#{topicId,jdbcType=VARCHAR}, #{topicName,jdbcType=VARCHAR},
 		#{topicType,jdbcType=VARCHAR},
-		#{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{lastOperator,jdbcType=VARCHAR},
+		#{attr,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},
+		#{lastOperator,jdbcType=VARCHAR},
 		#{lastUpdateTime,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="com.hust.scdx.model.Topic">
@@ -134,6 +133,9 @@
 			</if>
 			<if test="topicType != null">
 				topic_type,
+			</if>
+			<if test="attr != null">
+				attr,
 			</if>
 			<if test="createTime != null">
 				create_time,
@@ -157,6 +159,9 @@
 			</if>
 			<if test="topicType != null">
 				#{topicType,jdbcType=VARCHAR},
+			</if>
+			<if test="attr != null">
+				#{attr,jdbcType=VARCHAR},
 			</if>
 			<if test="createTime != null">
 				#{createTime,jdbcType=TIMESTAMP},
@@ -191,6 +196,9 @@
 			<if test="record.topicType != null">
 				topic_type = #{record.topicType,jdbcType=VARCHAR},
 			</if>
+			<if test="record.attr != null">
+				attr = #{record.attr,jdbcType=VARCHAR},
+			</if>
 			<if test="record.createTime != null">
 				create_time = #{record.createTime,jdbcType=TIMESTAMP},
 			</if>
@@ -213,6 +221,7 @@
 		set topic_id = #{record.topicId,jdbcType=VARCHAR},
 		topic_name = #{record.topicName,jdbcType=VARCHAR},
 		topic_type = #{record.topicType,jdbcType=VARCHAR},
+		attr = #{record.attr,jdbcType=VARCHAR},
 		create_time = #{record.createTime,jdbcType=TIMESTAMP},
 		creator = #{record.creator,jdbcType=VARCHAR},
 		last_operator = #{record.lastOperator,jdbcType=VARCHAR},
@@ -229,6 +238,9 @@
 			</if>
 			<if test="topicType != null">
 				topic_type = #{topicType,jdbcType=VARCHAR},
+			</if>
+			<if test="attr != null">
+				attr = #{attr,jdbcType=VARCHAR},
 			</if>
 			<if test="createTime != null">
 				create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -249,6 +261,7 @@
 		update topic
 		set topic_name = #{topicName,jdbcType=VARCHAR},
 		topic_type = #{topicType,jdbcType=VARCHAR},
+		attr = #{attr,jdbcType=VARCHAR},
 		create_time = #{createTime,jdbcType=TIMESTAMP},
 		creator = #{creator,jdbcType=VARCHAR},
 		last_operator = #{lastOperator,jdbcType=VARCHAR},

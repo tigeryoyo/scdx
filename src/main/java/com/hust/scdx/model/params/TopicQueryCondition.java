@@ -6,6 +6,7 @@ public class TopicQueryCondition {
 	private String topicId;
 	private String topicName;
 	private String topicType;
+	private String attr;
 	private String creater;
 	private Date createStartTime;
 	private Date createEndTime;
@@ -92,6 +93,14 @@ public class TopicQueryCondition {
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getAttr() {
+		return attr;
+	}
+
+	public void setAttr(String attr) {
+		this.attr = attr;
 	}
 
 }

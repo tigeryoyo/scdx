@@ -50,6 +50,7 @@ public class ExtfileController {
 
 	@Autowired
 	private DomainService domainService;
+
 	/**
 	 * 上传原始文件，经过去重成为基础数据文件存储在文件系统中。
 	 * 
@@ -65,8 +66,8 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public Object upload(@RequestParam(value = "origfile", required = true) MultipartFile origfile,
-			@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "sourceType", required = false) String sourceType, HttpServletRequest request) {
+			@RequestParam(value = "topicId", required = true) String topicId, @RequestParam(value = "sourceType", required = false) String sourceType,
+			HttpServletRequest request) {
 		if (origfile.isEmpty()) {
 			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
@@ -98,8 +99,9 @@ public class ExtfileController {
 		}
 		try {
 			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
-			if (AttrUtil.findIndexOfTitle(attrs) != -1 && AttrUtil.findIndexOfUrl(attrs) != -1
-					&& AttrUtil.findIndexOfTime(attrs) != -1) {
+			AttrUtil attrUtil = AttrUtil.getSingleton();
+			if (attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias()) != -1 && attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias()) != -1
+					&& attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias()) != -1) {
 				return ResultUtil.successWithoutMsg();
 			}
 		} catch (Exception e) {
@@ -124,22 +126,22 @@ public class ExtfileController {
 	@RequestMapping("/queryExtfilesByTimeRange")
 	public Object queryExtfilesByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
 			@RequestParam(value = "timeRangeType", required = true) String timeRangeType,
-			@RequestParam(value = "startTime", required = true) Date startTime,
-			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
+			HttpServletRequest request) {
 		switch (timeRangeType) {
 		case "1":
 			endTime = new Date();
-			startTime = new Date(endTime.getTime()-15*60*1000);
+			startTime = new Date(endTime.getTime() - 15 * 60 * 1000);
 			endTime = null;
 			break;
 		case "2":
 			endTime = new Date();
-			startTime = new Date(endTime.getTime()-1*24*60*60*1000);
+			startTime = new Date(endTime.getTime() - 1 * 24 * 60 * 60 * 1000);
 			endTime = null;
 			break;
 		case "3":
 			endTime = new Date();
-			startTime = new Date(endTime.getTime()-7*24*60*60*1000);
+			startTime = new Date(endTime.getTime() - 7 * 24 * 60 * 60 * 1000);
 			endTime = null;
 			break;
 		default:
@@ -172,8 +174,8 @@ public class ExtfileController {
 	@ResponseBody
 	@RequestMapping("/miningByTimeRange")
 	public Object miningByTimeRange(@RequestParam(value = "topicId", required = true) String topicId,
-			@RequestParam(value = "startTime", required = true) Date startTime,
-			@RequestParam(value = "endTime", required = true) Date endTime, HttpServletRequest request) {
+			@RequestParam(value = "startTime", required = true) Date startTime, @RequestParam(value = "endTime", required = true) Date endTime,
+			HttpServletRequest request) {
 		ExtfileQueryCondition con = new ExtfileQueryCondition();
 		con.setTopicId(topicId);
 		con.setStartTime(startTime);

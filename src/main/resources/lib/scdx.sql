@@ -16,6 +16,35 @@ Date: 2017-12-22 10:50:51
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
+-- Table structure for attr
+-- ----------------------------
+DROP TABLE IF EXISTS `attr`;
+CREATE TABLE `attr` (
+  `attr_id` int(11) NOT NULL,
+  `attr_mainname` varchar(128) DEFAULT NULL,
+  `attr_alias` varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (`attr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of attr
+-- ----------------------------
+INSERT INTO `attr` VALUES ('1', '标题', '标题|内容');
+INSERT INTO `attr` VALUES ('2', '链接', '链接|网址|域名|微博链接|[Uu][Rr][Ll]');
+INSERT INTO `attr` VALUES ('3', '时间', '发布时间|发帖时间|发贴时间|时间');
+INSERT INTO `attr` VALUES ('4', '发帖人', '发贴人|作者|发布人|来源/发布人|发布者昵称');
+INSERT INTO `attr` VALUES ('5', '网站', '网站|媒体名称');
+INSERT INTO `attr` VALUES ('6', '来源', '来源|类型|资源类型|媒体类型');
+INSERT INTO `attr` VALUES ('7', '板块', '板块|频道|频道分类');
+INSERT INTO `attr` VALUES ('8', '媒体级别', '媒体级别');
+INSERT INTO `attr` VALUES ('9', '权重', '权重');
+INSERT INTO `attr` VALUES ('10', '影响范围', '影响范围');
+INSERT INTO `attr` VALUES ('11', '权重', '权重');
+INSERT INTO `attr` VALUES ('12', '圈层', '圈层');
+INSERT INTO `attr` VALUES ('13', '城郊', '城郊');
+INSERT INTO `attr` VALUES ('14', '所属区域', '所属区域');
+
+-- ----------------------------
 -- Table structure for domain_one
 -- ----------------------------
 DROP TABLE IF EXISTS `domain_one`;
@@ -534,6 +563,7 @@ CREATE TABLE `topic` (
   `topic_id` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '专题id',
   `topic_name` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '''''' COMMENT '专题名称',
   `topic_type` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '专题类型',
+  `attr` varchar(255) COLLATE utf8_bin DEFAULT '' COMMENT '属性id',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `creator` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '''''' COMMENT '创建者',
   `last_operator` varchar(32) COLLATE utf8_bin NOT NULL DEFAULT '''''' COMMENT '最近一次操作人',

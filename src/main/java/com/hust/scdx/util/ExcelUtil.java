@@ -74,6 +74,7 @@ public class ExcelUtil {
 		if (inputStream == null) {
 			throw new IllegalArgumentException("inputStream is null.");
 		}
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		List<String[]> content = new ArrayList<String[]>();
 		Workbook workbook = null;
 		if (filename.endsWith("xls")) {
@@ -89,13 +90,13 @@ public class ExcelUtil {
 		// excel首行为属性行
 		String[] attrRow = convert(sheet.getRow(0), colNum);
 		// url、time所在列位置
-		int indexOfUrl = AttrUtil.findIndexOfUrl(attrRow);
-		int indexOfTime = AttrUtil.findIndexOfTime(attrRow);
+		int indexOfUrl = attrUtil.findIndexOf(attrRow, attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(attrRow, attrUtil.getTime_alias());
 		// 文件中已存在的url,key未url、Integer为当前url所在行的行数（从0开始）
 		HashMap<String, Integer> urlMap = new HashMap<String, Integer>();
 		for (int i = 1; i <= rowNum; i++) {
 			String[] row = convert(sheet.getRow(i), colNum);
-			if(!CommonUtil.isEmptyArray(row)){
+			if (!CommonUtil.isEmptyArray(row)) {
 				if (urlMap.containsKey(row[indexOfUrl])) {
 					int col = urlMap.get(row[indexOfUrl]);
 					String[] oldNews = content.get(col);
@@ -150,6 +151,7 @@ public class ExcelUtil {
 		if (inputStream == null) {
 			throw new IllegalArgumentException("inputStream is null.");
 		}
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		List<String[]> content = new ArrayList<String[]>();
 		Workbook workbook = null;
 		if (StdfileFilename.endsWith("xls")) {
@@ -166,7 +168,7 @@ public class ExcelUtil {
 		String[] attrRow = convert(sheet.getRow(0), colNum);
 		content.add(attrRow);
 		// url所在列位置
-		int indexOfUrl = AttrUtil.findIndexOfUrl(attrRow);
+		int indexOfUrl = attrUtil.findIndexOf(attrRow, attrUtil.getUrl_alias());
 		for (int i = 1; i <= rowNum; i++) {
 			String[] row = convert(sheet.getRow(i), colNum);
 			if (StringUtils.isBlank(row[indexOfUrl])) {
@@ -201,9 +203,10 @@ public class ExcelUtil {
 		}
 		return workbook;
 	}
+
 	/**
-	 * 将list导出为excel
-	 * String[]长度为0为空行
+	 * 将list导出为excel String[]长度为0为空行
+	 * 
 	 * @param lists
 	 * @return
 	 */
@@ -214,7 +217,7 @@ public class ExcelUtil {
 			Sheet sheet = workbook.createSheet("sheet" + (k + 1));
 			for (int i = 0; i < list.size(); i++) {
 				String[] rowList = list.get(i);
-				if(CommonUtil.isEmptyArray(rowList)){
+				if (CommonUtil.isEmptyArray(rowList)) {
 					continue;
 				}
 				Row row = sheet.createRow(i);
@@ -367,6 +370,7 @@ public class ExcelUtil {
 			throw new IllegalArgumentException("inputStream is null.");
 		}
 		List<String[]> content = new ArrayList<String[]>();
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		Workbook workbook = null;
 		if (filename.endsWith("xls")) {
 			workbook = new HSSFWorkbook(inputStream);
@@ -381,7 +385,7 @@ public class ExcelUtil {
 		// excel首行为属性行
 		String[] attrRow = convert(sheet.getRow(0), colNum);
 		// url所在列位置
-		int indexOfUrl = AttrUtil.findIndexOfUrl(attrRow);
+		int indexOfUrl = attrUtil.findIndexOf(attrRow, attrUtil.getUrl_alias());
 		List<String> exitUrls = new ArrayList<String>();
 		for (int i = 1; i <= rowNum; i++) {
 			String[] row = convert(sheet.getRow(i), colNum);
