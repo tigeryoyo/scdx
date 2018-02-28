@@ -17,11 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.DomainExcelAttr;
 import com.hust.scdx.dao.DomainOneDao;
+import com.hust.scdx.dao.DomainStoreDao;
 import com.hust.scdx.dao.DomainTwoDao;
 import com.hust.scdx.dao.SourceTypeDao;
 import com.hust.scdx.dao.WeightDao;
 import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.DomainOne;
+import com.hust.scdx.model.DomainStore;
 import com.hust.scdx.model.DomainTwo;
 import com.hust.scdx.model.Weight;
 import com.hust.scdx.model.params.DomainOneQueryCondition;
@@ -40,6 +42,9 @@ public class DomainServiceImpl implements DomainService {
 	private DomainOneDao domainOneDao;
 	@Autowired
 	private DomainTwoDao domainTwoDao;
+	
+	@Autowired
+	private DomainStoreDao domainStoreDao;
 
 	@Autowired
 	private WeightDao weightDao;
@@ -129,7 +134,7 @@ public class DomainServiceImpl implements DomainService {
 				} else if(null != DomainCacheManager.getByUrl(url)){
 					// 存在但未被标记为已维护的域名信息，以原始信息为准统计信息
 					Domain d = new Domain();
-					d.setUrl(string[urlIndex]);
+					d.setUrl(url);
 					if (nameFlag) {
 						if (StringUtils.isBlank(string[nameIndex])) {
 							d.setName(null);
@@ -181,9 +186,9 @@ public class DomainServiceImpl implements DomainService {
 			}
 			
 			/**
-			 * 处理存在但未被维护的域名信息
+			 * 处理存在但未被维护的域名信息,添加到数据库中
 			 */
-			
+			domainStoreDao.insertDomainStore(DomainStore.getDomainStoreFromDomain(unMaintainedList));
 			return true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
