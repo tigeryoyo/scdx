@@ -120,154 +120,48 @@
   </insert>
   <insert id="insertBatch" parameterType="java.util.List">
     REPLACE into domain_one 
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="column != null">
-        domain_one.column,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="rank != null">
-        rank,
-      </if>
-      <if test="incidence != null">
-        incidence,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-	  <if test="maintenanceStatus != null">
-        maintenance_status,
-      </if>
-      <if test="isFather != null">
-        is_father,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
+    (uuid, url, name, 
+      domain_one.column, type, rank, 
+      incidence, weight, maintenance_status, 
+      is_father, update_time)
     values 
     <foreach collection="list" item="item" index="index" separator=",">
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
+    (
         #{item.uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
         #{item.url,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
         #{item.name,jdbcType=VARCHAR},
-      </if>
-      <if test="column != null">
         #{item.column,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
         #{item.type,jdbcType=VARCHAR},
-      </if>
-      <if test="rank != null">
         #{item.rank,jdbcType=VARCHAR},
-      </if>
-      <if test="incidence != null">
         #{item.incidence,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
         #{item.weight,jdbcType=INTEGER},
-      </if>
-	  <if test="maintenanceStatus != null">
         #{item.maintenanceStatus,jdbcType=BIT},
-      </if>
-      <if test="isFather != null">
         #{item.isFather,jdbcType=BIT},
-      </if>
-      <if test="updateTime != null">
-        #{item.updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
+        #{item.updateTime,jdbcType=TIMESTAMP}
+    )
     </foreach>
   </insert>
   <insert id="insertIgnore" parameterType="java.util.List">
     insert ignore into domain_one 
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="column != null">
-        domain_one.column,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="rank != null">
-        rank,
-      </if>
-      <if test="incidence != null">
-        incidence,
-      </if>
-      <if test="weight != null">
-        weight,
-      </if>
-	  <if test="maintenanceStatus != null">
-        maintenance_status,
-      </if>
-      <if test="isFather != null">
-        is_father,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
+    (uuid, url, name, 
+      domain_one.column, type, rank, 
+      incidence, weight, maintenance_status, 
+      is_father, update_time)
     values 
     <foreach collection="list" item="item" index="index" separator=",">
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{item.uuid,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
+	(
+	    #{item.uuid,jdbcType=VARCHAR},
         #{item.url,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
         #{item.name,jdbcType=VARCHAR},
-      </if>
-      <if test="column != null">
         #{item.column,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
         #{item.type,jdbcType=VARCHAR},
-      </if>
-      <if test="rank != null">
         #{item.rank,jdbcType=VARCHAR},
-      </if>
-      <if test="incidence != null">
         #{item.incidence,jdbcType=VARCHAR},
-      </if>
-      <if test="weight != null">
         #{item.weight,jdbcType=INTEGER},
-      </if>
-	  <if test="maintenanceStatus != null">
         #{item.maintenanceStatus,jdbcType=BIT},
-      </if>
-      <if test="isFather != null">
         #{item.isFather,jdbcType=BIT},
-      </if>
-      <if test="updateTime != null">
-        #{item.updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
+        #{item.updateTime,jdbcType=TIMESTAMP}
+    )
     </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.hust.scdx.model.DomainOne">

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
+import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.util.AttrUtil;
 import com.hust.scdx.util.ExcelUtil;
@@ -47,6 +48,8 @@ public class ExtfileController {
 	@Autowired
 	private ExtfileService extfileService;
 
+	@Autowired
+	private DomainService domainService;
 	/**
 	 * 上传原始文件，经过去重成为基础数据文件存储在文件系统中。
 	 * 
@@ -68,6 +71,7 @@ public class ExtfileController {
 			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
 		}
+		domainService.addUnMaintainedFromOrigFile(origfile);
 		ExtfileQueryCondition con = new ExtfileQueryCondition();
 		con.setFile(origfile);
 		con.setSourceType(sourceType);
@@ -186,7 +190,7 @@ public class ExtfileController {
 	}
 
 	/**
-	 * 根据时间范围聚类。
+	 * 根据基础数据id聚类。
 	 * 
 	 * @param stdfileIds
 	 * @param request
