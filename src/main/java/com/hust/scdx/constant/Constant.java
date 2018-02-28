@@ -15,6 +15,8 @@ public class Constant {
 	public final static String UNKNOWN = "未知";
 	public final static String INVALID_TIME = "1970-01-01";
 
+	public final static String topicAttrOrder = "5;7;1;4;3;2;6;8;10;9;";
+	
 	/**
 	 * 全局域名变量
 	 */
