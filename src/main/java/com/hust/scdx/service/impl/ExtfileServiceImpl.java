@@ -26,12 +26,15 @@ import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.Algorithm;
 import com.hust.scdx.constant.Constant.Cluster;
+import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.dao.ExtfileDao;
+import com.hust.scdx.model.Attr;
 import com.hust.scdx.model.Extfile;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
+import com.hust.scdx.service.AttrService;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.RedisService;
@@ -55,6 +58,8 @@ public class ExtfileServiceImpl implements ExtfileService {
 	private UserService userService;
 	@Autowired
 	private TopicService topicService;
+	@Autowired
+	private AttrService attrService;
 	@Autowired
 	ResultService resultService;
 	@Autowired
@@ -124,8 +129,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		int size = extfiles.size();
 		for (int i = 0; i < size; i++) {
 			Date uploadTime = extfiles.get(i).getUploadTime();
-			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime)
-					+ extfiles.get(i).getExtfileId();
+			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime) + extfiles.get(i).getExtfileId();
 		}
 
 		return mining(con, getExtfilesContent(extfilePaths), request);
@@ -151,7 +155,6 @@ public class ExtfileServiceImpl implements ExtfileService {
 			}
 			extfilePaths[i] = DIRECTORY.EXTFILE + ConvertUtil.convertDateToPath(uploadTime) + extfile.getExtfileId();
 		}
-
 		return mining(con, getExtfilesContent(extfilePaths), request);
 	}
 
@@ -274,8 +277,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 			fromIndex = i * Constant.slices;
 			toIndex = (i == len - 1 ? csize : (i + 1) * Constant.slices);
 			subContent = content.subList(fromIndex, toIndex);
-			tasks[i] = excutorService.submit(new MiningThread(attrs, subContent, i, Algorithm.DIGITAL,
-					user.getAlgorithm(), user.getGranularity()));
+			tasks[i] = excutorService.submit(new MiningThread(attrs, subContent, i, Algorithm.DIGITAL, user.getAlgorithm(), user.getGranularity()));
 		}
 
 		for (int i = 0; i < len; i++) {
@@ -302,9 +304,10 @@ public class ExtfileServiceImpl implements ExtfileService {
 	 */
 	private Map<String, Object> clean(String[] attrs, List<String[]> content, List<List<Integer>> origRess) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
-		int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+    	int indexOfTitle = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
+		int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 		// 重载排序的方法，按照降序。类中数量多的排在前面。
 		Collections.sort(origRess, new Comparator<List<Integer>>() {
 			@Override
@@ -338,8 +341,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		List<String[]> displayResult = new ArrayList<String[]>();
 		for (int[] row : origCounts) {
 			String[] old = content.get(row[0]);
-			String[] sub = new String[] { old[indexOfTitle], old[indexOfUrl], old[indexOfTime],
-					String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfTitle], old[indexOfUrl], old[indexOfTime], String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
 		result.put(Cluster.DISPLAYRESULT, displayResult);
@@ -390,8 +392,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		int algorithmType;
 		int granularity;
 
-		public MiningThread(String[] attrs, List<String[]> subContent, int index, int converterType, int algorithmType,
-				int granularity) {
+		public MiningThread(String[] attrs, List<String[]> subContent, int index, int converterType, int algorithmType, int granularity) {
 			this.attrs = attrs;
 			this.subContent = subContent;
 			this.index = index;
@@ -403,8 +404,7 @@ public class ExtfileServiceImpl implements ExtfileService {
 		@Override
 		public List<List<Integer>> call() throws Exception {
 			List<List<Integer>> result = new ArrayList<List<Integer>>();
-			List<List<Integer>> res = miningService.getOrigClusters(attrs, subContent, converterType, algorithmType,
-					granularity);
+			List<List<Integer>> res = miningService.getOrigClusters(attrs, subContent, converterType, algorithmType, granularity);
 			int resSize = res.size();
 			int subSize;
 			List<Integer> newSub, subList;

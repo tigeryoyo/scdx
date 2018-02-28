@@ -62,8 +62,9 @@ public class MiningServiceImpl implements MiningService {
 			int algorithmType, int granularity) {
 		// 用于存放结果
 		List<List<Integer>> resultIndexSetList = new ArrayList<List<Integer>>();
-		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+    	int indexOfTitle = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 		List<String[]> segmentList = segmentService.getSegresult(content, indexOfTitle, 0);
 		Convertor convertor = null;
 		// 判断选择的向量模型的类型
@@ -183,7 +184,8 @@ public class MiningServiceImpl implements MiningService {
 	@Override
 	public List<int[]> getOrigCounts(String[] attrs, List<String[]> content, List<String[]> origClusters) {
 		List<int[]> origCounts = new ArrayList<int[]>();
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 		List<int[]> clusters = ConvertUtil.toIntArrayList(origClusters); // 变成
 		for (int i = 0; i < clusters.size(); i++) {
 			int[] cluster = clusters.get(i); // 取第i条数组
@@ -267,10 +269,11 @@ public class MiningServiceImpl implements MiningService {
                 });
         //属性行
         String[] attrs = content.remove(0);
-        int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
-        int indexOfTime = AttrUtil.findIndexOfTime(attrs);
-        int indexOfType = AttrUtil.findIndexOfSth(attrs, AttrUtil.TYPE_PATTERN);
-        int indexOfLevel = AttrUtil.findIndexOfSth(attrs, AttrUtil.RANK_PATTERN);
+        AttrUtil attrUtil = AttrUtil.getSingleton();
+		int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
+        int indexOfType = attrUtil.findIndexOf(attrs, attrUtil.getType_alias());
+        int indexOfLevel = attrUtil.findIndexOf(attrs, attrUtil.getRank_alias());
         for (String[] row : content) {
            
             if (CommonUtil.isEmptyArray(row)) {

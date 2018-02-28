@@ -7,203 +7,234 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 import com.hust.scdx.constant.Constant.AttrID;
+import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.constant.Constant.Interval;
 import com.hust.scdx.model.Domain;
 
 public class AttrUtil {
 
-	/**
-	 * title、url、time
-	 * 
-	 * @param attrs
-	 * @return
-	 */
-	/**
-	 * 标题 "标题|内容"
-	 */
-	public static final String TITLE_PATTERN = "标题|内容";
-	/**
-	 * url "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
-	 */
-	public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
-	/**
-	 * 时间 "发布时间|发贴时间|时间"
-	 */
-	public static final String TIME_PATTERN = "发布时间|发帖时间|发贴时间|时间";
-	/**
-	 * 发帖人 "发帖人|发贴人"
-	 */
-	public static final String POSTING = "发帖人|发贴人|作者|发布人|来源/发布人|发布者昵称";
-	/**
-	 * 网站名称 "网站|媒体名称"
-	 */
-	public static final String WEBNAME_PATTERN = "网站|媒体名称";
-	/**
-	 * 网站类型 "来源|类型|资源类型"
-	 */
-	public static final String TYPE_PATTERN = "来源|类型|资源类型|媒体类型";
-	/**
-	 * 网站所属模块 "板块|频道"
-	 */
-	public static final String COLUMN_PATTERN = "板块|频道|频道分类";
-	/**
-	 * 网站级别 "媒体级别"
-	 */
-	public static final String RANK_PATTERN = "媒体级别";
-	/**
-	 * 网站权重 "权重"
-	 */
-	public static final String WEIGHT_PATTERN = "权重";
-	/**
-	 * 网站影响范围 "影响范围"
-	 */
-	public static final String INCIDENCE_PATTERN = "影响范围";
+	private volatile static AttrUtil singleton;
 
-	public static int[] findEssentialIndex(String[] attrs) {
-		int indexOfTitle = findIndexOfTitle(attrs);
-		int indexOfUrl = findIndexOfUrl(attrs);
-		int indexOfTime = findIndexOfTime(attrs);
+	private AttrUtil() {
 
-		return new int[] { indexOfTitle, indexOfUrl, indexOfTime };
 	}
 
-	public static boolean isImp(String attr) {
-		return Pattern.matches(TITLE_PATTERN + "|" + URL_PATTERN + "|" + TIME_PATTERN + "|" + WEBNAME_PATTERN + "|" + TYPE_PATTERN + "|"
-				+ COLUMN_PATTERN + "|" + RANK_PATTERN + "|" + POSTING + "|" + RANK_PATTERN + "|" + WEIGHT_PATTERN + "|" + INCIDENCE_PATTERN, attr);
+	public static AttrUtil getSingleton() {
+		if (singleton == null) {
+			synchronized (AttrUtil.class) {
+				if (singleton == null) {
+					singleton = new AttrUtil();
+				}
+			}
+		}
+		return singleton;
 	}
 
-	public static int findIndexOfSth(String[] attrs, String sth) {
+	// 最核心冗余属性
+	String title_mainName; // 标题
+	String title_alias; // 标题|内容
+	String url_mainName; // 链接
+	String url_alias; // 链接|网址|域名|微博链接|[Uu][Rr][Ll]
+	String time_mainName; // 时间
+	String time_alias; // 发布时间|发帖时间|发贴时间|时间
+	// 次要冗余属性
+	String type_mainName; // 来源
+	String type_alias; // 来源|类型|资源类型|媒体类型
+	String rank_mainName; // 媒体级别
+	String rank_alias;// 媒体级别
+
+	// 存储的是自定义的属性名称
+	List<String> attrs_mainName;
+	// 对应的自定义属性别名
+	List<String> attrs_alias;
+
+	public String getTitle_mainName() {
+		return title_mainName;
+	}
+
+	public void setTitle_mainName(String title_mainName) {
+		this.title_mainName = title_mainName;
+	}
+
+	public String getTitle_alias() {
+		return title_alias;
+	}
+
+	public void setTitle_alias(String title_alias) {
+		this.title_alias = title_alias;
+	}
+
+	public String getUrl_mainName() {
+		return url_mainName;
+	}
+
+	public void setUrl_mainName(String url_mainName) {
+		this.url_mainName = url_mainName;
+	}
+
+	public String getUrl_alias() {
+		return url_alias;
+	}
+
+	public void setUrl_alias(String url_alias) {
+		this.url_alias = url_alias;
+	}
+
+	public String getTime_mainName() {
+		return time_mainName;
+	}
+
+	public void setTime_mainName(String time_mainName) {
+		this.time_mainName = time_mainName;
+	}
+
+	public String getTime_alias() {
+		return time_alias;
+	}
+
+	public void setTime_alias(String time_alias) {
+		this.time_alias = time_alias;
+	}
+
+	public List<String> getAttrs_mainName() {
+		return attrs_mainName;
+	}
+
+	public void setAttrs_mainName(List<String> attrs_mainName) {
+		this.attrs_mainName = attrs_mainName;
+	}
+
+	public List<String> getAttrs_alias() {
+		return attrs_alias;
+	}
+
+	public void setAttrs_alias(List<String> attrs_alias) {
+		this.attrs_alias = attrs_alias;
+	}
+
+	public String getType_mainName() {
+		if (type_mainName == null) {
+			return "来源";
+		}
+		return type_mainName;
+	}
+
+	public void setType_mainName(String type_mainName) {
+		this.type_mainName = type_mainName;
+	}
+
+	public String getType_alias() {
+		return type_alias;
+	}
+
+	public void setType_alias(String type_alias) {
+		this.type_alias = type_alias;
+	}
+
+	public String getRank_mainName() {
+		if (rank_mainName == null) {
+			return "媒体级别";
+		}
+		return rank_mainName;
+	}
+
+	public void setRank_mainName(String rank_mainName) {
+		this.rank_mainName = rank_mainName;
+	}
+
+	public String getRank_alias() {
+		return rank_alias;
+	}
+
+	public void setRank_alias(String rank_alias) {
+		this.rank_alias = rank_alias;
+	}
+
+	public int findIndexOf(String[] attrs, String pattern) {
 		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches(sth, attrs[i])) {
+			if (Pattern.matches(pattern, attrs[i])) {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
-	public static int findIndexOfSth(List<String> attrs, String sth) {
+	public int findIndexOf(List<String> attrs, String pattern) {
 		int size = attrs.size();
 		for (int i = 0; i < size; i++) {
-			if (Pattern.matches(sth, attrs.get(i))) {
+			if (Pattern.matches(pattern, attrs.get(i))) {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
-	public static int findIndexOfTitle(String[] attrs) {
-		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches(TITLE_PATTERN, attrs[i])) {
+	// title/url/time
+	public int[] findEssentialIndex(String[] attrs) {
+		int[] res = new int[3];
+		res[Index.TITLE] = findIndexOf(attrs, title_alias);
+		res[Index.URL] = findIndexOf(attrs, url_alias);
+		res[Index.TIME] = findIndexOf(attrs, time_alias);
+		return res;
+	}
+
+	/**
+	 * 判断attr是否在自定义属性里
+	 * 
+	 * @param attr
+	 * @return
+	 */
+	public int isIndexOf(String attr) {
+		int size = attrs_alias.size();
+		for (int i = 0; i < size; i++) {
+			if (Pattern.matches(attrs_alias.get(i), attr)) {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
-	public static int findIndexOfTitle(List<String> attrs) {
-		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches(TITLE_PATTERN, attrs.get(i))) {
-				return i;
-			}
-		}
 
-		return -1;
-	}
-
-	public static int findIndexOfUrl(String[] attrs) {
-		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches(URL_PATTERN, attrs[i])) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfUrl(List<String> attrs) {
-		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches(URL_PATTERN, attrs.get(i))) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfTime(String[] attrs) {
-		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches(TIME_PATTERN, attrs[i])) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfTime(List<String> attrs) {
-		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches(TIME_PATTERN, attrs.get(i))) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfWebName(String[] attrs) {
-		for (int i = 0; i < attrs.length; i++) {
-			if (Pattern.matches(WEBNAME_PATTERN, attrs[i])) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static int findIndexOfWebName(List<String> attrs) {
-		for (int i = 0; i < attrs.size(); i++) {
-			if (Pattern.matches(WEBNAME_PATTERN, attrs.get(i))) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-
-	public static boolean isTitle(String attr) {
-		if (Pattern.matches(TITLE_PATTERN, attr)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean isUrl(String attr) {
-		if (Pattern.matches(URL_PATTERN, attr)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean isTime(String attr) {
-		if (Pattern.matches(TIME_PATTERN, attr)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean isSth(String attr, String pattern) {
-		if (Pattern.matches(pattern, attr)) {
-			return true;
-		}
-
-		return false;
-	}
+//	/**
+//	 * 标题 "标题|内容"
+//	 */
+//	public static final String TITLE_PATTERN = "标题|内容";
+//	/**
+//	 * url "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
+//	 */
+//	public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
+//	/**
+//	 * 时间 "发布时间|发贴时间|时间"
+//	 */
+//	public static final String TIME_PATTERN = "发布时间|发帖时间|发贴时间|时间";
+//	/**
+//	 * 发帖人 "发帖人|发贴人"
+//	 */
+//	public static final String POSTING = "发帖人|发贴人|作者|发布人|来源/发布人|发布者昵称";
+//	/**
+//	 * 网站名称 "网站|媒体名称"
+//	 */
+//	public static final String WEBNAME_PATTERN = "网站|媒体名称";
+//	/**
+//	 * 网站类型 "来源|类型|资源类型"
+//	 */
+//	public static final String TYPE_PATTERN = "来源|类型|资源类型|媒体类型";
+//	/**
+//	 * 网站所属模块 "板块|频道"
+//	 */
+//	public static final String COLUMN_PATTERN = "板块|频道|频道分类";
+//	/**
+//	 * 网站级别 "媒体级别"
+//	 */
+//	public static final String RANK_PATTERN = "媒体级别";
+//	/**
+//	 * 网站权重 "权重"
+//	 */
+//	public static final String WEIGHT_PATTERN = "权重";
+//	/**
+//	 * 网站影响范围 "影响范围"
+//	 */
+//	public static final String INCIDENCE_PATTERN = "影响范围";
 
 	/**
 	 * 统计日期-数量与来源-数量
@@ -212,10 +243,11 @@ public class AttrUtil {
 	 * @return
 	 */
 	public static Map<String, TreeMap<String, Integer>> statistics(List<String[]> content) {
+		AttrUtil attrUtil = AttrUtil.getSingleton();
 		HashMap<String, TreeMap<String, Integer>> map = new HashMap<String, TreeMap<String, Integer>>();
-		int indexOfUrl = findIndexOfUrl(content.get(0));
-		int indexOfTime = findIndexOfTime(content.get(0));
-		int indexOfType = findIndexOfSth(content.get(0), TYPE_PATTERN);
+		int indexOfUrl = attrUtil.findIndexOf(content.get(0), attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(content.get(0), attrUtil.getTime_alias());
+		int indexOfType = attrUtil.findIndexOf(content.get(0), attrUtil.getType_alias());
 		TreeMap<String, Integer> timeMap = new TreeMap<String, Integer>();
 		TreeMap<String, Integer> webMap = new TreeMap<String, Integer>();
 

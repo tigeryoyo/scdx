@@ -129,7 +129,8 @@ public class ResultServiceImpl implements ResultService {
 
 		// 返回给前端的结果list：title、url、time、amount
 		List<String[]> displayResult = new ArrayList<String[]>();
-		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		int[] indexOfEss = attrUtil.findEssentialIndex(content.get(0));
 		for (int[] row : origCounts) {
 			String[] old = content.get(row[0] + 1);
 			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
@@ -174,7 +175,8 @@ public class ResultServiceImpl implements ResultService {
 		}
 		// 返回给前端的结果list：title、url、time、amount
 		List<String[]> displayResult = new ArrayList<String[]>();
-		int[] indexOfEss = AttrUtil.findEssentialIndex(content.get(0));
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		int[] indexOfEss = attrUtil.findEssentialIndex(content.get(0));
 		List<int[]> tmp = ConvertUtil.toIntArrayList(origCounts);
 		for (int[] row : tmp) {
 			String[] old = content.get(row[0] + 1);

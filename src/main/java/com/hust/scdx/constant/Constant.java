@@ -57,6 +57,7 @@ public class Constant {
 	}
 
 	public static class Index {
+		// 不能大于2
 		public static final int TITLE = 0;
 		public static final int URL = 1;
 		public static final int TIME = 2;

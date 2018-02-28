@@ -10,10 +10,10 @@ public class TopicExample {
 	protected boolean distinct;
 
 	protected List<Criteria> oredCriteria;
-	
-	protected int start;
 
-	protected int limit;
+	private int limit;
+
+	private int start;
 
 	public TopicExample() {
 		oredCriteria = new ArrayList<Criteria>();
@@ -33,6 +33,22 @@ public class TopicExample {
 
 	public boolean isDistinct() {
 		return distinct;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 	public List<Criteria> getOredCriteria() {
@@ -316,6 +332,76 @@ public class TopicExample {
 
 		public Criteria andTopicTypeNotBetween(String value1, String value2) {
 			addCriterion("topic_type not between", value1, value2, "topicType");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrIsNull() {
+			addCriterion("attr is null");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrIsNotNull() {
+			addCriterion("attr is not null");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrEqualTo(String value) {
+			addCriterion("attr =", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrNotEqualTo(String value) {
+			addCriterion("attr <>", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrGreaterThan(String value) {
+			addCriterion("attr >", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrGreaterThanOrEqualTo(String value) {
+			addCriterion("attr >=", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrLessThan(String value) {
+			addCriterion("attr <", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrLessThanOrEqualTo(String value) {
+			addCriterion("attr <=", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrLike(String value) {
+			addCriterion("attr like", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrNotLike(String value) {
+			addCriterion("attr not like", value, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrIn(List<String> values) {
+			addCriterion("attr in", values, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrNotIn(List<String> values) {
+			addCriterion("attr not in", values, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrBetween(String value1, String value2) {
+			addCriterion("attr between", value1, value2, "attr");
+			return (Criteria) this;
+		}
+
+		public Criteria andAttrNotBetween(String value1, String value2) {
+			addCriterion("attr not between", value1, value2, "attr");
 			return (Criteria) this;
 		}
 
@@ -676,21 +762,4 @@ public class TopicExample {
 			this(condition, value, secondValue, null);
 		}
 	}
-
-	public int getStart() {
-		return start;
-	}
-
-	public void setStart(int start) {
-		this.start = start;
-	}
-
-	public int getLimit() {
-		return limit;
-	}
-
-	public void setLimit(int limit) {
-		this.limit = limit;
-	}
-
 }

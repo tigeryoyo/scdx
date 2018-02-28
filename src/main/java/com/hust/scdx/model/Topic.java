@@ -15,6 +15,8 @@ public class Topic implements Serializable {
 
 	private String topicType;
 
+	private String attr;
+
 	private Date createTime;
 
 	private String creator;
@@ -45,6 +47,14 @@ public class Topic implements Serializable {
 
 	public void setTopicType(String topicType) {
 		this.topicType = topicType == null ? null : topicType.trim();
+	}
+
+	public String getAttr() {
+		return attr;
+	}
+
+	public void setAttr(String attr) {
+		this.attr = attr == null ? null : attr.trim();
 	}
 
 	public Date getCreateTime() {

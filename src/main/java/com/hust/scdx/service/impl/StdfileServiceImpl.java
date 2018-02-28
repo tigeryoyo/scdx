@@ -477,9 +477,10 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	private List<String[]> clean(String[] attrs, List<String[]> content, List<List<Integer>> origRess) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
-		int indexOfUrl = AttrUtil.findIndexOfUrl(attrs);
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+    	int indexOfTitle = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
+		int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 		// 重载排序的方法，按照降序。类中数量多的排在前面。
 		Collections.sort(origRess, new Comparator<List<Integer>>() {
 			@Override
@@ -538,8 +539,9 @@ public class StdfileServiceImpl implements StdfileService {
 			List<String[]> tmp = (List<String[]>) stdfileMap.get(StdfileMap.CONTENT);
 			// 属性行
 			String[] attrs = tmp.remove(0);
-			int indexOfTitle = AttrUtil.findIndexOfTitle(attrs);
-			int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+			AttrUtil attrUtil = AttrUtil.getSingleton();
+	    	int indexOfTitle = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
+			int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 			// 将类簇内容转换每一个类簇为一个list
 			List<List<String[]>> content = convert(tmp);
 			// 标记，每一个类簇的最早出现的新闻index
@@ -715,8 +717,9 @@ public class StdfileServiceImpl implements StdfileService {
 	 */
 	private List<String[]> generateSummary(String[] attrs, List<List<String[]>> allContent, List<Integer> marked, String topicName) {
 		List<String[]> summary = new ArrayList<>();
-		int titleIndex = AttrUtil.findIndexOfTitle(attrs);
-		int urlIndex = AttrUtil.findIndexOfUrl(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+    	int titleIndex = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
+		int urlIndex = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
 		if (allContent == null || allContent.size() == 0) {
 			return summary;
 		}

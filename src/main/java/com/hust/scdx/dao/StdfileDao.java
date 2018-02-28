@@ -78,7 +78,8 @@ public class StdfileDao {
 		// 存储规则 DIRECTORY.stdfile/xxxx年/xx月/xx日/stdfileId
 		String[] attrs = list.get(0);
 		int size = list.size();
-		int indexOfTime = AttrUtil.findIndexOfTime(attrs);
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 		TreeMap<String, List<String[]>> map = new TreeMap<String, List<String[]>>();
 		for (int i = 1; i < size; i++) {
 			String[] line = list.get(i);
