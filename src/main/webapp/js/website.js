@@ -23,50 +23,58 @@ function websiteInforShow(page) {
                 	if(item.maintenanceStatus){
 	                    row = '<summary style="margin-bottom:10px;" onclick="pullDown(this)">'
 	                        + '<p data-id="'+item.uuid+'">'
-	                        + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+	                        + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
-	                        + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-	                        + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-	                        + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
 	                        + '</p>'
 	                        + '</summary>';
                 	}else{
                 		row = '<summary style="margin-bottom:10px;" onclick="pullDown(this)">'
                             + '<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
-                            + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
-                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
-                            + '</span>'
-                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
+	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
+	                        + '</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
                             + '</p>'
                             + '</summary>';
                 	}
                     $.each(two[idx],function(idx,item){
                     	if(item.maintenanceStatus){
 	                        row +='<p data-id="'+item.uuid+'">'
-	                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
 	                            + '</span>'
-	                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-	                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-	                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'
+	                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+		                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+		                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+		                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+		                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
                             + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
                             + '</span>'
-                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'
+                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
                             + '</p>';
                         }
                     })
@@ -131,23 +139,34 @@ function initShowPage(currenPage) {
     })
 }
 
-function initSearchPage(currenPage) {
+function initSearchPage(currenPage,condition) {
     var listCount = 0;
     if ("undefined" == typeof(currenPage) || null == currenPage) {
         currenPage = 1;
     }
-    console.log(typeof($("#web_url").val()));
-    var obj2 = $("#web_name").val();
-    var obj3 = $("#web_level").val();
-    var obj4 = $("#web_weight").val();
     $.ajax({
         type: "post",
         url: "/domain/searchDomainOneCount",
+        traditional:true,
         data: {
-            url: $("#web_url").val(),
-            name: obj2,
-            type: obj3,
-            weight: obj4
+        	url:condition.url,
+            name:condition.name,
+            column:condition.column,
+            rank:condition.rank,
+            type:condition.type,
+            incidence:condition.incidence,
+            weightStart:condition.weightStart,
+            weightEnd:condition.weightEnd,
+            isFather:condition.isFather,
+            maintenance:condition.maintenance,
+            timeSorting:condition.timeSorting,
+            urlSorting:condition.urlSorting,
+            nameSorting:condition.nameSorting,
+            columnSorting:condition.columnSorting,
+            rankSorting:condition.rankSorting,
+            typeSorting:condition.typeSorting,
+            weightSorting:condition.weightSorting,
+            maintenanceSorting:condition.maintenanceSorting
         },
         dataType: "json",
         beforeSend : function() {
@@ -180,18 +199,30 @@ function initSearchPage(currenPage) {
 
 // 信息搜索
 function websiteInforSearch(page) {
-    // var obj1 = $("#web_url").val();
-    var obj2 = $("#web_name").val();
-    var obj3 = $("#web_level").val();
-    var obj4 = $("#web_weight").val();
+	console.log(condition)
     $.ajax({
         type: "post",
         url: "/domain/searchDomainOne",
+        traditional:true,
         data: {
-            url: $("#web_url").val(),
-            name: obj2,
-            type: obj3,
-            weight: obj4,
+            url:condition.url,
+            name:condition.name,
+            column:condition.column,
+            rank:condition.rank,
+            type:condition.type,
+            incidence:condition.incidence,
+            weightStart:condition.weightStart,
+            weightEnd:condition.weightEnd,
+            isFather:condition.isFather,
+            maintenance:condition.maintenance,
+            timeSorting:condition.timeSorting,
+            urlSorting:condition.urlSorting,
+            nameSorting:condition.nameSorting,
+            columnSorting:condition.columnSorting,
+            rankSorting:condition.rankSorting,
+            typeSorting:condition.typeSorting,
+            weightSorting:condition.weightSorting,
+            maintenanceSorting:condition.maintenanceSorting,
             start: (parseInt(10 * page - 10)),
             limit: 10
         },
@@ -210,50 +241,58 @@ function websiteInforSearch(page) {
                 	if(item.maintenanceStatus){
 	                    row = '<summary style="margin-bottom:10px;" onclick="pullDown(this)">'
 	                        + '<p data-id="'+item.uuid+'">'
-	                        + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+	                        + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
-	                        + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-	                        + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-	                        + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
 	                        + '</p>'
 	                        + '</summary>';
                 	}else{
                 		row = '<summary style="margin-bottom:10px;" onclick="pullDown(this)">'
                             + '<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
-                            + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
-                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
-                            + '</span>'
-                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
+	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
+	                        + '</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'//
                             + '</p>'
                             + '</summary>';
                 	}
                     $.each(two[idx],function(idx,item){
                     	if(item.maintenanceStatus){
 	                        row +='<p data-id="'+item.uuid+'">'
-	                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
 	                            + '</span>'
-	                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-	                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-	                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'
+	                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+		                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+		                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+		                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+		                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 220px; min-height: 10px; display: inline; float: left;">'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
                             + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
                             + '</span>'
-                            + '<span style="width: 170px;min-height: 10px; display: inline; float: left;">'+item.name+'</span>'
-                            + '<span style="width: 110px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
-                            + '<span style="width: 90px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'
+                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
+	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
+	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
+	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
+	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
+                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
                             + '</p>';
                         }
                     })
@@ -499,3 +538,21 @@ function pullDown(th){
         $(th).find(".glyphicon").addClass("glyphicon-chevron-down");
     }
 }
+
+
+function showOp(){
+	var show = $('.moreOp').css('display');
+	$('.moreOp').css('display',show =='block'?'none':'block');
+}
+
+function showChoice(){
+	$('.cancelChoice').css("display","inline-block");
+	$('.showChoice').css('display','none');
+	$('.choice').css("display","block");
+}
+function cancelChoice(){
+	$('.showChoice').css("display","inline-block");
+	$('.cancelChoice').css("display","none");
+	$('.choice').css("display","none");
+}
+

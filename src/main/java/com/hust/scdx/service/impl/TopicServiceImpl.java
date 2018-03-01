@@ -109,7 +109,7 @@ public class TopicServiceImpl implements TopicService {
 			if (attrs == null || attrs.isEmpty()) {
 				attrs = Constant.topicAttrOrder;
 			}
-			String[] attrIds = queryAttrByTopicId(topicId).split(";");
+			String[] attrIds = attrs.split(";");
 			for (String attrId : attrIds) {
 				Attr attr = attrService.queryAttrById(Integer.valueOf(attrId));
 				if (attr != null) {

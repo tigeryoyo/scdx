@@ -1,15 +1,26 @@
 package com.hust.scdx.model.params;
 
+import java.util.List;
+
 public class DomainOneQueryCondition {
 	private String url;
 	private String name;
-	private String type;
 	private String column;
-	private Boolean isFather;
+	private List<String> type;
 	private String incidence;
-	private String rank;
-	private Integer weight;
+	private List<String> rank;
+	private Boolean isFather;
 	private Boolean maintenanceStatus;
+	private Integer weightStart;
+	private Integer weightEnd;
+	private Integer timeSorting;
+	private Integer urlSorting;
+	private Integer nameSorting;
+	private Integer columnSorting;
+	private Integer typeSorting;
+	private Integer rankSorting;
+	private Integer weightSorting;
+	private Integer maintenanceSorting;
 	private Integer start;
 	private Integer limit;
 
@@ -27,14 +38,6 @@ public class DomainOneQueryCondition {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getColumn() {
@@ -61,11 +64,19 @@ public class DomainOneQueryCondition {
 		this.incidence = incidence;
 	}
 
-	public String getRank() {
+	public List<String> getType() {
+		return type;
+	}
+
+	public void setType(List<String> type) {
+		this.type = type;
+	}
+
+	public List<String> getRank() {
 		return rank;
 	}
 
-	public void setRank(String rank) {
+	public void setRank(List<String> rank) {
 		this.rank = rank;
 	}
 
@@ -75,14 +86,6 @@ public class DomainOneQueryCondition {
 
 	public void setIsFather(Boolean isFather) {
 		this.isFather = isFather;
-	}
-
-	public Integer getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Integer weight) {
-		this.weight = weight;
 	}
 
 	public Boolean getMaintenanceStatus() {
@@ -109,4 +112,84 @@ public class DomainOneQueryCondition {
 		this.limit = limit;
 	}
 
+	public Integer getWeightStart() {
+		return weightStart;
+	}
+
+	public void setWeightStart(Integer weightStart) {
+		this.weightStart = weightStart;
+	}
+
+	public Integer getWeightEnd() {
+		return weightEnd;
+	}
+
+	public void setWeightEnd(Integer weightEnd) {
+		this.weightEnd = weightEnd;
+	}
+
+	public Integer getUrlSorting() {
+		return urlSorting;
+	}
+
+	public void setUrlSorting(Integer urlSorting) {
+		this.urlSorting = urlSorting;
+	}
+
+	public Integer getNameSorting() {
+		return nameSorting;
+	}
+
+	public void setNameSorting(Integer nameSorting) {
+		this.nameSorting = nameSorting;
+	}
+
+	public Integer getColumnSorting() {
+		return columnSorting;
+	}
+
+	public void setColumnSorting(Integer columnSorting) {
+		this.columnSorting = columnSorting;
+	}
+
+	public Integer getTypeSorting() {
+		return typeSorting;
+	}
+
+	public void setTypeSorting(Integer typeSorting) {
+		this.typeSorting = typeSorting;
+	}
+
+	public Integer getRankSorting() {
+		return rankSorting;
+	}
+
+	public void setRankSorting(Integer rankSorting) {
+		this.rankSorting = rankSorting;
+	}
+
+	public Integer getWeightSorting() {
+		return weightSorting;
+	}
+
+	public void setWeightSorting(Integer weightSorting) {
+		this.weightSorting = weightSorting;
+	}
+
+	public Integer getTimeSorting() {
+		return timeSorting;
+	}
+
+	public void setTimeSorting(Integer timeSorting) {
+		this.timeSorting = timeSorting;
+	}
+
+	public Integer getMaintenanceSorting() {
+		return maintenanceSorting;
+	}
+
+	public void setMaintenanceSorting(Integer maintenanceSorting) {
+		this.maintenanceSorting = maintenanceSorting;
+	}
+	
 }

@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>权重表管理——编辑权重表</title>
-<script type="text/javascript" src="js/weight.js"></script>
+<title>媒体级别权重管理——编辑媒体级别权重</title>
+<script type="text/javascript" src="js/rank-weight.js"></script>
 </head>
 <body>
 	<div class="s_nav">
-		当前位置： <a href="javascript:;" onclick="jumpto('weight-infor')">权重表管理</a> >>编辑权重表
+		当前位置： <a href="javascript:;" onclick="jumpto('rank-weight-infor')">媒体级别权重管理</a> >>编辑媒体级别权重
 	</div>
 	<div class="user_infor">
 		<form>
 			<table width="470" border="0" class="change_tab">
 				<tr>
-					<td width="100" height="50">类型名称：</td>
+					<td width="100" height="50">级别名称：</td>
 					<td width="200" height="50"><input type="text" class="form-control"
 						id="new_name_weight" disabled="disabled" /></td>
 				</tr>
@@ -36,7 +36,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-	var weight = JSON.parse(getCookie("weightInfor"));
+	var weight = JSON.parse(getCookie("rankWeightInfor"));
 	var b_cookie = document.getElementById("new_name_weight");
 	var c_cookie = document.getElementById("new_weight_weight");
 	b_cookie.value = weight.weightName;

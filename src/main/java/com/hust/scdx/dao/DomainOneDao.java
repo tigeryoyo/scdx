@@ -60,19 +60,19 @@ public class DomainOneDao {
 			criteria.andNameLike("%" + condition.getName() + "%");
 		}
 		if (!StringUtils.isBlank(condition.getUrl())) {
-			criteria.andUrlEqualTo(condition.getUrl());
+			criteria.andUrlLike("%" +condition.getUrl() + "%");
 		}
 		if (!StringUtils.isBlank(condition.getColumn())) {
-			criteria.andColumnEqualTo(condition.getColumn());
-		}
-		if (!StringUtils.isBlank(condition.getType())) {
-			criteria.andTypeEqualTo(condition.getType());
-		}
-		if (!StringUtils.isBlank(condition.getRank())) {
-			criteria.andRankEqualTo(condition.getRank());
+			criteria.andColumnLike("%" +condition.getColumn()+ "%");
 		}
 		if (!StringUtils.isBlank(condition.getIncidence())) {
-			criteria.andIncidenceEqualTo(condition.getIncidence());
+			criteria.andIncidenceLike("%" +condition.getIncidence()+ "%");
+		}
+		if (null !=condition.getType()) {
+			criteria.andTypeIn(condition.getType());
+		}
+		if (null !=condition.getRank()) {
+			criteria.andRankIn(condition.getRank());
 		}
 		if (null != condition.getIsFather()) {
 			criteria.andIsFatherEqualTo(condition.getIsFather());
@@ -80,8 +80,14 @@ public class DomainOneDao {
 		if (null != condition.getMaintenanceStatus()) {
 			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
 		}
-		if (null != condition.getWeight()) {
-			criteria.andWeightEqualTo(condition.getWeight());
+		if (null != condition.getIsFather()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getIsFather());
+		}
+		if (null != condition.getWeightStart()) {
+			criteria.andWeightGreaterThanOrEqualTo(condition.getWeightStart());
+		}
+		if (null != condition.getWeightEnd()) {
+			criteria.andWeightLessThanOrEqualTo(condition.getWeightEnd());
 		}
 		if (null != condition.getStart()) {
 			example.setStart(condition.getStart());
@@ -93,7 +99,65 @@ public class DomainOneDao {
 		} else {
 			example.setLimit(0);
 		}
-		example.setOrderByClause("update_time desc,url");
+		String order = "";
+		if(null== condition.getTimeSorting()||condition.getTimeSorting()==1){
+			order+="update_time desc";
+		}else if(condition.getTimeSorting()==2){
+			order+="update_time";
+		}
+		if(null!= condition.getUrlSorting()){
+			if(condition.getUrlSorting()==1){
+				order+=",url desc";
+			}else if(condition.getUrlSorting()==2){
+				order+=",url";
+			}
+		}
+		if(null!= condition.getNameSorting()){
+			if(condition.getNameSorting()==1){
+				order+=",name desc";
+			}else if(condition.getNameSorting()==2){
+				order+=",name";
+			}
+		}
+		if(null!=condition.getColumnSorting()){
+			if(condition.getColumnSorting()==1){
+				order+=",domain_one.column desc";
+			}else if(condition.getColumnSorting()==2){
+				order+=",domain_one.column";
+			}
+		}
+		if(null!=condition.getRankSorting()){
+			if(condition.getRankSorting()==1){
+				order+=",rank desc";
+			}else if(condition.getRankSorting()==2){
+				order+=",rank";
+			}
+		}
+		if(null!=condition.getTypeSorting()){
+			if(condition.getTypeSorting()==1){
+				order+=",type desc";
+			}else if(condition.getTypeSorting()==2){
+				order+=",type";
+			}
+		}
+		if(null!=condition.getWeightSorting()){
+			if(condition.getWeightSorting()==1){
+				order+=",weight desc";
+			}else if(condition.getWeightSorting()==2){
+				order+=",weight";
+			}
+		}
+		if(null!=condition.getMaintenanceSorting()){
+			if(condition.getMaintenanceSorting()==1){
+				order+=",maintenance desc";
+			}else if(condition.getMaintenanceSorting()==2){
+				order+=",maintenance";
+			}
+		}
+		if(order.startsWith(",")){
+			order = order.substring(1);
+		}
+		example.setOrderByClause(order);
 
 		return domainOneMapper.selectByExample(example);
 	}
@@ -125,25 +189,34 @@ public class DomainOneDao {
 			criteria.andNameLike("%" + condition.getName() + "%");
 		}
 		if (!StringUtils.isBlank(condition.getUrl())) {
-			criteria.andUrlEqualTo(condition.getUrl());
+			criteria.andUrlLike("%" +condition.getUrl() + "%");
 		}
 		if (!StringUtils.isBlank(condition.getColumn())) {
-			criteria.andColumnEqualTo(condition.getColumn());
-		}
-		if (!StringUtils.isBlank(condition.getType())) {
-			criteria.andTypeEqualTo(condition.getType());
-		}
-		if (!StringUtils.isBlank(condition.getRank())) {
-			criteria.andRankEqualTo(condition.getRank());
+			criteria.andColumnLike("%" +condition.getColumn()+ "%");
 		}
 		if (!StringUtils.isBlank(condition.getIncidence())) {
-			criteria.andIncidenceEqualTo(condition.getIncidence());
+			criteria.andIncidenceLike("%" +condition.getIncidence()+ "%");
+		}
+		if (null !=condition.getType()) {
+			criteria.andTypeIn(condition.getType());
+		}
+		if (null !=condition.getRank()) {
+			criteria.andRankIn(condition.getRank());
 		}
 		if (null != condition.getIsFather()) {
 			criteria.andIsFatherEqualTo(condition.getIsFather());
 		}
-		if (null != condition.getWeight()) {
-			criteria.andWeightEqualTo(condition.getWeight());
+		if (null != condition.getMaintenanceStatus()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
+		}
+		if (null != condition.getIsFather()) {
+			criteria.andMaintenanceStatusEqualTo(condition.getIsFather());
+		}
+		if (null != condition.getWeightStart()) {
+			criteria.andWeightGreaterThanOrEqualTo(condition.getWeightStart());
+		}
+		if (null != condition.getWeightEnd()) {
+			criteria.andWeightLessThanOrEqualTo(condition.getWeightEnd());
 		}
 		if (null != condition.getStart()) {
 			example.setStart(condition.getStart());
@@ -155,6 +228,65 @@ public class DomainOneDao {
 		} else {
 			example.setLimit(0);
 		}
+		String order = "";
+		if(null== condition.getTimeSorting()||condition.getTimeSorting()==1){
+			order+="update_time desc";
+		}else if(condition.getTimeSorting()==2){
+			order+="update_time";
+		}
+		if(null!= condition.getUrlSorting()){
+			if(condition.getUrlSorting()==1){
+				order+=",url desc";
+			}else if(condition.getUrlSorting()==2){
+				order+=",url";
+			}
+		}
+		if(null!= condition.getNameSorting()){
+			if(condition.getNameSorting()==1){
+				order+=",name desc";
+			}else if(condition.getNameSorting()==2){
+				order+=",name";
+			}
+		}
+		if(null!=condition.getColumnSorting()){
+			if(condition.getColumnSorting()==1){
+				order+=",domain_one.column desc";
+			}else if(condition.getColumnSorting()==2){
+				order+=",domain_one.column";
+			}
+		}
+		if(null!=condition.getRankSorting()){
+			if(condition.getRankSorting()==1){
+				order+=",rank desc";
+			}else if(condition.getRankSorting()==2){
+				order+=",rank";
+			}
+		}
+		if(null!=condition.getTypeSorting()){
+			if(condition.getTypeSorting()==1){
+				order+=",type desc";
+			}else if(condition.getTypeSorting()==2){
+				order+=",type";
+			}
+		}
+		if(null!=condition.getWeightSorting()){
+			if(condition.getWeightSorting()==1){
+				order+=",weight desc";
+			}else if(condition.getWeightSorting()==2){
+				order+=",weight";
+			}
+		}
+		if(null!=condition.getMaintenanceSorting()){
+			if(condition.getMaintenanceSorting()==1){
+				order+=",maintenance desc";
+			}else if(condition.getMaintenanceSorting()==2){
+				order+=",maintenance";
+			}
+		}
+		if(order.startsWith(",")){
+			order = order.substring(1);
+		}
+		example.setOrderByClause(order);
 		return domainOneMapper.countByExample(example);
 	}
 	
@@ -194,7 +326,7 @@ public class DomainOneDao {
 	 *            给定条件用来锁定要修改的域名
 	 * @return
 	 */
-	public boolean updateDomainOneInfo(DomainOne domainOne, DomainOneQueryCondition condition) {
+	public boolean updateDomainOneInfo(DomainOne domainOne, DomainOne condition) {
 		DomainOneExample example = new DomainOneExample();
 		Criteria criteria = example.createCriteria();
 		if (!StringUtils.isBlank(condition.getName())) {

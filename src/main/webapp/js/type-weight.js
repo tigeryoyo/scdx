@@ -145,8 +145,8 @@ function weightChange(value1, value2, value3) {
 		weightName : value2,
 		weight : value3
 	};
-	setCookie("weightInfor", JSON.stringify(json));
-	jumpto("weight-change");
+	setCookie("typeWeightInfor", JSON.stringify(json));
+	jumpto("type-weight-change");
 }
 
 // 信息搜索
@@ -218,7 +218,7 @@ function weightInforSearch(page) {
 
 // 用户添加
 function weightInforAdd() {
-	jumpto("weight-add");
+	jumpto("type-weight-add");
 }
 function addWeight() {
 	$.ajax({
@@ -234,7 +234,7 @@ function addWeight() {
 			},
 		success : function(msg) {
 			if (msg.status == "OK") {
-				jumpto("weight-infor");
+				jumpto("type-weight-infor");
 			} else {
 				alert(msg.result);
 			}
@@ -261,7 +261,7 @@ function clearWeight() {
 }
 
 function weightInforChange() {
-	var weight = JSON.parse(getCookie("weightInfor"));
+	var weight = JSON.parse(getCookie("typeWeightInfor"));
 	$.ajax({
 		type : "post",
 		url : "/weight/updateWeight",
@@ -277,7 +277,7 @@ function weightInforChange() {
 		success : function(msg) {
 			console.log(msg);
 			if (msg.status == "OK") {
-				jumpto("weight-infor");
+				jumpto("type-weight-infor");
 			} else {
 				alert(msg.result);
 			}
@@ -325,7 +325,7 @@ $(function() {
 					console.log(msg);
 					if (msg.status == "OK") {
 						alert(msg.result);
-						jumpto("weight-infor");
+						jumpto("type-weight-infor");
 					} else {
 						alert(msg.result);
 					}

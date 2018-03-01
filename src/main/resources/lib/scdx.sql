@@ -15,6 +15,31 @@ Date: 2017-12-22 10:50:51
 
 SET FOREIGN_KEY_CHECKS=0;
 
+
+-- ----------------------------
+-- Table structure for rank_weight
+-- ----------------------------
+DROP TABLE IF EXISTS `rank_weight`;
+CREATE TABLE `rank_weight` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(32) default NULL,
+  `weight` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Table structure for domain_store
+-- ----------------------------
+DROP TABLE IF EXISTS `domain_store`;
+CREATE TABLE `domain_store` (
+  `url` varchar(64) NOT NULL,
+  `name` varchar(32) default NULL,
+  `column` varchar(32) default NULL,
+  `type` varchar(32) default NULL,
+  `rank` varchar(32) default NULL,
+  `incidence` varchar(32) default NULL,
+  `create_time` datetime default NULL,
+  KEY `url` (`url`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- ----------------------------
 -- Table structure for attr
 -- ----------------------------

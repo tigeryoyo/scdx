@@ -1,5 +1,4 @@
 $(".incidence_provience").change(function(){
-	console.log("incidence onChange");
 	switchCityByPro($(".incidence_provience").val());
 })
 
@@ -134,7 +133,7 @@ function switchCityByPro(provience) {
 		citys = ["澳门"];
 		break;
 	default:
-		citys = ["其他"];
+		citys = [""];
 		break;
 	}
 	appendCity(citys);
