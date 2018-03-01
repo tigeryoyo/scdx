@@ -100,14 +100,21 @@ public class ExtfileController {
 		try {
 			String[] attrs = ExcelUtil.readOrigfileAttrs(origfile.getOriginalFilename(), origfile.getInputStream());
 			AttrUtil attrUtil = AttrUtil.getSingleton();
-			if (attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias()) != -1 && attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias()) != -1
-					&& attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias()) != -1) {
-				return ResultUtil.successWithoutMsg();
+			if (attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias()) == -1) {
+				return ResultUtil.errorWithMsg(" [ 标题 ] 属性列不正确，请在属性列配置标题别名。");
+			}
+
+			if (attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias()) == -1) {
+				return ResultUtil.errorWithMsg(" [ 链接 ] 属性列不正确，请在属性列配置链接别名。");
+			}
+
+			if (attrUtil.findIndexOf(attrs, attrUtil.getTime_alias()) == -1) {
+				return ResultUtil.errorWithMsg(" [ 时间 ] 属性列不正确，请在属性列配置时间别名。");
 			}
 		} catch (Exception e) {
 			logger.warn("读取属性行失败。" + e.toString());
 		}
-		return ResultUtil.errorWithMsg("获取文件属性失败");
+		return ResultUtil.successWithoutMsg();
 	}
 
 	/**

@@ -69,7 +69,7 @@ $(function() {
 						$(".btn_upl_all").removeAttr("disabled");
 						fileBuf = origfile;
 					} else {
-						alert("文件「 " + filename + " 」属行行不符合规定。");
+						alert("文件「 " + filename + " 」属行行不符合规定。" + msg.result);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
