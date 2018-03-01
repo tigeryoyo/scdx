@@ -98,7 +98,8 @@ public class FileUtil {
 				int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
 				int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 				// 当前文件的所有属性在全局文件的索引位置
-				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs) : getIndexOfExtfile(attrUtil, attrs, globalAttrs);
+				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs)
+						: getIndexOfExtfile(attrUtil, attrs, globalAttrs);
 				// 全局文件time所在列
 				int globalIndexOfTime = attrUtil.findIndexOf(globalAttrs, attrUtil.getTime_alias());
 				while (true) {
@@ -206,7 +207,8 @@ public class FileUtil {
 	 * @param content
 	 * @return 调整属性行后的content
 	 */
-	private static List<String[]> adjustPropertyLine(AttrUtil attrUtil, List<String> globalAttrs, List<String[]> content) {
+	private static List<String[]> adjustPropertyLine(AttrUtil attrUtil, List<String> globalAttrs,
+			List<String[]> content) {
 		List<String[]> res = new ArrayList<String[]>();
 		List<String> attrs_mainName = attrUtil.getAttrs_mainName();
 		List<String> nattrs = new ArrayList<String>(attrs_mainName);
@@ -242,7 +244,7 @@ public class FileUtil {
 			String[] nline = new String[nsize];
 			for (int j = 0; j < nsize; j++) {
 				int n = indices.get(j);
-				if (n != -1) {
+				if (n != -1 && n < cline.length) {
 					nline[j] = cline[n];
 				} else {
 					nline[j] = "";
@@ -253,7 +255,7 @@ public class FileUtil {
 		String[] tmp = new String[nattrs.size()];
 		nattrs.toArray(tmp);
 		res.add(0, tmp);
-//		
+		//
 		return fillContentFromDomain(res);
 	}
 
@@ -262,7 +264,8 @@ public class FileUtil {
 		String[] attrs = content.remove(0);
 		AttrUtil attrUtil = AttrUtil.getSingleton();
 		int urlIndex = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
-		if(urlIndex==-1)return null;
+		if (urlIndex == -1)
+			return null;
 		int nameIndex = attrUtil.findIndexOf(attrs, attrUtil.getWebname_alias());
 		int columnIndex = attrUtil.findIndexOf(attrs, attrUtil.getColumn_alias());
 		int typeIndex = attrUtil.findIndexOf(attrs, attrUtil.getType_alias());
@@ -282,37 +285,47 @@ public class FileUtil {
 				Domain domain = DomainCacheManager.getByUrl(url);
 				if (null != domain && domain.getMaintenanceStatus()) {
 					// 如果该一级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
-					if(nameIndex!=-1)strs[nameIndex] = domain.getName();
-					if(columnIndex!=-1)strs[columnIndex] = domain.getColumn();
-					if(typeIndex!=-1)strs[typeIndex] = domain.getType();
-					if(rankIndex!=-1)strs[rankIndex] = domain.getRank();
-					if(incidenceIndex!=-1)strs[incidenceIndex] = domain.getIncidence();
-					if(weightIndex!=-1)strs[weightIndex] = domain.getWeight() + "";
+					if (nameIndex != -1)
+						strs[nameIndex] = domain.getName();
+					if (columnIndex != -1)
+						strs[columnIndex] = domain.getColumn();
+					if (typeIndex != -1)
+						strs[typeIndex] = domain.getType();
+					if (rankIndex != -1)
+						strs[rankIndex] = domain.getRank();
+					if (incidenceIndex != -1)
+						strs[incidenceIndex] = domain.getIncidence();
+					if (weightIndex != -1)
+						strs[weightIndex] = domain.getWeight() + "";
 				} else if (null != domain) {
 					// 若不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
-					if (nameIndex!=-1 && StringUtils.isBlank(strs[nameIndex])) {
+					if (nameIndex != -1 && StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if (columnIndex!=-1 && StringUtils.isBlank(strs[columnIndex]) && !StringUtils.isBlank(domain.getColumn())) {
+					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex])
+							&& !StringUtils.isBlank(domain.getColumn())) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if (typeIndex!=-1 && StringUtils.isBlank(strs[typeIndex]) && !StringUtils.isBlank(domain.getType())) {
+					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex])
+							&& !StringUtils.isBlank(domain.getType())) {
 						strs[typeIndex] = domain.getType();
 					}
-					if (rankIndex!=-1 && StringUtils.isBlank(strs[rankIndex]) && !StringUtils.isBlank(domain.getRank())) {
+					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex])
+							&& !StringUtils.isBlank(domain.getRank())) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if (incidenceIndex!=-1 && StringUtils.isBlank(strs[incidenceIndex]) && !StringUtils.isBlank(domain.getIncidence())) {
+					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex])
+							&& !StringUtils.isBlank(domain.getIncidence())) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
-					if (weightIndex!=-1 && StringUtils.isBlank(strs[weightIndex])) {
+					if (weightIndex != -1 && StringUtils.isBlank(strs[weightIndex])) {
 						Integer weight = domain.getWeight();
 						if (weight == null) {
 							strs[weightIndex] = "0";
 						} else {
 							strs[weightIndex] = weight + "";
 						}
-					} else if(weightIndex!=-1) {
+					} else if (weightIndex != -1) {
 						if (!StringUtils.isNumeric(strs[weightIndex])) {
 							Integer weight = domain.getWeight();
 							if (weight == null) {
@@ -329,44 +342,59 @@ public class FileUtil {
 				Domain one = DomainCacheManager.getByUrl(oUrl);
 				if (null != two && two.getMaintenanceStatus()) {
 					// 如果该二级域名被标记为已维护，则覆盖网站名、栏目、类型、级别、影响范围、权重信息
-					if(nameIndex!=-1)strs[nameIndex] = two.getName();
-					if(columnIndex!=-1)strs[columnIndex] = two.getColumn();
-					if(typeIndex!=-1)strs[typeIndex] = two.getType();
-					if(rankIndex!=-1)strs[rankIndex] = two.getRank();
-					if(incidenceIndex!=-1)strs[incidenceIndex] = two.getIncidence();
-					if(weightIndex!=-1)strs[weightIndex] = two.getWeight() + "";
+					if (nameIndex != -1)
+						strs[nameIndex] = two.getName();
+					if (columnIndex != -1)
+						strs[columnIndex] = two.getColumn();
+					if (typeIndex != -1)
+						strs[typeIndex] = two.getType();
+					if (rankIndex != -1)
+						strs[rankIndex] = two.getRank();
+					if (incidenceIndex != -1)
+						strs[incidenceIndex] = two.getIncidence();
+					if (weightIndex != -1)
+						strs[weightIndex] = two.getWeight() + "";
 				} else if (one != null && one.getMaintenanceStatus()) {
 					// 如果二级域名不是已维护状态，但他的一级域名是已维护状态，这覆盖网站名，级别、影响范围、权重信息
-					if(nameIndex!=-1)strs[nameIndex] = one.getName();
-					if(rankIndex!=-1)strs[rankIndex] = one.getRank();
-					if(incidenceIndex!=-1)strs[incidenceIndex] = one.getIncidence();
-					if(typeIndex!=-1)strs[typeIndex] = one.getType();
-					if(weightIndex!=-1)strs[weightIndex] = one.getWeight() + "";
+					if (nameIndex != -1)
+						strs[nameIndex] = one.getName();
+					if (rankIndex != -1)
+						strs[rankIndex] = one.getRank();
+					if (incidenceIndex != -1)
+						strs[incidenceIndex] = one.getIncidence();
+					if (typeIndex != -1)
+						strs[typeIndex] = one.getType();
+					if (weightIndex != -1)
+						strs[weightIndex] = one.getWeight() + "";
 				} else if (null != two) {
 					// 若都不是被标记为已维护域名，则判断该域名是否存在域名信息库中，若存在则填充为空的信息，其他信息不做修改，若不存在域名信息库中，则不做处理
-					if (nameIndex!=-1 && StringUtils.isBlank(strs[nameIndex])) {
+					if (nameIndex != -1 && StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = two.getName();
 					}
-					if (columnIndex!=-1 && StringUtils.isBlank(strs[columnIndex]) && !StringUtils.isBlank(two.getColumn())) {
+					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex])
+							&& !StringUtils.isBlank(two.getColumn())) {
 						strs[columnIndex] = two.getColumn();
 					}
-					if (typeIndex!=-1 && StringUtils.isBlank(strs[typeIndex]) && !StringUtils.isBlank(two.getType())) {
+					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex])
+							&& !StringUtils.isBlank(two.getType())) {
 						strs[typeIndex] = two.getType();
 					}
-					if (rankIndex!=-1 && StringUtils.isBlank(strs[rankIndex]) && !StringUtils.isBlank(two.getRank())) {
+					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex])
+							&& !StringUtils.isBlank(two.getRank())) {
 						strs[rankIndex] = two.getRank();
 					}
-					if (incidenceIndex!=-1 && StringUtils.isBlank(strs[incidenceIndex]) && !StringUtils.isBlank(two.getIncidence())) {
+					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex])
+							&& !StringUtils.isBlank(two.getIncidence())) {
 						strs[incidenceIndex] = two.getIncidence();
 					}
-					if (weightIndex!=-1 && StringUtils.isBlank(strs[weightIndex])) {
+					if (weightIndex != -1 && StringUtils.isBlank(strs[weightIndex])) {
 						Integer weight = two.getWeight();
 						if (weight == null) {
 							strs[weightIndex] = "0";
 						} else {
 							strs[weightIndex] = weight + "";
 						}
-					} else if(weightIndex!=-1){
+					} else if (weightIndex != -1) {
 						if (!StringUtils.isNumeric(strs[weightIndex])) {
 							Integer weight = two.getWeight();
 							if (weight == null) {
@@ -383,6 +411,7 @@ public class FileUtil {
 		res.add(0, attrs);
 		return res;
 	}
+
 	/**
 	 * 从文件from拷贝至to,如果存在则覆盖。
 	 * 

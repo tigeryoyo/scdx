@@ -3,6 +3,7 @@ package com.hust.scdx.dao;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.nlpcn.commons.lang.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,15 +150,16 @@ public class DomainOneDao {
 		}
 		if(null!=condition.getMaintenanceSorting()){
 			if(condition.getMaintenanceSorting()==1){
-				order+=",maintenance desc";
+				order+=",maintenance_status desc";
 			}else if(condition.getMaintenanceSorting()==2){
-				order+=",maintenance";
+				order+=",maintenance_status";
 			}
 		}
 		if(order.startsWith(",")){
 			order = order.substring(1);
 		}
-		example.setOrderByClause(order);
+		if(!StringUtil.isBlank(order))
+			example.setOrderByClause(order);
 
 		return domainOneMapper.selectByExample(example);
 	}
