@@ -1,6 +1,5 @@
 package com.hust.scdx.constant;
 
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.jetty.util.ConcurrentHashSet;
@@ -15,19 +14,21 @@ public class Constant {
 	public final static String UNKNOWN = "未知";
 	public final static String INVALID_TIME = "1970-01-01";
 
+	public static final String REGION = "成都";
+	public static final String REGION1 = "成都市";
 	public final static String topicAttrOrder = "5;7;1;4;3;2;6;8;10;9;";
-	public final static int keyAttrCount = 10;
-	
+	public final static int keyAttrCount = 13;
+
 	/**
 	 * 全局域名变量
 	 */
 	public static ConcurrentHashMap<String, Domain> DomainCache;
-	
+
 	/**
 	 * 类型-权重
 	 */
 	public static ConcurrentHashSet<String> typeMap = new ConcurrentHashSet<String>();
-	
+
 	// 切片
 	public final static int slices = 1250;
 	// 线程数

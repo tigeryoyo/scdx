@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.io.Files;
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.model.Domain;
 
@@ -98,8 +99,7 @@ public class FileUtil {
 				int indexOfUrl = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
 				int indexOfTime = attrUtil.findIndexOf(attrs, attrUtil.getTime_alias());
 				// 当前文件的所有属性在全局文件的索引位置
-				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs)
-						: getIndexOfExtfile(attrUtil, attrs, globalAttrs);
+				int[] indexs = i == 0 ? initGlobalAttrs(attrs, globalAttrs) : getIndexOfExtfile(attrUtil, attrs, globalAttrs);
 				// 全局文件time所在列
 				int globalIndexOfTime = attrUtil.findIndexOf(globalAttrs, attrUtil.getTime_alias());
 				while (true) {
@@ -207,8 +207,7 @@ public class FileUtil {
 	 * @param content
 	 * @return 调整属性行后的content
 	 */
-	private static List<String[]> adjustPropertyLine(AttrUtil attrUtil, List<String> globalAttrs,
-			List<String[]> content) {
+	private static List<String[]> adjustPropertyLine(AttrUtil attrUtil, List<String> globalAttrs, List<String[]> content) {
 		List<String[]> res = new ArrayList<String[]>();
 		List<String> attrs_mainName = attrUtil.getAttrs_mainName();
 		List<String> nattrs = new ArrayList<String>(attrs_mainName);
@@ -263,16 +262,44 @@ public class FileUtil {
 		List<String[]> res = new ArrayList<String[]>();
 		String[] attrs = content.remove(0);
 		AttrUtil attrUtil = AttrUtil.getSingleton();
+		AreaUtil areaUtil = new AreaUtil();
 		int urlIndex = attrUtil.findIndexOf(attrs, attrUtil.getUrl_alias());
 		if (urlIndex == -1)
 			return null;
+		int titleIndex = attrUtil.findIndexOf(attrs, attrUtil.getTitle_alias());
 		int nameIndex = attrUtil.findIndexOf(attrs, attrUtil.getWebname_alias());
 		int columnIndex = attrUtil.findIndexOf(attrs, attrUtil.getColumn_alias());
 		int typeIndex = attrUtil.findIndexOf(attrs, attrUtil.getType_alias());
 		int rankIndex = attrUtil.findIndexOf(attrs, attrUtil.getRank_alias());
 		int incidenceIndex = attrUtil.findIndexOf(attrs, attrUtil.getIncidence_alias());
 		int weightIndex = attrUtil.findIndexOf(attrs, attrUtil.getWeight_alias());
+
+		int layerIndex = -1, suburbIndex = -1, areaIndex = -1;
+		String alias = attrUtil.getArea_alias();
+		if (alias != null) {
+			areaIndex = attrUtil.findIndexOf(attrs, attrUtil.getArea_alias());
+			alias = attrUtil.getLayer_alias();
+			if (alias != null) {
+				layerIndex = attrUtil.findIndexOf(attrs, attrUtil.getLayer_alias());
+			}
+			alias = attrUtil.getSuburb_alias();
+			if (alias != null) {
+				suburbIndex = attrUtil.findIndexOf(attrs, attrUtil.getSuburb_alias());
+			}
+		}
 		for (String[] strs : content) {
+			// 填充圈层、城郊、所属区域
+			if (areaIndex != -1) {
+				if (StringUtils.isBlank(strs[areaIndex])) {
+					strs[areaIndex] = areaUtil.getArea(strs[titleIndex], Constant.REGION);
+				}
+				if (StringUtils.isBlank(strs[suburbIndex])) {
+					strs[suburbIndex] = areaUtil.isCenterLayer(strs[areaIndex]);
+				}
+				if (StringUtils.isBlank(strs[layerIndex])) {
+					strs[layerIndex] = areaUtil.isCenterLayer(strs[areaIndex]);
+				}
+			}
 			String url = UrlUtil.getUrl(strs[urlIndex]);
 			if (url == null) {
 				res.add(strs);
@@ -302,20 +329,16 @@ public class FileUtil {
 					if (nameIndex != -1 && StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = domain.getName();
 					}
-					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex])
-							&& !StringUtils.isBlank(domain.getColumn())) {
+					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex]) && !StringUtils.isBlank(domain.getColumn())) {
 						strs[columnIndex] = domain.getColumn();
 					}
-					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex])
-							&& !StringUtils.isBlank(domain.getType())) {
+					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex]) && !StringUtils.isBlank(domain.getType())) {
 						strs[typeIndex] = domain.getType();
 					}
-					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex])
-							&& !StringUtils.isBlank(domain.getRank())) {
+					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex]) && !StringUtils.isBlank(domain.getRank())) {
 						strs[rankIndex] = domain.getRank();
 					}
-					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex])
-							&& !StringUtils.isBlank(domain.getIncidence())) {
+					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex]) && !StringUtils.isBlank(domain.getIncidence())) {
 						strs[incidenceIndex] = domain.getIncidence();
 					}
 					if (weightIndex != -1 && StringUtils.isBlank(strs[weightIndex])) {
@@ -371,20 +394,16 @@ public class FileUtil {
 					if (nameIndex != -1 && StringUtils.isBlank(strs[nameIndex])) {
 						strs[nameIndex] = two.getName();
 					}
-					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex])
-							&& !StringUtils.isBlank(two.getColumn())) {
+					if (columnIndex != -1 && StringUtils.isBlank(strs[columnIndex]) && !StringUtils.isBlank(two.getColumn())) {
 						strs[columnIndex] = two.getColumn();
 					}
-					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex])
-							&& !StringUtils.isBlank(two.getType())) {
+					if (typeIndex != -1 && StringUtils.isBlank(strs[typeIndex]) && !StringUtils.isBlank(two.getType())) {
 						strs[typeIndex] = two.getType();
 					}
-					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex])
-							&& !StringUtils.isBlank(two.getRank())) {
+					if (rankIndex != -1 && StringUtils.isBlank(strs[rankIndex]) && !StringUtils.isBlank(two.getRank())) {
 						strs[rankIndex] = two.getRank();
 					}
-					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex])
-							&& !StringUtils.isBlank(two.getIncidence())) {
+					if (incidenceIndex != -1 && StringUtils.isBlank(strs[incidenceIndex]) && !StringUtils.isBlank(two.getIncidence())) {
 						strs[incidenceIndex] = two.getIncidence();
 					}
 					if (weightIndex != -1 && StringUtils.isBlank(strs[weightIndex])) {
@@ -479,9 +498,8 @@ public class FileUtil {
 		File file = new File(filename);
 		if (file.exists() && file.isFile()) {
 			file.delete();
-			return true;
 		}
-		return false;
+		return true;
 	}
 
 	class ReadThread implements Callable<List<String[]>> {
