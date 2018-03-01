@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hust.scdx.constant.Constant;
 import com.hust.scdx.dao.mapper.AttrMapper;
 import com.hust.scdx.model.Attr;
 import com.hust.scdx.model.AttrExample;
@@ -59,7 +60,7 @@ public class AttrDao {
 	 */
 	public int deleteAttr(int attrId) {
 		// id 1~10为必要属性，不能删除。
-		if (attrId <= 10) {
+		if (attrId <= Constant.keyAttrCount) {
 			return -1;
 		}
 		return attrMapper.deleteByPrimaryKey(attrId);
