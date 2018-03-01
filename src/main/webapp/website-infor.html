@@ -4,9 +4,25 @@
     <meta charset="UTF-8">
     <title>映射表管理——信息显示</title>
     <script type="text/javascript" src="js/website.js"></script>
+    <script type="text/javascript" src="js/website-incidence.js"></script>
+    <script type="text/javascript" src="js/website-search.js"></script>
     <style type="text/css">
 	span{
 		 white-space: nowrap;
+	}
+	.normal{
+		float:left;
+		list-style:none;
+		margin:0 5px 0 5px;
+		padding:2px 10px 2px 10px;
+		border:1px solid #e5e5e5;
+	}
+	.selected{
+		float:left;
+		list-style:none;
+		margin:0 5px 0 5px;
+		padding:2px 10px 2px 10px;
+		border:1px solid red;
 	}
 	#goodcover {
 		display: none;
@@ -22,6 +38,7 @@
 		filter: alpha(opacity = 50);
 	}
 </style>
+<link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
 
@@ -29,46 +46,145 @@
     当前位置： <a href="javascript:;">映射表管理</a> >>信息显示 <b style="color: red;"></b>
 </div>
 <div class="user_infor">
-    <table width="750" border="0" class="infor_tab01">
-        <tr>
-            <td width="85" height="50">网站URL：</td>
-            <td height="50"><input type="text" class="form-control"
-                                   id="web_url"></td>
-            <td width="85" height="50">网站类型：</td>
-            <td height="50"><input type="text" class="form-control"
-                                   id="web_level"></td>
-            <td height="50" colspan="2"/>
-            <td height="50" colspan="2">
-                <form action="/file/exportDomain?flag=0" method="POST">
-                    <button type="button" class="btn btn-success" onclick="chooseExport()">导出映射表</button>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td width="85" height="50">网站名称：</td>
-            <td height="50"><input type="text" class="form-control"
-                                   id="web_name"></td>
-            <td width="85" height="50">网站权重：</td>
-            <td height="50"><input type="text" class="form-control"
-                                   id="web_weight"></td>
-            <td height="50" colspan="2">
-                <button type="button" class="btn btn-primary"
-                        onclick="initSearchPage(1)">搜 索
-                </button>
-            </td>
-            <td height="50" colspan="2">
-                <button type="button" class="btn btn-primary"
-                        onClick="websiteInforAdd()">添加映射表
-                </button>
-            </td>
-        </tr>
+    <div width="750" border="1" style="position:relative;height:36px;font-size:16px;" class="infor_tab01">
+        <span style="line-height: 36px;display: inline; float: left;">域名：</span>
+        <input type="text" class="form-control" style="height: 36px;display: inline; float: left;" id="web_url">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">名称：</span>
+        <input type="text" class="form-control" style="height: 36px;display: inline; float: left;" id="web_name">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">栏目：</span>
+        <input type="text" class="form-control" style="height: 36px;display: inline; float: left;" id="web_column">
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="seach()">搜 索</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="showOp()">更多操作</button>
+        <div class="moreOp" style="width:96px;height:72px;position:absolute;right:-7px;bottom:-75px;z-index:999;display:none;">
+        <form action="/file/exportDomain?flag=0" method="POST" style="height: 36px;display: inline; float: left;">
+              <button type="button" class="btn btn-success" style="margin-left:0;" onclick="chooseExport()">导出映射表</button>
+        </form>
+        <button style="height: 36px;display: inline;margin-left:0;" type="button" class="btn btn-primary" onClick="websiteInforAdd()">添加映射表</button>
+        </div>
+    <a  style="position:absolute;right:13px;bottom:-25px;margin:0 0 0 4px;border: solid 1px #e8e8e8;padding: 0 9px;background: #f6f6f6;color: #6b6b6b;line-height:20px;" href="javascript:;">
+      <span class="showChoice" style="display:none;line-height:16px;color:#6b6b6b;cursor:pointer;" onclick="showChoice()">
+        <span style="line-height:16px;color:#6b6b6b;cursor:pointer;font-size:14px;">显示筛选</span><i class="icon-angle-down"></i>
+      </span>
+      <span class="cancelChoice" style="line-height:16px;color:#6b6b6b;cursor:pointer;display:inline-block;" onclick="cancelChoice()">
+        <span style="line-height:16px;color:#6b6b6b;cursor:pointer;font-size:14px;">收起筛选</span><span class="icon-angle-up"></span>
+      </span>
+    </a>
+    </div>
+    <table style="width:750px;font-size:16px; border:1px solid #e5e5e5;margin-top:30px;display:block;" class="infor_tab01 choice">
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;" >级别</td>
+    	<td>
+	    	<ul class="rank">
+	    		<li class="rank normal">中央</li>
+	    		<li class="rank selected" value="省级">省级</li>
+	    		<li class="rank normal">其他</li>
+	    	</ul>
+    	</td>
+    </tr>
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;">类型</td>
+    	<td>
+	    	<ul class="type">
+	    		<li class="type normal" value="新闻">新闻</li>
+	    		<li class="type selected" value="报纸">报纸</li>
+	    	</ul>
+    	</td>
+    </tr>
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;" >影响范围</td>
+    	<td>
+	    	<select class="form-control incidence_provience" style="width:188px;">
+	    				<option></option>
+						<option>全国</option>
+						<option>四川省</option>
+						<option>北京市</option>
+						<option>天津市</option>
+						<option>上海市</option>
+						<option>重庆市</option>
+						<option>河北省</option>
+						<option>山西省</option>
+						<option>辽宁省</option>
+						<option>吉林省</option>
+						<option>黑龙江</option>
+						<option>江苏省</option>
+						<option>浙江省</option>
+						<option>安徽省</option>
+						<option>福建省</option>
+						<option>江西省</option>
+						<option>山东省</option>
+						<option>河南省</option>
+						<option>湖北省</option>
+						<option>湖南省</option>
+						<option>广东省</option>
+						<option>海南省</option>
+						<option>贵州省</option>
+						<option>云南省</option>
+						<option>陕西省</option>
+						<option>甘肃省</option>
+						<option>青海省</option>
+						<option>台湾省</option>
+						<option>内蒙古自治区</option>
+						<option>广西壮族自治区</option>
+						<option>西藏自治区</option>
+						<option>宁夏回族自治区</option>
+						<option>新疆维吾尔自治区</option>
+						<option>香港</option>
+						<option>澳门</option>
+						<option>其他</option>
+					</select>
+			<select class="form-control incidence_city" style="width:188px;"><option></option></select>
+    	</td>
+    </tr>
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;">权重</td>
+    	<td>
+	    	<input type="text" class="form-control" style="height: 36px;width:60px;display: inline; float: left;" id="web_weight_start">
+	    	<span style="display:inline;line-height:36px;float: left;font-size:20px;margin:0 20px;">~</span>
+	    	<input type="text" class="form-control" style="height: 36px;width:60px;display: inline; float: left;" id="web_weight_end">
+    	</td>
+    </tr>
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;">维护状态</td>
+    	<td>
+	    	<ul class="maintenance">
+	    		<li class="maintenance normal" style="cursor:pointer;" value="0" onclick="choiceClick(this)">未维护</li>
+	    		<li class="maintenance normal" style="cursor:pointer;" value="1" onclick="choiceClick(this)">已维护</li>
+	    	</ul>
+    	</td>
+    </tr>
+    <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
+    	<td width="80px;">子域名状态</td>
+    	<td>
+	    	<ul class="isFather">
+	    		<li class="isFather normal" style="cursor:pointer;" value="0" onclick="choiceClick(this)">有子域名</li>
+	    		<li class="isFather normal" style="cursor:pointer;" value="1" onclick="choiceClick(this)">无子域名</li>
+	    	</ul>
+    	</td>
+    </tr>
+    <tr style="min-height:40px;">
+    	<td width="80px;">综合排序</td>
+    	<td>
+	    	<ul >
+	    		<li class="normal" style="cursor:pointer;color:red;" onclick="timeClick(this)">时间↓</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="urlClick(this)">域名</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="nameClick(this)">名称</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="columnClick(this)">栏目</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="rankClick(this)">级别</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="typeClick(this)">类型</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="weightClick(this)">权重</li>
+	    		<li class="normal" style="cursor:pointer;" onclick="maintenanceClick(this)">维护状态</li>
+	    	</ul>
+    	</td>
+    </tr>	
     </table>
     <div style="display: block; font-size: 18px;">
-        <span style="width: 220px; display: inline; float: left">域名</span> <span
-            style="width: 170px; display: inline; float: left">名称</span> <span
-            style="width: 110px; display: inline; float: left">类型</span> <span
-            style="width: 90px; display: inline; float: left">权重</span> <span
-            style="width: 130px;">操作</span>
+        <span style="width: 170px; display: inline; float: left;cursor:pointer" >域名</span> 
+        <span style="width: 120px; display: inline; float: left;cursor:pointer">名称</span>
+        <span style="width: 120px; display: inline; float: left;cursor:pointer">栏目</span>
+        <span style="width: 70px; display: inline; float: left;cursor:pointer">级别</span> 
+        <span style="width: 60px; display: inline; float: left;cursor:pointer">类型</span>
+        <span style="width: 50px; display: inline; float: left;cursor:pointer">权重</span>
+        <span style="width: 130px;">操作</span>
     </div>
     <div id="domain_content" style="width: 720px; min-height: 280px">
         <!--<details style="font-size: 16px">
@@ -138,6 +254,16 @@
 <script type="text/javascript">
 	initShowPage(1)
     $("#web_weight").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $("#web_weight_end").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $("#web_weight_start").keyup(function () {
         $(this).val($(this).val().replace(/[^0-9]/g,''));
     }).bind("paste",function() {  //CTR+V事件处理
         $(this).val($(this).val().replace(/[^0-9]/g, ''));

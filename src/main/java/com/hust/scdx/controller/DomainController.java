@@ -203,21 +203,55 @@ public class DomainController {
 	@RequestMapping("/searchDomainOne")
 	public Object searchDomainOne(@RequestParam(value = "url", required = true) String url,
 			@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "type", required = true) String type,
-			@RequestParam(value = "weight", required = true) String weight,
+			@RequestParam(value = "column", required = true) String column,
+			@RequestParam(value = "rank", required = false) List<String> rank,
+			@RequestParam(value = "type", required = false) List<String> type,
+			@RequestParam(value = "incidence", required = true) String incidence,
+			@RequestParam(value = "weightStart", required = true) Integer weightStart,
+			@RequestParam(value = "weightEnd", required = true) Integer weightEnd,
+			@RequestParam(value = "maintenance", required = false) Boolean maintenance,
+			@RequestParam(value = "isFather", required = false) Boolean isFather,
+			@RequestParam(value = "timeSorting", required = true) Integer timeSorting,
+			@RequestParam(value = "urlSorting", required = true) Integer urlSorting,
+			@RequestParam(value = "nameSorting", required = true) Integer nameSorting,
+			@RequestParam(value = "columnSorting", required = true) Integer columnSorting,
+			@RequestParam(value = "rankSorting", required = true) Integer rankSorting,
+			@RequestParam(value = "typeSorting", required = true) Integer typeSorting,
+			@RequestParam(value = "weightSorting", required = true) Integer weightSorting,
+			@RequestParam(value = "maintenanceSorting", required = true) Integer maintenanceSorting,
 			@RequestParam(value = "start", required = true) int start,
 			@RequestParam(value = "limit", required = true) int limit, HttpServletRequest request) {
 		DomainOneQueryCondition condition = new DomainOneQueryCondition();
-		if (StringUtils.isNotBlank(url)) {
-			url = UrlUtil.getDomainOne(UrlUtil.getUrl(url));
+		if (StringUtils.isNotBlank(url))
 			condition.setUrl(url);
-		}
 		if (StringUtils.isNotBlank(name))
 			condition.setName(name);
-		if (StringUtils.isNotBlank(type))
+		if (StringUtils.isNotBlank(column))
+			condition.setColumn(column);
+		if(null!=rank && rank.size()!=0)
+			condition.setRank(rank);
+		if(null!=type && type.size()!=0)
 			condition.setType(type);
-		if (StringUtils.isNotBlank(weight))
-			condition.setWeight(Integer.parseInt(weight));
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isNotBlank(incidence)){
+				condition.setIncidence(incidence);
+			}
+		}
+		condition.setWeightStart(weightStart);
+		condition.setWeightEnd(weightEnd);
+		condition.setMaintenanceStatus(maintenance);
+		condition.setIsFather(isFather);
+		condition.setTimeSorting(timeSorting);
+		condition.setUrlSorting(urlSorting);
+		condition.setNameSorting(nameSorting);
+		condition.setColumnSorting(columnSorting);
+		condition.setRankSorting(rankSorting);
+		condition.setTypeSorting(typeSorting);
+		condition.setWeightSorting(weightSorting);
+		condition.setMaintenanceSorting(maintenanceSorting);
 		condition.setStart(start);
 		condition.setLimit(limit);
 		List<DomainOne> list = domainService.getDomainOneByCondition(condition);
@@ -245,17 +279,54 @@ public class DomainController {
 	@RequestMapping("/searchDomainOneCount")
 	public Object searchDomainOneCount(@RequestParam(value = "url", required = true) String url,
 			@RequestParam(value = "name", required = true) String name,
-			@RequestParam(value = "type", required = true) String type,
-			@RequestParam(value = "weight", required = true) String weight, HttpServletRequest request) {
+			@RequestParam(value = "column", required = true) String column,
+			@RequestParam(value = "rank", required = false) List<String> rank,
+			@RequestParam(value = "type", required = false) List<String> type,
+			@RequestParam(value = "incidence", required = true) String incidence,
+			@RequestParam(value = "weightStart", required = true) Integer weightStart,
+			@RequestParam(value = "weightEnd", required = true) Integer weightEnd,
+			@RequestParam(value = "maintenance", required = false) Boolean maintenance,
+			@RequestParam(value = "isFather", required = false) Boolean isFather,
+			@RequestParam(value = "timeSorting", required = true) Integer timeSorting,
+			@RequestParam(value = "urlSorting", required = true) Integer urlSorting,
+			@RequestParam(value = "nameSorting", required = true) Integer nameSorting,
+			@RequestParam(value = "columnSorting", required = true) Integer columnSorting,
+			@RequestParam(value = "rankSorting", required = true) Integer rankSorting,
+			@RequestParam(value = "typeSorting", required = true) Integer typeSorting,
+			@RequestParam(value = "weightSorting", required = true) Integer weightSorting,
+			@RequestParam(value = "maintenanceSorting", required = true) Integer maintenanceSorting,
+			HttpServletRequest request) {
 		DomainOneQueryCondition condition = new DomainOneQueryCondition();
 		if (StringUtils.isNotBlank(url))
 			condition.setUrl(url);
 		if (StringUtils.isNotBlank(name))
 			condition.setName(name);
-		if (StringUtils.isNotBlank(type))
+		if (StringUtils.isNotBlank(column))
+			condition.setColumn(column);
+		if(null!=rank && rank.size()!=0)
+			condition.setRank(rank);
+		if(null!=type && type.size()!=0)
 			condition.setType(type);
-		if (StringUtils.isNotBlank(weight))
-			condition.setWeight(Integer.parseInt(weight));
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isNotBlank(incidence)){
+				condition.setIncidence(incidence);
+			}
+		}
+		condition.setWeightStart(weightStart);
+		condition.setWeightEnd(weightEnd);
+		condition.setMaintenanceStatus(maintenance);
+		condition.setIsFather(isFather);
+		condition.setTimeSorting(timeSorting);
+		condition.setUrlSorting(urlSorting);
+		condition.setNameSorting(nameSorting);
+		condition.setColumnSorting(columnSorting);
+		condition.setRankSorting(rankSorting);
+		condition.setTypeSorting(typeSorting);
+		condition.setWeightSorting(weightSorting);
+		condition.setMaintenanceSorting(maintenanceSorting);
 		condition.setStart(0);
 		condition.setLimit(0);
 		List<DomainOne> list = domainService.getDomainOneByCondition(condition);

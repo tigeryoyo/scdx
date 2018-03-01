@@ -29,7 +29,7 @@ public class DomainCacheManager {
 		DomainTwoDao domaintwoDao = applicationContext.getBean(DomainTwoDao.class);
 		DomainTwoQueryCondition twoCondition = new DomainTwoQueryCondition();
 		List<DomainTwo> twoList = domaintwoDao.getDomainTwoByCondition(twoCondition);
-		Constant.DomainCache = new ConcurrentHashMap<>((int) ((oneList.size()+twoList.size())/0.55f), 0.6f);
+		Constant.DomainCache = new ConcurrentHashMap<String,Domain>((int) ((oneList.size()+twoList.size())/0.55f), 0.6f);
 		for (DomainOne domainOne : oneList) {
 			Domain domain = new Domain();
 			domain.setDomainFormOne(domainOne);

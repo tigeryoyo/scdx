@@ -94,7 +94,7 @@ public class DomainServiceImpl implements DomainService {
 				return false;
 			}
 			String[] attr = content.remove(0);
-			AttrUtil attrUtil = attrUtil.getSingleton();
+			AttrUtil attrUtil = AttrUtil.getSingleton();
 			boolean nameFlag = true, columnFlag = true, typeFlag = true, rankFlag = true, weightFlag = true, incidenceFlag = true;
 			int urlIndex = attrUtil.findIndexOf(attr, attrUtil.getUrl_alias());
 			// 获取其他属性列的下标

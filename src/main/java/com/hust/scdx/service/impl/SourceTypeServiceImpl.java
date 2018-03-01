@@ -63,7 +63,7 @@ public class SourceTypeServiceImpl implements SourceTypeService {
 			return status;
 		}
 		//类型删除成功，将类型属性为该类型的域名的类型属性清空，同时更新数据库和内存
-		DomainOneQueryCondition doc = new DomainOneQueryCondition();
+		DomainOne doc = new DomainOne();
 		doc.setType(typeName);
 		DomainOne domainOne = new DomainOne();
 		domainOne.setType("");
@@ -98,7 +98,7 @@ public class SourceTypeServiceImpl implements SourceTypeService {
 		}
 		if(!StringUtils.isBlank(newTypeName)){
 		//类型修改成功，将类型属性为该类型的域名的类型属性也同步修改，同时更新数据库和内存
-			DomainOneQueryCondition doc = new DomainOneQueryCondition();
+			DomainOne doc = new DomainOne();
 			doc.setType(oldTypeName);
 			DomainOne domainOne = new DomainOne();
 			domainOne.setType(newTypeName);
@@ -132,7 +132,7 @@ public class SourceTypeServiceImpl implements SourceTypeService {
 			throw new RuntimeException();
 		}
 		//类型合并成功，将类型属性为该类型的域名的类型属性也同步修改，同时更新数据库和内存
-		DomainOneQueryCondition doc = new DomainOneQueryCondition();
+		DomainOne doc = new DomainOne();
 		DomainOne domainOne = new DomainOne();
 		domainOne.setType(newName);
 		DomainTwoQueryCondition dtc = new DomainTwoQueryCondition();
