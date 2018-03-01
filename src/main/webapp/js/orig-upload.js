@@ -34,8 +34,7 @@ $(function() {
 		// 检测文件是不是excel文件
 		for (var index = 0; index < fileList.length; index++) {
 			var filename = fileList[index].name;
-			if (filename.lastIndexOf("xls") !== -1
-					|| filename.lastIndexOf("xlsx") !== -1) {
+			if (filename.lastIndexOf("xls") !== -1 || filename.lastIndexOf("xlsx") !== -1) {
 				var origfile = fileList[index];
 				var fd = new FormData();
 				fd.append("origfile", origfile);
@@ -51,7 +50,7 @@ $(function() {
 					data : fd,
 					beforeSend : function() {
 						begin();
-						},
+					},
 					success : function(msg) {
 						if (msg.status == "OK") {
 							addOrigfile(filename);
@@ -59,23 +58,22 @@ $(function() {
 							$(".btn_upl_all").removeAttr("disabled");
 							fileBuf.push(origfile);
 						} else {
-							alert("文件「 " + filename+" 」属行行不符合规定。");
+							alert("文件「 " + filename + " 」属行行不符合规定:" + msg.result);
 						}
 					},
-					error: function (jqXHR, textStatus, errorThrown) {
-			            var status = jqXHR.status;
-			            if(status == 0){
-			            	alert(textStatus);
-			            }else if(status == 200){
-			            	alert("您没有权限使用该资源...");
-			            }else if(status == 500){
-			            	alert("文件预览失败！");
-			            }
-			            else{
-			            	alert(textStatus);
-			            }
-			        },
-					complete:function(){
+					error : function(jqXHR, textStatus, errorThrown) {
+						var status = jqXHR.status;
+						if (status == 0) {
+							alert(textStatus);
+						} else if (status == 200) {
+							alert("您没有权限使用该资源...");
+						} else if (status == 500) {
+							alert("文件预览失败！");
+						} else {
+							alert(textStatus);
+						}
+					},
+					complete : function() {
 						stop();
 					}
 				});
@@ -90,8 +88,7 @@ $(function() {
  * 将原始文件名显示在界面
  */
 function addOrigfile(filename) {
-	var btn_content = '<a href="#" class="btn btn-info disabled" role="button">'
-			+ filename + '</a>';
+	var btn_content = '<a href="#" class="btn btn-info disabled" role="button">' + filename + '</a>';
 	$("#filelist").append(btn_content);
 }
 
@@ -100,7 +97,7 @@ function addOrigfile(filename) {
  */
 function uploadAll() {
 	var flag = true;
-//	alert("fileBufLength = " + fileBuf.length);
+	// alert("fileBufLength = " + fileBuf.length);
 	for (var i = 0; i < fileBuf.length; i++) {
 		var form = new FormData();
 		form.append("origfile", fileBuf[i]);
@@ -116,13 +113,13 @@ function uploadAll() {
 			data : form,
 			beforeSend : function() {
 				begin();
-				},
+			},
 			error : function() {
 				alert("上传失败");
 				flag = false;
 				return false;
 			},
-			complete: function(){
+			complete : function() {
 				stop();
 			},
 		});
