@@ -37,7 +37,7 @@ public class AttrUtil {
 	String url_alias; // 链接|网址|域名|微博链接|[Uu][Rr][Ll]
 	String time_mainName; // 时间
 	String time_alias; // 发布时间|发帖时间|发贴时间|时间
-	// 次要冗余属性
+	// 次要冗余属性 （思考用reflect来做）
 	String posting_mainName; // 发帖人
 	String posting_alias; // 发帖人|发贴人|作者|发布人|来源/发布人|发布者昵称
 	String webname_mainName; // 网站
@@ -52,6 +52,14 @@ public class AttrUtil {
 	String weight_alias; // 权重
 	String incidence_mainName;// 影响范围
 	String incidence_alias;// 影响范围
+
+	// 环保专题
+	String layer_mainName; // 圈层
+	String layer_alias;
+	String suburb_mainName;// 城郊
+	String suburb_alias;
+	String area_mainName;// 所属区域
+	String area_alias;
 
 	// 存储的是自定义的属性名称
 	List<String> attrs_mainName;
@@ -234,6 +242,54 @@ public class AttrUtil {
 		this.incidence_alias = incidence_alias;
 	}
 
+	public String getLayer_mainName() {
+		return layer_mainName;
+	}
+
+	public void setLayer_mainName(String layer_mainName) {
+		this.layer_mainName = layer_mainName;
+	}
+
+	public String getLayer_alias() {
+		return layer_alias;
+	}
+
+	public void setLayer_alias(String layer_alias) {
+		this.layer_alias = layer_alias;
+	}
+
+	public String getSuburb_mainName() {
+		return suburb_mainName;
+	}
+
+	public void setSuburb_mainName(String suburb_mainName) {
+		this.suburb_mainName = suburb_mainName;
+	}
+
+	public String getSuburb_alias() {
+		return suburb_alias;
+	}
+
+	public void setSuburb_alias(String suburb_alias) {
+		this.suburb_alias = suburb_alias;
+	}
+
+	public String getArea_mainName() {
+		return area_mainName;
+	}
+
+	public void setArea_mainName(String area_mainName) {
+		this.area_mainName = area_mainName;
+	}
+
+	public String getArea_alias() {
+		return area_alias;
+	}
+
+	public void setArea_alias(String area_alias) {
+		this.area_alias = area_alias;
+	}
+
 	public int findIndexOf(String[] attrs, String pattern) {
 		for (int i = 0; i < attrs.length; i++) {
 			if (Pattern.matches(pattern, attrs[i])) {
@@ -277,47 +333,6 @@ public class AttrUtil {
 		}
 		return -1;
 	}
-
-	// /**
-	// * 标题 "标题|内容"
-	// */
-	// public static final String TITLE_PATTERN = "标题|内容";
-	// /**
-	// * url "链接|网址|域名|微博链接|[Uu][Rr][Ll]"
-	// */
-	// public static final String URL_PATTERN = "链接|网址|域名|微博链接|[Uu][Rr][Ll]";
-	// /**
-	// * 时间 "发布时间|发贴时间|时间"
-	// */
-	// public static final String TIME_PATTERN = "发布时间|发帖时间|发贴时间|时间";
-	// /**
-	// * 发帖人 "发帖人|发贴人"
-	// */
-	// public static final String POSTING = "发帖人|发贴人|作者|发布人|来源/发布人|发布者昵称";
-	// /**
-	// * 网站名称 "网站|媒体名称"
-	// */
-	// public static final String WEBNAME_PATTERN = "网站|媒体名称";
-	// /**
-	// * 网站类型 "来源|类型|资源类型"
-	// */
-	// public static final String TYPE_PATTERN = "来源|类型|资源类型|媒体类型";
-	// /**
-	// * 网站所属模块 "板块|频道"
-	// */
-	// public static final String COLUMN_PATTERN = "板块|频道|频道分类";
-	// /**
-	// * 网站级别 "媒体级别"
-	// */
-	// public static final String RANK_PATTERN = "媒体级别";
-	// /**
-	// * 网站权重 "权重"
-	// */
-	// public static final String WEIGHT_PATTERN = "权重";
-	// /**
-	// * 网站影响范围 "影响范围"
-	// */
-	// public static final String INCIDENCE_PATTERN = "影响范围";
 
 	/**
 	 * 统计日期-数量与来源-数量

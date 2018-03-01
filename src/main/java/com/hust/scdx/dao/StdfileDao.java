@@ -177,20 +177,6 @@ public class StdfileDao {
 	}
 
 	/**
-	 * 根据标准数据id删除数据库记录与文件。
-	 * 
-	 * @param stdfileId
-	 * @return
-	 */
-	public int deleteStdfileById(String stdfileId) {
-		Stdfile stdfile = queryStdfileById(stdfileId);
-		if (FileUtil.delete(DIRECTORY.STDFILE + ConvertUtil.convertDateToPath(stdfile.getUploadTime()) + stdfileId)) {
-			return stdfileMapper.deleteByPrimaryKey(stdfileId);
-		}
-		return -1;
-	}
-
-	/**
 	 * 根据专题id删除该专题下的所有标准数据:数据库与文件系统内的数据。
 	 * 
 	 * @param topicId
@@ -198,13 +184,6 @@ public class StdfileDao {
 	 */
 	public int deleteStdfileByTopicId(String topicId) {
 		int del = -1;
-		StdfileExample example = new StdfileExample();
-		Criteria criteria = example.createCriteria();
-		if (!StringUtils.isEmpty(topicId)) {
-			criteria.andTopicIdEqualTo(topicId);
-		} else {
-			return del;
-		}
 		StdfileQueryCondition con = new StdfileQueryCondition();
 		con.setTopicId(topicId);
 		List<Stdfile> list = queryStdfilesByCondtion(con);
@@ -215,6 +194,27 @@ public class StdfileDao {
 			del = deleteStdfileById(stdfile.getStdfileId());
 		}
 		return del;
+	}
+
+	/**
+	 * 根据标准数据id删除数据库记录与文件。
+	 * 
+	 * @param stdfileId
+	 * @return
+	 */
+	public int deleteStdfileById(String stdfileId) {
+		if (stdfileId.equals("stdfile_cluster_result")) {
+			return 0;
+		}
+		Stdfile stdfile = queryStdfileById(stdfileId);
+		String datatime = stdfile.getDatatime();
+		String[] datatimes = datatime.split(";");
+		for (String d : datatimes) {
+			if (FileUtil.delete(DIRECTORY.STDFILE + d.replaceAll("-", "/") + "/" + stdfileId)) {
+				return stdfileMapper.deleteByPrimaryKey(stdfileId);
+			}
+		}
+		return -1;
 	}
 
 }

@@ -108,8 +108,12 @@ public class TopicServiceImpl implements TopicService {
 			String attrs = queryAttrByTopicId(topicId);
 			if (attrs == null || attrs.isEmpty()) {
 				attrs = Constant.topicAttrOrder;
+				Topic topic = queryTopicById(topicId);
+				topic.setAttr(attrs);
+				updateTopicInfo(topic);
 			}
 			String[] attrIds = attrs.split(";");
+			String cAttrs = "";
 			for (String attrId : attrIds) {
 				Attr attr = attrService.queryAttrById(Integer.valueOf(attrId));
 				if (attr != null) {
@@ -145,8 +149,23 @@ public class TopicServiceImpl implements TopicService {
 					} else if (attr.getAttrId() == 10) {
 						attrUtil.setIncidence_mainName(attr.getAttrMainname());
 						attrUtil.setIncidence_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 11) {
+						attrUtil.setLayer_mainName(attr.getAttrMainname());
+						attrUtil.setLayer_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 12) {
+						attrUtil.setSuburb_mainName(attr.getAttrMainname());
+						attrUtil.setSuburb_alias(attr.getAttrAlias());
+					} else if (attr.getAttrId() == 13) {
+						attrUtil.setArea_mainName(attr.getAttrMainname());
+						attrUtil.setArea_alias(attr.getAttrAlias());
 					}
+					cAttrs += attrId + ";";
 				}
+			}
+			if (!cAttrs.equals(attrs)) {
+				Topic topic = queryTopicById(topicId);
+				topic.setAttr(cAttrs);
+				updateTopicInfo(topic);
 			}
 			attrUtil.setAttrs_mainName(attrs_mainName);
 			attrUtil.setAttrs_alias(attrs_alias);
