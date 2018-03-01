@@ -33,6 +33,16 @@ public class DomainOneDao {
 	}
 	
 	/**
+	 * 根据uuid查找一级域名
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	public List<DomainOne> getDomainOneById(List<String> uuids) {
+		return domainOneMapper.selectByPrimaryKeyBatch(uuids);
+	}
+	
+	/**
 	 * 按url查询一级域名
 	 * @param url
 	 * @return 存在返回DomainOne 不存在则返回null
@@ -304,6 +314,15 @@ public class DomainOneDao {
 		else
 			return false;
 	}
+	/**
+	 * 根据给定id批量删除域名
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public boolean delelteDomainOneById(List<String> ids){
+		return false;
+	}
 	
 	/**
 	 * 根据id更新domain信息
@@ -314,6 +333,20 @@ public class DomainOneDao {
 	 */
 	public boolean updateDomainOneInfo(DomainOne domainOne) {
 		if (0 < domainOneMapper.updateByPrimaryKeySelective(domainOne))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * 根据id更新domain信息
+	 * 
+	 * @param domainOne 要修改的信息
+	 * @param uuids 要修改信息的uuid记录 
+	 * @return
+	 */
+	public boolean updateDomainOneInfo(DomainOne domainOne,List<String> uuids) {
+		if (0 < domainOneMapper.updateByPrimaryKeySelectiveBatch(domainOne,uuids))
 			return true;
 		else
 			return false;

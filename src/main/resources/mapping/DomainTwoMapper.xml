@@ -96,9 +96,25 @@
     from domain_two
     where uuid = #{uuid,jdbcType=VARCHAR}
   </select>
+  <select id="selectByPrimaryKeyBatch" parameterType="java.util.List" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from domain_two
+    where uuid in
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+    	#{item,jdbcType=VARCHAR}
+    </foreach>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from domain_two
     where uuid = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByPrimaryKeyBatch" parameterType="java.util.List">
+    delete from domain_two
+    where uuid in
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+    	#{item,jdbcType=VARCHAR}
+    </foreach>
   </delete>
   <delete id="deleteByExample" parameterType="com.hust.scdx.model.DomainTwoExample">
     delete from domain_two
@@ -337,6 +353,42 @@
       </if>
     </set>
     where uuid = #{uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelectiveBatch" parameterType="map">
+    update domain_two
+    <set>
+      <if test="record.name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.column != null and column !='null'">
+        domain_two.column = #{column,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null and type !='null'">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null and rank !='null'">
+        rank = #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incidence != null">
+        incidence = #{incidence,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="record.maintenanceStatus != null">
+        maintenance_status = #{maintenanceStatus,jdbcType=BIT},
+      </if>
+      <if test="record.isFather != null">
+        is_father = #{isFather,jdbcType=BIT},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uuid in
+    <foreach collection="example" item="item" open="(" separator="," close=")">
+    	#{item,jdbcType=VARCHAR}
+    </foreach>
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hust.scdx.model.DomainTwo">
     update domain_two

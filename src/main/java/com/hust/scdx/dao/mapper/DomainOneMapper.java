@@ -11,6 +11,8 @@ public interface DomainOneMapper {
     int deleteByExample(DomainOneExample example);
 
     int deleteByPrimaryKey(String uuid);
+    
+    int deleteByPrimaryKeyBatch(List<String> list);
 
     int insert(DomainOne record);
     
@@ -23,12 +25,16 @@ public interface DomainOneMapper {
     List<DomainOne> selectByExample(DomainOneExample example);
 
     DomainOne selectByPrimaryKey(String uuid);
+    
+    List<DomainOne> selectByPrimaryKeyBatch(List<String> list);
 
     int updateByExampleSelective(@Param("record") DomainOne record, @Param("example") DomainOneExample example);
 
     int updateByExample(@Param("record") DomainOne record, @Param("example") DomainOneExample example);
 
     int updateByPrimaryKeySelective(DomainOne record);
+    
+    int updateByPrimaryKeySelectiveBatch(@Param("record") DomainOne record, @Param("example") List<String> example);
 
     int updateByPrimaryKey(DomainOne record);
 }

@@ -109,6 +109,16 @@ public class DomainTwoDao {
 	}
 	
 	/**
+	 * 根据二级域名id查找二级域名
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	public List<DomainTwo> getDomainTwoById(List<String> uuid) {
+		return domainTwoMapper.selectByPrimaryKeyBatch(uuid);
+	}
+	
+	/**
 	 * 根据二级域名id删除二级域名
 	 * 
 	 * @param uuid
@@ -116,6 +126,19 @@ public class DomainTwoDao {
 	 */
 	public boolean deleteDomainById(String uuid) {
 		if (0 < domainTwoMapper.deleteByPrimaryKey(uuid))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * 根据二级域名id删除二级域名
+	 * 
+	 * @param uuid
+	 * @return 删除成功返回true 删除十包返回false
+	 */
+	public boolean deleteDomainById(List<String> uuids) {
+		if (0 < domainTwoMapper.deleteByPrimaryKeyBatch(uuids))
 			return true;
 		else
 			return false;
@@ -130,6 +153,20 @@ public class DomainTwoDao {
 	 */
 	public boolean updateDomainTwo(DomainTwo record) {
 		if (0 < domainTwoMapper.updateByPrimaryKeySelective(record))
+			return true;
+		else
+			return false;
+	}
+	
+	/**
+	 * 根据id和要修改的信息更新二级域名信息
+	 * 
+	 * @param record
+	 *            Domain对象包含uuid，和其他需要修改的信息，不需要修改的信息可以不设置
+	 * @return
+	 */
+	public boolean updateDomainTwo(DomainTwo record,List<String> uuids) {
+		if (0 < domainTwoMapper.updateByPrimaryKeySelectiveBatch(record,uuids))
 			return true;
 		else
 			return false;

@@ -200,11 +200,10 @@ function domainTwoInfoChangeForTrue() {
 }
 
 function loadType() {
-	var content = "";
-	$("#new_type").empty();
-	$.ajax({
+	$
+	.ajax({
 		type : "post",
-		url : "/sourceType/selectAllSourceType",
+		url : "/weight/selectAllWeight",
 		data : {
 			start : 0,
 			limit : 0
@@ -212,14 +211,20 @@ function loadType() {
 		dataType : "json",
 		beforeSend : function() {
 			begin();
-		},
+			},
 		success : function(msg) {
+			$('#new_type').html("");
 			if (msg.status == "OK") {
-				var items = msg.result ;
-				$.each(items,function(idx,item) {
-					content+= '<option>'+item.name+'</option>';
-				});
-				$("#new_type").append(content);
+				var items = msg.result;
+				$
+					.each(
+						items,
+						function(idx, item) {
+							row = '<option>'+item.name+'</option>';
+							$('#new_type').append(row);
+						});
+			} else {
+				alert(msg.result);
 			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -232,12 +237,55 @@ function loadType() {
             	alert(textStatus);
             }
         },
-		complete : function() {
+		complete:function(){
 			stop();
 		}
 	})
 }
 
+function loadRank(){
+	$
+	.ajax({
+		type : "post",
+		url : "/rankWeight/selectAllWeight",
+		data : {
+			start : 0,
+			limit : 0
+		},
+		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
+		success : function(msg) {
+			$('#new_rank').html("");
+			if (msg.status == "OK") {
+				var items = msg.result;
+				$
+					.each(
+						items,
+						function(idx, item) {
+							row = '<option>'+item.name+'</option>';
+							$('#new_rank').append(row);
+						});
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+		complete:function(){
+			stop();
+		}
+	})
+}
 function back() {
 	// window.history.go(-1);
 	jumpto("website-infor");

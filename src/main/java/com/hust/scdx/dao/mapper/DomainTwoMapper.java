@@ -1,5 +1,6 @@
 package com.hust.scdx.dao.mapper;
 
+import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainTwo;
 import com.hust.scdx.model.DomainTwoExample;
 import java.util.List;
@@ -11,6 +12,8 @@ public interface DomainTwoMapper {
 	int deleteByExample(DomainTwoExample example);
 
 	int deleteByPrimaryKey(String uuid);
+	
+	int deleteByPrimaryKeyBatch(List<String> uuid);
 
 	int insert(DomainTwo record);
 
@@ -23,12 +26,16 @@ public interface DomainTwoMapper {
 	List<DomainTwo> selectByExample(DomainTwoExample example);
 
 	DomainTwo selectByPrimaryKey(String uuid);
+	
+	List<DomainTwo> selectByPrimaryKeyBatch(List<String> list);
 
 	int updateByExampleSelective(@Param("record") DomainTwo record, @Param("example") DomainTwoExample example);
 
 	int updateByExample(@Param("record") DomainTwo record, @Param("example") DomainTwoExample example);
 
 	int updateByPrimaryKeySelective(DomainTwo record);
+	
+	int updateByPrimaryKeySelectiveBatch(@Param("record") DomainTwo record, @Param("example") List<String> example);
 
 	int updateByPrimaryKey(DomainTwo record);
 }
