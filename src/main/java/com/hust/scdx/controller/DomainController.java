@@ -151,8 +151,13 @@ public class DomainController {
 		if (StringUtils.isBlank(rank)) {
 			rank = null;
 		}
-		if (StringUtils.isBlank(incidence)) {
-			incidence = null;
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
 		}
 		Domain domain = new Domain();
 		domain.setUrl(url);
@@ -434,6 +439,14 @@ public class DomainController {
 		one.setColumn(column);
 		one.setType(type);
 		one.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
+		}
 		one.setIncidence(incidence);
 		one.setWeight(weight);
 		one.setMaintenanceStatus(maintenanceStatus);
@@ -475,6 +488,14 @@ public class DomainController {
 		two.setColumn(column);
 		two.setType(type);
 		two.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
+		}
 		two.setIncidence(incidence);
 		two.setWeight(weight);
 		two.setMaintenanceStatus(maintenanceStatus);

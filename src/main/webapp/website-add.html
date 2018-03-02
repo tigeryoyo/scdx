@@ -29,18 +29,60 @@
 				</tr>
 				<tr>
 					<td width="117" height="50">类型：</td>
-					<td width="323" height="50"><input type="text" class="form-control"
-						id="type" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" id="type">
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">级别：</td>
-					<td width="323" height="50"><input type="text" class="form-control"
-						id="rank" /></td>
+					<td width="323" height="50"><select
+						class="form-control" style="width:381px;" id="rank">
+						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">影响范围：</td>
-					<td width="323" height="50"><input type="text" class="form-control"
-													   id="incidence" /></td>
+					<td width="323" height="50"><select
+						class="form-control incidence_provience" style="width:188px;" onchange="provienceChange(this)">
+						<option value="" disabled selected>请选择</option>
+						<option>全国</option>
+						<option>四川省</option>
+						<option>北京市</option>
+						<option>天津市</option>
+						<option>上海市</option>
+						<option>重庆市</option>
+						<option>河北省</option>
+						<option>山西省</option>
+						<option>辽宁省</option>
+						<option>吉林省</option>
+						<option>黑龙江省</option>
+						<option>江苏省</option>
+						<option>浙江省</option>
+						<option>安徽省</option>
+						<option>福建省</option>
+						<option>江西省</option>
+						<option>山东省</option>
+						<option>河南省</option>
+						<option>湖北省</option>
+						<option>湖南省</option>
+						<option>广东省</option>
+						<option>海南省</option>
+						<option>贵州省</option>
+						<option>云南省</option>
+						<option>陕西省</option>
+						<option>甘肃省</option>
+						<option>青海省</option>
+						<option>台湾省</option>
+						<option>内蒙古自治区</option>
+						<option>广西壮族自治区</option>
+						<option>西藏自治区</option>
+						<option>宁夏回族自治区</option>
+						<option>新疆维吾尔自治区</option>
+						<option>香港</option>
+						<option>澳门</option>
+						<option>其他</option>
+					</select> <select class="form-control incidence_city" style="width:188px;">
+					<option value="" disabled selected>请选择</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">权重：</td>
@@ -78,12 +120,14 @@
 <script type="text/javascript" src="js/loading.js"></script>
 <script type="text/javascript" src="js/waiting.js"></script>
 <script type="text/javascript" src="js/website-add.js"></script>
+<script type="text/javascript" src="js/website-incidence.js"></script>
 <script type="text/javascript">
 	$("#weight").keyup(function () {
         $(this).val($(this).val().replace(/[^0-9]/g,''));
     }).bind("paste",function() {  //CTR+V事件处理
         $(this).val($(this).val().replace(/[^0-9]/g, ''));
     })
+
     $(document).on({
 		dragleave : function(e) { // 拖离
 			e.preventDefault();

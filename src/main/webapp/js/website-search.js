@@ -275,6 +275,7 @@ function initTypeChoice(){
 		success : function(msg) {
 			$('ul.type').html("");
 			$('#new_type').html("");
+			$('#new_type').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -321,6 +322,7 @@ function initRankChoice(){
 		success : function(msg) {
 			$('ul.rank').html("");
 			$('#new_rank').html("");
+			$('#new_rank').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$

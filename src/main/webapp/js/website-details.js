@@ -15,6 +15,10 @@ function websiteInforEdit() {
 	$("#btn_back").css("margin-left", "30px");
 	$("#btn_submit").css("display", "inline-block");
 	$("#btn_submit_true").css("display", "inline-block");
+	loadRank();
+
+	loadType();
+	
 }
 
 function domainOneInfoChange() {
@@ -213,7 +217,9 @@ function loadType() {
 			begin();
 			},
 		success : function(msg) {
+			var type = $("#new_type").val();
 			$('#new_type').html("");
+			$('#new_type').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -223,6 +229,7 @@ function loadType() {
 							row = '<option>'+item.name+'</option>';
 							$('#new_type').append(row);
 						});
+				$("#new_type").val(type);
 			} else {
 				alert(msg.result);
 			}
@@ -257,7 +264,9 @@ function loadRank(){
 			begin();
 			},
 		success : function(msg) {
+			var rank = $("#new_rank").val();
 			$('#new_rank').html("");
+			$('#new_rank').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -267,6 +276,7 @@ function loadRank(){
 							row = '<option>'+item.name+'</option>';
 							$('#new_rank').append(row);
 						});
+				$("#new_rank").val(rank);
 			} else {
 				alert(msg.result);
 			}

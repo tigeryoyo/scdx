@@ -37,29 +37,12 @@ span{
 					<td width="117" height="50">类型：</td>
 					<td width="323" height="50"><select
 						class="form-control" style="width:381px;" disabled="disabled" id="new_type">
-						<option>新闻</option>
-						<option>资讯</option>
-						<option>报纸</option>
-						<option>论坛</option>
-						<option>博客</option>
-						<option>视频</option>
-						<option>微博</option>
-						<option>微信</option>
-						<option>问答</option>
-						<option>贴吧</option>
-						<option>境外</option>
-						<option>其他</option>
 						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">级别：</td>
 					<td width="323" height="50"><select
 						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
-						<option>中央</option>
-						<option>省级</option>
-						<option>其他媒体</option>
-						<option>商业网站</option>
-						<option>无</option>
 						</select></td>
 				</tr>
 				<tr>
@@ -67,6 +50,7 @@ span{
 					<td width="323" height="50"><select
 						class="form-control incidence_provience" style="width:188px;"
 						disabled="disabled" onchange="provienceChange(this)">
+						<option value="" disabled selected>请选择</option>
 						<option>全国</option>						
 						<option>四川省</option>
 						<option>北京市</option>
@@ -105,7 +89,7 @@ span{
 						<option>其他</option>
 					</select> <select class="form-control incidence_city" style="width:188px;"
 						disabled="disabled">
-						
+						<option value="" disabled selected>请选择</option>
 					</select></td>
 				</tr>
 				<tr>

@@ -134,6 +134,7 @@ function provienceChange(element){
 	
 	var city = $(element).siblings(".incidence_city");
 	city.empty();
+	city.append('<option value="" disabled selected>请选择</option>');
 	$.each(citys,function(index,val){
 		city.append("<option>"+$.trim(val)+"</option>");
 	})
