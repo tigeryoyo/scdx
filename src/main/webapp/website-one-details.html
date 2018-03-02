@@ -39,36 +39,20 @@ span {
 					<td width="117" height="50">类型：</td>
 					<td width="323" height="50"><select
 						class="form-control" style="width:381px;" disabled="disabled" id="new_type">
-						<option>新闻</option>
-						<option>资讯</option>
-						<option>报纸</option>
-						<option>论坛</option>
-						<option>博客</option>
-						<option>视频</option>
-						<option>微博</option>
-						<option>微信</option>
-						<option>问答</option>
-						<option>贴吧</option>
-						<option>境外</option>
-						<option>其他</option>
 						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">级别：</td>
 					<td width="323" height="50"><select
 						class="form-control" style="width:381px;" disabled="disabled" id="new_rank">
-						<option>中央</option>
-						<option>省级</option>
-						<option>其他媒体</option>
-						<option>商业网站</option>
-						<option>无</option>
 						</select></td>
 				</tr>
 				<tr>
 					<td width="117" height="50">影响范围：</td>
 					<td width="323" height="50"><select
 						class="form-control incidence_provience" style="width:188px;"
-						disabled="disabled">
+						disabled="disabled" onchange="provienceChange(this)">
+						<option value="" disabled selected>请选择</option>
 						<option>全国</option>
 						<option>四川省</option>
 						<option>北京市</option>
@@ -79,7 +63,7 @@ span {
 						<option>山西省</option>
 						<option>辽宁省</option>
 						<option>吉林省</option>
-						<option>黑龙江</option>
+						<option>黑龙江省</option>
 						<option>江苏省</option>
 						<option>浙江省</option>
 						<option>安徽省</option>
@@ -107,27 +91,7 @@ span {
 						<option>其他</option>
 					</select> <select class="form-control incidence_city" style="width:188px;"
 						disabled="disabled">
-						<option>成都市</option>
-						<option>自贡市</option>
-						<option>攀枝花市</option>
-						<option>泸州市</option>
-						<option>德阳市</option>
-						<option>绵阳市</option>
-						<option>广元市</option>
-						<option>遂宁市</option>
-						<option>内江市</option>
-						<option>乐山市</option>
-						<option>南充市</option>
-						<option>宜宾市</option>
-						<option>广安市</option>
-						<option>达州市</option>
-						<option>眉山市</option>
-						<option>雅安市</option>
-						<option>巴中市</option>
-						<option>资阳市</option>
-						<option>阿坝州</option>
-						<option>甘孜州</option>
-						<option>凉山州</option>
+						<option value="" disabled selected>请选择</option>
 					</select></td>
 				</tr>
 				<tr>
@@ -166,6 +130,7 @@ span {
 <script>
 	var uuid = getCookie("domain_id");
 	loadType();
+	loadRank();
 	$
 			.ajax({
 				type : "post",

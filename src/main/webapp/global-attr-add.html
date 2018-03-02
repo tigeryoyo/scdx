@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>全局属性列管理——添加属性列</title>
+<script type="text/javascript" src="js/global-attr.js"></script>
+</head>
+<body>
+
+	<div class="s_nav">
+		当前位置： <a href="javascript:;" onclick="jumpto('type-weight-infor')">全局属性列管理</a> >>添加属性列
+	</div>
+	<div class="user_infor">
+		<form>
+			<table width="470" border="0" class="change_tab">
+				<tr>
+					<td width="100" height="50">属 性 名：</td>
+					<td width="200" height="50"><input type="text" class="form-control" id="add_mainName" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100" height="50">属性别名：</td>
+					<td width="200" height="50"><input type="text" class="form-control" id="add_alias" />
+					</td>
+				</tr>
+				<tr>
+					<td width="100" height="80">
+						<button type="button"  class="btn btn-primary" onClick="addAttr()" >提交</button>
+					</td>
+					<td width="200" height="80">
+						<button type="button"  class="btn btn-primary" onClick="clearAttr()">重置</button>
+					</td>
+					<td width="160" height="80">&nbsp;</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>

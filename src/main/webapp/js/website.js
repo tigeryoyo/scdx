@@ -25,6 +25,7 @@ function websiteInforShow(page) {
 	                        + '<p data-id="'+item.uuid+'">'
 	                        + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<input data-id="'+item.uuid+'" name="domain_one" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
@@ -40,6 +41,7 @@ function websiteInforShow(page) {
                             + '<p data-id="'+item.uuid+'">'
                             + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<input data-id="'+item.uuid+'" name="domain_one" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
@@ -54,8 +56,9 @@ function websiteInforShow(page) {
                     $.each(two[idx],function(idx,item){
                     	if(item.maintenanceStatus){
 	                        row +='<p data-id="'+item.uuid+'">'
-	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
-	                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
+	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">----'
+	                            + '<input data-id="'+item.uuid+'" name="domain_two" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
+		                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                            + '</span>'
 	                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
 		                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
@@ -66,8 +69,9 @@ function websiteInforShow(page) {
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
-                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">----'
+                            + '<input data-id="'+item.uuid+'" name="domain_two" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
+	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
                             + '</span>'
                             + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
@@ -139,7 +143,7 @@ function initShowPage(currenPage) {
     })
 }
 
-function initSearchPage(currenPage,condition) {
+function initSearchPage(currenPage) {
     var listCount = 0;
     if ("undefined" == typeof(currenPage) || null == currenPage) {
         currenPage = 1;
@@ -243,6 +247,7 @@ function websiteInforSearch(page) {
 	                        + '<p data-id="'+item.uuid+'">'
 	                        + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<input data-id="'+item.uuid+'" name="domain_one" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
@@ -258,6 +263,7 @@ function websiteInforSearch(page) {
                             + '<p data-id="'+item.uuid+'">'
                             + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
 	                        + '<span class="glyphicon glyphicon-chevron-right" aria-label="true" style="float: left; padding: 1px 3px;"></span>'
+	                        + '<input data-id="'+item.uuid+'" name="domain_one" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
 	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                        + '</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
@@ -272,8 +278,9 @@ function websiteInforSearch(page) {
                     $.each(two[idx],function(idx,item){
                     	if(item.maintenanceStatus){
 	                        row +='<p data-id="'+item.uuid+'">'
-	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
-	                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
+	                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">----'
+	                            + '<input data-id="'+item.uuid+'" name="domain_two" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
+		                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
 	                            + '</span>'
 	                            + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
 		                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
@@ -284,8 +291,9 @@ function websiteInforSearch(page) {
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
-                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">'
-                            + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">----'+item.url+'</a>'
+                            + '<span style="width: 170px; min-height: 10px; display: inline; float: left;">----'
+                            + '<input data-id="'+item.uuid+'" name="domain_two" type="checkBox" style="width:16px;height:16px;" onclick="stopBubble()">'
+	                        + '<a href="http://'+item.url+'" target="_blank" title="'+item.url+'">'+item.url+'</a>'
                             + '</span>'
                             + '<span style="width: 120px;min-height: 10px; display: inline; float: left;" title="'+item.name+'">'+item.name+'</span>'
 	                        + '<span style="width: 120px;min-height: 10px; display: inline; float: left" title="'+item.column+'">'+item.column+'</span>'
@@ -556,3 +564,131 @@ function cancelChoice(){
 	$('.choice').css("display","none");
 }
 
+function stopBubble(e){
+	window.event ? window.event.cancelBubble = true : e.stopPropagation();
+}
+
+
+
+/**
+ * 批量操作部分
+**/ 
+function changeMaintence(element){
+	if($(element).hasClass('btn-success')){
+		$(element).removeClass('btn-success');
+		$(element).addClass('btn-danger');
+		$(element).text("已维护");
+		$(element).val(1);
+	}else{
+		$(element).removeClass('btn-danger');
+		$(element).addClass('btn-success');
+		$(element).text("未维护");
+		$(element).val(0);
+	}
+}
+/**
+ * 批量删除
+ */
+function delBatch(){
+	if(!confirm("是否确定删除所选域名？其中一级域名的删除会导致其所有的二级域名删除！！！"))
+		return ;
+	var domain_one_id = new Array();
+	$("input:checkbox[name='domain_one']:checked").each(function(){
+		domain_one_id.push($(this).attr("data-id"));
+	})
+	var domain_two_id = new Array();
+	$("input:checkbox[name='domain_two']:checked").each(function(){
+		domain_two_id.push($(this).attr("data-id"));
+	})
+	$.ajax({
+        type:"post",
+        url:"/domain/deleteDomainBatch",
+        traditional:true,
+        data:{
+            one:domain_one_id,
+            two:domain_two_id
+        },
+        dataType: "json",
+        beforeSend : function() {
+			begin();
+			},
+        success: function (msg) {
+            if (msg.status == "OK") {
+                alert(msg.result);
+                jumpto("website-infor");
+            }else
+                alert(msg.result);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+        complete:function(){
+			stop();
+		}
+    })
+}
+/**
+ * 批量修改
+ */
+function upBatch(){
+	if(!confirm("是否确定修改所选域名信息？"))
+		return ;
+	var domain_one_id = new Array();
+	$("input:checkbox[name='domain_one']:checked").each(function(){
+		domain_one_id.push($(this).attr("data-id"));
+	})
+	var domain_two_id = new Array();
+	$("input:checkbox[name='domain_two']:checked").each(function(){
+		domain_two_id.push($(this).attr("data-id"));
+	})
+	$.ajax({
+		type : "post",
+		url : "/domain/updateDomainBatch",
+        traditional:true,
+		data : {
+			one : domain_one_id,
+			two : domain_two_id,
+			name : $("#new_name").val(),
+			column : $("#new_column").val(),
+			type : $("#new_type").val(),
+			rank : $("#new_rank").val(),
+			incidence : $(".incidence_provience").val() + "-"
+					+ $(".incidence_city").val(),
+			weight : $("#new_weight").val(),
+			maintenanceStatus : $("#new_maintenance").val()==1
+		},
+		datatype : "json",
+		beforeSend : function() {
+			begin();
+		},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				alert(msg.result);
+				jumpto("website-infor");
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			alert("error")
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(errorThrown);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(errorThrown);
+            }
+        },
+		complete : function() {
+			stop();
+		}
+	})
+}

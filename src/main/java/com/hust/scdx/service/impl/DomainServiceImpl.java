@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
@@ -361,7 +362,7 @@ public class DomainServiceImpl implements DomainService {
 
 			System.out.println("共" + list.size() + "条已知域名需要更新！");
 			for (Domain d : list) {
-				addDomain(d);
+				updateDomainFromFile(d);
 			}
 			// 添加未知url
 			System.out.println("共" + unexist.size() + "条未知域名需要添加！");
@@ -485,7 +486,7 @@ public class DomainServiceImpl implements DomainService {
 	 * @return
 	 */
 	@Override
-	public boolean addDomain(Domain domain) {
+	public boolean updateDomainFromFile(Domain domain) {
 		String url = UrlUtil.getUrl(domain.getUrl());
 		// 判断域名中的类型属性是否存在，若存在则插入类型表中
 		if (!StringUtils.isBlank(domain.getType()) && !Constant.typeMap.contains(domain.getType())) {
@@ -516,7 +517,7 @@ public class DomainServiceImpl implements DomainService {
 				// 不是二级域名，就一定是一级域名
 				DomainOne domainOne = domainOneDao.getDomainOneByUrl(one);
 				if (null == domainOne) {
-					logger.error(one + "一级域名更新失败！");
+					logger.error(one + "该一级域名不存在，更新失败！");
 					return false;
 				}
 				// 更新一级域名信息
@@ -576,6 +577,33 @@ public class DomainServiceImpl implements DomainService {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean deleteDomainOneById(List<String> uuids) {
+		// TODO Auto-generated method stub
+		if(null== uuids||uuids.size()==0)return true;
+		List<DomainOne> dos = domainOneDao.getDomainOneById(uuids);
+		if (domainOneDao.delelteDomainOneById(uuids)) {
+			for (DomainOne domainOne : dos) {
+				String url = domainOne.getUrl();
+				List<DomainTwo> list = domainTwoDao.getDomainTwoByFatherId(domainOne.getUuid());
+				try {
+					if (null == DomainCacheManager.deleteByUrl(url))
+						logger.error(url + "删除缓存中的域名信息失败！");
+					// 同时级联删除内存中的二级域名信息
+					for (DomainTwo domainTwo : list) {
+						if (null == DomainCacheManager.deleteByUrl(domainTwo.getUrl()))
+							logger.error(domainTwo.getUrl() + "删除缓存中的域名信息失败！");
+					}
+				} catch (Exception e) {
+					logger.error("删除内存中的域名信息失败！");
+					logger.error(e.getMessage());
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public long getDomainOneCount() {
@@ -586,14 +614,56 @@ public class DomainServiceImpl implements DomainService {
 	@Override
 	public boolean deleteDomainTwoById(String uuid) {
 		// TODO Auto-generated method stub
-		String url = domainTwoDao.getDomainTwoById(uuid).getUrl();
+		DomainTwo dt = domainTwoDao.getDomainTwoById(uuid);
+		String url = dt.getUrl();
+		String fatherId = dt.getFatherUuid();
 		if (domainTwoDao.deleteDomainById(uuid)) {
+			if(domainTwoDao.getDomainTwoByFatherId(fatherId).size()==0){
+				DomainOne d= new DomainOne();
+				d.setUuid(fatherId);
+				d.setIsFather(false);
+				d.setUpdateTime(new Date());
+				updateDomainOne(d);
+			}
 			try {
 				if (null == DomainCacheManager.deleteByUrl(url))
 					logger.error(url + "删除缓存中的域名信息失败！");
 			} catch (Exception e) {
 				logger.error("删除缓存中的域名信息失败！");
 				logger.error(e.getMessage());
+			}
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean deleteDomainTwoById(List<String> uuids) {
+		// TODO Auto-generated method stub
+		if(null== uuids||uuids.size()==0)return true;
+		List<DomainTwo> dts = domainTwoDao.getDomainTwoById(uuids);
+		HashSet<String> hs = new HashSet<String>();
+		if (domainTwoDao.deleteDomainById(uuids)) {
+			for (DomainTwo dt : dts) {
+				String fatherUuid = dt.getFatherUuid();
+				String url = dt.getUrl();
+				try {
+					if (null == DomainCacheManager.deleteByUrl(url))
+						logger.error(url + "删除缓存中的域名信息失败！");
+				} catch (Exception e) {
+					logger.error("删除缓存中的域名信息失败！");
+					logger.error(e.getMessage());
+				}
+				if(!hs.contains(fatherUuid)){
+					hs.add(fatherUuid);
+					if(domainTwoDao.getDomainTwoByFatherId(fatherUuid).size()==0){
+						DomainOne d= new DomainOne();
+						d.setUuid(fatherUuid);
+						d.setIsFather(false);
+						d.setUpdateTime(new Date());
+						updateDomainOne(d);
+					}
+				}
 			}
 			return true;
 		}
@@ -674,10 +744,25 @@ public class DomainServiceImpl implements DomainService {
 	public boolean updateDomainOne(DomainOne one) {
 		// TODO Auto-generated method stub
 		if (domainOneDao.updateDomainOneInfo(one)) {
-			if (StringUtils.isBlank(one.getUrl())) {
-				one = domainOneDao.getDomainOneById(one.getUuid());
+			one = domainOneDao.getDomainOneById(one.getUuid());
+			Domain domain = new Domain();
+			domain.setDomainFormOne(one);
+			if (!DomainCacheManager.addDomain(domain))
+				logger.info(one.getUrl() + "更新到缓存失败！");
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateDomainOne(DomainOne one,List<String> uuids) {
+		// TODO Auto-generated method stub
+		if(null== uuids||uuids.size()==0)return true;
+		List<DomainOne> dos = domainOneDao.getDomainOneById(uuids);
+		if (domainOneDao.updateDomainOneInfo(one,uuids)) {
+			for (DomainOne domainOne : dos) {
 				Domain domain = new Domain();
-				domain.setDomainFormOne(one);
+				domain.setDomainFormOne(domainOne);
 				if (!DomainCacheManager.addDomain(domain))
 					logger.info(one.getUrl() + "更新到缓存失败！");
 			}
@@ -691,17 +776,37 @@ public class DomainServiceImpl implements DomainService {
 		// TODO Auto-generated method stub
 		if (domainTwoDao.updateDomainTwo(two)) {
 			two = domainTwoDao.getDomainTwoById(two.getUuid());
-			if (StringUtils.isBlank(two.getUrl())) {
-				two = domainTwoDao.getDomainTwoById(two.getUuid());
-				Domain domain = new Domain();
-				domain.setDomainFormTwo(two);
-				if (!DomainCacheManager.addDomain(domain))
-					logger.info(two.getUrl() + "更新到缓存失败！");
-			}
+			Domain domain = new Domain();
+			domain.setDomainFormTwo(two);
+			if (!DomainCacheManager.addDomain(domain))
+				logger.info(two.getUrl() + "更新到缓存失败！");
 			DomainOne one = domainOneDao.getDomainOneById(two.getFatherUuid());
 			if (null != one) {
 				one.setUpdateTime(two.getUpdateTime());
 				updateDomainOne(one);
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean updateDomainTwo(DomainTwo two,List<String> uuids) {
+		// TODO Auto-generated method stub
+		if(null== uuids||uuids.size()==0)return true;
+		if (domainTwoDao.updateDomainTwo(two,uuids)) {
+			List<DomainTwo> dts = domainTwoDao.getDomainTwoById(uuids);
+			for (DomainTwo domainTwo : dts) {
+				Domain domain = new Domain();
+				domain.setDomainFormTwo(domainTwo);
+				if (!DomainCacheManager.addDomain(domain))
+					logger.info(domainTwo.getUrl() + "更新到缓存失败！");
+				DomainOne one = domainOneDao.getDomainOneById(domainTwo.getFatherUuid());
+				if (null != one) {
+					one.setUpdateTime(domainTwo.getUpdateTime());
+					updateDomainOne(one);
+				}
 			}
 			return true;
 		} else {

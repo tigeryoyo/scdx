@@ -53,7 +53,7 @@
         <input type="text" class="form-control" style="height: 36px;display: inline; float: left;" id="web_name">
         <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">栏目：</span>
         <input type="text" class="form-control" style="height: 36px;display: inline; float: left;" id="web_column">
-        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="seach()">搜 索</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="search()">搜 索</button>
         <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="showOp()">更多操作</button>
         <div class="moreOp" style="width:96px;height:72px;position:absolute;right:-7px;bottom:-75px;z-index:999;display:none;">
         <form action="/file/exportDomain?flag=0" method="POST" style="height: 36px;display: inline; float: left;">
@@ -93,8 +93,8 @@
     <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
     	<td width="80px;" >影响范围</td>
     	<td>
-	    	<select class="form-control incidence_provience" style="width:188px;">
-	    				<option></option>
+	    	<select class="form-control incidence_provience" style="width:188px;display: inline; float: left;" onchange="provienceChange(this)">
+	    				<option value="" disabled selected>请选择</option>
 						<option>全国</option>
 						<option>四川省</option>
 						<option>北京市</option>
@@ -105,7 +105,7 @@
 						<option>山西省</option>
 						<option>辽宁省</option>
 						<option>吉林省</option>
-						<option>黑龙江</option>
+						<option>黑龙江省</option>
 						<option>江苏省</option>
 						<option>浙江省</option>
 						<option>安徽省</option>
@@ -132,7 +132,8 @@
 						<option>澳门</option>
 						<option>其他</option>
 					</select>
-			<select class="form-control incidence_city" style="width:188px;"><option></option></select>
+					<span style="display:inline;line-height:36px;float: left;font-size:20px;margin:0 5px;">-</span>
+			<select class="form-control incidence_city" style="width:188px;display: inline; float: left;"><option value="" disabled selected>请选择</option></select>
     	</td>
     </tr>
     <tr style="border-bottom:1px dashed #e5e5e5;min-height:40px;">
@@ -156,8 +157,8 @@
     	<td width="80px;">子域名状态</td>
     	<td>
 	    	<ul class="isFather">
-	    		<li class="isFather normal" style="cursor:pointer;" value="0" onclick="choiceClick(this)">有子域名</li>
-	    		<li class="isFather normal" style="cursor:pointer;" value="1" onclick="choiceClick(this)">无子域名</li>
+	    		<li class="isFather normal" style="cursor:pointer;" value="0" onclick="choiceClick(this)">无子域名</li>
+	    		<li class="isFather normal" style="cursor:pointer;" value="1" onclick="choiceClick(this)">有子域名</li>
 	    	</ul>
     	</td>
     </tr>
@@ -219,6 +220,67 @@
             </p>
         </details>-->
     </div>
+    <div style="position:relative;width:750px;height:36px;font-size:16px;margin-bottom:10px;margin-top:20px;" class="infor_tab01">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">名称：</span>
+        <input type="text" class="form-control" style="width:120px;height: 36px;display: inline; float: left;" id="new_name">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">栏目：</span>
+        <input type="text" class="form-control" style="width:120px;height: 36px;display: inline; float: left;" id="new_column">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">级别：</span>
+        <select class="form-control" style="width:120px;display: inline; float: left;" id="new_rank">
+						<option value="" disabled selected>请选择</option>
+		</select>
+		<span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">类型：</span>
+        <select class="form-control" style="width:120px;display: inline; float: left;" id="new_type"><option value="" disabled selected>请选择</option></select>
+    </div>
+    <div style="position:relative;width:750px;height:36px;font-size:16px;margin-bottom:0px;" class="infor_tab01">
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">影响范围：</span>
+        <select class="form-control incidence_provience" style="width:105px;display: inline; float: left;" onchange="provienceChange(this)">
+	    				<option value="" disabled selected>请选择</option>
+						<option>全国</option>
+						<option>四川省</option>
+						<option>北京市</option>
+						<option>天津市</option>
+						<option>上海市</option>
+						<option>重庆市</option>
+						<option>河北省</option>
+						<option>山西省</option>
+						<option>辽宁省</option>
+						<option>吉林省</option>
+						<option>黑龙江省</option>
+						<option>江苏省</option>
+						<option>浙江省</option>
+						<option>安徽省</option>
+						<option>福建省</option>
+						<option>江西省</option>
+						<option>山东省</option>
+						<option>河南省</option>
+						<option>湖北省</option>
+						<option>湖南省</option>
+						<option>广东省</option>
+						<option>海南省</option>
+						<option>贵州省</option>
+						<option>云南省</option>
+						<option>陕西省</option>
+						<option>甘肃省</option>
+						<option>青海省</option>
+						<option>台湾省</option>
+						<option>内蒙古自治区</option>
+						<option>广西壮族自治区</option>
+						<option>西藏自治区</option>
+						<option>宁夏回族自治区</option>
+						<option>新疆维吾尔自治区</option>
+						<option>香港</option>
+						<option>澳门</option>
+						<option>其他</option>
+		</select>
+		<span style="display:inline;line-height:36px;float: left;font-size:20px;margin:0 5px;">-</span>
+		<select class="form-control incidence_city" style="width:100px;display: inline; float: left;"><option value="" disabled selected>请选择</option></select>
+        <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">权重：</span>
+        <input type="text" class="form-control" style="width:70px;height: 36px;display: inline; float: left;" id="new_weight">
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-success" value=0 onclick="changeMaintence(this)" id="new_maintenance">待维护</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="upBatch()" >批量修改</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-danger" onclick="delBatch()" >批量删除</button>
+    </div>
     <div class="user_num" style="margin-right: 0px;">
         <ul class="page" maxshowpageitem="5" pagelistcount="10" id="page"></ul>
     </div>
@@ -264,6 +326,11 @@
         $(this).val($(this).val().replace(/[^0-9]/g, ''));
     })
     $("#web_weight_start").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $("#new_weight").keyup(function () {
         $(this).val($(this).val().replace(/[^0-9]/g,''));
     }).bind("paste",function() {  //CTR+V事件处理
         $(this).val($(this).val().replace(/[^0-9]/g, ''));

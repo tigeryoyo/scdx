@@ -3,6 +3,7 @@ package com.hust.scdx.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class DomainController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/selectDomainCount", method = RequestMethod.POST)
-	public Object SelectDomainCount(HttpServletRequest request) {
+	public Object selectDomainCount(HttpServletRequest request) {
 		Long count = domainService.getDomainOneCount();
 		if (null == count) {
 			return ResultUtil.errorWithMsg("分页失败！");
@@ -150,8 +151,13 @@ public class DomainController {
 		if (StringUtils.isBlank(rank)) {
 			rank = null;
 		}
-		if (StringUtils.isBlank(incidence)) {
-			incidence = null;
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
 		}
 		Domain domain = new Domain();
 		domain.setUrl(url);
@@ -162,9 +168,9 @@ public class DomainController {
 		domain.setIncidence(incidence);
 		domain.setWeight(weight);
 		domain.setMaintenanceStatus(maintenanceStatus);
-		if (domainService.addDomain(domain))
+		if (domainService.addUnknowDomain(domain))
 			return ResultUtil.success("添加成功！");
-		return ResultUtil.errorWithMsg("添加失败！");
+		return ResultUtil.errorWithMsg("添加失败！请检查该域名是否已存在！");
 	}
 
 	/**
@@ -345,13 +351,45 @@ public class DomainController {
 	@RequestMapping("/deleteDomainOne")
 	public Object deleteDomainOne(@RequestParam(value = "uuid", required = true) String uuid,
 			HttpServletRequest request) {
-		if (domainService.deleteDomainOneById(uuid)) {
-			return ResultUtil.success("删除成功！");
-		} else {
+		try {
+			if (domainService.deleteDomainOneById(uuid)) {
+				return ResultUtil.success("删除成功！");
+			} else {
+				return ResultUtil.errorWithMsg("删除失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error(e.getMessage());
 			return ResultUtil.errorWithMsg("删除失败！");
 		}
 	}
 
+	/**
+	 * 根据uuid删除批量域名 会有级联删除的效果，删除其对应的二级域名
+	 * 
+	 * @param uuid
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteDomainBatch")
+	public Object deleteDomainBatch(@RequestParam(value = "one", required = false) List<String> one,
+			@RequestParam(value = "two", required = false) List<String> two,
+			HttpServletRequest request) {
+		try {
+			if(domainService.deleteDomainOneById(one) & domainService.deleteDomainTwoById(two)){
+				return ResultUtil.success("删除成功！");
+			} else {
+				return ResultUtil.errorWithMsg("删除失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return ResultUtil.errorWithMsg("删除失败！");
+		}
+	}
+	
 	/**
 	 * 根据uuid删除二级域名
 	 * 
@@ -401,6 +439,14 @@ public class DomainController {
 		one.setColumn(column);
 		one.setType(type);
 		one.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
+		}
 		one.setIncidence(incidence);
 		one.setWeight(weight);
 		one.setMaintenanceStatus(maintenanceStatus);
@@ -442,12 +488,100 @@ public class DomainController {
 		two.setColumn(column);
 		two.setType(type);
 		two.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isBlank(incidence)){
+				incidence = null;
+			}
+		}
 		two.setIncidence(incidence);
 		two.setWeight(weight);
 		two.setMaintenanceStatus(maintenanceStatus);
 		two.setUpdateTime(new Date());
 		if (domainService.updateDomainTwo(two))
 			return ResultUtil.success("修改成功！");
+		return ResultUtil.errorWithMsg("修改失败！");
+	}
+	
+	/**
+	 * 根据所给定信息批量更新域名信息
+	 * 
+	 * @param one
+	 * @param two
+	 * @param url
+	 * @param name
+	 * @param column
+	 * @param type
+	 * @param rank
+	 * @param incidence
+	 * @param weight
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateDomainBatch")
+	public Object updateDomainBatch(@RequestParam(value = "one", required = false) List<String> one,
+			@RequestParam(value = "two", required = false) List<String> two,
+			@RequestParam(value = "name", required = true) String name,
+			@RequestParam(value = "column", required = true) String column,
+			@RequestParam(value = "type", required = true) String type,
+			@RequestParam(value = "rank", required = true) String rank,
+			@RequestParam(value = "incidence", required = true) String incidence,
+			@RequestParam(value = "weight", required = true) Integer weight,
+			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
+		System.out.println("updateDomainBatch");
+		DomainOne domainOne = new DomainOne();
+		if (StringUtils.isNotBlank(name))
+			domainOne.setName(name);
+		if (StringUtils.isNotBlank(column))
+			domainOne.setColumn(column);
+		if (StringUtils.isNotBlank(type))
+			domainOne.setType(type);
+		if (StringUtils.isNotBlank(rank))
+			domainOne.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isNotBlank(incidence)){
+				domainOne.setIncidence(incidence);
+			}
+		}
+		domainOne.setWeight(weight);
+		domainOne.setMaintenanceStatus(maintenanceStatus);
+		domainOne.setUpdateTime(new Date());
+		
+		DomainTwo domainTwo = new DomainTwo();
+		if (StringUtils.isNotBlank(name))
+			domainTwo.setName(name);
+		if (StringUtils.isNotBlank(column))
+			domainTwo.setColumn(column);
+		if (StringUtils.isNotBlank(type))
+			domainTwo.setType(type);
+		if (StringUtils.isNotBlank(rank))
+			domainTwo.setRank(rank);
+		if (null!=incidence){
+			incidence  = incidence.trim();
+			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
+				incidence = incidence.replace("-", "");
+			if (StringUtils.isNotBlank(incidence)){
+				domainTwo.setIncidence(incidence);
+			}
+		}
+		domainTwo.setWeight(weight);
+		domainTwo.setMaintenanceStatus(maintenanceStatus);
+		domainTwo.setUpdateTime(new Date());
+		
+		try {
+			if (domainService.updateDomainOne(domainOne,one) & domainService.updateDomainTwo(domainTwo, two))
+				return ResultUtil.success("修改成功！");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
 		return ResultUtil.errorWithMsg("修改失败！");
 	}
 

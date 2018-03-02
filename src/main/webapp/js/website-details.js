@@ -15,6 +15,10 @@ function websiteInforEdit() {
 	$("#btn_back").css("margin-left", "30px");
 	$("#btn_submit").css("display", "inline-block");
 	$("#btn_submit_true").css("display", "inline-block");
+	loadRank();
+
+	loadType();
+	
 }
 
 function domainOneInfoChange() {
@@ -200,11 +204,10 @@ function domainTwoInfoChangeForTrue() {
 }
 
 function loadType() {
-	var content = "";
-	$("#new_type").empty();
-	$.ajax({
+	$
+	.ajax({
 		type : "post",
-		url : "/sourceType/selectAllSourceType",
+		url : "/weight/selectAllWeight",
 		data : {
 			start : 0,
 			limit : 0
@@ -212,14 +215,23 @@ function loadType() {
 		dataType : "json",
 		beforeSend : function() {
 			begin();
-		},
+			},
 		success : function(msg) {
+			var type = $("#new_type").val();
+			$('#new_type').html("");
+			$('#new_type').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
-				var items = msg.result ;
-				$.each(items,function(idx,item) {
-					content+= '<option>'+item.name+'</option>';
-				});
-				$("#new_type").append(content);
+				var items = msg.result;
+				$
+					.each(
+						items,
+						function(idx, item) {
+							row = '<option>'+item.name+'</option>';
+							$('#new_type').append(row);
+						});
+				$("#new_type").val(type);
+			} else {
+				alert(msg.result);
 			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
@@ -232,12 +244,58 @@ function loadType() {
             	alert(textStatus);
             }
         },
-		complete : function() {
+		complete:function(){
 			stop();
 		}
 	})
 }
 
+function loadRank(){
+	$
+	.ajax({
+		type : "post",
+		url : "/rankWeight/selectAllWeight",
+		data : {
+			start : 0,
+			limit : 0
+		},
+		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
+		success : function(msg) {
+			var rank = $("#new_rank").val();
+			$('#new_rank').html("");
+			$('#new_rank').append('<option value="" disabled selected>请选择</option>');
+			if (msg.status == "OK") {
+				var items = msg.result;
+				$
+					.each(
+						items,
+						function(idx, item) {
+							row = '<option>'+item.name+'</option>';
+							$('#new_rank').append(row);
+						});
+				$("#new_rank").val(rank);
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+		complete:function(){
+			stop();
+		}
+	})
+}
 function back() {
 	// window.history.go(-1);
 	jumpto("website-infor");

@@ -2,6 +2,7 @@ package com.hust.scdx.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hust.scdx.model.Domain;
@@ -71,15 +72,24 @@ public interface DomainService {
 	 * @param domain 人工处理后的域名信息，必须包含url属性，同时其他属性基本健全
 	 * @return 对数据库影响行数大于0返回true
 	 */
-	boolean addDomain(Domain domain);
+	boolean updateDomainFromFile(Domain domain);
 
 	/**
 	 * 根据uuid删除一级域名
 	 * @param uuid
 	 * @return 删除成功返回true，失败返回false
 	 */
-	boolean deleteDomainOneById(String uuid);
+	@Transactional
+	boolean deleteDomainOneById(String uuid) throws Exception;
 
+	/**
+	 * 根据uuid批量删除一级域名
+	 * @param uuid
+	 * @return 删除成功返回true，失败返回false
+	 */
+	@Transactional
+	boolean deleteDomainOneById(List<String> uuids)throws Exception;
+	
 	/**
 	 * 获取所有一级域名数
 	 * @return
@@ -92,6 +102,14 @@ public interface DomainService {
 	 * @return 删除成功返回true，失败返回false
 	 */
 	boolean deleteDomainTwoById(String uuid);
+	
+	/**
+	 * 根据id批量删除二级域名
+	 * @param uuid
+	 * @return 删除成功返回true，失败返回false
+	 */
+	@Transactional
+	boolean deleteDomainTwoById(List<String> uuid)throws Exception;
 
 	/**
 	 * 根据id获取一级域名信息
@@ -115,12 +133,27 @@ public interface DomainService {
 	boolean updateDomainOne(DomainOne one);
 	
 	/**
+	 * 根据给定一级域名信息更新数据库，必须包含uuid	
+	 * @param one
+	 * @return 更新成功返回true，失败返回false
+	 */
+	@Transactional
+	boolean updateDomainOne(DomainOne one,List<String> uuids) throws Exception;
+	
+	/**
 	 * 根据给定二级域名信息更新数据库，必须包含uuid	
 	 * @param two
 	 * @return 更新成功返回true，失败返回false
 	 */
 	boolean updateDomainTwo(DomainTwo two);
 	
+	/**
+	 * 根据给定二级域名信息更新数据库，必须包含uuid	
+	 * @param two
+	 * @return 更新成功返回true，失败返回false
+	 */
+	@Transactional
+	boolean updateDomainTwo(DomainTwo two,List<String> uuids)throws Exception;
 	/**
 	 * 根据给定的url获取到域名信息
 	 * @param url 完整的url

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hust.scdx.model.Attr;
+import com.hust.scdx.model.params.AttrQueryCondition;
 import com.hust.scdx.service.AttrService;
 import com.hust.scdx.util.ResultUtil;
 
@@ -42,17 +44,55 @@ public class AttrController {
 	}
 
 	/**
-	 * 查询所有属性
+	 * 查询符合条件的所有属性
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/queryAllAttr", method = RequestMethod.POST)
-	public Object queryAllAttr(HttpServletRequest request) {
-		List<Attr> attrs = attrService.queryAllAttr();
+	@RequestMapping(value = "/queryAttr", method = RequestMethod.POST)
+	public Object queryAttr(@RequestParam(value = "mainName", required = false) String mainName,
+			@RequestParam(value = "alias", required = false) String alias,
+			@RequestParam(value = "start", required = false) Integer start,
+			@RequestParam(value = "limit", required = false) Integer limit, HttpServletRequest request) {
+		AttrQueryCondition condition = new AttrQueryCondition();
+		if(null != mainName)
+			condition.setMainName(mainName);
+		if(null != alias)
+			condition.setAlias(alias);
+		if(null != start)
+			condition.setStart(start);
+		if(null != limit)
+			condition.setLimit(limit);
+		List<Attr> attrs = attrService.queryAttrByCondition(condition);
 		if (attrs == null || attrs.isEmpty()) {
-			logger.error("查询所有属性失败。");
-			return ResultUtil.errorWithMsg("查询所有属性失败。");
+			logger.error("未找到符合条件的属性。");
+			return ResultUtil.errorWithMsg("未找到符合条件的属性。");
 		}
 		return ResultUtil.success(attrs);
+	}
+	
+	/**
+	 * 查询符合条件的属性的个数
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/queryAttrCount", method = RequestMethod.POST)
+	public Object queryAttrCount(@RequestParam(value = "mainName", required = false) String mainName,
+			@RequestParam(value = "alias", required = false) String alias,
+			@RequestParam(value = "start", required = false) Integer start,
+			@RequestParam(value = "limit", required = false) Integer limit, HttpServletRequest request) {
+		AttrQueryCondition condition = new AttrQueryCondition();
+		if(null != mainName)
+			condition.setMainName(mainName);
+		if(null != alias)
+			condition.setAlias(alias);
+		if(null != start)
+			condition.setStart(start);
+		if(null != limit)
+			condition.setLimit(limit);
+		Long count = attrService.queryAttrCountByCondition(condition);
+		if (count == null || count == 0) {
+			logger.error("未找到符合条件的属性。");
+			return ResultUtil.errorWithMsg("未找到符合条件的属性。");
+		}
+		return ResultUtil.success(count);
 	}
 
 	/**
@@ -60,8 +100,10 @@ public class AttrController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/insertAttr", method = RequestMethod.POST)
-	public Object insertAttr(@RequestParam(value = "attrMainname", required = true) String attrMainname,
-			@RequestParam(value = "attrAlias", required = true) String attrAlias, HttpServletRequest request) {
+	public Object insertAttr(@RequestParam(value = "mainName", required = true) String attrMainname,
+			@RequestParam(value = "alias", required = true) String attrAlias, HttpServletRequest request) {
+		if(StringUtils.isBlank(attrAlias)||StringUtils.isBlank(attrMainname))
+			return ResultUtil.errorWithMsg("插入属性失败!属性名或属性别名不能为空"); 
 		Attr attr = new Attr();
 		if (attrService.insertAttr(attrMainname, attrAlias) < 0) {
 			logger.error("插入属性失败。");
@@ -80,7 +122,7 @@ public class AttrController {
 			logger.error("删除属性失败。");
 			return ResultUtil.errorWithMsg("删除属性失败。");
 		}
-		return ResultUtil.successWithoutMsg();
+		return ResultUtil.success("删除成功！");
 	}
 
 	/**
@@ -88,10 +130,12 @@ public class AttrController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateAttr", method = RequestMethod.POST)
-	public Object updateAttr(@RequestParam(value = "attrId", required = true) int attrId,
-			@RequestParam(value = "attrMainname", required = true) String attrMainname,
-			@RequestParam(value = "attrAlias", required = true) String attrAlias, HttpServletRequest request) {
+	public Object updateAttr(@RequestParam(value = "id", required = true) Integer attrId,
+			@RequestParam(value = "mainName", required = true) String attrMainname,
+			@RequestParam(value = "alias", required = true) String attrAlias, HttpServletRequest request) {
 		Attr attr = new Attr();
+		if(StringUtils.isBlank(attrAlias)||StringUtils.isBlank(attrMainname))
+			return ResultUtil.errorWithMsg("更新属性失败!属性名或属性别名不能为空"); 
 		attr.setAttrId(attrId);
 		attr.setAttrMainname(attrMainname);
 		attr.setAttrAlias(attrAlias);
@@ -99,6 +143,6 @@ public class AttrController {
 			logger.error("更新属性失败。");
 			return ResultUtil.errorWithMsg("更新属性失败。");
 		}
-		return ResultUtil.successWithoutMsg();
+		return ResultUtil.success("更新成功！");
 	}
 }

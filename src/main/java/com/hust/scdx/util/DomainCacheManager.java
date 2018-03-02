@@ -88,6 +88,29 @@ public class DomainCacheManager {
 	public static Domain getByUrl(String url){
 		if(null != Constant.DomainCache && null != url)
 			return Constant.DomainCache.get(url);
+		else{
+			ApplicationContext applicationContext = new FileSystemXmlApplicationContext("classpath:spring-config.xml");
+			DomainOneDao domainOneDao = applicationContext.getBean(DomainOneDao.class);
+			DomainTwoDao domainTwoDao = applicationContext.getBean(DomainTwoDao.class);
+			if(null == UrlUtil.getDomainTwo(url)){
+				DomainTwo two = domainTwoDao.getDomainTwoByUrl(url);
+				if(null!= two){
+					Domain domain = new Domain();
+					domain.setDomainFormTwo(two);
+					Constant.DomainCache.put(two.getUrl(), domain);
+					return domain;
+				}
+			}
+			else{
+				DomainOne one = domainOneDao.getDomainOneByUrl(url);
+				if(null!= one){
+					Domain domain = new Domain();
+					domain.setDomainFormOne(one);
+					Constant.DomainCache.put(one.getUrl(), domain);
+					return domain;
+				}
+			}
+		}
 		return null;
 	}
 	

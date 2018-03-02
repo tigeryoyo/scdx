@@ -23,19 +23,24 @@ var condition={
 }
 function timeClick(th){
 	switch(condition.timeSorting){
+	case 0:
+		$(th).html("时间↓");
+		$(th).css("color","red");
+		condition.timeSorting=1;
+		break;
 		case 1:
 			$(th).html("时间↑");
 			$(th).css("color","red");
 			condition.timeSorting = 2;
 			break;
 		case 2:
-			$(th).html("时间↓");
-			$(th).css("color","red");
-			condition.timeSorting = 1;
+			$(th).html("时间");
+			$(th).css("color","");
+			condition.timeSorting = 0;
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function urlClick(th){
 	switch(condition.urlSorting){
@@ -56,7 +61,7 @@ function urlClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function nameClick(th){
 	switch(condition.nameSorting){
@@ -77,7 +82,7 @@ function nameClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function columnClick(th){
 	switch(condition.columnSorting){
@@ -98,7 +103,7 @@ function columnClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function rankClick(th){
 	switch(condition.rankSorting){
@@ -119,7 +124,7 @@ function rankClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function typeClick(th){
 	switch(condition.typeSorting){
@@ -140,7 +145,7 @@ function typeClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function weightClick(th){
 	switch(condition.weightSorting){
@@ -161,7 +166,7 @@ function weightClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 function maintenanceClick(th){
 	switch(condition.maintenanceSorting){
@@ -182,7 +187,7 @@ function maintenanceClick(th){
 			break;
 		default:alert("error!!!");
 	}
-	initSearchPage(1,condition);
+	search();
 }
 
 function choiceClick(element){
@@ -196,7 +201,7 @@ function choiceClick(element){
 }
 
 
-function seach(){
+function search(){
 	var url = $('#web_url').val();
 	var name = $('#web_name').val();
 	var column = $('#web_column').val();
@@ -238,7 +243,7 @@ function seach(){
 		condition.isFather=null;
 	}
 	console.log(condition)
-	initSearchPage(1,condition);
+	initSearchPage(1);
 }
 
 
@@ -269,6 +274,8 @@ function initTypeChoice(){
 			},
 		success : function(msg) {
 			$('ul.type').html("");
+			$('#new_type').html("");
+			$('#new_type').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -277,6 +284,7 @@ function initTypeChoice(){
 						function(idx, item) {
 							row = '<li class="type normal" style="cursor:pointer;" value="'+item.name+'" onclick="choiceClick(this)">'+item.name+'</li>';
 							$('ul.type').append(row);
+							$('#new_type').append('<option>'+item.name+'</option>');
 						});
 			} else {
 				alert(msg.result);
@@ -313,6 +321,8 @@ function initRankChoice(){
 			},
 		success : function(msg) {
 			$('ul.rank').html("");
+			$('#new_rank').html("");
+			$('#new_rank').append('<option value="" disabled selected>请选择</option>');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -321,6 +331,7 @@ function initRankChoice(){
 						function(idx, item) {
 							row = '<li class="rank normal" style="cursor:pointer;" value="'+item.name+'" onclick="choiceClick(this)">'+item.name+'</li>';
 							$('ul.rank').append(row);
+							$('#new_rank').append('<option>'+item.name+'</option>');
 						});
 			} else {
 				alert(msg.result);

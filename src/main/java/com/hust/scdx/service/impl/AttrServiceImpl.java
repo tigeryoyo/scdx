@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hust.scdx.dao.AttrDao;
 import com.hust.scdx.model.Attr;
+import com.hust.scdx.model.params.AttrQueryCondition;
 import com.hust.scdx.service.AttrService;
 
 @Service
@@ -24,6 +25,16 @@ public class AttrServiceImpl implements AttrService {
 	@Override
 	public List<Attr> queryAllAttr() {
 		return attrDao.queryAllAttr();
+	}
+	
+	@Override
+	public Long queryAttrCountByCondition(AttrQueryCondition condition) {
+		return attrDao.queryAttrCount(condition);
+	}
+	
+	@Override
+	public List<Attr> queryAttrByCondition(AttrQueryCondition condition) {
+		return attrDao.queryAttrByCondition(condition);
 	}
 
 	@Override
