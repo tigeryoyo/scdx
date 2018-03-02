@@ -359,31 +359,31 @@
     update domain_one
     <set>
       <if test="record.name != null">
-        name = #{name,jdbcType=VARCHAR},
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.column != null and column !='null'">
-        domain_one.column = #{column,jdbcType=VARCHAR},
+      <if test="record.column != null and record.column !='null'">
+        domain_one.column = #{record.column,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null and type !='null'">
-        type = #{type,jdbcType=VARCHAR},
+      <if test="record.type != null and record.type !='null'">
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
-      <if test="record.rank != null and rank !='null'">
-        rank = #{rank,jdbcType=VARCHAR},
+      <if test="record.rank != null and record.rank !='null'">
+        rank = #{record.rank,jdbcType=VARCHAR},
       </if>
       <if test="record.incidence != null">
-        incidence = #{incidence,jdbcType=VARCHAR},
+        incidence = #{record.incidence,jdbcType=VARCHAR},
       </if>
       <if test="record.weight != null">
-        weight = #{weight,jdbcType=INTEGER},
+        weight = #{record.weight,jdbcType=INTEGER},
       </if>
       <if test="record.maintenanceStatus != null">
-        maintenance_status = #{maintenanceStatus,jdbcType=BIT},
+        maintenance_status = #{record.maintenanceStatus,jdbcType=BIT},
       </if>
       <if test="record.isFather != null">
-        is_father = #{isFather,jdbcType=BIT},
+        is_father = #{record.isFather,jdbcType=BIT},
       </if>
       <if test="record.updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where uuid in

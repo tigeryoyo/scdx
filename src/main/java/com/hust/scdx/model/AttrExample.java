@@ -9,8 +9,28 @@ public class AttrExample {
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
+    
+    protected Integer start;
+    
+    protected Integer limit;
 
-    public AttrExample() {
+    public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getLimit() {
+		return limit;
+	}
+
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+
+	public AttrExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

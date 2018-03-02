@@ -72,7 +72,7 @@ public interface DomainService {
 	 * @param domain 人工处理后的域名信息，必须包含url属性，同时其他属性基本健全
 	 * @return 对数据库影响行数大于0返回true
 	 */
-	boolean addDomain(Domain domain);
+	boolean updateDomainFromFile(Domain domain);
 
 	/**
 	 * 根据uuid删除一级域名

@@ -651,7 +651,7 @@ function upBatch(){
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainBatch",
-		traditional:true,
+        traditional:true,
 		data : {
 			one : domain_one_id,
 			two : domain_two_id,
@@ -662,7 +662,7 @@ function upBatch(){
 			incidence : $(".incidence_provience").val() + "-"
 					+ $(".incidence_city").val(),
 			weight : $("#new_weight").val(),
-			maintenanceStatus : $("new_maintenance").val()==1
+			maintenanceStatus : $("#new_maintenance").val()==1
 		},
 		datatype : "json",
 		beforeSend : function() {

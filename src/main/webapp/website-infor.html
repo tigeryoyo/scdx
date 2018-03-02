@@ -281,7 +281,7 @@
 		<select class="form-control incidence_city" style="width:100px;display: inline; float: left;"><option></option></select>
         <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">权重：</span>
         <input type="text" class="form-control" style="width:70px;height: 36px;display: inline; float: left;" id="new_weight">
-        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-success" value=0 onclick="changeMaintence(this)" >待维护</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-success" value=0 onclick="changeMaintence(this)" id="new_maintenance">待维护</button>
         <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="upBatch()" >批量修改</button>
         <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-danger" onclick="delBatch()" >批量删除</button>
     </div>
@@ -330,6 +330,11 @@
         $(this).val($(this).val().replace(/[^0-9]/g, ''));
     })
     $("#web_weight_start").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $("#new_weight").keyup(function () {
         $(this).val($(this).val().replace(/[^0-9]/g,''));
     }).bind("paste",function() {  //CTR+V事件处理
         $(this).val($(this).val().replace(/[^0-9]/g, ''));

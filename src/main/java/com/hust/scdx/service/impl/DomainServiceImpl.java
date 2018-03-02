@@ -362,7 +362,7 @@ public class DomainServiceImpl implements DomainService {
 
 			System.out.println("共" + list.size() + "条已知域名需要更新！");
 			for (Domain d : list) {
-				addDomain(d);
+				updateDomainFromFile(d);
 			}
 			// 添加未知url
 			System.out.println("共" + unexist.size() + "条未知域名需要添加！");
@@ -486,7 +486,7 @@ public class DomainServiceImpl implements DomainService {
 	 * @return
 	 */
 	@Override
-	public boolean addDomain(Domain domain) {
+	public boolean updateDomainFromFile(Domain domain) {
 		String url = UrlUtil.getUrl(domain.getUrl());
 		// 判断域名中的类型属性是否存在，若存在则插入类型表中
 		if (!StringUtils.isBlank(domain.getType()) && !Constant.typeMap.contains(domain.getType())) {
@@ -517,7 +517,7 @@ public class DomainServiceImpl implements DomainService {
 				// 不是二级域名，就一定是一级域名
 				DomainOne domainOne = domainOneDao.getDomainOneByUrl(one);
 				if (null == domainOne) {
-					logger.error(one + "一级域名更新失败！");
+					logger.error(one + "该一级域名不存在，更新失败！");
 					return false;
 				}
 				// 更新一级域名信息

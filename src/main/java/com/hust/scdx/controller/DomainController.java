@@ -163,9 +163,9 @@ public class DomainController {
 		domain.setIncidence(incidence);
 		domain.setWeight(weight);
 		domain.setMaintenanceStatus(maintenanceStatus);
-		if (domainService.addDomain(domain))
+		if (domainService.addUnknowDomain(domain))
 			return ResultUtil.success("添加成功！");
-		return ResultUtil.errorWithMsg("添加失败！");
+		return ResultUtil.errorWithMsg("添加失败！请检查该域名是否已存在！");
 	}
 
 	/**
@@ -485,9 +485,10 @@ public class DomainController {
 	}
 	
 	/**
-	 * 根据所给定信息更新一句域名信息
+	 * 根据所给定信息批量更新域名信息
 	 * 
-	 * @param uuid
+	 * @param one
+	 * @param two
 	 * @param url
 	 * @param name
 	 * @param column
@@ -509,6 +510,7 @@ public class DomainController {
 			@RequestParam(value = "incidence", required = true) String incidence,
 			@RequestParam(value = "weight", required = true) Integer weight,
 			@RequestParam(value = "maintenanceStatus", required = true) Boolean maintenanceStatus,HttpServletRequest request) {
+		System.out.println("updateDomainBatch");
 		DomainOne domainOne = new DomainOne();
 		if (StringUtils.isNotBlank(name))
 			domainOne.setName(name);

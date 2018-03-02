@@ -321,6 +321,8 @@ public class DomainOneDao {
 	 * @return
 	 */
 	public boolean delelteDomainOneById(List<String> ids){
+		if(0<domainOneMapper.deleteByPrimaryKeyBatch(ids))
+			return true;
 		return false;
 	}
 	
