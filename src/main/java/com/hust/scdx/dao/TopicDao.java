@@ -82,34 +82,37 @@ public class TopicDao {
 	public List<Topic> queryTopic(TopicQueryCondition con) {
 		TopicExample example = new TopicExample();
 		Criteria criteria = example.createCriteria();
-		if (!StringUtils.isBlank(con.getTopicId())) {
-			criteria.andTopicIdEqualTo(con.getTopicId());
+		if(null!=con){
+			if (!StringUtils.isBlank(con.getTopicId())) {
+				criteria.andTopicIdEqualTo(con.getTopicId());
+			}
+			if (!StringUtils.isBlank(con.getCreater())) {
+				criteria.andCreatorEqualTo(con.getCreater());
+			}
+			if (!StringUtils.isBlank(con.getTopicName())) {
+				// criteria.andTopicNameEqualTo(con.getTopicName());
+				criteria.andTopicNameLike("%" + con.getTopicName() + "%");
+			}
+			if (!StringUtils.isBlank(con.getTopicType())) {
+				criteria.andTopicTypeEqualTo(con.getTopicType());
+			}
+			if (null != con.getCreateStartTime()) {
+				criteria.andCreateTimeGreaterThanOrEqualTo(con.getCreateStartTime());
+			}
+			if (null != con.getCreateEndTime()) {
+				criteria.andCreateTimeLessThanOrEqualTo(con.getCreateEndTime());
+			}
+			if (null != con.getLastUpdateStartTime()) {
+				criteria.andLastUpdateTimeGreaterThanOrEqualTo(con.getLastUpdateStartTime());
+			}
+			if (null != con.getLastUpdateEndTime()) {
+				criteria.andLastUpdateTimeLessThanOrEqualTo(con.getLastUpdateEndTime());
+			}
+			example.setStart((con.getPageNo() - 1) * con.getPageSize());
+			example.setLimit(con.getPageSize());
 		}
-		if (!StringUtils.isBlank(con.getCreater())) {
-			criteria.andCreatorEqualTo(con.getCreater());
-		}
-		if (!StringUtils.isBlank(con.getTopicName())) {
-			// criteria.andTopicNameEqualTo(con.getTopicName());
-			criteria.andTopicNameLike("%" + con.getTopicName() + "%");
-		}
-		if (!StringUtils.isBlank(con.getTopicType())) {
-			criteria.andTopicTypeEqualTo(con.getTopicType());
-		}
-		if (null != con.getCreateStartTime()) {
-			criteria.andCreateTimeGreaterThanOrEqualTo(con.getCreateStartTime());
-		}
-		if (null != con.getCreateEndTime()) {
-			criteria.andCreateTimeLessThanOrEqualTo(con.getCreateEndTime());
-		}
-		if (null != con.getLastUpdateStartTime()) {
-			criteria.andLastUpdateTimeGreaterThanOrEqualTo(con.getLastUpdateStartTime());
-		}
-		if (null != con.getLastUpdateEndTime()) {
-			criteria.andLastUpdateTimeLessThanOrEqualTo(con.getLastUpdateEndTime());
-		}
+
 		example.setOrderByClause("last_update_time desc");
-		example.setStart((con.getPageNo() - 1) * con.getPageSize());
-		example.setLimit(con.getPageSize());
 		return topicMapper.selectByExample(example);
 	}
 

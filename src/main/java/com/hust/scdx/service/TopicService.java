@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.hust.scdx.model.Attr;
 import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.params.TopicQueryCondition;
 
@@ -17,6 +18,8 @@ public interface TopicService {
 	Topic queryTopicById(String topicId);
 	
 	String queryAttrByTopicId(String topicId);
+	
+	List<Attr> getAttrsByTopicId(String topicId);
 	
 	List<Topic> queryTopicByName(TopicQueryCondition con);
 
