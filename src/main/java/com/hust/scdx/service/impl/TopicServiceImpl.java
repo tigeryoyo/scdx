@@ -1,12 +1,15 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +100,20 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public String queryAttrByTopicId(String topicId) {
 		return topicDao.queryAttrByTopicId(topicId);
+	}
+	
+	@Override
+	public List<Attr> getAttrsByTopicId(String topicId) {
+		String attrs = topicDao.queryAttrByTopicId(topicId);
+		if(StringUtils.isBlank(attrs))return null;
+		List<String> attrIds = Arrays.asList(attrs.split(";"));
+		List<Attr> attrList = new ArrayList<>();
+		for (String id : attrIds) {
+			Attr attr = attrService.queryAttrById(Integer.valueOf(id.trim()));
+			if(attr!=null)attrList.add(attr);
+			else return null;
+		}
+		return attrList;
 	}
 
 	@Override

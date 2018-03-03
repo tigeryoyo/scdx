@@ -1,5 +1,6 @@
 package com.hust.scdx.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hust.scdx.model.Attr;
 import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.TopicQueryCondition;
@@ -70,17 +72,26 @@ public class TopicController {
 
 	@ResponseBody
 	@RequestMapping(value = "/setTopicAttr", method = RequestMethod.POST)
-	public Object setTopicAttr(@RequestParam(value = "topicId", required = true) String topicId, HttpServletRequest request) {
+	public Object setTopicAttr(@RequestParam(value = "topicId", required = true) String topicId,@RequestParam(value = "attrIds", required = false) String attrIds, HttpServletRequest request) {
 		Topic topic = topicService.queryTopicById(topicId);
 		if (topic == null) {
 			logger.info("「" + topicId + "」专题不存在。");
 			return ResultUtil.errorWithMsg("该专题已被删除。");
 		}
-		if (!topicService.setTopicAttr(topicId)) {
-			logger.info("设置专题属性失败。");
-			return ResultUtil.errorWithMsg("设置专题属性失败。");
+		if(null == attrIds){
+			if (!topicService.setTopicAttr(topicId)) {
+				logger.info("设置专题属性失败。");
+				return ResultUtil.errorWithMsg("设置专题属性失败。");
+			}
+			return ResultUtil.success("设置属性成功。");
+		}else{
+			topic.setAttr(attrIds);
+			if (topicService.updateTopicInfo(topic)<=0) {
+				logger.info("设置专题属性失败。");
+				return ResultUtil.errorWithMsg("设置专题属性失败。");
+			}
+			return ResultUtil.success("设置属性成功。");
 		}
-		return ResultUtil.success("设置属性成功。");
 	}
 
 	/**
@@ -142,7 +153,21 @@ public class TopicController {
 		result.put("list", list);
 		return ResultUtil.success(result);
 	}
-
+	/**
+	 * 用于专题属性管理页面的查询
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getAllTopic")
+	public Object getAllTopic( HttpServletRequest request) {
+		List<Topic> list = topicService.queryTopic(null);
+		if (null == list || 0 == list.size()) {
+			return ResultUtil.errorWithMsg("没有专题被创建！");
+		}
+		return ResultUtil.success(list);
+	}
+	
 	@ResponseBody
 	@RequestMapping("/queryAllTopicCount")
 	public Object queryAllTopicCount(@RequestBody TopicQueryCondition con, HttpServletRequest request) {
@@ -151,6 +176,17 @@ public class TopicController {
 			return ResultUtil.errorWithMsg("没有专题被创建。");
 		}
 		return ResultUtil.success(count);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/queryTopicAttr")
+	public Object queryTopicAttr(@RequestParam(value = "topicId", required = true) String topicId, HttpServletRequest request) {
+		System.out.println(topicId);
+		List<Attr> attr = topicService.getAttrsByTopicId(topicId);
+		if (null == attr || attr.isEmpty()) {
+			return ResultUtil.errorWithMsg("查询该专题的自定义属性列失败！");
+		}
+		return ResultUtil.success(attr);
 	}
 
 }
