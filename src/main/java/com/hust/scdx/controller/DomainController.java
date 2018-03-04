@@ -239,7 +239,7 @@ public class DomainController {
 		if(null!=type && type.size()!=0)
 			condition.setType(type);
 		if (null!=incidence){
-			incidence  = incidence.trim();
+			incidence  = incidence.replace("null", "").trim();
 			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
 				incidence = incidence.replace("-", "");
 			if (StringUtils.isNotBlank(incidence)){
@@ -314,7 +314,7 @@ public class DomainController {
 		if(null!=type && type.size()!=0)
 			condition.setType(type);
 		if (null!=incidence){
-			incidence  = incidence.trim();
+			incidence  = incidence.replace("null", "").trim();
 			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
 				incidence = incidence.replace("-", "");
 			if (StringUtils.isNotBlank(incidence)){
@@ -440,7 +440,7 @@ public class DomainController {
 		one.setType(type);
 		one.setRank(rank);
 		if (null!=incidence){
-			incidence  = incidence.trim();
+			incidence  = incidence.replace("null", "").trim();
 			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
 				incidence = incidence.replace("-", "");
 			if (StringUtils.isBlank(incidence)){
@@ -489,7 +489,7 @@ public class DomainController {
 		two.setType(type);
 		two.setRank(rank);
 		if (null!=incidence){
-			incidence  = incidence.trim();
+			incidence  = incidence.replace("null", "").trim();
 			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
 				incidence = incidence.replace("-", "");
 			if (StringUtils.isBlank(incidence)){
@@ -542,7 +542,7 @@ public class DomainController {
 		if (StringUtils.isNotBlank(rank))
 			domainOne.setRank(rank);
 		if (null!=incidence){
-			incidence  = incidence.trim();
+			incidence  = incidence.replace("null", "").trim();
 			if(incidence.equals("-") || incidence.startsWith("-")||incidence.endsWith("-"))
 				incidence = incidence.replace("-", "");
 			if (StringUtils.isNotBlank(incidence)){
