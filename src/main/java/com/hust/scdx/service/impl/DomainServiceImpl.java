@@ -20,12 +20,14 @@ import com.hust.scdx.constant.Constant.DomainExcelAttr;
 import com.hust.scdx.dao.DomainOneDao;
 import com.hust.scdx.dao.DomainStoreDao;
 import com.hust.scdx.dao.DomainTwoDao;
+import com.hust.scdx.dao.RankWeightDao;
 import com.hust.scdx.dao.SourceTypeDao;
 import com.hust.scdx.dao.WeightDao;
 import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.DomainOne;
 import com.hust.scdx.model.DomainStore;
 import com.hust.scdx.model.DomainTwo;
+import com.hust.scdx.model.RankWeight;
 import com.hust.scdx.model.Weight;
 import com.hust.scdx.model.params.DomainOneQueryCondition;
 import com.hust.scdx.model.params.DomainTwoQueryCondition;
@@ -50,6 +52,9 @@ public class DomainServiceImpl implements DomainService {
 	@Autowired
 	private WeightDao weightDao;
 
+	@Autowired
+	private RankWeightDao rankWeightDao;
+	
 	@Autowired
 	private SourceTypeDao typeDao;
 
@@ -292,27 +297,12 @@ public class DomainServiceImpl implements DomainService {
 						}
 					}
 					if (weightFlag) {
-						if (StringUtils.isBlank(string[weightIndex]) || string[weightIndex].equals("0")) {
-							// 从权重表中根据类型的权重赋予初始值
-							if (!StringUtils.isBlank(d.getType())) {
-								List<Weight> weights = weightDao.selectWeightByName(d.getType());
-								if (weights.size() > 0) {
-									d.setWeight(weights.get(0).getWeight());
-								} else {
-									d.setWeight(0);
-								}
-							} else {
-								d.setWeight(0);
+						if (!(StringUtils.isBlank(string[weightIndex]) || string[weightIndex].equals("0"))) {
+							try{
+								d.setWeight(Integer.parseInt(string[weightIndex]));
+							}catch(Exception e){
+								logger.info(e.getMessage());
 							}
-						} else {
-							d.setWeight(Integer.parseInt(string[weightIndex]));
-						}
-					} else if (!StringUtils.isBlank(d.getType())) {
-						List<Weight> weights = weightDao.selectWeightByName(d.getType());
-						if (weights.size() > 0) {
-							d.setWeight(weights.get(0).getWeight());
-						} else {
-							d.setWeight(0);
 						}
 					}
 					if (incidenceFlag) {
@@ -534,23 +524,29 @@ public class DomainServiceImpl implements DomainService {
 	}
 
 	public boolean insertDomainOne(DomainOne domainOne) {
-		if (null != domainOne && null != domainOne.getUuid() && null != domainOne.getUrl() && domainOneDao.insertDomain(domainOne)) {
-			domainOne = domainOneDao.getDomainOneById(domainOne.getUuid());
-			Domain domain = new Domain();
-			domain.setDomainFormOne(domainOne);
-			DomainCacheManager.addDomain(domain);
-			return true;
+		if (null != domainOne && null != domainOne.getUuid() && null != domainOne.getUrl()) {
+			initDomainWeightByTypeAndRank(domainOne);
+			if(domainOneDao.insertDomain(domainOne)){
+				domainOne = domainOneDao.getDomainOneById(domainOne.getUuid());
+				Domain domain = new Domain();
+				domain.setDomainFormOne(domainOne);
+				DomainCacheManager.addDomain(domain);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean insertDomainTwo(DomainTwo domainTwo) {
-		if (null != domainTwo && null != domainTwo.getUuid() && null != domainTwo.getUrl() && domainTwoDao.insertDomainTwo(domainTwo)) {
-			domainTwo = domainTwoDao.getDomainTwoById(domainTwo.getUuid());
-			Domain domain = new Domain();
-			domain.setDomainFormTwo(domainTwo);
-			DomainCacheManager.addDomain(domain);
-			return true;
+		if (null != domainTwo && null != domainTwo.getUuid() && null != domainTwo.getUrl()) {
+			initDomainWeightByTypeAndRank(domainTwo);
+			if(domainTwoDao.insertDomainTwo(domainTwo)){
+				domainTwo = domainTwoDao.getDomainTwoById(domainTwo.getUuid());
+				Domain domain = new Domain();
+				domain.setDomainFormTwo(domainTwo);
+				DomainCacheManager.addDomain(domain);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -832,5 +828,55 @@ public class DomainServiceImpl implements DomainService {
 			}
 		}
 		return domain;
+	}
+	
+	private void initDomainWeightByTypeAndRank(DomainOne domain){
+		if (null == domain.getWeight()) {
+			// 从权重表中根据类型的权重赋予初始值
+			int typeWeight = 0;
+			int rankWeight = 0;
+			if (!StringUtils.isBlank(domain.getType())) {
+				List<Weight> weights = weightDao.selectWeightByName(domain.getType());
+				if (weights.size() > 0) {
+					typeWeight = weights.get(0).getWeight();
+				}
+			}
+			if (!StringUtils.isBlank(domain.getRank())) {
+				List<RankWeight> weights = rankWeightDao.selectWeightByName(domain.getRank());
+				if (weights.size() > 0) {
+					rankWeight = weights.get(0).getWeight();
+				}
+			}
+			if (typeWeight == 0 && rankWeight == 0) {
+				domain.setWeight(0);
+			} else {
+				domain.setWeight(typeWeight > rankWeight ? typeWeight : rankWeight);
+			}
+		}
+	}
+	
+	private void initDomainWeightByTypeAndRank(DomainTwo domain){
+		if (null == domain.getWeight()) {
+			// 从权重表中根据类型的权重赋予初始值
+			int typeWeight = 0;
+			int rankWeight = 0;
+			if (!StringUtils.isBlank(domain.getType())) {
+				List<Weight> weights = weightDao.selectWeightByName(domain.getType());
+				if (weights.size() > 0) {
+					typeWeight = weights.get(0).getWeight();
+				}
+			}
+			if (!StringUtils.isBlank(domain.getRank())) {
+				List<RankWeight> weights = rankWeightDao.selectWeightByName(domain.getRank());
+				if (weights.size() > 0) {
+					rankWeight = weights.get(0).getWeight();
+				}
+			}
+			if (typeWeight == 0 && rankWeight == 0) {
+				domain.setWeight(0);
+			} else {
+				domain.setWeight(typeWeight > rankWeight ? typeWeight : rankWeight);
+			}
+		}
 	}
 }
