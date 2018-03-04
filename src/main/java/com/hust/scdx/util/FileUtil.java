@@ -290,13 +290,13 @@ public class FileUtil {
 		for (String[] strs : content) {
 			// 填充圈层、城郊、所属区域
 			if (areaIndex != -1) {
-				if (StringUtils.isBlank(strs[areaIndex])) {
+				if (areaIndex != -1 && StringUtils.isBlank(strs[areaIndex])) {
 					strs[areaIndex] = areaUtil.getArea(strs[titleIndex], Constant.REGION);
 				}
-				if (StringUtils.isBlank(strs[suburbIndex])) {
+				if (suburbIndex != -1 && StringUtils.isBlank(strs[suburbIndex])) {
 					strs[suburbIndex] = areaUtil.isCenterLayer(strs[areaIndex]);
 				}
-				if (StringUtils.isBlank(strs[layerIndex])) {
+				if (layerIndex != -1 && StringUtils.isBlank(strs[layerIndex])) {
 					strs[layerIndex] = areaUtil.isCenterLayer(strs[areaIndex]);
 				}
 			}
