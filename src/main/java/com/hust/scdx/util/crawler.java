@@ -29,7 +29,7 @@ public class crawler {
 	         Elements pElements=doc.select("p");
 	         for (Element element : pElements) {
 	        	String str = trim(element.text());
-	         	if(null != str){
+	         	if(StringUtils.isNotBlank(str)){
 	         		list.add(str); 
 	         	} 
 	 			//System.out.println(element.text());
@@ -61,7 +61,7 @@ public class crawler {
 	 			String[] ss = pString.split(" ");
 	 			for (String string : ss) {
 	 				String str = trim(string);
-	 	        	if(null != str){
+	 	        	if(StringUtils.isNotBlank(str)){
 	 	        		list.add(str); 
 	 	        	} 
 					//System.out.println(string);
@@ -92,7 +92,7 @@ public class crawler {
 			Elements pElements=doc.select("div.box_con>p");
 	        for (Element element : pElements) {
 	        	String str = trim(element.text());
-	        	if(null != str){
+	        	if(StringUtils.isNotBlank(str)){
 	        		list.add(str); 
 	        	} 
 				//System.out.println(element.text());
@@ -121,7 +121,7 @@ public class crawler {
 	        Elements pElements=doc.select("td.black14>div");
 	        for (Element element : pElements) {
 	        	String str = trim(element.text());
-	        	if(null != str){
+	        	if(StringUtils.isNotBlank(str)){
 	        		list.add(str); 
 	        	}
 				//System.out.println(element.text());

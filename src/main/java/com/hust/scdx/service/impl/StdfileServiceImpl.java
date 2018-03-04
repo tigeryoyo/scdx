@@ -746,7 +746,7 @@ public class StdfileServiceImpl implements StdfileService {
 						continue;
 					if (!flag) {
 						sentence = crawler.getSummary(str[urlIndex]);
-						if (null != sentence) {
+						if (null != sentence && !sentence.isEmpty()) {
 							flag = true;
 							//title = str[titleIndex];
 							sentence.add(0, title);
