@@ -203,6 +203,7 @@ public class StdfileDao {
 	 * @return
 	 */
 	public int deleteStdfileById(String stdfileId) {
+		int del = -1;
 		if (stdfileId.equals("stdfile_cluster_result")) {
 			return 0;
 		}
@@ -211,10 +212,10 @@ public class StdfileDao {
 		String[] datatimes = datatime.split(";");
 		for (String d : datatimes) {
 			if (FileUtil.delete(DIRECTORY.STDFILE + d.replaceAll("-", "/") + "/" + stdfileId)) {
-				return stdfileMapper.deleteByPrimaryKey(stdfileId);
+				del = stdfileMapper.deleteByPrimaryKey(stdfileId);
 			}
 		}
-		return -1;
+		return del;
 	}
 
 }
