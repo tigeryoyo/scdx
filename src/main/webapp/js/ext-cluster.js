@@ -322,7 +322,8 @@ function miningByTimeRange() {
 			            }
 			            break;
 			    }
-			    queryResultByTimeRange(index,start,end);				
+			    queryResultByTimeRange(index,start,end);	
+			    $('.searchContent').show();
 			} else {
 				alert(msg.result);
 			}
@@ -499,6 +500,44 @@ function deleteResultItemsByIndices() {
 	});
 	}
 }
+
+
+function search(){
+	var keyword = $('#keyword').val();
+	$.ajax({
+		type : "post",
+		url : "/result/searchResultItemsByKeyword",
+		data : {
+			resultId : resultId,
+			keyword : keyword
+		},
+		dataType : "json",
+		beforeSend : function() {
+			begin();
+			},
+		success : function(msg) {
+			if (msg.status == "OK") {
+				getDisplayResultById();
+			} else {
+				alert(msg.result);
+			}
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+		complete:function(){
+			stop();
+		}
+	});
+}
+
 
 /**
  * 删除索引为index的类簇内的指定数据集。
