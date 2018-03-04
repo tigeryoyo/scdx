@@ -81,6 +81,7 @@ function selectTopic(element){
 	$(element).addClass('selected');
 	topicId = $(element).attr('data-id');
 	initTopicAttr(topicId);
+	$('#edit').css('display','block');
 	if(editFlag){
 		$('#move-forword').css('display','none');
 		$('#move-back').css('display','none');

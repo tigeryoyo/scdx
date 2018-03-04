@@ -104,7 +104,15 @@ public class AttrController {
 			@RequestParam(value = "alias", required = true) String attrAlias, HttpServletRequest request) {
 		if(StringUtils.isBlank(attrAlias)||StringUtils.isBlank(attrMainname))
 			return ResultUtil.errorWithMsg("插入属性失败!属性名或属性别名不能为空"); 
-		Attr attr = new Attr();
+		attrMainname = attrMainname.trim();
+		attrAlias = attrAlias.trim();
+		if(!attrAlias.contains(attrMainname)){
+			if(attrAlias.isEmpty()){
+				attrAlias = attrMainname;
+			}else{
+				attrAlias = attrMainname+"|"+attrAlias;
+			}
+		}
 		if (attrService.insertAttr(attrMainname, attrAlias) < 0) {
 			logger.error("插入属性失败。");
 			return ResultUtil.errorWithMsg("插入属性失败。");
@@ -136,6 +144,15 @@ public class AttrController {
 		Attr attr = new Attr();
 		if(StringUtils.isBlank(attrAlias)||StringUtils.isBlank(attrMainname))
 			return ResultUtil.errorWithMsg("更新属性失败!属性名或属性别名不能为空"); 
+		attrMainname = attrMainname.trim();
+		attrAlias = attrAlias.trim();
+		if(!attrAlias.contains(attrMainname)){
+			if(attrAlias.isEmpty()){
+				attrAlias = attrMainname;
+			}else{
+				attrAlias = attrMainname+"|"+attrAlias;
+			}
+		}
 		attr.setAttrId(attrId);
 		attr.setAttrMainname(attrMainname);
 		attr.setAttrAlias(attrAlias);
