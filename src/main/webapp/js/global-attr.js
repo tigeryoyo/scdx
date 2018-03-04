@@ -300,8 +300,9 @@ function attrInforChange() {
 	})
 }
 function clearNewAttr() {
-	$("#new_mainName").val('');
-	$("#new_alias").val('');
+	var attr = JSON.parse(getCookie("attrInfor"));
+	$("#new_mainName").val(attr.attrMainName);
+	$("#new_alias").val(attr.attrAlias);
 }
 
 // 用户删除
