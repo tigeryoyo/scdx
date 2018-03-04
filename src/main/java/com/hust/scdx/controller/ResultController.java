@@ -154,6 +154,25 @@ public class ResultController {
 		}
 		return ResultUtil.success("删除成功。");
 	}
+	
+	/**
+	 * 根据关键词查找聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param keyword
+	 *            关键词
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/searchResultItemsByKeyword")
+	public Object searchResultItemsByKeyword(@RequestParam(value = "resultId", required = true) String resultId,
+			@RequestParam(value = "keyword", required = true) String keyword, HttpServletRequest request) {
+		if (resultService.searchResultItemsByKeyword(resultId, keyword, request) < 0) {
+			return ResultUtil.errorWithMsg("查找失败。");
+		}
+		return ResultUtil.success("查找成功。");
+	}
 
 	/**
 	 * 重置结果，撤销对聚类结果的二次操作。

@@ -45,7 +45,19 @@ public interface ResultService {
 	 */
 	int combineResultItemsByIndices(String resultId, int[] indices, HttpServletRequest request);
 
+	/**
+	 * 根据关键词查找聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param keyword
+	 *            关键词
+	 * @param request
+	 * @return
+	 */
+	int searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request);
+
 	int deleteClusterItemsByIndices(String resultId, int index, int[] indices, HttpServletRequest request);
 
 	Map<String, Object> getResultContentById(String resultId, HttpServletRequest request);
+
 }

@@ -1,6 +1,7 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -133,8 +134,8 @@ public class ResultServiceImpl implements ResultService {
 		int[] indexOfEss = attrUtil.findEssentialIndex(content.get(0));
 		for (int[] row : origCounts) {
 			String[] old = content.get(row[0] + 1);
-			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
-					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
+					String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
 		try {
@@ -180,8 +181,8 @@ public class ResultServiceImpl implements ResultService {
 		List<int[]> tmp = ConvertUtil.toIntArrayList(origCounts);
 		for (int[] row : tmp) {
 			String[] old = content.get(row[0] + 1);
-			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]],
-					old[indexOfEss[Index.TIME]], String.valueOf(row[1]) };
+			String[] sub = new String[] { old[indexOfEss[Index.TITLE]], old[indexOfEss[Index.URL]], old[indexOfEss[Index.TIME]],
+					String.valueOf(row[1]) };
 			displayResult.add(sub);
 		}
 		FileUtil.copy(DIRECTORY.ORIG_CLUSTER + subPath, DIRECTORY.MODIFY_CLUSTER + subPath);
@@ -235,11 +236,9 @@ public class ResultServiceImpl implements ResultService {
 			}
 		});
 		String[] attrs = content.get(0);
-		List<String[]> modifyCounts = ConvertUtil
-				.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
+		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
-				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 		return -1;
@@ -261,16 +260,10 @@ public class ResultServiceImpl implements ResultService {
 		if (result == null) {
 			return -1;
 		}
+		if (indices == null || indices.length == 0) {
+			return 0;
+		}
 		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
-		List<String[]> content = null;
-		try {
-			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
-		} catch (Exception e) {
-			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
-		}
-		if (content == null || content.size() == 0) {
-			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
-		}
 		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
 		List<String[]> modifyCounts = FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath);
 		if (modifyClusters.size() == 0 || modifyCounts.size() == 0) {
@@ -282,12 +275,60 @@ public class ResultServiceImpl implements ResultService {
 			modifyCounts.remove(indices[i]);
 		}
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
-				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 
 		return -1;
+	}
+
+	/**
+	 * 根据关键词查找聚类结果中的某些类
+	 * 
+	 * @param resultId
+	 * @param keyword
+	 *            关键词
+	 * @param request
+	 * @return
+	 */
+	@Override
+	public int searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request) {
+		Result result = queryResultById(resultId);
+		if (result == null) {
+			return -1;
+		}
+		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> content = null;
+		List<int[]> origCounts = ConvertUtil.toIntArrayList(FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath));
+		try {
+			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
+		} catch (Exception e) {
+			logger.warn("从redis数据库查找数据失败,请检查redis数据库是否开启。");
+		}
+		if (content == null || content.size() == 0) {
+			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
+		}
+
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		int[] indexOfEss = attrUtil.findEssentialIndex(content.get(0));
+		List<Integer> toBeDelIndices = new ArrayList<Integer>();
+		int size = origCounts.size();
+		String[] keywords = keyword.split("\\s+");
+		for (int i = 0; i < size; i++) {
+			String c = content.get(origCounts.get(i)[0] + 1)[indexOfEss[Index.TITLE]];
+			for (String word : keywords) {
+				if (c.indexOf(word) == -1) {
+					toBeDelIndices.add(i);
+					break;
+				}
+			}
+		}
+		size = toBeDelIndices.size();
+		int[] indices = new int[size];
+		for (int i = 0; i < size; i++) {
+			indices[i] = toBeDelIndices.get(i);
+		}
+		return deleteResultItemsByIndices(resultId, indices, request);
 	}
 
 	/**
@@ -339,11 +380,9 @@ public class ResultServiceImpl implements ResultService {
 			}
 		});
 		String[] attrs = content.get(0);
-		List<String[]> modifyCounts = ConvertUtil
-				.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
+		List<String[]> modifyCounts = ConvertUtil.toStringArrayList(miningService.getOrigCounts(attrs, content, modifyClusters));
 
-		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters)
-				&& FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
+		if (FileUtil.write(DIRECTORY.MODIFY_CLUSTER + subPath, modifyClusters) && FileUtil.write(DIRECTORY.MODIFY_COUNT + subPath, modifyCounts)) {
 			return 0;
 		}
 		return -1;
