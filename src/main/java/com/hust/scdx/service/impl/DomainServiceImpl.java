@@ -315,7 +315,7 @@ public class DomainServiceImpl implements DomainService {
 		try {
 			InputStream input = file.getInputStream();
 			String fileName = file.getOriginalFilename();
-			List<String[]> content = ExcelUtil.readStdfile(fileName, input);
+			List<String[]> content = ExcelUtil.readDomainfile(fileName, input);
 			if (content == null || content.size() <= 1) {
 				logger.info("文件读取错误！");
 				return false;
