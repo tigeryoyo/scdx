@@ -49,6 +49,7 @@ import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.model.params.StdfileQueryCondition;
+import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.StdfileService;
 import com.hust.scdx.service.TopicService;
@@ -82,6 +83,8 @@ public class StdfileServiceImpl implements StdfileService {
 	@Autowired
 	private UserService userService;
 	@Autowired
+	private DomainService domainService;
+	@Autowired
 	private MiningService miningService;
 
 	/**
@@ -112,6 +115,9 @@ public class StdfileServiceImpl implements StdfileService {
 			logger.error("读取原始文件出现异常\t" + e.toString());
 			return 0;
 		}
+		
+		CleanDomainThread cdt = new CleanDomainThread(list);
+		cdt.start();
 		Stdfile stdfile = new Stdfile();
 		stdfile.setCreator(user.getUserName());
 		stdfile.setUploadTime(new Date());
@@ -799,5 +805,24 @@ public class StdfileServiceImpl implements StdfileService {
 			summary.add(new String[] { title, str_sentence, str_organization });
 		}
 		return summary;
+	}
+	
+	
+	class CleanDomainThread extends Thread{
+
+		private List<String[]> content;
+		
+		public CleanDomainThread(List<String[]> content) {
+			// TODO Auto-generated constructor stub
+			this.content = new ArrayList<>(content);
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			if(!domainService.addUnknowUrlFromFile(content)){
+				logger.info("添加未知域名信息发生错误发生错误！！！");
+			};
+		}
+		
 	}
 }

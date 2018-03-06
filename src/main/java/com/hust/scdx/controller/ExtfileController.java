@@ -72,7 +72,6 @@ public class ExtfileController {
 			logger.info("文件为空。");
 			return ResultUtil.errorWithMsg("文件为空。");
 		}
-		domainService.addUnMaintainedFromOrigFile(origfile);
 		ExtfileQueryCondition con = new ExtfileQueryCondition();
 		con.setFile(origfile);
 		con.setSourceType(sourceType);
@@ -113,6 +112,7 @@ public class ExtfileController {
 			}
 		} catch (Exception e) {
 			logger.warn("读取属性行失败。" + e.toString());
+			return ResultUtil.errorWithMsg("属性列为空或读取文件出错。");
 		}
 		return ResultUtil.successWithoutMsg();
 	}

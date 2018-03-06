@@ -1,5 +1,6 @@
 package com.hust.scdx.controller;
 
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,7 +107,11 @@ public class AttrController {
 			return ResultUtil.errorWithMsg("插入属性失败!属性名或属性别名不能为空"); 
 		attrMainname = attrMainname.trim();
 		attrAlias = attrAlias.trim();
-		if(!attrAlias.contains(attrMainname)){
+		HashSet<String> set = new HashSet<>();
+		for (String string : attrAlias.split("\\|")) {
+			set.add(string);
+		}
+		if(!set.contains(attrMainname)){
 			if(attrAlias.isEmpty()){
 				attrAlias = attrMainname;
 			}else{
@@ -146,7 +151,11 @@ public class AttrController {
 			return ResultUtil.errorWithMsg("更新属性失败!属性名或属性别名不能为空"); 
 		attrMainname = attrMainname.trim();
 		attrAlias = attrAlias.trim();
-		if(!attrAlias.contains(attrMainname)){
+		HashSet<String> set = new HashSet<>();
+		for (String string : attrAlias.split("\\|")) {
+			set.add(string);
+		}
+		if(!set.contains(attrMainname)){
 			if(attrAlias.isEmpty()){
 				attrAlias = attrMainname;
 			}else{

@@ -35,6 +35,7 @@ import com.hust.scdx.model.Topic;
 import com.hust.scdx.model.User;
 import com.hust.scdx.model.params.ExtfileQueryCondition;
 import com.hust.scdx.service.AttrService;
+import com.hust.scdx.service.DomainService;
 import com.hust.scdx.service.ExtfileService;
 import com.hust.scdx.service.MiningService;
 import com.hust.scdx.service.RedisService;
@@ -61,6 +62,8 @@ public class ExtfileServiceImpl implements ExtfileService {
 	@Autowired
 	private AttrService attrService;
 	@Autowired
+	private DomainService domainService;
+	@Autowired
 	ResultService resultService;
 	@Autowired
 	RedisService redisService;
@@ -78,6 +81,8 @@ public class ExtfileServiceImpl implements ExtfileService {
 			logger.error("读取原始文件出现异常\t" + e.toString());
 			return 0;
 		}
+		//处理已知但未维护的域名信息
+		domainService.addUnMaintainedFromOrigFile(new ArrayList<>(list));
 		Extfile extfile = new Extfile();
 		extfile.setCreator(user.getTrueName());
 		extfile.setUploadTime(new Date());

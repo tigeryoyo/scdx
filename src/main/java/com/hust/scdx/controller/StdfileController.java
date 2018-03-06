@@ -84,11 +84,7 @@ public class StdfileController {
 			logger.info("文件上传失败。");
 			return ResultUtil.errorWithMsg("上传失败。");
 		}
-		// 添加标准文件中未知的url基本属性
-		if (domainService.addUnknowUrlFromFile(stdfile))
-			return ResultUtil.success("准数据文件上传成功，并且未知url已添加到数据仓库中！");
-		else
-			return ResultUtil.success("准数据文件上传成功，但未知url添加失败！");
+		return ResultUtil.success("准数据文件上传成功，但未知url添加失败！");
 	}
 
 	/**
