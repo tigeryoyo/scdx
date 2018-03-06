@@ -89,16 +89,9 @@ public class DomainServiceImpl implements DomainService {
 	 * @return
 	 */
 	@Override
-	public boolean addUnMaintainedFromOrigFile(MultipartFile file) {
+	public boolean addUnMaintainedFromOrigFile(List<String[]> content) {
 		// TODO Auto-generated method stub
 		try {
-			InputStream input = file.getInputStream();
-			String fileName = file.getOriginalFilename();
-			List<String[]> content = ExcelUtil.readExcel(fileName, input);
-			if (content == null || content.size() <= 1) {
-				logger.info("文件读取错误！");
-				return false;
-			}
 			String[] attr = content.remove(0);
 			AttrUtil attrUtil = AttrUtil.getSingleton();
 			boolean nameFlag = true, columnFlag = true, typeFlag = true, rankFlag = true, weightFlag = true, incidenceFlag = true;
@@ -197,7 +190,7 @@ public class DomainServiceImpl implements DomainService {
 			 */
 			domainStoreDao.insertDomainStore(DomainStore.getDomainStoreFromDomain(unMaintainedList));
 			return true;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.info(e.toString());
 			return false;
@@ -211,16 +204,9 @@ public class DomainServiceImpl implements DomainService {
 	 * @return
 	 */
 	@Override
-	public boolean addUnknowUrlFromFile(MultipartFile file) {
+	public boolean addUnknowUrlFromFile(List<String[]> content) {
 		// TODO Auto-generated method stub
 		try {
-			InputStream input = file.getInputStream();
-			String fileName = file.getOriginalFilename();
-			List<String[]> content = ExcelUtil.readExcel(fileName, input);
-			if (content == null || content.size() <= 1) {
-				logger.info("文件读取错误！");
-				return false;
-			}
 			String[] attr = content.remove(0);
 			boolean nameFlag = true, columnFlag = true, typeFlag = true, rankFlag = true, weightFlag = true, incidenceFlag = true;
 			AttrUtil attrUtil = AttrUtil.getSingleton();
@@ -316,7 +302,7 @@ public class DomainServiceImpl implements DomainService {
 				}
 			}
 			return addUnknowDomain(unknowList);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.info(e.toString());
 			return false;
@@ -329,7 +315,7 @@ public class DomainServiceImpl implements DomainService {
 		try {
 			InputStream input = file.getInputStream();
 			String fileName = file.getOriginalFilename();
-			List<String[]> content = ExcelUtil.readExcel(fileName, input);
+			List<String[]> content = ExcelUtil.readDomainfile(fileName, input);
 			if (content == null || content.size() <= 1) {
 				logger.info("文件读取错误！");
 				return false;

@@ -629,6 +629,7 @@ function powerAdd() {
  * 资源管理-删除权限
  */
 function powerDel(powerId) {
+	if(!confirm("是否确定删除？"))return;
 	$.ajax({
 		type : "post",
 		url : "/power/deletePower",

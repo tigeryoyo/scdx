@@ -38,7 +38,7 @@ public interface DomainService {
 	 * @param file
 	 * @return 添加成功返回true，添加失败或文件读取错误返回false
 	 */
-	boolean addUnknowUrlFromFile(MultipartFile file);
+	boolean addUnknowUrlFromFile(List<String[]> content);
 
 	/**
 	 * 从导入的映射表中读取url基本信息，并做分级处理后添加到数据库中，已有的url信息做更新操作
@@ -165,5 +165,5 @@ public interface DomainService {
 	
 	boolean insertDomainOne(DomainOne domainOne);
 	
-	boolean addUnMaintainedFromOrigFile(MultipartFile file);
+	boolean addUnMaintainedFromOrigFile(List<String[]> content);
 }

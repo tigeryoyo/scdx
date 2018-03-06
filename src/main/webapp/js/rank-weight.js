@@ -298,13 +298,15 @@ function weightInforChange() {
 	})
 }
 function clearNewWeight() {
-	$("#new_name_weight").val('');
-	$("#new_weight_weight").val('');
+	var weight = JSON.parse(getCookie("typeWeightInfor"));
+	$("#new_name_weight").val(weight.weightName);
+	$("#new_weight_weight").val(weight.weight);
 }
 
 // 用户删除
 $(function() {
 	$(".infor_tab02").on("click", ".delWeight", function() {
+		if(!confirm("是否确定删除？"))return;
 		var weight_id = $(this).attr("id");
 		console.log(weight_id);
 		weightInforDel(weight_id);

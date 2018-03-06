@@ -25,8 +25,13 @@ function edit(){
 
 function deleteAttr(){
 	if(!editFlag)return;
-	if(confirm("确定删除这些属性列？"))
+	if(confirm("确定删除这些属性列？")){
+		$('.topic-attr-item.selected').each(function(){
+			var id = $(this).attr('data-id');
+			$('.grobal-attr-item[data-id="'+id+'"]').addClass('selected');
+		})
 		$('.topic-attr-item.selected').remove();
+	}
 }
 
 function save(){
@@ -99,6 +104,7 @@ function addAttr(element){
 	if($('.topic-attr-list [data-id="'+id+'"]').length>0)return;
 	row = '<li data-id="'+id+'" class="topic-attr-item" onclick="chooseAttr(this)">'+name+'</li>'
 	$('.topic-attr-list').append(row);
+	$(element).removeClass('selected');
 }
 
 function chooseAttr(element){
@@ -165,6 +171,8 @@ function initTopicAttr(topicId){
 			},
 		success : function(msg) {
 			$('.topic-attr-list').html("");
+			$('.grobal-attr-item').removeClass('selected');
+			$('.grobal-attr-item').addClass('selected');
 			if (msg.status == "OK") {
 				var items = msg.result;
 				$
@@ -173,6 +181,7 @@ function initTopicAttr(topicId){
 						function(idx, item) {
 							row = '<li data-id="'+item.attrId+'" class="topic-attr-item" onclick="chooseAttr(this)">'+item.attrMainname+'</li>'
 							$('.topic-attr-list').append(row);
+							$('.grobal-attr-item.selected[data-id="'+item.attrId+'"]').removeClass('selected');
 						});
 			} else {
 				alert(msg.result);

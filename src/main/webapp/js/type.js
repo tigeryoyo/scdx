@@ -370,13 +370,15 @@ function ChangetypeInfor() {
 	})
 }
 function clearNewtype() {
-	$("#new_name_type").val('');
+	var type =JSON.parse(getCookie("typeInfor"));
+	$("#new_name_type").val(type.typeName);
 }
 
 // 用户删除
 
 $(function() {
 	$(".infor_tab02").on("click", ".delType", function() {
+		if(!confirm("是否确定删除？"))return;
 		var typeId = $(this).attr("id");
 		typeInforDel(typeId);
 		function typeInforDel(typeId) {

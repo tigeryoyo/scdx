@@ -180,6 +180,49 @@ public class ExcelUtil {
 		inputStream.close();
 		return content;
 	}
+	
+	
+	/**
+	 * 读取域名数据文件
+	 * 
+	 * @param readDomainfile
+	 * @param inputStream
+	 * @return
+	 * @throws IOException
+	 */
+	public static List<String[]> readDomainfile(String StdfileFilename, InputStream inputStream) throws IOException {
+		if (inputStream == null) {
+			throw new IllegalArgumentException("inputStream is null.");
+		}
+		AttrUtil attrUtil = AttrUtil.getSingleton();
+		List<String[]> content = new ArrayList<String[]>();
+		Workbook workbook = null;
+		if (StdfileFilename.endsWith("xls")) {
+			workbook = new HSSFWorkbook(inputStream);
+		} else {
+			workbook = new XSSFWorkbook(inputStream);
+		}
+		Sheet sheet = workbook.getSheetAt(0);
+		// 行数
+		int rowNum = sheet.getLastRowNum();
+		// 列数
+		int colNum = sheet.getRow(0).getLastCellNum();
+		// excel首行为属性行
+		String[] attrRow = convert(sheet.getRow(0), colNum);
+		content.add(attrRow);
+		// url所在列位置
+		int indexOfUrl = 0;
+		for (int i = 1; i <= rowNum; i++) {
+			String[] row = convert(sheet.getRow(i), colNum);
+			if (StringUtils.isBlank(row[indexOfUrl])) {
+				content.add(new String[0]);
+			} else {
+				content.add(row);
+			}
+		}
+		inputStream.close();
+		return content;
+	}
 
 	/**
 	 * 将list导出为excel
