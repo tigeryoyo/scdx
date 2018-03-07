@@ -176,7 +176,7 @@ public class AreaUtil {
 			}
 			JSONObject j1 = JSONObject.fromObject(result);
 			if (j1.getString("status").equals("0")) {
-				System.out.println(j1.toString());
+//				System.out.println(j1.toString());
 				JSONArray array = j1.getJSONArray("results");
 				if (!array.isEmpty()) {
 					JSONObject j2 = (JSONObject) array.get(0);
