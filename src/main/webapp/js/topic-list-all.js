@@ -193,6 +193,24 @@ function openTopic(topicId, topicName) {
 	// 将topicId、topicName存入cookie
 	setCookie("topicId", topicId);
 	setCookie("topicName", topicName);
+	$.ajax({
+		type : "post",
+		url : "/topic/setTopicAttr",
+		data : {
+			topicId : topicId
+		},
+		dataType : "json",
+		error: function (jqXHR, textStatus, errorThrown) {
+            var status = jqXHR.status;
+            if(status == 0){
+            	alert(textStatus);
+            }else if(status == 200){
+            	alert("您没有权限使用该资源...");
+            }else{
+            	alert(textStatus);
+            }
+        },
+	});
 	jumpto("orig-upload");
 }
 
