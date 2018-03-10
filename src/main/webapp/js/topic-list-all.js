@@ -230,9 +230,9 @@ function GetJsonData(page) {
 		"topicName" : "",
 		"topicType" : "",
 		"creater" : "",
-		"createStartTime" : start,
+		"createStartTime" : "",
 		"createEndTime" : end,
-		"lastUpdateStartTime" : start,
+		"lastUpdateStartTime" : "",
 		"lastUpdateEndTime" : end,
 		"pageNo" : parseInt(page),
 		"pageSize" : 10
