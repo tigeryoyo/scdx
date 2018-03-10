@@ -791,7 +791,7 @@ public class FileUtil {
 			String[] row = line.split("\t");
 			list.add(row);
 			// targetIndex为0时，统计所有类信息
-			if (targetIndex == 0) {
+			if (targetIndex == -1) {
 				while (line != null) {
 					while (!StringUtils.isBlank((line = br.readLine()))) {
 						row = line.split("\t");
