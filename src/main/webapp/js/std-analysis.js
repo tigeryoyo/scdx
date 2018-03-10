@@ -191,7 +191,7 @@ function queryStdDataByTimeRange(timeRangeType,startTime,endTime){
 					count += parseInt(item[3]);
 				}
 				var rows = '<tr><td height="32" align="center">共:'+(items.length)+'类</td><td height="32" align="center"></td><td height="32" align="center"></td><td height="32" align="center">'+
-				'<a href="javascript:;" onclick="toPaint(0,'+pieTitle+')">'+count+'</a>'+
+				'<a href="javascript:;" onclick="toPaint(-1,'+pieTitle+')">'+count+'</a>'+
 				'</td></tr>';
 				$('.summary_tab table').append(rows);
 			} else {
