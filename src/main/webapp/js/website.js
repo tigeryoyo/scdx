@@ -1,12 +1,13 @@
 // JavaScript Document
+var pagesize = 10;
 //用户信息展示
 function websiteInforShow(page) {
     $.ajax({
         type: "post",
         url: "/domain/selectDomain",
         data: {
-            start: (parseInt(10 * page - 10)),
-            limit: 10
+            start: (parseInt(pagesize * page - pagesize)),
+            limit: pagesize
         },
         dataType: "json",
         beforeSend : function() {
@@ -227,8 +228,8 @@ function websiteInforSearch(page) {
             typeSorting:condition.typeSorting,
             weightSorting:condition.weightSorting,
             maintenanceSorting:condition.maintenanceSorting,
-            start: (parseInt(10 * page - 10)),
-            limit: 10
+            start: (parseInt(pagesize * page - pagesize)),
+            limit: pagesize
         },
         dataType: "json",
         beforeSend : function() {
@@ -568,7 +569,12 @@ function stopBubble(e){
 	window.event ? window.event.cancelBubble = true : e.stopPropagation();
 }
 
-
+function setPagesize(){
+	if($("#pagesize").val()!=null || $("#pagesize").val()!="" || $("#pagesize").val()!="undifined"){
+		pagesize = $("#pagesize").val();
+		initShowPage();
+	}
+}
 
 /**
  * 批量操作部分
@@ -577,12 +583,17 @@ function changeMaintence(element){
 	if($(element).hasClass('btn-success')){
 		$(element).removeClass('btn-success');
 		$(element).addClass('btn-danger');
-		$(element).text("已维护");
+		$(element).text("已 维 护");
 		$(element).val(1);
-	}else{
+	}else if($(element).hasClass('btn-danger')){
 		$(element).removeClass('btn-danger');
+		$(element).addClass('btn-primary');
+		$(element).text("维护状态");
+		$(element).val("");
+	}else{
+		$(element).removeClass('btn-primary');
 		$(element).addClass('btn-success');
-		$(element).text("未维护");
+		$(element).text("待 维 护");
 		$(element).val(0);
 	}
 }
@@ -648,6 +659,12 @@ function upBatch(){
 	$("input:checkbox[name='domain_two']:checked").each(function(){
 		domain_two_id.push($(this).attr("data-id"));
 	})
+	var maintenanceStatus = $("#new_maintenance").val();
+	if(maintenanceStatus == ""){
+		maintenanceStatus = null;
+	}else{
+		maintenanceStatus = maintenanceStatus==1;
+	}
 	$.ajax({
 		type : "post",
 		url : "/domain/updateDomainBatch",
@@ -662,7 +679,7 @@ function upBatch(){
 			incidence : $(".incidence_provience").val() + "-"
 					+ $(".incidence_city").val(),
 			weight : $("#new_weight").val(),
-			maintenanceStatus : $("#new_maintenance").val()==1
+			maintenanceStatus : maintenanceStatus
 		},
 		datatype : "json",
 		beforeSend : function() {
