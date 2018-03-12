@@ -277,11 +277,15 @@
 		<select class="form-control incidence_city" style="width:100px;display: inline; float: left;"><option value="" disabled selected>请选择</option></select>
         <span style="line-height: 36px;display: inline; float: left;margin-left: 5px;">权重：</span>
         <input type="text" class="form-control" style="width:70px;height: 36px;display: inline; float: left;" id="new_weight">
-        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-success" value=0 onclick="changeMaintence(this)" id="new_maintenance">待维护</button>
+        <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" value="" onclick="changeMaintence(this)" id="new_maintenance">维护状态</button>
         <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-primary" onclick="upBatch()" >批量修改</button>
         <button style="height: 36px;display: inline; float: left;" type="button" class="btn btn-danger" onclick="delBatch()" >批量删除</button>
     </div>
-    <div class="user_num" style="margin-right: 0px;">
+    <div style="float:right;display:inline-block;margin-top:34px">
+	    	<input type="text" class="form-control number" style="display:inline-block;width:70px;" placeholder="显示个数"  id="pagesize">
+	    	<button type="button" class="btn btn-primary" onclick="setPagesize()">确定</button>
+	</div>
+    <div class="user_num" style="margin-right: 0px;float:left">
         <ul class="page" maxshowpageitem="5" pagelistcount="10" id="page"></ul>
     </div>
 </div>
@@ -316,6 +320,11 @@
 <script type="text/javascript">
 	initShowPage(1)
     $("#web_weight").keyup(function () {
+        $(this).val($(this).val().replace(/[^0-9]/g,''));
+    }).bind("paste",function() {  //CTR+V事件处理
+        $(this).val($(this).val().replace(/[^0-9]/g, ''));
+    })
+    $(".number").keyup(function () {
         $(this).val($(this).val().replace(/[^0-9]/g,''));
     }).bind("paste",function() {  //CTR+V事件处理
         $(this).val($(this).val().replace(/[^0-9]/g, ''));
