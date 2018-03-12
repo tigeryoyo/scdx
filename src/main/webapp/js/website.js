@@ -572,6 +572,7 @@ function stopBubble(e){
 function setPagesize(){
 	if($("#pagesize").val()!=null || $("#pagesize").val()!="" || $("#pagesize").val()!="undifined"){
 		pagesize = $("#pagesize").val();
+		$('.page').attr('pagelistcount',pagesize);
 		initShowPage();
 	}
 }
