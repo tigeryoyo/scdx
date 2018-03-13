@@ -1,5 +1,5 @@
 // JavaScript Document
-var pagesize = 10;
+var pagesize = 20;
 //用户信息展示
 function websiteInforShow(page) {
     $.ajax({

@@ -54,7 +54,7 @@ public interface ResultService {
 	 * @param request
 	 * @return
 	 */
-	int searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request);
+	List<String[]> searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request);
 
 	int deleteClusterItemsByIndices(String resultId, int index, int[] indices, HttpServletRequest request);
 
