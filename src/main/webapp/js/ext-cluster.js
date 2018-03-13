@@ -176,6 +176,43 @@ function showResultByContent(items){
 }
 
 
+/**
+ * 根据ajax搜索到的内容显示聚类结果
+ * 
+ * @param items
+ *            ajxa返回的内容string[][]
+ */
+function showResultBySearchContent(items){
+	for (var i = 0; i < (items.length>300?300:items.length); i++) {
+		// items第一行存储index，故从i+1读起
+		var item = items[i];
+		var rows = '<tr><td height="32" align="left" style="cursor:pointer;" onclick="checkBoxClick(this)"><input onclick="checkBoxClickBubble()" type="checkbox" name="result_check" style="cursor:pointer;width:20px;height:20px" data-id="'+item[4]+'" data-count="'+item[3]+'" class="' + i
+			+ '"/>&nbsp;'
+			+(i+1)+'</td><td height="32" align="center"><a href="'+item[1]+'" target="view_window" '
+		//	+'onclick="showClusterDetails('
+			// + item[indexOfUrl]
+			// + '
+		//	+ (i+1) + ',\''
+			// + item[indexOfUrl]
+		//	+ resultId + '\',' + item[3] + ')"'+
+			+'>' + item[0] + '</a></td><td height="32" align="center">' + item[2] + '</td><td height="32" align="center">'
+			// 添加画图的代码为：'<a href="javascript:;" onclick="toPaint(' + i + ',\'' +
+			// item[indexOfTitle].replace(/\"/g, " ").replace(/\'/g, " ") +
+			// '\')">' + item[3] + '</a>'
+			+  item[3]  + '</td></tr>';
+		$('.summary_tab table').append(rows);
+	}
+	var count = 0;
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		count += parseInt(item[3]);
+	}
+	var rows = '<tr><td height="32" align="center">共:'+(items.length)+'类</td><td height="32" align="center"></td><td height="32" align="center"></td><td height="32" align="center">'+
+	+count+
+	'</td></tr>';
+	$('.summary_tab table').append(rows);
+}
+
 // 显示历史聚类结果
 function showHistoryResult(e){
 	resultId = $(e).attr("data-id");
@@ -518,7 +555,10 @@ function search(){
 			},
 		success : function(msg) {
 			if (msg.status == "OK") {
-				getDisplayResultById();
+				$('.searchContent').show();
+				$('.summary_tab table tr:not(:first)').html('');
+				var items = msg.result;
+				showResultBySearchContent(items);
 			} else {
 				alert(msg.result);
 			}
@@ -539,6 +579,10 @@ function search(){
 	});
 }
 
+
+function searchBack(){
+	getDisplayResultById()
+}
 
 /**
  * 删除索引为index的类簇内的指定数据集。

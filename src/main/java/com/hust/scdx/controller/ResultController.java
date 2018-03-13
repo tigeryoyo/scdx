@@ -168,10 +168,12 @@ public class ResultController {
 	@RequestMapping("/searchResultItemsByKeyword")
 	public Object searchResultItemsByKeyword(@RequestParam(value = "resultId", required = true) String resultId,
 			@RequestParam(value = "keyword", required = true) String keyword, HttpServletRequest request) {
-		if (resultService.searchResultItemsByKeyword(resultId, keyword, request) < 0) {
-			return ResultUtil.errorWithMsg("查找失败。");
+		List<String[]> list = resultService.searchResultItemsByKeyword(resultId, keyword, request);
+		if (list == null) {
+			logger.error("根据关键词查找操作结果失败。");
+			return ResultUtil.errorWithMsg("根据关键词查找操作结果失败。");
 		}
-		return ResultUtil.success("查找成功。");
+		return ResultUtil.success(list);
 	}
 
 	/**

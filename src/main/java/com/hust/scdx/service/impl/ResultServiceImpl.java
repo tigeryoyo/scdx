@@ -1,7 +1,6 @@
 package com.hust.scdx.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,15 +15,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang.StringUtils;
 
-import com.hust.scdx.constant.Constant;
 import com.hust.scdx.constant.Config.DIRECTORY;
 import com.hust.scdx.constant.Constant.Cluster;
 import com.hust.scdx.constant.Constant.Index;
 import com.hust.scdx.constant.Constant.Resutt;
-import com.hust.scdx.constant.Constant.StdfileMap;
 import com.hust.scdx.dao.ResultDao;
-import com.hust.scdx.model.Domain;
 import com.hust.scdx.model.Result;
 import com.hust.scdx.model.params.ResultQueryCondition;
 import com.hust.scdx.service.MiningService;
@@ -249,7 +245,7 @@ public class ResultServiceImpl implements ResultService {
 	 * 
 	 * @param resultId
 	 * @param indices
-	 *            顺序的索引集合
+	 *            顺序的索引集合，从下标0开始
 	 * @param request
 	 * @return
 	 */
@@ -292,14 +288,18 @@ public class ResultServiceImpl implements ResultService {
 	 * @return
 	 */
 	@Override
-	public int searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request) {
+	public List<String[]> searchResultItemsByKeyword(String resultId, String keyword, HttpServletRequest request) {
 		Result result = queryResultById(resultId);
 		if (result == null) {
-			return -1;
+			return null;
+		}
+		if (StringUtils.isBlank(keyword)) {
+			return getDisplayResultById(resultId, request);
 		}
 		String subPath = ConvertUtil.convertDateToPath(result.getCreateTime()) + result.getResId();
+		List<String[]> modifyClusters = FileUtil.read(DIRECTORY.MODIFY_CLUSTER + subPath);
+		List<String[]> modifyCounts = FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath);
 		List<String[]> content = null;
-		List<int[]> origCounts = ConvertUtil.toIntArrayList(FileUtil.read(DIRECTORY.MODIFY_COUNT + subPath));
 		try {
 			content = (List<String[]>) redisService.getObject(Cluster.REDIS_CONTENT, request);
 		} catch (Exception e) {
@@ -308,27 +308,24 @@ public class ResultServiceImpl implements ResultService {
 		if (content == null || content.size() == 0) {
 			content = FileUtil.read(DIRECTORY.CONTENT + subPath);
 		}
-
+		// 返回给前端的结果list：title、url、time、amount、index
+		List<String[]> displayResult = new ArrayList<String[]>();
 		AttrUtil attrUtil = AttrUtil.getSingleton();
 		int[] indexOfEss = attrUtil.findEssentialIndex(content.get(0));
-		List<Integer> toBeDelIndices = new ArrayList<Integer>();
-		int size = origCounts.size();
 		String[] keywords = keyword.split("\\s+");
+		int size = modifyCounts.size();
 		for (int i = 0; i < size; i++) {
-			String c = content.get(origCounts.get(i)[0] + 1)[indexOfEss[Index.TITLE]];
+			String[] row = modifyCounts.get(i);
+			String[] line = content.get(Integer.valueOf(row[0]) + 1);
 			for (String word : keywords) {
-				if (c.indexOf(word) == -1) {
-					toBeDelIndices.add(i);
+				if (line[indexOfEss[Index.TITLE]].indexOf(word) != -1) {
+					displayResult.add(new String[] { line[indexOfEss[Index.TITLE]], line[indexOfEss[Index.URL]], line[indexOfEss[Index.TIME]],
+							String.valueOf(row[1]), String.valueOf(i) });
 					break;
 				}
 			}
 		}
-		size = toBeDelIndices.size();
-		int[] indices = new int[size];
-		for (int i = 0; i < size; i++) {
-			indices[i] = toBeDelIndices.get(i);
-		}
-		return deleteResultItemsByIndices(resultId, indices, request);
+		return displayResult;
 	}
 
 	/**
