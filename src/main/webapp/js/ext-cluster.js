@@ -201,6 +201,7 @@ function getDisplayResultById() {
 			},
 		success : function(msg) {
 			if (msg.status == "OK") {
+				$('.searchContent').show();
 				$('.summary_tab table tr:not(:first)').html('');
 				var items = msg.result;
 				showResultByContent(items);				
