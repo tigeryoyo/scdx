@@ -731,8 +731,8 @@ function upBatch(){
 			column : $("#new_column").val(),
 			type : $("#new_type").val(),
 			rank : $("#new_rank").val(),
-			incidence : $(".incidence_provience").val() + "-"
-					+ $(".incidence_city").val(),
+			incidence : $(".incidence_provience:last").val() + "-"
+					+ $(".incidence_city:last").val(),
 			weight : $("#new_weight").val(),
 			maintenanceStatus : maintenanceStatus
 		},
