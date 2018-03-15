@@ -91,9 +91,6 @@ public class DomainOneDao {
 		if (null != condition.getMaintenanceStatus()) {
 			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
 		}
-		if (null != condition.getIsFather()) {
-			criteria.andMaintenanceStatusEqualTo(condition.getIsFather());
-		}
 		if (null != condition.getWeightStart()) {
 			criteria.andWeightGreaterThanOrEqualTo(condition.getWeightStart());
 		}
@@ -220,9 +217,6 @@ public class DomainOneDao {
 		}
 		if (null != condition.getMaintenanceStatus()) {
 			criteria.andMaintenanceStatusEqualTo(condition.getMaintenanceStatus());
-		}
-		if (null != condition.getIsFather()) {
-			criteria.andMaintenanceStatusEqualTo(condition.getIsFather());
 		}
 		if (null != condition.getWeightStart()) {
 			criteria.andWeightGreaterThanOrEqualTo(condition.getWeightStart());

@@ -1,5 +1,6 @@
 // JavaScript Document
 var pagesize = 20;
+var seachFlag = false;
 //用户信息展示
 function websiteInforShow(page) {
     $.ajax({
@@ -88,8 +89,12 @@ function websiteInforShow(page) {
                     $('#domain_content').append(row);
                 });
             } else {
-                alert(msg.result);
-                $('#domain_content').html("");
+            	if(page>1){
+            		initShowPage(page-1);
+            	}else{
+            		alert(msg.result);
+                    $('#domain_content').html("");
+            	}
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -108,6 +113,7 @@ function websiteInforShow(page) {
     })
 }
 function initShowPage(currenPage) {
+	searchFlag =false;
     var listCount = 0;
     if ("undefined" == typeof(currenPage) || null == currenPage) {
         currenPage = 1;
@@ -145,6 +151,7 @@ function initShowPage(currenPage) {
 }
 
 function initSearchPage(currenPage) {
+	searchFlag = true;
     var listCount = 0;
     if ("undefined" == typeof(currenPage) || null == currenPage) {
         currenPage = 1;
@@ -183,7 +190,7 @@ function initSearchPage(currenPage) {
                 listCount = msg.result;
                 $("#page").initPage(listCount, currenPage, websiteInforSearch);
             } else {
-                alert(msg.result);
+            	alert(msg.result);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -204,7 +211,6 @@ function initSearchPage(currenPage) {
 
 // 信息搜索
 function websiteInforSearch(page) {
-	console.log(condition)
     $.ajax({
         type: "post",
         url: "/domain/searchDomainOne",
@@ -309,8 +315,12 @@ function websiteInforSearch(page) {
                     $('#domain_content').append(row);
                 });
             } else {
-                alert(msg.result);
-                $('#domain_content').html("");
+            	if(page>1){
+            		initSearchPage(page-1);
+            	}else{
+            		alert(msg.result);
+                    $('#domain_content').html("");
+            	}
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -382,6 +392,7 @@ function changeOneStatusToMaintenance(e){
 }
 //修改一级域名的维护状态
 function changeOneStatus(uuid,url,status){
+	var curp = parseInt($(".pageItemActive").attr("page-data"));
 	 $.ajax({
 	        type: "post",
 	        url: "/domain/changeOneStatus",
@@ -397,15 +408,11 @@ function changeOneStatus(uuid,url,status){
 	        success: function (msg) {
 	            if (msg.status == "OK") {
 	            	//initShowPage(1);
-	            	var element = $("p[data-id='"+uuid+"']").find("a")[2];
-	            	if(status){
-	            		$(element).html("已维护");
-	            		$(element).css("color","red");
-	            		$(element).attr("onclick","changeOneStatusToUnmaintenance(this)")
+	            	
+	            	if(searchFlag){
+	            		initSearchPage(curp);
 	            	}else{
-	            		$(element).html("待维护");
-	            		$(element).css("color","");
-	            		$(element).attr("onclick","changeOneStatusToMaintenance(this)")
+	            		initShowPage(curp);
 	            	}
 	            }
 	        },
@@ -442,6 +449,7 @@ function changeTwoStatusToMaintenance(e){
 }
 //修改二级域名的维护状态
 function changeTwoStatus(uuid,url,status){
+	var curp = parseInt($(".pageItemActive").attr("page-data"));
 	$.ajax({
         type: "post",
         url: "/domain/changeTwoStatus",
@@ -457,15 +465,11 @@ function changeTwoStatus(uuid,url,status){
         success: function (msg) {
             if (msg.status == "OK") {
             	//initShowPage(1)
-            	var element = $("p[data-id='"+uuid+"']").find("a")[2];
-            	if(status){
-            		$(element).html("已维护");
-            		$(element).css("color","red");
-            		$(element).attr("onclick","changeOneStatusToUnmaintenance(this)")
+            	
+            	if(searchFlag){
+            		initSearchPage(curp);
             	}else{
-            		$(element).html("待维护");
-            		$(element).css("color","");
-            		$(element).attr("onclick","changeOneStatusToMaintenance(this)")
+            		initShowPage(curp);
             	}
             }
         },
@@ -486,6 +490,7 @@ function changeTwoStatus(uuid,url,status){
 }
 //删除一级域名
 function delDomainOne(e) {
+	var curp = parseInt($(".pageItemActive").attr("page-data"));
 	if(!confirm("该删除操作会连同二级域名一起删除！\n\n                 确定删除吗？"))
 		return ;
 	var uuid = $(e).parent().parent("p").attr("data-id");
@@ -503,7 +508,12 @@ function delDomainOne(e) {
             if (msg.status == "OK") {
                 alert(msg.result);
                 //jumpto("website-infor");
-                $(e).parents("details").remove();
+               
+            	if(searchFlag){
+            		initSearchPage(curp);
+            	}else{
+            		initShowPage(curp);
+            	}
             }else
                 alert(msg.result);
         },
@@ -526,6 +536,7 @@ function delDomainOne(e) {
 //删除二级域名
 function delDomainTwo(e) {
     var uuid = $(e).parent().parent("p").attr("data-id");
+    var curp = parseInt($(".pageItemActive").attr("page-data"));
     $.ajax({
         type:"post",
         url:"/domain/deleteDomainTwo",
@@ -540,7 +551,12 @@ function delDomainTwo(e) {
             if (msg.status == "OK") {
                 alert(msg.result);
                 //jumpto("website-infor");
-                $(e).parents("p").remove();
+                
+            	if(searchFlag){
+            		initSearchPage(curp);
+            	}else{
+            		initShowPage(curp);
+            	}
             }else
                 alert(msg.result);
         },
@@ -601,7 +617,10 @@ function setPagesize(){
 	if($("#pagesize").val()!=null || $("#pagesize").val()!="" || $("#pagesize").val()!="undifined"){
 		pagesize = $("#pagesize").val();
 		$('.page').attr('pagelistcount',pagesize);
-		initShowPage();
+		if(searchFlag)
+			initSearchPage(1);
+		else
+			initShowPage(1);
 	}
 }
 
@@ -630,6 +649,7 @@ function changeMaintence(element){
  * 批量删除
  */
 function delBatch(){
+	var curp = parseInt($(".pageItemActive").attr("page-data"));
 	if(!confirm("是否确定删除所选域名？其中一级域名的删除会导致其所有的二级域名删除！！！"))
 		return ;
 	var domain_one_id = new Array();
@@ -655,7 +675,12 @@ function delBatch(){
         success: function (msg) {
             if (msg.status == "OK") {
                 alert(msg.result);
-                jumpto("website-infor");
+                
+            	if(searchFlag){
+            		initSearchPage(curp);
+            	}else{
+            		initShowPage(curp);
+            	}
             }else
                 alert(msg.result);
         },
@@ -678,6 +703,7 @@ function delBatch(){
  * 批量修改
  */
 function upBatch(){
+	var curp = parseInt($(".pageItemActive").attr("page-data"));
 	if(!confirm("是否确定修改所选域名信息？"))
 		return ;
 	var domain_one_id = new Array();
@@ -717,7 +743,13 @@ function upBatch(){
 		success : function(msg) {
 			if (msg.status == "OK") {
 				alert(msg.result);
-				jumpto("website-infor");
+				//jumpto("website-infor");
+				
+            	if(searchFlag){
+            		initSearchPage(curp);
+            	}else{
+            		initShowPage(curp);
+            	}
 			} else {
 				alert(msg.result);
 			}
