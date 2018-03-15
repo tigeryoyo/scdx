@@ -344,7 +344,10 @@ function showOneDetails(e) {
     exp.setTime(exp.getTime() + minutes * 60 * 1000);
     document.cookie = "domain_id" + "=" + escape(uuid) + ";expires=" + exp.toGMTString();*/
 	setCookie("domain_id",uuid);
-    jumpto("website-one-details");
+    //jumpto("website-one-details");
+	var url = window.location.href;
+	var index = url.indexOf("=")+1;
+	window.open(url.substring(0,index)+"website-one-details");
 }
 
 //查看二级域名详细信息
@@ -355,7 +358,10 @@ function showTwoDetails(e){
     exp.setTime(exp.getTime() + minutes * 60 * 1000);
     document.cookie = "domain_id" + "=" + escape(uuid) + ";expires=" + exp.toGMTString();*/
 	setCookie("domain_id",uuid);
-    jumpto("website-two-details");
+    //jumpto("website-two-details");
+	var url = window.location.href;
+	var index = url.indexOf("=")+1
+	window.open(url.substring(0,index)+"website-two-details");
 }
 
 //将已维护的一级域名状态变为待维护
@@ -390,7 +396,17 @@ function changeOneStatus(uuid,url,status){
 				},
 	        success: function (msg) {
 	            if (msg.status == "OK") {
-	            	initShowPage(1);
+	            	//initShowPage(1);
+	            	var element = $("p[data-id='"+uuid+"']").find("a")[2];
+	            	if(status){
+	            		$(element).html("已维护");
+	            		$(element).css("color","red");
+	            		$(element).attr("onclick","changeOneStatusToUnmaintenance(this)")
+	            	}else{
+	            		$(element).html("待维护");
+	            		$(element).css("color","");
+	            		$(element).attr("onclick","changeOneStatusToMaintenance(this)")
+	            	}
 	            }
 	        },
 	        error: function (jqXHR, textStatus, errorThrown) {
@@ -440,7 +456,17 @@ function changeTwoStatus(uuid,url,status){
 			},
         success: function (msg) {
             if (msg.status == "OK") {
-            	initShowPage(1)
+            	//initShowPage(1)
+            	var element = $("p[data-id='"+uuid+"']").find("a")[2];
+            	if(status){
+            		$(element).html("已维护");
+            		$(element).css("color","red");
+            		$(element).attr("onclick","changeOneStatusToUnmaintenance(this)")
+            	}else{
+            		$(element).html("待维护");
+            		$(element).css("color","");
+            		$(element).attr("onclick","changeOneStatusToMaintenance(this)")
+            	}
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -476,7 +502,8 @@ function delDomainOne(e) {
         success: function (msg) {
             if (msg.status == "OK") {
                 alert(msg.result);
-                jumpto("website-infor");
+                //jumpto("website-infor");
+                $(e).parents("details").remove();
             }else
                 alert(msg.result);
         },
@@ -512,7 +539,8 @@ function delDomainTwo(e) {
         success: function (msg) {
             if (msg.status == "OK") {
                 alert(msg.result);
-                jumpto("website-infor");
+                //jumpto("website-infor");
+                $(e).parents("p").remove();
             }else
                 alert(msg.result);
         },

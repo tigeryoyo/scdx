@@ -145,7 +145,7 @@ function provienceChange(element){
 	switchCityByPro($(".incidence_provience").val());
 })
 
-
+*/
 function switchCityByPro(provience) {
 	var citys;
 	switch ($.trim(provience)) {
@@ -281,9 +281,10 @@ function switchCityByPro(provience) {
 	}
 	appendCity(citys);
 }
+
 function appendCity(citys){
 	$(".incidence_city").empty();
 	$.each(citys,function(index,val){
 		$(".incidence_city").append("<option>"+$.trim(val)+"</option>");
 	})
-}*/
+}
