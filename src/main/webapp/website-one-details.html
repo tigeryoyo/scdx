@@ -3,9 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>映射表管理——编辑映射表</title>
-<script type="text/javascript" src="js/website.js"></script>
-<script type="text/javascript" src="js/website-details.js"></script>
-<script type="text/javascript" src="js/website-incidence.js"></script>
 <style type="text/css">
 span {
 	white-space: nowrap;
@@ -127,6 +124,9 @@ span {
 		</form>
 	</div>
 </body>
+<script type="text/javascript" src="js/website.js"></script>
+<script type="text/javascript" src="js/website-details.js"></script>
+<script type="text/javascript" src="js/website-incidence.js"></script>
 <script>
 	var uuid = getCookie("domain_id");
 	loadType();
@@ -156,6 +156,7 @@ span {
 							$(".incidence_city").val(incidence[1]);
 						}
 						$("#new_weight").val(one.weight);
+						console.log(one);
 						if(one.maintenanceStatus){
 							$("input[name='maintenance_status'][value=1]").attr("checked",true);
 						}else{
