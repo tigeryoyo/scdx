@@ -35,7 +35,7 @@ function websiteInforShow(page) {
 	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
+	                        + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
 	                        + '</p>'
 	                        + '</summary>';
                 	}else{
@@ -51,7 +51,7 @@ function websiteInforShow(page) {
 	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
+                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
                             + '</p>'
                             + '</summary>';
                 	}
@@ -67,7 +67,7 @@ function websiteInforShow(page) {
 		                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 		                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 		                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
+	                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
@@ -80,7 +80,7 @@ function websiteInforShow(page) {
 	                        + '<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        + '<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        + '<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
+                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>' //
                             + '</p>';
                         }
                     })
@@ -262,7 +262,7 @@ function websiteInforSearch(page) {
 	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                        + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
+	                        + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeOneStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>' //
 	                        + '</p>'
 	                        + '</summary>';
                 	}else{
@@ -278,7 +278,7 @@ function websiteInforSearch(page) {
 	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'//
+                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showOneDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeOneStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainOne(this)">删除</a></span>'//
                             + '</p>'
                             + '</summary>';
                 	}
@@ -294,7 +294,7 @@ function websiteInforSearch(page) {
 		                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 		                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 		                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-	                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
+	                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;color:red" onclick="changeTwoStatusToUnmaintenance(this)">已维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
 	                            + '</p>';
                     	}else{
                     		row +='<p data-id="'+item.uuid+'">'
@@ -307,7 +307,7 @@ function websiteInforSearch(page) {
 	                        +'<span style="width: 70px;min-height: 10px; display: inline; float: left">'+item.rank+'</span>'
 	                        +'<span style="width: 60px;min-height: 10px; display: inline; float: left">'+item.type+'</span>'
 	                        +'<span style="width: 50px;min-height: 10px; display: inline; float: left">'+item.weight+'</span>'
-                            + '<span><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
+                            + '<span><a href="http://icp.chinaz.com/'+item.url+'" target="_blank" style="margin: 0px 2px; text-decoration:underline">查询</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline" onclick="showTwoDetails(this)">详情</a><a href="javascript:" style="margin: 0px 2px; text-decoration:underline;" onclick="changeTwoStatusToMaintenance(this)">待维护</a><a href="javascript:" style="margin: 0px 2px;text-decoration:underline" onclick="delDomainTwo(this)">删除</a></span>'//
                             + '</p>';
                         }
                     })
@@ -769,4 +769,16 @@ function upBatch(){
 			stop();
 		}
 	})
+}
+
+function selectAll(element){
+	if($(element).is(':checked')){
+		if(confirm("是否勾选全部的二级域名？")){
+			$("input[name='domain_two']").prop('checked',true);
+		}
+		$("input[name='domain_one']").prop('checked',true);
+	}else{
+		$("input[name='domain_one']").prop('checked',false);
+		$("input[name='domain_two']").prop('checked',false);
+	}
 }
