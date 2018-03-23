@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import net.sf.json.JSONObject;
 public class AreaUtil {
 	Segment segment;
 	HashSet<Nature> notEnding;
+	HashSet<Nature> ending;
 	String url;
 	String ak;
 	HashSet<String> centerLayerSet;
@@ -43,17 +45,28 @@ public class AreaUtil {
 			notEnding.add(Nature.nic);
 			notEnding.add(Nature.nis);
 			notEnding.add(Nature.nit);
-			notEnding.add(Nature.ntc);
-			notEnding.add(Nature.ntcb);
-			notEnding.add(Nature.ntcf);
-			notEnding.add(Nature.ntch);
-			notEnding.add(Nature.nth);
-			notEnding.add(Nature.nto);
-			notEnding.add(Nature.nts);
-			notEnding.add(Nature.ntu);
+			// notEnding.add(Nature.ntc);
+			// notEnding.add(Nature.ntcb);
+			// notEnding.add(Nature.ntcf);
+			// notEnding.add(Nature.ntch);
+			// notEnding.add(Nature.nth);
+			// notEnding.add(Nature.nto);
+			// notEnding.add(Nature.nts);
+			// notEnding.add(Nature.ntu);
 			notEnding.add(Nature.ns);
 			notEnding.add(Nature.nz);
 			notEnding.add(Nature.nr);
+			ending = new HashSet<Nature>();
+			ending.add(Nature.nsf);
+			ending.add(Nature.nt);
+			ending.add(Nature.ntc);
+			ending.add(Nature.ntcb);
+			ending.add(Nature.ntcf);
+			ending.add(Nature.ntch);
+			ending.add(Nature.nth);
+			ending.add(Nature.nto);
+			ending.add(Nature.nts);
+			ending.add(Nature.ntu);
 			centerLayerSet = new HashSet<String>();
 			centerLayerSet.add("青羊");
 			centerLayerSet.add("青羊区");
@@ -79,7 +92,7 @@ public class AreaUtil {
 			centerLayerSet.add("青白江");
 			centerLayerSet.add("青白江区");
 		} catch (Exception e) {
-			
+
 		}
 	}
 
@@ -89,6 +102,9 @@ public class AreaUtil {
 		boolean flag = false;
 		for (int i = 0; i < size; i++) {
 			Term term = termList.get(i);
+			if (ending.contains(term.nature)) {
+				return term.word;
+			}
 			if (!flag) {
 				if (term.nature == sflag) {
 					sb.append(term.word);
@@ -176,7 +192,7 @@ public class AreaUtil {
 			}
 			JSONObject j1 = JSONObject.fromObject(result);
 			if (j1.getString("status").equals("0")) {
-//				System.out.println(j1.toString());
+				// System.out.println(j1.toString());
 				JSONArray array = j1.getJSONArray("results");
 				if (!array.isEmpty()) {
 					JSONObject j2 = (JSONObject) array.get(0);
@@ -222,8 +238,8 @@ public class AreaUtil {
 		}
 		return "郊区新城";
 	}
-	
+
 	public static void main(String[] args) {
-		System.out.println(new AreaUtil().getArea("双流县", "成都"));
+		System.out.println(new AreaUtil().getArea("北京外国语大学2018年“一带一路”外语专业综合评价招生简章", "成都"));
 	}
 }
